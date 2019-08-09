@@ -1,0 +1,24 @@
+body {
+  font-family: arial,sans-serif;
+}
+
+.column {
+  float: left;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#scoreBoard {
+  background: lightblue
+}
+
+#myCanvas {
+  background: seashell; 
+  display: block; 
+  margin: 0 auto
+}

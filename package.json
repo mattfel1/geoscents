@@ -1,0 +1,40 @@
+{
+  "name": "simple-starter-with-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@tmkelly28/tk-css": "^1.0.2",
+    "body-parser": "^1.17.2",
+    "connect": "^3.7.0",
+    "express": "^4.15.3",
+    "morgan": "^1.9.1",
+    "papaparse": "^5.0.1",
+    "pg": "^6.4.0",
+    "pg-hstore": "^2.3.2",
+    "proj4": "^2.5.0",
+    "proj4js": "^10.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "sequelize": "^4.2.1",
+    "socket.io": "^2.1.0",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "scripts": {
+    "start": "webpack -w & nodemon server/app.js --ignore public"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "nodemon": "^1.11.0",
+    "style-loader": "^0.20.3",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
+  }
+}
