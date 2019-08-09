@@ -67,11 +67,11 @@ function log(payload) {
 	console.log('a user connected:', socket.id);
 	socket.on('newPlayer', () => {
 	  room.addPlayer(socket)
-      log("User connected    " + socket.id)
+      log("User connected    " + socket.handshake.address)
 	});
 	socket.on('disconnect', function() {
 	  room.killPlayer(socket)
-      log("User disconnected " + socket.id)
+      log("User disconnected " + socket.handshake.address)
 	});
     socket.on('playerReady', () => {
 	  room.playerReady(socket);
