@@ -7,7 +7,7 @@ module.exports = {
     SETUP_STATE: 'setup',
     IDLE_STATE: 'idle',
     PREPARE_GAME_STATE: 'prepare',
-    PREPARE_GAME_DURATION: 5,
+    PREPARE_GAME_DURATION: 20,
     ASK_READY_STATE: 'askready',
     SCORE_SCALE: 10000,
     POINT_RADIUS: 3,

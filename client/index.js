@@ -70,7 +70,7 @@ const panel = window.document.getElementById('panel');
 const panel_ctx = panel.getContext('2d');
 
 var ready_button = {
-    x:50,
+    x:90,
     y:90,
     width:100,
     height:50
@@ -132,21 +132,14 @@ socket.on('draw prepare panel', (time) => {
     panel_ctx.font = "25px Arial";
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText("Next game starts in: " + time, 20, 80)
-})
 
-socket.on('draw askready panel', (time) => {
-    panel_ctx.clearRect(0, 0, panel.width, panel.height/2);
-    panel_ctx.fillStyle = "#e3e4e6";
-    panel_ctx.fillRect(0, 0, panel.width, panel.height/2);
-    panel_ctx.font = "25px Arial";
-    panel_ctx.fillStyle = "black";
-    panel_ctx.fillText("Ready to begin? ", 20, 80)
     panel_ctx.fillStyle = "orange";
     panel_ctx.fillRect(ready_button['x'], ready_button['y'], ready_button['width'], ready_button['height']);
     panel_ctx.font = "25px Arial";
     panel_ctx.fillStyle = 'black';
-    panel_ctx.fillText('YES!', 60, 120)
+    panel_ctx.fillText('YES!', 100, 120)
 })
+
 
 socket.on('clear scores', () => {
   panel_ctx.clearRect(0, panel.height/2, panel.width, panel.height/2)

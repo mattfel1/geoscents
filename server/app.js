@@ -61,7 +61,7 @@ const gameState = {
   players: {},
   timer: CONSTANTS.GUESS_DURATION,
   target: randomCity(),
-  state: CONSTANTS.ASK_READY_STATE,
+  state: CONSTANTS.IDLE_STATE,
   round: 0
 }
 
@@ -220,7 +220,7 @@ function revealPlayer(player,i) {
 
 function revealCity() {
     var answer = geoToMerc(gameState.target['lat'], gameState.target['lon'])
-	io.sockets.emit('draw point', answer, '#ff8c00')
+	io.sockets.emit('draw point', answer, '#8b4c00')
 	Object.values(gameState.players).forEach(revealPlayer)
    	showScores()
     gameState.round = gameState.round + 1
@@ -241,7 +241,6 @@ function numPlayers() {
 }
 
 function prepareGame() {
-	Object.values(gameState.players).forEach(deepResetPlayer)
     io.sockets.emit('draw prepare panel', Math.floor(((gameState.timer * 100)) / 100));
     showScores()
     gameState.round = 0;
@@ -260,13 +259,6 @@ function allReady() {
   return Object.values(gameState.players).length > 0 && Object.values(gameState.players).filter(player => !player.ready).length == 0
 }
 
-function askReady() {
-    io.sockets.emit('draw askready panel');
-    gameState.round = 0;
-    showScores()
-    io.sockets.emit('refresh map');
-}
-
 setInterval(() => {
   // Game flow state machine
   if (numPlayers() == 0) {
@@ -274,20 +266,14 @@ setInterval(() => {
     gameState.state = CONSTANTS.IDLE_STATE
   }
   else if (numPlayers() > 0 && gameState.state == CONSTANTS.IDLE_STATE) {
-    askReady()
-    gameState.state = CONSTANTS.ASK_READY_STATE
-  }
-  else if (gameState.state == CONSTANTS.ASK_READY_STATE && allReady()) {
-    gameState.state = CONSTANTS.PREPARE_GAME_STATE;
+    gameState.state = CONSTANTS.PREPARE_GAME_STATE
     gameState.timer = CONSTANTS.PREPARE_GAME_DURATION;
     prepareGame()
 	showScores()
   }
-  else if (gameState.state == CONSTANTS.ASK_READY_STATE) {
-    // stay
-  }
-  else if (gameState.state == CONSTANTS.PREPARE_GAME_STATE && (gameState.timer <= 0)) {
+  else if (gameState.state == CONSTANTS.PREPARE_GAME_STATE && (allReady() || gameState.timer <= 0)) {
   	gameState.state = CONSTANTS.SETUP_STATE;
+  	Object.values(gameState.players).forEach(deepResetPlayer)
   }
   else if (gameState.state == CONSTANTS.PREPARE_GAME_STATE) {
   	managePrepare()
@@ -308,11 +294,12 @@ setInterval(() => {
   else if (gameState.state == CONSTANTS.GUESS_STATE) {
   	manageRound();
   }
-  else if (gameState.state == CONSTANTS.REVEAL_STATE && gameState.timer <= 0 && gameState.rounds < CONSTANTS.GAME_ROUNDS) {
+  else if (gameState.state == CONSTANTS.REVEAL_STATE && gameState.timer <= 0 && gameState.round < CONSTANTS.GAME_ROUNDS - 1) {
   	gameState.state = CONSTANTS.SETUP_STATE;
   }
-  else if (gameState.state == CONSTANTS.REVEAL_STATE && gameState.timer <= 0 && gameState.rounds >= CONSTANTS.GAME_ROUNDS) {
-  	gameState.state = CONSTANTS.ASK_READY_STATE;
+  else if (gameState.state == CONSTANTS.REVEAL_STATE && gameState.timer <= 0 && gameState.round >= CONSTANTS.GAME_ROUNDS - 1) {
+  	gameState.state = CONSTANTS.PREPARE_GAME_STATE;
+  	gameState.timer = CONSTANTS.PREPARE_GAME_DURATION;
   }
   else if (gameState.state == CONSTANTS.REVEAL_STATE) {
   	manageReveal();
