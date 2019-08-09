@@ -11,6 +11,7 @@ const PORT = 3000;
 const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server);
+const fs = require('fs');
 
 // Game mechanics
 const CONSTANTS = require('../resources/constants.js');
@@ -49,13 +50,28 @@ server.listen(PORT, () => {
 // Game state info
 const room = new Room(4, 0);
 
-io.on('connection', (socket) => {
+function log(payload) {
+    const currentdate = new Date();
+    const timestamp = currentdate.getDate() + "/"
+        + (currentdate.getMonth() + 1) + "/"
+        + currentdate.getFullYear() + " @ "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":";
+    fs.appendFile('connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+    });
+}
+
+    io.on('connection', (socket) => {
 	console.log('a user connected:', socket.id);
 	socket.on('newPlayer', () => {
 	  room.addPlayer(socket)
+      log("User connected    " + socket.id)
 	});
 	socket.on('disconnect', function() {
 	  room.killPlayer(socket)
+      log("User disconnected " + socket.id)
 	});
     socket.on('playerReady', () => {
 	  room.playerReady(socket);
