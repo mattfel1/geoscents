@@ -172,8 +172,6 @@ class Room {
                socket.emit('draw guess city', cityname + ', ' + citycountry)
            }
            if (state == CONSTANTS.REVEAL_STATE) {
-               updateScores();
-               sortPlayers();
                revealAll();
            }
        })
@@ -217,9 +215,13 @@ class Room {
       }
       else if (this.state == CONSTANTS.GUESS_STATE) {
           if ((this.timer <= 0 || this.allPlayersClicked()) && this.round < CONSTANTS.GAME_ROUNDS) {
+            this.updateScores();
+            this.sortPlayers();
             this.stateTransition(CONSTANTS.REVEAL_STATE, CONSTANTS.REVEAL_DURATION);
           }
           else if ((this.timer <= 0 || this.allPlayersClicked())) {
+            this.updateScores();
+            this.sortPlayers();
             this.stateTransition(CONSTANTS.PREPARE_GAME_DURATION, CONSTANTS.PREPARE_GAME_DURATION)
           }
       }
