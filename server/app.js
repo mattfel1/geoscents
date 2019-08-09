@@ -73,7 +73,7 @@ io.on('connection', (socket) => {
 		col: 0,
 		width: 5,
 		height: 5,
-		color: CONSTANTS.COLORS[Object.keys(gameState.players).length],
+		color: CONSTANTS.COLORS[Object.keys(gameState.players).length % 3],
         clicked: false,
 		lat: 0,
 		lon: 0,
@@ -159,6 +159,7 @@ function manageRound() {
   decrementTimer()
   if ( Math.floor((gameState.timer*100) % 100) == 0 ) {
 	  io.sockets.emit('draw guess panel', Math.floor(((gameState.timer * 100)) / 100), gameState.target["name"] + ', ' + gameState.target["country"], gameState.round);
+	  showScores()
 	  // io.clients[sessionID].send('')
   }
 }
@@ -213,9 +214,14 @@ function updateScores() {
 	Object.values(gameState.players).forEach(updateScore)
 }
 
+function revealPlayer(player,i) {
+  io.sockets.emit('draw point', {'row': player.row, 'col': player.col}, player.color)
+}
+
 function revealCity() {
     var answer = geoToMerc(gameState.target['lat'], gameState.target['lon'])
-	io.sockets.emit('draw point', answer, 'orange')
+	io.sockets.emit('draw point', answer, '#ff8c00')
+	Object.values(gameState.players).forEach(revealPlayer)
    	showScores()
     gameState.round = gameState.round + 1
 }
@@ -238,6 +244,7 @@ function prepareGame() {
 	Object.values(gameState.players).forEach(deepResetPlayer)
     io.sockets.emit('draw prepare panel', Math.floor(((gameState.timer * 100)) / 100));
     showScores()
+    gameState.round = 0;
     io.sockets.emit('refresh map');
 }
 
@@ -255,6 +262,7 @@ function allReady() {
 
 function askReady() {
     io.sockets.emit('draw askready panel');
+    gameState.round = 0;
     showScores()
     io.sockets.emit('refresh map');
 }
@@ -262,6 +270,7 @@ function askReady() {
 setInterval(() => {
   // Game flow state machine
   if (numPlayers() == 0) {
+  	showScores()
     gameState.state = CONSTANTS.IDLE_STATE
   }
   else if (numPlayers() > 0 && gameState.state == CONSTANTS.IDLE_STATE) {
@@ -269,9 +278,10 @@ setInterval(() => {
     gameState.state = CONSTANTS.ASK_READY_STATE
   }
   else if (gameState.state == CONSTANTS.ASK_READY_STATE && allReady()) {
-    prepareGame()
     gameState.state = CONSTANTS.PREPARE_GAME_STATE;
     gameState.timer = CONSTANTS.PREPARE_GAME_DURATION;
+    prepareGame()
+	showScores()
   }
   else if (gameState.state == CONSTANTS.ASK_READY_STATE) {
     // stay
@@ -284,6 +294,7 @@ setInterval(() => {
   }
   else if (gameState.state == CONSTANTS.SETUP_STATE) {
   	setupRound();
+  	showScores();
 	gameState.state = CONSTANTS.GUESS_STATE;
 	gameState.timer = CONSTANTS.GUESS_DURATION;
   }
@@ -291,13 +302,17 @@ setInterval(() => {
   	gameState.state = CONSTANTS.REVEAL_STATE;
   	gameState.timer = CONSTANTS.REVEAL_DURATION;
   	updateScores()
+	showScores()
     revealCity()
   }
   else if (gameState.state == CONSTANTS.GUESS_STATE) {
   	manageRound();
   }
-  else if (gameState.state == CONSTANTS.REVEAL_STATE && gameState.timer <= 0) {
+  else if (gameState.state == CONSTANTS.REVEAL_STATE && gameState.timer <= 0 && gameState.rounds < CONSTANTS.GAME_ROUNDS) {
   	gameState.state = CONSTANTS.SETUP_STATE;
+  }
+  else if (gameState.state == CONSTANTS.REVEAL_STATE && gameState.timer <= 0 && gameState.rounds >= CONSTANTS.GAME_ROUNDS) {
+  	gameState.state = CONSTANTS.ASK_READY_STATE;
   }
   else if (gameState.state == CONSTANTS.REVEAL_STATE) {
   	manageReveal();
