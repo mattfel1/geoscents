@@ -293,7 +293,7 @@ setInterval(() => {
   else if (gameState.state == CONSTANTS.GUESS_STATE) {
   	manageRound();
   }
-  else if (gameState.state == CONSTANTS.REVEAL_STATE && gameState.timer <= 0 && gameState.round < CONSTANTS.GAME_ROUNDS - 1) {
+  else if (gameState.state == CONSTANTS.REVEAL_STATE && gameState.timer <= 0 ) { //&& gameState.round < CONSTANTS.GAME_ROUNDS - 1) {
   	gameState.state = CONSTANTS.SETUP_STATE;
   }
   // else if (gameState.state == CONSTANTS.REVEAL_STATE && gameState.timer <= 0 && gameState.round >= CONSTANTS.GAME_ROUNDS - 1) {
