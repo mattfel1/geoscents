@@ -134,7 +134,6 @@ function deepResetPlayer(player, i) {
 
 function printPlayerScore(player, index) {
   io.sockets.emit('draw score', index, player.name, player.color, player.score);
-  io.to(player.id).emit('you', index, player.color)
 }
 
 function showScores() {
@@ -297,10 +296,10 @@ setInterval(() => {
   else if (gameState.state == CONSTANTS.REVEAL_STATE && gameState.timer <= 0 && gameState.round < CONSTANTS.GAME_ROUNDS - 1) {
   	gameState.state = CONSTANTS.SETUP_STATE;
   }
-  else if (gameState.state == CONSTANTS.REVEAL_STATE && gameState.timer <= 0 && gameState.round >= CONSTANTS.GAME_ROUNDS - 1) {
-  	gameState.state = CONSTANTS.PREPARE_GAME_STATE;
-  	gameState.timer = CONSTANTS.PREPARE_GAME_DURATION;
-  }
+  // else if (gameState.state == CONSTANTS.REVEAL_STATE && gameState.timer <= 0 && gameState.round >= CONSTANTS.GAME_ROUNDS - 1) {
+  // 	gameState.state = CONSTANTS.PREPARE_GAME_STATE;
+  // 	gameState.timer = CONSTANTS.PREPARE_GAME_DURATION;
+  // }
   else if (gameState.state == CONSTANTS.REVEAL_STATE) {
   	manageReveal();
   }
