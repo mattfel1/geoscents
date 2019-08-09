@@ -32,6 +32,8 @@ module.exports = {
 
     // Rooms
     GAME_ROUNDS: 10,
-    ROOM_CAPACITES: [6, 6, 6, 4, 4, 4, 2, 2, 2]
+    ROOM_CAPACITES: [6, 6, 6, 4, 4, 4, 2, 2, 2],
 
+    // Chat
+    MSG_HISTORY: 18
 }

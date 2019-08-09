@@ -213,6 +213,39 @@ function isInside(pos, rect){
 }
 //
 //
-// /** CHAT WINDOW HANDLING */
-// const chat = window.document.getElementById('chat');
-// const chat_ctx = panel.getContext('2d');
+
+/** CHAT WINDOW HANDLING */
+const chat = window.document.getElementById('chat');
+const chat_ctx = chat.getContext('2d');
+
+const chatdisplay = {
+    x: 0,
+    y: 0,
+    width: chat.width,
+    height: 7*chat.height/8
+};
+
+function clearMessages() {
+    chat_ctx.clearRect(chatdisplay['x'], chatdisplay['y'], chatdisplay['width'], chatdisplay['height']);
+    chat_ctx.fillStyle =  "#f4fce0";
+    chat_ctx.fillRect(chatdisplay['x'], chatdisplay['y'], chatdisplay['width'], chatdisplay['height']);
+    chat_ctx.font = "20px Arial";
+    chat_ctx.fillStyle =  "black";
+    chat_ctx.fillText("HISTORY (chat box TBD):", chatdisplay['x']+5,chatdisplay['y'] + 40);
+}
+function postMessage(row, namecolor, name, payloadcolor, payload) {
+    chat_ctx.font = "20px Arial";
+    chat_ctx.fillStyle =  namecolor;
+    chat_ctx.fillText(name + ": ", chatdisplay['x']+5,chatdisplay['y'] + 80 + row * 25);
+    chat_ctx.fillStyle =  payloadcolor;
+    chat_ctx.fillText(payload, chatdisplay['x']+90,chatdisplay['y'] + 80 + row * 25);
+}
+socket.on('reset chat', () => {clearMessages()});
+socket.on('draw chat', (chat) => {//row, namecolor, name, payloadcolor, payload) => {
+    var i;
+    for (i = 0; i < Math.min(CONSTANTS.MSG_HISTORY, Object.values(chat.messages).length); i++) {
+        const start = Math.max(Object.values(chat.messages).length - CONSTANTS.MSG_HISTORY, 0)
+        const msg = chat.messages[start + i];
+        postMessage(i, msg['namecolor'], msg['name'], msg['payloadcolor'], msg['payload']);
+    }
+});

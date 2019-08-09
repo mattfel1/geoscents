@@ -66,7 +66,9 @@ io.on('connection', (socket) => {
 });
 
 // Handle rooms
-setInterval(() => {room.fsm()}, 1000 / CONSTANTS.FPS);
+setInterval(() => {
+    room.fsm();
+}, 1000 / CONSTANTS.FPS);
 
 module.exports = io;
 

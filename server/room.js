@@ -5,6 +5,7 @@
 const CONSTANTS = require('../resources/constants.js');
 const Geography = require('./geography.js');
 const Player = require('./player.js');
+const Chat = require('./chat.js');
 const io = require('./app.js').io;
 
 class Room {
@@ -21,6 +22,7 @@ class Room {
       this.playedCities = {};
       this.state = CONSTANTS.IDLE_STATE;
       this.round = 0;
+      this.chat = new Chat()
     }
 
     // Player basic IO
@@ -31,6 +33,7 @@ class Room {
       this.drawUpperPanel(socket.id);
       this.drawLowerPanel(socket.id);
       socket.emit('fresh map');
+      socket.emit('reset chat')
     }
 
     killPlayer(socket) {
@@ -83,14 +86,17 @@ class Room {
     updateScores() {
       const scoreEquation = (a,b,c,d,e) => {this.scoreEquation(a,b,c,d,e)};
       const target = this.target;
+      const chatScore = (player, payload) => {this.chatScore(player, payload)}
+      this.chatRound(this.round, target['name'], target['country'])
       Array.from(this.players.values()).forEach(function(player) {
           var timeBonus = player.clickedAt;
-
           var merc = Geography.geoToMerc(parseFloat(target['lat']), parseFloat(target['lon']))
           var dist = Geography.mercDist(player.row, player.col, merc['row'], merc['col'])
           var update = Math.exp(-Math.pow(dist,2)/1000)*timeBonus*50
+          chatScore(player, " + " + Math.floor(update ) + " (Distance: " + Math.floor(dist) + ", Time Bonus: " + (Math.floor(timeBonus * 10) / 10) + ")")
           player.score = Math.floor(player.score + update)
         })
+      this.redrawChat()
     }
 
     scoreEquation(timeBonus, guess_row, guess_col, true_lat, true_lon) {
@@ -229,6 +235,20 @@ class Room {
       else {
         this.stateTransition(CONSTANTS.IDLE_STATE,0)
       }
+    }
+
+    chatRound(round, city, country) {
+        this.chat.newRound("Round " + round + ": " + city + ", " + country)
+    }
+    chatScore(player, score) {
+        this.chat.newScore("Player " + player.name, player.color, score)
+    }
+    redrawChat() {
+        const chat = this.chat;
+        this.clients.forEach(function(s,id) {
+            s.emit('reset chat')
+            s.emit('draw chat', chat)
+        });
     }
 }
 
