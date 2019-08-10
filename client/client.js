@@ -6,11 +6,12 @@ const CONSTANTS = require('../resources/constants.js')
 
 // Connect
 socket.emit('newPlayer');
-
+var chatcount = 0;
+var histcount = 0;
 
 /** MAP HANDLING */
 const drawMap = (gameState) => {
-  ctx.clearRect(0, 0, 800, 519);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   var img = new Image()
   img.onload = function () {
     ctx.drawImage(img, 0, 0)
@@ -55,6 +56,10 @@ setInterval(() => {
 }, 1000 / 60);
 document.addEventListener('mousedown', mouseDownHandler, false);
 document.addEventListener('mouseup', mouseUpHandler, false);
+// document.addEventListener('click', (e) => {
+//     mouseDownHandler(e);
+//     mouseUpHandler(e);
+// }, false);
 
 
 
@@ -85,7 +90,7 @@ const info_window = {
     x: 20,
     y: 80,
     width: 500,
-    height: 140
+    height: 150
 }
 const time_descrip_window = {
     x: 70,
@@ -139,7 +144,7 @@ function postReady(rank) {
 }
 
 
-function postInfo(info1, info2, button) {
+function postInfo(info1, info2, button, capital) {
     panel_ctx.clearRect(info_window['x'], info_window['y'], info_window['width'], info_window['height']);
     panel_ctx.fillStyle = 'white';
     panel_ctx.fillRect(info_window['x'], info_window['y'], info_window['width'], info_window['height']);
@@ -158,6 +163,12 @@ function postInfo(info1, info2, button) {
         panel_ctx.font = "25px Arial";
         panel_ctx.fillStyle = 'black';
         panel_ctx.fillText('READY!', ready_button['x'] + 5, ready_button['y'] + 28)
+    }
+
+    if (capital != "") {
+        panel_ctx.font = "25px Arial";
+        panel_ctx.fillStyle = "black";
+        panel_ctx.fillText(capital, info_window['x'] + 15, info_window['y'] + 146)
     }
 }
 
@@ -182,13 +193,13 @@ socket.on('draw timer', (time) => {
 });
 
 socket.on('draw prepare', () => {
-    postInfo("Preparing next game...", "",true);
+    postInfo("Preparing next game...", "",true, "");
     postTimeDescrip("seconds until autostart");
 })
 
 // Draw game for client
-socket.on('draw guess city', (city) => {
-    postInfo("Locate this city!", city, false)
+socket.on('draw guess city', (city, capital) => {
+    postInfo("Locate this city!", city, false, capital)
     postTimeDescrip("seconds remaining")
 });
 
@@ -214,38 +225,35 @@ function isInside(pos, rect){
 //
 //
 
-/** CHAT WINDOW HANDLING */
-const chat = window.document.getElementById('chat');
-const chat_ctx = chat.getContext('2d');
-
-const chatdisplay = {
-    x: 0,
-    y: 0,
-    width: chat.width,
-    height: 7*chat.height/8
-};
-
-function clearMessages() {
-    chat_ctx.clearRect(chatdisplay['x'], chatdisplay['y'], chatdisplay['width'], chatdisplay['height']);
-    chat_ctx.fillStyle =  "#f4fce0";
-    chat_ctx.fillRect(chatdisplay['x'], chatdisplay['y'], chatdisplay['width'], chatdisplay['height']);
-    chat_ctx.font = "20px Arial";
-    chat_ctx.fillStyle =  "black";
-    chat_ctx.fillText("HISTORY (chat box TBD):", chatdisplay['x']+5,chatdisplay['y'] + 40);
-}
-function postMessage(row, namecolor, name, payloadcolor, payload) {
-    chat_ctx.font = "20px Arial";
-    chat_ctx.fillStyle =  namecolor;
-    chat_ctx.fillText(name + ": ", chatdisplay['x']+5,chatdisplay['y'] + 80 + row * 25);
-    chat_ctx.fillStyle =  payloadcolor;
-    chat_ctx.fillText(payload, chatdisplay['x']+90,chatdisplay['y'] + 80 + row * 25);
-}
-socket.on('reset chat', () => {clearMessages()});
-socket.on('draw chat', (chat) => {//row, namecolor, name, payloadcolor, payload) => {
-    var i;
-    for (i = 0; i < Math.min(CONSTANTS.MSG_HISTORY, Object.values(chat.messages).length); i++) {
-        const start = Math.max(Object.values(chat.messages).length - CONSTANTS.MSG_HISTORY, 0)
-        const msg = chat.messages[start + i];
-        postMessage(i, msg['namecolor'], msg['name'], msg['payloadcolor'], msg['payload']);
-    }
+/** HISTORY WINDOW HANDLING */
+socket.on("update messages", function(msg){
+    var final_message = $("<p style=\"font-size:20px\" />").html(msg);
+   $("#history").prepend(final_message);
+   chatcount = chatcount + 1;
+   if (chatcount > CONSTANTS.MAX_CHAT_HIST) {
+       $("#history").children().last().remove();;
+       chatcount = chatcount - 1;
+   }
 });
+
+
+socket.on('break history', (winner) => {
+   var assembled = "********* WINNER: Player " + winner + " ***********"
+   var final_message = $("<p style=\"font-size:20px\" />").html(assembled);
+   $("#gamehist").append(final_message);
+   histcount = histcount + 1;
+   if (histcount > CONSTANTS.MAX_GAME_HIST) {
+       $("#gamehist").children().first().remove();;
+       histcount = histcount - 1;
+   }});
+socket.on('add history', (payload) => {
+   var assembled = payload
+   var final_message = $("<p style=\"font-size:20px\" />").html(assembled);
+   $("#gamehist").append(final_message);
+   histcount = histcount + 1;
+   if (histcount > CONSTANTS.MAX_GAME_HIST) {
+       $("#gamehist").children().first().remove();;
+       histcount = histcount - 1;
+   }
+});
+

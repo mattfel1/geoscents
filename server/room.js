@@ -5,7 +5,7 @@
 const CONSTANTS = require('../resources/constants.js');
 const Geography = require('./geography.js');
 const Player = require('./player.js');
-const Chat = require('./chat.js');
+const History = require('./history.js');
 const io = require('./app.js').io;
 
 class Room {
@@ -22,19 +22,49 @@ class Room {
       this.playedCities = {};
       this.state = CONSTANTS.IDLE_STATE;
       this.round = 0;
-      this.chat = new Chat()
+      this.winner = "";
     }
 
     // Player basic IO
     addPlayer(socket) {
+      var player = new Player(socket.id, this.players.size, socket.handshake.address, this.ordinalCounter, this.ordinalCounter)
       this.clients.set(socket.id, socket)
-      this.players.set(socket.id, new Player(socket.id, this.players.size, this.ordinalCounter, this.ordinalCounter))
+      this.players.set(socket.id, player)
       this.ordinalCounter = this.ordinalCounter + 1;
       this.drawUpperPanel(socket.id);
       this.drawLowerPanel(socket.id);
       socket.emit('fresh map');
-      socket.emit('reset chat')
+      socket.emit('clear history')
     }
+
+    getPlayerByIp(ip) {
+        const match = Array.from(this.players.values()).filter(player => player.ip == ip);
+        if (match.length > 0)
+            return match[0].id;
+        else
+            return ""
+    }
+
+    getPlayerName(ip) {
+        const socketId = this.getPlayerByIp(ip);
+        // console.log('got id ' + socketId)
+        if (this.players.has(socketId)) {
+            return this.players.get(socketId).name
+        }
+        else {
+            return socketId.substring(5,0)
+        }
+    }
+    getPlayerColor(ip) {
+        const socketId = this.getPlayerByIp(ip);
+        if (this.players.has(socketId)) {
+            return this.players.get(socketId).color
+        }
+        else {
+            return '#000000'
+        }
+    }
+
 
     killPlayer(socket) {
       console.log('user disconnected');
@@ -86,17 +116,16 @@ class Room {
     updateScores() {
       const scoreEquation = (a,b,c,d,e) => {this.scoreEquation(a,b,c,d,e)};
       const target = this.target;
-      const chatScore = (player, payload) => {this.chatScore(player, payload)}
-      this.chatRound(this.round, target['name'], target['country'])
+      this.historyRound(this.round, target['name'], target['country'], target['population'], target['capital'])
+      const historyScore = (player, payload) => {this.historyScore(player, payload)}
       Array.from(this.players.values()).forEach(function(player) {
           var timeBonus = player.clickedAt;
           var merc = Geography.geoToMerc(parseFloat(target['lat']), parseFloat(target['lon']))
           var dist = Geography.mercDist(player.row, player.col, merc['row'], merc['col'])
           var update = Math.exp(-Math.pow(dist,2)/1000)*timeBonus*50
-          chatScore(player, " + " + Math.floor(update ) + " (Distance: " + Math.floor(dist) + ", Time Bonus: " + (Math.floor(timeBonus * 10) / 10) + ")")
+          historyScore(player, " + " + Math.floor(update ) + " (Distance: " + Math.floor(dist) + ", Time Bonus: " + (Math.floor(timeBonus * 10) / 10) + ")")
           player.score = Math.floor(player.score + update)
         })
-      this.redrawChat()
     }
 
     scoreEquation(timeBonus, guess_row, guess_col, true_lat, true_lon) {
@@ -120,7 +149,6 @@ class Room {
         this.players.forEach((player,id) => {
             this.broadcastPoint(player.row, player.col, player.color);
         });
-        this.round = this.round + 1
     }
 
     allPlayersClicked() {
@@ -154,9 +182,12 @@ class Room {
        const players = this.players;
        const cityname = this.target['name'];
        const citycountry = this.target['country'];
+       var capital = "";
+       if (this.target['capital'] == "primary") capital = "(* CAPITAL CITY)";
        const revealAll = () => {this.revealAll()};
        const sortPlayers = () => {this.sortPlayers()};
        const updateScores = () => {this.updateScores()};
+       const historyNewGame = (w) => {this.historyNewGame(w)};
        this.clients.forEach(function(socket, socketId) {
            socket.emit('draw round', round);
            if (state == CONSTANTS.IDLE_STATE) {
@@ -169,7 +200,7 @@ class Room {
                 // ???
            }
            if (state == CONSTANTS.GUESS_STATE) {
-               socket.emit('draw guess city', cityname + ', ' + citycountry)
+               socket.emit('draw guess city', cityname + ', ' + citycountry, capital)
            }
            if (state == CONSTANTS.REVEAL_STATE) {
                revealAll();
@@ -183,7 +214,8 @@ class Room {
 
     sortPlayers() {
         var sortedPlayers = Array.from(this.players.values()).sort((a, b) => {(a.score > b.score) ? 1 : -1})
-        Array.from(sortedPlayers).forEach((p,i) => p.rank = i)
+        Array.from(sortedPlayers).forEach((p,i) => p.rank = i);
+        this.winner = Array.from(sortedPlayers)[0].name;
     }
 
     fsm() {
@@ -196,6 +228,7 @@ class Room {
       }
       else if (this.numPlayers() > 0 && this.state == CONSTANTS.IDLE_STATE) {
         this.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
+        this.round = 0;
       }
       else if (this.state == CONSTANTS.PREPARE_GAME_STATE) {
           if (this.allReady() || this.timer <= 0) {
@@ -222,11 +255,13 @@ class Room {
           else if ((this.timer <= 0 || this.allPlayersClicked())) {
             this.updateScores();
             this.sortPlayers();
+            this.historyNewGame(this.winner)
             this.stateTransition(CONSTANTS.PREPARE_GAME_DURATION, CONSTANTS.PREPARE_GAME_DURATION)
           }
       }
       else if (this.state == CONSTANTS.REVEAL_STATE) {
           if (this.timer <= 0) { //&& this.round < CONSTANTS.GAME_ROUNDS - 1) {
+            this.round = this.round + 1;
             this.stateTransition(CONSTANTS.SETUP_STATE,0);
           }
       }
@@ -239,19 +274,26 @@ class Room {
       }
     }
 
-    chatRound(round, city, country) {
-        this.chat.newRound("Round " + round + ": " + city + ", " + country)
-    }
-    chatScore(player, score) {
-        this.chat.newScore("Player " + player.name, player.color, score)
-    }
-    redrawChat() {
-        const chat = this.chat;
-        this.clients.forEach(function(s,id) {
-            s.emit('reset chat')
-            s.emit('draw chat', chat)
+    historyNewGame(winner) {
+        this.clients.forEach((socket,id) => {
+            socket.emit('break history',  winner)
         });
     }
+    historyRound(round, city, country, pop, capital) {
+        var star = ""
+        if (capital == 'primary') star = "*";
+        const base = "Round " + round + ": " + star + city + ", " + country + " (pop: " + pop.toLocaleString() + ")"
+        const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + city + "%2C+" + country + "&go=Go&ns0=1\">Learn!</a>"
+        this.clients.forEach((socket,id) => {
+            socket.emit('add history',  base + link)
+        });
+    }
+    historyScore(player, score) {
+        this.clients.forEach((socket,id) => {
+            socket.emit('add history', "  <font color=\"" + player.color +"\">Player " + player.name + ": " + score + "</font>")
+        });
+    }
+
 }
 
 module.exports = Room

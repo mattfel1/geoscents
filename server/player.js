@@ -4,7 +4,7 @@
 const CONSTANTS = require('../resources/constants.js');
 
 class Player {
-    constructor(socketid, rank, ordinalid, name) {
+    constructor(socketid, rank, ip, ordinalid, name) {
         this.row = 0;
 		this.col = 0;
 		this.width = 5;
@@ -15,6 +15,7 @@ class Player {
 		this.lon = 0;
 		this.clickedAt = 0;
         this.id = socketid;
+        this.ip = ip;
 		this.name = name;
 		this.score = 0;
 		this.rank = rank;

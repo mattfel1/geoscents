@@ -28,6 +28,11 @@ app.get('/', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 // Cities from https://simplemaps.com/data/world-cities
+//  1) Delete all "capitals" that were not primary
+//  2) Sort by capital first, population second
+//  3) Take top 1000 cities
+//  4) xlsx -> csv (https://www.zamzar.com/convert/xlsx-to-csv/)
+//  5) csv -> json (https://csvjson.com/csv2json)
 app.get('/resources/map.png', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '..', 'resources/map.png'));
 });
@@ -49,6 +54,11 @@ server.listen(PORT, () => {
 
 // Game state info
 const room = new Room(4, 0);
+const WELCOME_MESSAGE1 = "Welcome to GeoScents!";
+const WELCOME_MESSAGE2 = "This is an unabashed attempt at recreating the GeoSense game from the mid 2000s.";
+const WELCOME_MESSAGE3 = "Try to click the locations of the given city as quickly and accurately as possible!";
+const WELCOME_MESSAGE4 = "If you are enjoying this game, consider donating to keep the server running!";
+const WELCOME_MESSAGE5 = "Feel free to play with the source code on github and make pull requests.";
 
 function log(payload) {
     const currentdate = new Date();
@@ -63,15 +73,20 @@ function log(payload) {
     });
 }
 
-    io.on('connection', (socket) => {
+io.on('connection', (socket) => {
 	console.log('a user connected:', socket.id);
 	socket.on('newPlayer', () => {
 	  room.addPlayer(socket)
-      log("User connected    " + socket.handshake.address)
+      log("User connected    " + socket.handshake.address + ", " + socket.id)
+	  io.sockets.emit("update messages", WELCOME_MESSAGE5);
+	  io.sockets.emit("update messages", WELCOME_MESSAGE4);
+	  io.sockets.emit("update messages", WELCOME_MESSAGE3);
+	  io.sockets.emit("update messages", WELCOME_MESSAGE2);
+	  io.sockets.emit("update messages", WELCOME_MESSAGE1);
 	});
 	socket.on('disconnect', function() {
 	  room.killPlayer(socket)
-      log("User disconnected " + socket.handshake.address)
+      log("User disconnected " + socket.handshake.address + ", " + socket.id)
 	});
     socket.on('playerReady', () => {
 	  room.playerReady(socket);
@@ -79,6 +94,16 @@ function log(payload) {
 	socket.on('playerClick', (playerClick) => {
 	  room.playerClicked(socket, playerClick)
 	})
+    socket.on("send message", function(sent_msg, callback) {
+    	//TODO: Why is this socket.id different from the socket.id used to create player?  Will just use ip address for now...
+        sent_msg = "[ <font color='" + room.getPlayerColor(socket.handshake.address) + "'>Player " + room.getPlayerName(socket.handshake.address) + "</font> ]: " + sent_msg;
+        if (sent_msg.length > CONSTANTS.MAX_MSG) {
+        	sent_msg = sent_msg.substring(0, CONSTANTS.MAX_MSG)
+		}
+        log("Message passed: " + sent_msg)
+        io.sockets.emit("update messages", sent_msg);
+        callback();
+    });
 });
 
 // Handle rooms
