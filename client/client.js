@@ -100,9 +100,9 @@ const time_descrip_window = {
 }
 const scoreboard_window = {
     x: 0,
-    y: panel.height/2,
+    y: panel.height/3,
     width: panel.width,
-    height: panel.height/2
+    height: 2*panel.height/3
 };
 
 function postTime(time) {

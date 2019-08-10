@@ -5,10 +5,10 @@ module.exports = {
     TRUTH_COLOR: '#8b4c00',
 
     // Map and Panel
-    MAP_WIDTH: 2400,
-    MAP_HEIGHT: 1414,
+    MAP_WIDTH: 1200,
+    MAP_HEIGHT: 707,
     PANEL_WIDTH: 600,
-    PANEL_HEIGHT: 1414,
+    PANEL_HEIGHT: 707,
     ZERO_LAT: 77.0*Math.PI/180, // Latitude of top edge of map
     MAX_LAT: -65.0*Math.PI/180, // Latitude of bottom edge of map
 
@@ -36,6 +36,6 @@ module.exports = {
 
     // Chat
     GAME_HISTORY: 18,
-    MAX_GAME_HIST: 21,
-    MAX_CHAT_HIST: 23
+    MAX_GAME_HIST: 16,
+    MAX_CHAT_HIST: 16
 }

@@ -8,7 +8,7 @@
     <script defer src="/bundle.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <!-- Place this tag in your head or just before your close body tag. -->
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=1.0">
     <style>
         * { padding: 0; margin: 0; }
       </style>
@@ -18,23 +18,23 @@
           <table>
               <tr>
                  <th colspan='3'>
-                        <h1>GeoScents</h1>
+                     <h1><font size="48px">GeoScents</font></h1>
                   </th>
               </tr>
               <tr>
                   <td>
                       <div>
-                          <canvas id="map" width="2400" height="1414"></canvas>
+                          <canvas id="map" width="1200" height="707"></canvas>
                        </div>
                   </td>
                   <td>
                        <div>
-                          <canvas id="panel" width="600" height="1414"></canvas>
+                          <canvas id="panel" width="600" height="707"></canvas>
                        </div>
                   </td>
               </tr>
               <tr>
-                  <td align="left" height="900">
+                  <td align="left" height="400">
 <!--                      https://itnext.io/creating-a-chat-with-node-js-from-the-scratch-707896d64593-->
                      <form id="chat">
                      <input type="text" id="msg_text" name="msg_text" style="width: 1000px;" />
@@ -52,12 +52,12 @@
                        });
                      });
                      </script>
-                     <div id="history" style="width:2400px;height:900px;background:#ffffff;border:1px dotted black;text-align:left"></div>
+                     <div id="history" style="width:1200px;height:400px;background:#ffffff;border:1px dotted black;text-align:left"></div>
 
                   </td>
                   <td>
                       <h2>GAME HISTORY:</h2>
-                      <div id="gamehist" style="width:1100px;height:900px;background:#f4fce0;border:1px dotted black;text-align:left">
+                      <div id="gamehist" style="width:1100px;height:400px;background:#f4fce0;border:1px dotted black;text-align:left">
                       </div>
                   </td>
               </tr>
