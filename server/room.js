@@ -78,7 +78,6 @@ class Room {
     playerReady(socket) {
       const player = this.players.get(socket.id);
       player.ready = true
-      this.clients.forEach((s,id) => s.emit('player ready', player.rank))
     }
 
     playerClicked(socket, playerClick) {
@@ -195,7 +194,14 @@ class Room {
     }
 
     drawLowerPanel() {
+        const players = this.players;
         this.clients.forEach((s,id) => this.printScoresWithSelf(Array.from(this.players.values()),s,id))
+        this.clients.forEach(function(s,id) {
+            Array.from(players.values()).forEach(function(player,i) {
+              if (player.ready) s.emit('player ready', player.rank)
+            });
+        });
+
     }
 
     sortPlayers() {
