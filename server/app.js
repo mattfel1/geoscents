@@ -54,9 +54,9 @@ server.listen(PORT, () => {
 
 // Game state info
 const room = new Room(4, 0);
-const WELCOME_MESSAGE1 = "Welcome to GeoScents!  This is an unabashed attempt at recreating the GeoSense game from the mid 2000s " +
+const WELCOME_MESSAGE1 = "Welcome to GeoScents, an unabashed attempt at recreating the GeoSense game from the mid 2000s. " +
 	"Try to click the locations of the given city as quickly and accurately as possible!  If you are enjoying " +
-	"this game, consider donating to keep the server running!  Feel free to play with the code on github and make pull requests.";
+	"this game, consider donating to keep the server running!  Feel free to play with the code on github and make pull requests or post issues.";
 
 function log(payload) {
     const currentdate = new Date();
@@ -76,7 +76,9 @@ io.on('connection', (socket) => {
 	socket.on('newPlayer', () => {
 	  room.addPlayer(socket)
       log("User connected    " + socket.handshake.address + ", " + socket.id)
-	  io.sockets.emit("update messages", WELCOME_MESSAGE1);
+	  socket.emit("update messages", WELCOME_MESSAGE1);
+      var join_msg = "[ <font color='" + room.getPlayerColor(socket.handshake.address) + "'>Player " + room.getPlayerName(socket.handshake.address) + " has joined!</font> ]";
+      io.sockets.emit("update messages", join_msg)
 	});
 	socket.on('disconnect', function() {
 	  room.killPlayer(socket)

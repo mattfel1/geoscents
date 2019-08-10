@@ -288,7 +288,7 @@ class Room {
     }
     historyScore(player, score) {
         this.clients.forEach((socket,id) => {
-            socket.emit('add history', "  <font color=\"" + player.color +"\">Player " + player.name + ": " + score + "</font>")
+            socket.emit('add history', "<font color=\"" + player.color +"\">  Player " + player.name + ": " + score + "</font>")
         });
     }
 

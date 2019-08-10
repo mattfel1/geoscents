@@ -89,7 +89,7 @@ const round_window = {
 const info_window = {
     x: 20,
     y: 80,
-    width: 500,
+    width: 600,
     height: 152
 }
 const time_descrip_window = {
@@ -240,6 +240,7 @@ socket.on("update messages", function(msg){
 socket.on('break history', (winner) => {
    var assembled = "********* WINNER: Player " + winner + " ***********"
    var final_message = $("<p style=\"font-size:20px\" />").html(assembled);
+   $("#gamehist").append(" ");
    $("#gamehist").append(final_message);
    histcount = histcount + 1;
    if (histcount > CONSTANTS.MAX_GAME_HIST) {
