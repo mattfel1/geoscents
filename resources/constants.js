@@ -2,7 +2,7 @@ module.exports = {
 
     // Players
     COLORS: ['#1f77b4','#2ca02c','#d62728','#9467bd','#8c564b','#e377c2','#7f7f7f','#bcbd22','#17becf'],
-    TRUTH_COLOR: '#8b4c00',
+    TRUTH_COLOR: 'white',
 
     // Map and Panel
     MAP_WIDTH: 1200,
