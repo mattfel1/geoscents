@@ -5,8 +5,6 @@
 const CONSTANTS = require('../resources/constants.js');
 const Geography = require('./geography.js');
 const Player = require('./player.js');
-const History = require('./history.js');
-const io = require('./app.js').io;
 
 class Room {
     constructor(capacity, id) {
