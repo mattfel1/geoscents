@@ -126,15 +126,6 @@ class Room {
         })
     }
 
-    scoreEquation(timeBonus, guess_row, guess_col, true_lat, true_lon) {
-        // var dist = geoDist(player.lat, player.lon true_lat, true_lon)
-        var merc = Geography.geoToMerc(true_lat, true_lon)
-        var dist = Geography.mercDist(guess_row, guess_col, merc['row'], merc['col'])
-        var score = Math.exp(-Math.pow(dist,2)/1000)*timeBonus*50
-        // console.log('[' + guess_row + ',' + guess_col + '] to [' + merc['row'] + ',' + merc['col'] + '] = ' + score + ' dist ' + dist)
-        return score
-    }
-
     broadcastPoint(row, col, color) {
       this.clients.forEach(function(s,id) {
           s.emit('draw point', {'row': row, 'col': col}, color)
@@ -215,7 +206,9 @@ class Room {
 
     fsm() {
       // Game flow state machine
-      const timer = this.timer
+      const timer = this.timer;
+      const drawUpperPanel = () => {this.drawUpperPanel()};
+      const drawLowerPanel = () => {this.drawLowerPanel()};
       this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw timer', Math.floor(((timer * 1000)) / 1000))})})
       this.decrementTimer();
       if (this.numPlayers() == 0) {
@@ -231,7 +224,10 @@ class Room {
             Array.from(this.players.values()).forEach((player,i)=> player.deepReset(i))
           }
           else {
-              this.onSecond(() => {this.drawUpperPanel()})
+              this.onSecond(function() {
+                  drawUpperPanel();
+                  drawLowerPanel();
+              });
           }
       }
       else if (this.state == CONSTANTS.SETUP_STATE) {

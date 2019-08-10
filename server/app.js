@@ -80,8 +80,10 @@ io.on('connection', (socket) => {
       io.sockets.emit("update messages", join_msg)
 	});
 	socket.on('disconnect', function() {
-	  room.killPlayer(socket)
       log("User disconnected " + socket.handshake.address + ", " + socket.id)
+      var leave_msg = "[ <font color='" + room.getPlayerColor(socket.handshake.address) + "'>Player " + room.getPlayerName(socket.handshake.address) + " has left!</font> ]";
+      io.sockets.emit("update messages", leave_msg)
+	  room.killPlayer(socket)
 	});
     socket.on('playerReady', () => {
 	  room.playerReady(socket);
