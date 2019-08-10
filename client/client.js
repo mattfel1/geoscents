@@ -236,7 +236,7 @@ function isInside(pos, rect){
 
 /** HISTORY WINDOW HANDLING */
 socket.on("update messages", function(msg){
-    var final_message = $("<font style=\"font-size:20px;line-height:20px\" />").html(msg+"<br \>");
+    var final_message = $("<p style=\"font-size:20px;line-height:20px\" />").html(msg);
    $("#history").prepend(final_message);
    chatcount = chatcount + 1;
    if (chatcount > CONSTANTS.MAX_CHAT_HIST) {
@@ -247,8 +247,8 @@ socket.on("update messages", function(msg){
 
 
 socket.on('break history', (winner) => {
-   var assembled = "********* WINNER: Player " + winner + " ***********";
-   var final_message = $("<font style=\"font-size:20px\" />").html(assembled+"<br \>");
+   var assembled = "********* WINNER: Player " + winner + " ***********"
+   var final_message = $("<p style=\"font-size:20px\" />").html(assembled);
    $("#gamehist").append(" ");
    $("#gamehist").append(final_message);
    histcount = histcount + 1;
@@ -258,7 +258,7 @@ socket.on('break history', (winner) => {
    }});
 socket.on('add history', (payload) => {
    var assembled = payload
-   var final_message = $("<font style=\"font-size:20px\" />").html(assembled+"<br \>");
+   var final_message = $("<p style=\"font-size:20px\" />").html(assembled);
    $("#gamehist").append(final_message);
    histcount = histcount + 1;
    if (histcount > CONSTANTS.MAX_GAME_HIST) {
