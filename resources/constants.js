@@ -7,7 +7,7 @@ module.exports = {
     // Map and Panel
     MAP_WIDTH: 1200,
     MAP_HEIGHT: 707,
-    PANEL_WIDTH: 600,
+    PANEL_WIDTH: 800,
     PANEL_HEIGHT: 707,
     ZERO_LAT: 77.0*Math.PI/180, // Latitude of top edge of map
     MAX_LAT: -65.0*Math.PI/180, // Latitude of bottom edge of map
@@ -24,6 +24,7 @@ module.exports = {
     ASK_READY_STATE: 'askready',
 
     // Visuals and score
+    BGCOLOR: "#E6E6FA",
     SCORE_SCALE: 10000,
     POINT_RADIUS: 3,
     BUBBLE_RADIUS: 15,

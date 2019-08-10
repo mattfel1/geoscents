@@ -90,7 +90,7 @@ const info_window = {
     x: 20,
     y: 80,
     width: 500,
-    height: 150
+    height: 152
 }
 const time_descrip_window = {
     x: 70,
@@ -116,7 +116,7 @@ function postTime(time) {
 
 function postTimeDescrip(info) {
     panel_ctx.clearRect(time_descrip_window['x'], time_descrip_window['y'], time_descrip_window['width'], time_descrip_window['height'])
-    panel_ctx.fillStyle = 'white';
+    panel_ctx.fillStyle = CONSTANTS.BGCOLOR;
     panel_ctx.fillRect(time_descrip_window['x'], time_descrip_window['y'], time_descrip_window['width'], time_descrip_window['height']);    panel_ctx.font = "25px Arial";
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText(info, time_descrip_window['x'] + 5, time_descrip_window['y']+25)
@@ -146,7 +146,7 @@ function postReady(rank) {
 
 function postInfo(info1, info2, button, capital) {
     panel_ctx.clearRect(info_window['x'], info_window['y'], info_window['width'], info_window['height']);
-    panel_ctx.fillStyle = 'white';
+    panel_ctx.fillStyle = CONSTANTS.BGCOLOR;
     panel_ctx.fillRect(info_window['x'], info_window['y'], info_window['width'], info_window['height']);
 
     panel_ctx.font = "35px Arial";
@@ -181,7 +181,7 @@ socket.on('player ready', (rank) => {
 })
 socket.on('draw round', (round) => {
     panel_ctx.clearRect(round_window['x'], round_window['y'], round_window['width'], round_window['height']);
-    panel_ctx.fillStyle = 'white';
+    panel_ctx.fillStyle = CONSTANTS.BGCOLOR;
     panel_ctx.fillRect(round_window['x'], round_window['y'], round_window['width'], round_window['height']);
     panel_ctx.font = "25px Arial";
     panel_ctx.fillStyle = "black";
