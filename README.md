@@ -1,4 +1,13 @@
-Hi!
+# Introduction
+This is an unabashed attempt to recreate the game GeoSense (geosense.net), which went offline some time after ~2012.
+I have seen a few discussions on Reddit and elsewhere about people asking if it will ever go back online, but no one 
+seems to have made an effort to bring it back.
+
+I am a complete novice at Javascript and node.js but I made an attempt to throw this together anyway.
+
+Feel free to contribute!
+
+# Getting Started
 
 This is a simple starting point for a HTML5 game using Canvas, Sockets.io and Express.
 

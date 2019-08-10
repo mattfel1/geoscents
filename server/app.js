@@ -1,6 +1,5 @@
+/** Top level file for handling connections, messages, and dispatching the game FSM */
 
-const Player = require('./player.js')
-const Geography = require('./geography.js')
 const Room = require('./room.js')
 const express = require('express');
 const path = require('path');
@@ -54,7 +53,7 @@ server.listen(PORT, () => {
 
 // Game state info
 const room = new Room(4, 0);
-const WELCOME_MESSAGE1 = "Welcome to GeoScents, an unabashed attempt at recreating the GeoSense game from the mid 2000s. " +
+const WELCOME_MESSAGE1 = "Welcome to GeoScents, an unabashed attempt at recreating the geosense.net game from the mid 2000s. " +
 	"Try to click the locations of the given city as quickly and accurately as possible!  If you are enjoying " +
 	"this game, consider donating to keep the server running!  Feel free to play with the code on github and make pull requests or post issues.";
 
@@ -93,6 +92,7 @@ io.on('connection', (socket) => {
     socket.on("send message", function(sent_msg, callback) {
     	//TODO: Why is this socket.id different from the socket.id used to create player?  Will just use ip address for now...
         sent_msg = "[ <font color='" + room.getPlayerColor(socket.handshake.address) + "'>Player " + room.getPlayerName(socket.handshake.address) + "</font> ]: " + sent_msg;
+        console.log(sent_msg)
         // if (sent_msg.length > CONSTANTS.MAX_MSG) {
         // 	sent_msg = sent_msg.substring(0, CONSTANTS.MAX_MSG)
 		// }

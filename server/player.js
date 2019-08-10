@@ -1,5 +1,5 @@
 /**
- * Class for storing all of a player's properties and defining methonds on them
+ * Class for storing all of a player's properties and defining methods on them
  */
 const CONSTANTS = require('../resources/constants.js');
 

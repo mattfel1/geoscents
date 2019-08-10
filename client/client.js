@@ -1,3 +1,8 @@
+/**
+ * Top level file for handling rendering and interactions on the client side.
+ * // TODO: Split this into multiple classes for handling chat, game history, map, and panel separately
+ */
+
 const canvas = window.document.getElementById('map');
 const ctx = canvas.getContext('2d');
 const socket = io();
@@ -197,10 +202,14 @@ socket.on('draw prepare', () => {
     postTimeDescrip("seconds until autostart");
 })
 
-// Draw game for client
 socket.on('draw guess city', (city, capital) => {
     postInfo("Locate this city!", city, false, capital)
     postTimeDescrip("seconds remaining")
+});
+
+socket.on('draw reveal city', (city, capital) => {
+    postInfo("Revealing...", city, false, capital)
+    postTimeDescrip("seconds until next round")
 });
 
 panel.addEventListener('click', function(evt) {
@@ -227,7 +236,7 @@ function isInside(pos, rect){
 
 /** HISTORY WINDOW HANDLING */
 socket.on("update messages", function(msg){
-    var final_message = $("<p style=\"font-size:20px\" />").html(msg);
+    var final_message = $("<font style=\"font-size:20px;line-height:20px\" />").html(msg+"<br>");
    $("#history").prepend(final_message);
    chatcount = chatcount + 1;
    if (chatcount > CONSTANTS.MAX_CHAT_HIST) {
@@ -239,7 +248,7 @@ socket.on("update messages", function(msg){
 
 socket.on('break history', (winner) => {
    var assembled = "********* WINNER: Player " + winner + " ***********"
-   var final_message = $("<p style=\"font-size:20px\" />").html(assembled);
+   var final_message = $("<font style=\"font-size:20px\" />").html(assembled+"<br>");
    $("#gamehist").append(" ");
    $("#gamehist").append(final_message);
    histcount = histcount + 1;
@@ -249,7 +258,7 @@ socket.on('break history', (winner) => {
    }});
 socket.on('add history', (payload) => {
    var assembled = payload
-   var final_message = $("<p style=\"font-size:20px\" />").html(assembled);
+   var final_message = $("<font style=\"font-size:20px\" />").html(assembled+"<br>");
    $("#gamehist").append(final_message);
    histcount = histcount + 1;
    if (histcount > CONSTANTS.MAX_GAME_HIST) {

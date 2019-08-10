@@ -4,14 +4,11 @@
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width initial-scale=1.0'>
     <title></title>
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="style.css?v=1.0">
     <script defer src="/bundle.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <!-- Place this tag in your head or just before your close body tag. -->
-    <link rel="stylesheet" href="style.css?v=1.0">
-    <style>
-        * { padding: 0; margin: 0; }
-      </style>
+    <meta name="GeoScents" content="An online multiplayer world geography game!  Test your knowledge of city locations.">
   </head>
   <body>
 <!--  <body bgcolor="#E6E6FA">-->
@@ -26,15 +23,17 @@
               <tr>
                   <td>
                       <div>
-                          <canvas id="map" width="1200" height="707"></canvas>
+                          <canvas id="map" width="1400" height="824"></canvas>
                        </div>
                   </td>
                   <td>
                        <div>
-                          <canvas id="panel" width="800" height="707"></canvas>
+                          <canvas id="panel" width="600" height="824"></canvas>
                        </div>
                   </td>
               </tr>
+          </table>
+          <table>
               <tr>
                   <td align="left" height="400">
 <!--                      https://itnext.io/creating-a-chat-with-node-js-from-the-scratch-707896d64593-->
@@ -59,8 +58,7 @@
                   </td>
                   <td>
                       <h2>GAME HISTORY:</h2>
-                      <div id="gamehist" style="width:800px;height:400px;background:#f4fce0;border:1px dotted black;text-align:left">
-                      </div>
+                      <div id="gamehist" style="width:800px;height:400px;background:#f4fce0;border:1px dotted black;text-align:left"></div>
                   </td>
               </tr>
               <tr>

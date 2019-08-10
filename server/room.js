@@ -1,5 +1,6 @@
 /**
-  * Class for managing game flow
+  * Class for managing the game flow within a room.
+  * // TODO: Currently entire game has one room, but the plan is to have multiple rooms to choose from with player caps
   */
 
 const CONSTANTS = require('../resources/constants.js');
@@ -112,7 +113,6 @@ class Room {
     }
 
     updateScores() {
-      const scoreEquation = (a,b,c,d,e) => {this.scoreEquation(a,b,c,d,e)};
       const target = this.target;
       this.historyRound(this.round, target['name'], target['country'], target['population'], target['capital'])
       const historyScore = (player, payload) => {this.historyScore(player, payload)}
@@ -177,15 +177,11 @@ class Room {
     drawUpperPanel() {
        const round = this.round;
        const state = this.state;
-       const players = this.players;
+       const revealAll = () => {this.revealAll()};
        const cityname = this.target['name'];
        const citycountry = this.target['country'];
        var capital = "";
        if (this.target['capital'] == "primary") capital = "(* CAPITAL CITY)";
-       const revealAll = () => {this.revealAll()};
-       const sortPlayers = () => {this.sortPlayers()};
-       const updateScores = () => {this.updateScores()};
-       const historyNewGame = (w) => {this.historyNewGame(w)};
        this.clients.forEach(function(socket, socketId) {
            socket.emit('draw round', round);
            if (state == CONSTANTS.IDLE_STATE) {
@@ -201,6 +197,7 @@ class Room {
                socket.emit('draw guess city', cityname + ', ' + citycountry, capital)
            }
            if (state == CONSTANTS.REVEAL_STATE) {
+               socket.emit('draw reveal city', cityname + ', ' + citycountry, capital)
                revealAll();
            }
        })
