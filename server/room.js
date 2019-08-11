@@ -45,13 +45,26 @@ class Room {
     }
 
     getPlayerName(ip) {
-        const socketId = this.getPlayerByIp(ip);
-        // console.log('got id ' + socketId)
-        if (this.players.has(socketId)) {
-            return this.players.get(socketId).name
+        const match = Array.from(this.players.values()).filter(player => player.ip == ip);
+        if (match.length == 1) {
+            const socketId = match[0].id;
+            if (this.players.has(socketId)) {
+                return this.players.get(socketId).name
+            }
+            else {
+                return socketId.substring(5,0)
+            }
         }
-        else {
-            return socketId.substring(5,0)
+        else if (match.length > 1) {
+            const socketId = match[0].id;
+            if (this.players.has(socketId)) {
+                return this.players.get(socketId).name + "-" + socketId.substring(5,0);
+            }
+            else {
+                return socketId.substring(5,0)
+            }
+        } else {
+            return "???"
         }
     }
     getPlayerColor(ip) {
