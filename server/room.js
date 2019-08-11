@@ -73,12 +73,12 @@ class Room {
 
     killPlayer(socket) {
       console.log('user disconnected ' + socket.id);
-      console.log(this.clients.values())
+      console.log(this.clients.values().length)
       if (this.clients.has(socket.id)) {
         this.clients.delete(socket.id)
       }
       console.log('clietns now ')
-              console.log(this.clients.values())
+              console.log(this.clients.values().length)
 
     }
 
