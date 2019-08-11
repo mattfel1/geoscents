@@ -40,50 +40,31 @@ socket.on('draw point', (coords, color) => {
   ctx.closePath()
 });
 
-// const playerClick = {
-//   mouseDown: false,
-//   cursorX: 0,
-//   cursorY: 0
-// };
-// const mouseUpHandler = (e) => {
-//   if (window.event) playerClick.mouseDown = false
-// };
-// const mouseDownHandler = (e) => {
-//   playerClick.mouseDown = true
-//
-//   var rect = canvas.getBoundingClientRect();
-//   playerClick.cursorX = e.clientX - rect.left
-//   playerClick.cursorY = e.clientY - rect.top
-// };
+const playerClick = {
+  mouseDown: false,
+  cursorX: 0,
+  cursorY: 0
+};
+const mouseUpHandler = (e) => {
+  if (window.event) playerClick.mouseDown = false
+};
+const mouseDownHandler = (e) => {
+  playerClick.mouseDown = true
 
-const mouseClickHandler = (e) => {
-    var mousePos = getMousePosInMap(canvas, e);
-    if (isInsideMap(mousePos)) {
-        socket.emit('playerClick', mousePos);
-    }
+  var rect = canvas.getBoundingClientRect();
+  playerClick.cursorX = e.clientX - rect.left
+  playerClick.cursorY = e.clientY - rect.top
 };
 
-//Function to get the mouse position
-function getMousePosInMap(canvas, event) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top
-    };
-}
-//Function to check whether a point is inside a rectangle
-function isInsideMap(pos){
-    return pos.x < CONSTANTS.MAP_WIDTH && pos.y < CONSTANTS.MAP_HEIGHT;
-}
-
-// setInterval(() => {
-//   socket.emit('playerClick', playerClick);
-// }, 1000 / 60);
-// document.addEventListener('mousedown', mouseDownHandler, false);
-// document.addEventListener('mouseup', mouseUpHandler, false);
-document.addEventListener('click', mouseClickHandler, false);
-
-
+setInterval(() => {
+  socket.emit('playerClick', playerClick);
+}, 1000 / 60);
+document.addEventListener('mousedown', mouseDownHandler, false);
+document.addEventListener('mouseup', mouseUpHandler, false);
+// document.addEventListener('click', (e) => {
+//     mouseDownHandler(e);
+//     mouseUpHandler(e);
+// }, false);
 
 
 
@@ -255,7 +236,7 @@ function isInside(pos, rect){
 
 /** HISTORY WINDOW HANDLING */
 socket.on("update messages", function(msg){
-    var final_message = $("<font style=\"font-size:20px;\" />").html(msg);
+    var final_message = $("<p style=\"font-size:20px;\" />").html(msg);
    $("#history").prepend(final_message);
    chatcount = chatcount + 1;
    if (chatcount > CONSTANTS.MAX_CHAT_HIST) {
@@ -267,7 +248,7 @@ socket.on("update messages", function(msg){
 
 socket.on('break history', (winner) => {
    var assembled = "********* WINNER: Player " + winner + " ***********"
-   var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
+   var final_message = $("<p style=\"font-size:20px;\" />").html(assembled);
    $("#gamehist").append(" ");
    $("#gamehist").append(final_message);
    histcount = histcount + 1;
@@ -277,7 +258,7 @@ socket.on('break history', (winner) => {
    }});
 socket.on('add history', (payload) => {
    var assembled = payload
-   var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
+   var final_message = $("<p style=\"font-size:20px;\" />").html(assembled);
    $("#gamehist").append(final_message);
    histcount = histcount + 1;
    if (histcount > CONSTANTS.MAX_GAME_HIST) {

@@ -55,7 +55,7 @@ server.listen(PORT, () => {
 const room = new Room(4, 0);
 const WELCOME_MESSAGE1 = "Welcome to GeoScents, an unabashed attempt at recreating the geosense.net game from the mid 2000s. " +
 	"Try to click the locations of the given city as quickly and accurately as possible!  If you are enjoying " +
-	"this game, consider donating to keep the server running!  Feel free to play with the code on github and make pull requests or post issues.<br>";
+	"this game, consider donating to keep the server running!  Feel free to play with the code on github and make pull requests or post issues.";
 
 function log(payload) {
     const currentdate = new Date();
@@ -76,12 +76,12 @@ io.on('connection', (socket) => {
 	  room.addPlayer(socket)
       log("User connected    " + socket.handshake.address + ", " + socket.id)
 	  socket.emit("update messages", WELCOME_MESSAGE1);
-      var join_msg = "[ <font color='" + room.getPlayerColor(socket.handshake.address) + "'>Player " + room.getPlayerName(socket.handshake.address) + " has joined!</font> ]<br>";
+      var join_msg = "[ <font color='" + room.getPlayerColor(socket.handshake.address) + "'>Player " + room.getPlayerName(socket.handshake.address) + " has joined!</font> ]";
       io.sockets.emit("update messages", join_msg)
 	});
 	socket.on('disconnect', function() {
       log("User disconnected " + socket.handshake.address + ", " + socket.id)
-      var leave_msg = "[ <font color='" + room.getPlayerColor(socket.handshake.address) + "'>Player " + room.getPlayerName(socket.handshake.address) + " has left!</font> ]<br>";
+      var leave_msg = "[ <font color='" + room.getPlayerColor(socket.handshake.address) + "'>Player " + room.getPlayerName(socket.handshake.address) + " has left!</font> ]";
       io.sockets.emit("update messages", leave_msg)
 	  room.killPlayer(socket)
 	});
@@ -99,7 +99,7 @@ io.on('connection', (socket) => {
         // 	sent_msg = sent_msg.substring(0, CONSTANTS.MAX_MSG)
 		// }
         log("Message passed: " + sent_msg)
-        io.sockets.emit("update messages", sent_msg + "<br>");
+        io.sockets.emit("update messages", sent_msg);
         callback();
     });
 });
