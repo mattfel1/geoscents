@@ -15,7 +15,7 @@ var chatcount = 0;
 var histcount = 0;
 
 /** MAP HANDLING */
-const drawMap = (gameState) => {
+const drawMap = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   var img = new Image()
   img.onload = function () {
@@ -42,11 +42,13 @@ socket.on('draw point', (coords, color) => {
 
 const playerClick = {
   mouseDown: false,
+  touchDown: false,
+  downCount: 0,
   cursorX: 0,
   cursorY: 0
 };
 const mouseUpHandler = (e) => {
-  if (window.event) playerClick.mouseDown = false
+  playerClick.mouseDown = false
 };
 const mouseDownHandler = (e) => {
   playerClick.mouseDown = true
@@ -55,12 +57,28 @@ const mouseDownHandler = (e) => {
   playerClick.cursorX = e.clientX - rect.left
   playerClick.cursorY = e.clientY - rect.top
 };
+const touchUpHandler = (e) => {
+  socket.emit('playerClick', playerClick);
+  playerClick.downCount = 0;
+  playerClick.mouseDown = false
+};
+const touchDownHandler = (e) => {
+  playerClick.touchDown = true;
+  playerClick.mouseDown = true;
+
+  var rect = canvas.getBoundingClientRect();
+  playerClick.cursorX = e.touches[0].clientX - rect.left
+  playerClick.cursorY = e.touches[0].clientY - rect.top
+};
 
 setInterval(() => {
-  socket.emit('playerClick', playerClick);
-}, 1000 / 60);
+  if (playerClick.touchDown) playerClick.downCount = playerClick.downCount + 1;
+  if (!playerClick.touchDown) socket.emit('playerClick', playerClick);
+}, 1000 / CONSTANTS.FPS);
 document.addEventListener('mousedown', mouseDownHandler, false);
 document.addEventListener('mouseup', mouseUpHandler, false);
+document.addEventListener("touchstart", touchDownHandler, false);
+document.addEventListener("touchend", touchUpHandler, false);
 // document.addEventListener('click', (e) => {
 //     mouseDownHandler(e);
 //     mouseUpHandler(e);
@@ -76,7 +94,7 @@ const panel_ctx = panel.getContext('2d');
 const ready_button = {
     x:90,
     y:150,
-    width:110,
+    width:215,
     height:50
 };
 const timer_window = {
@@ -128,15 +146,6 @@ function postTimeDescrip(info) {
 }
 
 function postScore(rank, name, color, score, you) {
-    if (rank == 0) {
-        panel_ctx.clearRect(scoreboard_window['x'], scoreboard_window['y'], scoreboard_window['width'], scoreboard_window['height']);
-        panel_ctx.fillStyle =  "#e3e4e6";
-        panel_ctx.fillRect(scoreboard_window['x'], scoreboard_window['y'], scoreboard_window['width'], scoreboard_window['height']);
-        panel_ctx.font = "35px Arial";
-        panel_ctx.fillStyle = "black";
-        panel_ctx.fillText("Scoreboard:", scoreboard_window['x'] + 5, scoreboard_window['y'] + 45)
-    }
-
     panel_ctx.font = "30px Arial";
     panel_ctx.fillStyle = color;
     panel_ctx.fillText("Player " + name + ": " + score + ' ' + you, scoreboard_window['x'] + 80, scoreboard_window['y'] + 85 + rank * 40 )
@@ -167,7 +176,7 @@ function postInfo(info1, info2, button, capital) {
         panel_ctx.fillRect(ready_button['x'], ready_button['y'], ready_button['width'], ready_button['height']);
         panel_ctx.font = "25px Arial";
         panel_ctx.fillStyle = 'black';
-        panel_ctx.fillText('READY!', ready_button['x'] + 5, ready_button['y'] + 28)
+        panel_ctx.fillText('CLICK IF READY!', ready_button['x'] + 5, ready_button['y'] + 28)
     }
 
     if (capital != "") {
@@ -177,6 +186,14 @@ function postInfo(info1, info2, button, capital) {
     }
 }
 
+socket.on('clear scores', () => {
+    panel_ctx.clearRect(scoreboard_window['x'], scoreboard_window['y'], scoreboard_window['width'], scoreboard_window['height']);
+    panel_ctx.fillStyle =  "#e3e4e6";
+    panel_ctx.fillRect(scoreboard_window['x'], scoreboard_window['y'], scoreboard_window['width'], scoreboard_window['height']);
+    panel_ctx.font = "35px Arial";
+    panel_ctx.fillStyle = "black";
+    panel_ctx.fillText("Scoreboard:", scoreboard_window['x'] + 5, scoreboard_window['y'] + 45)
+});
 socket.on('post score', (rank, name, color, score, you) => {
     postScore(rank,name,color,score, you)
 });
@@ -200,6 +217,10 @@ socket.on('draw timer', (time) => {
 socket.on('draw prepare', () => {
     postInfo("Preparing next game...", "",true, "");
     postTimeDescrip("seconds until autostart");
+});
+
+socket.on('draw idle', () => {
+    postInfo("Waiting for players to join...", "", false, "");
 })
 
 socket.on('draw guess city', (city, capital) => {
@@ -246,8 +267,8 @@ socket.on("update messages", function(msg){
 });
 
 
-socket.on('break history', (winner) => {
-   var assembled = "********* WINNER: Player " + winner + " ***********<br>"
+socket.on('break history', (winner, score) => {
+   var assembled = "******* WINNER: Player " + winner + " (" + score + " points) *******<br>"
    var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
    $("#gamehist").append(" ");
    $("#gamehist").append(final_message);

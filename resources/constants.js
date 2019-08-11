@@ -22,6 +22,8 @@ module.exports = {
     PREPARE_GAME_STATE: 'prepare',
     PREPARE_GAME_DURATION: 20,
     ASK_READY_STATE: 'askready',
+    SCROLL_THRESHOLD: 25, // Number of frames mobile user can press for that distinguishes a "click" from a "scroll"
+
 
     // Visuals and score
     BGCOLOR: "#E6E6FA",
@@ -36,6 +38,6 @@ module.exports = {
     ROOM_CAPACITES: [6, 6, 6, 4, 4, 4, 2, 2, 2],
 
     // Chat
-    MAX_GAME_HIST: 26,
-    MAX_CHAT_HIST: 26
+    MAX_GAME_HIST: 28,
+    MAX_CHAT_HIST: 28
 }

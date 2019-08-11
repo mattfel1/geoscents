@@ -21,7 +21,7 @@ class Room {
       this.playedCities = {};
       this.state = CONSTANTS.IDLE_STATE;
       this.round = 0;
-      this.winner = "";
+      this.winner = null;
     }
 
     // Player basic IO
@@ -73,13 +73,12 @@ class Room {
 
     killPlayer(socket) {
       console.log('user disconnected ' + socket.id);
-      console.log(this.clients.values().length)
       if (this.clients.has(socket.id)) {
-        this.clients.delete(socket.id)
+        this.clients.delete(socket.id);
       }
-      console.log('clietns now ')
-              console.log(this.clients.values().length)
-
+      if (this.players.has(socket.id)) {
+          this.players.delete(socket.id);
+      }
     }
 
     playerReady(socket) {
@@ -90,8 +89,7 @@ class Room {
     playerClicked(socket, playerClick) {
       if (this.players.has(socket.id)) {
           const player = this.players.get(socket.id);
-
-          if (playerClick.mouseDown && this.state == CONSTANTS.GUESS_STATE && !player.clicked) {
+          if (playerClick.downCount < CONSTANTS.SCROLL_THRESHOLD && playerClick.mouseDown && this.state == CONSTANTS.GUESS_STATE && !player.clicked) {
               if (playerClick.cursorX < CONSTANTS.MAP_WIDTH && playerClick.cursorY < CONSTANTS.MAP_HEIGHT) {
                   player.clicked = true;
                   player.row = playerClick.cursorY;
@@ -107,12 +105,13 @@ class Room {
       }
     }
 
-    printScoresWithSelf(sortedPlayers, socket, socketId) {
-        sortedPlayers.forEach(function(player, index) {
+    printScoresWithSelf(socket, socketId) {
+        Array.from(this.players.values()).forEach(function(player, index) {
+          var you = '';
           if (player.id == socketId) {
-              socket.emit('post score', player.rank, player.name, player.color, player.score, '   (you)');
+              you = '   (you)';
           }
-          else socket.emit('post score', player.rank, player.name, player.color, player.score, '');
+          socket.emit('post score', player.rank, player.name, player.color, player.score, you);
         })
     }
 
@@ -125,10 +124,13 @@ class Room {
       this.historyRound(this.round, target['name'], target['country'], target['population'], target['capital'])
       const historyScore = (player, payload) => {this.historyScore(player, payload)}
       Array.from(this.players.values()).forEach(function(player) {
-          var timeBonus = player.clickedAt;
-          var merc = Geography.geoToMerc(parseFloat(target['lat']), parseFloat(target['lon']))
-          var dist = Geography.mercDist(player.row, player.col, merc['row'], merc['col'])
-          var update = Math.exp(-Math.pow(dist,2)/1000)*timeBonus*50
+          const timeBonus = player.clickedAt;
+          const merc = Geography.geoToMerc(parseFloat(target['lat']), parseFloat(target['lon']));
+          var dist = Geography.mercDist(player.row, player.col, merc['row'], merc['col']);
+          if (!player.clicked) {
+              dist = 9999;
+          }
+          const update = Math.exp(-Math.pow(dist, 2) / 1000) * timeBonus * 50;
           historyScore(player, " + " + Math.floor(update ) + " (Distance: " + Math.floor(dist) + ", Time Bonus: " + (Math.floor(timeBonus * 10) / 10) + ")")
           player.score = Math.floor(player.score + update)
         })
@@ -184,19 +186,19 @@ class Room {
        this.clients.forEach(function(socket, socketId) {
            socket.emit('draw round', round);
            if (state == CONSTANTS.IDLE_STATE) {
-               // ???
+               socket.emit('draw idle');
            }
            if (state == CONSTANTS.PREPARE_GAME_STATE) {
-               socket.emit('draw prepare')
+               socket.emit('draw prepare');
            }
            if (state == CONSTANTS.SETUP_STATE) {
                 // ???
            }
            if (state == CONSTANTS.GUESS_STATE) {
-               socket.emit('draw guess city', cityname + ', ' + citycountry, capital)
+               socket.emit('draw guess city', cityname + ', ' + citycountry, capital);
            }
            if (state == CONSTANTS.REVEAL_STATE) {
-               socket.emit('draw reveal city', cityname + ', ' + citycountry, capital)
+               socket.emit('draw reveal city', cityname + ', ' + citycountry, capital);
                revealAll();
            }
        })
@@ -204,7 +206,10 @@ class Room {
 
     drawLowerPanel() {
         const players = this.players;
-        this.clients.forEach((s,id) => this.printScoresWithSelf(Array.from(this.players.values()),s,id))
+        this.clients.forEach((s,id) => {
+            s.emit('clear scores');
+            this.printScoresWithSelf(s,id);
+        });
         this.clients.forEach(function(s,id) {
             Array.from(players.values()).forEach(function(player,i) {
               if (player.ready) s.emit('player ready', player.rank)
@@ -214,9 +219,10 @@ class Room {
     }
 
     sortPlayers() {
-        var sortedPlayers = Array.from(this.players.values()).sort((a, b) => {(a.score > b.score) ? 1 : -1})
-        Array.from(sortedPlayers).forEach((p,i) => p.rank = i);
-        this.winner = Array.from(sortedPlayers)[0].name;
+        var sortedPlayers = Array.from(this.players.values()).sort((a, b) => {return b.score - a.score})
+        Array.from(sortedPlayers.values()).forEach((p,i) => {p.rank = i});
+        this.winner = Array.from(sortedPlayers)[0];
+        return sortedPlayers;
     }
 
     fsm() {
@@ -253,36 +259,33 @@ class Room {
         this.stateTransition(CONSTANTS.GUESS_STATE, CONSTANTS.GUESS_DURATION);
       }
       else if (this.state == CONSTANTS.GUESS_STATE) {
-          if ((this.timer <= 0 || this.allPlayersClicked()) && this.round < CONSTANTS.GAME_ROUNDS) {
+          if (this.timer <= 0 || this.allPlayersClicked()) {
             this.updateScores();
             this.sortPlayers();
+            if (this.round >= CONSTANTS.GAME_ROUNDS) {
+                this.historyNewGame(this.winner.name, this.winner.score);
+            }
             this.stateTransition(CONSTANTS.REVEAL_STATE, CONSTANTS.REVEAL_DURATION);
-          }
-          else if ((this.timer <= 0 || this.allPlayersClicked())) {
-            this.updateScores();
-            this.sortPlayers();
-            this.historyNewGame(this.winner)
-            this.stateTransition(CONSTANTS.PREPARE_GAME_DURATION, CONSTANTS.PREPARE_GAME_DURATION)
           }
       }
       else if (this.state == CONSTANTS.REVEAL_STATE) {
-          if (this.timer <= 0) { //&& this.round < CONSTANTS.GAME_ROUNDS - 1) {
+          if (this.timer <= 0 && this.round >= CONSTANTS.GAME_ROUNDS) {
+            this.round = 0;
+            this.stateTransition(CONSTANTS.PREPARE_GAME_DURATION, CONSTANTS.PREPARE_GAME_DURATION)
+          }
+          else if (this.timer <= 0) {
             this.round = this.round + 1;
             this.stateTransition(CONSTANTS.SETUP_STATE,0);
           }
       }
-      // else if (this.state == CONSTANTS.REVEAL_STATE && this.timer <= 0 && this.round >= CONSTANTS.GAME_ROUNDS - 1) {
-      // 	this.state = CONSTANTS.PREPARE_GAME_STATE;
-      // 	this.timer = CONSTANTS.PREPARE_GAME_DURATION;
-      // }
       else {
         this.stateTransition(CONSTANTS.IDLE_STATE,0)
       }
     }
 
-    historyNewGame(winner) {
+    historyNewGame(winner, score) {
         this.clients.forEach((socket,id) => {
-            socket.emit('break history',  winner)
+            socket.emit('break history',  winner, score)
         });
     }
     historyRound(round, city, country, pop, capital) {
