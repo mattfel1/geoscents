@@ -121,7 +121,6 @@ class Room {
 
     updateScores() {
       const target = this.target;
-      this.historyRound(this.round, target['name'], target['country'], target['population'], target['capital'])
       const historyScore = (player, payload) => {this.historyScore(player, payload)}
       Array.from(this.players.values()).forEach(function(player) {
           const timeBonus = player.clickedAt;
@@ -134,6 +133,7 @@ class Room {
           historyScore(player, " + " + Math.floor(update ) + " (Distance: " + Math.floor(dist) + ", Time Bonus: " + (Math.floor(timeBonus * 10) / 10) + ")")
           player.score = Math.floor(player.score + update)
         })
+      this.historyRound(this.round, target['name'], target['country'], target['population'], target['capital'])
     }
 
     broadcastPoint(row, col, color) {

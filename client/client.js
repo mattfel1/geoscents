@@ -261,29 +261,29 @@ socket.on("update messages", function(msg){
    $("#history").prepend(final_message);
    chatcount = chatcount + 1;
    if (chatcount > CONSTANTS.MAX_CHAT_HIST) {
-       $("#history").children().last().remove();;
+       $("#history").children().last().remove();
        chatcount = chatcount - 1;
    }
 });
 
 
 socket.on('break history', (winner, score) => {
-   var assembled = "******* WINNER: Player " + winner + " (" + score + " points) *******<br>"
+   var assembled = "<br>******* WINNER: Player " + winner + " (" + score + " points) *******"
    var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
-   $("#gamehist").append(" ");
-   $("#gamehist").append(final_message);
+   $("#gamehist").prepend(" ");
+   $("#gamehist").prepend(final_message);
    histcount = histcount + 1;
    if (histcount > CONSTANTS.MAX_GAME_HIST) {
-       $("#gamehist").children().first().remove();;
+       $("#gamehist").children().last().remove();
        histcount = histcount - 1;
    }});
 socket.on('add history', (payload) => {
    var assembled = payload
    var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
-   $("#gamehist").append(final_message);
+   $("#gamehist").prepend(final_message);
    histcount = histcount + 1;
    if (histcount > CONSTANTS.MAX_GAME_HIST) {
-       $("#gamehist").children().first().remove();;
+       $("#gamehist").children().last().remove();
        histcount = histcount - 1;
    }
 });
