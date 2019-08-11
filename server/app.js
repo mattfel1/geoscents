@@ -94,7 +94,6 @@ io.on('connection', (socket) => {
     socket.on("send message", function(sent_msg, callback) {
     	//TODO: Why is this socket.id different from the socket.id used to create player?  Will just use ip address for now...
         sent_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>Player " + room.getPlayerName(socket) + "</font> ]: " + sent_msg + "<br>";
-        console.log(sent_msg)
         // if (sent_msg.length > CONSTANTS.MAX_MSG) {
         // 	sent_msg = sent_msg.substring(0, CONSTANTS.MAX_MSG)
 		// }
