@@ -46,7 +46,7 @@ class Room {
 
     getPlayerName(socket) {
         const ip = socket.handshake.address
-        const playerByIp = getPlayerByIp(ip);
+        const playerByIp = this.getPlayerByIp(ip);
         const matchedSocketId = playerByIp['playerId'];
         const numMatches = playerByIp['numMatch'];
         if (numMatches == 1 && this.players.has(matchedSocketId)) {
@@ -60,7 +60,7 @@ class Room {
     }
     getPlayerColor(socket) {
         const ip = socket.handshake.address;
-        const playerByIp = getPlayerByIp(ip);
+        const playerByIp = this.getPlayerByIp(ip);
         const matchedSocketId = playerByIp['playerId'];
         if (this.players.has(matchedSocketId)) {
             return this.players.get(matchedSocketId).color
