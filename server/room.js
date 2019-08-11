@@ -39,38 +39,31 @@ class Room {
     getPlayerByIp(ip) {
         const match = Array.from(this.players.values()).filter(player => player.ip == ip);
         if (match.length > 0)
-            return match[0].id;
+            return {'playerId': match[0].id, 'numMatch': match.length};
         else
-            return ""
+            return {'playerId': "", 'numMatch': 0};
     }
 
-    getPlayerName(ip,socket) {
-        const match = Array.from(this.players.values()).filter(player => player.ip == ip);
-        if (match.length == 1) {
-            const socketId = match[0].id;
-            if (this.players.has(socketId)) {
-                return this.players.get(socketId).name
-            }
-            else {
-                return socketId.substring(5,0)
-            }
+    getPlayerName(socket) {
+        const ip = socket.handshake.address
+        const playerByIp = getPlayerByIp(ip);
+        const matchedSocketId = playerByIp['playerId'];
+        const numMatches = playerByIp['numMatch'];
+        if (numMatches == 1 && this.players.has(matchedSocketId)) {
+            return this.players.get(matchedSocketId).name
         }
-        else if (match.length > 1) {
-            const socketId = match[0].id;
-            if (this.players.has(socketId)) {
-                return this.players.get(socketId).name + "-" + socket.substring(5,0);
-            }
-            else {
-                return socket.substring(5,0)
-            }
+        else if (numMatches > 1 && this.players.has(matchedSocketId)) {
+            return this.players.get(matchedSocketId).name + "-" + socket.id.substring(5,0);
         } else {
-            return "???"
+            return socket.id.substring(5,0);
         }
     }
-    getPlayerColor(ip) {
-        const socketId = this.getPlayerByIp(ip);
-        if (this.players.has(socketId)) {
-            return this.players.get(socketId).color
+    getPlayerColor(socket) {
+        const ip = socket.handshake.address;
+        const playerByIp = getPlayerByIp(ip);
+        const matchedSocketId = playerByIp['playerId'];
+        if (this.players.has(matchedSocketId)) {
+            return this.players.get(matchedSocketId).color
         }
         else {
             return '#000000'
