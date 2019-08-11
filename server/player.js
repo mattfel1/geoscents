@@ -24,6 +24,7 @@ class Player {
 
     reset() {
 		this.clicked = false;
+		this.ready = false;
 		this.lat = 0;
 		this.lon = 0;
 		this.row = 0;
@@ -34,7 +35,6 @@ class Player {
 	deepReset(rank) {
     	this.score = 0;
     	this.rank = rank;
-    	this.ready = false;
 	}
 };
 
