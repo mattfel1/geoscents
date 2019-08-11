@@ -74,13 +74,13 @@ io.on('connection', (socket) => {
 	console.log('a user connected:', socket.id);
 	socket.on('newPlayer', () => {
 	  room.addPlayer(socket)
-      log("User connected    " + socket.handshake.address + ", " + socket.id)
+      log("User connected    " + socket.request.connection.remoteAddress + ", " + socket.id)
 	  socket.emit("update messages", WELCOME_MESSAGE1);
       var join_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>Player " + room.getPlayerName(socket) + " has joined!</font> ]<br>";
       io.sockets.emit("update messages", join_msg)
 	});
 	socket.on('disconnect', function() {
-      log("User disconnected " + socket.handshake.address + ", " + socket.id)
+      log("User disconnected " + socket.request.connection.remoteAddress + ", " + socket.id)
       var leave_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>Player " + room.getPlayerName(socket) + " has left!</font> ]<br>";
       io.sockets.emit("update messages", leave_msg)
 	  room.killPlayer(socket)
@@ -98,7 +98,7 @@ io.on('connection', (socket) => {
         // if (sent_msg.length > CONSTANTS.MAX_MSG) {
         // 	sent_msg = sent_msg.substring(0, CONSTANTS.MAX_MSG)
 		// }
-        log("Message passed: " + sent_msg)
+        log("Message passed by " + socket.request.connection.remoteAddress + " " + socket + ": " + sent_msg)
         io.sockets.emit("update messages", sent_msg);
         callback();
     });

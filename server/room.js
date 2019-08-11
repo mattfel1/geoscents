@@ -26,7 +26,7 @@ class Room {
 
     // Player basic IO
     addPlayer(socket) {
-      var player = new Player(socket.id, this.players.size, socket.handshake.address, this.ordinalCounter, this.ordinalCounter)
+      var player = new Player(socket.id, this.players.size, socket.request.connection.remoteAddress, this.ordinalCounter, this.ordinalCounter)
       this.clients.set(socket.id, socket)
       this.players.set(socket.id, player)
       this.ordinalCounter = this.ordinalCounter + 1;
@@ -45,7 +45,7 @@ class Room {
     }
 
     getPlayerName(socket) {
-        const ip = socket.handshake.address
+        const ip = socket.request.connection.remoteAddress
         const playerByIp = this.getPlayerByIp(ip);
         const matchedSocketId = playerByIp['playerId'];
         const numMatches = playerByIp['numMatch'];
@@ -59,7 +59,7 @@ class Room {
         }
     }
     getPlayerColor(socket) {
-        const ip = socket.handshake.address;
+        const ip = socket.request.connection.remoteAddress;
         const playerByIp = this.getPlayerByIp(ip);
         const matchedSocketId = playerByIp['playerId'];
         if (this.players.has(matchedSocketId)) {
@@ -72,12 +72,9 @@ class Room {
 
 
     killPlayer(socket) {
-      console.log('user disconnected');
+      console.log('user disconnected ' + socket.id);
       if (this.clients.has(socket.id)) {
         this.clients.delete(socket.id)
-      }
-      if (this.players.has(socket.id)) {
-        this.players.delete(socket.id)
       }
     }
 
