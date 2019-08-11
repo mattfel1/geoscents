@@ -40,50 +40,31 @@ socket.on('draw point', (coords, color) => {
   ctx.closePath()
 });
 
-// const playerClick = {
-//   mouseDown: false,
-//   cursorX: 0,
-//   cursorY: 0
-// };
-// const mouseUpHandler = (e) => {
-//   if (window.event) playerClick.mouseDown = false
-// };
-// const mouseDownHandler = (e) => {
-//   playerClick.mouseDown = true
-//
-//   var rect = canvas.getBoundingClientRect();
-//   playerClick.cursorX = e.clientX - rect.left
-//   playerClick.cursorY = e.clientY - rect.top
-// };
+const playerClick = {
+  mouseDown: false,
+  cursorX: 0,
+  cursorY: 0
+};
+const mouseUpHandler = (e) => {
+  if (window.event) playerClick.mouseDown = false
+};
+const mouseDownHandler = (e) => {
+  playerClick.mouseDown = true
 
-const mouseClickHandler = (e) => {
-    var mousePos = getMousePosInMap(canvas, e);
-    if (isInsideMap(mousePos)) {
-        socket.emit('playerClick', mousePos);
-    }
+  var rect = canvas.getBoundingClientRect();
+  playerClick.cursorX = e.clientX - rect.left
+  playerClick.cursorY = e.clientY - rect.top
 };
 
-//Function to get the mouse position
-function getMousePosInMap(canvas, event) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top
-    };
-}
-//Function to check whether a point is inside a rectangle
-function isInsideMap(pos){
-    return pos.x < CONSTANTS.MAP_WIDTH && pos.y < CONSTANTS.MAP_HEIGHT;
-}
-
-// setInterval(() => {
-//   socket.emit('playerClick', playerClick);
-// }, 1000 / 60);
-// document.addEventListener('mousedown', mouseDownHandler, false);
-// document.addEventListener('mouseup', mouseUpHandler, false);
-document.addEventListener('click', mouseClickHandler, false);
-
-
+setInterval(() => {
+  socket.emit('playerClick', playerClick);
+}, 1000 / 60);
+document.addEventListener('mousedown', mouseDownHandler, false);
+document.addEventListener('mouseup', mouseUpHandler, false);
+// document.addEventListener('click', (e) => {
+//     mouseDownHandler(e);
+//     mouseUpHandler(e);
+// }, false);
 
 
 
