@@ -36,7 +36,6 @@ module.exports = {
     ROOM_CAPACITES: [6, 6, 6, 4, 4, 4, 2, 2, 2],
 
     // Chat
-    GAME_HISTORY: 18,
-    MAX_GAME_HIST: 16,
-    MAX_CHAT_HIST: 16
+    MAX_GAME_HIST: 26,
+    MAX_CHAT_HIST: 26
 }

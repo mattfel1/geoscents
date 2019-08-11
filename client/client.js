@@ -247,7 +247,7 @@ socket.on("update messages", function(msg){
 
 
 socket.on('break history', (winner) => {
-   var assembled = "********* WINNER: Player " + winner + " ***********"
+   var assembled = "********* WINNER: Player " + winner + " ***********<br>"
    var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
    $("#gamehist").append(" ");
    $("#gamehist").append(final_message);

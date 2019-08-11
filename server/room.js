@@ -44,7 +44,7 @@ class Room {
             return ""
     }
 
-    getPlayerName(ip) {
+    getPlayerName(ip,socket) {
         const match = Array.from(this.players.values()).filter(player => player.ip == ip);
         if (match.length == 1) {
             const socketId = match[0].id;
@@ -58,10 +58,10 @@ class Room {
         else if (match.length > 1) {
             const socketId = match[0].id;
             if (this.players.has(socketId)) {
-                return this.players.get(socketId).name + "-" + socketId.substring(5,0);
+                return this.players.get(socketId).name + "-" + socket.substring(5,0);
             }
             else {
-                return socketId.substring(5,0)
+                return socket.substring(5,0)
             }
         } else {
             return "???"
