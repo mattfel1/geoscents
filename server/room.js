@@ -295,12 +295,12 @@ class Room {
         const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + city + "%2C+" + country + "&go=Go&ns0=1\">Learn!</a><br>"
         this.clients.forEach((socket,id) => {
             socket.emit('add history',  base + link)
+            socket.emit('add history', "<br>")
         });
     }
     historyScore(player, score) {
         this.clients.forEach((socket,id) => {
             socket.emit('add history', "<font color=\"" + player.color +"\">  Player " + player.name + ": " + score + "</font><br>")
-            socket.emit('add history', "<br>")
         });
     }
 

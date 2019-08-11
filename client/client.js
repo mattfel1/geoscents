@@ -278,7 +278,7 @@ socket.on('break history', (winner, score) => {
        histcount = histcount - 1;
    }});
 socket.on('add history', (payload) => {
-   var assembled = payload
+   var assembled = payload;
    var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
    $("#gamehist").prepend(final_message);
    histcount = histcount + 1;
