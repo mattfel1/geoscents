@@ -280,14 +280,14 @@ class Room {
         var star = ""
         if (capital == 'primary') star = "*";
         const base = "Round " + round + ": " + star + city + ", " + country + " (pop: " + pop.toLocaleString() + ")"
-        const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + city + "%2C+" + country + "&go=Go&ns0=1\">Learn!</a>"
+        const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + city + "%2C+" + country + "&go=Go&ns0=1\">Learn!</a><br>"
         this.clients.forEach((socket,id) => {
             socket.emit('add history',  base + link)
         });
     }
     historyScore(player, score) {
         this.clients.forEach((socket,id) => {
-            socket.emit('add history', "<font color=\"" + player.color +"\">  Player " + player.name + ": " + score + "</font>")
+            socket.emit('add history', "<font color=\"" + player.color +"\">  Player " + player.name + ": " + score + "</font><br>")
         });
     }
 

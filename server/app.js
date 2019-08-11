@@ -76,12 +76,12 @@ io.on('connection', (socket) => {
 	  room.addPlayer(socket)
       log("User connected    " + socket.handshake.address + ", " + socket.id)
 	  socket.emit("update messages", WELCOME_MESSAGE1);
-      var join_msg = "[ <font color='" + room.getPlayerColor(socket.handshake.address) + "'>Player " + room.getPlayerName(socket.handshake.address) + " has joined!</font> ]";
+      var join_msg = "[ <font color='" + room.getPlayerColor(socket.handshake.address) + "'>Player " + room.getPlayerName(socket.handshake.address) + " has joined!</font> ]<br>";
       io.sockets.emit("update messages", join_msg)
 	});
 	socket.on('disconnect', function() {
       log("User disconnected " + socket.handshake.address + ", " + socket.id)
-      var leave_msg = "[ <font color='" + room.getPlayerColor(socket.handshake.address) + "'>Player " + room.getPlayerName(socket.handshake.address) + " has left!</font> ]";
+      var leave_msg = "[ <font color='" + room.getPlayerColor(socket.handshake.address) + "'>Player " + room.getPlayerName(socket.handshake.address) + " has left!</font> ]<br>";
       io.sockets.emit("update messages", leave_msg)
 	  room.killPlayer(socket)
 	});
@@ -93,7 +93,7 @@ io.on('connection', (socket) => {
 	})
     socket.on("send message", function(sent_msg, callback) {
     	//TODO: Why is this socket.id different from the socket.id used to create player?  Will just use ip address for now...
-        sent_msg = "[ <font color='" + room.getPlayerColor(socket.handshake.address) + "'>Player " + room.getPlayerName(socket.handshake.address) + "</font> ]: " + sent_msg;
+        sent_msg = "[ <font color='" + room.getPlayerColor(socket.handshake.address) + "'>Player " + room.getPlayerName(socket.handshake.address) + "</font> ]: " + sent_msg + "<br>";
         console.log(sent_msg)
         // if (sent_msg.length > CONSTANTS.MAX_MSG) {
         // 	sent_msg = sent_msg.substring(0, CONSTANTS.MAX_MSG)
