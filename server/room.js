@@ -87,21 +87,23 @@ class Room {
     }
 
     playerClicked(socket, playerClick) {
-	  const player = this.players.get(socket.id);
+      if (this.players.has(socket.id)) {
+          const player = this.players.get(socket.id);
 
-	  if (playerClick.mouseDown && this.state == CONSTANTS.GUESS_STATE && !player.clicked) {
-	  	if (playerClick.cursorX < CONSTANTS.MAP_WIDTH && playerClick.cursorY < CONSTANTS.MAP_HEIGHT) {
-	  		player.clicked = true;
-			player.row = playerClick.cursorY;
-			player.col = playerClick.cursorX;
-			player.clickedAt = this.timer;
-			var geo = Geography.mercToGeo(player.row, player.col)
-			player.lat = geo['lat'];
-			player.lon = geo['lon'];
-			// console.log('click at ' + player.row + ',' + player.col + ' (' + player.lat + ',' + player.lon + ')')
-            socket.emit('draw point', {'row': player.row, 'col': player.col}, player.color)
-		}
-	  }
+          if (playerClick.mouseDown && this.state == CONSTANTS.GUESS_STATE && !player.clicked) {
+              if (playerClick.cursorX < CONSTANTS.MAP_WIDTH && playerClick.cursorY < CONSTANTS.MAP_HEIGHT) {
+                  player.clicked = true;
+                  player.row = playerClick.cursorY;
+                  player.col = playerClick.cursorX;
+                  player.clickedAt = this.timer;
+                  var geo = Geography.mercToGeo(player.row, player.col)
+                  player.lat = geo['lat'];
+                  player.lon = geo['lon'];
+                  // console.log('click at ' + player.row + ',' + player.col + ' (' + player.lat + ',' + player.lon + ')')
+                  socket.emit('draw point', {'row': player.row, 'col': player.col}, player.color)
+              }
+          }
+      }
     }
 
     printScoresWithSelf(sortedPlayers, socket, socketId) {
