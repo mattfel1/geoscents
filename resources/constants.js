@@ -28,8 +28,8 @@ module.exports = {
     // Visuals and score
     BGCOLOR: "#E6E6FA",
     LOBBY_COLOR: "#e3e4e6",
-    GUESS_COLOR: 'green',
-    REVEAL_COLOR: 'red',
+    GUESS_COLOR: '#b3ffda',
+    REVEAL_COLOR: '#ffad99',
     SCORE_SCALE: 10000,
     POINT_RADIUS: 3,
     BUBBLE_RADIUS: 15,
