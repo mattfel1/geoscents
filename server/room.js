@@ -109,7 +109,7 @@ class Room {
         Array.from(this.players.values()).forEach(function(player, index) {
           var you = '';
           if (player.id == socketId) {
-              you = '   <--- you';
+              you = '   <--you';
           }
           socket.emit('post score', player.rank, player.name, player.color, player.score, player.wins, you);
         })
