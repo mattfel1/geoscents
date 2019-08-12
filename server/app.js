@@ -64,7 +64,7 @@ function log(payload) {
         + currentdate.getFullYear() + " @ "
         + currentdate.getHours() + ":"
         + currentdate.getMinutes() + ":";
-    fs.appendFile('connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
+    fs.appendFile('/root/connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
         if (err) throw err;
         console.log('Saved!');
     });
