@@ -20,6 +20,7 @@ class Player {
 		this.score = 0;
 		this.rank = rank;
         this.ready = false;
+        this.wins = 0;
     }
 
     reset() {

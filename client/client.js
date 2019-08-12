@@ -128,9 +128,9 @@ const scoreboard_window = {
     height: 2*panel.height/3
 };
 
-function postTime(time) {
+function postTime(time, color) {
     panel_ctx.clearRect(timer_window['x'], timer_window['y'], timer_window['width'], timer_window['height']);
-    panel_ctx.fillStyle =  "#e3e4e6";
+    panel_ctx.fillStyle =  color;
     panel_ctx.fillRect(timer_window['x'], timer_window['y'], timer_window['width'], timer_window['height']);
     panel_ctx.font = "30px Arial";
     panel_ctx.fillStyle = "black";
@@ -145,10 +145,10 @@ function postTimeDescrip(info) {
     panel_ctx.fillText(info, time_descrip_window['x'] + 5, time_descrip_window['y']+25)
 }
 
-function postScore(rank, name, color, score, you) {
+function postScore(rank, name, color, score, wins, you) {
     panel_ctx.font = "30px Arial";
     panel_ctx.fillStyle = color;
-    panel_ctx.fillText("Player " + name + ": " + score + ' ' + you, scoreboard_window['x'] + 80, scoreboard_window['y'] + 85 + rank * 40 )
+    panel_ctx.fillText("Player " + name + ": " + score + '  (' + wins + ' won)' + you, scoreboard_window['x'] + 80, scoreboard_window['y'] + 85 + rank * 40 )
 }
 
 function postReady(rank) {
@@ -194,8 +194,8 @@ socket.on('clear scores', () => {
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText("Scoreboard:", scoreboard_window['x'] + 5, scoreboard_window['y'] + 45)
 });
-socket.on('post score', (rank, name, color, score, you) => {
-    postScore(rank,name,color,score, you)
+socket.on('post score', (rank, name, color, score, wins, you) => {
+    postScore(rank,name,color,score, wins, you)
 });
 
 socket.on('player ready', (rank) => {
@@ -267,8 +267,8 @@ socket.on("update messages", function(msg){
 });
 
 
-socket.on('break history', (winner, score) => {
-   var assembled = "<br>******* WINNER: Player " + winner + " (" + score + " points) *******<br>"
+socket.on('break history', (winner, score, color) => {
+   var assembled = "<br>******* WINNER: <font color=\"" + color + "\">Player " + winner + " (" + score + " points)</font> *******<br>"
    var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
    $("#gamehist").prepend(" ");
    $("#gamehist").prepend(final_message);

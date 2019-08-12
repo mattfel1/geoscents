@@ -14,19 +14,22 @@ module.exports = {
 
     // FSM
     REVEAL_STATE: 'reveal',
-    REVEAL_DURATION: 4,
+    REVEAL_DURATION: 7,
     GUESS_STATE: 'guess',
-    GUESS_DURATION: 8,
+    GUESS_DURATION: 10,
     SETUP_STATE: 'setup',
     IDLE_STATE: 'idle',
     PREPARE_GAME_STATE: 'prepare',
-    PREPARE_GAME_DURATION: 20,
+    PREPARE_GAME_DURATION: 45,
     ASK_READY_STATE: 'askready',
     SCROLL_THRESHOLD: 25, // Number of frames mobile user can press for that distinguishes a "click" from a "scroll"
 
 
     // Visuals and score
     BGCOLOR: "#E6E6FA",
+    LOBBY_COLOR: "#e3e4e6",
+    GUESS_COLOR: 'green',
+    REVEAL_COLOR: 'red',
     SCORE_SCALE: 10000,
     POINT_RADIUS: 3,
     BUBBLE_RADIUS: 15,

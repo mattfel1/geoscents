@@ -111,7 +111,7 @@ class Room {
           if (player.id == socketId) {
               you = '   (you)';
           }
-          socket.emit('post score', player.rank, player.name, player.color, player.score, you);
+          socket.emit('post score', player.rank, player.name, player.color, player.score, player.wins, you);
         })
     }
 
@@ -222,6 +222,7 @@ class Room {
         var sortedPlayers = Array.from(this.players.values()).sort((a, b) => {return b.score - a.score})
         Array.from(sortedPlayers.values()).forEach((p,i) => {p.rank = i});
         this.winner = Array.from(sortedPlayers)[0];
+        this.winner.wins = this.winner.wins + 1;
         return sortedPlayers;
     }
 
@@ -230,7 +231,14 @@ class Room {
       const timer = this.timer;
       const drawUpperPanel = () => {this.drawUpperPanel()};
       const drawLowerPanel = () => {this.drawLowerPanel()};
-      this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw timer', Math.floor(((timer * 1000)) / 1000))})})
+      var timerColor = CONSTANTS.LOBBY_COLOR;
+      if (this.state == CONSTANTS.GUESS_STATE) {
+          timerColor = CONSTANTS.GUESS_COLOR;
+      }
+      else if (this.state == CONSTANTS.REVEAL_STATE) {
+          timerColor = CONSTANTS.REVEAL_COLOR;
+      }
+      this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw timer', Math.floor(((timer * 1000)) / 1000), timerColor)})})
       this.decrementTimer();
       if (this.numPlayers() == 0) {
         this.state = CONSTANTS.IDLE_STATE;
@@ -263,7 +271,7 @@ class Room {
             this.updateScores();
             this.sortPlayers();
             if (this.round >= CONSTANTS.GAME_ROUNDS) {
-                this.historyNewGame(this.winner.name, this.winner.score);
+                this.historyNewGame(this.winner.name, this.winner.score, this.winner.color);
             }
             this.stateTransition(CONSTANTS.REVEAL_STATE, CONSTANTS.REVEAL_DURATION);
           }
@@ -283,9 +291,9 @@ class Room {
       }
     }
 
-    historyNewGame(winner, score) {
+    historyNewGame(winner, score, color) {
         this.clients.forEach((socket,id) => {
-            socket.emit('break history',  winner, score)
+            socket.emit('break history',  winner, score, color)
         });
     }
     historyRound(round, city, country, pop, capital) {
