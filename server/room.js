@@ -109,7 +109,7 @@ class Room {
         Array.from(this.players.values()).forEach(function(player, index) {
           var you = '';
           if (player.id == socketId) {
-              you = '   (you)';
+              you = '   <--- you';
           }
           socket.emit('post score', player.rank, player.name, player.color, player.score, player.wins, you);
         })
@@ -222,7 +222,6 @@ class Room {
         var sortedPlayers = Array.from(this.players.values()).sort((a, b) => {return b.score - a.score})
         Array.from(sortedPlayers.values()).forEach((p,i) => {p.rank = i});
         this.winner = Array.from(sortedPlayers)[0];
-        this.winner.wins = this.winner.wins + 1;
         return sortedPlayers;
     }
 
@@ -271,6 +270,7 @@ class Room {
             this.updateScores();
             this.sortPlayers();
             if (this.round >= CONSTANTS.GAME_ROUNDS) {
+                this.winner.wins = this.winner.wins + 1;
                 this.historyNewGame(this.winner.name, this.winner.score, this.winner.color);
             }
             this.stateTransition(CONSTANTS.REVEAL_STATE, CONSTANTS.REVEAL_DURATION);

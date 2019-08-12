@@ -129,8 +129,8 @@ const scoreboard_window = {
 };
 
 function postTime(time, color) {
+    panel_ctx.fillStyle = color;
     panel_ctx.clearRect(timer_window['x'], timer_window['y'], timer_window['width'], timer_window['height']);
-    panel_ctx.fillStyle =  color;
     panel_ctx.fillRect(timer_window['x'], timer_window['y'], timer_window['width'], timer_window['height']);
     panel_ctx.font = "30px Arial";
     panel_ctx.fillStyle = "black";
@@ -210,8 +210,8 @@ socket.on('draw round', (round) => {
     panel_ctx.fillText('Round ' + round + '/' + CONSTANTS.GAME_ROUNDS, round_window['x']+2,round_window['y'] + 25);
 })
 
-socket.on('draw timer', (time) => {
-    postTime(time)
+socket.on('draw timer', (time,color) => {
+    postTime(time,color)
 });
 
 socket.on('draw prepare', () => {
