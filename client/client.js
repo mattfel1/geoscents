@@ -200,7 +200,7 @@ socket.on('post score', (rank, name, color, score, wins, you) => {
 
 socket.on('player ready', (rank) => {
     postReady(rank);
-})
+});
 socket.on('draw round', (round) => {
     panel_ctx.clearRect(round_window['x'], round_window['y'], round_window['width'], round_window['height']);
     panel_ctx.fillStyle = CONSTANTS.BGCOLOR;
@@ -217,6 +217,10 @@ socket.on('draw timer', (time,color) => {
 socket.on('draw prepare', () => {
     postInfo("Preparing next game...", "",true, "");
     postTimeDescrip("seconds until autostart");
+});
+
+socket.on('draw booted', (roundsDead) => {
+    postInfo("You have been booted!", "Please refresh to rejoin",false, "(you spent " + roundsDead + " consecutive rounds inactive)");
 });
 
 socket.on('draw idle', () => {

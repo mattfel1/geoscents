@@ -81,9 +81,29 @@ class Room {
       }
     }
 
+    bootPlayer(socket) {
+      console.log('user booted ' + socket.id);
+
+      if (this.clients.has(socket.id)) {
+        this.clients.delete(socket.id);
+      }
+      if (this.players.has(socket.id)) {
+          const player = this.players.get(socket.id);
+          const color = player.color;
+          const name = player.name;
+          var boot_msg = "[ <font color='" + color + "'>Player " + name + " has been booted due to inactivity!</font> ]<br>";
+          this.players.delete(socket.id);
+          this.clients.forEach(function(s,id) {
+              s.emit('update messages', boot_msg)
+          });
+      }
+    }
+
     playerReady(socket) {
-      const player = this.players.get(socket.id);
-      player.ready = true
+      if (this.players.has(socket.id)) {
+          const player = this.players.get(socket.id);
+          player.ready = true
+      }
     }
 
     playerClicked(socket, playerClick) {
@@ -92,6 +112,7 @@ class Room {
           if (playerClick.downCount < CONSTANTS.SCROLL_THRESHOLD && playerClick.mouseDown && this.state == CONSTANTS.GUESS_STATE && !player.clicked) {
               if (playerClick.cursorX < CONSTANTS.MAP_WIDTH && playerClick.cursorY < CONSTANTS.MAP_HEIGHT) {
                   player.clicked = true;
+                  player.consecutiveRoundsInactive = 0;
                   player.row = playerClick.cursorY;
                   player.col = playerClick.cursorX;
                   player.clickedAt = this.timer;
@@ -147,6 +168,27 @@ class Room {
         this.broadcastPoint(answer['row'], answer['col'], CONSTANTS.TRUTH_COLOR);
         this.players.forEach((player,id) => {
             this.broadcastPoint(player.row, player.col, player.color);
+        });
+    }
+
+    incrementInactive() {
+        this.players.forEach((player, id) => {
+            player.consecutiveRoundsInactive = player.consecutiveRoundsInactive + 1;
+        });
+    }
+
+    bootInactive() {
+        const bootPlayer = (socket) => {this.bootPlayer(socket)};
+        const clients = this.clients;
+        this.players.forEach((player, id) => {
+            if (player.consecutiveRoundsInactive > CONSTANTS.MAX_INACTIVE) {
+                if (clients.has(id)) {
+                    const socket = clients.get(id);
+                    socket.emit('draw booted', player.consecutiveRoundsInactive);
+                    console.log('killing! ' + id);
+                    bootPlayer(socket);
+                }
+            };
         });
     }
 
@@ -283,6 +325,8 @@ class Room {
           }
           else if (this.timer <= 0) {
             this.round = this.round + 1;
+            this.incrementInactive();
+            this.bootInactive()
             this.stateTransition(CONSTANTS.SETUP_STATE,0);
           }
       }

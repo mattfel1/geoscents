@@ -39,6 +39,7 @@ module.exports = {
     // Rooms
     GAME_ROUNDS: 10,
     ROOM_CAPACITES: [6, 6, 6, 4, 4, 4, 2, 2, 2],
+    MAX_INACTIVE: 30, // Rounds of no click before you get booted
 
     // Chat
     MAX_GAME_HIST: 100,

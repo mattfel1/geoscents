@@ -21,6 +21,7 @@ class Player {
 		this.rank = rank;
         this.ready = false;
         this.wins = 0;
+        this.consecutiveRoundsInactive = 0;
     }
 
     reset() {
