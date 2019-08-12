@@ -28,7 +28,7 @@ module.exports = {
     // Visuals and score
     BGCOLOR: "#E6E6FA",
     LOBBY_COLOR: "#e3e4e6",
-    GUESS_COLOR: '#b3ffda',
+    GUESS_COLOR: '#17eb5e',
     REVEAL_COLOR: '#ffad99',
     SCORE_SCALE: 10000,
     POINT_RADIUS: 3,

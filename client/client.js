@@ -148,7 +148,7 @@ function postTimeDescrip(info) {
 function postScore(rank, name, color, score, wins, you) {
     panel_ctx.font = "30px Arial";
     panel_ctx.fillStyle = color;
-    panel_ctx.fillText("Player " + name + ": " + score + '  (' + wins + ' won)' + you, scoreboard_window['x'] + 80, scoreboard_window['y'] + 85 + rank * 40 )
+    panel_ctx.fillText("Player " + name + ": " + score + '  (' + wins + ' games won)' + you, scoreboard_window['x'] + 80, scoreboard_window['y'] + 85 + rank * 40 )
 }
 
 function postReady(rank) {
