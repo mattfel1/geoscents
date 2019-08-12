@@ -7,7 +7,9 @@ const CONSTANTS = require('../resources/constants.js');
 const randomCity = () => {return CITIES[Math.floor(Math.random()*CITIES.length)];};
 
 const mercDist = (row1,col1,row2,col2) => {
-    return Math.sqrt(Math.pow(row1-row2,2) + Math.pow(col1-col2, 2))
+    const row_err = Math.pow(row1-row2,2);
+    const col_err = Math.min(Math.pow(col1-col2,2), Math.pow(col1-col2+CONSTANTS.MAP_WIDTH,2), Math.pow(col1-col2-CONSTANTS.MAP_WIDTH,2));
+    return Math.sqrt(row_err + col_err);
 };
 
 const geoDist = (lat1,lon1,lat2,lon2) => {
