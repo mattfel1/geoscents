@@ -7,15 +7,18 @@ const EUROCITIES = require('../resources/eurocities.js').CITIES;
 const CONSTANTS = require('../resources/constants.js');
 
 const randomCity = (room) => {
-    if (room == 'World') return WORLDCITIES[Math.floor(Math.random()*WORLDCITIES.length)];
-    else if (room == 'N. America') return USCITIES[Math.floor(Math.random()*USCITIES.length)];
-    else if (room == 'Euerasia') return EUROCITIES[Math.floor(Math.random()*EUROCITIES.length)];
+    if (room == CONSTANTS.WORLD) return WORLDCITIES[Math.floor(Math.random()*WORLDCITIES.length)];
+    else if (room == CONSTANTS.US) return USCITIES[Math.floor(Math.random()*USCITIES.length)];
+    else if (room == CONSTANTS.EURO) return EUROCITIES[Math.floor(Math.random()*EUROCITIES.length)];
     else return WORLDCITIES[Math.floor(Math.random()*WORLDCITIES.length)];
 };
 
-const mercDist = (row1,col1,row2,col2) => {
+const mercDist = (room,row1,col1,row2,col2) => {
     const row_err = Math.pow(row1-row2,2);
-    const col_err = Math.min(Math.pow(col1-col2,2), Math.pow(col1-col2+CONSTANTS.MAP_WIDTH,2), Math.pow(col1-col2-CONSTANTS.MAP_WIDTH,2));
+    var col_err = Math.min(Math.pow(col1-col2,2), Math.pow(col1-col2+CONSTANTS.MAP_WIDTH,2), Math.pow(col1-col2-CONSTANTS.MAP_WIDTH,2));
+    if (room == CONSTANTS.US || room == CONSTANTS.EURO) { // No wrap
+        col_err = Math.pow(col1-col2,2);
+    }
     return Math.sqrt(row_err + col_err);
 };
 
@@ -33,14 +36,14 @@ const mercToGeo = (room,row,col) => {
     var min_lon = CONSTANTS.WORLD_MIN_LON;
     var max_lon = CONSTANTS.WORLD_MAX_LON;
     var lat_ts = CONSTANTS.WORLD_LAT_TS;
-    if (room == 'N. America') {
+    if (room == CONSTANTS.US) {
         zero_lat = CONSTANTS.US_ZERO_LAT;
         max_lat = CONSTANTS.US_MAX_LAT;
         min_lon = CONSTANTS.US_MIN_LON;
         max_lon = CONSTANTS.US_MAX_LON;
         lat_ts = CONSTANTS.US_LAT_TS;
     }
-    else if (room == 'Euerasia') {
+    else if (room == CONSTANTS.EURO) {
         zero_lat = CONSTANTS.EURO_ZERO_LAT;
         max_lat = CONSTANTS.EURO_MAX_LAT;
         min_lon = CONSTANTS.EURO_MIN_LON;
@@ -60,14 +63,14 @@ const geoToMerc = (room,lat, lon) => {
     var min_lon = CONSTANTS.WORLD_MIN_LON;
     var max_lon = CONSTANTS.WORLD_MAX_LON;
     var lat_ts = CONSTANTS.WORLD_LAT_TS;
-    if (room == 'N. America') {
+    if (room == CONSTANTS.US) {
         zero_lat = CONSTANTS.US_ZERO_LAT;
         max_lat = CONSTANTS.US_MAX_LAT;
         min_lon = CONSTANTS.US_MIN_LON;
         max_lon = CONSTANTS.US_MAX_LON;
         lat_ts = CONSTANTS.US_LAT_TS;
     }
-    else if (room == 'Euerasia') {
+    else if (room == CONSTANTS.EURO) {
         zero_lat = CONSTANTS.EURO_ZERO_LAT;
         max_lat = CONSTANTS.EURO_MAX_LAT;
         min_lon = CONSTANTS.EURO_MIN_LON;

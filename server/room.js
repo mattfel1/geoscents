@@ -155,7 +155,7 @@ class Room {
 
     stringifyTarget(){
         var state = ''
-        if (this.target['country'] == 'United States') {
+        if (this.target['country'] == 'United States' || this.target['country'] == 'USA') {
             state = ', ' + this.target['admin_name'];
         }
         var pop = 0;
@@ -176,7 +176,7 @@ class Room {
       Array.from(this.players.values()).forEach(function(player) {
           const timeBonus = player.clickedAt;
           const merc = Geography.geoToMerc(room,parseFloat(target['lat']), parseFloat(target['lon']));
-          var dist = Geography.mercDist(player.row, player.col, merc['row'], merc['col']);
+          var dist = Geography.mercDist(room, player.row, player.col, merc['row'], merc['col']);
           if (!player.clicked) {
               dist = 9999;
           }
@@ -312,7 +312,7 @@ class Room {
       }
       this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw timer', Math.floor(((timer * 1000)) / 1000), timerColor)})})
       this.decrementTimer();
-      if (this.room == 'lobby') {
+      if (this.room == CONSTANTS.LOBBY) {
           this.state = CONSTANTS.LOBBY_STATE;
           this.timer = 0;
           this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw lobby')})})

@@ -1,6 +1,19 @@
 module.exports = {
     CITIES: [
   {
+    "name": "Cairo",
+    "city_ascii": "Cairo",
+    "lat": 30.05,
+    "lon": 31.25,
+    "country": "Egypt",
+    "iso2": "EG",
+    "iso3": "EGY",
+    "admin_name": "Al Qāhirah",
+    "capital": "primary",
+    "population": 11893000,
+    "id": 1818253931
+  },
+  {
     "name": "Moscow",
     "city_ascii": "Moscow",
     "lat": 55.7522,
@@ -116,6 +129,19 @@ module.exports = {
     "capital": "admin",
     "population": 4553000,
     "id": 1643616350
+  },
+  {
+    "name": "Alexandria",
+    "city_ascii": "Alexandria",
+    "lat": 31.2,
+    "lon": 29.95,
+    "country": "Egypt",
+    "iso2": "EG",
+    "iso3": "EGY",
+    "admin_name": "Al Iskandarīyah",
+    "capital": "admin",
+    "population": 4165000,
+    "id": 1818695837
   },
   {
     "name": "Ankara",
@@ -313,6 +339,19 @@ module.exports = {
     "id": 1804382913
   },
   {
+    "name": "El Giza",
+    "city_ascii": "El Giza",
+    "lat": 30.01,
+    "lon": 31.19,
+    "country": "Egypt",
+    "iso2": "EG",
+    "iso3": "EGY",
+    "admin_name": "Al Jīzah",
+    "capital": "admin",
+    "population": 2681863,
+    "id": 1818925479
+  },
+  {
     "name": "İzmir",
     "city_ascii": "Izmir",
     "lat": 38.4361,
@@ -469,6 +508,19 @@ module.exports = {
     "id": 1031946365
   },
   {
+    "name": "Kuwait",
+    "city_ascii": "Kuwait",
+    "lat": 29.3697,
+    "lon": 47.9783,
+    "country": "Kuwait",
+    "iso2": "KW",
+    "iso3": "KWT",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 2063000,
+    "id": 1414102075
+  },
+  {
     "name": "Bucharest",
     "city_ascii": "Bucharest",
     "lat": 44.4334,
@@ -493,19 +545,6 @@ module.exports = {
     "capital": "minor",
     "population": 1860310,
     "id": 1586619596
-  },
-  {
-    "name": "Rawalpindi",
-    "city_ascii": "Rawalpindi",
-    "lat": 33.6,
-    "lon": 73.04,
-    "country": "Pakistan",
-    "iso2": "PK",
-    "iso3": "PAK",
-    "admin_name": "Punjab",
-    "capital": "minor",
-    "population": 1858000,
-    "id": 1586344001
   },
   {
     "name": "Beirut",
@@ -651,17 +690,17 @@ module.exports = {
     "id": 1826343963
   },
   {
-    "name": "Gujranwala",
-    "city_ascii": "Gujranwala",
-    "lat": 32.1604,
-    "lon": 74.185,
+    "name": "Multan",
+    "city_ascii": "Multan",
+    "lat": 30.2,
+    "lon": 71.455,
     "country": "Pakistan",
     "iso2": "PK",
     "iso3": "PAK",
     "admin_name": "Punjab",
     "capital": "minor",
-    "population": 1513000,
-    "id": 1586400472
+    "population": 1522000,
+    "id": 1586256291
   },
   {
     "name": "Florence",
@@ -898,6 +937,19 @@ module.exports = {
     "id": 1752425602
   },
   {
+    "name": "Shiraz",
+    "city_ascii": "Shiraz",
+    "lat": 29.63,
+    "lon": 52.57,
+    "country": "Iran",
+    "iso2": "IR",
+    "iso3": "IRN",
+    "admin_name": "Fārs",
+    "capital": "admin",
+    "population": 1240000,
+    "id": 1364432238
+  },
+  {
     "name": "Geneva",
     "city_ascii": "Geneva",
     "lat": 46.21,
@@ -950,19 +1002,6 @@ module.exports = {
     "id": 1100762037
   },
   {
-    "name": "Abbottabad",
-    "city_ascii": "Abbottabad",
-    "lat": 34.1495,
-    "lon": 73.1995,
-    "country": "Pakistan",
-    "iso2": "PK",
-    "iso3": "PAK",
-    "admin_name": "Khyber Pakhtunkhwa",
-    "capital": "minor",
-    "population": 1183647,
-    "id": 1586788758
-  },
-  {
     "name": "Banghazi",
     "city_ascii": "Banghazi",
     "lat": 32.1167,
@@ -1013,19 +1052,6 @@ module.exports = {
     "capital": "admin",
     "population": 1137000,
     "id": 1643205757
-  },
-  {
-    "name": "Omsk",
-    "city_ascii": "Omsk",
-    "lat": 54.99,
-    "lon": 73.4,
-    "country": "Russia",
-    "iso2": "RU",
-    "iso3": "RUS",
-    "admin_name": "Omskaya Oblast’",
-    "capital": "admin",
-    "population": 1135000,
-    "id": 1643360863
   },
   {
     "name": "Kazan",
@@ -1145,6 +1171,19 @@ module.exports = {
     "id": 1208763942
   },
   {
+    "name": "Amman",
+    "city_ascii": "Amman",
+    "lat": 31.95,
+    "lon": 35.9333,
+    "country": "Jordan",
+    "iso2": "JO",
+    "iso3": "JOR",
+    "admin_name": "Al ‘Āşimah",
+    "capital": "primary",
+    "population": 1060000,
+    "id": 1400522593
+  },
+  {
     "name": "Dublin",
     "city_ascii": "Dublin",
     "lat": 53.3331,
@@ -1221,6 +1260,19 @@ module.exports = {
     "capital": "primary",
     "population": 1031000,
     "id": 1528355309
+  },
+  {
+    "name": "Jerusalem",
+    "city_ascii": "Jerusalem",
+    "lat": 31.7784,
+    "lon": 35.2066,
+    "country": "Israel",
+    "iso2": "IL",
+    "iso3": "ISR",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 1029300,
+    "id": 1376261644
   },
   {
     "name": "Ufa",
@@ -1312,6 +1364,19 @@ module.exports = {
     "capital": "",
     "population": 997000,
     "id": 1643700880
+  },
+  {
+    "name": "Ahvaz",
+    "city_ascii": "Ahvaz",
+    "lat": 31.28,
+    "lon": 48.72,
+    "country": "Iran",
+    "iso2": "IR",
+    "iso3": "IRN",
+    "admin_name": "Khūzestān",
+    "capital": "admin",
+    "population": 996000,
+    "id": 1364350188
   },
   {
     "name": "Odessa",
@@ -1457,6 +1522,19 @@ module.exports = {
     "id": 1008162156
   },
   {
+    "name": "Az Zarqa",
+    "city_ascii": "Az Zarqa",
+    "lat": 32.07,
+    "lon": 36.1,
+    "country": "Jordan",
+    "iso2": "JO",
+    "iso3": "JOR",
+    "admin_name": "Az Zarqā’",
+    "capital": "admin",
+    "population": 894691,
+    "id": 1400161837
+  },
+  {
     "name": "Tarsus",
     "city_ascii": "Tarsus",
     "lat": 36.9204,
@@ -1494,6 +1572,32 @@ module.exports = {
     "capital": "minor",
     "population": 875552,
     "id": 1724331267
+  },
+  {
+    "name": "Marrakesh",
+    "city_ascii": "Marrakesh",
+    "lat": 31.63,
+    "lon": -8,
+    "country": "Morocco",
+    "iso2": "MA",
+    "iso3": "MAR",
+    "admin_name": "Marrakech-Safi",
+    "capital": "admin",
+    "population": 872000,
+    "id": 1504172585
+  },
+  {
+    "name": "Basra",
+    "city_ascii": "Basra",
+    "lat": 30.5135,
+    "lon": 47.8136,
+    "country": "Iraq",
+    "iso2": "IQ",
+    "iso3": "IRQ",
+    "admin_name": "Al Başrah",
+    "capital": "admin",
+    "population": 870000,
+    "id": 1368714645
   },
   {
     "name": "Palermo",
@@ -1639,6 +1743,19 @@ module.exports = {
     "id": 1826122597
   },
   {
+    "name": "Agadir",
+    "city_ascii": "Agadir",
+    "lat": 30.44,
+    "lon": -9.62,
+    "country": "Morocco",
+    "iso2": "MA",
+    "iso3": "MAR",
+    "admin_name": "Souss-Massa",
+    "capital": "admin",
+    "population": 825467,
+    "id": 1504116858
+  },
+  {
     "name": "Liverpool",
     "city_ascii": "Liverpool",
     "lat": 53.416,
@@ -1730,19 +1847,6 @@ module.exports = {
     "id": 1792988434
   },
   {
-    "name": "Islamabad",
-    "city_ascii": "Islamabad",
-    "lat": 33.7,
-    "lon": 73.1666,
-    "country": "Pakistan",
-    "iso2": "PK",
-    "iso3": "PAK",
-    "admin_name": "Islāmābād",
-    "capital": "primary",
-    "population": 780000,
-    "id": 1586306717
-  },
-  {
     "name": "Wuppertal",
     "city_ascii": "Wuppertal",
     "lat": 51.25,
@@ -1767,6 +1871,19 @@ module.exports = {
     "capital": "admin",
     "population": 770001,
     "id": 1276419711
+  },
+  {
+    "name": "Quetta",
+    "city_ascii": "Quetta",
+    "lat": 30.22,
+    "lon": 67.025,
+    "country": "Pakistan",
+    "iso2": "PK",
+    "iso3": "PAK",
+    "admin_name": "Balochistān",
+    "capital": "admin",
+    "population": 768000,
+    "id": 1586556108
   },
   {
     "name": "Trabzon",
@@ -1964,6 +2081,19 @@ module.exports = {
     "id": 1276457707
   },
   {
+    "name": "Kandahar",
+    "city_ascii": "Kandahar",
+    "lat": 31.61,
+    "lon": 65.6949,
+    "country": "Afghanistan",
+    "iso2": "AF",
+    "iso3": "AFG",
+    "admin_name": "Kandahār",
+    "capital": "admin",
+    "population": 715542,
+    "id": 1004003059
+  },
+  {
     "name": "Samarqand",
     "city_ascii": "Samarqand",
     "lat": 39.67,
@@ -2055,6 +2185,19 @@ module.exports = {
     "id": 1380562508
   },
   {
+    "name": "An Najaf",
+    "city_ascii": "An Najaf",
+    "lat": 32.0003,
+    "lon": 44.3354,
+    "country": "Iraq",
+    "iso2": "IQ",
+    "iso3": "IRQ",
+    "admin_name": "An Najaf",
+    "capital": "admin",
+    "population": 665552,
+    "id": 1368003357
+  },
+  {
     "name": "Bytom",
     "city_ascii": "Bytom",
     "lat": 50.35,
@@ -2066,6 +2209,19 @@ module.exports = {
     "capital": "minor",
     "population": 662247,
     "id": 1616740907
+  },
+  {
+    "name": "Ismaïlia",
+    "city_ascii": "Ismailia",
+    "lat": 30.5903,
+    "lon": 32.26,
+    "country": "Egypt",
+    "iso2": "EG",
+    "iso3": "EGY",
+    "admin_name": "Al Ismā‘īlīyah",
+    "capital": "admin",
+    "population": 656135,
+    "id": 1818532766
   },
   {
     "name": "Kryvyy Rih",
@@ -2224,6 +2380,19 @@ module.exports = {
     "id": 1616725607
   },
   {
+    "name": "Bur Said",
+    "city_ascii": "Bur Said",
+    "lat": 31.26,
+    "lon": 32.29,
+    "country": "Egypt",
+    "iso2": "EG",
+    "iso3": "EGY",
+    "admin_name": "Būr Sa‘īd",
+    "capital": "admin",
+    "population": 623864,
+    "id": 1818628574
+  },
+  {
     "name": "Bannu",
     "city_ascii": "Bannu",
     "lat": 32.989,
@@ -2328,6 +2497,32 @@ module.exports = {
     "id": 1368344172
   },
   {
+    "name": "El Mansura",
+    "city_ascii": "El Mansura",
+    "lat": 31.0504,
+    "lon": 31.38,
+    "country": "Egypt",
+    "iso2": "EG",
+    "iso3": "EGY",
+    "admin_name": "Ad Daqahlīyah",
+    "capital": "admin",
+    "population": 600000,
+    "id": 1818255319
+  },
+  {
+    "name": "Zahedan",
+    "city_ascii": "Zahedan",
+    "lat": 29.5,
+    "lon": 60.83,
+    "country": "Iran",
+    "iso2": "IR",
+    "iso3": "IRN",
+    "admin_name": "Sīstān va Balūchestān",
+    "capital": "admin",
+    "population": 598887,
+    "id": 1364072353
+  },
+  {
     "name": "Jalalabad",
     "city_ascii": "Jalalabad",
     "lat": 34.4415,
@@ -2393,6 +2588,19 @@ module.exports = {
     "id": 1276562886
   },
   {
+    "name": "Kerman",
+    "city_ascii": "Kerman",
+    "lat": 30.3,
+    "lon": 57.08,
+    "country": "Iran",
+    "iso2": "IR",
+    "iso3": "IRN",
+    "admin_name": "Kermān",
+    "capital": "admin",
+    "population": 577514,
+    "id": 1364554896
+  },
+  {
     "name": "Urmia",
     "city_ascii": "Urmia",
     "lat": 37.53,
@@ -2432,6 +2640,19 @@ module.exports = {
     "id": 1826921049
   },
   {
+    "name": "Bahawalpur",
+    "city_ascii": "Bahawalpur",
+    "lat": 29.39,
+    "lon": 71.675,
+    "country": "Pakistan",
+    "iso2": "PK",
+    "iso3": "PAK",
+    "admin_name": "Punjab",
+    "capital": "minor",
+    "population": 552607,
+    "id": 1586038700
+  },
+  {
     "name": "Kenitra",
     "city_ascii": "Kenitra",
     "lat": 34.2704,
@@ -2469,6 +2690,19 @@ module.exports = {
     "capital": "minor",
     "population": 550058,
     "id": 1724397372
+  },
+  {
+    "name": "Tabuk",
+    "city_ascii": "Tabuk",
+    "lat": 28.3838,
+    "lon": 36.555,
+    "country": "Saudi Arabia",
+    "iso2": "SA",
+    "iso3": "SAU",
+    "admin_name": "Tabūk",
+    "capital": "admin",
+    "population": 547957,
+    "id": 1682590992
   },
   {
     "name": "Sargodha",
@@ -2679,6 +2913,19 @@ module.exports = {
     "id": 1368597794
   },
   {
+    "name": "Suez",
+    "city_ascii": "Suez",
+    "lat": 30.005,
+    "lon": 32.5499,
+    "country": "Egypt",
+    "iso2": "EG",
+    "iso3": "EGY",
+    "admin_name": "As Suways",
+    "capital": "admin",
+    "population": 508335,
+    "id": 1818495972
+  },
+  {
     "name": "Gliwice",
     "city_ascii": "Gliwice",
     "lat": 50.3304,
@@ -2783,6 +3030,32 @@ module.exports = {
     "id": 1380991126
   },
   {
+    "name": "El Minya",
+    "city_ascii": "El Minya",
+    "lat": 28.09,
+    "lon": 30.75,
+    "country": "Egypt",
+    "iso2": "EG",
+    "iso3": "EGY",
+    "admin_name": "Al Minyā",
+    "capital": "admin",
+    "population": 500000,
+    "id": 1818607968
+  },
+  {
+    "name": "Damanhûr",
+    "city_ascii": "Damanhur",
+    "lat": 31.0504,
+    "lon": 30.47,
+    "country": "Egypt",
+    "iso2": "EG",
+    "iso3": "EGY",
+    "admin_name": "Al Buḩayrah",
+    "capital": "admin",
+    "population": 500000,
+    "id": 1818708838
+  },
+  {
     "name": "Shahrisabz",
     "city_ascii": "Shahrisabz",
     "lat": 39.0618,
@@ -2833,6 +3106,19 @@ module.exports = {
     "capital": "admin",
     "population": 489486,
     "id": 1643255206
+  },
+  {
+    "name": "Beni Suef",
+    "city_ascii": "Beni Suef",
+    "lat": 29.0804,
+    "lon": 31.09,
+    "country": "Egypt",
+    "iso2": "EG",
+    "iso3": "EGY",
+    "admin_name": "Banī Suwayf",
+    "capital": "admin",
+    "population": 489450,
+    "id": 1818902849
   },
   {
     "name": "Bologna",
@@ -2898,6 +3184,19 @@ module.exports = {
     "capital": "admin",
     "population": 478963,
     "id": 1203687206
+  },
+  {
+    "name": "Yazd",
+    "city_ascii": "Yazd",
+    "lat": 31.9201,
+    "lon": 54.37,
+    "country": "Iran",
+    "iso2": "IR",
+    "iso3": "IRN",
+    "admin_name": "Yazd",
+    "capital": "admin",
+    "population": 477905,
+    "id": 1364429875
   },
   {
     "name": "İzmit",
@@ -3069,17 +3368,17 @@ module.exports = {
     "id": 1804688214
   },
   {
-    "name": "Qaraghandy",
-    "city_ascii": "Qaraghandy",
-    "lat": 49.885,
-    "lon": 73.115,
-    "country": "Kazakhstan",
-    "iso2": "KZ",
-    "iso3": "KAZ",
-    "admin_name": "Qaraghandy",
+    "name": "An Nasiriyah",
+    "city_ascii": "An Nasiriyah",
+    "lat": 31.0429,
+    "lon": 46.2676,
+    "country": "Iraq",
+    "iso2": "IQ",
+    "iso3": "IRQ",
+    "admin_name": "Dhī Qār",
     "capital": "admin",
-    "population": 451800,
-    "id": 1398274508
+    "population": 451547,
+    "id": 1368273311
   },
   {
     "name": "Belfast",
@@ -3407,6 +3706,19 @@ module.exports = {
     "id": 1724107739
   },
   {
+    "name": "Tanta",
+    "city_ascii": "Tanta",
+    "lat": 30.7904,
+    "lon": 31,
+    "country": "Egypt",
+    "iso2": "EG",
+    "iso3": "EGY",
+    "admin_name": "Al Gharbīyah",
+    "capital": "admin",
+    "population": 404901,
+    "id": 1818501770
+  },
+  {
     "name": "Tver",
     "city_ascii": "Tver",
     "lat": 56.86,
@@ -3418,19 +3730,6 @@ module.exports = {
     "capital": "admin",
     "population": 400212,
     "id": 1643456559
-  },
-  {
-    "name": "Surgut",
-    "city_ascii": "Surgut",
-    "lat": 61.2599,
-    "lon": 73.425,
-    "country": "Russia",
-    "iso2": "RU",
-    "iso3": "RUS",
-    "admin_name": "Khanty-Mansiyskiy Avtonomnyy Okrug-Yugra",
-    "capital": "",
-    "population": 400000,
-    "id": 1643007475
   },
   {
     "name": "Khmelnytskyy",
@@ -3641,6 +3940,19 @@ module.exports = {
     "id": 1724045676
   },
   {
+    "name": "Las Palmas",
+    "city_ascii": "Las Palmas",
+    "lat": 28.1,
+    "lon": -15.43,
+    "country": "Spain",
+    "iso2": "ES",
+    "iso3": "ESP",
+    "admin_name": "Canary Islands",
+    "capital": "admin",
+    "population": 378495,
+    "id": 1724501748
+  },
+  {
     "name": "Karlsruhe",
     "city_ascii": "Karlsruhe",
     "lat": 49,
@@ -3758,6 +4070,19 @@ module.exports = {
     "id": 1724417375
   },
   {
+    "name": "Abadan",
+    "city_ascii": "Abadan",
+    "lat": 30.3307,
+    "lon": 48.2797,
+    "country": "Iran",
+    "iso2": "IR",
+    "iso3": "IRN",
+    "admin_name": "Khūzestān",
+    "capital": "",
+    "population": 370180,
+    "id": 1364708556
+  },
+  {
     "name": "Reading",
     "city_ascii": "Reading",
     "lat": 51.47,
@@ -3862,6 +4187,19 @@ module.exports = {
     "id": 1276314100
   },
   {
+    "name": "Ad Diwaniyah",
+    "city_ascii": "Ad Diwaniyah",
+    "lat": 31.9889,
+    "lon": 44.924,
+    "country": "Iraq",
+    "iso2": "IQ",
+    "iso3": "IRQ",
+    "admin_name": "Al Qādisīyah",
+    "capital": "admin",
+    "population": 358408,
+    "id": 1368864006
+  },
+  {
     "name": "Taraz",
     "city_ascii": "Taraz",
     "lat": 42.9,
@@ -3914,19 +4252,6 @@ module.exports = {
     "id": 1724910555
   },
   {
-    "name": "Archangel",
-    "city_ascii": "Archangel",
-    "lat": 64.575,
-    "lon": 40.545,
-    "country": "Russia",
-    "iso2": "RU",
-    "iso3": "RUS",
-    "admin_name": "Arkhangel’skaya Oblast’",
-    "capital": "admin",
-    "population": 356051,
-    "id": 1643797198
-  },
-  {
     "name": "Safi",
     "city_ascii": "Safi",
     "lat": 32.32,
@@ -3938,6 +4263,19 @@ module.exports = {
     "capital": "",
     "population": 353476,
     "id": 1504000717
+  },
+  {
+    "name": "Rahim Yar Khan",
+    "city_ascii": "Rahim Yar Khan",
+    "lat": 28.4202,
+    "lon": 70.2952,
+    "country": "Pakistan",
+    "iso2": "PK",
+    "iso3": "PAK",
+    "admin_name": "Punjab",
+    "capital": "",
+    "population": 353203,
+    "id": 1586136399
   },
   {
     "name": "Vinnytsya",
@@ -4057,6 +4395,19 @@ module.exports = {
     "id": 1643407900
   },
   {
+    "name": "Al Amarah",
+    "city_ascii": "Al Amarah",
+    "lat": 31.8416,
+    "lon": 47.1512,
+    "country": "Iraq",
+    "iso2": "IQ",
+    "iso3": "IRQ",
+    "admin_name": "Maysān",
+    "capital": "admin",
+    "population": 345007,
+    "id": 1368336235
+  },
+  {
     "name": "Kurgan",
     "city_ascii": "Kurgan",
     "lat": 55.46,
@@ -4096,6 +4447,19 @@ module.exports = {
     "id": 1112480679
   },
   {
+    "name": "Jhang",
+    "city_ascii": "Jhang",
+    "lat": 31.2804,
+    "lon": 72.325,
+    "country": "Pakistan",
+    "iso2": "PK",
+    "iso3": "PAK",
+    "admin_name": "Punjab",
+    "capital": "minor",
+    "population": 341210,
+    "id": 1586288677
+  },
+  {
     "name": "Plovdiv",
     "city_ascii": "Plovdiv",
     "lat": 42.154,
@@ -4120,6 +4484,19 @@ module.exports = {
     "capital": "admin",
     "population": 338978,
     "id": 1643161747
+  },
+  {
+    "name": "Santa Cruz de Tenerife",
+    "city_ascii": "Santa Cruz de Tenerife",
+    "lat": 28.47,
+    "lon": -16.25,
+    "country": "Spain",
+    "iso2": "ES",
+    "iso3": "ESP",
+    "admin_name": "Canary Islands",
+    "capital": "admin",
+    "population": 336061,
+    "id": 1724813158
   },
   {
     "name": "Gijón",
@@ -4380,6 +4757,19 @@ module.exports = {
     "capital": "admin",
     "population": 317365,
     "id": 1112187197
+  },
+  {
+    "name": "El Faiyum",
+    "city_ascii": "El Faiyum",
+    "lat": 29.31,
+    "lon": 30.84,
+    "country": "Egypt",
+    "iso2": "EG",
+    "iso3": "EGY",
+    "admin_name": "Al Fayyūm",
+    "capital": "admin",
+    "population": 316772,
+    "id": 1818281002
   },
   {
     "name": "Cluj-Napoca",
@@ -4707,19 +5097,6 @@ module.exports = {
     "id": 1792630786
   },
   {
-    "name": "Gujrat",
-    "city_ascii": "Gujrat",
-    "lat": 32.58,
-    "lon": 74.08,
-    "country": "Pakistan",
-    "iso2": "PK",
-    "iso3": "PAK",
-    "admin_name": "Punjab",
-    "capital": "minor",
-    "population": 301506,
-    "id": 1586006990
-  },
-  {
     "name": "Tambov",
     "city_ascii": "Tambov",
     "lat": 52.73,
@@ -4783,6 +5160,19 @@ module.exports = {
     "capital": "admin",
     "population": 299479,
     "id": 1368444902
+  },
+  {
+    "name": "Dumyat",
+    "city_ascii": "Dumyat",
+    "lat": 31.4204,
+    "lon": 31.82,
+    "country": "Egypt",
+    "iso2": "EG",
+    "iso3": "EGY",
+    "admin_name": "Dumyāţ",
+    "capital": "admin",
+    "population": 299459,
+    "id": 1818333966
   },
   {
     "name": "Chernivtsi",
@@ -4913,6 +5303,19 @@ module.exports = {
     "capital": "minor",
     "population": 289924,
     "id": 1276791686
+  },
+  {
+    "name": "Zagazig",
+    "city_ascii": "Zagazig",
+    "lat": 30.5833,
+    "lon": 31.5167,
+    "country": "Egypt",
+    "iso2": "EG",
+    "iso3": "EGY",
+    "admin_name": "Ash Sharqīyah",
+    "capital": "admin",
+    "population": 285097,
+    "id": 1818017750
   },
   {
     "name": "Cádiz",
@@ -5266,6 +5669,19 @@ module.exports = {
     "id": 1398602716
   },
   {
+    "name": "Az Aubayr",
+    "city_ascii": "Az Aubayr",
+    "lat": 30.3892,
+    "lon": 47.708,
+    "country": "Iraq",
+    "iso2": "IQ",
+    "iso3": "IRQ",
+    "admin_name": "Al Başrah",
+    "capital": "minor",
+    "population": 262219,
+    "id": 1368147923
+  },
+  {
     "name": "Balıkesir",
     "city_ascii": "Balikesir",
     "lat": 39.6504,
@@ -5487,17 +5903,17 @@ module.exports = {
     "id": 1250913458
   },
   {
-    "name": "Jalal Abad",
-    "city_ascii": "Jalal Abad",
-    "lat": 40.9429,
-    "lon": 73.0025,
-    "country": "Kyrgyzstan",
-    "iso2": "KG",
-    "iso3": "KGZ",
-    "admin_name": "Jalal-Abad",
-    "capital": "admin",
-    "population": 248899,
-    "id": 1417653652
+    "name": "Hafar al Batin",
+    "city_ascii": "Hafar al Batin",
+    "lat": 28.4337,
+    "lon": 45.9601,
+    "country": "Saudi Arabia",
+    "iso2": "SA",
+    "iso3": "SAU",
+    "admin_name": "Ash Sharqīyah",
+    "capital": "",
+    "population": 249194,
+    "id": 1682394909
   },
   {
     "name": "Miskolc",
@@ -5708,6 +6124,19 @@ module.exports = {
     "id": 1250635972
   },
   {
+    "name": "Dera Ghazi Khan",
+    "city_ascii": "Dera Ghazi Khan",
+    "lat": 30.0604,
+    "lon": 70.6351,
+    "country": "Pakistan",
+    "iso2": "PK",
+    "iso3": "PAK",
+    "admin_name": "Punjab",
+    "capital": "minor",
+    "population": 236093,
+    "id": 1586002238
+  },
+  {
     "name": "Luton",
     "city_ascii": "Luton",
     "lat": 51.8804,
@@ -5784,6 +6213,19 @@ module.exports = {
     "capital": "",
     "population": 234297,
     "id": 1643493938
+  },
+  {
+    "name": "Zabol",
+    "city_ascii": "Zabol",
+    "lat": 31.0215,
+    "lon": 61.4815,
+    "country": "Iran",
+    "iso2": "IR",
+    "iso3": "IRN",
+    "admin_name": "Sīstān va Balūchestān",
+    "capital": "minor",
+    "population": 233968,
+    "id": 1364485195
   },
   {
     "name": "Clermont-Ferrand",
@@ -5929,6 +6371,19 @@ module.exports = {
     "id": 1643001706
   },
   {
+    "name": "Er Rachidia",
+    "city_ascii": "Er Rachidia",
+    "lat": 31.9404,
+    "lon": -4.45,
+    "country": "Morocco",
+    "iso2": "MA",
+    "iso3": "MAR",
+    "admin_name": "Drâa-Tafilalet",
+    "capital": "",
+    "population": 228489,
+    "id": 1504005759
+  },
+  {
     "name": "Petropavlovsk",
     "city_ascii": "Petropavlovsk",
     "lat": 54.88,
@@ -6057,6 +6512,19 @@ module.exports = {
     "capital": "admin",
     "population": 223744,
     "id": 1792686663
+  },
+  {
+    "name": "Arar",
+    "city_ascii": "Arar",
+    "lat": 30.99,
+    "lon": 41.0207,
+    "country": "Saudi Arabia",
+    "iso2": "SA",
+    "iso3": "SAU",
+    "admin_name": "Al Ḩudūd ash Shamālīyah",
+    "capital": "admin",
+    "population": 222016,
+    "id": 1682664517
   },
   {
     "name": "Banja Luka",
@@ -6200,19 +6668,6 @@ module.exports = {
     "capital": "",
     "population": 217274,
     "id": 1860150082
-  },
-  {
-    "name": "Gilgit",
-    "city_ascii": "Gilgit",
-    "lat": 35.9171,
-    "lon": 74.3,
-    "country": "Pakistan",
-    "iso2": "PK",
-    "iso3": "PAK",
-    "admin_name": "Gilgit-Baltistan",
-    "capital": "minor",
-    "population": 216760,
-    "id": 1586284242
   },
   {
     "name": "Rybinsk",
@@ -6397,201 +6852,6 @@ module.exports = {
     "id": 1250363682
   },
   {
-    "name": "Santander",
-    "city_ascii": "Santander",
-    "lat": 43.3805,
-    "lon": -3.8,
-    "country": "Spain",
-    "iso2": "ES",
-    "iso3": "ESP",
-    "admin_name": "Cantabria",
-    "capital": "admin",
-    "population": 208763,
-    "id": 1724247413
-  },
-  {
-    "name": "Sidi bel Abbes",
-    "city_ascii": "Sidi bel Abbes",
-    "lat": 35.1903,
-    "lon": -0.64,
-    "country": "Algeria",
-    "iso2": "DZ",
-    "iso3": "DZA",
-    "admin_name": "Sidi Bel Abbès",
-    "capital": "admin",
-    "population": 208604,
-    "id": 1012123414
-  },
-  {
-    "name": "Bojnurd",
-    "city_ascii": "Bojnurd",
-    "lat": 37.47,
-    "lon": 57.32,
-    "country": "Iran",
-    "iso2": "IR",
-    "iso3": "IRN",
-    "admin_name": "Khorāsān-e Shomālī",
-    "capital": "admin",
-    "population": 208582,
-    "id": 1364981174
-  },
-  {
-    "name": "Salzburg",
-    "city_ascii": "Salzburg",
-    "lat": 47.8105,
-    "lon": 13.04,
-    "country": "Austria",
-    "iso2": "AT",
-    "iso3": "AUT",
-    "admin_name": "Salzburg",
-    "capital": "admin",
-    "population": 206279,
-    "id": 1040312147
-  },
-  {
-    "name": "Funchal",
-    "city_ascii": "Funchal",
-    "lat": 32.65,
-    "lon": -16.88,
-    "country": "Portugal",
-    "iso2": "PT",
-    "iso3": "PRT",
-    "admin_name": "Madeira",
-    "capital": "admin",
-    "population": 204767,
-    "id": 1620995356
-  },
-  {
-    "name": "Pisa",
-    "city_ascii": "Pisa",
-    "lat": 43.7205,
-    "lon": 10.4,
-    "country": "Italy",
-    "iso2": "IT",
-    "iso3": "ITA",
-    "admin_name": "Tuscany",
-    "capital": "minor",
-    "population": 203336,
-    "id": 1380310225
-  },
-  {
-    "name": "Erfurt",
-    "city_ascii": "Erfurt",
-    "lat": 50.9701,
-    "lon": 11.03,
-    "country": "Germany",
-    "iso2": "DE",
-    "iso3": "DEU",
-    "admin_name": "Thuringia",
-    "capital": "admin",
-    "population": 203254,
-    "id": 1276924655
-  },
-  {
-    "name": "Rostock",
-    "city_ascii": "Rostock",
-    "lat": 54.0704,
-    "lon": 12.15,
-    "country": "Germany",
-    "iso2": "DE",
-    "iso3": "DEU",
-    "admin_name": "Mecklenburg-Western Pomerania",
-    "capital": "",
-    "population": 203080,
-    "id": 1276210265
-  },
-  {
-    "name": "Khvoy",
-    "city_ascii": "Khvoy",
-    "lat": 38.5304,
-    "lon": 44.97,
-    "country": "Iran",
-    "iso2": "IR",
-    "iso3": "IRN",
-    "admin_name": "Āz̄arbāyjān-e Gharbī",
-    "capital": "minor",
-    "population": 202728,
-    "id": 1364186788
-  },
-  {
-    "name": "Biskra",
-    "city_ascii": "Biskra",
-    "lat": 34.86,
-    "lon": 5.73,
-    "country": "Algeria",
-    "iso2": "DZ",
-    "iso3": "DZA",
-    "admin_name": "Biskra",
-    "capital": "admin",
-    "population": 202103,
-    "id": 1012947247
-  },
-  {
-    "name": "Angren",
-    "city_ascii": "Angren",
-    "lat": 41.0304,
-    "lon": 70.1549,
-    "country": "Uzbekistan",
-    "iso2": "UZ",
-    "iso3": "UZB",
-    "admin_name": "Toshkent",
-    "capital": "",
-    "population": 202070,
-    "id": 1860045958
-  },
-  {
-    "name": "Taranto",
-    "city_ascii": "Taranto",
-    "lat": 40.5084,
-    "lon": 17.23,
-    "country": "Italy",
-    "iso2": "IT",
-    "iso3": "ITA",
-    "admin_name": "Puglia",
-    "capital": "minor",
-    "population": 202033,
-    "id": 1380707445
-  },
-  {
-    "name": "Pskov",
-    "city_ascii": "Pskov",
-    "lat": 57.83,
-    "lon": 28.3299,
-    "country": "Russia",
-    "iso2": "RU",
-    "iso3": "RUS",
-    "admin_name": "Pskovskaya Oblast’",
-    "capital": "admin",
-    "population": 201990,
-    "id": 1643877414
-  },
-  {
-    "name": "Al Khums",
-    "city_ascii": "Al Khums",
-    "lat": 32.6604,
-    "lon": 14.26,
-    "country": "Libya",
-    "iso2": "LY",
-    "iso3": "LBY",
-    "admin_name": "Al Marqab",
-    "capital": "admin",
-    "population": 201943,
-    "id": 1434348717
-  },
-  {
-    "name": "Daşoguz",
-    "city_ascii": "Dasoguz",
-    "lat": 41.84,
-    "lon": 59.965,
-    "country": "Turkmenistan",
-    "iso2": "TM",
-    "iso3": "TKM",
-    "admin_name": "Daşoguz",
-    "capital": "admin",
-    "population": 201424,
-    "id": 1795167397
-  },
-  {
     "name": "Gibraltar",
     "city_ascii": "Gibraltar",
     "lat": 36.1324,
@@ -6603,19 +6863,6 @@ module.exports = {
     "capital": "primary",
     "population": 187083,
     "id": 1292385245
-  },
-  {
-    "name": "Reykjavík",
-    "city_ascii": "Reykjavik",
-    "lat": 64.15,
-    "lon": -21.95,
-    "country": "Iceland",
-    "iso2": "IS",
-    "iso3": "ISL",
-    "admin_name": "Höfuðborgarsvæði",
-    "capital": "primary",
-    "population": 166212,
-    "id": 1352327190
   },
   {
     "name": "Podgorica",
@@ -6722,6 +6969,19 @@ module.exports = {
     "id": 1234904517
   },
   {
+    "name": "Al Quds",
+    "city_ascii": "Al Quds",
+    "lat": 31.7764,
+    "lon": 35.2269,
+    "country": "West Bank",
+    "iso2": "XW",
+    "iso3": "XWB",
+    "admin_name": "",
+    "capital": "primary",
+    "population": "",
+    "id": 1934000006
+  },
+  {
     "name": "Pristina",
     "city_ascii": "Pristina",
     "lat": 42.6666,
@@ -6760,5 +7020,4 @@ module.exports = {
     "population": "",
     "id": 1831991870
   }
-]
-};
+]};

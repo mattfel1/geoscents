@@ -59,16 +59,17 @@ server.listen(PORT, () => {
 
 // Game state info
 const rooms = {
-    'World': new Room('World'),
-    'N. America': new Room('N. America'),
-    'Eurasia': new Room('Eurasia'),
-    'lobby': new Room('lobby')
+    'World': new Room(CONSTANTS.WORLD),
+    'N. America': new Room(CONSTANTS.US),
+    'Eurasia': new Room(CONSTANTS.EURO),
+    'Lobby': new Room(CONSTANTS.LOBBY)
 };
 var playerRooms = new Map();
 
 const WELCOME_MESSAGE1 = 'This is an unabashed attempt at recreating the similarly-named game, Geosense (geosense.net), from the mid 2000s. ' +
                           'If you are enjoying this game, consider donating at the bottom of the page to help keep the server' +
-                          'running!  Feel free to play with the code on github and make pull requests if you want.';
+                          'running!  Feel free to play with the code on github and make pull requests if you want.' +
+                          ' If this text is double-spaced or things don\'t look right, try refreshing the page!';
 
 function log(payload) {
     const currentdate = new Date();
@@ -86,13 +87,13 @@ function log(payload) {
 io.on('connection', (socket) => {
 	console.log('a user connected:', socket.id);
 	socket.on('newPlayer', () => {
-	  rooms['lobby'].addPlayer(socket, {'moved': false});
-      playerRooms.set(socket.id, rooms['lobby']);
+	  rooms[CONSTANTS.LOBBY].addPlayer(socket, {'moved': false});
+      playerRooms.set(socket.id, rooms[CONSTANTS.LOBBY]);
       log("User connected    " + socket.handshake.address + ", " + socket.id)
-	  socket.emit("update messages", 'lobby', WELCOME_MESSAGE1);
-      var join_msg = "[ <font color='" + rooms['lobby'].getPlayerColor(socket) + "'>Player " + rooms['lobby'].getPlayerName(socket) + " has entered the lobby!</font> ]<br>";
-      io.sockets.emit("update messages", 'lobby', join_msg)
-      io.sockets.emit('update counts', rooms['World'].playerCount(),rooms['N. America'].playerCount(),rooms['Eurasia'].playerCount());
+	  socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
+      var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'>Player " + rooms[CONSTANTS.LOBBY].getPlayerName(socket) + " has entered the lobby!</font> ]<br>";
+      io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg)
+      io.sockets.emit('update counts', rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
 	});
 	socket.on('disconnect', function() {
       if (playerRooms.has(socket.id)) {
@@ -101,7 +102,7 @@ io.on('connection', (socket) => {
           var leave_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>Player " + room.getPlayerName(socket) + " has left " + room.room + "!</font> ]<br>";
           io.sockets.emit("update messages", room.room, leave_msg);
           room.killPlayer(socket)
-          io.sockets.emit('update counts', rooms['World'].playerCount(),rooms['N. America'].playerCount(),rooms['Eurasia'].playerCount());
+          io.sockets.emit('update counts', rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
       }
 	});
     socket.on('playerReady', () => {
@@ -131,7 +132,7 @@ io.on('connection', (socket) => {
           socket.emit('moved to', dest);
           var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'>Player " + rooms[dest].getPlayerName(socket) + " has joined " + dest + "!</font> ]<br>";
           io.sockets.emit("update messages", dest, join_msg)
-          io.sockets.emit('update counts', rooms['World'].playerCount(),rooms['N. America'].playerCount(),rooms['Eurasia'].playerCount());
+          io.sockets.emit('update counts', rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
       }
     });
 	socket.on('playerClick', (playerClick) => {
@@ -146,7 +147,16 @@ io.on('connection', (socket) => {
       Object.values(rooms).forEach(function(room) {
           if (room.getPlayerByIp(socket.handshake.address)['numMatch'] > 0) {
               //TODO: Why is this socket.id different from the socket.id used to create player?  Will just use ip address for now...
-              const sent_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>Player " + room.getPlayerName(socket) + "</font> ]: " + msg + "<br>";
+
+              replaceAll = function(original, strReplace, strWith) {
+                // See http://stackoverflow.com/a/3561711/556609
+                var esc = strReplace.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                var reg = new RegExp(esc, 'ig');
+                return original.replace(reg, strWith);
+              };
+              var new_sent_msg = msg;
+              CONSTANTS.PROFANITY.forEach((word) => {new_sent_msg = replaceAll(new_sent_msg, word, "****")});
+              const sent_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>Player " + room.getPlayerName(socket) + "</font> ]: " + new_sent_msg + "<br>";
               // if (msg.length > CONSTANTS.MAX_MSG) {
               // 	msg = msg.substring(0, CONSTANTS.MAX_MSG)
               // }

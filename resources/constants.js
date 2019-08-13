@@ -19,11 +19,11 @@ module.exports = {
     US_MIN_LON: -130.0, // Latitude of top edge of map
     US_MAX_LON: -58.0, // Latitude of bottom edge of map    US_LAT_TS: 0,
     US_LAT_TS: 36,
-    EURO_ZERO_LAT: 69.0*Math.PI/180, // Latitude of top edge of map
-    EURO_MAX_LAT: 32.0*Math.PI/180, // Latitude of bottom edge of map
-    EURO_MIN_LON: -31, // Latitude of top edge of map
-    EURO_MAX_LON: 75, // Latitude of bottom edge of map    euro_LAT_TS: 0,
-    EURO_LAT_TS: 50,
+    EURO_ZERO_LAT: 64.0*Math.PI/180, // Latitude of top edge of map
+    EURO_MAX_LAT: 27.0*Math.PI/180, // Latitude of bottom edge of map
+    EURO_MIN_LON: -22, // Latitude of top edge of map
+    EURO_MAX_LON: 73, // Latitude of bottom edge of map    euro_LAT_TS: 0,
+    EURO_LAT_TS: 45,
 
     // FSM
     REVEAL_STATE: 'reveal',
@@ -49,14 +49,19 @@ module.exports = {
     POINT_RADIUS: 3,
     BUBBLE_RADIUS: 15,
     BUBBLE_WIDTH: 3,
+    LONGCITY: 40, // # characters for city string to be considered "long"
     FPS: 30,
 
     // Rooms
     GAME_ROUNDS: 10,
-    ROOMS: ['world', 'namerica', 'europe', 'lobby'],
+    WORLD: 'World',
+    LOBBY: 'Lobby',
+    US: 'N. America',
+    EURO: 'Eurasia',
     MAX_INACTIVE: 30, // Rounds of no click before you get booted
 
     // Chat
     MAX_GAME_HIST: 100,
-    MAX_CHAT_HIST: 100
+    MAX_CHAT_HIST: 100,
+    PROFANITY: ['shit', 'damn', 'ass', 'fuck', 'cunt']
 }

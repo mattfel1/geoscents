@@ -13,7 +13,7 @@ const CONSTANTS = require('../resources/constants.js')
 socket.emit('newPlayer');
 var chatcount = 0;
 var histcount = 0;
-var myRoom = 'lobby';
+var myRoom = CONSTANTS.LOBBY;
 var us_count = 0;
 var world_count = 0;
 var euro_count = 0;
@@ -37,14 +37,14 @@ function canvas_arrow(context, fromx, fromy, tox, toy) {
 /** MAP HANDLING */
 const drawMap = (room) => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  if (room == 'lobby'){
+  if (room == CONSTANTS.LOBBY){
     // Banner message
     ctx.fillStyle = 'cyan';
     ctx.fillRect(0,0,canvas.width,canvas.height);
     ctx.font = "50px Arial";
     ctx.fillStyle = 'black';
-    ctx.fillText('Welcome to GeoScents!', 5, 50);
-    ctx.fillText('Locate cities as quickly and accurately as possible!',100,110);
+    ctx.fillText('Welcome to GeoScents!', 300, 50);
+    ctx.fillText('Locate cities as quickly and accurately as possible!',10,110);
 
 
     // Instructions
@@ -58,26 +58,27 @@ const drawMap = (room) => {
     ctx.fillText('learn about the cities here', 800, 625);
     canvas_arrow(ctx, 1100, 650, 1300, 800);
 
+    ctx.fillText('Map will appear in this box', 100, 310);
 
     ctx.fillText('Discuss here', 100, 610);
     canvas_arrow(ctx, 200, 650, 200, 800);
 
   }
-  else if (room == 'World'){
+  else if (room == CONSTANTS.WORLD){
       var img = new Image()
       img.onload = function () {
         ctx.drawImage(img, 0, 0)
       };
       img.src = "/resources/world.png"
   }
-  else if (room == 'N. America'){
+  else if (room == CONSTANTS.US){
       var img = new Image()
       img.onload = function () {
         ctx.drawImage(img, 0, 0)
       };
       img.src = "/resources/us.png"
   }
-  else if (room == 'Eurasia'){
+  else if (room == CONSTANTS.EURO){
       var img = new Image()
       img.onload = function () {
         ctx.drawImage(img, 0, 0)
@@ -259,19 +260,19 @@ function postLobby() {
     panel_ctx.fillRect(world_button['x'], world_button['y'], world_button['width'], world_button['height']);
     panel_ctx.font = "25px Arial";
     panel_ctx.fillStyle = 'black';
-    panel_ctx.fillText('World  (' + world_count + ' players)', world_button['x'] + 5, world_button['y'] + 28)
+    panel_ctx.fillText(CONSTANTS.WORLD + '  (' + world_count + ' players)', world_button['x'] + 5, world_button['y'] + 28)
 
     panel_ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
     panel_ctx.fillRect(us_button['x'], us_button['y'], us_button['width'], us_button['height']);
     panel_ctx.font = "25px Arial";
     panel_ctx.fillStyle = 'black';
-    panel_ctx.fillText('N. America  (' + us_count + ' players)', us_button['x'] + 5, us_button['y'] + 28)
+    panel_ctx.fillText(CONSTANTS.US + ' (' + us_count + ' players)', us_button['x'] + 5, us_button['y'] + 28)
 
     panel_ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
     panel_ctx.fillRect(euro_button['x'], euro_button['y'], euro_button['width'], euro_button['height']);
     panel_ctx.font = "25px Arial";
     panel_ctx.fillStyle = 'black';
-    panel_ctx.fillText('Eurasia  (' + euro_count + ' players)', euro_button['x'] + 5, euro_button['y'] + 28)
+    panel_ctx.fillText(CONSTANTS.EURO + '  (' + euro_count + ' players)', euro_button['x'] + 5, euro_button['y'] + 28)
 
 }
 
@@ -284,7 +285,13 @@ function postInfo(info1, info2, button, capital) {
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText(info1, info_window['x'] + 5, info_window['y'] + 28)
 
-    panel_ctx.font = "30px Arial";
+    if (info2.length < CONSTANTS.LONGCITY) {
+        panel_ctx.font = "30px Arial";
+    }
+    else {
+        panel_ctx.font = "20px Arial";
+    }
+
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText(info2, info_window['x'] + 5, info_window['y'] + 86)
 
@@ -311,7 +318,7 @@ socket.on('clear scores', () => {
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText("Scoreboard:", scoreboard_window['x'] + 5, scoreboard_window['y'] + 45)
 
-    if (myRoom != 'lobby') {
+    if (myRoom != CONSTANTS.LOBBY) {
         panel_ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
         panel_ctx.fillRect(lobby_button['x'], lobby_button['y'], lobby_button['width'], lobby_button['height']);
         panel_ctx.font = "25px Arial";
@@ -371,20 +378,20 @@ socket.on('draw reveal city', (city, capital) => {
 
 panel.addEventListener('click', function(evt) {
     var mousePos = getMousePosInPanel(panel, evt);
-    if (isInside(mousePos,ready_button) && myRoom != 'lobby') {
+    if (isInside(mousePos,ready_button) && myRoom != CONSTANTS.LOBBY) {
         socket.emit('playerReady')
     }
-    if (isInside(mousePos,lobby_button) && myRoom != 'lobby') {
-        socket.emit('moveTo', 'lobby')
+    if (isInside(mousePos,lobby_button) && myRoom != CONSTANTS.LOBBY) {
+        socket.emit('moveTo', CONSTANTS.LOBBY)
     }
-    else if (isInside(mousePos,world_button) && myRoom == 'lobby') {
-        socket.emit('moveTo', 'World')
+    else if (isInside(mousePos,world_button) && myRoom == CONSTANTS.LOBBY) {
+        socket.emit('moveTo', CONSTANTS.WORLD)
     }
-    else if (isInside(mousePos,us_button) && myRoom == 'lobby') {
-        socket.emit('moveTo', 'N. America')
+    else if (isInside(mousePos,us_button) && myRoom == CONSTANTS.LOBBY) {
+        socket.emit('moveTo', CONSTANTS.US)
     }
-    else if (isInside(mousePos,euro_button) && myRoom == 'lobby') {
-        socket.emit('moveTo', 'Eurasia')
+    else if (isInside(mousePos,euro_button) && myRoom == CONSTANTS.LOBBY) {
+        socket.emit('moveTo', CONSTANTS.EURO)
     }
 }, false);
 
