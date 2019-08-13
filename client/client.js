@@ -63,21 +63,21 @@ const drawMap = (room) => {
     canvas_arrow(ctx, 200, 650, 200, 800);
 
   }
-  else if (room == 'world'){
+  else if (room == 'World'){
       var img = new Image()
       img.onload = function () {
         ctx.drawImage(img, 0, 0)
       };
       img.src = "/resources/world.png"
   }
-  else if (room == 'namerica'){
+  else if (room == 'N. America'){
       var img = new Image()
       img.onload = function () {
         ctx.drawImage(img, 0, 0)
       };
       img.src = "/resources/us.png"
   }
-  else if (room == 'euro'){
+  else if (room == 'Eurasia'){
       var img = new Image()
       img.onload = function () {
         ctx.drawImage(img, 0, 0)
@@ -378,13 +378,13 @@ panel.addEventListener('click', function(evt) {
         socket.emit('moveTo', 'lobby')
     }
     else if (isInside(mousePos,world_button) && myRoom == 'lobby') {
-        socket.emit('moveTo', 'world')
+        socket.emit('moveTo', 'World')
     }
     else if (isInside(mousePos,us_button) && myRoom == 'lobby') {
-        socket.emit('moveTo', 'namerica')
+        socket.emit('moveTo', 'N. America')
     }
     else if (isInside(mousePos,euro_button) && myRoom == 'lobby') {
-        socket.emit('moveTo', 'euro')
+        socket.emit('moveTo', 'Eurasia')
     }
 }, false);
 

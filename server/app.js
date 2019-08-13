@@ -59,9 +59,9 @@ server.listen(PORT, () => {
 
 // Game state info
 const rooms = {
-    'world': new Room('world'),
-    'namerica': new Room('namerica'),
-    'euro': new Room('euro'),
+    'World': new Room('World'),
+    'N. America': new Room('N. America'),
+    'Eurasia': new Room('Eurasia'),
     'lobby': new Room('lobby')
 };
 var playerRooms = new Map();
@@ -92,7 +92,7 @@ io.on('connection', (socket) => {
 	  socket.emit("update messages", 'lobby', WELCOME_MESSAGE1);
       var join_msg = "[ <font color='" + rooms['lobby'].getPlayerColor(socket) + "'>Player " + rooms['lobby'].getPlayerName(socket) + " has entered the lobby!</font> ]<br>";
       io.sockets.emit("update messages", 'lobby', join_msg)
-      io.sockets.emit('update counts', rooms['world'].playerCount(),rooms['namerica'].playerCount(),rooms['euro'].playerCount());
+      io.sockets.emit('update counts', rooms['World'].playerCount(),rooms['N. America'].playerCount(),rooms['Eurasia'].playerCount());
 	});
 	socket.on('disconnect', function() {
       if (playerRooms.has(socket.id)) {
@@ -101,7 +101,7 @@ io.on('connection', (socket) => {
           var leave_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>Player " + room.getPlayerName(socket) + " has left " + room.room + "!</font> ]<br>";
           io.sockets.emit("update messages", room.room, leave_msg);
           room.killPlayer(socket)
-          io.sockets.emit('update counts', rooms['world'].playerCount(),rooms['namerica'].playerCount(),rooms['euro'].playerCount());
+          io.sockets.emit('update counts', rooms['World'].playerCount(),rooms['N. America'].playerCount(),rooms['Eurasia'].playerCount());
       }
 	});
     socket.on('playerReady', () => {
@@ -131,7 +131,7 @@ io.on('connection', (socket) => {
           socket.emit('moved to', dest);
           var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'>Player " + rooms[dest].getPlayerName(socket) + " has joined " + dest + "!</font> ]<br>";
           io.sockets.emit("update messages", dest, join_msg)
-          io.sockets.emit('update counts', rooms['world'].playerCount(),rooms['namerica'].playerCount(),rooms['euro'].playerCount());
+          io.sockets.emit('update counts', rooms['World'].playerCount(),rooms['N. America'].playerCount(),rooms['Eurasia'].playerCount());
       }
     });
 	socket.on('playerClick', (playerClick) => {

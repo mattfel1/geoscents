@@ -7,9 +7,9 @@ const EUROCITIES = require('../resources/eurocities.js').CITIES;
 const CONSTANTS = require('../resources/constants.js');
 
 const randomCity = (room) => {
-    if (room == 'world') return WORLDCITIES[Math.floor(Math.random()*WORLDCITIES.length)];
-    else if (room == 'namerica') return USCITIES[Math.floor(Math.random()*USCITIES.length)];
-    else if (room == 'euro') return EUROCITIES[Math.floor(Math.random()*EUROCITIES.length)];
+    if (room == 'World') return WORLDCITIES[Math.floor(Math.random()*WORLDCITIES.length)];
+    else if (room == 'N. America') return USCITIES[Math.floor(Math.random()*USCITIES.length)];
+    else if (room == 'Euerasia') return EUROCITIES[Math.floor(Math.random()*EUROCITIES.length)];
     else return WORLDCITIES[Math.floor(Math.random()*WORLDCITIES.length)];
 };
 
@@ -33,14 +33,14 @@ const mercToGeo = (room,row,col) => {
     var min_lon = CONSTANTS.WORLD_MIN_LON;
     var max_lon = CONSTANTS.WORLD_MAX_LON;
     var lat_ts = CONSTANTS.WORLD_LAT_TS;
-    if (room == 'namerica') {
+    if (room == 'N. America') {
         zero_lat = CONSTANTS.US_ZERO_LAT;
         max_lat = CONSTANTS.US_MAX_LAT;
         min_lon = CONSTANTS.US_MIN_LON;
         max_lon = CONSTANTS.US_MAX_LON;
         lat_ts = CONSTANTS.US_LAT_TS;
     }
-    else if (room == 'euro') {
+    else if (room == 'Euerasia') {
         zero_lat = CONSTANTS.EURO_ZERO_LAT;
         max_lat = CONSTANTS.EURO_MAX_LAT;
         min_lon = CONSTANTS.EURO_MIN_LON;
@@ -60,14 +60,14 @@ const geoToMerc = (room,lat, lon) => {
     var min_lon = CONSTANTS.WORLD_MIN_LON;
     var max_lon = CONSTANTS.WORLD_MAX_LON;
     var lat_ts = CONSTANTS.WORLD_LAT_TS;
-    if (room == 'namerica') {
+    if (room == 'N. America') {
         zero_lat = CONSTANTS.US_ZERO_LAT;
         max_lat = CONSTANTS.US_MAX_LAT;
         min_lon = CONSTANTS.US_MIN_LON;
         max_lon = CONSTANTS.US_MAX_LON;
         lat_ts = CONSTANTS.US_LAT_TS;
     }
-    else if (room == 'euro') {
+    else if (room == 'Euerasia') {
         zero_lat = CONSTANTS.EURO_ZERO_LAT;
         max_lat = CONSTANTS.EURO_MAX_LAT;
         min_lon = CONSTANTS.EURO_MIN_LON;
