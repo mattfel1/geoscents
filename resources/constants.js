@@ -59,7 +59,7 @@ module.exports = {
     US: 'N. America',
     EURO: 'Eurasia',
     MAX_INACTIVE: 30, // Rounds of no click before you get booted
-    MAX_S_INACTIVE: 5, // Rounds of no click before you get booted
+    MAX_S_INACTIVE: 5*FPS, // Rounds of no click before you get booted
 
     // Chat
     MAX_GAME_HIST: 100,
