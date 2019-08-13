@@ -260,6 +260,12 @@ function postReady(rank) {
 }
 
 function postLobby() {
+    panel_ctx.clearRect(time_descrip_window['x'], time_descrip_window['y'], time_descrip_window['width'], time_descrip_window['height'])
+    panel_ctx.fillStyle = CONSTANTS.BGCOLOR;
+    panel_ctx.fillRect(time_descrip_window['x'], time_descrip_window['y'], time_descrip_window['width'], time_descrip_window['height']);    panel_ctx.font = "25px Arial";
+    panel_ctx.clearRect(timer_window['x'], timer_window['y'], timer_window['width'], timer_window['height']);
+    panel_ctx.fillRect(timer_window['x'], timer_window['y'], timer_window['width'], timer_window['height']);
+
     panel_ctx.clearRect(info_window['x'], info_window['y'], info_window['width'], info_window['height']);
     panel_ctx.fillStyle = CONSTANTS.BGCOLOR;
     panel_ctx.fillRect(info_window['x'], info_window['y'], info_window['width'], info_window['height']);
@@ -429,6 +435,10 @@ socket.on("update messages", function(room, msg){
             chatcount = chatcount - 1;
         }
     }
+});
+
+socket.on('request boot', function(id){
+   socket.emit('bootPlayer', id)
 });
 
 socket.on('moved to', (room) => {

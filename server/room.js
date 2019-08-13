@@ -6,6 +6,7 @@
 const CONSTANTS = require('../resources/constants.js');
 const Geography = require('./geography.js');
 const Player = require('./player.js');
+const global = require('./app.js')
 
 class Room {
     constructor(map) {
@@ -104,12 +105,15 @@ class Room {
           const player = this.players.get(socket.id);
           const color = player.color;
           const name = player.name;
+          const room = this.room;
           var boot_msg = "[ <font color='" + color + "'>Player " + name + " has been booted due to inactivity!</font> ]<br>";
           this.players.delete(socket.id);
           this.clients.forEach(function(s,id) {
-              s.emit('update messages', boot_msg)
+              s.emit('update messages', room, boot_msg)
           });
+          socket.emit('request boot', socket.id);
       }
+
     }
 
     playerReady(socket) {
@@ -210,11 +214,13 @@ class Room {
     bootInactive() {
         const bootPlayer = (socket) => {this.bootPlayer(socket)};
         const clients = this.clients;
+        const room = this.room;
         this.players.forEach((player, id) => {
             if (player.consecutiveRoundsInactive > CONSTANTS.MAX_INACTIVE || player.consecutiveSecondsInactive > CONSTANTS.MAX_S_INACTIVE) {
                 if (clients.has(id)) {
                     const socket = clients.get(id);
-                    socket.emit('draw booted', player.consecutiveRoundsInactive);
+                    socket.emit('draw booted', room, player.consecutiveRoundsInactive);
+                    socket.emit('update messages', room, "[ You have been booted due to inactivity! ]<br>")
                     console.log('killing! ' + id);
                     bootPlayer(socket);
                 }

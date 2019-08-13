@@ -58,8 +58,8 @@ module.exports = {
     LOBBY: 'Lobby',
     US: 'N. America',
     EURO: 'Eurasia',
-    MAX_INACTIVE: 30, // Rounds of no click before you get booted
-    MAX_S_INACTIVE: 150, // Rounds of no click before you get booted
+    MAX_INACTIVE: 15, // Rounds of no click before you get booted
+    MAX_S_INACTIVE: 300*30, // seconds * fps spent in lobby before you get booted
 
     // Chat
     MAX_GAME_HIST: 100,

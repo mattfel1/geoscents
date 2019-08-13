@@ -6,7 +6,7 @@ const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
-const PORT = 80;
+const PORT = 6001;
 const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server);
@@ -23,10 +23,10 @@ function log(payload) {
         + currentdate.getFullYear() + " @ "
         + currentdate.getHours() + ":"
         + currentdate.getMinutes() + ":";
-    fs.appendFile('/root/connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
-        if (err) throw err;
-        console.log('Saved!');
-    });
+    // fs.appendFile('/root/connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
+    //     if (err) throw err;
+    //     console.log('Saved!');
+    // });
 }
 
 app.use(morgan('dev'));
@@ -113,6 +113,11 @@ io.on('connection', (socket) => {
           const room = playerRooms.get(socket.id);
           room.playerReady(socket);
       }
+    });
+    socket.on('bootPlayer', (socketid) => {
+       if (playerRooms.has(socketid)) {
+           playerRooms.delete(socketid);
+       }
     });
     socket.on('moveTo', (dest) => {
       if (playerRooms.has(socket.id)) {
