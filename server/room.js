@@ -255,7 +255,7 @@ class Room {
        const citystring = thisTarget['string'];
        var capital = "";
        if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
-       if (thisTarget['minorcapital']) capital = "(* MINOR CAPITAL)";
+       if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
        this.clients.forEach(function(socket, socketId) {
            socket.emit('draw round', round);
            if (state == CONSTANTS.IDLE_STATE) {
@@ -380,7 +380,8 @@ class Room {
     historyRound(round, thisTarget) {
         const room = this.room;
         var star = ""
-        if (thisTarget['majorcapital'] || thisTarget['minorcapital']) star = "*";
+        if (thisTarget['majorcapital']) star = "*";
+        if (thisTarget['minorcapital']) start = "†";
         const base = "Round " + round + ": " + star + thisTarget['string'] + " (pop: " + thisTarget['pop'].toLocaleString() + ")";
         const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + this.target['name'] + "%2C+" + this.target['country'] + "&go=Go&ns0=1\">Learn!</a><br>"
         this.clients.forEach((socket,id) => {
