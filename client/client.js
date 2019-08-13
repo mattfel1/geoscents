@@ -23,6 +23,7 @@ function canvas_arrow(context, fromx, fromy, tox, toy) {
   var dx = tox - fromx;
   var dy = toy - fromy;
   var angle = Math.atan2(dy, dx);
+  context.color = 'black';
   context.lineWidth = 10;
   context.beginPath();
   context.moveTo(fromx, fromy);
