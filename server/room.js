@@ -34,6 +34,7 @@ class Room {
       this.clients.set(socket.id, socket)
       this.players.set(socket.id, player)
       this.ordinalCounter = this.ordinalCounter + 1;
+      this.sortPlayers();
       this.drawUpperPanel(socket.id);
       this.drawLowerPanel(socket.id);
       socket.emit('fresh map', this.room);
@@ -93,6 +94,8 @@ class Room {
       if (this.players.has(socket.id)) {
           this.players.delete(socket.id);
       }
+      this.sortPlayers();
+      this.drawLowerPanel(socket.id);
     }
 
     bootPlayer(socket) {
@@ -113,7 +116,8 @@ class Room {
           });
           socket.emit('request boot', socket.id);
       }
-
+      this.sortPlayers();
+      this.drawLowerPanel(socket.id);
     }
 
     playerReady(socket) {
@@ -321,8 +325,6 @@ class Room {
           this.state = CONSTANTS.LOBBY_STATE;
           this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw lobby')})})
           this.onSecond(() => this.players.forEach(function(player,id) {player.consecutiveSecondsInactive = player.consecutiveSecondsInactive + 1;}));
-          this.onSecond(() => drawLowerPanel());
-          this.onSecond(() => this.sortPlayers());
           this.bootInactive();
       }
       else {
