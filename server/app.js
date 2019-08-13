@@ -118,6 +118,7 @@ io.on('connection', (socket) => {
        if (playerRooms.has(socketid)) {
            playerRooms.delete(socketid);
        }
+       io.sockets.emit('update counts', rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
     });
     socket.on('moveTo', (dest) => {
       if (playerRooms.has(socket.id)) {
