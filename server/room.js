@@ -315,63 +315,63 @@ class Room {
           this.state = CONSTANTS.LOBBY_STATE;
           this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw lobby')})})
           this.onSecond(() => this.players.forEach(function(player,id) {player.consecutiveSecondsInactive = player.consecutiveSecondsInactive + 1;}));
+          this.onSecond(() => drawLowerPanel());
           this.bootInactive();
       }
       else {
-          this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw timer', Math.floor(((timer * 1000)) / 1000), timerColor)})})
-      }
-
-      if (this.numPlayers() == 0 && this.room != CONSTANTS.LOBBY) {
-        this.state = CONSTANTS.IDLE_STATE;
-      }
-      else if (this.numPlayers() > 0 && this.state == CONSTANTS.IDLE_STATE) {
-        this.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
-        this.round = 0;
-      }
-      else if (this.state == CONSTANTS.PREPARE_GAME_STATE) {
-          if (this.allReady() || this.timer <= 0) {
-            this.stateTransition(CONSTANTS.SETUP_STATE,0);
-            Array.from(this.players.values()).forEach((player,i)=> player.deepReset(i))
+          this.onSecond(() => {
+              this.clients.forEach(function (socket, id) {
+                  socket.emit('draw timer', Math.floor(((timer * 1000)) / 1000), timerColor)
+              })
+          })
+          if (this.numPlayers() == 0 && this.room != CONSTANTS.LOBBY) {
+              this.state = CONSTANTS.IDLE_STATE;
+          } else if (this.numPlayers() > 0 && this.state == CONSTANTS.IDLE_STATE) {
+              this.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
+              this.round = 0;
+          } else if (this.state == CONSTANTS.PREPARE_GAME_STATE) {
+              if (this.allReady() || this.timer <= 0) {
+                  this.stateTransition(CONSTANTS.SETUP_STATE, 0);
+                  Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
+              } else {
+                  this.onSecond(function () {
+                      drawUpperPanel();
+                      drawLowerPanel();
+                  });
+              }
+          } else if (this.state == CONSTANTS.SETUP_STATE) {
+              this.target = Geography.randomCity(this.room);
+              Array.from(this.players.values()).forEach((p, id) => {
+                  p.reset()
+              })
+              this.playedCities[this.round] = this.target;
+              Array.from(this.clients.values()).forEach((socket, id) => {
+                  socket.emit('fresh map', this.room)
+              })
+              this.stateTransition(CONSTANTS.GUESS_STATE, CONSTANTS.GUESS_DURATION);
+          } else if (this.state == CONSTANTS.GUESS_STATE) {
+              if (this.timer <= 0 || this.allPlayersClicked()) {
+                  this.updateScores();
+                  this.sortPlayers();
+                  if (this.round >= CONSTANTS.GAME_ROUNDS) {
+                      this.winner.wins = this.winner.wins + 1;
+                      this.historyNewGame(this.winner.name, this.winner.score, this.winner.color);
+                  }
+                  this.stateTransition(CONSTANTS.REVEAL_STATE, CONSTANTS.REVEAL_DURATION);
+              }
+          } else if (this.state == CONSTANTS.REVEAL_STATE) {
+              if (this.timer <= 0 && this.round >= CONSTANTS.GAME_ROUNDS) {
+                  this.round = 0;
+                  this.stateTransition(CONSTANTS.PREPARE_GAME_DURATION, CONSTANTS.PREPARE_GAME_DURATION)
+              } else if (this.timer <= 0) {
+                  this.round = this.round + 1;
+                  this.incrementInactive();
+                  this.bootInactive();
+                  this.stateTransition(CONSTANTS.SETUP_STATE, 0);
+              }
+          } else {
+              this.stateTransition(CONSTANTS.IDLE_STATE, 0)
           }
-          else {
-              this.onSecond(function() {
-                  drawUpperPanel();
-                  drawLowerPanel();
-              });
-          }
-      }
-      else if (this.state == CONSTANTS.SETUP_STATE) {
-        this.target = Geography.randomCity(this.room);
-        Array.from(this.players.values()).forEach((p,id) => {p.reset()})
-        this.playedCities[this.round] = this.target;
-        Array.from(this.clients.values()).forEach((socket,id) => {socket.emit('fresh map', this.room)})
-        this.stateTransition(CONSTANTS.GUESS_STATE, CONSTANTS.GUESS_DURATION);
-      }
-      else if (this.state == CONSTANTS.GUESS_STATE) {
-          if (this.timer <= 0 || this.allPlayersClicked()) {
-            this.updateScores();
-            this.sortPlayers();
-            if (this.round >= CONSTANTS.GAME_ROUNDS) {
-                this.winner.wins = this.winner.wins + 1;
-                this.historyNewGame(this.winner.name, this.winner.score, this.winner.color);
-            }
-            this.stateTransition(CONSTANTS.REVEAL_STATE, CONSTANTS.REVEAL_DURATION);
-          }
-      }
-      else if (this.state == CONSTANTS.REVEAL_STATE) {
-          if (this.timer <= 0 && this.round >= CONSTANTS.GAME_ROUNDS) {
-            this.round = 0;
-            this.stateTransition(CONSTANTS.PREPARE_GAME_DURATION, CONSTANTS.PREPARE_GAME_DURATION)
-          }
-          else if (this.timer <= 0) {
-            this.round = this.round + 1;
-            this.incrementInactive();
-            this.bootInactive();
-            this.stateTransition(CONSTANTS.SETUP_STATE,0);
-          }
-      }
-      else {
-        this.stateTransition(CONSTANTS.IDLE_STATE,0)
       }
     }
 
