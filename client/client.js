@@ -271,7 +271,7 @@ function postLobby() {
     panel_ctx.fillRect(euro_button['x'], euro_button['y'], euro_button['width'], euro_button['height']);
     panel_ctx.font = "25px Arial";
     panel_ctx.fillStyle = 'black';
-    panel_ctx.fillText('Europe  (' + euro_count + ' players)', euro_button['x'] + 5, euro_button['y'] + 28)
+    panel_ctx.fillText('Eurasia  (' + euro_count + ' players)', euro_button['x'] + 5, euro_button['y'] + 28)
 
 }
 
