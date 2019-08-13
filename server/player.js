@@ -22,6 +22,7 @@ class Player {
         this.ready = false;
         this.wins = 0;
         this.consecutiveRoundsInactive = 0;
+        this.consecutiveSecondsInactive = 0;
         this.room = room;
 
         // Override values based on info map

@@ -159,7 +159,7 @@ io.on('connection', (socket) => {
               };
               var new_sent_msg = msg;
               CONSTANTS.PROFANITY.forEach((word) => {new_sent_msg = replaceAll(new_sent_msg, word, "****")});
-              const sent_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>Player " + room.getPlayerName(socket) + "</font> ]: " + new_sent_msg + "<br>";
+              const sent_msg = "[ " + room.room + " <font color='" + room.getPlayerColor(socket) + "'>Player " + room.getPlayerName(socket) + "</font> ]: " + new_sent_msg + "<br>";
               // if (msg.length > CONSTANTS.MAX_MSG) {
               // 	msg = msg.substring(0, CONSTANTS.MAX_MSG)
               // }

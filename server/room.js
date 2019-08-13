@@ -310,13 +310,17 @@ class Room {
       else if (this.state == CONSTANTS.REVEAL_STATE) {
           timerColor = CONSTANTS.REVEAL_COLOR;
       }
-      this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw timer', Math.floor(((timer * 1000)) / 1000), timerColor)})})
       this.decrementTimer();
       if (this.room == CONSTANTS.LOBBY) {
           this.state = CONSTANTS.LOBBY_STATE;
-          this.timer = 0;
           this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw lobby')})})
+          this.onSecond( => this.players.forEach(function(player,id) => {player.consecutiveSecondsInactive = player.consecutiveSecondsInactive + 1;}));
+          this.bootInactive();
       }
+      else {
+          this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw timer', Math.floor(((timer * 1000)) / 1000), timerColor)})})
+      }
+
       else if (this.numPlayers() == 0) {
         this.state = CONSTANTS.IDLE_STATE;
       }
@@ -362,7 +366,7 @@ class Room {
           else if (this.timer <= 0) {
             this.round = this.round + 1;
             this.incrementInactive();
-            this.bootInactive()
+            this.bootInactive();
             this.stateTransition(CONSTANTS.SETUP_STATE,0);
           }
       }
