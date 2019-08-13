@@ -322,6 +322,7 @@ class Room {
           this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw lobby')})})
           this.onSecond(() => this.players.forEach(function(player,id) {player.consecutiveSecondsInactive = player.consecutiveSecondsInactive + 1;}));
           this.onSecond(() => drawLowerPanel());
+          this.onSecond(() => this.sortPlayers();)
           this.bootInactive();
       }
       else {
