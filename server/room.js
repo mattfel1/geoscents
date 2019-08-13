@@ -381,7 +381,7 @@ class Room {
         const room = this.room;
         var star = ""
         if (thisTarget['majorcapital']) star = "*";
-        if (thisTarget['minorcapital']) start = "†";
+        if (thisTarget['minorcapital']) star = "†";
         const base = "Round " + round + ": " + star + thisTarget['string'] + " (pop: " + thisTarget['pop'].toLocaleString() + ")";
         const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + this.target['name'] + "%2C+" + this.target['country'] + "&go=Go&ns0=1\">Learn!</a><br>"
         this.clients.forEach((socket,id) => {
