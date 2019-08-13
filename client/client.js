@@ -13,29 +13,98 @@ const CONSTANTS = require('../resources/constants.js')
 socket.emit('newPlayer');
 var chatcount = 0;
 var histcount = 0;
+var myRoom = 'lobby';
+var us_count = 0;
+var world_count = 0;
+var euro_count = 0;
 
-/** MAP HANDLING */
-const drawMap = () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  var img = new Image()
-  img.onload = function () {
-    ctx.drawImage(img, 0, 0)
-  };
-  img.src = "/resources/map.png"
+function canvas_arrow(context, fromx, fromy, tox, toy) {
+  var headlen = 50; // length of head in pixels
+  var dx = tox - fromx;
+  var dy = toy - fromy;
+  var angle = Math.atan2(dy, dx);
+  context.lineWidth = 10;
+  context.beginPath();
+  context.moveTo(fromx, fromy);
+  context.lineTo(tox, toy);
+  context.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+  context.moveTo(tox, toy);
+  context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+  context.stroke();
+  context.closePath()
 }
 
-socket.on('fresh map', (gameState) => drawMap(gameState))
+/** MAP HANDLING */
+const drawMap = (room) => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (room == 'lobby'){
+    // Banner message
+    ctx.fillStyle = 'cyan';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.font = "50px Arial";
+    ctx.fillStyle = 'black';
+    ctx.fillText('Welcome to GeoScents!', 5, 50);
+    ctx.fillText('Locate cities as quickly and accurately as possible!',100,110);
+
+
+    // Instructions
+    ctx.font = "35px Arial";
+    ctx.fillStyle = 'black';
+    ctx.fillText('Choose a map to play on and the', 700, 310);
+    ctx.fillText('target cities will show up here', 700, 350);
+    canvas_arrow(ctx, 1200, 340, 1350, 220);
+
+    ctx.fillText('See how everyone did and', 800, 590);
+    ctx.fillText('learn about the cities here', 800, 625);
+    canvas_arrow(ctx, 1100, 650, 1300, 800);
+
+
+    ctx.fillText('Discuss here', 100, 610);
+    canvas_arrow(ctx, 200, 650, 200, 800);
+
+  }
+  else if (room == 'world'){
+      var img = new Image()
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0)
+      };
+      img.src = "/resources/world.png"
+  }
+  else if (room == 'namerica'){
+      var img = new Image()
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0)
+      };
+      img.src = "/resources/us.png"
+  }
+  else if (room == 'euro'){
+      var img = new Image()
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0)
+      };
+      img.src = "/resources/euro.png"
+  }
+
+}
+
+socket.on('update counts', (w,u,e) => {
+   world_count = w;
+   us_count = u;
+   euro_count = e;
+});
+
+socket.on('fresh map', (room) => drawMap(room))
 
 socket.on('draw point', (coords, color) => {
-  ctx.beginPath()
+  ctx.beginPath();
   ctx.arc(coords['col'] - CONSTANTS.POINT_RADIUS/2, coords['row'] - CONSTANTS.POINT_RADIUS/2, CONSTANTS.POINT_RADIUS,0, 2 * Math.PI);
   ctx.fillStyle = color;
   ctx.fill();
-  ctx.closePath()
-  ctx.beginPath()
+  ctx.closePath();
+  ctx.beginPath();
   ctx.arc(coords['col'] - CONSTANTS.POINT_RADIUS/2, coords['row'] - CONSTANTS.POINT_RADIUS/2, CONSTANTS.BUBBLE_RADIUS, 0, 2*Math.PI, false);
   ctx.lineWidth = CONSTANTS.BUBBLE_WIDTH;
-  ctx.strokeStyle = color
+  ctx.strokeStyle = color;
   ctx.stroke();
   ctx.closePath()
 });
@@ -97,10 +166,34 @@ const ready_button = {
     width:215,
     height:50
 };
+const world_button = {
+    x:20,
+    y:80,
+    width:270,
+    height:50
+};
+const us_button = {
+    x:20,
+    y:140,
+    width:270,
+    height:50
+};
+const euro_button = {
+    x:20,
+    y:200,
+    width:270,
+    height:50
+};
 const timer_window = {
     x: 10,
     y: 5,
     width: 50,
+    height: 50
+};
+const lobby_button = {
+    x: 400,
+    y: 210,
+    width: 170,
     height: 50
 };
 const round_window = {
@@ -113,7 +206,7 @@ const info_window = {
     x: 20,
     y: 80,
     width: 600,
-    height: 152
+    height: 180
 }
 const time_descrip_window = {
     x: 70,
@@ -157,17 +250,41 @@ function postReady(rank) {
     panel_ctx.fillText("RDY", scoreboard_window['x'] + 5, scoreboard_window['y'] + 85 + rank * 40 )
 }
 
+function postLobby() {
+    panel_ctx.clearRect(info_window['x'], info_window['y'], info_window['width'], info_window['height']);
+    panel_ctx.fillStyle = CONSTANTS.BGCOLOR;
+    panel_ctx.fillRect(info_window['x'], info_window['y'], info_window['width'], info_window['height']);
+
+    panel_ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
+    panel_ctx.fillRect(world_button['x'], world_button['y'], world_button['width'], world_button['height']);
+    panel_ctx.font = "25px Arial";
+    panel_ctx.fillStyle = 'black';
+    panel_ctx.fillText('World  (' + world_count + ' players)', world_button['x'] + 5, world_button['y'] + 28)
+
+    panel_ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
+    panel_ctx.fillRect(us_button['x'], us_button['y'], us_button['width'], us_button['height']);
+    panel_ctx.font = "25px Arial";
+    panel_ctx.fillStyle = 'black';
+    panel_ctx.fillText('N. America  (' + us_count + ' players)', us_button['x'] + 5, us_button['y'] + 28)
+
+    panel_ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
+    panel_ctx.fillRect(euro_button['x'], euro_button['y'], euro_button['width'], euro_button['height']);
+    panel_ctx.font = "25px Arial";
+    panel_ctx.fillStyle = 'black';
+    panel_ctx.fillText('Europe  (' + euro_count + ' players)', euro_button['x'] + 5, euro_button['y'] + 28)
+
+}
 
 function postInfo(info1, info2, button, capital) {
     panel_ctx.clearRect(info_window['x'], info_window['y'], info_window['width'], info_window['height']);
     panel_ctx.fillStyle = CONSTANTS.BGCOLOR;
     panel_ctx.fillRect(info_window['x'], info_window['y'], info_window['width'], info_window['height']);
 
-    panel_ctx.font = "35px Arial";
+    panel_ctx.font = "30px Arial";
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText(info1, info_window['x'] + 5, info_window['y'] + 28)
 
-    panel_ctx.font = "35px Arial";
+    panel_ctx.font = "30px Arial";
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText(info2, info_window['x'] + 5, info_window['y'] + 86)
 
@@ -193,6 +310,14 @@ socket.on('clear scores', () => {
     panel_ctx.font = "35px Arial";
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText("Scoreboard:", scoreboard_window['x'] + 5, scoreboard_window['y'] + 45)
+
+    if (myRoom != 'lobby') {
+        panel_ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
+        panel_ctx.fillRect(lobby_button['x'], lobby_button['y'], lobby_button['width'], lobby_button['height']);
+        panel_ctx.font = "25px Arial";
+        panel_ctx.fillStyle = 'black';
+        panel_ctx.fillText('Back to Lobby', lobby_button['x'] + 5, lobby_button['y'] + 28)
+    }
 });
 socket.on('post score', (rank, name, color, score, wins, you) => {
     postScore(rank,name,color,score, wins, you)
@@ -208,6 +333,8 @@ socket.on('draw round', (round) => {
     panel_ctx.font = "25px Arial";
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText('Round ' + round + '/' + CONSTANTS.GAME_ROUNDS, round_window['x']+2,round_window['y'] + 25);
+
+
 })
 
 socket.on('draw timer', (time,color) => {
@@ -221,6 +348,10 @@ socket.on('draw prepare', () => {
 
 socket.on('draw booted', (roundsDead) => {
     postInfo("You have been booted!", "Please refresh to rejoin",false, "(you spent " + roundsDead + " consecutive rounds inactive)");
+});
+
+socket.on('draw lobby', () => {
+    postLobby();
 });
 
 socket.on('draw idle', () => {
@@ -237,10 +368,23 @@ socket.on('draw reveal city', (city, capital) => {
     postTimeDescrip("seconds until next round")
 });
 
+
 panel.addEventListener('click', function(evt) {
     var mousePos = getMousePosInPanel(panel, evt);
-    if (isInside(mousePos,ready_button)) {
+    if (isInside(mousePos,ready_button) && myRoom != 'lobby') {
         socket.emit('playerReady')
+    }
+    if (isInside(mousePos,lobby_button) && myRoom != 'lobby') {
+        socket.emit('moveTo', 'lobby')
+    }
+    else if (isInside(mousePos,world_button) && myRoom == 'lobby') {
+        socket.emit('moveTo', 'world')
+    }
+    else if (isInside(mousePos,us_button) && myRoom == 'lobby') {
+        socket.emit('moveTo', 'namerica')
+    }
+    else if (isInside(mousePos,euro_button) && myRoom == 'lobby') {
+        socket.emit('moveTo', 'euro')
     }
 }, false);
 
@@ -260,35 +404,45 @@ function isInside(pos, rect){
 //
 
 /** HISTORY WINDOW HANDLING */
-socket.on("update messages", function(msg){
-    var final_message = $("<font style=\"font-size:20px;\" />").html(msg);
-   $("#history").prepend(final_message);
-   chatcount = chatcount + 1;
-   if (chatcount > CONSTANTS.MAX_CHAT_HIST) {
-       $("#history").children().last().remove();
-       chatcount = chatcount - 1;
-   }
+socket.on("update messages", function(room, msg){
+    if (room == myRoom) {
+        var final_message = $("<font style=\"font-size:20px;\" />").html(msg);
+        $("#history").prepend(final_message);
+        chatcount = chatcount + 1;
+        if (chatcount > CONSTANTS.MAX_CHAT_HIST) {
+            $("#history").children().last().remove();
+            chatcount = chatcount - 1;
+        }
+    }
 });
 
+socket.on('moved to', (room) => {
+    myRoom = room;
+});
 
-socket.on('break history', (winner, score, color) => {
-   var assembled = "<br>******* WINNER: <font color=\"" + color + "\">Player " + winner + " (" + score + " points)</font> *******<br>"
-   var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
-   $("#gamehist").prepend(" ");
-   $("#gamehist").prepend(final_message);
-   histcount = histcount + 1;
-   if (histcount > CONSTANTS.MAX_GAME_HIST) {
-       $("#gamehist").children().last().remove();
-       histcount = histcount - 1;
-   }});
-socket.on('add history', (payload) => {
-   var assembled = payload;
-   var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
-   $("#gamehist").prepend(final_message);
-   histcount = histcount + 1;
-   if (histcount > CONSTANTS.MAX_GAME_HIST) {
-       $("#gamehist").children().last().remove();
-       histcount = histcount - 1;
-   }
+socket.on('break history', (room, winner, score, color) => {
+    if (room == myRoom) {
+        var assembled = "<br>******* WINNER: <font color=\"" + color + "\">Player " + winner + " (" + score + " points)</font> *******<br>"
+        var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
+        $("#gamehist").prepend(" ");
+        $("#gamehist").prepend(final_message);
+        histcount = histcount + 1;
+        if (histcount > CONSTANTS.MAX_GAME_HIST) {
+            $("#gamehist").children().last().remove();
+            histcount = histcount - 1;
+        }
+    }
+});
+socket.on('add history', (room, payload) => {
+    if (room == myRoom) {
+        var assembled = payload;
+        var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
+        $("#gamehist").prepend(final_message);
+        histcount = histcount + 1;
+        if (histcount > CONSTANTS.MAX_GAME_HIST) {
+            $("#gamehist").children().last().remove();
+            histcount = histcount - 1;
+        }
+    }
 });
 

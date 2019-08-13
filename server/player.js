@@ -4,7 +4,7 @@
 const CONSTANTS = require('../resources/constants.js');
 
 class Player {
-    constructor(socketid, rank, ip, ordinalid, name) {
+    constructor(socketid, rank, room, ip, ordinalid, name, info) {
         this.row = 0;
 		this.col = 0;
 		this.width = 5;
@@ -22,6 +22,14 @@ class Player {
         this.ready = false;
         this.wins = 0;
         this.consecutiveRoundsInactive = 0;
+        this.room = room;
+
+        // Override values based on info map
+		if (info['moved']) {
+			this.color = info['color'];
+			this.wins = info['wins'];
+			this.name = info['name'];
+		}
     }
 
     reset() {

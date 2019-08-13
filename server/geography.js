@@ -1,10 +1,17 @@
 /**
  * Class for storing all geography methods
  */
-const CITIES = require('../resources/cities.js').CITIES;
+const WORLDCITIES = require('../resources/worldcities.js').CITIES;
+const USCITIES = require('../resources/uscities.js').CITIES;
+const EUROCITIES = require('../resources/eurocities.js').CITIES;
 const CONSTANTS = require('../resources/constants.js');
 
-const randomCity = () => {return CITIES[Math.floor(Math.random()*CITIES.length)];};
+const randomCity = (room) => {
+    if (room == 'world') return WORLDCITIES[Math.floor(Math.random()*WORLDCITIES.length)];
+    else if (room == 'namerica') return USCITIES[Math.floor(Math.random()*USCITIES.length)];
+    else if (room == 'euro') return EUROCITIES[Math.floor(Math.random()*EUROCITIES.length)];
+    else return WORLDCITIES[Math.floor(Math.random()*WORLDCITIES.length)];
+};
 
 const mercDist = (row1,col1,row2,col2) => {
     const row_err = Math.pow(row1-row2,2);
@@ -20,23 +27,63 @@ const geoDist = (lat1,lon1,lat2,lon2) => {
 	return dist
 };
 
-const mercToGeo = (row,col) => {
-    var eqMin = Math.atanh(Math.sin(CONSTANTS.ZERO_LAT));
-    var eqRange = Math.atanh(Math.sin(CONSTANTS.MAX_LAT)) - eqMin;
-	var lon = ((col)*360/CONSTANTS.MAP_WIDTH) - 180;
-    var lat = Math.asin(Math.tanh((row*eqRange/CONSTANTS.MAP_HEIGHT) + eqMin)) * 180 / Math.PI;
+const mercToGeo = (room,row,col) => {
+    var zero_lat = CONSTANTS.WORLD_ZERO_LAT;
+    var max_lat = CONSTANTS.WORLD_MAX_LAT;
+    var min_lon = CONSTANTS.WORLD_MIN_LON;
+    var max_lon = CONSTANTS.WORLD_MAX_LON;
+    var lat_ts = CONSTANTS.WORLD_LAT_TS;
+    if (room == 'namerica') {
+        zero_lat = CONSTANTS.US_ZERO_LAT;
+        max_lat = CONSTANTS.US_MAX_LAT;
+        min_lon = CONSTANTS.US_MIN_LON;
+        max_lon = CONSTANTS.US_MAX_LON;
+        lat_ts = CONSTANTS.US_LAT_TS;
+    }
+    else if (room == 'euro') {
+        zero_lat = CONSTANTS.EURO_ZERO_LAT;
+        max_lat = CONSTANTS.EURO_MAX_LAT;
+        min_lon = CONSTANTS.EURO_MIN_LON;
+        max_lon = CONSTANTS.EURO_MAX_LON;
+        lat_ts = CONSTANTS.EURO_LAT_TS;
+    }
+    const eqMin = Math.atanh(Math.sin(zero_lat));
+    const eqRange = Math.atanh(Math.sin(max_lat)) - eqMin;
+	const lon = ((col)*(max_lon-min_lon)/CONSTANTS.MAP_WIDTH) + min_lon;
+    const lat = Math.asin(Math.tanh(((row)*eqRange/CONSTANTS.MAP_HEIGHT) + eqMin)) * 180 / Math.PI;
 	return {'lat': lat, 'lon': lon}
 };
 
-const geoToMerc = (lat, lon) => {
+const geoToMerc = (room,lat, lon) => {
+    var zero_lat = CONSTANTS.WORLD_ZERO_LAT;
+    var max_lat = CONSTANTS.WORLD_MAX_LAT;
+    var min_lon = CONSTANTS.WORLD_MIN_LON;
+    var max_lon = CONSTANTS.WORLD_MAX_LON;
+    var lat_ts = CONSTANTS.WORLD_LAT_TS;
+    if (room == 'namerica') {
+        zero_lat = CONSTANTS.US_ZERO_LAT;
+        max_lat = CONSTANTS.US_MAX_LAT;
+        min_lon = CONSTANTS.US_MIN_LON;
+        max_lon = CONSTANTS.US_MAX_LON;
+        lat_ts = CONSTANTS.US_LAT_TS;
+    }
+    else if (room == 'euro') {
+        zero_lat = CONSTANTS.EURO_ZERO_LAT;
+        max_lat = CONSTANTS.EURO_MAX_LAT;
+        min_lon = CONSTANTS.EURO_MIN_LON;
+        max_lon = CONSTANTS.EURO_MAX_LON;
+        lat_ts = CONSTANTS.EURO_LAT_TS;
+    }
 	// get col value
-	var col = (parseFloat(lon)+180)*(CONSTANTS.MAP_WIDTH/360);
+	const col = (parseFloat(lon)-min_lon)*(CONSTANTS.MAP_WIDTH/(max_lon - min_lon));
 	// convert from degrees to radians
-	var latRad = parseFloat(lat)*Math.PI/180;
-    var eqMin = Math.atanh(Math.sin(CONSTANTS.ZERO_LAT));
-    var eqRange = Math.atanh(Math.sin(CONSTANTS.MAX_LAT)) - eqMin;
+	const latRad = (parseFloat(lat))*Math.PI/180;
+
+    const eqMin = Math.atanh(Math.sin(zero_lat));
+    const eqRange = Math.atanh(Math.sin(max_lat)) - eqMin;
+
 	// get row value
-	var row = (CONSTANTS.MAP_HEIGHT/eqRange) * (Math.atanh(Math.sin(latRad)) - eqMin);
+	const row = (CONSTANTS.MAP_HEIGHT/eqRange) * (Math.atanh(Math.sin(latRad)) - eqMin);
 	return {'row': row, 'col': col}
 };
 

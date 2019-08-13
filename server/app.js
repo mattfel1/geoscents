@@ -32,8 +32,14 @@ app.get('/', (req, res, next) => {
 //  3) Take top 1000 cities
 //  4) xlsx -> csv (https://www.zamzar.com/convert/xlsx-to-csv/)
 //  5) csv -> json (https://csvjson.com/csv2json)
-app.get('/resources/map.png', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', 'resources/map.png'));
+app.get('/resources/world.png', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '..', 'resources/world.png'));
+});
+app.get('/resources/us.png', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '..', 'resources/us.png'));
+});
+app.get('/resources/euro.png', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '..', 'resources/euro.png'));
 });
 
 app.use((req, res, next) => {
@@ -52,10 +58,17 @@ server.listen(PORT, () => {
 });
 
 // Game state info
-const room = new Room(4, 0);
-const WELCOME_MESSAGE1 = "Welcome to GeoScents, an unabashed attempt at recreating the geosense.net game from the mid 2000s. " +
-	"Try to click the locations of the given city as quickly and accurately as possible!  If you are enjoying " +
-	"this game, consider donating to keep the server running!  Feel free to play with the code on github and make pull requests or post issues.";
+const rooms = {
+    'world': new Room('world'),
+    'namerica': new Room('namerica'),
+    'euro': new Room('euro'),
+    'lobby': new Room('lobby')
+};
+var playerRooms = new Map();
+
+const WELCOME_MESSAGE1 = 'This is an unabashed attempt at recreating the similarly-named game, Geosense (geosense.net), from the mid 2000s. ' +
+                          'If you are enjoying this game, consider donating at the bottom of the page to help keep the server' +
+                          'running!  Feel free to play with the code on github and make pull requests if you want.';
 
 function log(payload) {
     const currentdate = new Date();
@@ -73,39 +86,81 @@ function log(payload) {
 io.on('connection', (socket) => {
 	console.log('a user connected:', socket.id);
 	socket.on('newPlayer', () => {
-	  room.addPlayer(socket)
+	  rooms['lobby'].addPlayer(socket, {'moved': false});
+      playerRooms.set(socket.id, rooms['lobby']);
       log("User connected    " + socket.handshake.address + ", " + socket.id)
-	  socket.emit("update messages", WELCOME_MESSAGE1);
-      var join_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>Player " + room.getPlayerName(socket) + " has joined!</font> ]<br>";
-      io.sockets.emit("update messages", join_msg)
+	  socket.emit("update messages", 'lobby', WELCOME_MESSAGE1);
+      var join_msg = "[ <font color='" + rooms['lobby'].getPlayerColor(socket) + "'>Player " + rooms['lobby'].getPlayerName(socket) + " has entered the lobby!</font> ]<br>";
+      io.sockets.emit("update messages", 'lobby', join_msg)
+      io.sockets.emit('update counts', rooms['world'].playerCount(),rooms['namerica'].playerCount(),rooms['euro'].playerCount());
 	});
 	socket.on('disconnect', function() {
-      log("User disconnected " + socket.handshake.address + ", " + socket.id)
-      var leave_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>Player " + room.getPlayerName(socket) + " has left!</font> ]<br>";
-      io.sockets.emit("update messages", leave_msg)
-	  room.killPlayer(socket)
+      if (playerRooms.has(socket.id)) {
+          const room = playerRooms.get(socket.id);
+          log("User disconnected " + socket.handshake.address + ", " + socket.id)
+          var leave_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>Player " + room.getPlayerName(socket) + " has left " + room.room + "!</font> ]<br>";
+          io.sockets.emit("update messages", room.room, leave_msg);
+          room.killPlayer(socket)
+          io.sockets.emit('update counts', rooms['world'].playerCount(),rooms['namerica'].playerCount(),rooms['euro'].playerCount());
+      }
 	});
     socket.on('playerReady', () => {
-	  room.playerReady(socket);
-    })
+      if (playerRooms.has(socket.id)) {
+          const room = playerRooms.get(socket.id);
+          room.playerReady(socket);
+      }
+    });
+    socket.on('moveTo', (dest) => {
+      if (playerRooms.has(socket.id)) {
+          const room = playerRooms.get(socket.id);
+          const origin = room.room;
+          const oldColor = rooms[origin].getPlayerColor(socket);
+          const oldName = rooms[origin].getPlayerName(socket);
+          const oldWins = rooms[origin].getPlayerWins(socket);
+          const info = {
+              'moved': true,
+              'color': oldColor,
+              'name': oldName,
+              'wins': oldWins
+          }
+          var leave_msg = "[ <font color='" + rooms[origin].getPlayerColor(socket) + "'>Player " + rooms[origin].getPlayerName(socket) + " has left " + origin + " and joined " + dest + "!</font> ]<br>";
+          io.sockets.emit("update messages", origin, leave_msg)
+          rooms[origin].killPlayer(socket);
+          rooms[dest].addPlayer(socket, info);
+          playerRooms.set(socket.id, rooms[dest]);
+          socket.emit('moved to', dest);
+          var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'>Player " + rooms[dest].getPlayerName(socket) + " has joined " + dest + "!</font> ]<br>";
+          io.sockets.emit("update messages", dest, join_msg)
+          io.sockets.emit('update counts', rooms['world'].playerCount(),rooms['namerica'].playerCount(),rooms['euro'].playerCount());
+      }
+    });
 	socket.on('playerClick', (playerClick) => {
-	  room.playerClicked(socket, playerClick)
-	})
+      if (playerRooms.has(socket.id)) {
+          const room = playerRooms.get(socket.id);
+          room.playerClicked(socket, playerClick)
+      }
+	});
     socket.on("send message", function(sent_msg, callback) {
-    	//TODO: Why is this socket.id different from the socket.id used to create player?  Will just use ip address for now...
-        sent_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>Player " + room.getPlayerName(socket) + "</font> ]: " + sent_msg + "<br>";
-        // if (sent_msg.length > CONSTANTS.MAX_MSG) {
-        // 	sent_msg = sent_msg.substring(0, CONSTANTS.MAX_MSG)
-		// }
-        log("Message passed by " + socket.handshake.address + " " + socket + ": " + sent_msg)
-        io.sockets.emit("update messages", sent_msg);
-        callback();
+      const msg = sent_msg;
+      const cb = () => {callback()};
+      Object.values(rooms).forEach(function(room) {
+          if (room.getPlayerByIp(socket.handshake.address)['numMatch'] > 0) {
+              //TODO: Why is this socket.id different from the socket.id used to create player?  Will just use ip address for now...
+              const sent_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>Player " + room.getPlayerName(socket) + "</font> ]: " + msg + "<br>";
+              // if (msg.length > CONSTANTS.MAX_MSG) {
+              // 	msg = msg.substring(0, CONSTANTS.MAX_MSG)
+              // }
+              log("Message passed by " + socket.handshake.address + " " + socket.id + ": " + sent_msg)
+              io.sockets.emit("update messages", room.room, sent_msg);
+              cb();
+          }
+      });
     });
 });
 
 // Handle rooms
 setInterval(() => {
-    room.fsm();
+    Object.values(rooms).forEach((room) => room.fsm());
 }, 1000 / CONSTANTS.FPS);
 
 module.exports = io;

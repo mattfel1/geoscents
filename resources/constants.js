@@ -1,7 +1,7 @@
 module.exports = {
 
     // Players
-    COLORS: ['#1f77b4','#2ca02c','#d62728','#9467bd','#8c564b','#e377c2','#7f7f7f','#bcbd22','#17becf', 'blue', 'green', 'red', 'magenta', 'black'],
+    COLORS: ['#1f77b4','#2ca02c','#9cd69f','#9467bd','#8c564b','#e377c2','#7f7f7f','#bcbd22','#17becf', 'blue', 'green', 'red', 'magenta', 'black'],
     TRUTH_COLOR: 'white',
 
     // Map and Panel
@@ -9,8 +9,21 @@ module.exports = {
     MAP_HEIGHT: 824,
     PANEL_WIDTH: 600,
     PANEL_HEIGHT: 824,
-    ZERO_LAT: 77.0*Math.PI/180, // Latitude of top edge of map
-    MAX_LAT: -65.0*Math.PI/180, // Latitude of bottom edge of map
+    WORLD_ZERO_LAT: 77.0*Math.PI/180, // Latitude of top edge of map
+    WORLD_MAX_LAT: -65.0*Math.PI/180, // Latitude of bottom edge of map
+    WORLD_MIN_LON: -180, // Latitude of top edge of map
+    WORLD_MAX_LON: 180, // Latitude of bottom edge of map
+    WORLD_LAT_TS: 6,
+    US_ZERO_LAT: 53.0*Math.PI/180, // Latitude of top edge of map
+    US_MAX_LAT: 20.0*Math.PI/180, // Latitude of bottom edge of map
+    US_MIN_LON: -130.0, // Latitude of top edge of map
+    US_MAX_LON: -58.0, // Latitude of bottom edge of map    US_LAT_TS: 0,
+    US_LAT_TS: 36,
+    EURO_ZERO_LAT: 69.0*Math.PI/180, // Latitude of top edge of map
+    EURO_MAX_LAT: 32.0*Math.PI/180, // Latitude of bottom edge of map
+    EURO_MIN_LON: -31, // Latitude of top edge of map
+    EURO_MAX_LON: 75, // Latitude of bottom edge of map    euro_LAT_TS: 0,
+    EURO_LAT_TS: 50,
 
     // FSM
     REVEAL_STATE: 'reveal',
@@ -22,12 +35,14 @@ module.exports = {
     PREPARE_GAME_STATE: 'prepare',
     PREPARE_GAME_DURATION: 45,
     ASK_READY_STATE: 'askready',
+    LOBBY_STATE: 'lobby',
     SCROLL_THRESHOLD: 25, // Number of frames mobile user can press for that distinguishes a "click" from a "scroll"
 
 
     // Visuals and score
     BGCOLOR: "#E6E6FA",
     LOBBY_COLOR: "#e3e4e6",
+    MAP_BUTTON_COLOR: "#9CD69F",
     GUESS_COLOR: '#17eb5e',
     REVEAL_COLOR: '#ffad99',
     SCORE_SCALE: 10000,
@@ -38,7 +53,7 @@ module.exports = {
 
     // Rooms
     GAME_ROUNDS: 10,
-    ROOM_CAPACITES: [6, 6, 6, 4, 4, 4, 2, 2, 2],
+    ROOMS: ['world', 'namerica', 'europe', 'lobby'],
     MAX_INACTIVE: 30, // Rounds of no click before you get booted
 
     // Chat
