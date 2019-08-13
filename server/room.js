@@ -321,7 +321,7 @@ class Room {
           this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw timer', Math.floor(((timer * 1000)) / 1000), timerColor)})})
       }
 
-      else if (this.numPlayers() == 0) {
+      if (this.numPlayers() == 0 && this.room != CONSTANTS.LOBBY) {
         this.state = CONSTANTS.IDLE_STATE;
       }
       else if (this.numPlayers() > 0 && this.state == CONSTANTS.IDLE_STATE) {
