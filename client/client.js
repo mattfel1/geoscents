@@ -362,7 +362,7 @@ socket.on('draw prepare', () => {
 });
 
 socket.on('draw booted', (roundsDead) => {
-    postInfo("You have been booted!", "Please refresh to rejoin",false, "(you spent " + roundsDead + " consecutive rounds inactive)");
+    postInfo("You have been booted due to inactivity!", "Please refresh to rejoin",false, "");
 });
 
 socket.on('draw lobby', () => {
