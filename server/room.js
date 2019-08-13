@@ -211,7 +211,7 @@ class Room {
         const bootPlayer = (socket) => {this.bootPlayer(socket)};
         const clients = this.clients;
         this.players.forEach((player, id) => {
-            if (player.consecutiveRoundsInactive > CONSTANTS.MAX_INACTIVE) {
+            if (player.consecutiveRoundsInactive > CONSTANTS.MAX_INACTIVE || player.consecutiveSecondsInactive > CONSTANTS.MAX_S_INACTIVE) {
                 if (clients.has(id)) {
                     const socket = clients.get(id);
                     socket.emit('draw booted', player.consecutiveRoundsInactive);
@@ -314,7 +314,7 @@ class Room {
       if (this.room == CONSTANTS.LOBBY) {
           this.state = CONSTANTS.LOBBY_STATE;
           this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw lobby')})})
-          this.onSecond( => this.players.forEach(function(player,id) => {player.consecutiveSecondsInactive = player.consecutiveSecondsInactive + 1;}));
+          this.onSecond( => this.players.forEach(function(player,id) {player.consecutiveSecondsInactive = player.consecutiveSecondsInactive + 1;}));
           this.bootInactive();
       }
       else {
