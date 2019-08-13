@@ -1,7 +1,7 @@
 from mpl_toolkits.basemap import Basemap
 import numpy as np
 import matplotlib.pyplot as plt
-plt.figure(figsize=(14,8.24))
+plt.figure(figsize=(13.5,7.94))
 plt.subplots_adjust(left=0.0, right=1.0, top=1.0, bottom=0)
 # llcrnrlat,llcrnrlon,urcrnrlat,urcrnrlon
 # are the lat/lon values of the lower left and upper right corners

@@ -53,16 +53,16 @@ const drawMap = (room) => {
     ctx.fillStyle = 'black';
     ctx.fillText('Choose a map to play on and the', 700, 310);
     ctx.fillText('target cities will show up here', 700, 350);
-    canvas_arrow(ctx, 1200, 340, 1350, 220);
+    canvas_arrow(ctx, 1200, 340, canvas.width - 20, 220);
 
     ctx.fillText('See how everyone did and', 800, 590);
     ctx.fillText('learn about the cities here', 800, 625);
-    canvas_arrow(ctx, 1100, 650, 1300, 800);
+    canvas_arrow(ctx, 1100, 650, canvas.width - 70, canvas.height - 20);
 
     ctx.fillText('Map will appear in this box', 100, 310);
 
     ctx.fillText('Discuss here', 100, 610);
-    canvas_arrow(ctx, 200, 650, 200, 800);
+    canvas_arrow(ctx, 200, 650, 200, canvas.height-20);
 
   }
   else if (room == CONSTANTS.WORLD){
@@ -161,54 +161,61 @@ document.addEventListener("touchend", touchUpHandler, false);
 /** PANEL HANDLING */
 const panel = window.document.getElementById('panel');
 const panel_ctx = panel.getContext('2d');
-
+const info_x = panel.width*20/600;
+const buttons_height = panel.height*50/824;
+const buttons_width = panel.width*275/600;
+const buttons_font = buttons_height*0.5;
+const buttons_spacing = 5;
+const info_big_font = panel.height*30/824;
+const info_little_font = panel.height*20/824;
+const info_spacing = info_big_font + 10;
 const ready_button = {
-    x:90,
-    y:150,
-    width:215,
-    height:50
+    x:info_x,
+    y:80 + buttons_height + buttons_spacing,
+    width:buttons_width,
+    height:buttons_height
 };
 const world_button = {
-    x:20,
+    x:info_x,
     y:80,
-    width:270,
-    height:50
+    width:buttons_width,
+    height:buttons_height
 };
 const us_button = {
-    x:20,
-    y:140,
-    width:270,
-    height:50
+    x:info_x,
+    y:80 + buttons_height + buttons_spacing,
+    width:buttons_width,
+    height:buttons_height
 };
 const euro_button = {
-    x:20,
-    y:200,
-    width:270,
-    height:50
+    x:info_x,
+    y:80 + 2*(buttons_height + buttons_spacing),
+    width:buttons_width,
+    height:buttons_height
 };
 const timer_window = {
     x: 10,
     y: 5,
-    width: 50,
-    height: 50
+    width: buttons_height,
+    height: buttons_height
 };
 const lobby_button = {
-    x: 400,
-    y: 210,
-    width: 170,
-    height: 50
+    x: panel.width*400/600,
+    y: panel.height*210/824,
+    width: panel.width*175/600,
+    height: buttons_height
 };
 const round_window = {
-    x: 450,
+    x: panel.width*440/600,
     y: 40,
-    width: 160,
+    width: (panel.width-30)*160/600,
     height: 40
 };
 const info_window = {
-    x: 20,
+    x: info_x,
     y: 80,
-    width: 600,
-    height: 180
+    width: panel.width - 30,
+    height: panel.height*180/824
 }
 const time_descrip_window = {
     x: 70,
@@ -219,7 +226,7 @@ const time_descrip_window = {
 const scoreboard_window = {
     x: 0,
     y: panel.height/3,
-    width: panel.width,
+    width: panel.width-15,
     height: 2*panel.height/3
 };
 
@@ -227,7 +234,7 @@ function postTime(time, color) {
     panel_ctx.fillStyle = color;
     panel_ctx.clearRect(timer_window['x'], timer_window['y'], timer_window['width'], timer_window['height']);
     panel_ctx.fillRect(timer_window['x'], timer_window['y'], timer_window['width'], timer_window['height']);
-    panel_ctx.font = "30px Arial";
+    panel_ctx.font = info_big_font + "px Arial";
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText(Math.max(time,0), timer_window['x']+5,timer_window['y'] + 33);
 }
@@ -241,13 +248,13 @@ function postTimeDescrip(info) {
 }
 
 function postScore(rank, name, color, score, wins, you) {
-    panel_ctx.font = "30px Arial";
+    panel_ctx.font = info_big_font + "px Arial";
     panel_ctx.fillStyle = color;
     panel_ctx.fillText("Player " + name + ": " + score + '  (' + wins + ' wins)' + you, scoreboard_window['x'] + 80, scoreboard_window['y'] + 85 + rank * 40 )
 }
 
 function postReady(rank) {
-    panel_ctx.font = "30px Arial";
+    panel_ctx.font = info_big_font + "px Arial";
     panel_ctx.fillStyle = "green";
     panel_ctx.fillText("RDY", scoreboard_window['x'] + 5, scoreboard_window['y'] + 85 + rank * 40 )
 }
@@ -259,19 +266,19 @@ function postLobby() {
 
     panel_ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
     panel_ctx.fillRect(world_button['x'], world_button['y'], world_button['width'], world_button['height']);
-    panel_ctx.font = "25px Arial";
+    panel_ctx.font = buttons_font + "px Arial";
     panel_ctx.fillStyle = 'black';
     panel_ctx.fillText(CONSTANTS.WORLD + '  (' + world_count + ' players)', world_button['x'] + 5, world_button['y'] + 28)
 
     panel_ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
     panel_ctx.fillRect(us_button['x'], us_button['y'], us_button['width'], us_button['height']);
-    panel_ctx.font = "25px Arial";
+    panel_ctx.font = buttons_font + "px Arial";
     panel_ctx.fillStyle = 'black';
     panel_ctx.fillText(CONSTANTS.US + ' (' + us_count + ' players)', us_button['x'] + 5, us_button['y'] + 28)
 
     panel_ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
     panel_ctx.fillRect(euro_button['x'], euro_button['y'], euro_button['width'], euro_button['height']);
-    panel_ctx.font = "25px Arial";
+    panel_ctx.font = buttons_font + "px Arial";
     panel_ctx.fillStyle = 'black';
     panel_ctx.fillText(CONSTANTS.EURO + '  (' + euro_count + ' players)', euro_button['x'] + 5, euro_button['y'] + 28)
 
@@ -282,32 +289,32 @@ function postInfo(info1, info2, button, capital) {
     panel_ctx.fillStyle = CONSTANTS.BGCOLOR;
     panel_ctx.fillRect(info_window['x'], info_window['y'], info_window['width'], info_window['height']);
 
-    panel_ctx.font = "30px Arial";
+    panel_ctx.font = info_big_font + "px Arial";
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText(info1, info_window['x'] + 5, info_window['y'] + 28)
 
     if (info2.length < CONSTANTS.LONGCITY) {
-        panel_ctx.font = "30px Arial";
+        panel_ctx.font = info_big_font + "px Arial";
     }
     else {
-        panel_ctx.font = "20px Arial";
+        panel_ctx.font = info_little_font + "px Arial";
     }
 
     panel_ctx.fillStyle = "black";
-    panel_ctx.fillText(info2, info_window['x'] + 5, info_window['y'] + 86)
+    panel_ctx.fillText(info2, info_window['x'] + 5, info_window['y'] + 26 + info_spacing)
 
     if (button) {
         panel_ctx.fillStyle = "orange";
         panel_ctx.fillRect(ready_button['x'], ready_button['y'], ready_button['width'], ready_button['height']);
-        panel_ctx.font = "25px Arial";
+        panel_ctx.font = buttons_font + "px Arial";
         panel_ctx.fillStyle = 'black';
         panel_ctx.fillText('CLICK IF READY!', ready_button['x'] + 5, ready_button['y'] + 28)
     }
 
     if (capital != "") {
-        panel_ctx.font = "25px Arial";
+        panel_ctx.font = info_big_font + "px Arial";
         panel_ctx.fillStyle = "black";
-        panel_ctx.fillText(capital, info_window['x'] + 15, info_window['y'] + 146)
+        panel_ctx.fillText(capital, info_window['x'] + 15, info_window['y'] + 26 + 2*info_spacing)
     }
 }
 
@@ -322,7 +329,7 @@ socket.on('clear scores', () => {
     if (myRoom != CONSTANTS.LOBBY) {
         panel_ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
         panel_ctx.fillRect(lobby_button['x'], lobby_button['y'], lobby_button['width'], lobby_button['height']);
-        panel_ctx.font = "25px Arial";
+        panel_ctx.font = buttons_font + "px Arial";
         panel_ctx.fillStyle = 'black';
         panel_ctx.fillText('Back to Lobby', lobby_button['x'] + 5, lobby_button['y'] + 28)
     }
@@ -338,7 +345,7 @@ socket.on('draw round', (round) => {
     panel_ctx.clearRect(round_window['x'], round_window['y'], round_window['width'], round_window['height']);
     panel_ctx.fillStyle = CONSTANTS.BGCOLOR;
     panel_ctx.fillRect(round_window['x'], round_window['y'], round_window['width'], round_window['height']);
-    panel_ctx.font = "25px Arial";
+    panel_ctx.font = panel.height*25/824 + "px Arial";
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText('Round ' + round + '/' + CONSTANTS.GAME_ROUNDS, round_window['x']+2,round_window['y'] + 25);
 

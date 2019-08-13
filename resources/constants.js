@@ -5,10 +5,10 @@ module.exports = {
     TRUTH_COLOR: 'white',
 
     // Map and Panel
-    MAP_WIDTH: 1400,
-    MAP_HEIGHT: 824,
-    PANEL_WIDTH: 600,
-    PANEL_HEIGHT: 824,
+    MAP_WIDTH: 1350,
+    MAP_HEIGHT: 794,
+    PANEL_WIDTH: 550,
+    PANEL_HEIGHT: 794,
     WORLD_ZERO_LAT: 77.0*Math.PI/180, // Latitude of top edge of map
     WORLD_MAX_LAT: -65.0*Math.PI/180, // Latitude of bottom edge of map
     WORLD_MIN_LON: -180, // Latitude of top edge of map

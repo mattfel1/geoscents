@@ -6,7 +6,7 @@ const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
-const PORT = 80;
+const PORT = 6001;
 const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server);
@@ -14,6 +14,20 @@ const fs = require('fs');
 
 // Game mechanics
 const CONSTANTS = require('../resources/constants.js');
+
+
+function log(payload) {
+    const currentdate = new Date();
+    const timestamp = currentdate.getDate() + "/"
+        + (currentdate.getMonth() + 1) + "/"
+        + currentdate.getFullYear() + " @ "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":";
+    // fs.appendFile('/root/connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
+    //     if (err) throw err;
+    //     console.log('Saved!');
+    // });
+}
 
 app.use(morgan('dev'));
 
@@ -71,18 +85,6 @@ const WELCOME_MESSAGE1 = 'This is an unabashed attempt at recreating the similar
                           'running!  Feel free to play with the code on github and make pull requests if you want.' +
                           ' If this text is double-spaced or things don\'t look right, try refreshing the page!';
 
-function log(payload) {
-    const currentdate = new Date();
-    const timestamp = currentdate.getDate() + "/"
-        + (currentdate.getMonth() + 1) + "/"
-        + currentdate.getFullYear() + " @ "
-        + currentdate.getHours() + ":"
-        + currentdate.getMinutes() + ":";
-    fs.appendFile('/root/connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
-        if (err) throw err;
-        console.log('Saved!');
-    });
-}
 
 io.on('connection', (socket) => {
 	console.log('a user connected:', socket.id);
