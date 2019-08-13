@@ -155,7 +155,7 @@ class Room {
 
     stringifyTarget(){
         var state = ''
-        if (this.target['country'] == 'United States' || this.target['country'] == 'USA' || this.target['country'] == 'Canada' || this.target['country'] == 'Mexico']) {
+        if (this.target['country'] == 'United States' || this.target['country'] == 'USA' || this.target['country'] == 'Canada' || this.target['country'] == 'Mexico') {
             state = ', ' + this.target['admin_name'];
         }
         var pop = 0;
