@@ -314,7 +314,7 @@ class Room {
       if (this.room == CONSTANTS.LOBBY) {
           this.state = CONSTANTS.LOBBY_STATE;
           this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw lobby')})})
-          this.onSecond( => this.players.forEach(function(player,id) {player.consecutiveSecondsInactive = player.consecutiveSecondsInactive + 1;}));
+          this.onSecond(() => this.players.forEach(function(player,id) {player.consecutiveSecondsInactive = player.consecutiveSecondsInactive + 1;}));
           this.bootInactive();
       }
       else {
