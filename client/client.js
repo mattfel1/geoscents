@@ -270,6 +270,10 @@ function postLobby() {
     panel_ctx.fillStyle = CONSTANTS.BGCOLOR;
     panel_ctx.fillRect(info_window['x'], info_window['y'], info_window['width'], info_window['height']);
 
+    panel_ctx.clearRect(round_window['x'], round_window['y'], round_window['width'], round_window['height']);
+    panel_ctx.fillStyle = CONSTANTS.BGCOLOR;
+    panel_ctx.fillRect(round_window['x'], round_window['y'], round_window['width'], round_window['height']);
+
     panel_ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
     panel_ctx.fillRect(world_button['x'], world_button['y'], world_button['width'], world_button['height']);
     panel_ctx.font = buttons_font + "px Arial";
