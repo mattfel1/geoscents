@@ -19,6 +19,7 @@ var world_count = 0;
 var euro_count = 0;
 var frame_cnt = 0;
 var frames = 8*9;
+var rate = 2;
 
 function canvas_arrow(context, fromx, fromy, tox, toy) {
   var headlen = 50; // length of head in pixels
@@ -72,8 +73,8 @@ function canvas_arrow(context, fromx, fromy, tox, toy) {
 const drawAnimation = () => {
     var globeImage = new Image();
     globeImage.src = "/resources/spritesheet.png";
-    frame_cnt = (frame_cnt + 1) % frames;
-    const sx = Math.floor(frame_cnt/2) * 450;
+    frame_cnt = (frame_cnt + 1) % frames*rate;
+    const sx = Math.floor(frame_cnt/rate) * 450;
     globeImage.onload = function () {
       ctx.drawImage(globeImage, sx,0,450,450,50, 100,450,450);
     };
