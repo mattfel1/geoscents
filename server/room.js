@@ -311,7 +311,6 @@ class Room {
 
     fsm() {
       // Game flow state machine
-      const timer = this.timer;
       const drawUpperPanel = () => {this.drawUpperPanel()};
       const drawLowerPanel = () => {this.drawLowerPanel()};
       this.decrementTimer();
@@ -381,6 +380,7 @@ class Room {
           }
           this.onSecond(() => {
               const timerColor = this.timerColor;
+              const timer = this.timer;
               this.clients.forEach(function (socket, id) {
                   socket.emit('draw timer', Math.floor(((timer * 1000)) / 1000), timerColor)
               })
