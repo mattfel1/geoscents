@@ -22,6 +22,7 @@ class Room {
       this.state = CONSTANTS.IDLE_STATE;
       this.round = 0;
       this.winner = null;
+      this.timerColor = CONSTANTS.LOBBY_COLOR;
     }
 
     // Player count
@@ -313,31 +314,28 @@ class Room {
       const timer = this.timer;
       const drawUpperPanel = () => {this.drawUpperPanel()};
       const drawLowerPanel = () => {this.drawLowerPanel()};
-      var timerColor = CONSTANTS.LOBBY_COLOR;
-      if (this.state == CONSTANTS.GUESS_STATE) {
-          timerColor = CONSTANTS.GUESS_COLOR;
-      }
-      else if (this.state == CONSTANTS.REVEAL_STATE) {
-          timerColor = CONSTANTS.REVEAL_COLOR;
-      }
       this.decrementTimer();
       if (this.room == CONSTANTS.LOBBY) {
+          this.timerColor = CONSTANTS.LOBBY_COLOR;
           this.state = CONSTANTS.LOBBY_STATE;
           this.clients.forEach(function (socket, id) {
               socket.emit('animate')
-          })
+          });
           this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw lobby')})})
           this.onSecond(() => this.players.forEach(function(player,id) {player.consecutiveSecondsInactive = player.consecutiveSecondsInactive + 1;}));
           this.bootInactive();
       }
       else {
           if (this.numPlayers() == 0 && this.room != CONSTANTS.LOBBY) {
+              this.timerColor = CONSTANTS.LOBBY_COLOR;
               this.state = CONSTANTS.IDLE_STATE;
           } else if (this.numPlayers() > 0 && this.state == CONSTANTS.IDLE_STATE) {
+              this.timerColor = CONSTANTS.LOBBY_COLOR;
               this.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
               this.round = 0;
           } else if (this.state == CONSTANTS.PREPARE_GAME_STATE) {
               if (this.allReady() || this.timer <= 0) {
+                  this.timerColor = CONSTANTS.LOBBY_COLOR;
                   this.stateTransition(CONSTANTS.SETUP_STATE, 0);
                   Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
               } else {
@@ -348,13 +346,14 @@ class Room {
               }
           } else if (this.state == CONSTANTS.SETUP_STATE) {
               this.target = Geography.randomCity(this.room);
+              this.timerColor = CONSTANTS.GUESS_COLOR;
               Array.from(this.players.values()).forEach((p, id) => {
                   p.reset()
-              })
+              });
               this.playedCities[this.round] = this.target;
               Array.from(this.clients.values()).forEach((socket, id) => {
                   socket.emit('fresh map', this.room)
-              })
+              });
               this.stateTransition(CONSTANTS.GUESS_STATE, CONSTANTS.GUESS_DURATION);
           } else if (this.state == CONSTANTS.GUESS_STATE) {
               if (this.timer <= 0 || this.allPlayersClicked()) {
@@ -365,6 +364,7 @@ class Room {
                       this.historyNewGame(this.winner.name, this.winner.score, this.winner.color);
                   }
                   this.stateTransition(CONSTANTS.REVEAL_STATE, CONSTANTS.REVEAL_DURATION);
+                  this.timerColor = CONSTANTS.REVEAL_COLOR;
               }
           } else if (this.state == CONSTANTS.REVEAL_STATE) {
               if (this.timer <= 0 && this.round >= CONSTANTS.GAME_ROUNDS) {
@@ -380,6 +380,7 @@ class Room {
               this.stateTransition(CONSTANTS.IDLE_STATE, 0)
           }
           this.onSecond(() => {
+              const timerColor = this.timerColor;
               this.clients.forEach(function (socket, id) {
                   socket.emit('draw timer', Math.floor(((timer * 1000)) / 1000), timerColor)
               })
