@@ -101,7 +101,7 @@ const drawMap = (room) => {
     ctx.fillText('learn about the cities here', 800, 625);
     canvas_arrow(ctx, 1100, 650, canvas.width - 70, canvas.height - 20);
 
-    ctx.fillText('Map will appear in this box', 480, 480);
+    ctx.fillText('Map will appear here', 480, 480);
 
     ctx.fillText('Discuss here', 100, 610);
     canvas_arrow(ctx, 200, 650, 200, canvas.height-20);
