@@ -41,6 +41,7 @@ module.exports = {
 
     // Visuals and score
     BGCOLOR: "#E6E6FA",
+    NUM_GLOBES: 180/5,
     LOBBY_COLOR: "#e3e4e6",
     MAP_BUTTON_COLOR: "#9CD69F",
     GUESS_COLOR: '#17eb5e',

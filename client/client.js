@@ -17,6 +17,8 @@ var myRoom = CONSTANTS.LOBBY;
 var us_count = 0;
 var world_count = 0;
 var euro_count = 0;
+var frame_cnt = 0;
+var frames = 8*9;
 
 function canvas_arrow(context, fromx, fromy, tox, toy) {
   var headlen = 50; // length of head in pixels
@@ -35,18 +37,57 @@ function canvas_arrow(context, fromx, fromy, tox, toy) {
   context.closePath()
 }
 
+// Globe animation
+//
+// function sprite (options) {
+//     var that = {};
+//     that.context = options.context;
+//     that.width = options.width;
+//     that.height = options.height;
+//     that.image = options.image;
+//     that.render = function () {
+//         // Draw the animation
+//         that.context.drawImage(
+//            that.image,
+//            0,
+//            0,
+//            that.width,
+//            that.height,
+//            200,
+//            200,
+//            that.width,
+//            that.height);
+//     };
+//     return that;
+// }
+// var globe = sprite({
+//     context: ctx,
+//     width: 450,
+//     height: 450,
+//     image: globeImage
+// });
+
 /** MAP HANDLING */
+
+const drawAnimation = () => {
+    var globeImage = new Image();
+    globeImage.src = "/resources/spritesheet.png";
+    frame_cnt = (frame_cnt + 1) % frames;
+    const sx = Math.floor(frame_cnt/2) * 450;
+    globeImage.onload = function () {
+      ctx.drawImage(globeImage, sx,0,450,450,50, 100,450,450);
+    };
+}
 const drawMap = (room) => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   if (room == CONSTANTS.LOBBY){
     // Banner message
-    ctx.fillStyle = 'cyan';
+    ctx.fillStyle = CONSTANTS.BGCOLOR;
     ctx.fillRect(0,0,canvas.width,canvas.height);
     ctx.font = "50px Arial";
     ctx.fillStyle = 'black';
     ctx.fillText('Welcome to GeoScents!', 300, 50);
     ctx.fillText('Locate cities as quickly and accurately as possible!',10,110);
-
 
     // Instructions
     ctx.font = "35px Arial";
@@ -59,7 +100,7 @@ const drawMap = (room) => {
     ctx.fillText('learn about the cities here', 800, 625);
     canvas_arrow(ctx, 1100, 650, canvas.width - 70, canvas.height - 20);
 
-    ctx.fillText('Map will appear in this box', 100, 310);
+    ctx.fillText('Map will appear in this box', 480, 480);
 
     ctx.fillText('Discuss here', 100, 610);
     canvas_arrow(ctx, 200, 650, 200, canvas.height-20);
@@ -95,7 +136,8 @@ socket.on('update counts', (w,u,e) => {
    euro_count = e;
 });
 
-socket.on('fresh map', (room) => drawMap(room))
+socket.on('fresh map', (room) => drawMap(room));
+socket.on('animate', () => drawAnimation());
 
 socket.on('draw point', (coords, color) => {
   ctx.beginPath();
@@ -259,12 +301,14 @@ function postReady(rank) {
     panel_ctx.fillText("RDY", scoreboard_window['x'] + 5, scoreboard_window['y'] + 85 + rank * 40 )
 }
 
+
 function postLobby() {
     panel_ctx.clearRect(time_descrip_window['x'], time_descrip_window['y'], time_descrip_window['width'], time_descrip_window['height'])
     panel_ctx.fillStyle = CONSTANTS.BGCOLOR;
     panel_ctx.fillRect(time_descrip_window['x'], time_descrip_window['y'], time_descrip_window['width'], time_descrip_window['height']);    panel_ctx.font = "25px Arial";
     panel_ctx.clearRect(timer_window['x'], timer_window['y'], timer_window['width'], timer_window['height']);
     panel_ctx.fillRect(timer_window['x'], timer_window['y'], timer_window['width'], timer_window['height']);
+
 
     panel_ctx.clearRect(info_window['x'], info_window['y'], info_window['width'], info_window['height']);
     panel_ctx.fillStyle = CONSTANTS.BGCOLOR;

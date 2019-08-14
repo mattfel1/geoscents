@@ -323,6 +323,9 @@ class Room {
       this.decrementTimer();
       if (this.room == CONSTANTS.LOBBY) {
           this.state = CONSTANTS.LOBBY_STATE;
+          this.clients.forEach(function (socket, id) {
+              socket.emit('animate')
+          })
           this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw lobby')})})
           this.onSecond(() => this.players.forEach(function(player,id) {player.consecutiveSecondsInactive = player.consecutiveSecondsInactive + 1;}));
           this.bootInactive();

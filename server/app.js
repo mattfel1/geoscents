@@ -55,6 +55,9 @@ app.get('/resources/us.png', (req, res, next) => {
 app.get('/resources/euro.png', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '..', 'resources/euro.png'));
 });
+app.get('/resources/spritesheet.png', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '..', 'resources/spritesheet.png'));
+});
 
 app.use((req, res, next) => {
 	const err = new Error('Not Found');
