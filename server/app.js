@@ -6,7 +6,7 @@ const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
-const PORT = 80;
+const PORT = 3000;
 const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server);
@@ -23,10 +23,10 @@ function log(payload) {
         + currentdate.getFullYear() + " @ "
         + currentdate.getHours() + ":"
         + currentdate.getMinutes() + ":";
-    fs.appendFile('/root/connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
-        if (err) throw err;
-        console.log('Saved!');
-    });
+    // fs.appendFile('/root/connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
+    //     if (err) throw err;
+    //     console.log('Saved!');
+    // });
 }
 
 app.use(morgan('dev'));
@@ -57,6 +57,9 @@ app.get('/resources/euro.png', (req, res, next) => {
 });
 app.get('/resources/spritesheet.png', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '..', 'resources/spritesheet.png'));
+});
+app.get('/resources/favicon.png', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '..', 'resources/favicon.png'));
 });
 
 app.use((req, res, next) => {
@@ -90,16 +93,31 @@ const WELCOME_MESSAGE1 = 'Welcome to Geoscents, an online multiplayer world geog
                           ' If this text is double-spaced or things don\'t look right, try refreshing the page!';
 
 
+function warnDuplicateIp(ip) {
+    Object.values(rooms).forEach((room) => {
+        const matches = room.getPlayerByIp(ip)['numMatch'];
+        if (matches > 0 && room.room != CONSTANTS.LOBBY) { // Conflict between lobby and other room
+            io.sockets.emit('update messages', room.room, "A player has joined the lobby who shares an IP address with a player in this room. Chats from these players may be buggy, but their gameplay should work fine.<br>");
+            io.sockets.emit('update messages', CONSTANTS.LOBBY, "A player in the " + room.room + " game shares an IP address with a player who just joined.  Chats from these players may be buggy, but their gameplay should work fine.<br>");
+        }
+        else if (matches > 1 && room.room == CONSTANTS.LOBBY) { // Conflict in lobby
+            io.sockets.emit('update messages', CONSTANTS.LOBBY, "A player in the lobby shares an IP address with a player who just joined.  Chats from these players may be buggy, but their gameplay should work fine.<br>");
+        }
+    })
+
+}
+
 io.on('connection', (socket) => {
 	console.log('a user connected:', socket.id);
 	socket.on('newPlayer', () => {
 	  rooms[CONSTANTS.LOBBY].addPlayer(socket, {'moved': false});
       playerRooms.set(socket.id, rooms[CONSTANTS.LOBBY]);
-      log("User connected    " + socket.handshake.address + ", " + socket.id)
+      log("User connected    " + socket.handshake.address + ", " + socket.id);
 	  socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
       var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'>Player " + rooms[CONSTANTS.LOBBY].getPlayerName(socket) + " has entered the lobby!</font> ]<br>";
       io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg)
       io.sockets.emit('update counts', rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
+      warnDuplicateIp(socket.handshake.address);
 	});
 	socket.on('disconnect', function() {
       if (playerRooms.has(socket.id)) {

@@ -70,15 +70,34 @@ function canvas_arrow(context, fromx, fromy, tox, toy) {
 
 /** MAP HANDLING */
 
+var globeImage = new Image();
+globeImage.src = "/resources/spritesheet.png";
+globeImage.onload = function (sx) {
+  return ctx.drawImage(globeImage, sx,0,450,450,50, 100,450,450);
+};
+var worldImg = new Image()
+worldImg.src = "/resources/world.png";
+worldImg.onload = function () {
+    ctx.drawImage(worldImg, 0, 0)
+};
+
+var usImg = new Image()
+usImg.src = "/resources/us.png";
+usImg.onload = function () {
+    ctx.drawImage(usImg, 0, 0)
+};
+
+var euroImg = new Image()
+euroImg.src = "/resources/euro.png";
+euroImg.onload = function () {
+    ctx.drawImage(euroImg, 0, 0)
+};
+
 const drawAnimation = () => {
-    var globeImage = new Image();
-    globeImage.src = "/resources/spritesheet.png";
     frame_cnt = (frame_cnt + 1) % (frames*rate);
     const sx = Math.floor(frame_cnt/rate) * 450;
-    globeImage.onload = function () {
-      ctx.drawImage(globeImage, sx,0,450,450,50, 100,450,450);
-    };
-}
+    globeImage.onload(sx);
+};
 const drawMap = (room) => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   if (room == CONSTANTS.LOBBY){
@@ -108,25 +127,13 @@ const drawMap = (room) => {
 
   }
   else if (room == CONSTANTS.WORLD){
-      var img = new Image()
-      img.onload = function () {
-        ctx.drawImage(img, 0, 0)
-      };
-      img.src = "/resources/world.png"
+      worldImg.onload();
   }
   else if (room == CONSTANTS.US){
-      var img = new Image()
-      img.onload = function () {
-        ctx.drawImage(img, 0, 0)
-      };
-      img.src = "/resources/us.png"
+      usImg.onload();
   }
   else if (room == CONSTANTS.EURO){
-      var img = new Image()
-      img.onload = function () {
-        ctx.drawImage(img, 0, 0)
-      };
-      img.src = "/resources/euro.png"
+      euroImg.onload();
   }
 
 }

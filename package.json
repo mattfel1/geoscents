@@ -1,8 +1,8 @@
 {
-  "name": "simple-starter-with-server",
+  "name": "GeoScents",
   "version": "1.0.0",
   "main": "client.js",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "dependencies": {
     "@tmkelly28/tk-css": "^1.0.2",
     "body-parser": "^1.17.2",
