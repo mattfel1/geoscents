@@ -87,7 +87,7 @@ const rooms = {
 var playerRooms = new Map();
 
 const WELCOME_MESSAGE1 = 'Welcome to Geoscents, an online multiplayer world geography game! ' +
-                          'This is an unabashed attempt at recreating the similarly-named game, Geosense (geosense.net), from the mid 2000s. ' +
+                          'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
                           'If you are enjoying this game, consider donating at the bottom of the page to help keep the server ' +
                           'running!  Feel free to play with the code on github and make pull requests if you want.' +
                           ' If this text is double-spaced or things don\'t look right, try refreshing the page!';
