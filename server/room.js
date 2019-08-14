@@ -331,11 +331,6 @@ class Room {
           this.bootInactive();
       }
       else {
-          this.onSecond(() => {
-              this.clients.forEach(function (socket, id) {
-                  socket.emit('draw timer', Math.floor(((timer * 1000)) / 1000), timerColor)
-              })
-          })
           if (this.numPlayers() == 0 && this.room != CONSTANTS.LOBBY) {
               this.state = CONSTANTS.IDLE_STATE;
           } else if (this.numPlayers() > 0 && this.state == CONSTANTS.IDLE_STATE) {
@@ -384,6 +379,11 @@ class Room {
           } else {
               this.stateTransition(CONSTANTS.IDLE_STATE, 0)
           }
+          this.onSecond(() => {
+              this.clients.forEach(function (socket, id) {
+                  socket.emit('draw timer', Math.floor(((timer * 1000)) / 1000), timerColor)
+              })
+          })
       }
     }
 
@@ -399,7 +399,9 @@ class Room {
         if (thisTarget['majorcapital']) star = "*";
         if (thisTarget['minorcapital']) star = "†";
         const base = "Round " + round + ": " + star + thisTarget['string'] + " (pop: " + thisTarget['pop'].toLocaleString() + ")";
-        const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + this.target['name'] + "%2C+" + this.target['admin_name'] + "%2C+" + this.target['country'] + "&go=Go&ns0=1\">Learn!</a><br>"
+        var admin = "";
+        if (this.target['country'] == "USA") admin = "%2C+" + this.target['admin_name'];
+        var link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + this.target['name'] + admin + "%2C+" + this.target['country'] + "&go=Go&ns0=1\">Learn!</a><br>"
         this.clients.forEach((socket,id) => {
             socket.emit('add history',  room, base + link)
             socket.emit('add history', room, "<br>")
