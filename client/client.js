@@ -21,21 +21,38 @@ var frame_cnt = 0;
 var frames = 8*9;
 var rate = 2;
 
-function canvas_arrow(context, fromx, fromy, tox, toy) {
-  var headlen = 50; // length of head in pixels
-  var dx = tox - fromx;
-  var dy = toy - fromy;
-  var angle = Math.atan2(dy, dx);
-  context.fillStyle = 'black';
-  context.lineWidth = 10;
-  context.beginPath();
-  context.moveTo(fromx, fromy);
-  context.lineTo(tox, toy);
-  context.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
-  context.moveTo(tox, toy);
-  context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
-  context.stroke();
-  context.closePath()
+function canvas_arrow(fromx, fromy, tox, toy){
+    //variables to be used when creating the arrow
+    var headlen = 30;
+
+    var angle = Math.atan2(toy-fromy,tox-fromx);
+
+    //starting path of the arrow from the start square to the end square and drawing the stroke
+    ctx.beginPath();
+    ctx.moveTo(fromx, fromy);
+    ctx.lineTo(tox, toy);
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 10;
+    ctx.stroke();
+
+    //starting a new path from the head of the arrow to one of the sides of the point
+    ctx.beginPath();
+    ctx.moveTo(tox, toy);
+    ctx.lineTo(tox-headlen*Math.cos(angle-Math.PI/7),toy-headlen*Math.sin(angle-Math.PI/7));
+
+    //path from the side point of the arrow, to the other side point
+    ctx.lineTo(tox-headlen*Math.cos(angle+Math.PI/7),toy-headlen*Math.sin(angle+Math.PI/7));
+
+    //path from the side point back to the tip of the arrow, and then again to the opposite side point
+    ctx.lineTo(tox, toy);
+    ctx.lineTo(tox-headlen*Math.cos(angle-Math.PI/7),toy-headlen*Math.sin(angle-Math.PI/7));
+
+    //draws the paths created above
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 10;
+    ctx.stroke();
+    ctx.fillStyle = "black";
+    ctx.fill();
 }
 
 // Globe animation
@@ -109,16 +126,16 @@ const drawMap = (room) => {
     ctx.fillStyle = 'black';
     ctx.fillText('Choose a map to play on and the', 700, 310);
     ctx.fillText('target cities will show up here', 700, 350);
-    canvas_arrow(ctx, 1200, 340, canvas.width - 20, 220);
+    canvas_arrow(1200, 340, canvas.width - 20, 220);
 
     ctx.fillText('See how everyone did and', 800, 590);
     ctx.fillText('learn about the cities here', 800, 625);
-    canvas_arrow(ctx, 1100, 650, canvas.width - 70, canvas.height - 20);
+    canvas_arrow(1100, 650, canvas.width - 70, canvas.height - 20);
 
     ctx.fillText('Map will appear here', 480, 480);
 
     ctx.fillText('Discuss here', 100, 610);
-    canvas_arrow(ctx, 200, 650, 200, canvas.height-20);
+    canvas_arrow(200, 650, 200, canvas.height-20);
 
   }
   else if (room == CONSTANTS.WORLD){
