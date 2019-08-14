@@ -19,7 +19,7 @@ var world_count = 0;
 var euro_count = 0;
 var frame_cnt = 0;
 var frames = 8*9;
-var rate = 4;
+var rate = 2;
 
 function canvas_arrow(context, fromx, fromy, tox, toy) {
   var headlen = 50; // length of head in pixels
