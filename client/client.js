@@ -72,30 +72,25 @@ function canvas_arrow(context, fromx, fromy, tox, toy) {
 
 var globeImage = new Image();
 globeImage.src = "/resources/spritesheet.png";
-globeImage.onload = function (sx) {
-  return ctx.drawImage(globeImage, sx,0,450,450,50, 100,450,450);
-};
+
 var worldImg = new Image()
 worldImg.src = "/resources/world.png";
-worldImg.onload = function () {
-    ctx.drawImage(worldImg, 0, 0)
-};
+
 
 var usImg = new Image()
 usImg.src = "/resources/us.png";
-usImg.onload = function () {
-    ctx.drawImage(usImg, 0, 0)
-};
+
 
 var euroImg = new Image()
 euroImg.src = "/resources/euro.png";
-euroImg.onload = function () {
-    ctx.drawImage(euroImg, 0, 0)
-};
+
 
 const drawAnimation = () => {
     frame_cnt = (frame_cnt + 1) % (frames*rate);
     const sx = Math.floor(frame_cnt/rate) * 450;
+    globeImage.onload = function (sx) {
+      return ctx.drawImage(globeImage, sx,0,450,450,50, 100,450,450);
+    };
     globeImage.onload(sx);
 };
 const drawMap = (room) => {
@@ -127,12 +122,21 @@ const drawMap = (room) => {
 
   }
   else if (room == CONSTANTS.WORLD){
+        worldImg.onload = function () {
+            ctx.drawImage(worldImg, 0, 0)
+        };
       worldImg.onload();
   }
   else if (room == CONSTANTS.US){
+        usImg.onload = function () {
+            ctx.drawImage(usImg, 0, 0)
+        };
       usImg.onload();
   }
   else if (room == CONSTANTS.EURO){
+        euroImg.onload = function () {
+            ctx.drawImage(euroImg, 0, 0)
+        };
       euroImg.onload();
   }
 
