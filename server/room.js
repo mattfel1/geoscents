@@ -400,9 +400,9 @@ class Room {
         if (thisTarget['majorcapital']) star = "*";
         if (thisTarget['minorcapital']) star = "†";
         const base = "Round " + round + ": " + star + thisTarget['string'] + " (pop: " + thisTarget['pop'].toLocaleString() + ")";
-        var admin = "";
-        if (this.target['country'] == "USA") admin = "%2C+" + this.target['admin_name'];
-        var link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + this.target['name'] + admin + "%2C+" + this.target['country'] + "&go=Go&ns0=1\">Learn!</a><br>"
+        var part2 = "%2C+" + this.target['country'];
+        if (this.target['country'] == "USA") part2 = "%2C+" + this.target['admin_name'];
+        var link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + this.target['name'] + part2 + "&go=Go&ns0=1\">Learn!</a><br>"
         this.clients.forEach((socket,id) => {
             socket.emit('add history',  room, base + link)
             socket.emit('add history', room, "<br>")
