@@ -309,6 +309,12 @@ const scoreboard_window = {
     width: panel.width-15,
     height: 2*panel.height/3
 };
+const record_window = {
+    x: panel.width*2/3 - 70,
+    y: panel.height/3 + 20,
+    width: panel.width/3 + 50,
+    height: 35
+};
 
 function postTime(time, color) {
     panel_ctx.fillStyle = color;
@@ -327,16 +333,17 @@ function postTimeDescrip(info) {
     panel_ctx.fillText(info, time_descrip_window['x'] + 5, time_descrip_window['y']+25)
 }
 
-function postScore(rank, name, color, score, wins, you) {
+function postScore(rank, name, color, score, wins, you, trophy) {
     panel_ctx.font = info_big_font + "px Arial";
     panel_ctx.fillStyle = color;
     panel_ctx.fillText("Player " + name + ": " + score + '  (' + wins + ' wins)' + you, scoreboard_window['x'] + 80, scoreboard_window['y'] + 85 + rank * 40 )
+    if (trophy) panel_ctx.fillText("🏆", scoreboard_window['x'] + 50, scoreboard_window['y'] + 85 )
 }
 
 function postReady(rank) {
     panel_ctx.font = info_big_font + "px Arial";
     panel_ctx.fillStyle = "green";
-    panel_ctx.fillText("RDY", scoreboard_window['x'] + 5, scoreboard_window['y'] + 85 + rank * 40 )
+    panel_ctx.fillText("✔️", scoreboard_window['x'] + 10, scoreboard_window['y'] + 85 + rank * 40 )
 }
 
 function postBackToLobby() {
@@ -420,7 +427,7 @@ function postInfo(info1, info2, button, capital) {
     }
 }
 
-socket.on('clear scores', () => {
+socket.on('clear scores', (record, color, drawPopper) => {
     panel_ctx.clearRect(scoreboard_window['x'], scoreboard_window['y'], scoreboard_window['width'], scoreboard_window['height']);
     panel_ctx.fillStyle =  "#e3e4e6";
     panel_ctx.fillRect(scoreboard_window['x'], scoreboard_window['y'], scoreboard_window['width'], scoreboard_window['height']);
@@ -428,13 +435,22 @@ socket.on('clear scores', () => {
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText("Scoreboard:", scoreboard_window['x'] + 5, scoreboard_window['y'] + 45)
 
+    if (myRoom != CONSTANTS.LOBBY) {
+        panel_ctx.fillStyle = color;
+        panel_ctx.font = "22px Arial";
+        panel_ctx.fillText("Today's Record: " + record, record_window['x'] + 5, record_window['y'] + 20);
+        if (drawPopper) panel_ctx.fillText("🎉", record_window['x'] - 20, record_window['y'] + 20);
+    }
+
+    // TODO: Is this back to lobby needed here?
     postBackToLobby();
 });
+
 socket.on('draw back button', () => {
    postBackToLobby();
 });
-socket.on('post score', (rank, name, color, score, wins, you) => {
-    postScore(rank,name,color,score, wins, you)
+socket.on('post score', (rank, name, color, score, wins, you, trophy) => {
+    postScore(rank,name,color,score, wins, you, trophy)
 });
 
 socket.on('player ready', (rank) => {
@@ -536,9 +552,11 @@ socket.on('moved to', (room) => {
     myRoom = room;
 });
 
-socket.on('break history', (room, winner, score, color) => {
+socket.on('break history', (room, winner, score, color, record) => {
     if (room == myRoom) {
-        var assembled = "<br>******* WINNER: <font color=\"" + color + "\">Player " + winner + " (" + score + " points)</font> *******<br>"
+        var newRecord = "";
+        if (record) newRecord = " 🎉 NEW RECORD 🎉";
+        var assembled = "<br>******* " + myRoom + " WINNER: <font color=\"" + color + "\">Player " + winner + " (" + score + " points)</font>" + newRecord + " *******<br>"
         var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
         $("#gamehist").prepend(" ");
         $("#gamehist").prepend(final_message);

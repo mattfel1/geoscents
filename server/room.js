@@ -23,6 +23,8 @@ class Room {
       this.round = 0;
       this.winner = null;
       this.timerColor = CONSTANTS.LOBBY_COLOR;
+      this.record = Math.floor(Math.random() * CONSTANTS.RECORD_INIT_RANGE) + CONSTANTS.RECORD_INIT_BASE;
+      this.recordColor = CONSTANTS.COLORS[Math.floor(Math.random()*CONSTANTS.COLORS.length)];
     }
 
     // Player count
@@ -31,7 +33,7 @@ class Room {
     }
     // Player basic IO
     addPlayer(socket,info) {
-      var player = new Player(socket.id, this.players.size, this.room, socket.handshake.address, this.ordinalCounter, this.ordinalCounter,info)
+      var player = new Player(socket.id, this.players.size, this.room, socket.handshake.address, this.ordinalCounter, this.ordinalCounter % 100,info)
       this.clients.set(socket.id, socket);
       this.players.set(socket.id, player);
       this.ordinalCounter = this.ordinalCounter + 1;
@@ -52,6 +54,13 @@ class Room {
         else {
             return socket.id.substring(5,0);
         }
+    }
+    getPlayerTrophy(socket) {
+        var trophy = "";
+        if (this.players.has(socket.id)) {
+            if (this.players.get(socket.id).trophy) trophy = "🏆";
+        }
+        return trophy;
     }
     getPlayerColor(socket) {
         if (this.players.has(socket.id)) {
@@ -137,7 +146,7 @@ class Room {
           if (player.id == socketId) {
               you = '   <-- you';
           }
-          socket.emit('post score', player.rank, player.name, player.color, player.score, player.wins, you);
+          socket.emit('post score', player.rank, player.name, player.color, player.score, player.wins, you, player.trophy);
         })
     }
 
@@ -274,8 +283,11 @@ class Room {
 
     drawLowerPanel() {
         const players = this.players;
+        const record = this.record;
+        const color = this.recordColor;
+        const drawPopper = (this.winner != null && this.winner.trophy && this.winner.score == this.record)
         this.clients.forEach((s,id) => {
-            s.emit('clear scores');
+            s.emit('clear scores', record, color, drawPopper);
             this.printScoresWithSelf(s,id);
         });
         this.clients.forEach(function(s,id) {
@@ -344,7 +356,8 @@ class Room {
                   this.sortPlayers();
                   if (this.round >= CONSTANTS.GAME_ROUNDS) {
                       this.winner.wins = this.winner.wins + 1;
-                      this.historyNewGame(this.winner.name, this.winner.score, this.winner.color);
+                      this.winner.trophy = true;
+                      this.printWinner(this.winner.name, this.winner.score, this.winner.color);
                   }
                   this.stateTransition(CONSTANTS.REVEAL_STATE, CONSTANTS.REVEAL_DURATION);
                   this.timerColor = CONSTANTS.REVEAL_COLOR;
@@ -352,8 +365,9 @@ class Room {
           } else if (this.state == CONSTANTS.REVEAL_STATE) {
               if (this.timer <= 0 && this.round >= CONSTANTS.GAME_ROUNDS) {
                   this.round = 0;
-                  this.stateTransition(CONSTANTS.PREPARE_GAME_DURATION, CONSTANTS.PREPARE_GAME_DURATION)
-              } else if (this.timer <= 0) {
+                  this.stateTransition(CONSTANTS.PREPARE_GAME_DURATION, CONSTANTS.PREPARE_GAME_DURATION);
+              }
+               else if (this.timer <= 0) {
                   this.round = this.round + 1;
                   this.incrementInactive();
                   this.bootInactive();
@@ -372,10 +386,16 @@ class Room {
       }
     }
 
-    historyNewGame(winner, score, color) {
+    printWinner(winner, score, color) {
         const room = this.room;
+        var newRecord = false;
+        if (score > this.record) {
+            this.record = score;
+            this.recordColor = color;
+            newRecord = true;
+        }
         this.clients.forEach((socket,id) => {
-            socket.emit('break history',  room, winner, score, color)
+            socket.emit('break history',  room, winner, score, color, newRecord);
         });
     }
     historyRound(round, thisTarget) {
@@ -388,14 +408,16 @@ class Room {
         if (this.target['country'] == "USA") part2 = "%2C+" + this.target['admin_name'];
         var link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + this.target['name'] + part2 + "&go=Go&ns0=1\">Learn!</a><br>"
         this.clients.forEach((socket,id) => {
-            socket.emit('add history',  room, base + link)
-            socket.emit('add history', room, "<br>")
+            socket.emit('add history',  room, base + link);
+            socket.emit('add history', room, "<br>");
         });
     }
     historyScore(player, score) {
         const room = this.room;
         this.clients.forEach((socket,id) => {
-            socket.emit('add history', room, "<font color=\"" + player.color +"\">  Player " + player.name + ": " + score + "</font><br>")
+            var name = "Player " + player.name;
+            if (player.id == id) name = " ( -you- )";
+            socket.emit('add history', room, "<font color=\"" + player.color +"\">  " + name + ": " + score + "</font><br>")
         });
     }
 

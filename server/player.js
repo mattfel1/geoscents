@@ -15,7 +15,6 @@ class Player {
 		this.lon = 0;
 		this.clickedAt = 0;
         this.id = socketid;
-        this.ip = ip;
 		this.name = name;
 		this.score = 0;
 		this.rank = rank;
@@ -23,6 +22,7 @@ class Player {
         this.wins = 0;
         this.consecutiveRoundsInactive = 0;
         this.consecutiveSecondsInactive = 0;
+        this.trophy = false;
         this.room = room;
 
         // Override values based on info map
@@ -36,6 +36,7 @@ class Player {
     reset() {
 		this.clicked = false;
 		this.ready = false;
+		this.trophy = false;
 		this.lat = 0;
 		this.lon = 0;
 		this.row = 0;

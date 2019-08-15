@@ -55,6 +55,8 @@ module.exports = {
 
     // Rooms
     GAME_ROUNDS: 10,
+    RECORD_INIT_RANGE: 700,
+    RECORD_INIT_BASE: 450,
     WORLD: 'World',
     LOBBY: 'Lobby',
     US: 'N. America',
@@ -65,5 +67,5 @@ module.exports = {
     // Chat
     MAX_GAME_HIST: 100,
     MAX_CHAT_HIST: 100,
-    PROFANITY: ['shit', 'damn', 'ass', 'fuck', 'cunt']
+    PROFANITY: ['shit', 'damn', 'ass', 'fuck', 'cunt', 'fuuck', 'fuuuck', 'shiit'] // TODO: Use regex
 }
