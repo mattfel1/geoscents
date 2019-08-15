@@ -387,7 +387,7 @@ class Room {
     }
 
     distributeMessage(senderSocket, new_sent_msg, cb) {
-      var senderName = this.getPlayerName(senderSocket);
+      var senderName = "Player " + this.getPlayerName(senderSocket);
       const senderColor = this.getPlayerColor(senderSocket);
       const senderTrophy = this.getPlayerTrophy(senderSocket);
       const room = this.room;
@@ -396,7 +396,7 @@ class Room {
               const player = this.players.get(id);
               if (player.id == senderSocket.id) senderName = " ( -you- )";
           }
-          const sent_msg = "[ " + room + " <font color='" + senderColor + "'>" + senderTrophy + "Player " + senderName + "</font> ]: " + new_sent_msg + "<br>";
+          const sent_msg = "[ " + room + " <font color='" + senderColor + "'>" + senderTrophy + senderName + "</font> ]: " + new_sent_msg + "<br>";
           socket.emit("update messages", room, sent_msg);
           cb();
       });
