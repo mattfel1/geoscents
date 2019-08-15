@@ -387,7 +387,7 @@ class Room {
     }
 
     distributeMessage(senderSocket, new_sent_msg, cb) {
-      const getname = (s) => this.getPlayerTrophy(s)
+      const getname = (s) => this.getPlayerName(s)
       const senderColor = this.getPlayerColor(senderSocket);
       const senderTrophy = this.getPlayerTrophy(senderSocket);
       const room = this.room;
