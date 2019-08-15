@@ -67,5 +67,5 @@ module.exports = {
     // Chat
     MAX_GAME_HIST: 100,
     MAX_CHAT_HIST: 100,
-    PROFANITY: ['shit', 'damn', 'ass', 'fuck', 'cunt', 'fuuck', 'fuuuck', 'shiit'] // TODO: Use regex
+    PROFANITY: ['shit', 'damn', 'ass', 'fuck', 'bitch', 'cunt', 'fuuck', 'fuuuck', 'shiit'] // TODO: Use regex
 }
