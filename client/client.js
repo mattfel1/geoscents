@@ -336,7 +336,7 @@ function postTimeDescrip(info) {
 function postScore(rank, name, color, score, wins, you, trophy) {
     panel_ctx.font = info_big_font + "px Arial";
     panel_ctx.fillStyle = color;
-    panel_ctx.fillText("Player " + name + ": " + score + '  (' + wins + ' wins)' + you, scoreboard_window['x'] + 80, scoreboard_window['y'] + 85 + rank * 40 )
+    panel_ctx.fillText("Player " + name + ": " + score + '  (' + wins + ' 🏆)' + you, scoreboard_window['x'] + 80, scoreboard_window['y'] + 85 + rank * 40 );
     if (trophy) panel_ctx.fillText("🏆", scoreboard_window['x'] + 50, scoreboard_window['y'] + 85 )
 }
 
