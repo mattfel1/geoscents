@@ -32,55 +32,38 @@ class Room {
     // Player basic IO
     addPlayer(socket,info) {
       var player = new Player(socket.id, this.players.size, this.room, socket.handshake.address, this.ordinalCounter, this.ordinalCounter,info)
-      this.clients.set(socket.id, socket)
-      this.players.set(socket.id, player)
+      this.clients.set(socket.id, socket);
+      this.players.set(socket.id, player);
       this.ordinalCounter = this.ordinalCounter + 1;
       this.sortPlayers();
       this.drawUpperPanel(socket.id);
       this.drawLowerPanel(socket.id);
       socket.emit('fresh map', this.room);
-      socket.emit('clear history')
     }
 
-    getPlayerByIp(ip) {
-        const match = Array.from(this.players.values()).filter(player => player.ip == ip);
-        if (match.length > 0)
-            return {'playerId': match[0].id, 'numMatch': match.length};
-        else
-            return {'playerId': "", 'numMatch': 0};
+    hasPlayer(socket) {
+        return this.clients.has(socket.id) && this.players.has(socket.id)
     }
 
     getPlayerName(socket) {
-        const ip = socket.handshake.address;
-        const playerByIp = this.getPlayerByIp(ip);
-        const matchedSocketId = playerByIp['playerId'];
-        const numMatches = playerByIp['numMatch'];
-        if (numMatches == 1 && this.players.has(matchedSocketId)) {
-            return this.players.get(matchedSocketId).name
+        if (this.players.has(socket.id)) {
+            return this.players.get(socket.id).name
         }
-        else if (numMatches > 1 && this.players.has(matchedSocketId)) {
-            return this.players.get(matchedSocketId).name + "-" + socket.id.substring(5,0);
-        } else {
+        else {
             return socket.id.substring(5,0);
         }
     }
     getPlayerColor(socket) {
-        const ip = socket.handshake.address;
-        const playerByIp = this.getPlayerByIp(ip);
-        const matchedSocketId = playerByIp['playerId'];
-        if (this.players.has(matchedSocketId)) {
-            return this.players.get(matchedSocketId).color
+        if (this.players.has(socket.id)) {
+            return this.players.get(socket.id).color
         }
         else {
             return '#000000'
         }
     }
     getPlayerWins(socket) {
-        const ip = socket.handshake.address;
-        const playerByIp = this.getPlayerByIp(ip);
-        const matchedSocketId = playerByIp['playerId'];
-        if (this.players.has(matchedSocketId)) {
-            return this.players.get(matchedSocketId).wins
+        if (this.players.has(socket.id)) {
+            return this.players.get(socket.id).wins
         }
         else {
             return 0
@@ -272,19 +255,20 @@ class Room {
            if (state == CONSTANTS.IDLE_STATE) {
                socket.emit('draw idle');
            }
-           if (state == CONSTANTS.PREPARE_GAME_STATE) {
+           else if (state == CONSTANTS.PREPARE_GAME_STATE) {
                socket.emit('draw prepare');
            }
-           if (state == CONSTANTS.SETUP_STATE) {
+           else if (state == CONSTANTS.SETUP_STATE) {
                 // ???
            }
-           if (state == CONSTANTS.GUESS_STATE) {
+           else if (state == CONSTANTS.GUESS_STATE) {
                socket.emit('draw guess city', citystring, capital);
            }
-           if (state == CONSTANTS.REVEAL_STATE) {
+           else if (state == CONSTANTS.REVEAL_STATE) {
                socket.emit('draw reveal city', citystring, capital);
                revealAll();
            }
+           socket.emit('draw back button');
        })
     }
 

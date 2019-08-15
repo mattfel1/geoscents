@@ -9,6 +9,15 @@ const socket = io();
 
 const CONSTANTS = require('../resources/constants.js')
 
+// Handle chat submit
+ $("form#chat").submit(function(e) {
+   e.preventDefault();
+
+   socket.emit("send message", $(this).find("#msg_text").val(), function() {
+     $("form#chat #msg_text").val("");
+   });
+ });
+
 // Connect
 socket.emit('newPlayer');
 var chatcount = 0;
@@ -330,6 +339,16 @@ function postReady(rank) {
     panel_ctx.fillText("RDY", scoreboard_window['x'] + 5, scoreboard_window['y'] + 85 + rank * 40 )
 }
 
+function postBackToLobby() {
+    if (myRoom != CONSTANTS.LOBBY) {
+        panel_ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
+        panel_ctx.fillRect(lobby_button['x'], lobby_button['y'], lobby_button['width'], lobby_button['height']);
+        panel_ctx.font = buttons_font + "px Arial";
+        panel_ctx.fillStyle = 'black';
+        panel_ctx.fillText('Back to Lobby', lobby_button['x'] + 5, lobby_button['y'] + 28)
+    }
+}
+
 
 function postLobby() {
     panel_ctx.clearRect(time_descrip_window['x'], time_descrip_window['y'], time_descrip_window['width'], time_descrip_window['height'])
@@ -409,13 +428,10 @@ socket.on('clear scores', () => {
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText("Scoreboard:", scoreboard_window['x'] + 5, scoreboard_window['y'] + 45)
 
-    if (myRoom != CONSTANTS.LOBBY) {
-        panel_ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
-        panel_ctx.fillRect(lobby_button['x'], lobby_button['y'], lobby_button['width'], lobby_button['height']);
-        panel_ctx.font = buttons_font + "px Arial";
-        panel_ctx.fillStyle = 'black';
-        panel_ctx.fillText('Back to Lobby', lobby_button['x'] + 5, lobby_button['y'] + 28)
-    }
+    postBackToLobby();
+});
+socket.on('draw back button', () => {
+   postBackToLobby();
 });
 socket.on('post score', (rank, name, color, score, wins, you) => {
     postScore(rank,name,color,score, wins, you)
@@ -431,9 +447,7 @@ socket.on('draw round', (round) => {
     panel_ctx.font = panel.height*25/824 + "px Arial";
     panel_ctx.fillStyle = "black";
     panel_ctx.fillText('Round ' + round + '/' + CONSTANTS.GAME_ROUNDS, round_window['x']+2,round_window['y'] + 25);
-
-
-})
+});
 
 socket.on('draw timer', (time,color) => {
     postTime(time,color)

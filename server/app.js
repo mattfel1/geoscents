@@ -6,7 +6,7 @@ const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
-const PORT = 80;
+const PORT = 3016;
 const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server);
@@ -23,10 +23,10 @@ function log(payload) {
         + currentdate.getFullYear() + " @ "
         + currentdate.getHours() + ":"
         + currentdate.getMinutes() + ":";
-    fs.appendFile('/root/connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
-        if (err) throw err;
-        console.log('Saved!');
-    });
+    // fs.appendFile('/root/connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
+    //     if (err) throw err;
+    //     console.log('Saved!');
+    // });
 }
 
 app.use(morgan('dev'));
@@ -93,20 +93,6 @@ const WELCOME_MESSAGE1 = 'Welcome to Geoscents, an online multiplayer world geog
                           ' If this text is double-spaced or things don\'t look right, try refreshing the page!';
 
 
-function warnDuplicateIp(ip) {
-    Object.values(rooms).forEach((room) => {
-        const matches = room.getPlayerByIp(ip)['numMatch'];
-        if (matches > 0 && room.room != CONSTANTS.LOBBY) { // Conflict between lobby and other room
-            io.sockets.emit('update messages', room.room, "A player has joined the lobby who shares an IP address with a player in this room. Chats from these players may be buggy, but their gameplay should work fine.<br>");
-            io.sockets.emit('update messages', CONSTANTS.LOBBY, "A player in the " + room.room + " game shares an IP address with a player who just joined.  Chats from these players may be buggy, but their gameplay should work fine.<br>");
-        }
-        else if (matches > 1 && room.room == CONSTANTS.LOBBY) { // Conflict in lobby
-            io.sockets.emit('update messages', CONSTANTS.LOBBY, "A player in the lobby shares an IP address with a player who just joined.  Chats from these players may be buggy, but their gameplay should work fine.<br>");
-        }
-    })
-
-}
-
 io.on('connection', (socket) => {
 	console.log('a user connected:', socket.id);
 	socket.on('newPlayer', () => {
@@ -117,7 +103,6 @@ io.on('connection', (socket) => {
       var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'>Player " + rooms[CONSTANTS.LOBBY].getPlayerName(socket) + " has entered the lobby!</font> ]<br>";
       io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg)
       io.sockets.emit('update counts', rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
-      warnDuplicateIp(socket.handshake.address);
 	});
 	socket.on('disconnect', function() {
       if (playerRooms.has(socket.id)) {
@@ -157,9 +142,9 @@ io.on('connection', (socket) => {
           var leave_msg = "[ <font color='" + rooms[origin].getPlayerColor(socket) + "'>Player " + rooms[origin].getPlayerName(socket) + " has left " + origin + " and joined " + dest + "!</font> ]<br>";
           io.sockets.emit("update messages", origin, leave_msg)
           rooms[origin].killPlayer(socket);
+          socket.emit('moved to', dest);
           rooms[dest].addPlayer(socket, info);
           playerRooms.set(socket.id, rooms[dest]);
-          socket.emit('moved to', dest);
           var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'>Player " + rooms[dest].getPlayerName(socket) + " has joined " + dest + "!</font> ]<br>";
           io.sockets.emit("update messages", dest, join_msg)
           io.sockets.emit('update counts', rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
@@ -175,7 +160,7 @@ io.on('connection', (socket) => {
       const msg = sent_msg;
       const cb = () => {callback()};
       Object.values(rooms).forEach(function(room) {
-          if (room.getPlayerByIp(socket.handshake.address)['numMatch'] > 0) {
+          if (room.hasPlayer(socket)) {
               //TODO: Why is this socket.id different from the socket.id used to create player?  Will just use ip address for now...
 
               replaceAll = function(original, strReplace, strWith) {
