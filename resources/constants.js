@@ -62,7 +62,7 @@ module.exports = {
     US: 'N. America',
     EURO: 'Eurasia',
     MAX_INACTIVE: 15, // Rounds of no click before you get booted
-    MAX_S_INACTIVE: 300*30, // seconds * fps spent in lobby before you get booted
+    MAX_S_INACTIVE: 600*30, // seconds * fps spent in lobby before you get booted
 
     // Chat
     MAX_GAME_HIST: 100,
