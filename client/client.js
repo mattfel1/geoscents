@@ -30,6 +30,9 @@ var frame_cnt = 0;
 var frames = 8*9;
 var rate = 2;
 
+var isActive;
+var newMessage = false;
+
 function canvas_arrow(fromx, fromy, tox, toy){
     //variables to be used when creating the arrow
     var headlen = 30;
@@ -225,6 +228,7 @@ const touchDownHandler = (e) => {
 setInterval(() => {
   if (playerClick.touchDown) playerClick.downCount = playerClick.downCount + 1;
   if (!playerClick.touchDown) socket.emit('playerClick', playerClick);
+  if (newMessage) document.title = "(*) GeoScents"
 }, 1000 / CONSTANTS.FPS);
 document.addEventListener('mousedown', mouseDownHandler, false);
 document.addEventListener('mouseup', mouseUpHandler, false);
@@ -535,6 +539,9 @@ function isInside(pos, rect){
 socket.on("update messages", function(room, msg){
     if (room == myRoom) {
         var final_message = $("<font style=\"font-size:20px;\" />").html(msg);
+        if (!isActive) {
+            newMessage = true;
+        }
         $("#history").prepend(final_message);
         chatcount = chatcount + 1;
         if (chatcount > CONSTANTS.MAX_CHAT_HIST) {
@@ -579,4 +586,15 @@ socket.on('add history', (room, payload) => {
         }
     }
 });
+
+
+window.onfocus = function () {
+  isActive = true;
+  newMessage = false;
+  document.title = "GeoScents"
+};
+
+window.onblur = function () {
+  isActive = false;
+};
 
