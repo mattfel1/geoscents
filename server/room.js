@@ -387,11 +387,12 @@ class Room {
     }
 
     distributeMessage(senderSocket, new_sent_msg, cb) {
-      var senderName = "Player " + this.getPlayerName(senderSocket);
+      const getname = (s) => this.getPlayerTrophy(s)
       const senderColor = this.getPlayerColor(senderSocket);
       const senderTrophy = this.getPlayerTrophy(senderSocket);
       const room = this.room;
       this.clients.forEach((socket,id) => {
+          var senderName = "Player " + getname(senderSocket);
           if (this.players.has(id)) {
               const player = this.players.get(id);
               if (player.id == senderSocket.id) senderName = " ( -you- )";
