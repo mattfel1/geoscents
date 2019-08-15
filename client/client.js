@@ -30,7 +30,7 @@ var frame_cnt = 0;
 var frames = 8*9;
 var rate = 2;
 
-var isActive;
+var isActive = true;
 var newMessage = false;
 
 function canvas_arrow(fromx, fromy, tox, toy){
