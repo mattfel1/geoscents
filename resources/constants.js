@@ -1,7 +1,7 @@
 module.exports = {
 
     // Players
-    COLORS: ['#1f77b4','#2ca02c','#8cff1a','#9467bd','#8c564b','#e377c2','#737373','#adad1f','#17becf', 'blue', 'green', 'red', 'magenta', 'black'],
+    COLORS: ['#1f77b4','#2ca02c','#ff9900','#9467bd','#8c564b','#e377c2','#737373','#adad1f','#17becf', 'blue', 'green', 'red', 'magenta', 'black'],
     TRUTH_COLOR: 'white',
 
     // Map and Panel
