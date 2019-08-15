@@ -386,6 +386,21 @@ class Room {
       }
     }
 
+    distributeMessage(senderSocket, new_sent_msg, cb) {
+      var senderName = this.getPlayerName(senderSocket);
+      const senderColor = this.getPlayerColor(senderSocket);
+      const senderTrophy = this.getPlayerTrophy(senderSocket);
+      const room = this.room;
+      this.clients.forEach((socket,id) => {
+          if (this.players.has(id)) {
+              const player = this.players.get(id);
+              if (player.id == senderSocket.id) senderName = " ( -you- )";
+          }
+          const sent_msg = "[ " + room + " <font color='" + senderColor + "'>" + senderTrophy + "Player " + senderName + "</font> ]: " + new_sent_msg + "<br>";
+          socket.emit("update messages", room, sent_msg);
+          cb();
+      });
+    };
     printWinner(winner, score, color) {
         const room = this.room;
         var newRecord = false;

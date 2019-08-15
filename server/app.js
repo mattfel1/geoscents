@@ -169,13 +169,8 @@ io.on('connection', (socket) => {
               };
               var new_sent_msg = msg;
               CONSTANTS.PROFANITY.forEach((word) => {new_sent_msg = replaceAll(new_sent_msg, word, "****")});
-              const sent_msg = "[ " + room.room + " <font color='" + room.getPlayerColor(socket) + "'>" + room.getPlayerTrophy(socket) + "Player " + room.getPlayerName(socket) + "</font> ]: " + new_sent_msg + "<br>";
-              // if (msg.length > CONSTANTS.MAX_MSG) {
-              // 	msg = msg.substring(0, CONSTANTS.MAX_MSG)
-              // }
-              log("Message passed by " + socket.handshake.address + " " + socket.id + ": " + sent_msg)
-              io.sockets.emit("update messages", room.room, sent_msg);
-              cb();
+              log("Message passed by " + socket.handshake.address + " " + socket.id + ": " + new_sent_msg);
+              room.distributeMessage(socket, new_sent_msg, cb);
           }
       });
     });
