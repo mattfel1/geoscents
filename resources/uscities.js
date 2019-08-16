@@ -6930,27 +6930,27 @@ module.exports = {
     "id": 1840001442
   },
   {
-    "name": "Siuslaw National Forest",
+    "name": "Siuslaw",
     "city_ascii": "",
     "lat": 44.358715,
     "lon": -123.829994,
     "country": "USA",
     "iso2": "",
     "iso3": "",
-    "admin_name": "Nat’l Park",
+    "admin_name": "Nat’l Forest",
     "capital": "",
     "population": "",
     "id": ""
   },
   {
-    "name": "Whiskeytown National Recreation Area",
+    "name": "Whiskeytown",
     "city_ascii": "",
     "lat": 40.633495,
     "lon": -122.564247,
     "country": "USA",
     "iso2": "",
     "iso3": "",
-    "admin_name": "Nat’l Park",
+    "admin_name": "Nat’l Recreation Area",
     "capital": "",
     "population": "",
     "id": ""
@@ -7008,14 +7008,14 @@ module.exports = {
     "id": ""
   },
   {
-    "name": "Mojave National Preserve",
+    "name": "Mojave",
     "city_ascii": "",
     "lat": 35.141689,
     "lon": -115.510399,
     "country": "USA",
     "iso2": "",
     "iso3": "",
-    "admin_name": "Nat’l Park",
+    "admin_name": "Nat’l Preserve",
     "capital": "",
     "population": "",
     "id": ""
@@ -7034,14 +7034,14 @@ module.exports = {
     "id": ""
   },
   {
-    "name": "Manti-La Sal National Forest",
+    "name": "Manti-La Sal",
     "city_ascii": "",
     "lat": 39.18705,
     "lon": -111.37989,
     "country": "USA",
     "iso2": "",
     "iso3": "",
-    "admin_name": "Nat’l Park",
+    "admin_name": "Nat’l Forest",
     "capital": "",
     "population": "",
     "id": ""
@@ -7112,40 +7112,40 @@ module.exports = {
     "id": ""
   },
   {
-    "name": "Bandelier National Monument",
+    "name": "Bandelier",
     "city_ascii": "",
     "lat": 35.767288,
     "lon": -106.311607,
     "country": "USA",
     "iso2": "",
     "iso3": "",
-    "admin_name": "Nat’l Park",
+    "admin_name": "Nat’l Monument",
     "capital": "",
     "population": "",
     "id": ""
   },
   {
-    "name": "Little Sandy National Wildlife Refuge",
+    "name": "Little Sandy",
     "city_ascii": "",
     "lat": 32.590797,
     "lon": -95.273666,
     "country": "USA",
     "iso2": "",
     "iso3": "",
-    "admin_name": "Nat’l Park",
+    "admin_name": "Nat'l Wildlife Refuge",
     "capital": "",
     "population": "",
     "id": ""
   },
   {
-    "name": "Anahuac National Wildlife Refuge",
+    "name": "Anahuac ",
     "city_ascii": "",
     "lat": 29.6103,
     "lon": -94.449081,
     "country": "USA",
     "iso2": "",
     "iso3": "",
-    "admin_name": "Nat’l Park",
+    "admin_name": "Nat'l Wildlife Refuge",
     "capital": "",
     "population": "",
     "id": ""
@@ -7164,27 +7164,27 @@ module.exports = {
     "id": ""
   },
   {
-    "name": "Buffalo National River",
+    "name": "Buffalo",
     "city_ascii": "",
     "lat": 35.985512,
     "lon": -92.757652,
     "country": "USA",
     "iso2": "",
     "iso3": "",
-    "admin_name": "Nat’l Park",
+    "admin_name": "Nat’l River",
     "capital": "",
     "population": "",
     "id": ""
   },
   {
-    "name": "Chattahoochee National Forest",
+    "name": "Chattahoochee",
     "city_ascii": "",
     "lat": 34.765972,
     "lon": -84.143517,
     "country": "USA",
     "iso2": "",
     "iso3": "",
-    "admin_name": "Nat’l Park",
+    "admin_name": "Nat’l Forest",
     "capital": "",
     "population": "",
     "id": ""
@@ -7203,14 +7203,14 @@ module.exports = {
     "id": ""
   },
   {
-    "name": "Okefenokee National Wildlife Refuge",
+    "name": "Okefenokee",
     "city_ascii": "",
     "lat": 30.77323,
     "lon": -82.292732,
     "country": "USA",
     "iso2": "",
     "iso3": "",
-    "admin_name": "Nat’l Park",
+    "admin_name": "Nat’l Wildlife Refuge",
     "capital": "",
     "population": "",
     "id": ""
