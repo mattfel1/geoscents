@@ -61,6 +61,9 @@ app.get('/resources/spritesheet.png', (req, res, next) => {
 app.get('/resources/favicon.png', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '..', 'resources/favicon.png'));
 });
+app.get('/overlaypopup.css', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '..', 'overlaypopup.css'));
+});
 
 app.use((req, res, next) => {
 	const err = new Error('Not Found');
@@ -100,9 +103,6 @@ io.on('connection', (socket) => {
       playerRooms.set(socket.id, rooms[CONSTANTS.LOBBY]);
       log("User connected    " + socket.handshake.address + ", " + socket.id);
 	  socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
-      var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'>Player " + rooms[CONSTANTS.LOBBY].getPlayerName(socket) + " has entered the lobby!</font> ]<br>";
-      io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg)
-      io.sockets.emit('update counts', rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
 	});
 	socket.on('disconnect', function() {
       if (playerRooms.has(socket.id)) {
@@ -114,6 +114,22 @@ io.on('connection', (socket) => {
           io.sockets.emit('update counts', rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
       }
 	});
+	socket.on('playerJoin', (newname, callback) => {
+	    var name = newname;
+        log("User named themself    " + newname + ", " + socket.id);
+	    if (rooms[CONSTANTS.LOBBY].hasPlayer(socket)) {
+	        var badname = "";
+	        CONSTANTS.PROFANITY.forEach((word) => {if (newname.toUpperCase().includes(word.toUpperCase())) badname = "I used a bad word in my name :(";});
+	        if (badname != "") {
+                name = 'Naughty'
+            }
+	        rooms[CONSTANTS.LOBBY].renamePlayer(socket, name);
+            var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'>" + rooms[CONSTANTS.LOBBY].getPlayerName(socket) + " has entered the lobby!</font> ] " + badname + "<br>";
+            io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
+            io.sockets.emit('update counts', rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
+	    }
+        callback()
+    });
     socket.on('playerReady', () => {
       if (playerRooms.has(socket.id)) {
           const room = playerRooms.get(socket.id);
@@ -139,13 +155,13 @@ io.on('connection', (socket) => {
               'name': oldName,
               'wins': oldWins
           }
-          var leave_msg = "[ <font color='" + rooms[origin].getPlayerColor(socket) + "'>Player " + rooms[origin].getPlayerName(socket) + " has left " + origin + " and joined " + dest + "!</font> ]<br>";
+          var leave_msg = "[ <font color='" + rooms[origin].getPlayerColor(socket) + "'>" + rooms[origin].getPlayerName(socket) + " has left " + origin + " and joined " + dest + "!</font> ]<br>";
           io.sockets.emit("update messages", origin, leave_msg)
           rooms[origin].killPlayer(socket);
           socket.emit('moved to', dest);
           rooms[dest].addPlayer(socket, info);
           playerRooms.set(socket.id, rooms[dest]);
-          var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'>Player " + rooms[dest].getPlayerName(socket) + " has joined " + dest + "!</font> ]<br>";
+          var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'>" + rooms[dest].getPlayerName(socket) + " has joined " + dest + "!</font> ]<br>";
           io.sockets.emit("update messages", dest, join_msg)
           io.sockets.emit('update counts', rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
       }

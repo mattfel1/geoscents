@@ -9,6 +9,47 @@ const socket = io();
 
 const CONSTANTS = require('../resources/constants.js')
 
+var choseName = false;
+
+socket.emit('newPlayer')
+function join(name,cb) {
+    choseName = true;
+    socket.emit('playerJoin', name, cb);
+}
+
+// function to show our popups
+function showPopup(){
+    var docHeight = $(document).height(); //grab the height of the page
+    var scrollTop = $(window).scrollTop(); //grab the px value from the top of the page to where you're scrolling
+    $('.overlay-bg').show().css({'height' : docHeight}); //display your popup background and set height to the page height
+    $('.popup').show().css({'top': scrollTop+20+'px'}); //show the appropriate popup and set the content 20px from the window top
+    $('#selected_name').focus();
+}
+
+// function to close our popups
+function closePopup(){
+    $('.overlay-bg, .overlay-content').hide(); //hide the overlay
+}
+// hide popup when user clicks on close button or if user clicks anywhere outside the container
+$('.close-btn, .overlay-bg').click(function(){
+    join('', () => {closePopup()});
+});
+// hide the popup when user presses the esc key
+$(document).keyup(function(e) {
+    if (e.keyCode == 27) { // if user presses esc key
+        join('', () => {closePopup()});
+    }
+});
+ // hide popup when user sends name
+  $("form#rename").submit(function(e) {
+   e.preventDefault();
+
+   join($(this).find("#selected_name").val(), function() {
+     $("form#rename #selected_name").val("");
+     closePopup()
+   });
+ });
+
 // Handle chat submit
  $("form#chat").submit(function(e) {
    e.preventDefault();
@@ -18,8 +59,13 @@ const CONSTANTS = require('../resources/constants.js')
    });
  });
 
+
+
+$(document).ready(function(){
+    if (choseName == false) showPopup();
+});
+
 // Connect
-socket.emit('newPlayer');
 var chatcount = 0;
 var histcount = 0;
 var myRoom = CONSTANTS.LOBBY;
@@ -314,7 +360,7 @@ const scoreboard_window = {
     height: 2*panel.height/3
 };
 const record_window = {
-    x: panel.width*2/3 - 70,
+    x: panel.width*2/5 - 70,
     y: panel.height/3 + 20,
     width: panel.width/3 + 50,
     height: 35
@@ -340,7 +386,7 @@ function postTimeDescrip(info) {
 function postScore(rank, name, color, score, wins, you, trophy) {
     panel_ctx.font = info_big_font + "px Arial";
     panel_ctx.fillStyle = color;
-    panel_ctx.fillText("Player " + name + ": " + score + '  (' + wins + ' 🏆)' + you, scoreboard_window['x'] + 80, scoreboard_window['y'] + 85 + rank * 40 );
+    panel_ctx.fillText(name + ": " + score + '  (' + wins + ' 🏆)' + you, scoreboard_window['x'] + 80, scoreboard_window['y'] + 85 + rank * 40 );
     if (trophy) panel_ctx.fillText("🏆", scoreboard_window['x'] + 50, scoreboard_window['y'] + 85 )
 }
 
@@ -431,18 +477,18 @@ function postInfo(info1, info2, button, capital) {
     }
 }
 
-socket.on('clear scores', (record, color, drawPopper) => {
+socket.on('clear scores', (record, color, name, drawPopper) => {
     panel_ctx.clearRect(scoreboard_window['x'], scoreboard_window['y'], scoreboard_window['width'], scoreboard_window['height']);
     panel_ctx.fillStyle =  "#e3e4e6";
     panel_ctx.fillRect(scoreboard_window['x'], scoreboard_window['y'], scoreboard_window['width'], scoreboard_window['height']);
     panel_ctx.font = "35px Arial";
     panel_ctx.fillStyle = "black";
-    panel_ctx.fillText("Scoreboard:", scoreboard_window['x'] + 5, scoreboard_window['y'] + 45)
+    panel_ctx.fillText("Scores:", scoreboard_window['x'] + 5, scoreboard_window['y'] + 45)
 
     if (myRoom != CONSTANTS.LOBBY) {
         panel_ctx.fillStyle = color;
         panel_ctx.font = "22px Arial";
-        panel_ctx.fillText("Today's Record: " + record, record_window['x'] + 5, record_window['y'] + 20);
+        panel_ctx.fillText("Today's Record " + record + " (" + name + ")", record_window['x'] + 5, record_window['y'] + 20);
         if (drawPopper) panel_ctx.fillText("🎉", record_window['x'] - 20, record_window['y'] + 20);
     }
 
@@ -563,7 +609,7 @@ socket.on('break history', (room, winner, score, color, record) => {
     if (room == myRoom) {
         var newRecord = "";
         if (record) newRecord = " 🎉 NEW RECORD 🎉";
-        var assembled = "<br>******* " + myRoom + " WINNER: <font color=\"" + color + "\">Player " + winner + " (" + score + " points)</font>" + newRecord + " *******<br>"
+        var assembled = "<br>******* " + myRoom + " WINNER: <font color=\"" + color + "\">" + winner + " (" + score + " points)</font>" + newRecord + " *******<br>"
         var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
         $("#gamehist").prepend(" ");
         $("#gamehist").prepend(final_message);

@@ -9,14 +9,25 @@
     <script src="/socket.io/socket.io.js"></script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <link rel="icon" type="image/png" href="resources/favicon.png" sizes="48x48">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="overlaypopup.css" />
     <meta name="GeoScents" content="An online multiplayer world geography game!  Test your knowledge of city locations. This is a recreation of the game Geosense from geosense.net.">
   </head>
   <body>
-<!--  <body bgcolor="#E6E6FA">-->
+
+<div class="overlay-bg">
+</div>
+<div class="overlay-content popup">
+    <p>Please write a name or click away to get a random name</p>
+                     <form id="rename">
+                     <input type="text" id="selected_name" autofocus name="selected_name" style="width: 100px;" maxlength="10" required pattern="[a-zA-Z][a-zA-Z0-9 ?!]+" title="Name should only contain letters, numbers, and spaces" />
+                     <input type="submit" value="Join!" />
+                     </form>
+</div>
+
   <div style="background:#E6E6FA;border:1px solid black;width:1900px;margin-left:0px;margin-top:0px;margin-bottom:0px;margin-right:0px">
       <div id='container'>
           <table>
-
               <tr>
                   <td padding="0">
                       <div>

@@ -25,6 +25,7 @@ class Room {
       this.timerColor = CONSTANTS.LOBBY_COLOR;
       this.record = Math.floor(Math.random() * CONSTANTS.RECORD_INIT_RANGE) + CONSTANTS.RECORD_INIT_BASE;
       this.recordColor = CONSTANTS.COLORS[Math.floor(Math.random()*CONSTANTS.COLORS.length)];
+      this.recordName = CONSTANTS.RANDOM_NAMES[Math.floor(Math.random()*CONSTANTS.RANDOM_NAMES.length)];
     }
 
     // Player count
@@ -33,7 +34,7 @@ class Room {
     }
     // Player basic IO
     addPlayer(socket,info) {
-      var player = new Player(socket.id, this.players.size, this.room, socket.handshake.address, this.ordinalCounter, this.ordinalCounter % 100,info)
+      var player = new Player(socket.id, this.players.size, this.room, socket.handshake.address, this.ordinalCounter, "Player " + this.ordinalCounter % 100,info)
       this.clients.set(socket.id, socket);
       this.players.set(socket.id, player);
       this.ordinalCounter = this.ordinalCounter + 1;
@@ -46,6 +47,17 @@ class Room {
     hasPlayer(socket) {
         return this.clients.has(socket.id) && this.players.has(socket.id)
     }
+
+    renamePlayer(socket, name) {
+        if (this.players.has(socket.id)) {
+            if (name != '') this.players.get(socket.id).name = name;
+            this.players.get(socket.id).inGame = true;
+        }
+      this.drawUpperPanel(socket.id);
+      this.drawLowerPanel(socket.id);
+      socket.emit('fresh map', this.room);
+    }
+
 
     getPlayerName(socket) {
         if (this.players.has(socket.id)) {
@@ -102,7 +114,7 @@ class Room {
           const color = player.color;
           const name = player.name;
           const room = this.room;
-          var boot_msg = "[ <font color='" + color + "'>Player " + name + " has been booted due to inactivity!</font> ]<br>";
+          var boot_msg = "[ <font color='" + color + "'>" + name + " has been booted due to inactivity!</font> ]<br>";
           this.players.delete(socket.id);
           this.clients.forEach(function(s,id) {
               s.emit('update messages', room, boot_msg)
@@ -146,7 +158,7 @@ class Room {
           if (player.id == socketId) {
               you = '   <-- you';
           }
-          socket.emit('post score', player.rank, player.name, player.color, player.score, player.wins, you, player.trophy);
+          if (player.inGame) socket.emit('post score', player.rank, player.name, player.color, player.score, player.wins, you, player.trophy);
         })
     }
 
@@ -285,9 +297,10 @@ class Room {
         const players = this.players;
         const record = this.record;
         const color = this.recordColor;
+        const name = this.recordName;
         const drawPopper = (this.winner != null && this.winner.trophy && this.winner.score == this.record)
         this.clients.forEach((s,id) => {
-            s.emit('clear scores', record, color, drawPopper);
+            s.emit('clear scores', record, color, name, drawPopper);
             this.printScoresWithSelf(s,id);
         });
         this.clients.forEach(function(s,id) {
@@ -299,7 +312,7 @@ class Room {
     }
 
     sortPlayers() {
-        var sortedPlayers = Array.from(this.players.values()).sort((a, b) => {return b.score - a.score})
+        var sortedPlayers = Array.from(this.players.values()).filter((p) => p.inGame).sort((a, b) => {return b.score - a.score});
         Array.from(sortedPlayers.values()).forEach((p,i) => {p.rank = i});
         this.winner = Array.from(sortedPlayers)[0];
         return sortedPlayers;
@@ -392,7 +405,7 @@ class Room {
       const senderTrophy = this.getPlayerTrophy(senderSocket);
       const room = this.room;
       this.clients.forEach((socket,id) => {
-          var senderName = "Player " + getname(senderSocket);
+          var senderName = getname(senderSocket);
           if (this.players.has(id)) {
               const player = this.players.get(id);
               if (player.id == senderSocket.id) senderName = " ( -you- )";
@@ -408,6 +421,7 @@ class Room {
         if (score > this.record) {
             this.record = score;
             this.recordColor = color;
+            this.recordName = winner;
             newRecord = true;
         }
         this.clients.forEach((socket,id) => {
@@ -431,7 +445,7 @@ class Room {
     historyScore(player, score) {
         const room = this.room;
         this.clients.forEach((socket,id) => {
-            var name = "Player " + player.name;
+            var name = player.name;
             if (player.id == id) name = " ( -you- )";
             socket.emit('add history', room, "<font color=\"" + player.color +"\">  " + name + ": " + score + "</font><br>")
         });

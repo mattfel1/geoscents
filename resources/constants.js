@@ -2,6 +2,9 @@ module.exports = {
 
     // Players
     COLORS: ['#1f77b4','#2ca02c','#995c00','#9467bd','#8c564b','#e377c2','#737373','#adad1f','#17becf', 'blue', 'green', 'red', 'magenta', 'black'],
+    RANDOM_NAMES: ['Emma','Liam','Noah','Olivia','Ava','Isabella','Sophia','Elijah','Logan','Mia','Mason','James','Aiden','Ethan','Lucas','Jacob',
+        'Michael','Matthew','Benjamin','Amelia','Charlotte','Alexander','William','Daniel','Jayden','Merica!','happy','lucky','sleepy','funky',
+        'KnuckleHed','geoNow!','fish','dog','cat','meow','ruff','woof','L337','AAAAAAAAAA','knightmare','asdf','aoeu','qwerty'],
     TRUTH_COLOR: 'white',
 
     // Map and Panel
@@ -67,5 +70,5 @@ module.exports = {
     // Chat
     MAX_GAME_HIST: 100,
     MAX_CHAT_HIST: 100,
-    PROFANITY: ['shit', 'damn', 'ass', 'fuck', 'bitch', 'cunt', 'fuuck', 'fuuuck', 'shiit'] // TODO: Use regex
+    PROFANITY: ['shit', 'damn', 'fuck', 'bitch', 'cunt', ' ass ', 'asshole', 'fuuck', 'fuuuck', 'shiit'] // TODO: Use regex
 }
