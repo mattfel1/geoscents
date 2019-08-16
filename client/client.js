@@ -36,7 +36,7 @@ $('.close-btn, .overlay-bg').click(function(){
 });
 // hide the popup when user presses the esc key
 $(document).keyup(function(e) {
-    if (e.keyCode == 27) { // if user presses esc key
+    if (e.keyCode == 27 && !choseName) { // if user presses esc key
         join('', () => {closePopup()});
     }
 });
@@ -44,10 +44,12 @@ $(document).keyup(function(e) {
   $("form#rename").submit(function(e) {
    e.preventDefault();
 
-   join($(this).find("#selected_name").val(), function() {
-     $("form#rename #selected_name").val("");
-     closePopup()
-   });
+   if (!choseName) {
+       join($(this).find("#selected_name").val(), function () {
+           $("form#rename #selected_name").val("");
+           closePopup()
+       });
+   }
  });
 
 // Handle chat submit
