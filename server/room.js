@@ -7,6 +7,22 @@ const CONSTANTS = require('../resources/constants.js');
 const Geography = require('./geography.js');
 const Player = require('./player.js');
 const global = require('./app.js')
+const fs = require('fs');
+
+const log = (payload) => {
+    const currentdate = new Date();
+    const timestamp = currentdate.getDate() + "/"
+        + (currentdate.getMonth() + 1) + "/"
+        + currentdate.getFullYear() + " @ "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":";
+    if (fs.existsSync('/root/connections.log')) {
+        fs.appendFile('/root/connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
+            if (err) throw err;
+            // console.log('Saved!');
+        });
+    }
+}
 
 class Room {
     constructor(map) {
@@ -424,7 +440,7 @@ class Room {
             this.recordColor = color;
             this.recordName = winner;
             newRecord = true;
-            global.log("new record by " + winner + ", " + score)
+            log("new record by " + winner + ", " + score)
         }
         this.clients.forEach((socket,id) => {
             socket.emit('break history',  room, winner, score, color, newRecord);
