@@ -23,12 +23,12 @@ class Player {
         this.consecutiveSecondsInactive = 0;
         this.trophy = false;
         this.room = room;
-        this.inGame = false;
+        this.choseName = false;
         this.name = name;
 
         // Override values based on info map
 		if (info['moved']) {
-			this.inGame = true;
+			this.choseName = true;
 			this.color = info['color'];
 			this.wins = info['wins'];
 			this.name = info['name'];

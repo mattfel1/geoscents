@@ -67,7 +67,7 @@ class Room {
     renamePlayer(socket, name) {
         if (this.players.has(socket.id)) {
             if (name != '') this.players.get(socket.id).name = name;
-            this.players.get(socket.id).inGame = true;
+            this.players.get(socket.id).choseName = true;
         }
       this.drawUpperPanel(socket.id);
       this.drawLowerPanel(socket.id);
@@ -82,6 +82,9 @@ class Room {
         else {
             return socket.id.substring(5,0);
         }
+    }
+    playerChoseName(socket) {
+        return this.players.has(socket.id) && this.players.get(socket.id).choseName;
     }
     getPlayerTrophy(socket) {
         var trophy = "";
@@ -172,9 +175,9 @@ class Room {
         Array.from(this.players.values()).forEach(function(player, index) {
           var you = '';
           if (player.id == socketId) {
-              you = '   <-- you';
+              you = '  <-- you';
           }
-          if (player.inGame) socket.emit('post score', player.rank, player.name, player.color, player.score, player.wins, you, player.trophy);
+          if (player.choseName) socket.emit('post score', player.rank, player.name, player.color, player.score, player.wins, you, player.trophy);
         })
     }
 
@@ -329,7 +332,7 @@ class Room {
     }
 
     sortPlayers() {
-        var sortedPlayers = Array.from(this.players.values()).filter((p) => p.inGame).sort((a, b) => {return b.score - a.score});
+        var sortedPlayers = Array.from(this.players.values()).filter((p) => p.choseName).sort((a, b) => {return b.score - a.score});
         Array.from(sortedPlayers.values()).forEach((p,i) => {p.rank = i});
         this.winner = Array.from(sortedPlayers)[0];
         return sortedPlayers;

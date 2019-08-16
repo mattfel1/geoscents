@@ -109,9 +109,11 @@ io.on('connection', (socket) => {
       if (playerRooms.has(socket.id)) {
           const room = playerRooms.get(socket.id);
           log("User disconnected " + socket.handshake.address + ", " + socket.id)
-          var leave_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>" + room.getPlayerName(socket) + " has left " + room.room + "!</font> ]<br>";
-          io.sockets.emit("update messages", room.room, leave_msg);
-          room.killPlayer(socket)
+          if (room.playerChoseName(socket)) {
+              var leave_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>" + room.getPlayerName(socket) + " has left " + room.room + "!</font> ]<br>";
+              io.sockets.emit("update messages", room.room, leave_msg);
+          }
+          room.killPlayer(socket);
           io.sockets.emit('update counts', rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
       }
 	});
