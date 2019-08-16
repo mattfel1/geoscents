@@ -440,7 +440,7 @@ class Room {
             this.recordColor = color;
             this.recordName = winner;
             newRecord = true;
-            log("new record by " + winner + ", " + score)
+            log(room + ": New record by " + winner + ", " + score)
         }
         this.clients.forEach((socket,id) => {
             socket.emit('break history',  room, winner, score, color, newRecord);
