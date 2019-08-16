@@ -23,10 +23,12 @@ function log(payload) {
         + currentdate.getFullYear() + " @ "
         + currentdate.getHours() + ":"
         + currentdate.getMinutes() + ":";
-    fs.appendFile('/root/connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
-        if (err) throw err;
-        console.log('Saved!');
-    });
+    if (fs.existsSync('/root/connections.log')) {
+        fs.appendFile('/root/connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
+            if (err) throw err;
+            // console.log('Saved!');
+        });
+    }
 }
 
 app.use(morgan('dev'));
@@ -108,7 +110,7 @@ io.on('connection', (socket) => {
       if (playerRooms.has(socket.id)) {
           const room = playerRooms.get(socket.id);
           log("User disconnected " + socket.handshake.address + ", " + socket.id)
-          var leave_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>Player " + room.getPlayerName(socket) + " has left " + room.room + "!</font> ]<br>";
+          var leave_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>" + room.getPlayerName(socket) + " has left " + room.room + "!</font> ]<br>";
           io.sockets.emit("update messages", room.room, leave_msg);
           room.killPlayer(socket)
           io.sockets.emit('update counts', rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
