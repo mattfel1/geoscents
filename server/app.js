@@ -15,7 +15,6 @@ const fs = require('fs');
 // Game mechanics
 const CONSTANTS = require('../resources/constants.js');
 
-
 function log(payload) {
     const currentdate = new Date();
     const timestamp = currentdate.getDate() + "/"
@@ -199,5 +198,5 @@ setInterval(() => {
     Object.values(rooms).forEach((room) => room.fsm());
 }, 1000 / CONSTANTS.FPS);
 
-module.exports = io;
+module.exports = {io,log};
 
