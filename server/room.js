@@ -193,7 +193,7 @@ class Room {
           if (!player.clicked) {
               dist = 9999;
           }
-          const timeLogistic = 20/(2+Mathe.exp(0.8*(-timeBonus+7)))+1
+          const timeLogistic = 20/(2+Math.exp(0.8*(-timeBonus+7)))+1
           const update = Math.exp(-Math.pow(dist, 2) / 1000) * timeLogistic * 50;
           historyScore(player, " + " + Math.floor(update ) + " (Distance: " + Math.floor(dist) + ", Time Bonus: " + (Math.floor(timeBonus * 10) / 10) + "s)")
           player.score = Math.floor(player.score + update)
