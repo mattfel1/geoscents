@@ -15,7 +15,7 @@ const fs = require('fs');
 // Game mechanics
 const CONSTANTS = require('../resources/constants.js');
 
-const log = (payload) {
+const log = (payload) => {
     const currentdate = new Date();
     const timestamp = currentdate.getDate() + "/"
         + (currentdate.getMonth() + 1) + "/"
