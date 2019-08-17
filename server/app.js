@@ -6,29 +6,14 @@ const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
-const PORT = 80;
+const PORT = 3000;
 const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server);
-const fs = require('fs');
+const helpers = require('../resources/helpers.js')
 
 // Game mechanics
 const CONSTANTS = require('../resources/constants.js');
-
-const log = (payload) => {
-    const currentdate = new Date();
-    const timestamp = currentdate.getDate() + "/"
-        + (currentdate.getMonth() + 1) + "/"
-        + currentdate.getFullYear() + " @ "
-        + currentdate.getHours() + ":"
-        + currentdate.getMinutes() + ":";
-    if (fs.existsSync('/root/connections.log')) {
-        fs.appendFile('/root/connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
-            if (err) throw err;
-            // console.log('Saved!');
-        });
-    }
-}
 
 app.use(morgan('dev'));
 
@@ -102,15 +87,16 @@ io.on('connection', (socket) => {
 	socket.on('newPlayer', () => {
 	  rooms[CONSTANTS.LOBBY].addPlayer(socket, {'moved': false});
       playerRooms.set(socket.id, rooms[CONSTANTS.LOBBY]);
-      log("User connected    " + socket.handshake.address + ", " + socket.id);
+      io.sockets.emit('update counts', rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
+      helpers.log("User connected    " + socket.handshake.address);
 	  socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
 	});
 	socket.on('disconnect', function() {
       if (playerRooms.has(socket.id)) {
           const room = playerRooms.get(socket.id);
-          log("User disconnected " + socket.handshake.address + ", " + socket.id)
+          helpers.log("User disconnected " + socket.handshake.address);
           if (room.playerChoseName(socket)) {
-              var leave_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>" + room.getPlayerName(socket) + " has left " + room.room + "!</font> ]<br>";
+              var leave_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>" + room.getPlayerName(socket) + " has exited GeoScents!</font> ]<br>";
               io.sockets.emit("update messages", room.room, leave_msg);
           }
           room.killPlayer(socket);
@@ -119,7 +105,7 @@ io.on('connection', (socket) => {
 	});
 	socket.on('playerJoin', (newname, callback) => {
 	    var name = newname;
-        log("User named themself    " + newname + ", " + socket.id);
+        helpers.log("User " + socket.handshake.address + " named themself    " + newname);
 	    if (rooms[CONSTANTS.LOBBY].hasPlayer(socket)) {
 	        var badname = "";
 	        CONSTANTS.PROFANITY.forEach((word) => {if (newname.toUpperCase().includes(word.toUpperCase())) badname = "I used a bad word in my name :(";});
@@ -188,7 +174,7 @@ io.on('connection', (socket) => {
               };
               var new_sent_msg = msg;
               CONSTANTS.PROFANITY.forEach((word) => {new_sent_msg = replaceAll(new_sent_msg, word, "****")});
-              log("Message passed by " + socket.handshake.address + " " + socket.id + ": " + new_sent_msg);
+              helpers.log("Message passed by " + socket.handshake.address + " " + socket.id + ": " + new_sent_msg);
               room.distributeMessage(socket, new_sent_msg, cb);
           }
       });
@@ -200,5 +186,5 @@ setInterval(() => {
     Object.values(rooms).forEach((room) => room.fsm());
 }, 1000 / CONSTANTS.FPS);
 
-module.exports = {io,log};
+module.exports = {io};
 

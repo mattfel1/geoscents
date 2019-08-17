@@ -6,23 +6,7 @@
 const CONSTANTS = require('../resources/constants.js');
 const Geography = require('./geography.js');
 const Player = require('./player.js');
-const global = require('./app.js')
-const fs = require('fs');
-
-const log = (payload) => {
-    const currentdate = new Date();
-    const timestamp = currentdate.getDate() + "/"
-        + (currentdate.getMonth() + 1) + "/"
-        + currentdate.getFullYear() + " @ "
-        + currentdate.getHours() + ":"
-        + currentdate.getMinutes() + ":";
-    if (fs.existsSync('/root/connections.log')) {
-        fs.appendFile('/root/connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
-            if (err) throw err;
-            // console.log('Saved!');
-        });
-    }
-}
+const helpers = require('../resources/helpers.js')
 
 class Room {
     constructor(map) {
@@ -187,7 +171,7 @@ class Room {
 
     stringifyTarget(){
         var state = ''
-        if (this.target['country'] == 'United States' || this.target['country'] == 'USA' || this.target['country'] == 'Canada' || this.target['country'] == 'Mexico') {
+        if (this.target['country'] == 'United States' || this.target['country'] == 'USA' || this.target['country'] == 'Canada' || this.target['country'] == 'Mexico' || this.target['country'] == 'India' || this.target['country'] == 'China') {
             state = ', ' + this.target['admin_name'];
         }
         var pop = 0;
@@ -443,7 +427,7 @@ class Room {
             this.recordColor = color;
             this.recordName = winner;
             newRecord = true;
-            log(room + ": New record by " + winner + ", " + score)
+            helpers.log(room + ": New record by " + winner + ", " + score)
         }
         this.clients.forEach((socket,id) => {
             socket.emit('break history',  room, winner, score, color, newRecord);

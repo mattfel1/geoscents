@@ -55,6 +55,17 @@ module.exports = {
     BUBBLE_WIDTH: 3,
     LONGCITY: 40, // # characters for city string to be considered "long"
     FPS: 30,
+    BUTTONS_HEIGHT: 40,
+    INFO_BIG_FONT: 35,
+    INFO_X: 18,
+    BUTTONS_HEIGHT: 45,
+    INFO_SPACING: 38,
+    INFO_BIG_FONT: 28,
+    INFO_LITTLE_FONT: 20,
+    BUTTONS_SPACING: 15,
+    BUTTONS_WIDTH: 252,
+    BUTTONS_FONT: 22,
+
 
     // Rooms
     GAME_ROUNDS: 10,
