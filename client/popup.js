@@ -8,6 +8,9 @@ class Popup {
         this.choseName = true;
         this.socket.emit('playerJoin', name, cb);
     }
+    getChoseName() {
+        return this.choseName;
+    }
 
     // function to show our popups
     showPopup() {
@@ -20,14 +23,14 @@ class Popup {
         }
         const join = (name,cb) => this.join(name,cb);
         const closePopup = () => this.closePopup();
-        const choseName = this.choseName;
+        const choseName = () => this.getChoseName();
         // hide popup when user clicks on close button or if user clicks anywhere outside the container
         $('.close-btn, .overlay-bg').click(function(){
             join('', () => {closePopup()});
         });
         // hide the this.when user presses the esc key
         $(document).keyup(function(e) {
-            if (e.keyCode == 27 && !choseName) { // if user presses esc key
+            if (e.keyCode == 27 && !choseName()) { // if user presses esc key
                 join('', () => {closePopup()});
             }
         });
@@ -36,7 +39,7 @@ class Popup {
           $("form#rename").submit(function(e) {
            e.preventDefault();
 
-           if (!choseName) {
+           if (!choseName()) {
                join($(this).find("#selected_name").val(), function () {
                    $("form#rename #selected_name").val("");
                    closePopup()
@@ -47,6 +50,7 @@ class Popup {
 
     // function to close our popups
     closePopup(){
+        $('#msg_text').focus();
         $('.overlay-bg, .overlay-content').hide(); //hide the overlay
     }
 }
