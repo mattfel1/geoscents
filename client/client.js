@@ -35,22 +35,21 @@ $(document).ready(function(){
 
     /**** Scoreboard *****/
     const scoreboard = new Scoreboard(socket);
-    socket.on('clear scores', (record, color, name, drawPopper) => {scoreboard.clearScores(record,color,name,drawPopper)});
-    socket.on('post score', (rank, name, color, score, wins, you, trophy) => {scoreboard.postScore(rank,name,color,score,wins,you,trophy)});
-    socket.on('player ready', (rank) => {scoreboard.postReady(rank)});
+    socket.on('clear scores', () => {scoreboard.clearScores()});
+    socket.on('post score', (rank, name, color, score, wins, ready, trophy) => {scoreboard.postScore(rank,name,color,score,wins,ready,trophy)});
+    socket.on('post record', (color, score, name, drawPopper) => {scoreboard.postRecord(color, score, name, drawPopper)});
+    socket.on('announce record', (name, score, color) => {socket.emit("announcement", '[' + myRoom + ' record has been broken by <font color="' + color + '">' + name + ' (' + score + ')</font><br>')});
 
     /**** Commands *****/
     const commands = new Commands(socket);
-    socket.on('update counts', (w,u,e) => {commands.updateCounts(w,u,e);})
-    socket.on('draw back button', () => {commands.postBackToLobby()});
-    socket.on('draw lobby', () => {commands.postLobby()});
-    socket.on('draw round', (round) => {commands.drawRound(round)});
+    socket.on('update counts', (l,w,u,e) => {commands.updateCounts(l,w,u,e);commands.postButtons();})
+    socket.on('draw buttons', () => {commands.postButtons()});
     socket.on('draw timer', (time,color) => {commands.postTime(time,color)});
-    socket.on('draw prepare', () => {commands.postInfo("Preparing next game...", "", true, ""); commands.postTimeDescrip("seconds until autostart")});
-    socket.on('draw booted', () => {commands.postInfo("You have been booted due to inactivity!", "Please refresh to rejoin",false, "")});
-    socket.on('draw idle', () => {commands.postInfo("Waiting for players to join...", "", false, "")})
-    socket.on('draw guess city', (city, capital) => {commands.postInfo("Locate this city!", city, false, capital); commands.postTimeDescrip("seconds remaining")});
-    socket.on('draw reveal city', (city, capital) => {commands.postInfo("Revealing...", city, false, capital); commands.postTimeDescrip("seconds until next round")});
+    socket.on('draw prepare', (round) => {commands.drawCommand(" seconds until new game auto-starts...", "", "", round, true)});
+    socket.on('draw guess city', (city, capital, round) => {commands.drawCommand( "Find!       ", city, capital, round, false);});
+    socket.on('draw reveal city', (city, capital, round) => {commands.drawCommand("Revealing...", city, capital, round, false)});
+    socket.on('draw booted', () => {commands.drawCommand("You have been booted due to inactivity!", "Please refresh to rejoin","", 0, false)});
+    socket.on('draw idle', () => {commands.drawCommand("Waiting for players to join...", "", "", 0, false)})
 
     /**** Chat *****/
     const chat = new Chat(socket);
@@ -65,8 +64,9 @@ $(document).ready(function(){
 
     /**** Map *****/
     const map = new Map(socket);
-    socket.on('draw point', (coords, color) => {map.drawPoint(coords, color)})
+    socket.on('draw point', (coords, color) => {map.drawPoint(coords, color)});
     socket.on('fresh map', (room) => map.drawMap(room));
+    socket.on('blank map', (room) => map.drawBlank(room));
     socket.on('animate', () => map.drawAnimation());
 
     /**** History *****/
@@ -117,22 +117,10 @@ $(document).ready(function(){
     document.addEventListener('mouseup', mouseUpHandler, false);
     document.addEventListener("touchstart", touchDownHandler, false);
     document.addEventListener("touchend", touchUpHandler, false);
-    panel.addEventListener('click', function(evt) {
-        var mousePos = getMousePosInPanel(panel, evt);
+    canvas.addEventListener('click', function(evt) {
+        var mousePos = getMousePosInPanel(canvas, evt);
         if (isInside(mousePos,commands.ready_button) && myRoom != CONSTANTS.LOBBY) {
             socket.emit('playerReady')
-        }
-        if (isInside(mousePos,commands.lobby_button) && myRoom != CONSTANTS.LOBBY) {
-            socket.emit('moveTo', CONSTANTS.LOBBY)
-        }
-        else if (isInside(mousePos,commands.world_button) && myRoom == CONSTANTS.LOBBY) {
-            socket.emit('moveTo', CONSTANTS.WORLD)
-        }
-        else if (isInside(mousePos,commands.us_button) && myRoom == CONSTANTS.LOBBY) {
-            socket.emit('moveTo', CONSTANTS.US)
-        }
-        else if (isInside(mousePos,commands.euro_button) && myRoom == CONSTANTS.LOBBY) {
-            socket.emit('moveTo', CONSTANTS.EURO)
         }
     }, false);
 

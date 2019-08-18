@@ -50,7 +50,7 @@ class Popup {
 
     // function to close our popups
     closePopup(){
-        $('#msg_text').focus();
+        // $('#msg_text').focus();
         $('.overlay-bg, .overlay-content').hide(); //hide the overlay
     }
 }

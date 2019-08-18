@@ -8,10 +8,8 @@ module.exports = {
     TRUTH_COLOR: 'white',
 
     // Map and Panel
-    MAP_WIDTH: 1350,
-    MAP_HEIGHT: 794,
-    PANEL_WIDTH: 550,
-    PANEL_HEIGHT: 794,
+    MAP_WIDTH: 1530,
+    MAP_HEIGHT: 900,
     WORLD_ZERO_LAT: 77.0*Math.PI/180, // Latitude of top edge of map
     WORLD_MAX_LAT: -65.0*Math.PI/180, // Latitude of bottom edge of map
     WORLD_MIN_LON: -180, // Latitude of top edge of map
@@ -75,11 +73,11 @@ module.exports = {
     LOBBY: 'Lobby',
     US: 'N. America',
     EURO: 'Eurasia',
-    MAX_INACTIVE: 15, // Rounds of no click before you get booted
+    MAX_INACTIVE: 10, // Rounds of no click before you get booted
     MAX_S_INACTIVE: 600*30, // seconds * fps spent in lobby before you get booted
 
     // Chat
     MAX_GAME_HIST: 100,
     MAX_CHAT_HIST: 100,
-    PROFANITY: ['shit', 'damn', 'fuck', 'bitch', 'cunt', ' ass ', 'asshole', 'fuuck', 'fuuuck', 'shiit'] // TODO: Use regex
+    PROFANITY: ['shit', 'damn', 'fuck', 'bitch', 'cunt', ' ass ', 'asshole', 'penis', 'vagina', 'fuuck', 'fuuuck', 'shiit'] // TODO: Use regex
 }
