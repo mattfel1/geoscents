@@ -30,7 +30,7 @@ class Room {
 
     // Player count
     playerCount() {
-        return this.players.size;
+        return Array.from(this.players.values()).filter(player => player.choseName).length;
     }
     // Player basic IO
     addPlayer(socket,info) {
@@ -39,9 +39,9 @@ class Room {
       this.players.set(socket.id, player);
       this.ordinalCounter = this.ordinalCounter + 1;
       this.sortPlayers();
-      this.drawUpperPanel(socket.id);
-      this.drawLowerPanel(socket.id);
+      this.drawScorePanel(socket.id);
       socket.emit('fresh map', this.room);
+      this.drawCommand(socket);
     }
 
     hasPlayer(socket) {
@@ -53,8 +53,7 @@ class Room {
             if (name != '') this.players.get(socket.id).name = name;
             this.players.get(socket.id).choseName = true;
         }
-      this.drawUpperPanel(socket.id);
-      this.drawLowerPanel(socket.id);
+      this.drawScorePanel(socket.id);
       socket.emit('fresh map', this.room);
     }
 
@@ -103,7 +102,7 @@ class Room {
           this.players.delete(socket.id);
       }
       this.sortPlayers();
-      this.drawLowerPanel(socket.id);
+      this.drawScorePanel(socket.id);
     }
 
     bootPlayer(socket) {
@@ -125,7 +124,7 @@ class Room {
           socket.emit('request boot', socket.id);
       }
       this.sortPlayers();
-      this.drawLowerPanel(socket.id);
+      this.drawScorePanel(socket.id);
     }
 
     playerReady(socket) {
@@ -133,6 +132,7 @@ class Room {
           const player = this.players.get(socket.id);
           player.ready = true
       }
+      this.drawScorePanel();
     }
 
     playerClicked(socket, playerClick) {
@@ -156,12 +156,28 @@ class Room {
     }
 
     printScoresWithSelf(socket, socketId) {
-        Array.from(this.players.values()).forEach(function(player, index) {
+        if (this.room != CONSTANTS.LOBBY) {
+            const record = this.record;
+            const color = this.recordColor;
+            const name = this.recordName;
+            const drawPopper = (this.winner != null && this.winner.trophy && this.winner.score == this.record);
+            socket.emit('post record', color, record, name, drawPopper);
+        }
+        const sortedPlayers = this.sortPlayers();
+        Array.from(sortedPlayers.values()).forEach(function(player, index) {
           var you = '';
           if (player.id == socketId) {
-              you = '  <-- you';
+              you = '*';
           }
-          if (player.choseName) socket.emit('post score', player.rank, player.name, player.color, player.score, player.wins, you, player.trophy);
+          var trophy = '';
+          if (player.trophy) {
+              trophy = '🏆';
+          }
+          var ready = '';
+          if (player.ready) {
+              ready = '✔';
+          }
+          if (player.choseName) socket.emit('post score', player.rank, you + player.name, player.color, player.score, player.wins, trophy, ready);
         })
     }
 
@@ -232,6 +248,7 @@ class Room {
             if (player.consecutiveRoundsInactive > CONSTANTS.MAX_INACTIVE || player.consecutiveSecondsInactive > CONSTANTS.MAX_S_INACTIVE) {
                 if (clients.has(id)) {
                     const socket = clients.get(id);
+                    socket.emit('blank map');
                     socket.emit('draw booted', room, player.consecutiveRoundsInactive);
                     socket.emit('update messages', room, "[ You have been booted due to inactivity! ]<br>")
                     console.log('killing! ' + id);
@@ -254,65 +271,51 @@ class Room {
     }
 
     onSecond(fcn) {
-        if ( Math.floor((this.timer*1000) % 1000) < 50 ) {
+        if ( Math.abs(Math.floor((this.timer*1000) % 1000)) < 40 ) {
             fcn()
         }
+    }
+
+    drawCommand(socket) {
+          const room = this.room;
+          const round = this.round;
+          if (this.state == CONSTANTS.PREPARE_GAME_STATE) {
+             socket.emit('fresh map', room);
+             socket.emit('draw prepare', round);
+          }
+          else if (this.state == CONSTANTS.GUESS_STATE) {
+             const thisTarget = this.stringifyTarget();
+             const citystring = thisTarget['string'];
+             var capital = "";
+             if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
+             if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
+             socket.emit('fresh map', room);
+             socket.emit('draw guess city', citystring, capital, round);
+          }
+          else if (this.state == CONSTANTS.REVEAL_STATE) {
+             const thisTarget = this.stringifyTarget();
+             const citystring = thisTarget['string'];
+             var capital = "";
+             if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
+             if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
+             socket.emit('fresh map', room);
+             socket.emit('draw reveal city', citystring, capital, round);
+             this.revealAll();
+          }
     }
     stateTransition(toState, toDuration) {
       this.state = toState;
       this.timer = toDuration;
-      this.drawUpperPanel();
-      this.drawLowerPanel();
+      this.drawScorePanel();
+      const drawCommand = (socket) => this.drawCommand(socket);
+      this.clients.forEach(function(socket, socketId) {drawCommand(socket)});
     }
 
-    // Panel methods
-    drawUpperPanel() {
-       const round = this.round;
-       const state = this.state;
-       const revealAll = () => {this.revealAll()};
-       const thisTarget = this.stringifyTarget();
-       const citystring = thisTarget['string'];
-       var capital = "";
-       if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
-       if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
-       this.clients.forEach(function(socket, socketId) {
-           socket.emit('draw round', round);
-           if (state == CONSTANTS.IDLE_STATE) {
-               socket.emit('draw idle');
-           }
-           else if (state == CONSTANTS.PREPARE_GAME_STATE) {
-               socket.emit('draw prepare');
-           }
-           else if (state == CONSTANTS.SETUP_STATE) {
-                // ???
-           }
-           else if (state == CONSTANTS.GUESS_STATE) {
-               socket.emit('draw guess city', citystring, capital);
-           }
-           else if (state == CONSTANTS.REVEAL_STATE) {
-               socket.emit('draw reveal city', citystring, capital);
-               revealAll();
-           }
-           socket.emit('draw back button');
-       })
-    }
-
-    drawLowerPanel() {
-        const players = this.players;
-        const record = this.record;
-        const color = this.recordColor;
-        const name = this.recordName;
-        const drawPopper = (this.winner != null && this.winner.trophy && this.winner.score == this.record)
+    drawScorePanel() {
         this.clients.forEach((s,id) => {
-            s.emit('clear scores', record, color, name, drawPopper);
+            s.emit('clear scores');
             this.printScoresWithSelf(s,id);
         });
-        this.clients.forEach(function(s,id) {
-            Array.from(players.values()).forEach(function(player,i) {
-              if (player.ready) s.emit('player ready', player.rank)
-            });
-        });
-
     }
 
     sortPlayers() {
@@ -324,8 +327,7 @@ class Room {
 
     fsm() {
       // Game flow state machine
-      const drawUpperPanel = () => {this.drawUpperPanel()};
-      const drawLowerPanel = () => {this.drawLowerPanel()};
+      const drawScorePanel = () => {this.drawScorePanel()};
       this.decrementTimer();
       if (this.room == CONSTANTS.LOBBY) {
           this.timerColor = CONSTANTS.LOBBY_COLOR;
@@ -333,7 +335,7 @@ class Room {
           this.clients.forEach(function (socket, id) {
               socket.emit('animate')
           });
-          this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw lobby')})})
+          // this.onSecond(() => {this.clients.forEach(function(socket,id) {socket.emit('draw lobby')})})
           this.onSecond(() => this.players.forEach(function(player,id) {player.consecutiveSecondsInactive = player.consecutiveSecondsInactive + 1;}));
           this.bootInactive();
       }
@@ -352,8 +354,7 @@ class Room {
                   Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
               } else {
                   this.onSecond(function () {
-                      drawUpperPanel();
-                      drawLowerPanel();
+                      drawScorePanel();
                   });
               }
           } else if (this.state == CONSTANTS.SETUP_STATE) {
@@ -363,9 +364,6 @@ class Room {
                   p.reset()
               });
               this.playedCities[this.round] = this.target;
-              Array.from(this.clients.values()).forEach((socket, id) => {
-                  socket.emit('fresh map', this.room)
-              });
               this.stateTransition(CONSTANTS.GUESS_STATE, CONSTANTS.GUESS_DURATION);
           } else if (this.state == CONSTANTS.GUESS_STATE) {
               if (this.timer <= 0 || this.allPlayersClicked()) {
@@ -412,7 +410,7 @@ class Room {
           var senderName = getname(senderSocket);
           if (this.players.has(id)) {
               const player = this.players.get(id);
-              if (player.id == senderSocket.id) senderName = " ( -you- )";
+              if (player.id == senderSocket.id) senderName = "*" + senderName;
           }
           const sent_msg = "[ " + room + " <font color='" + senderColor + "'>" + senderTrophy + senderName + "</font> ]: " + new_sent_msg + "<br>";
           socket.emit("update messages", room, sent_msg);
@@ -428,6 +426,10 @@ class Room {
             this.recordName = winner;
             newRecord = true;
             helpers.log(room + ": New record by " + winner + ", " + score)
+            if (this.clients.has(this.winner.id)) {
+                this.clients.get(this.winner.id).emit("announce record", winner, score, color);
+            }
+
         }
         this.clients.forEach((socket,id) => {
             socket.emit('break history',  room, winner, score, color, newRecord);
@@ -451,7 +453,7 @@ class Room {
         const room = this.room;
         this.clients.forEach((socket,id) => {
             var name = player.name;
-            if (player.id == id) name = " ( -you- )";
+            if (player.id == id) name = "*" + name;
             socket.emit('add history', room, "<font color=\"" + player.color +"\">  " + name + ": " + score + "</font><br>")
         });
     }

@@ -63,10 +63,16 @@ class Map {
         const sx = Math.floor(frame_cnt/rate) * 450;
         var ctx = this.ctx;
         globeImage.onload = function (sx) {
-          return ctx.drawImage(globeImage, sx,0,450,450,50, 100,450,450);
+          return ctx.drawImage(globeImage, sx,0,450,450,20, 20,450,450);
         };
         globeImage.onload(sx);
     };
+
+
+    drawBlank(room) {
+        var ctx = this.ctx;
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
 
     drawMap(room) {
       var ctx = this.ctx;
@@ -77,21 +83,22 @@ class Map {
         this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
         this.ctx.font = "50px Arial";
         this.ctx.fillStyle = 'black';
-        this.ctx.fillText('Welcome to GeoScents!', 300, 50);
-        this.ctx.fillText('Locate cities as quickly and accurately as possible!',10,110);
+        this.ctx.fillText('Welcome to GeoScents!', 510, 420);
+        this.ctx.fillText('Locate cities as quickly and accurately as possible!',330,480);
 
         // Instructions
         this.ctx.font = "35px Arial";
         this.ctx.fillStyle = 'black';
-        this.ctx.fillText('Choose a map to play on and the', 700, 310);
-        this.ctx.fillText('target cities will show up here', 700, 350);
-        this.canvas_arrow(1200, 340, this.canvas.width - 20, 220);
+        this.ctx.fillText('Choose a map to play on here', 670, 135);
+        this.canvas_arrow(1150, 120, this.canvas.width-20, 120);
 
-        this.ctx.fillText('See how everyone did and', 800, 590);
-        this.ctx.fillText('learn about the cities here', 800, 625);
-        this.canvas_arrow(1100, 650, this.canvas.width - 70, this.canvas.height - 20);
+        this.ctx.fillText('Rankings will show here', 720, 315);
+        this.canvas_arrow(1150, 300, this.canvas.width-20, 300);
 
-        this.ctx.fillText('Map will appear here', 480, 480);
+        this.ctx.fillText('Target city and timer will appear here', 500, 40);
+
+        this.ctx.fillText('See results and learn here', 800, 610);
+        this.canvas_arrow(1100, 650, this.canvas.width - 200, this.canvas.height - 20);
 
         this.ctx.fillText('Discuss here', 100, 610);
         this.canvas_arrow(200, 650, 200, this.canvas.height-20);
