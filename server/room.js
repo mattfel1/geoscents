@@ -23,10 +23,19 @@ class Room {
       this.round = 0;
       this.winner = null;
       this.timerColor = CONSTANTS.LOBBY_COLOR;
-      this.record = Math.floor(Math.random() * CONSTANTS.RECORD_INIT_RANGE) + CONSTANTS.RECORD_INIT_BASE;
-      this.recordColor = CONSTANTS.COLORS[Math.floor(Math.random()*CONSTANTS.COLORS.length)];
-      this.recordName = CONSTANTS.RANDOM_NAMES[Math.floor(Math.random()*CONSTANTS.RANDOM_NAMES.length)];
-    }
+      this.record1 = Math.floor(Math.random() * CONSTANTS.RECORD_INIT_RANGE) + CONSTANTS.RECORD_INIT_BASE;
+      this.recordColor1 = CONSTANTS.COLORS[Math.floor(Math.random()*CONSTANTS.COLORS.length)];
+      this.recordName1 = CONSTANTS.RANDOM_NAMES[Math.floor(Math.random()*CONSTANTS.RANDOM_NAMES.length)];
+      this.recordBroken1 = false;
+      this.record2 = this.record1 - Math.floor(Math.random() * CONSTANTS.RECORD_DELTA_RANGE);
+      this.recordColor2 = CONSTANTS.COLORS[Math.floor(Math.random()*CONSTANTS.COLORS.length)];
+      this.recordName2 = CONSTANTS.RANDOM_NAMES[Math.floor(Math.random()*CONSTANTS.RANDOM_NAMES.length)];
+      this.recordBroken2 = false;
+      this.record3 = this.record2 - Math.floor(Math.random() * CONSTANTS.RECORD_DELTA_RANGE);
+      this.recordColor3 = CONSTANTS.COLORS[Math.floor(Math.random()*CONSTANTS.COLORS.length)];
+      this.recordName3 = CONSTANTS.RANDOM_NAMES[Math.floor(Math.random()*CONSTANTS.RANDOM_NAMES.length)];
+      this.recordBroken3 = false;
+}
 
     // Player count
     playerCount() {
@@ -60,7 +69,7 @@ class Room {
 
     getPlayerName(socket) {
         if (this.players.has(socket.id)) {
-            return this.players.get(socket.id).name
+            return this.players.get(socket.id).getName();
         }
         else {
             return socket.id.substring(5,0);
@@ -68,13 +77,6 @@ class Room {
     }
     playerChoseName(socket) {
         return this.players.has(socket.id) && this.players.get(socket.id).choseName;
-    }
-    getPlayerTrophy(socket) {
-        var trophy = "";
-        if (this.players.has(socket.id)) {
-            if (this.players.get(socket.id).trophy) trophy = "🏆";
-        }
-        return trophy;
     }
     getPlayerColor(socket) {
         if (this.players.has(socket.id)) {
@@ -130,7 +132,7 @@ class Room {
     playerReady(socket) {
       if (this.players.has(socket.id)) {
           const player = this.players.get(socket.id);
-          player.ready = true
+          player.ready = '✔';
       }
       this.drawScorePanel();
     }
@@ -155,13 +157,84 @@ class Room {
       }
     }
 
+    recordsBroken() {
+        var record1 = this.record1;
+        var recordColor1 = this.recordColor1;
+        var recordName1 = this.recordName1;
+        var recordBroken1 = this.recordBroken1;
+        var record2 = this.record2;
+        var recordColor2 = this.recordColor2;
+        var recordName2 = this.recordName2;
+        var recordBroken2 = this.recordBroken2;
+        var record3 = this.record3;
+        var recordColor3 = this.recordColor3;
+        var recordName3 = this.recordName3;
+        var recordBroken3 = this.recordBroken3;
+        Array.from(this.sortPlayers()).forEach((player, id) => {
+            if (player.score > record1) {
+                record3 = record2;
+                recordColor3 = recordColor2;
+                recordName3 = recordName2;
+                recordBroken1 = true;
+                record2 = record1;
+                recordColor2 = recordColor1;
+                recordName2 = recordName1;
+                record1 = player.score;
+                recordColor1 = player.color;
+                recordName1 = player.name;
+                player.medal = '🥇';
+                if (this.clients.has(player.id)) {
+                    this.clients.get(player.id).emit("announce record", player.getName(), player.score, player.color);
+                }
+            }
+            else if (player.score > record2) {
+                record3 = record2;
+                recordColor3 = recordColor2;
+                recordName3 = recordName2;
+                record2 = player.score;
+                recordColor2 = player.color;
+                recordName2 = player.name;
+                recordBroken2 = true;
+                player.medal = '🥈';
+                if (this.clients.has(player.id)) {
+                    this.clients.get(player.id).emit("announce record", player.getName(), player.score, player.color);
+                }
+            }
+            else if (player.score > record3) {
+                record3 = player.score;
+                recordColor3 = player.color;
+                recordName3 = player.name;
+                recordBroken3 = true;
+                player.medal = '🥉';
+                if (this.clients.has(player.id)) {
+                    this.clients.get(player.id).emit("announce record", player.getName(), player.score, player.color);
+                }
+            }
+        });
+
+        this.record1 = record1;
+        this.recordColor1 = recordColor1;
+        this.recordName1 = recordName1;
+        this.recordBroken1 = recordBroken1;
+        this.record2 = record2;
+        this.recordColor2 = recordColor2;
+        this.recordName2 = recordName2;
+        this.recordBroken2 = recordBroken2;
+        this.record3 = record3;
+        this.recordColor3 = recordColor3;
+        this.recordName3 = recordName3;
+        this.recordBroken3 = recordBroken3;
+    }
+
     printScoresWithSelf(socket, socketId) {
         if (this.room != CONSTANTS.LOBBY) {
-            const record = this.record;
-            const color = this.recordColor;
-            const name = this.recordName;
-            const drawPopper = (this.winner != null && this.winner.trophy && this.winner.score == this.record);
-            socket.emit('post record', color, record, name, drawPopper);
+            socket.emit('post record', 1,this.recordColor1, this.record1, this.recordName1, this.recordBroken1);
+            socket.emit('post record', 2,this.recordColor2, this.record2, this.recordName2, this.recordBroken2);
+            socket.emit('post record', 3,this.recordColor3, this.record3, this.recordName3, this.recordBroken3);
+            socket.emit('post space');
+        }
+        else {
+            socket.emit('post lobby');
         }
         const sortedPlayers = this.sortPlayers();
         Array.from(sortedPlayers.values()).forEach(function(player, index) {
@@ -169,15 +242,7 @@ class Room {
           if (player.id == socketId) {
               you = '*';
           }
-          var trophy = '';
-          if (player.trophy) {
-              trophy = '🏆';
-          }
-          var ready = '';
-          if (player.ready) {
-              ready = '✔';
-          }
-          if (player.choseName) socket.emit('post score', player.rank, you + player.name, player.color, player.score, player.wins, trophy, ready);
+          if (player.choseName) socket.emit('post score', player.rank, you + player.getName(), player.color, player.score, player.wins);
         })
     }
 
@@ -350,6 +415,9 @@ class Room {
           } else if (this.state == CONSTANTS.PREPARE_GAME_STATE) {
               if (this.allReady() || this.timer <= 0) {
                   this.timerColor = CONSTANTS.LOBBY_COLOR;
+                  this.recordBroken1 = false;
+                  this.recordBroken2 = false;
+                  this.recordBroken3 = false;
                   this.stateTransition(CONSTANTS.SETUP_STATE, 0);
                   Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
               } else {
@@ -370,9 +438,8 @@ class Room {
                   this.updateScores();
                   this.sortPlayers();
                   if (this.round >= CONSTANTS.GAME_ROUNDS) {
-                      this.winner.wins = this.winner.wins + 1;
-                      this.winner.trophy = true;
-                      this.printWinner(this.winner.name, this.winner.score, this.winner.color);
+                      this.winner.won();
+                      this.printWinner(this.winner.getName(), this.winner.score, this.winner.color);
                   }
                   this.stateTransition(CONSTANTS.REVEAL_STATE, CONSTANTS.REVEAL_DURATION);
                   this.timerColor = CONSTANTS.REVEAL_COLOR;
@@ -404,7 +471,6 @@ class Room {
     distributeMessage(senderSocket, new_sent_msg, cb) {
       const getname = (s) => this.getPlayerName(s)
       const senderColor = this.getPlayerColor(senderSocket);
-      const senderTrophy = this.getPlayerTrophy(senderSocket);
       const room = this.room;
       this.clients.forEach((socket,id) => {
           var senderName = getname(senderSocket);
@@ -412,27 +478,16 @@ class Room {
               const player = this.players.get(id);
               if (player.id == senderSocket.id) senderName = "*" + senderName;
           }
-          const sent_msg = "[ " + room + " <font color='" + senderColor + "'>" + senderTrophy + senderName + "</font> ]: " + new_sent_msg + "<br>";
+          const sent_msg = "[ " + room + " <font color='" + senderColor + "'>" + senderName + "</font> ]: " + new_sent_msg + "<br>";
           socket.emit("update messages", room, sent_msg);
           cb();
       });
     };
     printWinner(winner, score, color) {
+        this.recordsBroken();
         const room = this.room;
-        var newRecord = false;
-        if (score > this.record) {
-            this.record = score;
-            this.recordColor = color;
-            this.recordName = winner;
-            newRecord = true;
-            helpers.log(room + ": New record by " + winner + ", " + score)
-            if (this.clients.has(this.winner.id)) {
-                this.clients.get(this.winner.id).emit("announce record", winner, score, color);
-            }
-
-        }
         this.clients.forEach((socket,id) => {
-            socket.emit('break history',  room, winner, score, color, newRecord);
+            socket.emit('break history',  room, winner, score, color);
         });
     }
     historyRound(round, thisTarget) {

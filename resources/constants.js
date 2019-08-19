@@ -68,7 +68,8 @@ module.exports = {
     // Rooms
     GAME_ROUNDS: 0,
     RECORD_INIT_RANGE: 700,
-    RECORD_INIT_BASE: 450,
+    RECORD_INIT_BASE: 1,//480,
+    RECORD_DELTA_RANGE: 200,
     WORLD: 'World',
     LOBBY: 'Lobby',
     US: 'N. America',

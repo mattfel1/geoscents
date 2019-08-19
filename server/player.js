@@ -17,14 +17,15 @@ class Player {
         this.id = socketid;
 		this.score = 0;
 		this.rank = rank;
-        this.ready = false;
+        this.ready = '';
         this.wins = 0;
         this.consecutiveRoundsInactive = 0;
         this.consecutiveSecondsInactive = 0;
-        this.trophy = false;
+        this.trophy = '';
         this.room = room;
         this.choseName = false;
         this.name = name;
+        this.medal = '';
 
         // Override values based on info map
 		if (info['moved']) {
@@ -37,8 +38,9 @@ class Player {
 
     reset() {
 		this.clicked = false;
-		this.ready = false;
-		this.trophy = false;
+		this.ready = '';
+		this.trophy = '';
+		this.medal = '';
 		this.lat = 0;
 		this.lon = 0;
 		this.row = 0;
@@ -49,6 +51,15 @@ class Player {
 	deepReset(rank) {
     	this.score = 0;
     	this.rank = rank;
+    	this.reset();
+	}
+
+	won() {
+    	this.wins = this.wins + 1;
+        this.trophy = '🏆';
+	}
+	getName() {
+    	return this.ready + this.medal + this.trophy + this.name;
 	}
 };
 

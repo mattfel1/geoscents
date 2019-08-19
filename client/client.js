@@ -36,9 +36,11 @@ $(document).ready(function(){
     /**** Scoreboard *****/
     const scoreboard = new Scoreboard(socket);
     socket.on('clear scores', () => {scoreboard.clearScores()});
-    socket.on('post score', (rank, name, color, score, wins, ready, trophy) => {scoreboard.postScore(rank,name,color,score,wins,ready,trophy)});
-    socket.on('post record', (color, score, name, drawPopper) => {scoreboard.postRecord(color, score, name, drawPopper)});
-    socket.on('announce record', (name, score, color) => {socket.emit("announcement", '[' + myRoom + ' record has been broken by <font color="' + color + '">' + name + ' (' + score + ')</font><br>')});
+    socket.on('post score', (rank, name, color, score, wins) => {scoreboard.postScore(rank,name,color,score,wins)});
+    socket.on('post record', (rank,color, score, name, drawPopper) => {scoreboard.postRecord(rank,color, score, name, drawPopper)});
+    socket.on('post space', () => {scoreboard.postSpace()});
+    socket.on('post lobby', () => {scoreboard.postLobby()});
+    socket.on('announce record', (name, score, color) => {socket.emit("announcement", '[A record in ' + myRoom + ' has been broken by <font color="' + color + '">' + name + ' (' + score + ')</font>]<br>')});
 
     /**** Commands *****/
     const commands = new Commands(socket);
