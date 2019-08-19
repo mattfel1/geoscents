@@ -6,7 +6,8 @@
 const CONSTANTS = require('../resources/constants.js');
 const Geography = require('./geography.js');
 const Player = require('./player.js');
-const helpers = require('../resources/helpers.js')
+const helpers = require('../resources/helpers.js');
+const fs = require('fs')
 
 class Room {
     constructor(map) {
@@ -35,6 +36,20 @@ class Room {
       this.recordColor3 = CONSTANTS.COLORS[Math.floor(Math.random()*CONSTANTS.COLORS.length)];
       this.recordName3 = CONSTANTS.RANDOM_NAMES[Math.floor(Math.random()*CONSTANTS.RANDOM_NAMES.length)];
       this.recordBroken3 = false;
+
+      if (fs.existsSync('/tmp/' + map + '_record')) {
+          var record = JSON.parse(fs.readFileSync('/tmp/' + map + '_record', 'utf8'));
+          this.allRecord = record['score'];
+          this.allRecordName = record['name'];
+          this.allRecordColor = record['color'];
+          this.allRecordBroken = false;
+      } else {
+          this.allRecord = this.record1;
+          this.allRecordName = this.recordName1;
+          this.allRecordColor = this.recordColor1;
+          this.allRecordBroken = false;
+      }
+
 }
 
     // Player count
@@ -179,7 +194,28 @@ class Room {
         var recordColor3 = this.recordColor3;
         var recordName3 = this.recordName3;
         var recordBroken3 = this.recordBroken3;
+        var allRecord = this.allRecord;
+        var allRecordColor = this.allRecordColor;
+        var allRecordName = this.allRecordName;
+        var allRecordBroken = this.allRecordBroken;
+        const room = this.room;
         Array.from(this.sortPlayers()).forEach((player, id) => {
+            if (player.score > allRecord) {
+                allRecord = player.score;
+                allRecordName = player.name;
+                allRecordColor = player.color;
+                allRecordBroken = true;
+                player.record = '🌟';
+                if (this.clients.has(player.id)) {
+                    this.clients.get(player.id).emit("announce alltime record", player.getName(), player.score, player.color);
+                }
+                const payload = {"score": allRecord, "name": allRecordName, "color": allRecordColor}
+                fs.writeFile("/tmp/" + room + "_record", JSON.stringify(payload), function(err) {
+                    if(err) {
+                        return console.log(err);
+                    }
+                });
+            }
             if (player.score > record1) {
                 record3 = record2;
                 recordColor3 = recordColor2;
@@ -233,10 +269,15 @@ class Room {
         this.recordColor3 = recordColor3;
         this.recordName3 = recordName3;
         this.recordBroken3 = recordBroken3;
+        this.allRecord = allRecord;
+        this.allRecordColor = allRecordColor;
+        this.allRecordName = allRecordName;
+        this.allRecordBroken = allRecordBroken;
     }
 
     printScoresWithSelf(socket, socketId) {
         if (this.room != CONSTANTS.LOBBY) {
+            socket.emit('post all record', this.allRecordColor, this.allRecord, this.allRecordName, this.allRecordBroken);
             socket.emit('post record', 1,this.recordColor1, this.record1, this.recordName1, this.recordBroken1);
             socket.emit('post record', 2,this.recordColor2, this.record2, this.recordName2, this.recordBroken2);
             socket.emit('post record', 3,this.recordColor3, this.record3, this.recordName3, this.recordBroken3);
@@ -420,6 +461,7 @@ class Room {
               this.recordBroken1 = false;
               this.recordBroken2 = false;
               this.recordBroken3 = false;
+              this.allRecordBroken = false;
           } else if (this.numPlayers() > 0 && this.state == CONSTANTS.IDLE_STATE) {
               this.timerColor = CONSTANTS.LOBBY_COLOR;
               this.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
@@ -430,6 +472,7 @@ class Room {
                   this.recordBroken1 = false;
                   this.recordBroken2 = false;
                   this.recordBroken3 = false;
+                  this.allRecordBroken = false;
                   this.stateTransition(CONSTANTS.SETUP_STATE, 0);
                   Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
               } else {

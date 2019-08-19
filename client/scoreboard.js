@@ -27,6 +27,15 @@ class Scoreboard {
         if (rank == 1) $('#scoreboard').append("<b>Today's Records:</b><br>")
        $('#scoreboard').append(string)
     }
+    postAllRecord(color, score, name, drawPopper) {
+       var pop = "";
+       if (drawPopper) pop = '🎉';
+       var qualifier = "🌟";
+
+       const string = $("<font color=" + color + " style=\"font-size:16px;\" \>").html(pop + qualifier + ": " + score + " (" + name + ")" + pop + "<br><br>");
+       $('#scoreboard').append("<b>All-time Record:</b><br>")
+       $('#scoreboard').append(string)
+    }
     postSpace() {
        $('#scoreboard').append("<br><b>Scoreboard:</b><br>")
     }

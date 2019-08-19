@@ -34,7 +34,7 @@ class Map {
         this.ctx.beginPath();
         this.ctx.moveTo(fromx, fromy);
         this.ctx.lineTo(tox, toy);
-        this.ctx.strokeStyle = "black";
+        // this.ctx.strokeStyle = "black";
         this.ctx.lineWidth = 10;
         this.ctx.stroke();
 
@@ -51,10 +51,10 @@ class Map {
         this.ctx.lineTo(tox-headlen*Math.cos(angle-Math.PI/7),toy-headlen*Math.sin(angle-Math.PI/7));
 
         //draws the paths created above
-        this.ctx.strokeStyle = "black";
+        // this.ctx.strokeStyle = "black";
         this.ctx.lineWidth = 10;
         this.ctx.stroke();
-        this.ctx.fillStyle = "black";
+        // this.ctx.fillStyle = "black";
         this.ctx.fill();
     }
 
@@ -81,27 +81,28 @@ class Map {
         // Banner message
         this.ctx.fillStyle = CONSTANTS.BGCOLOR;
         this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
-        this.ctx.font = "50px Arial";
+        this.ctx.font = "55px Arial bold";
         this.ctx.fillStyle = 'black';
-        this.ctx.fillText('Welcome to GeoScents!', 510, 420);
-        this.ctx.fillText('Locate cities as quickly and accurately as possible!',330,480);
+        this.ctx.fillText('Welcome to GeoScents!', 480, 490);
+        this.ctx.fillText('Locate cities as quickly and accurately as possible!',90,550);
 
         // Instructions
-        this.ctx.font = "35px Arial";
-        this.ctx.fillStyle = 'black';
-        this.ctx.fillText('Choose a map to play on here', 670, 135);
+        this.ctx.font = "25px Arial";
+        this.ctx.fillStyle = 'red';
+        this.ctx.strokeStyle = 'red';
+        this.ctx.fillText('Choose a map to play on here', 780, 125);
         this.canvas_arrow(1150, 120, this.canvas.width-20, 120);
 
-        this.ctx.fillText('Rankings will show here', 720, 315);
+        this.ctx.fillText('Rankings will show here', 850, 305);
         this.canvas_arrow(1150, 300, this.canvas.width-20, 300);
 
         this.ctx.fillText('Target city and timer will appear here', 500, 40);
 
-        this.ctx.fillText('See results and learn here', 800, 610);
-        this.canvas_arrow(1100, 650, this.canvas.width - 200, this.canvas.height - 20);
+        this.ctx.fillText('See results and learn here', 850, 660);
+        this.canvas_arrow(1100, 680, this.canvas.width - 200, this.canvas.height - 20);
 
-        this.ctx.fillText('Discuss here', 100, 610);
-        this.canvas_arrow(200, 650, 200, this.canvas.height-20);
+        this.ctx.fillText('Discuss here', 130, 660);
+        this.canvas_arrow(200, 680, 200, this.canvas.height-20);
 
       }
       else if (room == CONSTANTS.WORLD){

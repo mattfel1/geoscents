@@ -23,6 +23,7 @@ class Player {
         this.ready = '';
         this.trophy = '';
         this.medal = '';
+        this.record = '';
         this.room = room;
         this.choseName = false;
         this.name = name;
@@ -41,6 +42,7 @@ class Player {
 		this.ready = '';
 		this.trophy = '';
 		this.medal = '';
+		this.record = '';
 		this.lat = 0;
 		this.lon = 0;
 		this.row = 0;
@@ -59,7 +61,7 @@ class Player {
         this.trophy = '🏆';
 	}
 	getName() {
-		const fullname = this.ready + this.medal + this.trophy + this.name;
+		const fullname = this.ready + this.record + this.medal + this.trophy + this.name;
     	return fullname;
 	}
 };
