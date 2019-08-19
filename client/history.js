@@ -8,7 +8,8 @@ class History {
     }
 
     breakHistory(room, winner, score, color, record) {
-        if (room == this.myRoom) {
+        const myRoom = this.myRoom;
+        if (room == myRoom) {
             var newRecord = "";
             if (record) newRecord = " 🎉 NEW RECORD 🎉";
             var assembled = "<br>******* " + myRoom + " WINNER: <font color=\"" + color + "\">" + winner + " (" + score + " points)</font>" + newRecord + " *******<br>"
