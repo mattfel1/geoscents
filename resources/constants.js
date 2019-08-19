@@ -4,7 +4,8 @@ module.exports = {
     COLORS: ['#1f77b4','#2ca02c','#995c00','#9467bd','#8c564b','#e377c2','#737373','#adad1f','#17becf', 'blue', 'green', 'red', 'magenta', 'black'],
     RANDOM_NAMES: ['Emma','Liam','Noah','Olivia','Ava','Isabella','Sophia','Elijah','Logan','Mia','Mason','James','Aiden','Ethan','Lucas','Jacob',
         'Michael','Matthew','Benjamin','Amelia','Charlotte','Alexander','William','Daniel','Jayden','Merica!','happy','lucky','sleepy','funky',
-        'KnuckleHed','geoMASTA','fish','dog','cat','meow','ruff','woof','AAAAAAAAAA','knightmare','asdf','aoeu','qwerty'],
+        'KnuckleHed','geoMASTA','fish','dog','cat','meow','ruff','woof','AAAAAAAAAA','knightmare','asdf','aoeu','qwerty','Naughty', 'xkcd',
+        'hector', 'dz', 'swed', 'tobies', 'masta', 'coooool', 'BLOOP!', 'Shwoop'],
     TRUTH_COLOR: 'white',
 
     // Map and Panel
@@ -68,7 +69,7 @@ module.exports = {
     // Rooms
     GAME_ROUNDS: 0,
     RECORD_INIT_RANGE: 700,
-    RECORD_INIT_BASE: 1,//480,
+    RECORD_INIT_BASE: 480,
     RECORD_DELTA_RANGE: 200,
     WORLD: 'World',
     LOBBY: 'Lobby',
