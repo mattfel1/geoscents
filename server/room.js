@@ -417,6 +417,9 @@ class Room {
           if (this.numPlayers() == 0 && this.room != CONSTANTS.LOBBY) {
               this.timerColor = CONSTANTS.LOBBY_COLOR;
               this.state = CONSTANTS.IDLE_STATE;
+              this.recordBroken1 = false;
+              this.recordBroken2 = false;
+              this.recordBroken3 = false;
           } else if (this.numPlayers() > 0 && this.state == CONSTANTS.IDLE_STATE) {
               this.timerColor = CONSTANTS.LOBBY_COLOR;
               this.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
