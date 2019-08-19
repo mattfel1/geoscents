@@ -96,7 +96,7 @@ io.on('connection', (socket) => {
           const room = playerRooms.get(socket.id);
           helpers.log("User disconnected " + socket.handshake.address);
           if (room.playerChoseName(socket)) {
-              var leave_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>" + room.getPlayerName(socket) + " has exited GeoScents!</font> ]<br>";
+              var leave_msg = "[ <font color='" + room.getPlayerColor(socket) + "'>" + room.getPlayerRawName(socket) + " has exited GeoScents!</font> ]<br>";
               io.sockets.emit("update messages", room.room, leave_msg);
           }
           room.killPlayer(socket);
@@ -113,7 +113,7 @@ io.on('connection', (socket) => {
                 name = 'Naughty'
             }
 	        rooms[CONSTANTS.LOBBY].renamePlayer(socket, name);
-            var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'>" + rooms[CONSTANTS.LOBBY].getPlayerName(socket) + " has entered the lobby!</font> ] " + badname + "<br>";
+            var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'>" + rooms[CONSTANTS.LOBBY].getPlayerRawName(socket) + " has entered the lobby!</font> ] " + badname + "<br>";
             io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
             io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
 	    }
@@ -142,7 +142,7 @@ io.on('connection', (socket) => {
           const room = playerRooms.get(socket.id);
           const origin = room.room;
           const oldColor = rooms[origin].getPlayerColor(socket);
-          const oldName = rooms[origin].getPlayerName(socket);
+          const oldName = rooms[origin].getPlayerRawName(socket);
           const oldWins = rooms[origin].getPlayerWins(socket);
           const info = {
               'moved': true,
@@ -150,13 +150,13 @@ io.on('connection', (socket) => {
               'name': oldName,
               'wins': oldWins
           }
-          var leave_msg = "[ <font color='" + rooms[origin].getPlayerColor(socket) + "'>" + rooms[origin].getPlayerName(socket) + " has left " + origin + " and joined " + dest + "!</font> ]<br>";
+          var leave_msg = "[ <font color='" + rooms[origin].getPlayerColor(socket) + "'>" + rooms[origin].getPlayerRawName(socket) + " has left " + origin + " and joined " + dest + "!</font> ]<br>";
           io.sockets.emit("update messages", origin, leave_msg)
           rooms[origin].killPlayer(socket);
           socket.emit('moved to', dest);
           rooms[dest].addPlayer(socket, info);
           playerRooms.set(socket.id, rooms[dest]);
-          var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'>" + rooms[dest].getPlayerName(socket) + " has joined " + dest + "!</font> ]<br>";
+          var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'>" + rooms[dest].getPlayerRawName(socket) + " has joined " + dest + "!</font> ]<br>";
           io.sockets.emit("update messages", dest, join_msg)
           io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount());
       }

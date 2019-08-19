@@ -43,7 +43,7 @@ class Room {
     }
     // Player basic IO
     addPlayer(socket,info) {
-      var player = new Player(socket.id, this.players.size, this.room, socket.handshake.address, this.ordinalCounter, "Player " + this.ordinalCounter % 100,info)
+      var player = new Player(socket.id, this.players.size, this.room, socket.handshake.address, this.ordinalCounter, "Player " + this.ordinalCounter % 100,info);
       this.clients.set(socket.id, socket);
       this.players.set(socket.id, player);
       this.ordinalCounter = this.ordinalCounter + 1;
@@ -66,6 +66,14 @@ class Room {
       socket.emit('fresh map', this.room);
     }
 
+    getPlayerRawName(socket) {
+        if (this.players.has(socket.id)) {
+            return this.players.get(socket.id).name;
+        }
+        else {
+            return socket.id.substring(5,0);
+        }
+    }
 
     getPlayerName(socket) {
         if (this.players.has(socket.id)) {
@@ -96,11 +104,12 @@ class Room {
     }
 
     killPlayer(socket) {
-      console.log('user disconnected ' + socket.id);
+      // console.log('user disconnected ' + socket.id);
       if (this.clients.has(socket.id)) {
         this.clients.delete(socket.id);
       }
       if (this.players.has(socket.id)) {
+          this.players.get(socket.id).reset();
           this.players.delete(socket.id);
       }
       this.sortPlayers();
@@ -421,9 +430,9 @@ class Room {
                   this.stateTransition(CONSTANTS.SETUP_STATE, 0);
                   Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
               } else {
-                  this.onSecond(function () {
-                      drawScorePanel();
-                  });
+                  // this.onSecond(function () {
+                  //     drawScorePanel();
+                  // });
               }
           } else if (this.state == CONSTANTS.SETUP_STATE) {
               this.target = Geography.randomCity(this.room);

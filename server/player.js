@@ -17,15 +17,15 @@ class Player {
         this.id = socketid;
 		this.score = 0;
 		this.rank = rank;
-        this.ready = '';
         this.wins = 0;
         this.consecutiveRoundsInactive = 0;
         this.consecutiveSecondsInactive = 0;
+        this.ready = '';
         this.trophy = '';
+        this.medal = '';
         this.room = room;
         this.choseName = false;
         this.name = name;
-        this.medal = '';
 
         // Override values based on info map
 		if (info['moved']) {
@@ -59,7 +59,8 @@ class Player {
         this.trophy = '🏆';
 	}
 	getName() {
-    	return this.ready + this.medal + this.trophy + this.name;
+		const fullname = this.ready + this.medal + this.trophy + this.name;
+    	return fullname;
 	}
 };
 
