@@ -56,6 +56,12 @@ class Player {
     	this.reset();
 	}
 
+	giveMedal(position, category) {
+		if (position == 1) this.medal = this.medal + '🥇';
+		else if (position == 2) this.medal = this.medal + '🥈';
+		else if (position == 3) this.medal = this.medal + '🥉';
+	}
+
 	won() {
     	this.wins = this.wins + 1;
         this.trophy = '🏆';

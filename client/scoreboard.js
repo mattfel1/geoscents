@@ -15,29 +15,26 @@ class Scoreboard {
     clearScores() {
         $('#scoreboard').empty();
     }
-    postRecord(rank, color, score, name, drawPopper) {
-       var pop = "";
-       if (drawPopper) pop = '🎉';
-       var qualifier = "";
-       if (rank == 1) qualifier = "🥇 1st";
-       else if (rank == 2) qualifier = "🥈 2nd";
-       else if (rank == 3) qualifier = "🥉 3rd";
 
-       const string = $("<font color=" + color + " style=\"font-size:16px;\" \>").html(pop + qualifier + ": " + score + " (" + name + ")" + pop + "<br>");
-        if (rank == 1) $('#scoreboard').append("<b>Today's Records:</b><br>")
-       $('#scoreboard').append(string)
-    }
-    postAllRecord(color, score, name, drawPopper) {
-       var pop = "";
-       if (drawPopper) pop = '🎉';
-       var qualifier = "🌟";
+    postGroup(category, dict) {
+       var pop1 = "";
+       if (dict['recordBroken1']) pop1 = '🎉';
+       var pop2 = "";
+       if (dict['recordBroken2']) pop2 = '🎉';
+       var pop3 = "";
+       if (dict['recordBroken3']) pop3 = '🎉';
 
-       const string = $("<font color=" + color + " style=\"font-size:16px;\" \>").html(pop + qualifier + ": " + score + " (" + name + ")" + pop + "<br><br>");
-       $('#scoreboard').append("<b>All-time Record:</b><br>")
-       $('#scoreboard').append(string)
+       const string1 = $("<font color=" + dict['recordColor1'] + " style=\"font-size:16px;\" \>").html(pop1 +  "🥇 1st: " + dict['record1'] + " (" + dict['recordName1'] + ")" + pop1 + "<br>");
+       const string2 = $("<font color=" + dict['recordColor2'] + " style=\"font-size:16px;\" \>").html(pop2 + "🥈 2nd: " + dict['record2'] + " (" + dict['recordName2'] + ")" + pop2 + "<br>");
+       const string3 = $("<font color=" + dict['recordColor3'] + " style=\"font-size:16px;\" \>").html(pop3 + "🥉 3rd: " + dict['record3'] + " (" + dict['recordName3'] + ")" + pop3 + "<br>");
+       $('#scoreboard').append("<b>" + category + " Records:</b><br>");
+       $('#scoreboard').append(string1);
+       $('#scoreboard').append(string2);
+       $('#scoreboard').append(string3);
+       $('#scoreboard').append("<br>")
     }
     postSpace() {
-       $('#scoreboard').append("<br><b>Scoreboard:</b><br>")
+       $('#scoreboard').append("<br>-------------------------------------------<br><b>Scoreboard:</b><br>")
     }
     postLobby() {
        $('#scoreboard').append("<b>Lobby:</b><br>")

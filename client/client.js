@@ -37,12 +37,10 @@ $(document).ready(function(){
     const scoreboard = new Scoreboard(socket);
     socket.on('clear scores', () => {scoreboard.clearScores()});
     socket.on('post score', (rank, name, color, score, wins) => {scoreboard.postScore(rank,name,color,score,wins)});
-    socket.on('post record', (rank,color, score, name, drawPopper) => {scoreboard.postRecord(rank,color, score, name, drawPopper)});
-    socket.on('post all record', (color, score, name, drawPopper) => {scoreboard.postAllRecord(color, score, name, drawPopper)});
+    socket.on('post group', (category, dict) => {scoreboard.postGroup(category, dict)});
     socket.on('post space', () => {scoreboard.postSpace()});
     socket.on('post lobby', () => {scoreboard.postLobby()});
-    socket.on('announce record', (name, score, color) => {socket.emit("announcement", '[Daily record in ' + myRoom + ' has been broken by <font color="' + color + '">' + name + ' (' + score + ')</font>]<br>')});
-    socket.on('announce alltime record', (name, score, color) => {socket.emit("announcement", '[All-time record in ' + myRoom + ' has been broken by <font color="' + color + '">' + name + ' (' + score + ')</font>]<br>')});
+    socket.on('announce record', (category, room, medal, name, score, color) => {socket.emit("announcement", '[New ' + category + ' record set by <font color="' + color + '">' + medal + name + ' (' + score + ')</font> in ' + room + ']<br>')});
 
     /**** Commands *****/
     const commands = new Commands(socket);

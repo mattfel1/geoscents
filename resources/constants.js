@@ -76,7 +76,8 @@ module.exports = {
     US: 'N. America',
     EURO: 'Eurasia',
     MAX_INACTIVE: 10, // Rounds of no click before you get booted
-    MAX_S_INACTIVE: 600*30, // seconds * fps spent in lobby before you get booted
+    MAX_S_INACTIVE: 600, // seconds * fps spent in lobby before you get booted
+    INIT_RECORD: {'record1': 0, 'recordName1': '-', 'recordColor1': 'black', 'recordBroken1': false, 'record2': 0, 'recordName2': '-', 'recordColor2': 'black', 'recordBroken2': false, 'record3': 0, 'recordName3': '-', 'recordColor3': 'black', 'recordBroken3': false},
 
     // Chat
     MAX_GAME_HIST: 100,

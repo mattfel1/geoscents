@@ -24,32 +24,42 @@ class Room {
       this.round = 0;
       this.winner = null;
       this.timerColor = CONSTANTS.LOBBY_COLOR;
-      this.record1 = Math.floor(Math.random() * CONSTANTS.RECORD_INIT_RANGE) + CONSTANTS.RECORD_INIT_BASE;
-      this.recordColor1 = CONSTANTS.COLORS[Math.floor(Math.random()*CONSTANTS.COLORS.length)];
-      this.recordName1 = CONSTANTS.RANDOM_NAMES[Math.floor(Math.random()*CONSTANTS.RANDOM_NAMES.length)];
-      this.recordBroken1 = false;
-      this.record2 = this.record1 - Math.floor(Math.random() * CONSTANTS.RECORD_DELTA_RANGE);
-      this.recordColor2 = CONSTANTS.COLORS[Math.floor(Math.random()*CONSTANTS.COLORS.length)];
-      this.recordName2 = CONSTANTS.RANDOM_NAMES[Math.floor(Math.random()*CONSTANTS.RANDOM_NAMES.length)];
-      this.recordBroken2 = false;
-      this.record3 = this.record2 - Math.floor(Math.random() * CONSTANTS.RECORD_DELTA_RANGE);
-      this.recordColor3 = CONSTANTS.COLORS[Math.floor(Math.random()*CONSTANTS.COLORS.length)];
-      this.recordName3 = CONSTANTS.RANDOM_NAMES[Math.floor(Math.random()*CONSTANTS.RANDOM_NAMES.length)];
-      this.recordBroken3 = false;
-
-      if (fs.existsSync('/tmp/' + map + '_record')) {
-          var record = JSON.parse(fs.readFileSync('/tmp/' + map + '_record', 'utf8'));
-          this.allRecord = record['score'];
-          this.allRecordName = record['name'];
-          this.allRecordColor = record['color'];
-          this.allRecordBroken = false;
+      if (fs.existsSync('/tmp/' + map + '_day_record')) {
+          try {
+              this.dayRecord = JSON.parse(fs.readFileSync('/tmp/' + map + '_day_record', 'utf8'));
+          } catch (err) {
+              this.dayRecord = CONSTANTS.INIT_RECORD;
+          }
       } else {
-          this.allRecord = this.record1;
-          this.allRecordName = this.recordName1;
-          this.allRecordColor = this.recordColor1;
-          this.allRecordBroken = false;
+          this.dayRecord = CONSTANTS.INIT_RECORD;
       }
-
+      if (fs.existsSync('/tmp/' + map + '_week_record')) {
+          try {
+              this.weekRecord = JSON.parse(fs.readFileSync('/tmp/' + map + '_week_record', 'utf8'));
+          } catch (err) {
+              this.weekRecord = CONSTANTS.INIT_RECORD;
+          }
+      } else {
+          this.weekRecord = CONSTANTS.INIT_RECORD;
+      }
+      if (fs.existsSync('/tmp/' + map + '_month_record')) {
+          try {
+              this.monthRecord = JSON.parse(fs.readFileSync('/tmp/' + map + '_month_record', 'utf8'));
+          } catch (err) {
+              this.monthRecord = CONSTANTS.INIT_RECORD;
+          }
+      } else {
+          this.monthRecord = CONSTANTS.INIT_RECORD;
+      }
+      if (fs.existsSync('/tmp/' + map + '_all-time_record')) {
+          try {
+              this.allRecord = JSON.parse(fs.readFileSync('/tmp/' + map + '_all-time_record', 'utf8'));
+          } catch (err) {
+              this.allRecord = CONSTANTS.INIT_RECORD;
+          }
+      } else {
+          this.allRecord = CONSTANTS.INIT_RECORD;
+      }
 }
 
     // Player count
@@ -181,106 +191,98 @@ class Room {
       }
     }
 
-    recordsBroken() {
-        var record1 = this.record1;
-        var recordColor1 = this.recordColor1;
-        var recordName1 = this.recordName1;
-        var recordBroken1 = this.recordBroken1;
-        var record2 = this.record2;
-        var recordColor2 = this.recordColor2;
-        var recordName2 = this.recordName2;
-        var recordBroken2 = this.recordBroken2;
-        var record3 = this.record3;
-        var recordColor3 = this.recordColor3;
-        var recordName3 = this.recordName3;
-        var recordBroken3 = this.recordBroken3;
-        var allRecord = this.allRecord;
-        var allRecordColor = this.allRecordColor;
-        var allRecordName = this.allRecordName;
-        var allRecordBroken = this.allRecordBroken;
-        const room = this.room;
-        Array.from(this.sortPlayers()).forEach((player, id) => {
-            if (player.score > allRecord) {
-                allRecord = player.score;
-                allRecordName = player.name;
-                allRecordColor = player.color;
-                allRecordBroken = true;
-                player.record = '🌟';
-                if (this.clients.has(player.id)) {
-                    this.clients.get(player.id).emit("announce alltime record", player.getName(), player.score, player.color);
-                }
-                const payload = {"score": allRecord, "name": allRecordName, "color": allRecordColor}
-                fs.writeFile("/tmp/" + room + "_record", JSON.stringify(payload), function(err) {
-                    if(err) {
-                        return console.log(err);
-                    }
-                });
-            }
-            if (player.score > record1) {
-                record3 = record2;
-                recordColor3 = recordColor2;
-                recordName3 = recordName2;
-                recordBroken1 = true;
-                record2 = record1;
-                recordColor2 = recordColor1;
-                recordName2 = recordName1;
-                record1 = player.score;
-                recordColor1 = player.color;
-                recordName1 = player.name;
-                player.medal = '🥇';
-                if (this.clients.has(player.id)) {
-                    this.clients.get(player.id).emit("announce record", player.getName(), player.score, player.color);
-                }
-            }
-            else if (player.score > record2) {
-                record3 = record2;
-                recordColor3 = recordColor2;
-                recordName3 = recordName2;
-                record2 = player.score;
-                recordColor2 = player.color;
-                recordName2 = player.name;
-                recordBroken2 = true;
-                player.medal = '🥈';
-                if (this.clients.has(player.id)) {
-                    this.clients.get(player.id).emit("announce record", player.getName(), player.score, player.color);
-                }
-            }
-            else if (player.score > record3) {
-                record3 = player.score;
-                recordColor3 = player.color;
-                recordName3 = player.name;
-                recordBroken3 = true;
-                player.medal = '🥉';
-                if (this.clients.has(player.id)) {
-                    this.clients.get(player.id).emit("announce record", player.getName(), player.score, player.color);
-                }
+    insertRecord(position, category, olddict, room, player){
+        function copy(x) {
+            return JSON.parse( JSON.stringify(x) );
+        }
+        var dict = copy(olddict);
+        var i;
+        for (i = 3; i > position; i--) {
+          dict['record' + i] = copy(dict['record' + (i-1)]);
+          dict['recordColor' + i] = copy(dict['recordColor' + (i-1)]);
+          dict['recordName' + i] = copy(dict['recordName' + (i-1)]);
+          dict['recordBroken' + i] = false;
+        }
+        dict['record' + position] = copy(player.score);
+        dict['recordColor' + position] = copy(player.color);
+        dict['recordName' + position] = copy(player.name);
+        dict['recordBroken' + position] = true;
+        player.giveMedal(position, category);
+        var medal = '';
+        if (position == 1) medal = '🥇';
+        else if (position == 2) medal = '🥈';
+        else if (position == 3) medal = '🥉';
+        if (this.clients.has(player.id)) {
+            this.clients.get(player.id).emit("announce record", category, room, medal, player.name, player.score, player.color);
+        }
+        fs.writeFile("/tmp/" + room + "_" + category + "_record", JSON.stringify(dict), function(err) {
+            if(err) {
+                return console.log(err);
             }
         });
+        return copy(dict);
+    }
 
-        this.record1 = record1;
-        this.recordColor1 = recordColor1;
-        this.recordName1 = recordName1;
-        this.recordBroken1 = recordBroken1;
-        this.record2 = record2;
-        this.recordColor2 = recordColor2;
-        this.recordName2 = recordName2;
-        this.recordBroken2 = recordBroken2;
-        this.record3 = record3;
-        this.recordColor3 = recordColor3;
-        this.recordName3 = recordName3;
-        this.recordBroken3 = recordBroken3;
-        this.allRecord = allRecord;
-        this.allRecordColor = allRecordColor;
-        this.allRecordName = allRecordName;
-        this.allRecordBroken = allRecordBroken;
+    getPosition(score, category){
+        if (score > category['record1']) return 1;
+        else if (score > category['record2']) return 2;
+        else if (score > category['record3']) return 3;
+        else return 4;
+    }
+
+    removePoppers() {
+        this.allRecord['recordBroken1'] = false;
+        this.allRecord['recordBroken2'] = false;
+        this.allRecord['recordBroken3'] = false;
+        this.monthRecord['recordBroken1'] = false;
+        this.monthRecord['recordBroken2'] = false;
+        this.monthRecord['recordBroken3'] = false;
+        this.weekRecord['recordBroken1'] = false;
+        this.weekRecord['recordBroken2'] = false;
+        this.weekRecord['recordBroken3'] = false;
+        this.dayRecord['recordBroken1'] = false;
+        this.dayRecord['recordBroken2'] = false;
+        this.dayRecord['recordBroken3'] = false;
+
+    }
+    recordsBroken() {
+        function copy(x) {
+            return JSON.parse( JSON.stringify(x) );
+        }
+        var dayRecord = copy(this.dayRecord);
+        var weekRecord = copy(this.weekRecord);
+        var monthRecord = copy(this.monthRecord);
+        var allRecord = copy(this.allRecord);
+        const getPosition = (score, category) => {return this.getPosition(score, category)};
+        const insertRecord = (p,c,d,r,pl) => {return this.insertRecord(p,c,d,r,pl)}
+        const room = this.room;
+        Array.from(this.sortPlayers()).forEach((player, id) => {
+            if (getPosition(player.score,dayRecord) < 4) {
+                dayRecord = copy(insertRecord(getPosition(player.score,dayRecord), "day", copy(dayRecord), room, player));
+            }
+            if (getPosition(player.score,weekRecord) < 4) {
+                weekRecord = copy(insertRecord(getPosition(player.score,weekRecord), "week", copy(weekRecord), room, player));
+            }
+            if (getPosition(player.score,monthRecord) < 4) {
+                monthRecord = copy(insertRecord(getPosition(player.score,monthRecord), "month", copy(monthRecord), room, player));
+            }
+            if (getPosition(player.score,allRecord) < 4) {
+                allRecord = copy(insertRecord(getPosition(player.score,allRecord), "all-time", copy(allRecord), room, player));
+            }
+        });
+        this.dayRecord = copy(dayRecord);
+        this.weekRecord = copy(weekRecord);
+        this.monthRecord = copy(monthRecord);
+        this.allRecord = copy(allRecord);
+
     }
 
     printScoresWithSelf(socket, socketId) {
         if (this.room != CONSTANTS.LOBBY) {
-            socket.emit('post all record', this.allRecordColor, this.allRecord, this.allRecordName, this.allRecordBroken);
-            socket.emit('post record', 1,this.recordColor1, this.record1, this.recordName1, this.recordBroken1);
-            socket.emit('post record', 2,this.recordColor2, this.record2, this.recordName2, this.recordBroken2);
-            socket.emit('post record', 3,this.recordColor3, this.record3, this.recordName3, this.recordBroken3);
+            socket.emit('post group', 'All-Time Records:', this.allRecord);
+            socket.emit('post group', 'Monthly Records:', this.monthRecord);
+            socket.emit('post group', 'Weekly Records:', this.weekRecord);
+            socket.emit('post group', 'Daily Records:', this.dayRecord);
             socket.emit('post space');
         }
         else {
@@ -442,7 +444,6 @@ class Room {
 
     fsm() {
       // Game flow state machine
-      const drawScorePanel = () => {this.drawScorePanel()};
       this.decrementTimer();
       if (this.room == CONSTANTS.LOBBY) {
           this.timerColor = CONSTANTS.LOBBY_COLOR;
@@ -458,10 +459,7 @@ class Room {
           if (this.numPlayers() == 0 && this.room != CONSTANTS.LOBBY) {
               this.timerColor = CONSTANTS.LOBBY_COLOR;
               this.state = CONSTANTS.IDLE_STATE;
-              this.recordBroken1 = false;
-              this.recordBroken2 = false;
-              this.recordBroken3 = false;
-              this.allRecordBroken = false;
+              this.removePoppers();
           } else if (this.numPlayers() > 0 && this.state == CONSTANTS.IDLE_STATE) {
               this.timerColor = CONSTANTS.LOBBY_COLOR;
               this.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
@@ -469,10 +467,7 @@ class Room {
           } else if (this.state == CONSTANTS.PREPARE_GAME_STATE) {
               if (this.allReady() || this.timer <= 0) {
                   this.timerColor = CONSTANTS.LOBBY_COLOR;
-                  this.recordBroken1 = false;
-                  this.recordBroken2 = false;
-                  this.recordBroken3 = false;
-                  this.allRecordBroken = false;
+                  this.removePoppers();
                   this.stateTransition(CONSTANTS.SETUP_STATE, 0);
                   Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
               } else {
