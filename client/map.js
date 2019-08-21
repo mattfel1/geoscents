@@ -129,14 +129,17 @@ class Map {
     drawStar(coords) {
         var rot = Math.PI / 2 * 3;
         const spikes = 5;
-        const outerRadius = 25;
-        const innerRadius = 15;
+        const outerRadius = 15;
+        const innerRadius = 5;
         var cx = coords['col'];
         var cy = coords['row'];
+        var x = cx;
+        var y = cy;
         var step = Math.PI / spikes;
 
         this.ctx.beginPath();
-        this.ctx.moveTo(cx, cy - outerRadius)
+        this.ctx.moveTo(cx, cy - outerRadius);
+        var i;
         for (i = 0; i < spikes; i++) {
             x = cx + Math.cos(rot) * outerRadius;
             y = cy + Math.sin(rot) * outerRadius;
@@ -150,7 +153,7 @@ class Map {
         }
         this.ctx.lineTo(cx, cy - outerRadius);
         this.ctx.closePath();
-        this.ctx.lineWidth = 5;
+        this.ctx.lineWidth = 2;
         this.ctx.strokeStyle = 'black';
         this.ctx.stroke();
         this.ctx.fillStyle = 'white';
