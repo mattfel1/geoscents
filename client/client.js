@@ -67,6 +67,7 @@ $(document).ready(function(){
     /**** Map *****/
     const map = new Map(socket);
     socket.on('draw point', (coords, color, radius) => {map.drawPoint(coords, color, radius)});
+    socket.on('draw answer', (coords) => {map.drawStar(coords)});
     socket.on('fresh map', (room) => map.drawMap(room));
     socket.on('blank map', (room) => map.drawBlank(room));
     socket.on('animate', () => map.drawAnimation());

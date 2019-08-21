@@ -344,9 +344,15 @@ class Room {
       });
     }
 
+    broadcastAnswer(row, col) {
+      this.clients.forEach(function(s,id) {
+          s.emit('draw answer', {'row': row, 'col': col})
+      });
+    }
+
     revealAll() {
         var answer = Geography.geoToMerc(this.room,this.target['lat'], this.target['lon']);
-        this.broadcastPoint(answer['row'], answer['col'], CONSTANTS.TRUTH_COLOR, CONSTANTS.BUBBLE_RADIUS);
+        this.broadcastAnswer(answer['row'], answer['col']);
         this.players.forEach((player,id) => {
             this.broadcastPoint(player.row, player.col, player.color, player.radius());
         });
