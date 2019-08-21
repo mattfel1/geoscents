@@ -23,6 +23,7 @@ class Room {
       this.state = CONSTANTS.IDLE_STATE;
       this.round = 0;
       this.winner = null;
+      this.blacklist = []; // List of countries or states to avoid drawing for this round
       this.timerColor = CONSTANTS.LOBBY_COLOR;
       if (fs.existsSync('/tmp/' + map + '_day_record')) {
           try {
@@ -326,7 +327,7 @@ class Room {
           const timeBonus = player.clickedAt;
           const merc = Geography.geoToMerc(room,parseFloat(target['lat']), parseFloat(target['lon']));
           var dist = Geography.mercDist(room, player.row, player.col, merc['row'], merc['col']);
-          if (!player.clicked) {
+          if (!player.clicked || isNaN(dist)) {
               dist = 9999;
           }
           const timeLogistic = CONSTANTS.LOGISTIC_C3/(2+Math.exp(CONSTANTS.LOGISTIC_C1*(-timeBonus+CONSTANTS.LOGISTIC_C2)))+CONSTANTS.LOGISTIC_C4;
@@ -474,16 +475,15 @@ class Room {
           } else if (this.state == CONSTANTS.PREPARE_GAME_STATE) {
               if (this.allReady() || this.timer <= 0) {
                   this.timerColor = CONSTANTS.LOBBY_COLOR;
+                  this.blacklist = [];
                   this.removePoppers();
                   this.stateTransition(CONSTANTS.SETUP_STATE, 0);
                   Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
-              } else {
-                  // this.onSecond(function () {
-                  //     drawScorePanel();
-                  // });
               }
           } else if (this.state == CONSTANTS.SETUP_STATE) {
-              this.target = Geography.randomCity(this.room);
+              this.target = Geography.randomCity(this.room, this.blacklist);
+              if (this.room == CONSTANTS.US) this.blacklist.push(this.target['admin_name']);
+              else this.blacklist.push(this.target['country']);
               this.timerColor = CONSTANTS.GUESS_COLOR;
               Array.from(this.players.values()).forEach((p, id) => {
                   p.reset()

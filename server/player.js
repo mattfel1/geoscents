@@ -72,7 +72,7 @@ class Player {
 			// const inverse = Math.sqrt(-Math.log(5/((CONSTANTS.MULTIPLIER*timeLogistic)))*CONSTANTS.GAUSS_C1);
 			// // return Math.max(inverse - CONSTANTS.BUBBLE_RADIUS, CONSTANTS.MIN_BUBBLE_RADIUS);
 			// return Math.max(inverse, CONSTANTS.MIN_BUBBLE_RADIUS);
-			return 2.8*this.clickedAt + 15;
+			return 2.7*this.clickedAt + 11;
 		} catch (err) {
 			return CONSTANTS.BUBBLE_RADIUS;
 		}

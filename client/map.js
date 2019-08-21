@@ -12,6 +12,10 @@ usImg.src = "/resources/us.png";
 
 var euroImg = new Image();
 euroImg.src = "/resources/euro.png";
+
+var africaImg = new Image();
+africaImg.src = "/resources/africa.png";
+
 var frame_cnt = 0;
 var frames = 8*9;
 var rate = 2;
@@ -123,14 +127,20 @@ class Map {
             };
           euroImg.onload();
       }
+      else if (room == CONSTANTS.AFRICA){
+            africaImg.onload = function () {
+                ctx.drawImage(africaImg, 0, 0)
+            };
+          africaImg.onload();
+      }
 
     }
 
     drawStar(coords) {
         var rot = Math.PI / 2 * 3;
-        const spikes = 5;
-        const outerRadius = 15;
-        const innerRadius = 5;
+        const spikes = CONSTANTS.STAR_POINTS;
+        const outerRadius = CONSTANTS.STAR_OUTER_RADIUS;
+        const innerRadius = CONSTANTS.STAR_INNER_RADIUS;
         var cx = coords['col'];
         var cy = coords['row'];
         var x = cx;

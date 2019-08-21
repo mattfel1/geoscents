@@ -30,8 +30,8 @@
 		cursor: pointer;
 		border: 1px solid #333;
 		padding: 2px 2px;
-		margin: 5px 5px;
-		font-size: 20px;
+		margin: 3px 3px;
+		font-size: 16px;
 		background: #a9e7f9; /* fallback */
 		background: -moz-linear-gradient(top,  #a9e7f9 0%, #77d3ef 4%, #05abe0 100%);
 		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9e7f9), color-stop(4%,#77d3ef), color-stop(100%,#05abe0));
@@ -39,6 +39,22 @@
 		background: -o-linear-gradient(top,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
 		background: -ms-linear-gradient(top,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
 		background: linear-gradient(to bottom,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
+		border-radius: 2px;
+		box-shadow: 0 0 4px rgba(0,0,0,0.3);
+	}
+	.lobby-btn {
+		cursor: pointer;
+		border: 1px solid #333;
+		padding: 2px 2px;
+		margin: 3px 3px;
+		font-size: 16px;
+		background: #ffcccc; /* fallback */
+		background: -moz-linear-gradient(top,  #ffcccc 0%, #ff9999 4%, #ff6666 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffcccc), color-stop(4%,#ff9999), color-stop(100%,#ff6666));
+		background: -webkit-linear-gradient(top,  #ffcccc 0%,#ff9999 4%,#ff6666 100%);
+		background: -o-linear-gradient(top,  #ffcccc 0%,#ff9999 4%,#ff6666 100%);
+		background: -ms-linear-gradient(top,  #ffcccc 0%,#ff9999 4%,#ff6666 100%);
+		background: linear-gradient(to bottom,  #ffcccc 0%,#ff9999 4%,#ff6666 100%);
 		border-radius: 2px;
 		box-shadow: 0 0 4px rgba(0,0,0,0.3);
 	}

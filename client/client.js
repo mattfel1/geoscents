@@ -44,7 +44,7 @@ $(document).ready(function(){
 
     /**** Commands *****/
     const commands = new Commands(socket);
-    socket.on('update counts', (l,w,u,e) => {commands.updateCounts(l,w,u,e);commands.postButtons();})
+    socket.on('update counts', (l,w,u,e,a) => {commands.updateCounts(l,w,u,e,a);commands.postButtons();})
     socket.on('draw buttons', () => {commands.postButtons()});
     socket.on('draw timer', (time,color) => {commands.postTime(time,color)});
     socket.on('draw prepare', (round) => {commands.drawCommand(" seconds until new game auto-starts...", "", "", round, true)});

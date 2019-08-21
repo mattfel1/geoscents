@@ -10,6 +10,7 @@ class Commands {
         this.us_count = 0;
         this.world_count = 0;
         this.euro_count = 0;
+        this.africa_count = 0;
         this.lobby_count = 0;
         this.ready_button = {
             x:this.canvas.width*5/9,
@@ -59,25 +60,28 @@ class Commands {
     }
 
 
-    updateCounts(l,w,u,e) {
+    updateCounts(l,w,u,e,a) {
        this.lobby_count = l;
        this.world_count = w;
        this.us_count = u;
        this.euro_count = e;
+       this.africa_count = a;
     }
     postButtons() {
         const socket = this.socket;
         $('#commands').empty();
-        $('#commands').append($("<button class='room-btn' id='lobby_button'>Go to Lobby (" + this.lobby_count + " players)</button>  "))
+        $('#commands').append($("<button class='lobby-btn' id='lobby_button'>To Lobby (" + this.lobby_count + " players)</button><br>"))
         $('#commands').append($("<button class='room-btn' id='world_button'>World (" + this.world_count + " players)</button>  "))
         $('#commands').append($("<button class='room-btn' id='us_button'>N. America (" + this.us_count + " players)</button>  "))
         $('#commands').append($("<button class='room-btn' id='euro_button'>Eurasia (" + this.euro_count + " players)</button>  "))
+        $('#commands').append($("<button class='room-btn' id='africa_button'>Africa (" + this.africa_count + " players)</button>  "))
 
         var room = this.myRoom;
         $('#lobby_button').bind("click", () => {if (room != CONSTANTS.LOBBY) socket.emit('moveTo', CONSTANTS.LOBBY)});
         $('#world_button').bind("click", () => {if (room != CONSTANTS.WORLD) socket.emit('moveTo', CONSTANTS.WORLD)});
         $('#us_button').bind("click", () => {if (room != CONSTANTS.US) socket.emit('moveTo', CONSTANTS.US)});
         $('#euro_button').bind("click", () => {if (room != CONSTANTS.EURO) socket.emit('moveTo', CONSTANTS.EURO)});
+        $('#africa_button').bind("click", () => {if (room != CONSTANTS.AFRICA) socket.emit('moveTo', CONSTANTS.AFRICA)});
 
     }
 
