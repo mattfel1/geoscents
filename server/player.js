@@ -62,6 +62,18 @@ class Player {
 		else if (position == 3) this.medal = this.medal + '🥉';
 	}
 
+	radius() {
+    	// Distance where timeLogistic * distGaussian == 1
+		try {
+		    // const timeLogistic = CONSTANTS.LOGISTIC_C3/(2+Math.exp(CONSTANTS.LOGISTIC_C1*(-timeBonus+CONSTANTS.LOGISTIC_C2)))+1;
+            // const distGaussian = Math.exp(-Math.pow(dist, 2) / CONSTANST.GAUSS_C1) * CONSTANTS.MULTIPLIER;
+			const timeLogistic = CONSTANTS.LOGISTIC_C3/(2+Math.exp(CONSTANTS.LOGISTIC_C1*(-this.clickedAt+CONSTANTS.LOGISTIC_C2)))+CONSTANTS.LOGISTIC_C4;
+			const inverse = Math.sqrt(-Math.log(1/((CONSTANTS.MULTIPLIER*timeLogistic)))*CONSTANTS.GAUSS_C1);
+			return Math.max(inverse - CONSTANTS.BUBBLE_RADIUS, CONSTANTS.MIN_BUBBLE_RADIUS);
+		} catch (err) {
+			return CONSTANTS.BUBBLE_RADIUS;
+		}
+	}
 	won() {
     	this.wins = this.wins + 1;
         this.trophy = '🏆';

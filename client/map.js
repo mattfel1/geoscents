@@ -126,14 +126,14 @@ class Map {
 
     }
 
-    drawPoint(coords, color) {
+    drawPoint(coords, color, radius) {
         this.ctx.beginPath();
         this.ctx.arc(coords['col'] - CONSTANTS.POINT_RADIUS / 2, coords['row'] - CONSTANTS.POINT_RADIUS / 2, CONSTANTS.POINT_RADIUS, 0, 2 * Math.PI);
         this.ctx.fillStyle = color;
         this.ctx.fill();
         this.ctx.closePath();
         this.ctx.beginPath();
-        this.ctx.arc(coords['col'] - CONSTANTS.POINT_RADIUS / 2, coords['row'] - CONSTANTS.POINT_RADIUS / 2, CONSTANTS.BUBBLE_RADIUS, 0, 2 * Math.PI, false);
+        this.ctx.arc(coords['col'] - CONSTANTS.POINT_RADIUS / 2, coords['row'] - CONSTANTS.POINT_RADIUS / 2, radius, 0, 2 * Math.PI, false);
         this.ctx.lineWidth = CONSTANTS.BUBBLE_WIDTH;
         this.ctx.strokeStyle = color;
         this.ctx.stroke();

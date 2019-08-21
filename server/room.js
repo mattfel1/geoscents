@@ -185,7 +185,7 @@ class Room {
                   player.lat = geo['lat'];
                   player.lon = geo['lon'];
                   // console.log('click at ' + player.row + ',' + player.col + ' (' + player.lat + ',' + player.lon + ')')
-                  socket.emit('draw point', {'row': player.row, 'col': player.col}, player.color)
+                  socket.emit('draw point', {'row': player.row, 'col': player.col}, player.color, player.radius())
               }
           }
       }
@@ -329,25 +329,26 @@ class Room {
           if (!player.clicked) {
               dist = 9999;
           }
-          const timeLogistic = 20/(2+Math.exp(0.8*(-timeBonus+7)))+1
-          const update = Math.exp(-Math.pow(dist, 2) / 1000) * timeLogistic * 50;
+          const timeLogistic = CONSTANTS.LOGISTIC_C3/(2+Math.exp(CONSTANTS.LOGISTIC_C1*(-timeBonus+CONSTANTS.LOGISTIC_C2)))+CONSTANTS.LOGISTIC_C4;
+          const distGaussian = Math.exp(-Math.pow(dist, 2) / CONSTANTS.GAUSS_C1) * CONSTANTS.MULTIPLIER;
+          const update = distGaussian * timeLogistic;
           historyScore(player, " + " + Math.floor(update ) + " (Distance: " + Math.floor(dist) + ", Time Bonus: " + (Math.floor(timeBonus * 10) / 10) + "s)")
           player.score = Math.floor(player.score + update)
         })
       this.historyRound(this.round, this.stringifyTarget())
     }
 
-    broadcastPoint(row, col, color) {
+    broadcastPoint(row, col, color, radius) {
       this.clients.forEach(function(s,id) {
-          s.emit('draw point', {'row': row, 'col': col}, color)
+          s.emit('draw point', {'row': row, 'col': col}, color, radius)
       });
     }
 
     revealAll() {
         var answer = Geography.geoToMerc(this.room,this.target['lat'], this.target['lon']);
-        this.broadcastPoint(answer['row'], answer['col'], CONSTANTS.TRUTH_COLOR);
+        this.broadcastPoint(answer['row'], answer['col'], CONSTANTS.TRUTH_COLOR, CONSTANTS.BUBBLE_RADIUS);
         this.players.forEach((player,id) => {
-            this.broadcastPoint(player.row, player.col, player.color);
+            this.broadcastPoint(player.row, player.col, player.color, player.radius());
         });
     }
 
