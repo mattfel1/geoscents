@@ -67,6 +67,7 @@ class Player {
 		try {
 		    // const timeLogistic = CONSTANTS.LOGISTIC_C3/(2+Math.exp(CONSTANTS.LOGISTIC_C1*(-timeBonus+CONSTANTS.LOGISTIC_C2)))+1;
             // const distGaussian = Math.exp(-Math.pow(dist, 2) / CONSTANST.GAUSS_C1) * CONSTANTS.MULTIPLIER;
+			// Desmond: \sqrt{-1000\ln\left(\frac{1}{80\cdot\left(\frac{30}{2+e^{1.4\left(-x+10\right)}}+\frac{1}{80}\right)}\right)}
 			const timeLogistic = CONSTANTS.LOGISTIC_C3/(2+Math.exp(CONSTANTS.LOGISTIC_C1*(-this.clickedAt+CONSTANTS.LOGISTIC_C2)))+CONSTANTS.LOGISTIC_C4;
 			const inverse = Math.sqrt(-Math.log(1/((CONSTANTS.MULTIPLIER*timeLogistic)))*CONSTANTS.GAUSS_C1);
 			// return Math.max(inverse - CONSTANTS.BUBBLE_RADIUS, CONSTANTS.MIN_BUBBLE_RADIUS);

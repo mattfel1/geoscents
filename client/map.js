@@ -131,8 +131,8 @@ class Map {
         const spikes = 5;
         const outerRadius = 25;
         const innerRadius = 15;
-        var x = coords['col'];
-        var y = coords['row'];
+        var cx = coords['col'];
+        var cy = coords['row'];
         var step = Math.PI / spikes;
 
         this.ctx.beginPath();
