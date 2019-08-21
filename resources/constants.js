@@ -64,7 +64,7 @@ module.exports = {
     LONGCITY: 40, // # characters for city string to be considered "long"
     FPS: 30,
     BUTTONS_HEIGHT: 40,
-    MULTIPLIER: 80,
+    MULTIPLIER: 50,
     LOGISTIC_C1: 0.9,
     LOGISTIC_C2: 7,
     LOGISTIC_C3: 30,
