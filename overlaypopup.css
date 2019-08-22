@@ -72,20 +72,6 @@
 	}
 }
 
-
-
-
-body {
-  /* background: #ccc; */
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-body, html {
-  height: 100%;
-}
 .graph-container {
   position: relative;
 }
