@@ -209,19 +209,6 @@ module.exports = {
     "id": 1834843853
   },
   {
-    "name": "Aleppo",
-    "city_ascii": "Aleppo",
-    "lat": 36.23,
-    "lon": 37.17,
-    "country": "Syria",
-    "iso2": "SY",
-    "iso3": "SYR",
-    "admin_name": "Ḩalab",
-    "capital": "admin",
-    "population": 2738000,
-    "id": 1760366651
-  },
-  {
     "name": "Durban",
     "city_ascii": "Durban",
     "lat": -29.865,
@@ -272,19 +259,6 @@ module.exports = {
     "capital": "primary",
     "population": 2604000,
     "id": 1686604760
-  },
-  {
-    "name": "Damascus",
-    "city_ascii": "Damascus",
-    "lat": 33.5,
-    "lon": 36.3,
-    "country": "Syria",
-    "iso2": "SY",
-    "iso3": "SYR",
-    "admin_name": "Dimashq",
-    "capital": "primary",
-    "population": 2466000,
-    "id": 1760685964
   },
   {
     "name": "Tunis",
@@ -701,19 +675,6 @@ module.exports = {
     "capital": "admin",
     "population": 1020000,
     "id": 1566070649
-  },
-  {
-    "name": "Hims",
-    "city_ascii": "Hims",
-    "lat": 34.73,
-    "lon": 36.72,
-    "country": "Syria",
-    "iso2": "SY",
-    "iso3": "SYR",
-    "admin_name": "Ḩimş",
-    "capital": "admin",
-    "population": 1005000,
-    "id": 1760013934
   },
   {
     "name": "Fez",
@@ -1327,19 +1288,6 @@ module.exports = {
     "id": 1508768577
   },
   {
-    "name": "Al Ladhiqiyah",
-    "city_ascii": "Al Ladhiqiyah",
-    "lat": 35.54,
-    "lon": 35.78,
-    "country": "Syria",
-    "iso2": "SY",
-    "iso3": "SYR",
-    "admin_name": "Al Lādhiqīyah",
-    "capital": "admin",
-    "population": 539147,
-    "id": 1760555544
-  },
-  {
     "name": "Beira",
     "city_ascii": "Beira",
     "lat": -19.82,
@@ -1416,19 +1364,6 @@ module.exports = {
     "capital": "admin",
     "population": 500000,
     "id": 1566560581
-  },
-  {
-    "name": "Douma",
-    "city_ascii": "Douma",
-    "lat": 33.5833,
-    "lon": 36.4,
-    "country": "Syria",
-    "iso2": "SY",
-    "iso3": "SYR",
-    "admin_name": "Rīf Dimashq",
-    "capital": "minor",
-    "population": 496145,
-    "id": 1760821818
   },
   {
     "name": "Mwanza",
@@ -1520,19 +1455,6 @@ module.exports = {
     "capital": "admin",
     "population": 461796,
     "id": 1566495489
-  },
-  {
-    "name": "Hamah",
-    "city_ascii": "Hamah",
-    "lat": 35.1503,
-    "lon": 36.73,
-    "country": "Syria",
-    "iso2": "SY",
-    "iso3": "SYR",
-    "admin_name": "Ḩamāh",
-    "capital": "admin",
-    "population": 460602,
-    "id": 1760197502
   },
   {
     "name": "Sfax",
@@ -2146,19 +2068,6 @@ module.exports = {
     "id": 1566310893
   },
   {
-    "name": "Dayr az Zawr",
-    "city_ascii": "Dayr az Zawr",
-    "lat": 35.3304,
-    "lon": 40.13,
-    "country": "Syria",
-    "iso2": "SY",
-    "iso3": "SYR",
-    "admin_name": "Dayr az Zawr",
-    "capital": "admin",
-    "population": 309141,
-    "id": 1760792603
-  },
-  {
     "name": "Antsirabe",
     "city_ascii": "Antsirabe",
     "lat": -19.85,
@@ -2183,19 +2092,6 @@ module.exports = {
     "capital": "",
     "population": 306600,
     "id": 1504230428
-  },
-  {
-    "name": "Hatay",
-    "city_ascii": "Hatay",
-    "lat": 36.2304,
-    "lon": 36.12,
-    "country": "Turkey",
-    "iso2": "TR",
-    "iso3": "TUR",
-    "admin_name": "Hatay",
-    "capital": "admin",
-    "population": 305564,
-    "id": 1792115763
   },
   {
     "name": "Kom Ombo",
@@ -2261,19 +2157,6 @@ module.exports = {
     "capital": "admin",
     "population": 299459,
     "id": 1818333966
-  },
-  {
-    "name": "İskenderun",
-    "city_ascii": "Iskenderun",
-    "lat": 36.5804,
-    "lon": 36.17,
-    "country": "Turkey",
-    "iso2": "TR",
-    "iso3": "TUR",
-    "admin_name": "Hatay",
-    "capital": "minor",
-    "population": 297943,
-    "id": 1792962911
   },
   {
     "name": "Thiès",
@@ -3654,19 +3537,6 @@ module.exports = {
     "id": 1384205840
   },
   {
-    "name": "Ar Raqqah",
-    "city_ascii": "Ar Raqqah",
-    "lat": 35.9304,
-    "lon": 39.02,
-    "country": "Syria",
-    "iso2": "SY",
-    "iso3": "SYR",
-    "admin_name": "Ar Raqqah",
-    "capital": "admin",
-    "population": 177636,
-    "id": 1760035911
-  },
-  {
     "name": "El Oued",
     "city_ascii": "El Oued",
     "lat": 33.3704,
@@ -3951,19 +3821,6 @@ module.exports = {
     "capital": "admin",
     "population": 162981,
     "id": 1729642412
-  },
-  {
-    "name": "Tartus",
-    "city_ascii": "Tartus",
-    "lat": 34.8846,
-    "lon": 35.8866,
-    "country": "Syria",
-    "iso2": "SY",
-    "iso3": "SYR",
-    "admin_name": "Ţarţūs",
-    "capital": "admin",
-    "population": 162980,
-    "id": 1760695473
   },
   {
     "name": "Settat",
@@ -4421,19 +4278,6 @@ module.exports = {
     "id": 1834712235
   },
   {
-    "name": "Dar'a",
-    "city_ascii": "Dar'a",
-    "lat": 32.625,
-    "lon": 36.105,
-    "country": "Syria",
-    "iso2": "SY",
-    "iso3": "SYR",
-    "admin_name": "Dar‘ā",
-    "capital": "admin",
-    "population": 146481,
-    "id": 1760427038
-  },
-  {
     "name": "Machakos",
     "city_ascii": "Machakos",
     "lat": -1.5095,
@@ -4746,19 +4590,6 @@ module.exports = {
     "id": 1508476900
   },
   {
-    "name": "Idlib",
-    "city_ascii": "Idlib",
-    "lat": 35.9297,
-    "lon": 36.6317,
-    "country": "Syria",
-    "iso2": "SY",
-    "iso3": "SYR",
-    "admin_name": "Idlib",
-    "capital": "admin",
-    "population": 128840,
-    "id": 1760305230
-  },
-  {
     "name": "Xai-Xai",
     "city_ascii": "Xai-Xai",
     "lat": -25.04,
@@ -4835,19 +4666,6 @@ module.exports = {
     "capital": "admin",
     "population": 128123,
     "id": 1434563640
-  },
-  {
-    "name": "Al Hasakah",
-    "city_ascii": "Al Hasakah",
-    "lat": 36.4833,
-    "lon": 40.75,
-    "country": "Syria",
-    "iso2": "SY",
-    "iso3": "SYR",
-    "admin_name": "Al Ḩasakah",
-    "capital": "admin",
-    "population": 128100,
-    "id": 1760476337
   },
   {
     "name": "Darnah",
@@ -5082,19 +4900,6 @@ module.exports = {
     "capital": "",
     "population": 122497,
     "id": 1710468143
-  },
-  {
-    "name": "Manbij",
-    "city_ascii": "Manbij",
-    "lat": 36.5266,
-    "lon": 37.9563,
-    "country": "Syria",
-    "iso2": "SY",
-    "iso3": "SYR",
-    "admin_name": "Ḩalab",
-    "capital": "minor",
-    "population": 120169,
-    "id": 1760355581
   },
   {
     "name": "Larache",
@@ -6072,19 +5877,6 @@ module.exports = {
     "id": 1404380224
   },
   {
-    "name": "Samandagi",
-    "city_ascii": "Samandagi",
-    "lat": 36.1171,
-    "lon": 35.9333,
-    "country": "Turkey",
-    "iso2": "TR",
-    "iso3": "TUR",
-    "admin_name": "Hatay",
-    "capital": "minor",
-    "population": 93638,
-    "id": 1792813864
-  },
-  {
     "name": "Bafang",
     "city_ascii": "Bafang",
     "lat": 5.1704,
@@ -6278,19 +6070,6 @@ module.exports = {
     "capital": "primary",
     "population": 88219,
     "id": 1678301324
-  },
-  {
-    "name": "Madinat ath Thawrah",
-    "city_ascii": "Madinat ath Thawrah",
-    "lat": 35.8367,
-    "lon": 38.5481,
-    "country": "Syria",
-    "iso2": "SY",
-    "iso3": "SYR",
-    "admin_name": "Ar Raqqah",
-    "capital": "minor",
-    "population": 87880,
-    "id": 1760605225
   },
   {
     "name": "Ebolowa",

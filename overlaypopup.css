@@ -74,3 +74,48 @@
 
 
 
+
+body {
+  /* background: #ccc; */
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body, html {
+  height: 100%;
+}
+.graph-container {
+  position: relative;
+}
+.chart {
+  background: "#3887cc";
+  width: 500px;
+  height: 200px;
+  border-left: 1px dotted #555;
+  border-bottom: 1px dotted #555;
+  padding: 20px 20px 20px 0px;
+}
+.x-labels, .y-labels {
+  color: gray;
+}
+.x-labels {
+  font-size: 0.7em;
+  width: 520px;
+  position: relative;
+  bottom: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.y-labels {
+  font-size: 0.9em;
+  position: relative;
+  bottom: 240px;
+  right: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+

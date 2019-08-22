@@ -16,6 +16,7 @@ class Room {
       this.clients = new Map();
       // Map from socketID -> player
       this.players = new Map();
+      this.playersHistory = new Map();
       this.ordinalCounter = 0;
       this.timer = CONSTANTS.GUESS_DURATION;
       this.target = {'name':'', 'country':'', 'capital':''};
@@ -319,9 +320,25 @@ class Room {
             'minorcapital': this.target['capital'] == 'admin' || this.target['capital'] == 'minor'
         }
     }
+    updateHistory(player, round, score) {
+        if (this.playersHistory.has(player)) {
+          var dict = this.playersHistory.get(player);
+          dict[round] = score;
+          this.playersHistory.set(player, dict)
+        } else {
+          var dict = {};
+          dict[round] = score;
+          this.playersHistory.set(player, dict)
+        }
+    }
     updateScores() {
+        function copy(x) {
+            return JSON.parse( JSON.stringify(x) );
+        }
       const target = this.target;
       const room = this.room;
+      const round = this.round;
+      const updateHistory = (p,r,s) => this.updateHistory(p,r,s);
       const historyScore = (player, payload) => {this.historyScore(player, payload)}
       Array.from(this.players.values()).forEach(function(player) {
           const timeBonus = player.clickedAt;
@@ -333,8 +350,10 @@ class Room {
           const timeLogistic = CONSTANTS.LOGISTIC_C3/(2+Math.exp(CONSTANTS.LOGISTIC_C1*(-timeBonus+CONSTANTS.LOGISTIC_C2)))+CONSTANTS.LOGISTIC_C4;
           const distGaussian = Math.exp(-Math.pow(dist, 2) / CONSTANTS.GAUSS_C1) * CONSTANTS.MULTIPLIER;
           const update = distGaussian * timeLogistic;
+          const newScore = Math.floor(player.score + update);
           historyScore(player, " + " + Math.floor(update ) + " (Distance: " + Math.floor(dist) + ", Time Bonus: " + (Math.floor(timeBonus * 10) / 10) + "s)")
-          player.score = Math.floor(player.score + update)
+          player.score = newScore;
+          updateHistory(player, round, newScore);
         })
       this.historyRound(this.round, this.stringifyTarget())
     }
@@ -477,6 +496,7 @@ class Room {
                   this.timerColor = CONSTANTS.LOBBY_COLOR;
                   this.blacklist = [];
                   this.removePoppers();
+                  this.playersHistory = new Map();
                   this.stateTransition(CONSTANTS.SETUP_STATE, 0);
                   Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
               }
@@ -542,9 +562,11 @@ class Room {
     };
     printWinner(winner, score, color) {
         this.recordsBroken();
+        const playersHistory = JSON.stringify([...this.playersHistory.entries()]);
         const room = this.room;
         this.clients.forEach((socket,id) => {
-            socket.emit('break history',  room, winner, score, color);
+            socket.emit('draw chart', playersHistory, winner, color, room, score);
+            // socket.emit('break history',  room, winner, score, color);
         });
     }
     historyRound(round, thisTarget) {
