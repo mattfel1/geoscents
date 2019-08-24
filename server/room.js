@@ -55,8 +55,10 @@ class Room {
       }
       if (fs.existsSync('/tmp/' + map + '_all-time_record')) {
           try {
+              console.log('loading record ' + map)
               this.allRecord = JSON.parse(fs.readFileSync('/tmp/' + map + '_all-time_record', 'utf8'));
           } catch (err) {
+              console.log('failed loading ' + map)
               this.allRecord = CONSTANTS.INIT_RECORD;
           }
       } else {
@@ -217,11 +219,11 @@ class Room {
         if (this.clients.has(player.id)) {
             this.clients.get(player.id).emit("announce record", category, room, medal, player.name, player.score, player.color);
         }
-        fs.writeFile("/tmp/" + room + "_" + category + "_record", JSON.stringify(dict), function(err) {
-            if(err) {
-                return console.log(err);
-            }
-        });
+        // fs.writeFile("/tmp/" + room + "_" + category + "_record", JSON.stringify(dict), function(err) {
+        //     if(err) {
+        //         return console.log(err);
+        //     }
+        // });
         return copy(dict);
     }
 
@@ -270,6 +272,26 @@ class Room {
             }
             if (getPosition(player.score,allRecord) < 4) {
                 allRecord = copy(insertRecord(getPosition(player.score,allRecord), "all-time", copy(allRecord), room, player));
+            }
+        });
+        fs.writeFile("/tmp/" + room + "_day_record", JSON.stringify(copy(dayRecord)), function(err) {
+            if(err) {
+                return console.log(err);
+            }
+        });
+        fs.writeFile("/tmp/" + room + "_week_record", JSON.stringify(copy(weekRecord)), function(err) {
+            if(err) {
+                return console.log(err);
+            }
+        });
+        fs.writeFile("/tmp/" + room + "_month_record", JSON.stringify(copy(monthRecord)), function(err) {
+            if(err) {
+                return console.log(err);
+            }
+        });
+        fs.writeFile("/tmp/" + room + "_all-time_record", JSON.stringify(copy(allRecord)), function(err) {
+            if(err) {
+                return console.log(err);
             }
         });
         this.dayRecord = copy(dayRecord);
