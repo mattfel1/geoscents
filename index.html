@@ -18,10 +18,33 @@
 <div class="overlay-bg">
 </div>
 <div class="overlay-content popup">
-    <p>Please write a name or click away to get a random name</p>
+    <p>Please choose a name and color (or leave blank for random)</p>
                      <form id="rename">
-                     <input type="text" id="selected_name" autofocus name="selected_name" style="width: 100px;" maxlength="14" required pattern="[a-zA-Z0-9][a-zA-Z0-9 ?!]+" title="Name should only contain letters, numbers, and spaces" />
+                 <table>
+                     <td>
+                     <input type="text" id="selected_name" autofocus name="selected_name" style="width: 120px;" maxlength="14" pattern="[a-zA-Z0-9][a-zA-Z0-9 ?!]+" title="Name should only contain letters, numbers, and spaces" />
                      <input type="submit" value="Join!" />
+                     </td>
+                     <td>
+                     <input type="radio" name="selected_color" value="random" checked> random
+                     <input type="radio" name="selected_color" value="red"> <font color="red"><b>X</b></font>
+                     <input type="radio" name="selected_color" value="blue"> <font color="blue"><b>X</b></font>
+                     <input type="radio" name="selected_color" value="purple"> <font color="purple"><b>X</b></font>
+                     <input type="radio" name="selected_color" value="magenta"> <font color="magenta"><b>X</b></font>
+                     <input type="radio" name="selected_color" value="grey"> <font color="grey"><b>X</b></font>
+                     <input type="radio" name="selected_color" value="orange"> <font color="orange"><b>X</b></font>
+                     <input type="radio" name="selected_color" value="green"> <font color="green"><b>X</b></font>
+                     <input type="radio" name="selected_color" value="#1f77b4"> <font color="#1f77b4"><b>X</b></font>
+                     <input type="radio" name="selected_color" value="#2ca02c"> <font color="#2ca02c"><b>X</b></font>
+                     <input type="radio" name="selected_color" value="#995c00"> <font color="#995c00"><b>X</b></font>
+                     <input type="radio" name="selected_color" value="#9467bd"> <font color="#9467bd"><b>X</b></font>
+                     <input type="radio" name="selected_color" value="#8c564b"> <font color="#8c564b"><b>X</b></font>
+                     <input type="radio" name="selected_color" value="#e377c2"> <font color="#e377c2"><b>X</b></font>
+                     <input type="radio" name="selected_color" value="#adad1f"> <font color="#adad1f"><b>X</b></font>
+                     <input type="radio" name="selected_color" value="#17becf"> <font color="#17becf"><b>X</b></font>
+                     </td>
+                 </table>
+
                      </form>
 </div>
 

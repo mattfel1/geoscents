@@ -55,10 +55,8 @@ class Room {
       }
       if (fs.existsSync('/tmp/' + map + '_all-time_record')) {
           try {
-              console.log('loading record ' + map)
               this.allRecord = JSON.parse(fs.readFileSync('/tmp/' + map + '_all-time_record', 'utf8'));
           } catch (err) {
-              console.log('failed loading ' + map)
               this.allRecord = CONSTANTS.INIT_RECORD;
           }
       } else {
@@ -86,9 +84,10 @@ class Room {
         return this.clients.has(socket.id) && this.players.has(socket.id)
     }
 
-    renamePlayer(socket, name) {
+    renamePlayer(socket, name, color) {
         if (this.players.has(socket.id)) {
             if (name != '') this.players.get(socket.id).name = name;
+            if (color != 'random') this.players.get(socket.id).color = color;
             this.players.get(socket.id).choseName = true;
         }
       this.drawScorePanel(socket.id);

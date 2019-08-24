@@ -1,7 +1,7 @@
 module.exports = {
 
     // Players
-    COLORS: ['#1f77b4','#2ca02c','#995c00','#9467bd','#8c564b','#e377c2','#737373','#adad1f','#17becf', 'blue', 'green', 'red', 'magenta', 'black'],
+    COLORS: ["red", "blue", "purple", "magenta", "grey", "orange", "green", "#1f77b4", "#2ca02c", "#995c00", "#9467bd", "#8c564b", "#e377c2", "#adad1f", "#17becf"],
     RANDOM_NAMES: ['Emma','Liam','Noah','Olivia','Ava','Isabella','Sophia','Elijah','Logan','Mia','Mason','James','Aiden','Ethan','Lucas','Jacob',
         'Michael','Matthew','Benjamin','Amelia','Charlotte','Alexander','William','Daniel','Jayden','Merica!','happy','lucky','sleepy','funky',
         'KnuckleHed','geoMASTA','fish','dog','cat','meow','ruff','woof','AAAAAAAAAA','knightmare','asdf','aoeu','qwerty','Naughty', 'xkcd',

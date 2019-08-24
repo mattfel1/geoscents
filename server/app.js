@@ -107,16 +107,20 @@ io.on('connection', (socket) => {
           io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount());
       }
 	});
-	socket.on('playerJoin', (newname, callback) => {
-	    var name = newname;
+	socket.on('playerJoin', (newname, newcolor, callback) => {
+	    var name = '';
+        if (newname !== null) name = newname;
+        var color = '';
+        if (newcolor !== null) color = newcolor;
+        console.log(color)
         helpers.log("User " + socket.handshake.address + " named themself    " + newname);
 	    if (rooms[CONSTANTS.LOBBY].hasPlayer(socket)) {
 	        var badname = "";
-	        CONSTANTS.PROFANITY.forEach((word) => {if (newname.toUpperCase().includes(word.toUpperCase())) badname = "I used a bad word in my name :(";});
+	        CONSTANTS.PROFANITY.forEach((word) => {if (name.toUpperCase().includes(word.toUpperCase())) badname = "I used a bad word in my name :(";});
 	        if (badname != "") {
                 name = 'Naughty'
             }
-	        rooms[CONSTANTS.LOBBY].renamePlayer(socket, name);
+	        rooms[CONSTANTS.LOBBY].renamePlayer(socket, name, color);
             var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'>" + rooms[CONSTANTS.LOBBY].getPlayerRawName(socket) + " has entered the lobby!</font> ] " + badname + "<br>";
             io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
             io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount());

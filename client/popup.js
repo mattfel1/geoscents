@@ -4,9 +4,9 @@ class Popup {
         this.choseName = false;
     }
 
-    join(name,cb) {
+    join(info, cb) {
         this.choseName = true;
-        this.socket.emit('playerJoin', name, cb);
+        this.socket.emit('playerJoin', info['name'], info['color'], cb);
     }
     getChoseName() {
         return this.choseName;
@@ -24,14 +24,18 @@ class Popup {
         const join = (name,cb) => this.join(name,cb);
         const closePopup = () => this.closePopup();
         const choseName = () => this.getChoseName();
+        const callback = () => {
+                   // $("form#rename #selected_name").val("");
+                   closePopup()
+               }
         // hide popup when user clicks on close button or if user clicks anywhere outside the container
         $('.close-btn, .overlay-bg').click(function(){
-            join('', () => {closePopup()});
+            join({'name':'', 'color':$("input[name='selected_color']:checked").val()}, () => {closePopup()});
         });
         // hide the this.when user presses the esc key
         $(document).keyup(function(e) {
             if (e.keyCode == 27 && !choseName()) { // if user presses esc key
-                join('', () => {closePopup()});
+                join({'name':'', 'color':$("input[name='selected_color']:checked").val()}, () => {closePopup()});
             }
         });
 
@@ -40,10 +44,9 @@ class Popup {
            e.preventDefault();
 
            if (!choseName()) {
-               join($(this).find("#selected_name").val(), function () {
-                   $("form#rename #selected_name").val("");
-                   closePopup()
-               });
+               var name = $(this).find("#selected_name").val();
+               var color = $("input[name='selected_color']:checked").val();
+               join({'name':name, 'color':color}, callback);
            }
          });
     }
