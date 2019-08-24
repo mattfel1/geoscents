@@ -112,7 +112,6 @@ io.on('connection', (socket) => {
         if (newname !== null) name = newname;
         var color = '';
         if (newcolor !== null) color = newcolor;
-        console.log(color)
         helpers.log("User " + socket.handshake.address + " named themself    " + newname);
 	    if (rooms[CONSTANTS.LOBBY].hasPlayer(socket)) {
 	        var badname = "";
