@@ -246,8 +246,12 @@ class Room {
         this.dayRecord['recordBroken1'] = false;
         this.dayRecord['recordBroken2'] = false;
         this.dayRecord['recordBroken3'] = false;
-
     }
+
+    appendActivity(update) {
+        // TODO: update activity log json for display in lobby
+    }
+
     recordsBroken() {
         function copy(x) {
             return JSON.parse( JSON.stringify(x) );
@@ -259,40 +263,42 @@ class Room {
         const getPosition = (score, category) => {return this.getPosition(score, category)};
         const insertRecord = (p,c,d,r,pl) => {return this.insertRecord(p,c,d,r,pl)}
         const room = this.room;
+        const appendActivity = (update) => {this.appendActivity(update)};
         Array.from(this.sortPlayers()).forEach((player, id) => {
+            var activityLog = {};
             if (getPosition(player.score,dayRecord) < 4) {
                 dayRecord = copy(insertRecord(getPosition(player.score,dayRecord), "day", copy(dayRecord), room, player));
+                activityLog['day'] = getPosition(player.score,dayRecord)
             }
             if (getPosition(player.score,weekRecord) < 4) {
                 weekRecord = copy(insertRecord(getPosition(player.score,weekRecord), "week", copy(weekRecord), room, player));
+                activityLog['week'] = getPosition(player.score,weekRecord)
             }
             if (getPosition(player.score,monthRecord) < 4) {
                 monthRecord = copy(insertRecord(getPosition(player.score,monthRecord), "month", copy(monthRecord), room, player));
+                activityLog['month'] = getPosition(player.score,monthRecord)
             }
             if (getPosition(player.score,allRecord) < 4) {
                 allRecord = copy(insertRecord(getPosition(player.score,allRecord), "all-time", copy(allRecord), room, player));
+                activityLog['all-time'] = getPosition(player.score,allRecord)
+            }
+            if (Object.keys(activityLog).length > 0) {
+                const monthNames = ["Jan", "Feb", "Mar","Apr", "May", "Jun","Jul", "Aug", "Sep","Oct", "Nov", "Dec"];
+                const time = new Date();
+                const month = monthNames[time.getMonth()];
+                const day = time.getDay();
+                const hour = time.getHours();
+                activityLog['room'] = room;
+                activityLog['date'] = month + day + " @" + hour + "gmt";
+                activityLog['player'] = player.name;
+                activityLog['color'] = player.color;
+                appendActivity(activityLog)
             }
         });
-        fs.writeFile("/tmp/" + room + "_day_record", JSON.stringify(copy(dayRecord)), function(err) {
-            if(err) {
-                return console.log(err);
-            }
-        });
-        fs.writeFile("/tmp/" + room + "_week_record", JSON.stringify(copy(weekRecord)), function(err) {
-            if(err) {
-                return console.log(err);
-            }
-        });
-        fs.writeFile("/tmp/" + room + "_month_record", JSON.stringify(copy(monthRecord)), function(err) {
-            if(err) {
-                return console.log(err);
-            }
-        });
-        fs.writeFile("/tmp/" + room + "_all-time_record", JSON.stringify(copy(allRecord)), function(err) {
-            if(err) {
-                return console.log(err);
-            }
-        });
+        fs.writeFile("/tmp/" + room + "_day_record", JSON.stringify(copy(dayRecord)), function(err) {if(err){return console.log(err);}});
+        fs.writeFile("/tmp/" + room + "_week_record", JSON.stringify(copy(weekRecord)), function(err) {if(err){return console.log(err);}});
+        fs.writeFile("/tmp/" + room + "_month_record", JSON.stringify(copy(monthRecord)), function(err) {if(err){return console.log(err);}});
+        fs.writeFile("/tmp/" + room + "_all-time_record", JSON.stringify(copy(allRecord)), function(err) {if(err){return console.log(err);}});
         this.dayRecord = copy(dayRecord);
         this.weekRecord = copy(weekRecord);
         this.monthRecord = copy(monthRecord);

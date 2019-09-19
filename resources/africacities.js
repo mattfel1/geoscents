@@ -2757,19 +2757,6 @@ module.exports = {
     "id": 1508752825
   },
   {
-    "name": "Nicosia",
-    "city_ascii": "Nicosia",
-    "lat": 35.1667,
-    "lon": 33.3666,
-    "country": "Cyprus",
-    "iso2": "CY",
-    "iso3": "CYP",
-    "admin_name": "Lefkosía",
-    "capital": "primary",
-    "population": 224300,
-    "id": 1196944155
-  },
-  {
     "name": "Gueckedou",
     "city_ascii": "Gueckedou",
     "lat": 8.554,
@@ -4016,19 +4003,6 @@ module.exports = {
     "capital": "",
     "population": 154425,
     "id": 1180466776
-  },
-  {
-    "name": "Lemosos",
-    "city_ascii": "Lemosos",
-    "lat": 34.6754,
-    "lon": 33.0333,
-    "country": "Cyprus",
-    "iso2": "CY",
-    "iso3": "CYP",
-    "admin_name": "Lemesós",
-    "capital": "admin",
-    "population": 154000,
-    "id": 1196136222
   },
   {
     "name": "Moanda",

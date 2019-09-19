@@ -4,7 +4,6 @@ class Scoreboard {
     constructor(socket) {
         this.socket = socket
         this.myRoom = CONSTANTS.LOBBY;
-
     }
 
     postScore(rank, name, color, score, wins) {

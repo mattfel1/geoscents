@@ -8,11 +8,11 @@ plt.subplots_adjust(left=0.0, right=1.0, top=1.0, bottom=0)
 # of the map.
 # lat_ts is the latitude of true scale.
 # resolution = 'c' means use crude resolution coastlines.
-m = Basemap(projection='merc',llcrnrlat=27,urcrnrlat=64,\
-            llcrnrlon=-22,urcrnrlon=73,lat_ts=0,resolution='i')
+m = Basemap(projection='merc',llcrnrlat=22,urcrnrlat=62,\
+            llcrnrlon=-14,urcrnrlon=83,lat_ts=0,resolution='i')
 m.drawcoastlines()
 m.drawcountries()
-m.drawstates()
+# m.drawstates(color='red', linewidth=0.2)
 m.fillcontinents(color='coral',lake_color='aqua')
 # draw parallels and meridians.
 #m.drawparallels(np.arange(-90.,91.,30.))

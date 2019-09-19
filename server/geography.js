@@ -5,6 +5,7 @@ const WORLDCITIES = require('../resources/worldcities.js').CITIES;
 const USCITIES = require('../resources/uscities.js').CITIES;
 const EUROCITIES = require('../resources/eurocities.js').CITIES;
 const AFRICACITIES = require('../resources/africacities.js').CITIES;
+const SAMERICACITIES = require('../resources/samericacities.js').CITIES;
 const CONSTANTS = require('../resources/constants.js');
 
 const randomCity = (room, blacklist) => {
@@ -39,6 +40,13 @@ const randomCity = (room, blacklist) => {
             else i = i+1;
         }
     }
+    else if (room == CONSTANTS.SAMERICA) {
+        while(!acceptable) {
+            proposal = SAMERICACITIES[Math.floor(Math.random()*SAMERICACITIES.length)];
+            if (!blacklist.includes(proposal['country']) && i < 10) acceptable = true;
+            else i = i+1;
+        }
+    }
     else {
         while(!acceptable) {
             proposal = WORLDCITIES[Math.floor(Math.random()*WORLDCITIES.length)];
@@ -52,7 +60,7 @@ const randomCity = (room, blacklist) => {
 const mercDist = (room,row1,col1,row2,col2) => {
     const row_err = Math.pow(row1-row2,2);
     var col_err = Math.min(Math.pow(col1-col2,2), Math.pow(col1-col2+CONSTANTS.MAP_WIDTH,2), Math.pow(col1-col2-CONSTANTS.MAP_WIDTH,2));
-    if (room == CONSTANTS.US || room == CONSTANTS.EURO || room == CONSTANTS.AFRICA) { // No wrap
+    if (room == CONSTANTS.US || room == CONSTANTS.EURO || room == CONSTANTS.AFRICA || room == CONSTANTS.SAMERICA) { // No wrap
         col_err = Math.pow(col1-col2,2);
     }
     return Math.sqrt(row_err + col_err);
@@ -93,6 +101,13 @@ const mercToGeo = (room,row,col) => {
         max_lon = CONSTANTS.AFRICA_MAX_LON;
         lat_ts = CONSTANTS.AFRICA_LAT_TS;
     }
+    else if (room == CONSTANTS.SAMERICA) {
+        zero_lat = CONSTANTS.SAMERICA_ZERO_LAT;
+        max_lat = CONSTANTS.SAMERICA_MAX_LAT;
+        min_lon = CONSTANTS.SAMERICA_MIN_LON;
+        max_lon = CONSTANTS.SAMERICA_MAX_LON;
+        lat_ts = CONSTANTS.SAMERICA_LAT_TS;
+    }
     const eqMin = Math.atanh(Math.sin(zero_lat));
     const eqRange = Math.atanh(Math.sin(max_lat)) - eqMin;
 	const lon = ((col)*(max_lon-min_lon)/CONSTANTS.MAP_WIDTH) + min_lon;
@@ -126,6 +141,13 @@ const geoToMerc = (room,lat, lon) => {
         min_lon = CONSTANTS.AFRICA_MIN_LON;
         max_lon = CONSTANTS.AFRICA_MAX_LON;
         lat_ts = CONSTANTS.AFRICA_LAT_TS;
+    }
+    else if (room == CONSTANTS.SAMERICA) {
+        zero_lat = CONSTANTS.SAMERICA_ZERO_LAT;
+        max_lat = CONSTANTS.SAMERICA_MAX_LAT;
+        min_lon = CONSTANTS.SAMERICA_MIN_LON;
+        max_lon = CONSTANTS.SAMERICA_MAX_LON;
+        lat_ts = CONSTANTS.SAMERICA_LAT_TS;
     }
 	// get col value
 	const col = (parseFloat(lon)-min_lon)*(CONSTANTS.MAP_WIDTH/(max_lon - min_lon));

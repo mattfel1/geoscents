@@ -6,7 +6,7 @@ const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
-const PORT = 80;
+const PORT = 3000;
 const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server);
@@ -44,6 +44,9 @@ app.get('/resources/euro.png', (req, res, next) => {
 app.get('/resources/africa.png', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '..', 'resources/africa.png'));
 });
+app.get('/resources/samerica.png', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '..', 'resources/samerica.png'));
+});
 app.get('/resources/spritesheet.png', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '..', 'resources/spritesheet.png'));
 });
@@ -75,6 +78,7 @@ const rooms = {
     'N. America': new Room(CONSTANTS.US),
     'Eurasia': new Room(CONSTANTS.EURO),
     'Africa': new Room(CONSTANTS.AFRICA),
+    'S. America': new Room(CONSTANTS.SAMERICA),
     'Lobby': new Room(CONSTANTS.LOBBY)
 };
 var playerRooms = new Map();
@@ -91,7 +95,7 @@ io.on('connection', (socket) => {
 	socket.on('newPlayer', () => {
 	  rooms[CONSTANTS.LOBBY].addPlayer(socket, {'moved': false});
       playerRooms.set(socket.id, rooms[CONSTANTS.LOBBY]);
-      io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount());
+      io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount());
       helpers.log("User connected    " + socket.handshake.address);
 	  socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
 	});
@@ -104,7 +108,7 @@ io.on('connection', (socket) => {
               io.sockets.emit("update messages", room.room, leave_msg);
           }
           room.killPlayer(socket);
-          io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount());
+          io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount());
       }
 	});
 	socket.on('playerJoin', (newname, newcolor, callback) => {
@@ -122,7 +126,7 @@ io.on('connection', (socket) => {
 	        rooms[CONSTANTS.LOBBY].renamePlayer(socket, name, color);
             var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'>" + rooms[CONSTANTS.LOBBY].getPlayerRawName(socket) + " has entered the lobby!</font> ] " + badname + "<br>";
             io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
-            io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount());
+            io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount());
 	    }
         callback()
     });
@@ -132,6 +136,7 @@ io.on('connection', (socket) => {
         io.sockets.emit("update messages", CONSTANTS.US, text);
         io.sockets.emit("update messages", CONSTANTS.EURO, text);
         io.sockets.emit("update messages", CONSTANTS.AFRICA, text);
+        io.sockets.emit("update messages", CONSTANTS.SAMERICA, text);
     });
     socket.on('playerReady', () => {
       if (playerRooms.has(socket.id)) {
@@ -143,7 +148,7 @@ io.on('connection', (socket) => {
        if (playerRooms.has(socketid)) {
            playerRooms.delete(socketid);
        }
-       io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount());
+       io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount());
     });
     socket.on('moveTo', (dest) => {
       if (playerRooms.has(socket.id)) {
@@ -166,7 +171,7 @@ io.on('connection', (socket) => {
           playerRooms.set(socket.id, rooms[dest]);
           var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'>" + rooms[dest].getPlayerRawName(socket) + " has joined " + dest + "!</font> ]<br>";
           io.sockets.emit("update messages", dest, join_msg)
-          io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount());
+          io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount());
       }
     });
 	socket.on('playerClick', (playerClick) => {

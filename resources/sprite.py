@@ -1,6 +1,6 @@
 from PIL import Image
 import os, math, time
-max_frames_row = 9*8
+max_frames_row = 1000
 frames = []
 tile_width = 0
 tile_height = 0

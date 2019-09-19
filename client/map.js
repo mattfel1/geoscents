@@ -16,8 +16,11 @@ euroImg.src = "/resources/euro.png";
 var africaImg = new Image();
 africaImg.src = "/resources/africa.png";
 
+var samericaImg = new Image();
+samericaImg.src = "/resources/samerica.png";
+
 var frame_cnt = 0;
-var frames = 8*9;
+var frames = 120;
 var rate = 2;
 
 class Map {
@@ -132,6 +135,12 @@ class Map {
                 ctx.drawImage(africaImg, 0, 0)
             };
           africaImg.onload();
+      }
+      else if (room == CONSTANTS.SAMERICA){
+            samericaImg.onload = function () {
+                ctx.drawImage(samericaImg, 0, 0)
+            };
+          samericaImg.onload();
       }
 
     }

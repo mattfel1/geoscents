@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 i = 0
-for lon_viewing_angle in np.arange(-180, 180, 5):
+for lon_viewing_angle in np.arange(-180, 180, 2):
 	fig = plt.figure(figsize=(3,3))
 	#print(lon_viewing_angle)
 	# set perspective angle

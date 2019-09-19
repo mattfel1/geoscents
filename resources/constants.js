@@ -16,21 +16,26 @@ module.exports = {
     WORLD_MIN_LON: -180, // Latitude of top edge of map
     WORLD_MAX_LON: 180, // Latitude of bottom edge of map
     WORLD_LAT_TS: 0,
-    US_ZERO_LAT: 53.0*Math.PI/180, // Latitude of top edge of map
-    US_MAX_LAT: 20.0*Math.PI/180, // Latitude of bottom edge of map
-    US_MIN_LON: -130.0, // Latitude of top edge of map
-    US_MAX_LON: -58.0, // Latitude of bottom edge of map
+    US_ZERO_LAT: 56.0*Math.PI/180, // Latitude of top edge of map
+    US_MAX_LAT: 10.0*Math.PI/180, // Latitude of bottom edge of map
+    US_MIN_LON: -141.0, // Latitude of top edge of map
+    US_MAX_LON: -43.0, // Latitude of bottom edge of map
     US_LAT_TS: 0,
-    EURO_ZERO_LAT: 64.0*Math.PI/180, // Latitude of top edge of map
-    EURO_MAX_LAT: 27.0*Math.PI/180, // Latitude of bottom edge of map
-    EURO_MIN_LON: -22, // Latitude of top edge of map
-    EURO_MAX_LON: 73, // Latitude of bottom edge of map
+    EURO_ZERO_LAT: 62.0*Math.PI/180, // Latitude of top edge of map
+    EURO_MAX_LAT: 22.0*Math.PI/180, // Latitude of bottom edge of map
+    EURO_MIN_LON: -14, // Latitude of top edge of map
+    EURO_MAX_LON: 83, // Latitude of bottom edge of map
     EURO_LAT_TS: 0,
     AFRICA_ZERO_LAT: 41.0*Math.PI/180, // Latitude of top edge of map
     AFRICA_MAX_LAT: -36.0*Math.PI/180, // Latitude of bottom edge of map
     AFRICA_MIN_LON: -60, // Latitude of top edge of map
     AFRICA_MAX_LON: 82, // Latitude of bottom edge of map  
     AFRICA_LAT_TS: 0,
+    SAMERICA_ZERO_LAT: 20.0*Math.PI/180, // Latitude of top edge of map
+    SAMERICA_MAX_LAT: -56.0*Math.PI/180, // Latitude of bottom edge of map
+    SAMERICA_MIN_LON: -135, // Latitude of top edge of map
+    SAMERICA_MAX_LON: 15, // Latitude of bottom edge of map
+    SAMERICA_LAT_TS: 0,
 
     // FSM
     REVEAL_STATE: 'reveal',
@@ -91,6 +96,7 @@ module.exports = {
     US: 'N. America',
     EURO: 'Eurasia',
     AFRICA: 'Africa',
+    SAMERICA: "S. America",
     MAX_INACTIVE: 10, // Rounds of no click before you get booted
     MAX_S_INACTIVE: 600, // seconds * fps spent in lobby before you get booted
     INIT_RECORD: {'record1': 0, 'recordName1': '-', 'recordColor1': 'black', 'recordBroken1': false, 'record2': 0, 'recordName2': '-', 'recordColor2': 'black', 'recordBroken2': false, 'record3': 0, 'recordName3': '-', 'recordColor3': 'black', 'recordBroken3': false},
