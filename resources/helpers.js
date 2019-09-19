@@ -18,6 +18,11 @@ const log = (payload) => {
 
 const readRecentActivity = (numel) => {
     var result = "";
+    if (!fs.existsSync('/tmp/recent_activity')) {
+        fs.writeFile('/tmp/recent_activity', "", { flag: 'wx' }, function (err) {
+            if (err) throw err;
+        });
+    }
     require('fs').readFileSync('/tmp/recent_activity', 'utf-8')
         .split('\n').map( (line, i) => {if (i < numel) result = result + line + "<br>"});
     return result;
