@@ -35,8 +35,10 @@ class Scoreboard {
     postSpace() {
        $('#scoreboard').append("<br>-------------------------------------------<br><b>Scoreboard:</b><br>")
     }
-    postLobby() {
-       $('#scoreboard').append("<b>Lobby:</b><br>")
+    postLobby(recent) {
+       $('#scoreboard').append("<b>Recent Records:</b><br>");
+       $('#scoreboard').append(recent);
+       $('#scoreboard').append("<br><b>Players in Lobby:</b><br>");
     }
 }
 

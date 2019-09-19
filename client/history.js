@@ -57,12 +57,14 @@ class History {
         playersHistory.forEach((hist, player) => {
             i = i + 1;
             Object.keys(hist).forEach((round) => {
+                const x1 = (round) * ((width) / (CONSTANTS.GAME_ROUNDS+1));
+                var y1 = height;
                 if ((round-1) in hist) {
-                    const x1 = (round-1) * ((width) / CONSTANTS.GAME_ROUNDS);
-                    const x2 = (round) * ((width) / CONSTANTS.GAME_ROUNDS);
-                    const y1 = height - height*(hist[round-1] / (Math.max(max,1)));
-                    const y2 = height - height*(hist[round] / (Math.max(max,1)));
-                    graph = graph + `
+                    y1 = height - height * (hist[round - 1] / (Math.max(max, 1)));
+                }
+                const x2 = (round+1) * ((width) / (CONSTANTS.GAME_ROUNDS+1));
+                const y2 = height - height*(hist[round] / (Math.max(max,1)));
+                graph = graph + `
 <polyline
     fill="none"
     stroke="${player.color}"
@@ -73,9 +75,8 @@ class History {
     "
     />
 `
-                }
             });
-        })
+        });
 
 
         graph = graph + graph_footer;
