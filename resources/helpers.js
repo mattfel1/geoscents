@@ -23,7 +23,7 @@ const readRecentActivity = (numel) => {
             if (err) throw err;
         });
     }
-    require('fs').readFileSync('/tmp/recent_activity', 'utf-8')
+    fs.readFileSync('/tmp/recent_activity', 'utf-8')
         .split('\n').map( (line, i) => {if (i < numel) result = result + line + "<br>"});
     return result;
 };

@@ -47,6 +47,7 @@ class History {
       <div>8</div>
       <div>9</div>
       <div>10</div>
+      <div>11</div>
     </div>
     <div class="y-labels">
       <div class="y-label top">${max}</div>
@@ -62,7 +63,7 @@ class History {
                 if ((round-1) in hist) {
                     y1 = height - height * (hist[round - 1] / (Math.max(max, 1)));
                 }
-                const x2 = (round+1) * ((width) / (CONSTANTS.GAME_ROUNDS+1));
+                const x2 = (1+parseInt(round)) * ((width) / (CONSTANTS.GAME_ROUNDS+1));
                 const y2 = height - height*(hist[round] / (Math.max(max,1)));
                 graph = graph + `
 <polyline
