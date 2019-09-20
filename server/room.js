@@ -534,13 +534,12 @@ class Room {
               this.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
               this.round = 0;
           } else if (this.state == CONSTANTS.BEGIN_GAME_STATE) {
-              this.timerColor = CONSTANTS.BEGIN_COLOR;
               if (this.timer <= 0) {
                   this.stateTransition(CONSTANTS.SETUP_STATE, 0);
               }
           } else if (this.state == CONSTANTS.PREPARE_GAME_STATE) {
               if (this.allReady() || this.timer <= 0) {
-                  this.timerColor = CONSTANTS.LOBBY_COLOR;
+                  this.timerColor = CONSTANTS.BEGIN_COLOR;
                   this.blacklist = [];
                   this.removePoppers();
                   this.playersHistory = new Map();
