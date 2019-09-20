@@ -31,10 +31,10 @@ module.exports = {
     AFRICA_MIN_LON: -60, // Latitude of top edge of map
     AFRICA_MAX_LON: 82, // Latitude of bottom edge of map  
     AFRICA_LAT_TS: 0,
-    SAMERICA_ZERO_LAT: 20.0*Math.PI/180, // Latitude of top edge of map
+    SAMERICA_ZERO_LAT: 24.0*Math.PI/180, // Latitude of top edge of map
     SAMERICA_MAX_LAT: -56.0*Math.PI/180, // Latitude of bottom edge of map
-    SAMERICA_MIN_LON: -135, // Latitude of top edge of map
-    SAMERICA_MAX_LON: 15, // Latitude of bottom edge of map
+    SAMERICA_MIN_LON: -140, // Latitude of top edge of map
+    SAMERICA_MAX_LON: 17, // Latitude of bottom edge of map
     SAMERICA_LAT_TS: 0,
 
     // FSM
