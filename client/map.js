@@ -100,6 +100,9 @@ class Map {
         this.ctx.fillText('Choose a map to play on here', 780, 125);
         this.canvas_arrow(1150, 120, this.canvas.width-20, 120);
 
+        this.ctx.fillText('toggle volume', 1165, 50);
+        this.canvas_arrow(1350, 45, this.canvas.width-20, 45);
+
         this.ctx.fillText('Rankings will show here', 850, 305);
         this.canvas_arrow(1150, 300, this.canvas.width-20, 300);
 
