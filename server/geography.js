@@ -15,42 +15,42 @@ const randomCity = (room, blacklist) => {
     if (room == CONSTANTS.WORLD) {
         while(!acceptable) {
             proposal = WORLDCITIES[Math.floor(Math.random()*WORLDCITIES.length)];
-            if (!blacklist.includes(proposal['country']) && i < 10) acceptable = true;
+            if (!blacklist.includes(proposal['country']) || i < 10) acceptable = true;
             else i = i+1;
         }
     }
     else if (room == CONSTANTS.US) {
         while(!acceptable) {
             proposal = USCITIES[Math.floor(Math.random()*USCITIES.length)];
-            if (!blacklist.includes(proposal['admin_name']) && i < 10) acceptable = true;
+            if (!blacklist.includes(proposal['admin_name']) || i < 10) acceptable = true;
             else i = i+1;
         }
     }
     else if (room == CONSTANTS.EURO) {
         while(!acceptable) {
             proposal = EUROCITIES[Math.floor(Math.random()*EUROCITIES.length)];
-            if (!blacklist.includes(proposal['country']) && i < 10) acceptable = true;
+            if (!blacklist.includes(proposal['country']) || i < 10) acceptable = true;
             else i = i+1;
         }
     }
     else if (room == CONSTANTS.AFRICA) {
         while(!acceptable) {
             proposal = AFRICACITIES[Math.floor(Math.random()*AFRICACITIES.length)];
-            if (!blacklist.includes(proposal['country']) && i < 10) acceptable = true;
+            if (!blacklist.includes(proposal['country']) || i < 10) acceptable = true;
             else i = i+1;
         }
     }
     else if (room == CONSTANTS.SAMERICA) {
         while(!acceptable) {
             proposal = SAMERICACITIES[Math.floor(Math.random()*SAMERICACITIES.length)];
-            if (!blacklist.includes(proposal['country']) && i < 10) acceptable = true;
+            if (!blacklist.includes(proposal['country']) || i < 10) acceptable = true;
             else i = i+1;
         }
     }
     else {
         while(!acceptable) {
             proposal = WORLDCITIES[Math.floor(Math.random()*WORLDCITIES.length)];
-            if (!blacklist.includes(proposal['country']) && i < 10) acceptable = true;
+            if (!blacklist.includes(proposal['country']) || i < 10) acceptable = true;
             else i = i+1;
         }
     }
@@ -67,7 +67,6 @@ const mercDist = (room,row1,col1,row2,col2) => {
 };
 
 const geoDist = (lat1,lon1,lat2,lon2) => {
-    console.log('dist btw ' + lat1 + ',' + lon1 + ' and ' + lat2 + ',' + lon2)
 	var a = Math.pow(Math.sin(Math.abs(lat1-lat2)/2), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(Math.abs(lon1-lon2)/2), 2,2);
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 	var dist = c;
