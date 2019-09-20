@@ -56,6 +56,21 @@ app.get('/resources/favicon.png', (req, res, next) => {
 app.get('/overlaypopup.css', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '..', 'overlaypopup.css'));
 });
+app.get('/resources/message.mp3', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '..', 'resources/message.mp3'));
+});
+app.get('/resources/gamestart.mp3', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '..', 'resources/gamestart.mp3'));
+});
+app.get('/resources/roundstart.mp3', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '..', 'resources/roundstart.mp3'));
+});
+app.get('/resources/roundstop.mp3', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '..', 'resources/roundstop.mp3'));
+});
+app.get('/resources/geonow.mp3', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '..', 'resources/geonow.mp3'));
+});
 
 app.use((req, res, next) => {
 	const err = new Error('Not Found');
@@ -87,7 +102,8 @@ const WELCOME_MESSAGE1 = 'Welcome to Geoscents, an online multiplayer world geog
                           'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
                           'If you are enjoying this game, consider donating at the bottom of the page to help keep the server ' +
                           'running!  Feel free to make pull requests or leave feedback on github.' +
-                          ' This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>.';
+                          ' This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>.' +
+                          ' The game-start jingle comes from the youtube channel, <a href="https://www.youtube.com/user/GeographyNow">Geography Now</a>';
 
 
 io.on('connection', (socket) => {
@@ -149,6 +165,9 @@ io.on('connection', (socket) => {
            playerRooms.delete(socketid);
        }
        io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount());
+    });
+    socket.on('mute', () => {
+        io.sockets.emit('mute player', socket.id)
     });
     socket.on('moveTo', (dest) => {
       if (playerRooms.has(socket.id)) {

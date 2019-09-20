@@ -46,6 +46,8 @@ module.exports = {
     IDLE_STATE: 'idle',
     PREPARE_GAME_STATE: 'prepare',
     PREPARE_GAME_DURATION: 45,
+    BEGIN_GAME_STATE: 'begingame',
+    BEGIN_GAME_DURATION: 5,
     ASK_READY_STATE: 'askready',
     LOBBY_STATE: 'lobby',
     SCROLL_THRESHOLD: 25, // Number of frames mobile user can press for that distinguishes a "click" from a "scroll"
@@ -55,6 +57,7 @@ module.exports = {
     BGCOLOR: "#E6E6FA",
     NUM_GLOBES: 180/5,
     LOBBY_COLOR: "#e3e4e6",
+    BEGIN_COLOR: "blue",
     MAP_BUTTON_COLOR: "#9CD69F",
     GUESS_COLOR: '#17eb5e',
     REVEAL_COLOR: '#ffad99',

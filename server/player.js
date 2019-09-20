@@ -28,6 +28,7 @@ class Player {
         this.choseName = false;
         this.name = name;
 
+
         // Override values based on info map
 		if (info['moved']) {
 			this.choseName = true;
@@ -36,6 +37,7 @@ class Player {
 			this.name = info['name'];
 		}
     }
+
 
     reset() {
 		this.clicked = false;

@@ -465,6 +465,10 @@ class Room {
              socket.emit('fresh map', room);
              socket.emit('draw prepare', round);
           }
+          else if (this.state == CONSTANTS.BEGIN_GAME_STATE) {
+             socket.emit('play begin sound', room);
+             socket.emit('draw begin', round);
+          }
           else if (this.state == CONSTANTS.GUESS_STATE) {
              const thisTarget = this.stringifyTarget();
              const citystring = thisTarget['string'];
@@ -529,13 +533,18 @@ class Room {
               this.timerColor = CONSTANTS.LOBBY_COLOR;
               this.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
               this.round = 0;
+          } else if (this.state == CONSTANTS.BEGIN_GAME_STATE) {
+              this.timerColor = CONSTANTS.BEGIN_COLOR;
+              if (this.timer <= 0) {
+                  this.stateTransition(CONSTANTS.SETUP_STATE, 0);
+              }
           } else if (this.state == CONSTANTS.PREPARE_GAME_STATE) {
               if (this.allReady() || this.timer <= 0) {
                   this.timerColor = CONSTANTS.LOBBY_COLOR;
                   this.blacklist = [];
                   this.removePoppers();
                   this.playersHistory = new Map();
-                  this.stateTransition(CONSTANTS.SETUP_STATE, 0);
+                  this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, CONSTANTS.BEGIN_GAME_DURATION);
                   Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
               }
           } else if (this.state == CONSTANTS.SETUP_STATE) {

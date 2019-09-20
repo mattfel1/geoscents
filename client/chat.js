@@ -7,6 +7,7 @@ class Chat {
         this.myRoom = CONSTANTS.LOBBY;
         this.windowActive = true;
         this.hasNewMessage = false;
+        this.muted = false;
     }
 
     isActive(document) {

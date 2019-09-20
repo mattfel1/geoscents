@@ -58,6 +58,16 @@
 		border-radius: 2px;
 		box-shadow: 0 0 4px rgba(0,0,0,0.3);
 	}
+	.mute-btn {
+		cursor: pointer;
+		border: 1px solid #333;
+		padding: 2px 2px;
+		margin: 3px 3px;
+		font-size: 16px;
+		background: darkslategray; /* fallback */
+		border-radius: 2px;
+		box-shadow: 0 0 4px rgba(0,0,0,0.3);
+	}
 	.close-btn:hover {
 		background: #05abe0;
 	}

@@ -6,6 +6,7 @@
 const socket = io();
 const Scoreboard = require('./scoreboard.js');
 const Commands = require('./commands.js');
+const Sounds = require('./sounds.js');
 const Popup = require('./popup.js');
 const Chat = require('./chat.js');
 const Map = require('./map.js');
@@ -43,18 +44,31 @@ $(document).ready(function(){
     socket.on('announce record', (category, room, medal, name, score, color) => {socket.emit("announcement", '[New ' + category + ' record set by <font color="' + color + '">' + medal + name + ' (' + score + ')</font> in ' + room + ']<br>')});
 
     /**** Commands *****/
+    const sounds = new Sounds(socket);
+
     const commands = new Commands(socket);
     socket.on('update counts', (l,w,u,e,a,s) => {commands.updateCounts(l,w,u,e,a,s);commands.postButtons();})
     socket.on('draw buttons', () => {commands.postButtons()});
     socket.on('draw timer', (time,color) => {commands.postTime(time,color)});
     socket.on('draw prepare', (round) => {commands.drawCommand(" seconds until new game auto-starts...", "", "", round, true)});
-    socket.on('draw guess city', (city, capital, round) => {commands.drawCommand( "Find!       ", city, capital, round, false);});
-    socket.on('draw reveal city', (city, capital, round) => {commands.drawCommand("Revealing...", city, capital, round, false)});
+    socket.on('draw begin', (round) => {
+        commands.drawCommand(" seconds until first round..  GET READY!", "", "", round, false);
+        sounds.playGameBeginSound();
+    });
+    socket.on('draw guess city', (city, capital, round) => {
+        commands.drawCommand( "Find!       ", city, capital, round, false);
+        sounds.playRoundBeginSound();
+    });
+    socket.on('draw reveal city', (city, capital, round) => {
+        commands.drawCommand("Revealing...", city, capital, round, false);
+        sounds.playRoundEndSound();
+    });
     socket.on('draw booted', () => {commands.drawCommand("You have been booted due to inactivity!", "Please refresh to rejoin","", 0, false)});
     socket.on('draw idle', () => {commands.drawCommand("Waiting for players to join...", "", "", 0, false)})
 
     /**** Chat *****/
     const chat = new Chat(socket);
+
     window.onfocus = function () {
       chat.isActive(document);
     };
@@ -62,7 +76,14 @@ $(document).ready(function(){
       chat.isBlur();
     };
     chat.listen();
-    socket.on("update messages", function(room, msg){ chat.addMessage(room, msg)});
+    socket.on("update messages", function(room, msg){
+        chat.addMessage(room, msg);
+        sounds.newMessage(room)
+    });
+    socket.on("mute player", function(id){
+        sounds.muteMe(id);
+        commands.muted = sounds.muted;
+    })
 
     /**** Map *****/
     const map = new Map(socket);
@@ -87,6 +108,7 @@ $(document).ready(function(){
         scoreboard.myRoom = room;
         commands.myRoom = room;
         history.myRoom = room;
+        sounds.myRoom = room;
     });
     setInterval(() => {
       if (playerClick.touchDown) playerClick.downCount = playerClick.downCount + 1;

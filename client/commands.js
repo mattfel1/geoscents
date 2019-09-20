@@ -31,6 +31,7 @@ class Commands {
             width: this.canvas.width*3/5,
             height: 40
         };
+        this.muted = false;
     }
 
 
@@ -72,6 +73,8 @@ class Commands {
     postButtons() {
         const socket = this.socket;
         $('#commands').empty();
+        if (this.muted) $('#commands').append($("<button class='mute-btn' id='mute_button'>🔇 <font color=\"white\">(muted)</font></button>"));
+        else $('#commands').append($("<button class='mute-btn' id='mute_button'>🔊</button>"));
         $('#commands').append($("<button class='lobby-btn' id='lobby_button'>To Lobby (" + this.lobby_count + " players)</button><br>"))
         $('#commands').append($("<button class='room-btn' id='world_button'>World (" + this.world_count + " players)</button>  "))
         $('#commands').append($("<button class='room-btn' id='euro_button'>Eurasia (" + this.euro_count + " players)</button>  "))
@@ -80,6 +83,7 @@ class Commands {
         $('#commands').append($("<button class='room-btn' id='samerica_button'>S. America (" + this.samerica_count + " players)</button>  "))
 
         var room = this.myRoom;
+        $('#mute_button').bind("click", () => {socket.emit('mute')});
         $('#lobby_button').bind("click", () => {if (room != CONSTANTS.LOBBY) socket.emit('moveTo', CONSTANTS.LOBBY)});
         $('#world_button').bind("click", () => {if (room != CONSTANTS.WORLD) socket.emit('moveTo', CONSTANTS.WORLD)});
         $('#us_button').bind("click", () => {if (room != CONSTANTS.US) socket.emit('moveTo', CONSTANTS.US)});
