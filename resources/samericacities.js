@@ -1483,32 +1483,6 @@ module.exports = {
     "id": 1320083599
   },
   {
-    "name": "Conakry",
-    "city_ascii": "Conakry",
-    "lat": 9.5315,
-    "lon": -13.6802,
-    "country": "Guinea",
-    "iso2": "GN",
-    "iso3": "GIN",
-    "admin_name": "Conakry",
-    "capital": "primary",
-    "population": 1494000,
-    "id": 1324568159
-  },
-  {
-    "name": "Bissau",
-    "city_ascii": "Bissau",
-    "lat": 11.865,
-    "lon": -15.5984,
-    "country": "Guinea-Bissau",
-    "iso2": "GW",
-    "iso3": "GNB",
-    "admin_name": "Bissau",
-    "capital": "primary",
-    "population": 403339,
-    "id": 1624168850
-  },
-  {
     "name": "Georgetown",
     "city_ascii": "Georgetown",
     "lat": 6.802,
@@ -2079,32 +2053,6 @@ module.exports = {
     "capital": "primary",
     "population": 49485,
     "id": 1670376659
-  },
-  {
-    "name": "São Tomé",
-    "city_ascii": "Sao Tome",
-    "lat": 0.3334,
-    "lon": 6.7333,
-    "country": "Sao Tome And Principe",
-    "iso2": "ST",
-    "iso3": "STP",
-    "admin_name": "São Tomé",
-    "capital": "primary",
-    "population": 88219,
-    "id": 1678301324
-  },
-  {
-    "name": "Dakar",
-    "city_ascii": "Dakar",
-    "lat": 14.7158,
-    "lon": -17.4731,
-    "country": "Senegal",
-    "iso2": "SN",
-    "iso3": "SEN",
-    "admin_name": "Dakar",
-    "capital": "primary",
-    "population": 2604000,
-    "id": 1686604760
   },
   {
     "name": "Freetown",
