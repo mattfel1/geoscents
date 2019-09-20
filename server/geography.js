@@ -15,42 +15,42 @@ const randomCity = (room, blacklist) => {
     if (room == CONSTANTS.WORLD) {
         while(!acceptable) {
             proposal = WORLDCITIES[Math.floor(Math.random()*WORLDCITIES.length)];
-            if (!blacklist.includes(proposal['country']) || i < 10) acceptable = true;
+            if (!blacklist.includes(proposal['country']) || i >= 10) acceptable = true;
             else i = i+1;
         }
     }
     else if (room == CONSTANTS.US) {
         while(!acceptable) {
             proposal = USCITIES[Math.floor(Math.random()*USCITIES.length)];
-            if (!blacklist.includes(proposal['admin_name']) || i < 10) acceptable = true;
+            if (!blacklist.includes(proposal['admin_name']) || i >= 10) acceptable = true;
             else i = i+1;
         }
     }
     else if (room == CONSTANTS.EURO) {
         while(!acceptable) {
             proposal = EUROCITIES[Math.floor(Math.random()*EUROCITIES.length)];
-            if (!blacklist.includes(proposal['country']) || i < 10) acceptable = true;
+            if (!blacklist.includes(proposal['country']) || i >= 10) acceptable = true;
             else i = i+1;
         }
     }
     else if (room == CONSTANTS.AFRICA) {
         while(!acceptable) {
             proposal = AFRICACITIES[Math.floor(Math.random()*AFRICACITIES.length)];
-            if (!blacklist.includes(proposal['country']) || i < 10) acceptable = true;
+            if (!blacklist.includes(proposal['country']) || i >= 10) acceptable = true;
             else i = i+1;
         }
     }
     else if (room == CONSTANTS.SAMERICA) {
         while(!acceptable) {
             proposal = SAMERICACITIES[Math.floor(Math.random()*SAMERICACITIES.length)];
-            if (!blacklist.includes(proposal['country']) || i < 10) acceptable = true;
+            if (!blacklist.includes(proposal['country']) || i >= 10) acceptable = true;
             else i = i+1;
         }
     }
     else {
         while(!acceptable) {
             proposal = WORLDCITIES[Math.floor(Math.random()*WORLDCITIES.length)];
-            if (!blacklist.includes(proposal['country']) || i < 10) acceptable = true;
+            if (!blacklist.includes(proposal['country']) || i >= 10) acceptable = true;
             else i = i+1;
         }
     }
