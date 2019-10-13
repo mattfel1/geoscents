@@ -68,8 +68,8 @@ app.get('/resources/roundstart.mp3', (req, res, next) => {
 app.get('/resources/roundstop.mp3', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '..', 'resources/roundstop.mp3'));
 });
-app.get('/resources/geonow.mp3', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', 'resources/geonow.mp3'));
+app.get('/resources/jingle.mp3', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '..', 'resources/jingle.mp3'));
 });
 
 app.use((req, res, next) => {
