@@ -26,36 +26,36 @@ class Room {
       this.winner = null;
       this.blacklist = []; // List of countries or states to avoid drawing for this round
       this.timerColor = CONSTANTS.LOBBY_COLOR;
-      if (fs.existsSync('/tmp/' + map + '_day_record')) {
+      if (fs.existsSync('/scratch/' + map + '_day_record')) {
           try {
-              this.dayRecord = JSON.parse(fs.readFileSync('/tmp/' + map + '_day_record', 'utf8'));
+              this.dayRecord = JSON.parse(fs.readFileSync('/scratch/' + map + '_day_record', 'utf8'));
           } catch (err) {
               this.dayRecord = CONSTANTS.INIT_RECORD;
           }
       } else {
           this.dayRecord = CONSTANTS.INIT_RECORD;
       }
-      if (fs.existsSync('/tmp/' + map + '_week_record')) {
+      if (fs.existsSync('/scratch/' + map + '_week_record')) {
           try {
-              this.weekRecord = JSON.parse(fs.readFileSync('/tmp/' + map + '_week_record', 'utf8'));
+              this.weekRecord = JSON.parse(fs.readFileSync('/scratch/' + map + '_week_record', 'utf8'));
           } catch (err) {
               this.weekRecord = CONSTANTS.INIT_RECORD;
           }
       } else {
           this.weekRecord = CONSTANTS.INIT_RECORD;
       }
-      if (fs.existsSync('/tmp/' + map + '_month_record')) {
+      if (fs.existsSync('/scratch/' + map + '_month_record')) {
           try {
-              this.monthRecord = JSON.parse(fs.readFileSync('/tmp/' + map + '_month_record', 'utf8'));
+              this.monthRecord = JSON.parse(fs.readFileSync('/scratch/' + map + '_month_record', 'utf8'));
           } catch (err) {
               this.monthRecord = CONSTANTS.INIT_RECORD;
           }
       } else {
           this.monthRecord = CONSTANTS.INIT_RECORD;
       }
-      if (fs.existsSync('/tmp/' + map + '_all-time_record')) {
+      if (fs.existsSync('/scratch/' + map + '_all-time_record')) {
           try {
-              this.allRecord = JSON.parse(fs.readFileSync('/tmp/' + map + '_all-time_record', 'utf8'));
+              this.allRecord = JSON.parse(fs.readFileSync('/scratch/' + map + '_all-time_record', 'utf8'));
           } catch (err) {
               this.allRecord = CONSTANTS.INIT_RECORD;
           }
@@ -218,7 +218,7 @@ class Room {
         if (this.clients.has(player.id)) {
             this.clients.get(player.id).emit("announce record", category, room, medal, player.name, player.score, player.color);
         }
-        // fs.writeFile("/tmp/" + room + "_" + category + "_record", JSON.stringify(dict), function(err) {
+        // fs.writeFile("/scratch/" + room + "_" + category + "_record", JSON.stringify(dict), function(err) {
         //     if(err) {
         //         return console.log(err);
         //     }
@@ -306,10 +306,10 @@ class Room {
                 helpers.prependRecentActivity(payload)
             }
         });
-        fs.writeFile("/tmp/" + room + "_day_record", JSON.stringify(copy(dayRecord)), function(err) {if(err){return console.log(err);}});
-        fs.writeFile("/tmp/" + room + "_week_record", JSON.stringify(copy(weekRecord)), function(err) {if(err){return console.log(err);}});
-        fs.writeFile("/tmp/" + room + "_month_record", JSON.stringify(copy(monthRecord)), function(err) {if(err){return console.log(err);}});
-        fs.writeFile("/tmp/" + room + "_all-time_record", JSON.stringify(copy(allRecord)), function(err) {if(err){return console.log(err);}});
+        fs.writeFile("/scratch/" + room + "_day_record", JSON.stringify(copy(dayRecord)), function(err) {if(err){return console.log(err);}});
+        fs.writeFile("/scratch/" + room + "_week_record", JSON.stringify(copy(weekRecord)), function(err) {if(err){return console.log(err);}});
+        fs.writeFile("/scratch/" + room + "_month_record", JSON.stringify(copy(monthRecord)), function(err) {if(err){return console.log(err);}});
+        fs.writeFile("/scratch/" + room + "_all-time_record", JSON.stringify(copy(allRecord)), function(err) {if(err){return console.log(err);}});
         this.dayRecord = copy(dayRecord);
         this.weekRecord = copy(weekRecord);
         this.monthRecord = copy(monthRecord);
