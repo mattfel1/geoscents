@@ -103,7 +103,7 @@ const WELCOME_MESSAGE1 = 'Welcome to Geoscents, an online multiplayer world geog
                           'If you are enjoying this game, consider donating at the bottom of the page to help keep the server ' +
                           'running!  Feel free to make pull requests or leave feedback on github.' +
                           ' This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>.' +
-                          ' The game-start jingle comes from the youtube channel, <a href="https://www.youtube.com/user/GeographyNow">Geography Now</a>';
+                          ' On Oct 14 2019, all records were accidentally lost but this issue has since been fixed.  Sorry!';
 
 
 io.on('connection', (socket) => {
