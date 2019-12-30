@@ -4,12 +4,11 @@
 */
 "use strict";
 
-const Tapable = require("tapable").Tapable;
-const SyncHook = require("tapable").SyncHook;
-const MultiHook = require("tapable").MultiHook;
+const { Tapable, SyncHook, MultiHook } = require("tapable");
 const asyncLib = require("neo-async");
 const MultiWatching = require("./MultiWatching");
 const MultiStats = require("./MultiStats");
+const ConcurrentCompilationError = require("./ConcurrentCompilationError");
 
 module.exports = class MultiCompiler extends Tapable {
 	constructor(compilers) {
@@ -19,7 +18,10 @@ module.exports = class MultiCompiler extends Tapable {
 			invalid: new MultiHook(compilers.map(c => c.hooks.invalid)),
 			run: new MultiHook(compilers.map(c => c.hooks.run)),
 			watchClose: new SyncHook([]),
-			watchRun: new MultiHook(compilers.map(c => c.hooks.watchRun))
+			watchRun: new MultiHook(compilers.map(c => c.hooks.watchRun)),
+			infrastructureLog: new MultiHook(
+				compilers.map(c => c.hooks.infrastructureLog)
+			)
 		};
 		if (!Array.isArray(compilers)) {
 			compilers = Object.keys(compilers).map(name => {
@@ -53,6 +55,7 @@ module.exports = class MultiCompiler extends Tapable {
 				}
 			});
 		}
+		this.running = false;
 	}
 
 	get outputPath() {
@@ -88,6 +91,10 @@ module.exports = class MultiCompiler extends Tapable {
 		for (const compiler of this.compilers) {
 			compiler.outputFileSystem = value;
 		}
+	}
+
+	getInfrastructureLogger(name) {
+		return this.compilers[0].getInfrastructureLogger(name);
 	}
 
 	validateDependencies(callback) {
@@ -162,8 +169,11 @@ module.exports = class MultiCompiler extends Tapable {
 			for (const c of list) {
 				const ready =
 					!c.dependencies || c.dependencies.every(isDependencyFulfilled);
-				if (ready) readyCompilers.push(c);
-				else remainingCompilers.push(c);
+				if (ready) {
+					readyCompilers.push(c);
+				} else {
+					remainingCompilers.push(c);
+				}
 			}
 			return readyCompilers;
 		};
@@ -185,10 +195,13 @@ module.exports = class MultiCompiler extends Tapable {
 	}
 
 	watch(watchOptions, handler) {
+		if (this.running) return handler(new ConcurrentCompilationError());
+
 		let watchings = [];
 		let allStats = this.compilers.map(() => null);
 		let compilerStatus = this.compilers.map(() => false);
 		if (this.validateDependencies(handler)) {
+			this.running = true;
 			this.runWithDependencies(
 				this.compilers,
 				(compiler, callback) => {
@@ -230,21 +243,38 @@ module.exports = class MultiCompiler extends Tapable {
 	}
 
 	run(callback) {
+		if (this.running) {
+			return callback(new ConcurrentCompilationError());
+		}
+
+		const finalCallback = (err, stats) => {
+			this.running = false;
+
+			if (callback !== undefined) {
+				return callback(err, stats);
+			}
+		};
+
 		const allStats = this.compilers.map(() => null);
 		if (this.validateDependencies(callback)) {
+			this.running = true;
 			this.runWithDependencies(
 				this.compilers,
 				(compiler, callback) => {
 					const compilerIdx = this.compilers.indexOf(compiler);
 					compiler.run((err, stats) => {
-						if (err) return callback(err);
+						if (err) {
+							return callback(err);
+						}
 						allStats[compilerIdx] = stats;
 						callback();
 					});
 				},
 				err => {
-					if (err) return callback(err);
-					callback(null, new MultiStats(allStats));
+					if (err) {
+						return finalCallback(err);
+					}
+					finalCallback(null, new MultiStats(allStats));
 				}
 			);
 		}
@@ -252,8 +282,9 @@ module.exports = class MultiCompiler extends Tapable {
 
 	purgeInputFileSystem() {
 		for (const compiler of this.compilers) {
-			if (compiler.inputFileSystem && compiler.inputFileSystem.purge)
+			if (compiler.inputFileSystem && compiler.inputFileSystem.purge) {
 				compiler.inputFileSystem.purge();
+			}
 		}
 	}
 };

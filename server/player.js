@@ -13,6 +13,8 @@ class Player {
         this.clicked = false;
 		this.lat = 0;
 		this.lon = 0;
+		this.mercError = 0;
+		this.geoError = 0;
 		this.clickedAt = 0;
         this.id = socketid;
 		this.score = 0;
@@ -66,7 +68,7 @@ class Player {
 
 	radius() {
     	// Distance where timeLogistic * distGaussian == 4
-		try {
+		// try {
 		    // const timeLogistic = CONSTANTS.LOGISTIC_C3/(2+Math.exp(CONSTANTS.LOGISTIC_C1*(-timeBonus+CONSTANTS.LOGISTIC_C2)))+1;
             // const distGaussian = Math.exp(-Math.pow(dist, 2) / CONSTANST.GAUSS_C1) * CONSTANTS.MULTIPLIER;
 			// Desmond: \sqrt{-1000\ln\left(\frac{1}{80\cdot\left(\frac{30}{2+e^{1.4\left(-x+10\right)}}+\frac{1}{80}\right)}\right)}
@@ -74,10 +76,11 @@ class Player {
 			// const inverse = Math.sqrt(-Math.log(5/((CONSTANTS.MULTIPLIER*timeLogistic)))*CONSTANTS.GAUSS_C1);
 			// // return Math.max(inverse - CONSTANTS.BUBBLE_RADIUS, CONSTANTS.MIN_BUBBLE_RADIUS);
 			// return Math.max(inverse, CONSTANTS.MIN_BUBBLE_RADIUS);
-			return 2.7*this.clickedAt + 11;
-		} catch (err) {
-			return CONSTANTS.BUBBLE_RADIUS;
-		}
+			// return 2.7*this.clickedAt + 11;
+		// } catch (err) {
+		// 	return CONSTANTS.BUBBLE_RADIUS;
+		// }
+		return CONSTANTS.BUBBLE_RADIUS*2;
 	}
 	won() {
     	this.wins = this.wins + 1;

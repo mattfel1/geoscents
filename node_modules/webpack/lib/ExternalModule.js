@@ -3,11 +3,13 @@
 	Author Tobias Koppers @sokra
 */
 "use strict";
+
+const { OriginalSource, RawSource } = require("webpack-sources");
 const Module = require("./Module");
-const OriginalSource = require("webpack-sources").OriginalSource;
-const RawSource = require("webpack-sources").RawSource;
 const WebpackMissingModule = require("./dependencies/WebpackMissingModule");
 const Template = require("./Template");
+
+/** @typedef {import("./util/createHash").Hash} Hash */
 
 class ExternalModule extends Module {
 	constructor(request, type, userRequest) {
@@ -72,13 +74,15 @@ class ExternalModule extends Module {
 			.slice(1)
 			.map(r => `[${JSON.stringify(r)}]`)
 			.join("");
-		return `module.exports = require(${moduleName})${objectLookup};`;
+		return `module.exports = require(${JSON.stringify(
+			moduleName
+		)})${objectLookup};`;
 	}
 
 	checkExternalVariable(variableToCheck, request) {
-		return `if(typeof ${
-			variableToCheck
-		} === 'undefined') {${WebpackMissingModule.moduleCode(request)}}\n`;
+		return `if(typeof ${variableToCheck} === 'undefined') {${WebpackMissingModule.moduleCode(
+			request
+		)}}\n`;
 	}
 
 	getSourceForAmdOrUmdExternal(id, optional, request) {
@@ -92,15 +96,25 @@ class ExternalModule extends Module {
 	}
 
 	getSourceForDefaultCase(optional, request) {
+		if (!Array.isArray(request)) {
+			// make it an array as the look up works the same basically
+			request = [request];
+		}
+
+		const variableName = request[0];
 		const missingModuleError = optional
-			? this.checkExternalVariable(request, request)
+			? this.checkExternalVariable(variableName, request.join("."))
 			: "";
-		return `${missingModuleError}module.exports = ${request};`;
+		const objectLookup = request
+			.slice(1)
+			.map(r => `[${JSON.stringify(r)}]`)
+			.join("");
+		return `${missingModuleError}module.exports = ${variableName}${objectLookup};`;
 	}
 
 	getSourceString(runtime) {
 		const request =
-			typeof this.request === "object"
+			typeof this.request === "object" && !Array.isArray(this.request)
 				? this.request[this.externalType]
 				: this.request;
 		switch (this.externalType) {
@@ -113,15 +127,17 @@ class ExternalModule extends Module {
 				);
 			case "global":
 				return this.getSourceForGlobalVariableExternal(
-					runtime.outputOptions.globalObject,
-					this.externalType
+					request,
+					runtime.outputOptions.globalObject
 				);
 			case "commonjs":
 			case "commonjs2":
 				return this.getSourceForCommonJsExternal(request);
 			case "amd":
+			case "amd-require":
 			case "umd":
 			case "umd2":
+			case "system":
 				return this.getSourceForAmdOrUmdExternal(
 					this.id,
 					this.optional,
@@ -148,6 +164,10 @@ class ExternalModule extends Module {
 		return 42;
 	}
 
+	/**
+	 * @param {Hash} hash the hash used to track dependencies
+	 * @returns {void}
+	 */
 	updateHash(hash) {
 		hash.update(this.externalType);
 		hash.update(JSON.stringify(this.request));

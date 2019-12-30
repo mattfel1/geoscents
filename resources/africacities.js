@@ -1808,19 +1808,6 @@ module.exports = {
     "id": 1012140298
   },
   {
-    "name": "Valletta",
-    "city_ascii": "Valletta",
-    "lat": 35.8997,
-    "lon": 14.5147,
-    "country": "Malta",
-    "iso2": "MT",
-    "iso3": "MLT",
-    "admin_name": "Valletta",
-    "capital": "primary",
-    "population": 368250,
-    "id": 1470574399
-  },
-  {
     "name": "Nakuru",
     "city_ascii": "Nakuru",
     "lat": -0.28,

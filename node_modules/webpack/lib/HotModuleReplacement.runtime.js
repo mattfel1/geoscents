@@ -5,12 +5,15 @@
 /*global $hash$ $requestTimeout$ installedModules $require$ hotDownloadManifest hotDownloadUpdateChunk hotDisposeChunk modules */
 module.exports = function() {
 	var hotApplyOnUpdate = true;
-	var hotCurrentHash = $hash$; // eslint-disable-line no-unused-vars
+	// eslint-disable-next-line no-unused-vars
+	var hotCurrentHash = $hash$;
 	var hotRequestTimeout = $requestTimeout$;
 	var hotCurrentModuleData = {};
-	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
-	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
-	var hotCurrentParentsTemp = []; // eslint-disable-line no-unused-vars
+	var hotCurrentChildModule;
+	// eslint-disable-next-line no-unused-vars
+	var hotCurrentParents = [];
+	// eslint-disable-next-line no-unused-vars
+	var hotCurrentParentsTemp = [];
 
 	// eslint-disable-next-line no-unused-vars
 	function hotCreateRequire(moduleId) {
@@ -19,13 +22,16 @@ module.exports = function() {
 		var fn = function(request) {
 			if (me.hot.active) {
 				if (installedModules[request]) {
-					if (!installedModules[request].parents.includes(moduleId))
+					if (installedModules[request].parents.indexOf(moduleId) === -1) {
 						installedModules[request].parents.push(moduleId);
+					}
 				} else {
 					hotCurrentParents = [moduleId];
 					hotCurrentChildModule = request;
 				}
-				if (!me.children.includes(request)) me.children.push(request);
+				if (me.children.indexOf(request) === -1) {
+					me.children.push(request);
+				}
 			} else {
 				console.warn(
 					"[HMR] unexpected require(" +
@@ -52,7 +58,8 @@ module.exports = function() {
 		for (var name in $require$) {
 			if (
 				Object.prototype.hasOwnProperty.call($require$, name) &&
-				name !== "e"
+				name !== "e" &&
+				name !== "t"
 			) {
 				Object.defineProperty(fn, name, ObjectFactory(name));
 			}
@@ -77,6 +84,10 @@ module.exports = function() {
 				}
 			}
 		};
+		fn.t = function(value, mode) {
+			if (mode & 1) value = fn(value);
+			return $require$.t(value, mode & ~1);
+		};
 		return fn;
 	}
 
@@ -94,7 +105,7 @@ module.exports = function() {
 			// Module API
 			active: true,
 			accept: function(dep, callback) {
-				if (typeof dep === "undefined") hot._selfAccepted = true;
+				if (dep === undefined) hot._selfAccepted = true;
 				else if (typeof dep === "function") hot._selfAccepted = dep;
 				else if (typeof dep === "object")
 					for (var i = 0; i < dep.length; i++)
@@ -102,7 +113,7 @@ module.exports = function() {
 				else hot._acceptedDependencies[dep] = callback || function() {};
 			},
 			decline: function(dep) {
-				if (typeof dep === "undefined") hot._selfDeclined = true;
+				if (dep === undefined) hot._selfDeclined = true;
 				else if (typeof dep === "object")
 					for (var i = 0; i < dep.length; i++)
 						hot._declinedDependencies[dep[i]] = true;
@@ -167,8 +178,9 @@ module.exports = function() {
 	}
 
 	function hotCheck(apply) {
-		if (hotStatus !== "idle")
+		if (hotStatus !== "idle") {
 			throw new Error("check() is only allowed in idle status");
+		}
 		hotApplyOnUpdate = apply;
 		hotSetStatus("check");
 		return hotDownloadManifest(hotRequestTimeout).then(function(update) {
@@ -190,8 +202,8 @@ module.exports = function() {
 			});
 			hotUpdate = {};
 			/*foreachInstalledChunks*/
+			// eslint-disable-next-line no-lone-blocks
 			{
-				// eslint-disable-line no-lone-blocks
 				/*globals chunkId */
 				hotEnsureUpdateChunk(chunkId);
 			}
@@ -278,7 +290,7 @@ module.exports = function() {
 			var outdatedModules = [updateModuleId];
 			var outdatedDependencies = {};
 
-			var queue = outdatedModules.slice().map(function(id) {
+			var queue = outdatedModules.map(function(id) {
 				return {
 					chain: [id],
 					id: id
@@ -316,7 +328,7 @@ module.exports = function() {
 							parentId: parentId
 						};
 					}
-					if (outdatedModules.includes(parentId)) continue;
+					if (outdatedModules.indexOf(parentId) !== -1) continue;
 					if (parent.hot._acceptedDependencies[moduleId]) {
 						if (!outdatedDependencies[parentId])
 							outdatedDependencies[parentId] = [];
@@ -343,7 +355,7 @@ module.exports = function() {
 		function addAllToSet(a, b) {
 			for (var i = 0; i < b.length; i++) {
 				var item = b[i];
-				if (!a.includes(item)) a.push(item);
+				if (a.indexOf(item) === -1) a.push(item);
 			}
 		}
 
@@ -362,6 +374,7 @@ module.exports = function() {
 		for (var id in hotUpdate) {
 			if (Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
 				moduleId = toModuleId(id);
+				/** @type {TODO} */
 				var result;
 				if (hotUpdate[id]) {
 					result = getAffectedStuff(moduleId);
@@ -371,6 +384,7 @@ module.exports = function() {
 						moduleId: id
 					};
 				}
+				/** @type {Error|false} */
 				var abortError = false;
 				var doApply = false;
 				var doDispose = false;
@@ -453,12 +467,15 @@ module.exports = function() {
 			moduleId = outdatedModules[i];
 			if (
 				installedModules[moduleId] &&
-				installedModules[moduleId].hot._selfAccepted
-			)
+				installedModules[moduleId].hot._selfAccepted &&
+				// removed self-accepted modules should not be required
+				appliedUpdate[moduleId] !== warnUnexpectedRequire
+			) {
 				outdatedSelfAcceptedModules.push({
 					module: moduleId,
 					errorHandler: installedModules[moduleId].hot._selfAccepted
 				});
+			}
 		}
 
 		// Now in "dispose" phase
@@ -525,7 +542,7 @@ module.exports = function() {
 			}
 		}
 
-		// Not in "apply" phase
+		// Now in "apply" phase
 		hotSetStatus("apply");
 
 		hotCurrentHash = hotUpdateNewHash;
@@ -551,7 +568,7 @@ module.exports = function() {
 						dependency = moduleOutdatedDependencies[i];
 						cb = module.hot._acceptedDependencies[dependency];
 						if (cb) {
-							if (callbacks.includes(cb)) continue;
+							if (callbacks.indexOf(cb) !== -1) continue;
 							callbacks.push(cb);
 						}
 					}

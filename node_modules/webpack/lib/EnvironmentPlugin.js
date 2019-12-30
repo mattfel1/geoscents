@@ -5,6 +5,9 @@
 
 "use strict";
 
+/** @typedef {import("./Compiler")} Compiler */
+
+const WebpackError = require("./WebpackError");
 const DefinePlugin = require("./DefinePlugin");
 
 const needsEnvVarFix =
@@ -25,6 +28,10 @@ class EnvironmentPlugin {
 		}
 	}
 
+	/**
+	 * @param {Compiler} compiler webpack compiler instance
+	 * @returns {void}
+	 */
 	apply(compiler) {
 		const definitions = this.keys.reduce((defs, key) => {
 			// TODO remove once the fix has made its way into Node 8.
@@ -41,10 +48,8 @@ class EnvironmentPlugin {
 
 			if (value === undefined) {
 				compiler.hooks.thisCompilation.tap("EnvironmentPlugin", compilation => {
-					const error = new Error(
-						`EnvironmentPlugin - ${
-							key
-						} environment variable is undefined.\n\n` +
+					const error = new WebpackError(
+						`EnvironmentPlugin - ${key} environment variable is undefined.\n\n` +
 							"You can pass an object with default values to suppress this warning.\n" +
 							"See https://webpack.js.org/plugins/environment-plugin for example."
 					);
@@ -55,7 +60,7 @@ class EnvironmentPlugin {
 			}
 
 			defs[`process.env.${key}`] =
-				typeof value === "undefined" ? "undefined" : JSON.stringify(value);
+				value === undefined ? "undefined" : JSON.stringify(value);
 
 			return defs;
 		}, {});

@@ -22,6 +22,7 @@
     "rs-chat": "^2.0.7",
     "sequelize": "^6.0.0",
     "socket.io": "^2.1.0",
+    "svg-country-flags": "^1.2.6",
     "xmlhttprequest": "^1.8.0"
   },
   "scripts": {
@@ -37,7 +38,7 @@
     "css-loader": "^3.2.0",
     "nodemon": "^1.11.0",
     "style-loader": "^0.20.3",
-    "webpack": "^4.1.1",
+    "webpack": "^4.41.5",
     "webpack-cli": "^3.3.6"
   }
 }

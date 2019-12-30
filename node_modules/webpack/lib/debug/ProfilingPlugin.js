@@ -1,11 +1,17 @@
 const fs = require("fs");
-const Trace = require("chrome-trace-event").Tracer;
+const path = require("path");
+const mkdirp = require("mkdirp");
+const { Tracer } = require("chrome-trace-event");
 const validateOptions = require("schema-utils");
 const schema = require("../../schemas/plugins/debug/ProfilingPlugin.json");
+
+/** @typedef {import("../../declarations/plugins/debug/ProfilingPlugin").ProfilingPluginOptions} ProfilingPluginOptions */
+
 let inspector = undefined;
 
 try {
-	inspector = require("inspector"); // eslint-disable-line node/no-missing-require
+	// eslint-disable-next-line node/no-unsupported-features/node-builtins
+	inspector = require("inspector");
 } catch (e) {
 	console.log("Unable to CPU profile in < node 8.0");
 }
@@ -72,18 +78,32 @@ class Profiler {
 }
 
 /**
- * @param {string} outputPath The location where to write the log.
- * @returns {{trace: ?,	counter: number, profiler: Profiler}} The trace object
+ * an object that wraps Tracer and Profiler with a counter
+ * @typedef {Object} Trace
+ * @property {Tracer} trace instance of Tracer
+ * @property {number} counter Counter
+ * @property {Profiler} profiler instance of Profiler
+ * @property {Function} end the end function
  */
-function createTrace(outputPath) {
-	const trace = new Trace({
+
+/**
+ * @param {string} outputPath The location where to write the log.
+ * @returns {Trace} The trace object
+ */
+const createTrace = outputPath => {
+	const trace = new Tracer({
 		noStream: true
 	});
 	const profiler = new Profiler(inspector);
+	if (/\/|\\/.test(outputPath)) {
+		const dirPath = path.dirname(outputPath);
+		mkdirp.sync(dirPath);
+	}
+	const fsStream = fs.createWriteStream(outputPath);
 
 	let counter = 0;
 
-	trace.pipe(fs.createWriteStream(outputPath));
+	trace.pipe(fsStream);
 	// These are critical events that need to be inserted so that tools like
 	// chrome dev tools can load the profile.
 	trace.instantEvent({
@@ -119,13 +139,24 @@ function createTrace(outputPath) {
 	return {
 		trace,
 		counter,
-		profiler
+		profiler,
+		end: callback => {
+			// Wait until the write stream finishes.
+			fsStream.on("finish", () => {
+				callback();
+			});
+			// Tear down the readable trace stream.
+			trace.push(null);
+		}
 	};
-}
+};
 
 const pluginName = "ProfilingPlugin";
 
 class ProfilingPlugin {
+	/**
+	 * @param {ProfilingPluginOptions=} opts options object
+	 */
 	constructor(opts) {
 		validateOptions(schema, opts || {}, "Profiling plugin");
 		opts = opts || {};
@@ -169,16 +200,17 @@ class ProfilingPlugin {
 		);
 
 		// We need to write out the CPU profile when we are all done.
-		compiler.hooks.done.tap(
+		compiler.hooks.done.tapAsync(
 			{
 				name: pluginName,
 				stage: Infinity
 			},
-			() => {
+			(stats, callback) => {
 				tracer.profiler.stopProfiling().then(parsedResults => {
 					if (parsedResults === undefined) {
 						tracer.profiler.destroy();
 						tracer.trace.flush();
+						tracer.end(callback);
 						return;
 					}
 
@@ -226,6 +258,7 @@ class ProfilingPlugin {
 
 					tracer.profiler.destroy();
 					tracer.trace.flush();
+					tracer.end(callback);
 				});
 			}
 		);
@@ -301,26 +334,32 @@ const interceptAllParserHooks = (moduleFactory, tracer) => {
 };
 
 const makeInterceptorFor = (instance, tracer) => hookName => ({
-	register: ({ name, type, fn }) => {
+	register: ({ name, type, context, fn }) => {
 		const newFn = makeNewProfiledTapFn(hookName, tracer, {
 			name,
 			type,
 			fn
 		});
 		return {
-			// eslint-disable-line
 			name,
 			type,
+			context,
 			fn: newFn
 		};
 	}
 });
 
+// TODO improve typing
+/** @typedef {(...args: TODO[]) => void | Promise<TODO>} PluginFunction */
+
 /**
  * @param {string} hookName Name of the hook to profile.
- * @param {{counter: number, trace: *, profiler: *}} tracer Instance of tracer.
- * @param {{name: string, type: string, fn: Function}} opts Options for the profiled fn.
- * @returns {*} Chainable hooked function.
+ * @param {Trace} tracer The trace object.
+ * @param {object} options Options for the profiled fn.
+ * @param {string} options.name Plugin name
+ * @param {string} options.type Plugin type (sync | async | promise)
+ * @param {PluginFunction} options.fn Plugin function
+ * @returns {PluginFunction} Chainable hooked function.
  */
 const makeNewProfiledTapFn = (hookName, tracer, { name, type, fn }) => {
 	const defaultCategory = ["blink.user_timing"];
@@ -328,14 +367,14 @@ const makeNewProfiledTapFn = (hookName, tracer, { name, type, fn }) => {
 	switch (type) {
 		case "promise":
 			return (...args) => {
-				// eslint-disable-line
 				const id = ++tracer.counter;
 				tracer.trace.begin({
 					name,
 					id,
 					cat: defaultCategory
 				});
-				return fn(...args).then(r => {
+				const promise = /** @type {Promise<*>} */ (fn(...args));
+				return promise.then(r => {
 					tracer.trace.end({
 						name,
 						id,
@@ -346,15 +385,14 @@ const makeNewProfiledTapFn = (hookName, tracer, { name, type, fn }) => {
 			};
 		case "async":
 			return (...args) => {
-				// eslint-disable-line
 				const id = ++tracer.counter;
 				tracer.trace.begin({
 					name,
 					id,
 					cat: defaultCategory
 				});
+				const callback = args.pop();
 				fn(...args, (...r) => {
-					const callback = args.pop();
 					tracer.trace.end({
 						name,
 						id,
@@ -365,7 +403,6 @@ const makeNewProfiledTapFn = (hookName, tracer, { name, type, fn }) => {
 			};
 		case "sync":
 			return (...args) => {
-				// eslint-disable-line
 				const id = ++tracer.counter;
 				// Do not instrument ourself due to the CPU
 				// profile needing to be the last event in the trace.

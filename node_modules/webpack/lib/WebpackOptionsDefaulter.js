@@ -13,16 +13,28 @@ const isProductionLikeMode = options => {
 	return options.mode === "production" || !options.mode;
 };
 
+const isWebLikeTarget = options => {
+	return options.target === "web" || options.target === "webworker";
+};
+
+const getDevtoolNamespace = library => {
+	// if options.output.library is a string
+	if (Array.isArray(library)) {
+		return library.join(".");
+	} else if (typeof library === "object") {
+		return getDevtoolNamespace(library.root);
+	}
+	return library || "";
+};
+
 class WebpackOptionsDefaulter extends OptionsDefaulter {
 	constructor() {
 		super();
 
 		this.set("entry", "./src");
 
-		this.set(
-			"devtool",
-			"make",
-			options => (options.mode === "development" ? "eval" : false)
+		this.set("devtool", "make", options =>
+			options.mode === "development" ? "eval" : false
 		);
 		this.set("cache", "make", options => options.mode === "development");
 
@@ -55,7 +67,9 @@ class WebpackOptionsDefaulter extends OptionsDefaulter {
 				type: "javascript/esm",
 				resolve: {
 					mainFields:
-						options.target === "web" || options.target === "webworker"
+						options.target === "web" ||
+						options.target === "webworker" ||
+						options.target === "electron-renderer"
 							? ["browser", "main"]
 							: ["main"]
 				}
@@ -85,14 +99,16 @@ class WebpackOptionsDefaulter extends OptionsDefaulter {
 		this.set("output.filename", "[name].js");
 		this.set("output.chunkFilename", "make", options => {
 			const filename = options.output.filename;
-			if (typeof filename === "function") return filename;
-			const hasName = filename.includes("[name]");
-			const hasId = filename.includes("[id]");
-			const hasChunkHash = filename.includes("[chunkhash]");
-			// Anything changing depending on chunk is fine
-			if (hasChunkHash || hasName || hasId) return filename;
-			// Elsewise prefix "[id]." in front of the basename to make it changing
-			return filename.replace(/(^|\/)([^/]*(?:\?|$))/, "$1[id].$2");
+			if (typeof filename !== "function") {
+				const hasName = filename.includes("[name]");
+				const hasId = filename.includes("[id]");
+				const hasChunkHash = filename.includes("[chunkhash]");
+				// Anything changing depending on chunk is fine
+				if (hasChunkHash || hasName || hasId) return filename;
+				// Elsewise prefix "[id]." in front of the basename to make it changing
+				return filename.replace(/(^|\/)([^/]*(?:\?|$))/, "$1[id].$2");
+			}
+			return "[id].js";
 		});
 		this.set("output.webassemblyModuleFilename", "[modulehash].module.wasm");
 		this.set("output.library", "");
@@ -115,12 +131,12 @@ class WebpackOptionsDefaulter extends OptionsDefaulter {
 			switch (options.target) {
 				case "web":
 				case "electron-renderer":
+				case "node-webkit":
 					return "window";
 				case "webworker":
 					return "self";
 				case "node":
 				case "async-node":
-				case "node-webkit":
 				case "electron-main":
 					return "global";
 				default:
@@ -128,9 +144,7 @@ class WebpackOptionsDefaulter extends OptionsDefaulter {
 			}
 		});
 		this.set("output.devtoolNamespace", "make", options => {
-			if (Array.isArray(options.output.library))
-				return options.output.library.join(".");
-			return options.output.library || "";
+			return getDevtoolNamespace(options.output.library);
 		});
 		this.set("output.libraryTarget", "var");
 		this.set("output.path", path.join(process.cwd(), "dist"));
@@ -166,32 +180,36 @@ class WebpackOptionsDefaulter extends OptionsDefaulter {
 		this.set("node.__filename", "mock");
 		this.set("node.__dirname", "mock");
 
-		this.set(
-			"performance",
-			"make",
-			options => (isProductionLikeMode(options) ? false : undefined)
-		);
-		this.set("performance", "call", value => {
-			if (typeof value === "boolean") {
-				return value;
-			} else {
-				return Object.assign({}, value);
-			}
+		this.set("performance", "call", (value, options) => {
+			if (value === false) return false;
+			if (
+				value === undefined &&
+				(!isProductionLikeMode(options) || !isWebLikeTarget(options))
+			)
+				return false;
+			return Object.assign({}, value);
 		});
 		this.set("performance.maxAssetSize", 250000);
 		this.set("performance.maxEntrypointSize", 250000);
-		this.set(
-			"performance.hints",
-			"make",
-			options => (isProductionLikeMode(options) ? "warning" : false)
+		this.set("performance.hints", "make", options =>
+			isProductionLikeMode(options) ? "warning" : false
 		);
 
-		this.set("optimization.removeAvailableModules", true);
+		this.set("optimization", "call", value => Object.assign({}, value));
+		// TODO webpack 5: Disable by default in a modes
+		this.set(
+			"optimization.removeAvailableModules",
+			"make",
+			options => options.mode !== "development"
+		);
 		this.set("optimization.removeEmptyChunks", true);
 		this.set("optimization.mergeDuplicateChunks", true);
 		this.set("optimization.flagIncludedChunks", "make", options =>
 			isProductionLikeMode(options)
 		);
+		// TODO webpack 5 add `moduleIds: "named"` default for development
+		// TODO webpack 5 add `moduleIds: "size"` default for production
+		// TODO webpack 5 remove optimization.occurrenceOrder
 		this.set("optimization.occurrenceOrder", "make", options =>
 			isProductionLikeMode(options)
 		);
@@ -206,19 +224,32 @@ class WebpackOptionsDefaulter extends OptionsDefaulter {
 			isProductionLikeMode(options)
 		);
 		this.set("optimization.splitChunks", {});
+		this.set("optimization.splitChunks.hidePathInfo", "make", options => {
+			return isProductionLikeMode(options);
+		});
 		this.set("optimization.splitChunks.chunks", "async");
-		this.set("optimization.splitChunks.minSize", 30000);
+		this.set("optimization.splitChunks.minSize", "make", options => {
+			return isProductionLikeMode(options) ? 30000 : 10000;
+		});
 		this.set("optimization.splitChunks.minChunks", 1);
-		this.set("optimization.splitChunks.maxAsyncRequests", 5);
-		this.set("optimization.splitChunks.maxInitialRequests", 3);
+		this.set("optimization.splitChunks.maxAsyncRequests", "make", options => {
+			return isProductionLikeMode(options) ? 5 : Infinity;
+		});
+		this.set("optimization.splitChunks.automaticNameDelimiter", "~");
+		this.set("optimization.splitChunks.automaticNameMaxLength", 109);
+		this.set("optimization.splitChunks.maxInitialRequests", "make", options => {
+			return isProductionLikeMode(options) ? 3 : Infinity;
+		});
 		this.set("optimization.splitChunks.name", true);
 		this.set("optimization.splitChunks.cacheGroups", {});
 		this.set("optimization.splitChunks.cacheGroups.default", {
+			automaticNamePrefix: "",
 			reuseExistingChunk: true,
 			minChunks: 2,
 			priority: -20
 		});
 		this.set("optimization.splitChunks.cacheGroups.vendors", {
+			automaticNamePrefix: "vendors",
 			test: /[\\/]node_modules[\\/]/,
 			priority: -10
 		});
@@ -238,11 +269,20 @@ class WebpackOptionsDefaulter extends OptionsDefaulter {
 		this.set("optimization.noEmitOnErrors", "make", options =>
 			isProductionLikeMode(options)
 		);
+		this.set("optimization.checkWasmTypes", "make", options =>
+			isProductionLikeMode(options)
+		);
+		this.set("optimization.mangleWasmImports", false);
+		// TODO webpack 5 remove optimization.namedModules
 		this.set(
 			"optimization.namedModules",
 			"make",
 			options => options.mode === "development"
 		);
+		this.set("optimization.hashedModuleIds", false);
+		// TODO webpack 5 add `chunkIds: "named"` default for development
+		// TODO webpack 5 add `chunkIds: "size"` default for production
+		// TODO webpack 5 remove optimization.namedChunks
 		this.set(
 			"optimization.namedChunks",
 			"make",
@@ -264,10 +304,10 @@ class WebpackOptionsDefaulter extends OptionsDefaulter {
 		this.set("optimization.minimizer", "make", options => [
 			{
 				apply: compiler => {
-					// Lazy load the uglifyjs plugin
-					const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+					// Lazy load the Terser plugin
+					const TerserPlugin = require("terser-webpack-plugin");
 					const SourceMapDevToolPlugin = require("./SourceMapDevToolPlugin");
-					new UglifyJsPlugin({
+					new TerserPlugin({
 						cache: true,
 						parallel: true,
 						sourceMap:
@@ -278,11 +318,10 @@ class WebpackOptionsDefaulter extends OptionsDefaulter {
 				}
 			}
 		]);
-		this.set(
-			"optimization.nodeEnv",
-			"make",
-			options => options.mode || "production"
-		);
+		this.set("optimization.nodeEnv", "make", options => {
+			// TODO: In webpack 5, it should return `false` when mode is `none`
+			return options.mode || "production";
+		});
 
 		this.set("resolve", "call", value => Object.assign({}, value));
 		this.set("resolve.unsafeCache", true);
@@ -290,14 +329,26 @@ class WebpackOptionsDefaulter extends OptionsDefaulter {
 		this.set("resolve.extensions", [".wasm", ".mjs", ".js", ".json"]);
 		this.set("resolve.mainFiles", ["index"]);
 		this.set("resolve.aliasFields", "make", options => {
-			if (options.target === "web" || options.target === "webworker")
+			if (
+				options.target === "web" ||
+				options.target === "webworker" ||
+				options.target === "electron-renderer"
+			) {
 				return ["browser"];
-			else return [];
+			} else {
+				return [];
+			}
 		});
 		this.set("resolve.mainFields", "make", options => {
-			if (options.target === "web" || options.target === "webworker")
+			if (
+				options.target === "web" ||
+				options.target === "webworker" ||
+				options.target === "electron-renderer"
+			) {
 				return ["browser", "module", "main"];
-			else return ["module", "main"];
+			} else {
+				return ["module", "main"];
+			}
 		});
 		this.set("resolve.cacheWithContext", "make", options => {
 			return (
@@ -317,6 +368,12 @@ class WebpackOptionsDefaulter extends OptionsDefaulter {
 				options.resolveLoader.plugins.length > 0
 			);
 		});
+
+		this.set("infrastructureLogging", "call", value =>
+			Object.assign({}, value)
+		);
+		this.set("infrastructureLogging.level", "info");
+		this.set("infrastructureLogging.debug", false);
 	}
 }
 

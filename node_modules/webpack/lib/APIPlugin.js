@@ -52,18 +52,18 @@ class APIPlugin {
 									? ParserHelpers.toConstantDependency(
 											parser,
 											REPLACEMENTS[key]
-										)
+									  )
 									: ParserHelpers.toConstantDependencyWithWebpackRequire(
 											parser,
 											REPLACEMENTS[key]
-										)
+									  )
 							);
-						parser.hooks.evaluateTypeof
-							.for(key)
-							.tap(
-								"APIPlugin",
-								ParserHelpers.evaluateToString(REPLACEMENT_TYPES[key])
-							);
+						const type = REPLACEMENT_TYPES[key];
+						if (type) {
+							parser.hooks.evaluateTypeof
+								.for(key)
+								.tap("APIPlugin", ParserHelpers.evaluateToString(type));
+						}
 					});
 				};
 

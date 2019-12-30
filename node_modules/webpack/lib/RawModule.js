@@ -5,8 +5,7 @@
 "use strict";
 
 const Module = require("./Module");
-const OriginalSource = require("webpack-sources").OriginalSource;
-const RawSource = require("webpack-sources").RawSource;
+const { OriginalSource, RawSource } = require("webpack-sources");
 
 module.exports = class RawModule extends Module {
 	constructor(source, identifier, readableIdentifier) {
@@ -43,9 +42,11 @@ module.exports = class RawModule extends Module {
 	}
 
 	source() {
-		if (this.useSourceMap)
+		if (this.useSourceMap) {
 			return new OriginalSource(this.sourceStr, this.identifier());
-		else return new RawSource(this.sourceStr);
+		} else {
+			return new RawSource(this.sourceStr);
+		}
 	}
 
 	updateHash(hash) {

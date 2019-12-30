@@ -10,12 +10,12 @@ module.exports = function() {
 		require("fs").readFile(filename, "utf-8", function(err, content) {
 			if (err) {
 				if ($require$.onError) return $require$.oe(err);
-				else throw err;
+				throw err;
 			}
 			var chunk = {};
 			require("vm").runInThisContext(
 				"(function(exports) {" + content + "\n})",
-				filename
+				{ filename: filename }
 			)(chunk);
 			hotAddUpdateChunk(chunk.id, chunk.modules);
 		});
@@ -37,7 +37,7 @@ module.exports = function() {
 		});
 	}
 
-	//eslint-disable-next-line no-unused-vars
+	// eslint-disable-next-line no-unused-vars
 	function hotDisposeChunk(chunkId) {
 		delete installedChunks[chunkId];
 	}

@@ -96,7 +96,7 @@ module.exports = class NodeMainTemplatePlugin {
 								"var promise = new Promise(function(resolve, reject) {",
 								Template.indent([
 									"installedChunkData = installedChunks[chunkId] = [resolve, reject];",
-									"var filename = __dirname + " +
+									"var filename = require('path').join(__dirname, " +
 										mainTemplate.getAssetPath(
 											JSON.stringify(`/${chunkFilename}`),
 											{
@@ -116,22 +116,46 @@ module.exports = class NodeMainTemplatePlugin {
 													hashWithLength: length => {
 														const shortChunkHashMap = {};
 														for (const chunkId of Object.keys(chunkMaps.hash)) {
-															if (typeof chunkMaps.hash[chunkId] === "string")
+															if (typeof chunkMaps.hash[chunkId] === "string") {
 																shortChunkHashMap[chunkId] = chunkMaps.hash[
 																	chunkId
 																].substr(0, length);
+															}
 														}
 														return `" + ${JSON.stringify(
 															shortChunkHashMap
 														)}[chunkId] + "`;
 													},
+													contentHash: {
+														javascript: `" + ${JSON.stringify(
+															chunkMaps.contentHash.javascript
+														)}[chunkId] + "`
+													},
+													contentHashWithLength: {
+														javascript: length => {
+															const shortContentHashMap = {};
+															const contentHash =
+																chunkMaps.contentHash.javascript;
+															for (const chunkId of Object.keys(contentHash)) {
+																if (typeof contentHash[chunkId] === "string") {
+																	shortContentHashMap[chunkId] = contentHash[
+																		chunkId
+																	].substr(0, length);
+																}
+															}
+															return `" + ${JSON.stringify(
+																shortContentHashMap
+															)}[chunkId] + "`;
+														}
+													},
 													name: `" + (${JSON.stringify(
 														chunkMaps.name
 													)}[chunkId]||chunkId) + "`
-												}
+												},
+												contentHashType: "javascript"
 											}
 										) +
-										";",
+										");",
 									"require('fs').readFile(filename, 'utf-8',  function(err, content) {",
 									Template.indent(
 										[
@@ -178,19 +202,42 @@ module.exports = class NodeMainTemplatePlugin {
 								hashWithLength: length => {
 									const shortChunkHashMap = {};
 									for (const chunkId of Object.keys(chunkMaps.hash)) {
-										if (typeof chunkMaps.hash[chunkId] === "string")
+										if (typeof chunkMaps.hash[chunkId] === "string") {
 											shortChunkHashMap[chunkId] = chunkMaps.hash[
 												chunkId
 											].substr(0, length);
+										}
 									}
 									return `" + ${JSON.stringify(
 										shortChunkHashMap
 									)}[chunkId] + "`;
 								},
+								contentHash: {
+									javascript: `" + ${JSON.stringify(
+										chunkMaps.contentHash.javascript
+									)}[chunkId] + "`
+								},
+								contentHashWithLength: {
+									javascript: length => {
+										const shortContentHashMap = {};
+										const contentHash = chunkMaps.contentHash.javascript;
+										for (const chunkId of Object.keys(contentHash)) {
+											if (typeof contentHash[chunkId] === "string") {
+												shortContentHashMap[chunkId] = contentHash[
+													chunkId
+												].substr(0, length);
+											}
+										}
+										return `" + ${JSON.stringify(
+											shortContentHashMap
+										)}[chunkId] + "`;
+									}
+								},
 								name: `" + (${JSON.stringify(
 									chunkMaps.name
 								)}[chunkId]||chunkId) + "`
-							}
+							},
+							contentHashType: "javascript"
 						}
 					);
 					return Template.asString([
@@ -233,11 +280,12 @@ module.exports = class NodeMainTemplatePlugin {
 							hashWithLength: length => {
 								const shortChunkHashMap = {};
 								for (const chunkId of Object.keys(chunkMaps.hash)) {
-									if (typeof chunkMaps.hash[chunkId] === "string")
+									if (typeof chunkMaps.hash[chunkId] === "string") {
 										shortChunkHashMap[chunkId] = chunkMaps.hash[chunkId].substr(
 											0,
 											length
 										);
+									}
 								}
 								return `" + ${JSON.stringify(shortChunkHashMap)}[chunkId] + "`;
 							},
@@ -257,8 +305,8 @@ module.exports = class NodeMainTemplatePlugin {
 				);
 				return Template.getFunctionContent(
 					asyncChunkLoading
-						? require("./NodeMainTemplateAsync.runtime.js")
-						: require("./NodeMainTemplate.runtime.js")
+						? require("./NodeMainTemplateAsync.runtime")
+						: require("./NodeMainTemplate.runtime")
 				)
 					.replace(/\$require\$/g, mainTemplate.requireFn)
 					.replace(/\$hotMainFilename\$/g, currentHotUpdateMainFilename)
@@ -267,9 +315,7 @@ module.exports = class NodeMainTemplatePlugin {
 		);
 		mainTemplate.hooks.hash.tap("NodeMainTemplatePlugin", hash => {
 			hash.update("node");
-			hash.update("3");
-			hash.update(mainTemplate.outputOptions.filename + "");
-			hash.update(mainTemplate.outputOptions.chunkFilename + "");
+			hash.update("4");
 		});
 	}
 };

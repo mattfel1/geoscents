@@ -4,9 +4,12 @@
 */
 "use strict";
 
-const ConcatSource = require("webpack-sources").ConcatSource;
+const { ConcatSource } = require("webpack-sources");
 
 class JsonpExportMainTemplatePlugin {
+	/**
+	 * @param {string} name jsonp function name
+	 */
 	constructor(name) {
 		this.name = name;
 	}

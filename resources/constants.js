@@ -9,33 +9,37 @@ module.exports = {
     TRUTH_COLOR: 'white',
 
     // Map and Panel
+    EARTH_RADIUS: 6371, // Earth radius in km
     MAP_WIDTH: 1530,
     MAP_HEIGHT: 900,
-    WORLD_ZERO_LAT: 77.0*Math.PI/180, // Latitude of top edge of map
-    WORLD_MAX_LAT: -65.0*Math.PI/180, // Latitude of bottom edge of map
+    WORLD_MIN_LAT: 77.0, // Latitude of top edge of map
+    WORLD_MAX_LAT: -65.0, // Latitude of bottom edge of map
     WORLD_MIN_LON: -180, // Latitude of top edge of map
     WORLD_MAX_LON: 180, // Latitude of bottom edge of map
     WORLD_LAT_TS: 0,
-    US_ZERO_LAT: 56.0*Math.PI/180, // Latitude of top edge of map
-    US_MAX_LAT: 10.0*Math.PI/180, // Latitude of bottom edge of map
+    US_MIN_LAT: 56.0, // Latitude of top edge of map
+    US_MAX_LAT: 10.0, // Latitude of bottom edge of map
     US_MIN_LON: -141.0, // Latitude of top edge of map
     US_MAX_LON: -43.0, // Latitude of bottom edge of map
     US_LAT_TS: 0,
-    EURO_ZERO_LAT: 62.0*Math.PI/180, // Latitude of top edge of map
-    EURO_MAX_LAT: 22.0*Math.PI/180, // Latitude of bottom edge of map
+    EURO_MIN_LAT: 62.0, // Latitude of top edge of map
+    EURO_MAX_LAT: 22.0, // Latitude of bottom edge of map
     EURO_MIN_LON: -14, // Latitude of top edge of map
     EURO_MAX_LON: 83, // Latitude of bottom edge of map
     EURO_LAT_TS: 0,
-    AFRICA_ZERO_LAT: 41.0*Math.PI/180, // Latitude of top edge of map
-    AFRICA_MAX_LAT: -36.0*Math.PI/180, // Latitude of bottom edge of map
+    AFRICA_MIN_LAT: 41.0, // Latitude of top edge of map
+    AFRICA_MAX_LAT: -36.0, // Latitude of bottom edge of map
     AFRICA_MIN_LON: -60, // Latitude of top edge of map
     AFRICA_MAX_LON: 82, // Latitude of bottom edge of map  
     AFRICA_LAT_TS: 0,
-    SAMERICA_ZERO_LAT: 24.0*Math.PI/180, // Latitude of top edge of map
-    SAMERICA_MAX_LAT: -56.0*Math.PI/180, // Latitude of bottom edge of map
+    SAMERICA_MIN_LAT: 24.0, // Latitude of top edge of map
+    SAMERICA_MAX_LAT: -56.0, // Latitude of bottom edge of map
     SAMERICA_MIN_LON: -140, // Latitude of top edge of map
     SAMERICA_MAX_LON: 17, // Latitude of bottom edge of map
     SAMERICA_LAT_TS: 0,
+    VERT_WRITE_CELLS: 30,
+    HORZ_WRITE_CELLS: 15,
+
 
     // FSM
     REVEAL_STATE: 'reveal',
@@ -55,9 +59,10 @@ module.exports = {
 
     // Visuals and score
     BGCOLOR: "#E6E6FA",
+    SCOREBOX_COLOR: "#E6E6E6",
     NUM_GLOBES: 180/5,
     LOBBY_COLOR: "#e3e4e6",
-    BEGIN_COLOR: "blue",
+    BEGIN_COLOR: "#388EE6",
     MAP_BUTTON_COLOR: "#9CD69F",
     GUESS_COLOR: '#17eb5e',
     REVEAL_COLOR: '#ffad99',

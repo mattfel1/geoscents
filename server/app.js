@@ -32,44 +32,20 @@ app.get('/', (req, res, next) => {
 //  3) Take top 1000 cities
 //  4) xlsx -> csv (https://www.zamzar.com/convert/xlsx-to-csv/)
 //  5) csv -> json (https://csvjson.com/csv2json)
-app.get('/resources/world.png', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', 'resources/world.png'));
-});
-app.get('/resources/us.png', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', 'resources/us.png'));
-});
-app.get('/resources/euro.png', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', 'resources/euro.png'));
-});
-app.get('/resources/africa.png', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', 'resources/africa.png'));
-});
-app.get('/resources/samerica.png', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', 'resources/samerica.png'));
-});
-app.get('/resources/spritesheet.png', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', 'resources/spritesheet.png'));
-});
-app.get('/resources/favicon.png', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', 'resources/favicon.png'));
+app.get('/resources/*.png', (req, res, next) => {
+    const wildcard = req.params['0'];
+	res.sendFile(path.join(__dirname, '..', 'resources/' + wildcard + '.png'));
 });
 app.get('/overlaypopup.css', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '..', 'overlaypopup.css'));
 });
-app.get('/resources/message.mp3', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', 'resources/message.mp3'));
+app.get('/resources/*.mp3', (req, res, next) => {
+    const wildcard = req.params['0'];
+	res.sendFile(path.join(__dirname, '..', 'resources/' + wildcard + '.mp3'));
 });
-app.get('/resources/gamestart.mp3', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', 'resources/gamestart.mp3'));
-});
-app.get('/resources/roundstart.mp3', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', 'resources/roundstart.mp3'));
-});
-app.get('/resources/roundstop.mp3', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', 'resources/roundstop.mp3'));
-});
-app.get('/resources/jingle.mp3', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', 'resources/jingle.mp3'));
+app.get('/resources/flags/*.png', (req, res, next) => {
+    const wildcard = req.params['0'];
+	res.sendFile(path.join(__dirname, '..', 'resources/flags/' + wildcard + '.png'));
 });
 
 app.use((req, res, next) => {
@@ -102,8 +78,7 @@ const WELCOME_MESSAGE1 = 'Welcome to Geoscents, an online multiplayer world geog
                           'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
                           'If you are enjoying this game, consider donating at the bottom of the page to help keep the server ' +
                           'running!  Feel free to make pull requests or leave feedback on github.' +
-                          ' This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>.' +
-                          ' On Oct 14 2019, all records were accidentally lost but this issue has since been fixed.  Sorry!';
+                          ' This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>.';
 
 
 io.on('connection', (socket) => {

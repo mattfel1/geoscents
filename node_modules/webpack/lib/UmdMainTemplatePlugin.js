@@ -4,26 +4,63 @@
 */
 "use strict";
 
-const ConcatSource = require("webpack-sources").ConcatSource;
-const OriginalSource = require("webpack-sources").OriginalSource;
+const { ConcatSource, OriginalSource } = require("webpack-sources");
 const Template = require("./Template");
 
-function accessorToObjectAccess(accessor) {
-	return accessor.map(a => `[${JSON.stringify(a)}]`).join("");
-}
+/** @typedef {import("../declarations/WebpackOptions").LibraryCustomUmdObject} LibraryCustomUmdObject */
+/** @typedef {import("./Compilation")} Compilation */
 
-function accessorAccess(base, accessor) {
-	accessor = [].concat(accessor);
-	return accessor
-		.map((a, idx) => {
-			a = base + accessorToObjectAccess(accessor.slice(0, idx + 1));
-			if (idx === accessor.length - 1) return a;
+/**
+ * @param {string[]} accessor the accessor to convert to path
+ * @returns {string} the path
+ */
+const accessorToObjectAccess = accessor => {
+	return accessor.map(a => `[${JSON.stringify(a)}]`).join("");
+};
+
+/**
+ * @param {string=} base the path prefix
+ * @param {string|string[]} accessor the accessor
+ * @param {string=} joinWith the element separator
+ * @returns {string} the path
+ */
+const accessorAccess = (base, accessor, joinWith = ", ") => {
+	const accessors = Array.isArray(accessor) ? accessor : [accessor];
+	return accessors
+		.map((_, idx) => {
+			const a = base
+				? base + accessorToObjectAccess(accessors.slice(0, idx + 1))
+				: accessors[0] + accessorToObjectAccess(accessors.slice(1, idx + 1));
+			if (idx === accessors.length - 1) return a;
+			if (idx === 0 && base === undefined)
+				return `${a} = typeof ${a} === "object" ? ${a} : {}`;
 			return `${a} = ${a} || {}`;
 		})
-		.join(", ");
-}
+		.join(joinWith);
+};
+
+/** @typedef {string | string[] | LibraryCustomUmdObject} UmdMainTemplatePluginName */
+
+/**
+ * @typedef {Object} AuxiliaryCommentObject
+ * @property {string} root
+ * @property {string} commonjs
+ * @property {string} commonjs2
+ * @property {string} amd
+ */
+
+/**
+ * @typedef {Object} UmdMainTemplatePluginOption
+ * @property {boolean=} optionalAmdExternalAsGlobal
+ * @property {boolean} namedDefine
+ * @property {string | AuxiliaryCommentObject} auxiliaryComment
+ */
 
 class UmdMainTemplatePlugin {
+	/**
+	 * @param {UmdMainTemplatePluginName} name the name of the UMD library
+	 * @param {UmdMainTemplatePluginOption} options the plugin option
+	 */
 	constructor(name, options) {
 		if (typeof name === "object" && !Array.isArray(name)) {
 			this.name = name.root || name.amd || name.commonjs;
@@ -41,6 +78,10 @@ class UmdMainTemplatePlugin {
 		this.auxiliaryComment = options.auxiliaryComment;
 	}
 
+	/**
+	 * @param {Compilation} compilation the compilation instance
+	 * @returns {void}
+	 */
 	apply(compilation) {
 		const { mainTemplate, chunkTemplate, runtimeTemplate } = compilation;
 
@@ -67,14 +108,14 @@ class UmdMainTemplatePlugin {
 				requiredExternals = externals;
 			}
 
-			function replaceKeys(str) {
+			const replaceKeys = str => {
 				return mainTemplate.getAssetPath(str, {
 					hash,
 					chunk
 				});
-			}
+			};
 
-			function externalsDepsArray(modules) {
+			const externalsDepsArray = modules => {
 				return `[${replaceKeys(
 					modules
 						.map(m =>
@@ -84,9 +125,9 @@ class UmdMainTemplatePlugin {
 						)
 						.join(", ")
 				)}]`;
-			}
+			};
 
-			function externalsRootArray(modules) {
+			const externalsRootArray = modules => {
 				return replaceKeys(
 					modules
 						.map(m => {
@@ -96,47 +137,50 @@ class UmdMainTemplatePlugin {
 						})
 						.join(", ")
 				);
-			}
+			};
 
-			function externalsRequireArray(type) {
+			const externalsRequireArray = type => {
 				return replaceKeys(
 					externals
 						.map(m => {
 							let expr;
 							let request = m.request;
-							if (typeof request === "object") request = request[type];
-							if (typeof request === "undefined")
+							if (typeof request === "object") {
+								request = request[type];
+							}
+							if (request === undefined) {
 								throw new Error(
 									"Missing external configuration for type:" + type
 								);
+							}
 							if (Array.isArray(request)) {
 								expr = `require(${JSON.stringify(
 									request[0]
 								)})${accessorToObjectAccess(request.slice(1))}`;
-							} else expr = `require(${JSON.stringify(request)})`;
+							} else {
+								expr = `require(${JSON.stringify(request)})`;
+							}
 							if (m.optional) {
-								expr = `(function webpackLoadOptionalExternalModule() { try { return ${
-									expr
-								}; } catch(e) {} }())`;
+								expr = `(function webpackLoadOptionalExternalModule() { try { return ${expr}; } catch(e) {} }())`;
 							}
 							return expr;
 						})
 						.join(", ")
 				);
-			}
+			};
 
-			function externalsArguments(modules) {
+			const externalsArguments = modules => {
 				return modules
 					.map(
 						m =>
 							`__WEBPACK_EXTERNAL_MODULE_${Template.toIdentifier(`${m.id}`)}__`
 					)
 					.join(", ");
-			}
+			};
 
-			function libraryName(library) {
+			const libraryName = library => {
 				return JSON.stringify(replaceKeys([].concat(library).pop()));
-			}
+			};
 
 			let amdFactory;
 			if (optionalExternals.length > 0) {
@@ -144,95 +188,87 @@ class UmdMainTemplatePlugin {
 				const factoryArguments =
 					requiredExternals.length > 0
 						? externalsArguments(requiredExternals) +
-							", " +
-							externalsRootArray(optionalExternals)
+						  ", " +
+						  externalsRootArray(optionalExternals)
 						: externalsRootArray(optionalExternals);
 				amdFactory =
-					`function webpackLoadOptionalExternalModuleAmd(${
-						wrapperArguments
-					}) {\n` +
+					`function webpackLoadOptionalExternalModuleAmd(${wrapperArguments}) {\n` +
 					`			return factory(${factoryArguments});\n` +
 					"		}";
 			} else {
 				amdFactory = "factory";
 			}
 
+			const auxiliaryComment = this.auxiliaryComment;
+
+			const getAuxilaryComment = type => {
+				if (auxiliaryComment) {
+					if (typeof auxiliaryComment === "string")
+						return "\t//" + auxiliaryComment + "\n";
+					if (auxiliaryComment[type])
+						return "\t//" + auxiliaryComment[type] + "\n";
+				}
+				return "";
+			};
+
 			return new ConcatSource(
 				new OriginalSource(
 					"(function webpackUniversalModuleDefinition(root, factory) {\n" +
-						(this.auxiliaryComment && typeof this.auxiliaryComment === "string"
-							? "	//" + this.auxiliaryComment + "\n"
-							: this.auxiliaryComment.commonjs2
-								? "	//" + this.auxiliaryComment.commonjs2 + "\n"
-								: "") +
+						getAuxilaryComment("commonjs2") +
 						"	if(typeof exports === 'object' && typeof module === 'object')\n" +
 						"		module.exports = factory(" +
 						externalsRequireArray("commonjs2") +
 						");\n" +
-						(this.auxiliaryComment && typeof this.auxiliaryComment === "string"
-							? "	//" + this.auxiliaryComment + "\n"
-							: this.auxiliaryComment.amd
-								? "	//" + this.auxiliaryComment.amd + "\n"
-								: "") +
+						getAuxilaryComment("amd") +
 						"	else if(typeof define === 'function' && define.amd)\n" +
 						(requiredExternals.length > 0
 							? this.names.amd && this.namedDefine === true
 								? "		define(" +
-									libraryName(this.names.amd) +
-									", " +
-									externalsDepsArray(requiredExternals) +
-									", " +
-									amdFactory +
-									");\n"
+								  libraryName(this.names.amd) +
+								  ", " +
+								  externalsDepsArray(requiredExternals) +
+								  ", " +
+								  amdFactory +
+								  ");\n"
 								: "		define(" +
-									externalsDepsArray(requiredExternals) +
-									", " +
-									amdFactory +
-									");\n"
+								  externalsDepsArray(requiredExternals) +
+								  ", " +
+								  amdFactory +
+								  ");\n"
 							: this.names.amd && this.namedDefine === true
-								? "		define(" +
-									libraryName(this.names.amd) +
-									", [], " +
-									amdFactory +
-									");\n"
-								: "		define([], " + amdFactory + ");\n") +
+							? "		define(" +
+							  libraryName(this.names.amd) +
+							  ", [], " +
+							  amdFactory +
+							  ");\n"
+							: "		define([], " + amdFactory + ");\n") +
 						(this.names.root || this.names.commonjs
-							? (this.auxiliaryComment &&
-								typeof this.auxiliaryComment === "string"
-									? "	//" + this.auxiliaryComment + "\n"
-									: this.auxiliaryComment.commonjs
-										? "	//" + this.auxiliaryComment.commonjs + "\n"
-										: "") +
-								"	else if(typeof exports === 'object')\n" +
-								"		exports[" +
-								libraryName(this.names.commonjs || this.names.root) +
-								"] = factory(" +
-								externalsRequireArray("commonjs") +
-								");\n" +
-								(this.auxiliaryComment &&
-								typeof this.auxiliaryComment === "string"
-									? "	//" + this.auxiliaryComment + "\n"
-									: this.auxiliaryComment.root
-										? "	//" + this.auxiliaryComment.root + "\n"
-										: "") +
-								"	else\n" +
-								"		" +
-								replaceKeys(
+							? getAuxilaryComment("commonjs") +
+							  "	else if(typeof exports === 'object')\n" +
+							  "		exports[" +
+							  libraryName(this.names.commonjs || this.names.root) +
+							  "] = factory(" +
+							  externalsRequireArray("commonjs") +
+							  ");\n" +
+							  getAuxilaryComment("root") +
+							  "	else\n" +
+							  "		" +
+							  replaceKeys(
 									accessorAccess("root", this.names.root || this.names.commonjs)
-								) +
-								" = factory(" +
-								externalsRootArray(externals) +
-								");\n"
+							  ) +
+							  " = factory(" +
+							  externalsRootArray(externals) +
+							  ");\n"
 							: "	else {\n" +
-								(externals.length > 0
+							  (externals.length > 0
 									? "		var a = typeof exports === 'object' ? factory(" +
-										externalsRequireArray("commonjs") +
-										") : factory(" +
-										externalsRootArray(externals) +
-										");\n"
+									  externalsRequireArray("commonjs") +
+									  ") : factory(" +
+									  externalsRootArray(externals) +
+									  ");\n"
 									: "		var a = factory();\n") +
-								"		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];\n" +
-								"	}\n") +
+							  "		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];\n" +
+							  "	}\n") +
 						`})(${
 							runtimeTemplate.outputOptions.globalObject
 						}, function(${externalsArguments(externals)}) {\nreturn `,

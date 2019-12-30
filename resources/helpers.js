@@ -34,9 +34,9 @@ const prependRecentActivity = (payload) => {
             if (err) throw err;
         });
     }
-    const data = fs.readFileSync('/scratch/recent_activity')
+    const data = fs.readFileSync('/scratch/recent_activity');
     const fd = fs.openSync('/scratch/recent_activity', 'w+');
-    const insert = new Buffer(payload + "\n")
+    const insert = new Buffer(payload + "\n"); // TODO: use safer Buffer api
     fs.writeSync(fd, insert, 0, insert.length, 0);
     fs.writeSync(fd, data, 0, data.length, insert.length);
     fs.close(fd, (err) => {

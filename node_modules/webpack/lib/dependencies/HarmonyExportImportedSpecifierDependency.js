@@ -3,8 +3,38 @@
 	Author Tobias Koppers @sokra
 */
 "use strict";
+
+const DependencyReference = require("./DependencyReference");
 const HarmonyImportDependency = require("./HarmonyImportDependency");
 const Template = require("../Template");
+const HarmonyLinkingError = require("../HarmonyLinkingError");
+
+/** @typedef {import("../Module")} Module */
+
+/** @typedef {"missing"|"unused"|"empty-star"|"reexport-non-harmony-default"|"reexport-named-default"|"reexport-namespace-object"|"reexport-non-harmony-default-strict"|"reexport-fake-namespace-object"|"rexport-non-harmony-undefined"|"safe-reexport"|"checked-reexport"|"dynamic-reexport"} ExportModeType */
+
+/** @type {Map<string, string>} */
+const EMPTY_MAP = new Map();
+
+class ExportMode {
+	/**
+	 * @param {ExportModeType} type type of the mode
+	 */
+	constructor(type) {
+		/** @type {ExportModeType} */
+		this.type = type;
+		/** @type {string|null} */
+		this.name = null;
+		/** @type {Map<string, string>} */
+		this.map = EMPTY_MAP;
+		/** @type {Module|null} */
+		this.module = null;
+		/** @type {string|null} */
+		this.userRequest = null;
+	}
+}
+
+const EMPTY_STAR_MODE = new ExportMode("empty-star");
 
 class HarmonyExportImportedSpecifierDependency extends HarmonyImportDependency {
 	constructor(
@@ -20,6 +50,7 @@ class HarmonyExportImportedSpecifierDependency extends HarmonyImportDependency {
 	) {
 		super(request, originModule, sourceOrder, parserScope);
 		this.id = id;
+		this.redirectedId = undefined;
 		this.name = name;
 		this.activeExports = activeExports;
 		this.otherStarExports = otherStarExports;
@@ -30,80 +61,75 @@ class HarmonyExportImportedSpecifierDependency extends HarmonyImportDependency {
 		return "harmony export imported specifier";
 	}
 
+	get _id() {
+		return this.redirectedId || this.id;
+	}
+
 	getMode(ignoreUnused) {
 		const name = this.name;
-		const id = this.id;
+		const id = this._id;
 		const used = this.originModule.isUsed(name);
-		const importedModule = this.module;
+		const importedModule = this._module;
 
 		if (!importedModule) {
-			return {
-				type: "missing",
-				userRequest: this.userRequest
-			};
+			const mode = new ExportMode("missing");
+			mode.userRequest = this.userRequest;
+			return mode;
 		}
 
 		if (
 			!ignoreUnused &&
 			(name ? !used : this.originModule.usedExports === false)
 		) {
-			return {
-				type: "unused",
-				name: name || "*"
-			};
+			const mode = new ExportMode("unused");
+			mode.name = name || "*";
+			return mode;
+		}
+
+		const strictHarmonyModule = this.originModule.buildMeta.strictHarmonyModule;
+		if (name && id === "default" && importedModule.buildMeta) {
+			if (!importedModule.buildMeta.exportsType) {
+				const mode = new ExportMode(
+					strictHarmonyModule
+						? "reexport-non-harmony-default-strict"
+						: "reexport-non-harmony-default"
+				);
+				mode.name = name;
+				mode.module = importedModule;
+				return mode;
+			} else if (importedModule.buildMeta.exportsType === "named") {
+				const mode = new ExportMode("reexport-named-default");
+				mode.name = name;
+				mode.module = importedModule;
+				return mode;
+			}
 		}
 
 		const isNotAHarmonyModule =
 			importedModule.buildMeta && !importedModule.buildMeta.exportsType;
-		const strictHarmonyModule = this.originModule.buildMeta.strictHarmonyModule;
-		if (name && id === "default" && isNotAHarmonyModule) {
-			if (strictHarmonyModule) {
-				return {
-					type: "reexport-non-harmony-default-strict",
-					module: importedModule,
-					name
-				};
-			} else {
-				return {
-					type: "reexport-non-harmony-default",
-					module: importedModule,
-					name
-				};
-			}
-		}
-
 		if (name) {
-			// export { name as name }
+			let mode;
 			if (id) {
+				// export { name as name }
 				if (isNotAHarmonyModule && strictHarmonyModule) {
-					return {
-						type: "rexport-non-harmony-undefined",
-						module: importedModule,
-						name
-					};
+					mode = new ExportMode("rexport-non-harmony-undefined");
+					mode.name = name;
 				} else {
-					return {
-						type: "safe-reexport",
-						module: importedModule,
-						map: new Map([[name, id]])
-					};
+					mode = new ExportMode("safe-reexport");
+					mode.map = new Map([[name, id]]);
+				}
+			} else {
+				// export { * as name }
+				if (isNotAHarmonyModule && strictHarmonyModule) {
+					mode = new ExportMode("reexport-fake-namespace-object");
+					mode.name = name;
+				} else {
+					mode = new ExportMode("reexport-namespace-object");
+					mode.name = name;
 				}
 			}
-
-			// export { * as name }
-			if (isNotAHarmonyModule && strictHarmonyModule) {
-				return {
-					type: "reexport-fake-namespace-object",
-					module: importedModule,
-					name
-				};
-			} else {
-				return {
-					type: "reexport-namespace-object",
-					module: importedModule,
-					name
-				};
-			}
+			mode.module = importedModule;
+			return mode;
 		}
 
 		const hasUsedExports = Array.isArray(this.originModule.usedExports);
@@ -130,16 +156,13 @@ class HarmonyExportImportedSpecifierDependency extends HarmonyImportDependency {
 				);
 
 				if (map.size === 0) {
-					return {
-						type: "empty-star"
-					};
+					return EMPTY_STAR_MODE;
 				}
 
-				return {
-					type: "safe-reexport",
-					module: importedModule,
-					map
-				};
+				const mode = new ExportMode("safe-reexport");
+				mode.module = importedModule;
+				mode.map = map;
+				return mode;
 			}
 
 			const map = new Map(
@@ -155,16 +178,13 @@ class HarmonyExportImportedSpecifierDependency extends HarmonyImportDependency {
 			);
 
 			if (map.size === 0) {
-				return {
-					type: "empty-star"
-				};
+				return EMPTY_STAR_MODE;
 			}
 
-			return {
-				type: "checked-reexport",
-				module: importedModule,
-				map
-			};
+			const mode = new ExportMode("checked-reexport");
+			mode.module = importedModule;
+			mode.map = map;
+			return mode;
 		}
 
 		if (hasProvidedExports) {
@@ -181,26 +201,22 @@ class HarmonyExportImportedSpecifierDependency extends HarmonyImportDependency {
 			);
 
 			if (map.size === 0) {
-				return {
-					type: "empty-star"
-				};
+				return EMPTY_STAR_MODE;
 			}
 
-			return {
-				type: "safe-reexport",
-				module: importedModule,
-				map
-			};
+			const mode = new ExportMode("safe-reexport");
+			mode.module = importedModule;
+			mode.map = map;
+			return mode;
 		}
 
-		return {
-			type: "dynamic-reexport",
-			module: importedModule
-		};
+		const mode = new ExportMode("dynamic-reexport");
+		mode.module = importedModule;
+		return mode;
 	}
 
 	getReference() {
-		const mode = this.getMode();
+		const mode = this.getMode(false);
 
 		switch (mode.type) {
 			case "missing":
@@ -209,32 +225,41 @@ class HarmonyExportImportedSpecifierDependency extends HarmonyImportDependency {
 				return null;
 
 			case "reexport-non-harmony-default":
-				return {
-					module: mode.module,
-					importedNames: ["default"]
-				};
+			case "reexport-named-default":
+				return new DependencyReference(
+					mode.module,
+					["default"],
+					false,
+					this.sourceOrder
+				);
 
 			case "reexport-namespace-object":
 			case "reexport-non-harmony-default-strict":
 			case "reexport-fake-namespace-object":
 			case "rexport-non-harmony-undefined":
-				return {
-					module: mode.module,
-					importedNames: true
-				};
+				return new DependencyReference(
+					mode.module,
+					true,
+					false,
+					this.sourceOrder
+				);
 
 			case "safe-reexport":
 			case "checked-reexport":
-				return {
-					module: mode.module,
-					importedNames: Array.from(mode.map.values())
-				};
+				return new DependencyReference(
+					mode.module,
+					Array.from(mode.map.values()),
+					false,
+					this.sourceOrder
+				);
 
 			case "dynamic-reexport":
-				return {
-					module: mode.module,
-					importedNames: true
-				};
+				return new DependencyReference(
+					mode.module,
+					true,
+					false,
+					this.sourceOrder
+				);
 
 			default:
 				throw new Error(`Unknown mode ${mode.type}`);
@@ -246,13 +271,15 @@ class HarmonyExportImportedSpecifierDependency extends HarmonyImportDependency {
 		const result = new Set();
 		// try to learn impossible exports from other star exports with provided exports
 		for (const otherStarExport of this.otherStarExports) {
-			const otherImportedModule = otherStarExport.module;
+			const otherImportedModule = otherStarExport._module;
 			if (
 				otherImportedModule &&
 				Array.isArray(otherImportedModule.buildMeta.providedExports)
 			) {
-				for (const exportName of otherImportedModule.buildMeta.providedExports)
+				for (const exportName of otherImportedModule.buildMeta
+					.providedExports) {
 					result.add(exportName);
+				}
 			}
 		}
 		return result;
@@ -261,16 +288,18 @@ class HarmonyExportImportedSpecifierDependency extends HarmonyImportDependency {
 	getExports() {
 		if (this.name) {
 			return {
-				exports: [this.name]
+				exports: [this.name],
+				dependencies: undefined
 			};
 		}
 
-		const importedModule = this.module;
+		const importedModule = this._module;
 
 		if (!importedModule) {
 			// no imported module available
 			return {
-				exports: null
+				exports: null,
+				dependencies: undefined
 			};
 		}
 
@@ -285,7 +314,8 @@ class HarmonyExportImportedSpecifierDependency extends HarmonyImportDependency {
 
 		if (importedModule.buildMeta.providedExports) {
 			return {
-				exports: true
+				exports: true,
+				dependencies: undefined
 			};
 		}
 
@@ -316,7 +346,7 @@ class HarmonyExportImportedSpecifierDependency extends HarmonyImportDependency {
 	}
 
 	_getErrors() {
-		const importedModule = this.module;
+		const importedModule = this._module;
 		if (!importedModule) {
 			return;
 		}
@@ -325,46 +355,38 @@ class HarmonyExportImportedSpecifierDependency extends HarmonyImportDependency {
 			// It's not an harmony module
 			if (
 				this.originModule.buildMeta.strictHarmonyModule &&
-				this.id !== "default"
+				this._id &&
+				this._id !== "default"
 			) {
 				// In strict harmony modules we only support the default export
-				const exportName = this.id
-					? `the named export '${this.id}'`
-					: "the namespace object";
-				const err = new Error(
-					`Can't reexport ${
-						exportName
-					} from non EcmaScript module (only default export is available)`
-				);
-				err.hideStack = true;
-				return [err];
+				return [
+					new HarmonyLinkingError(
+						`Can't reexport the named export '${this._id}' from non EcmaScript module (only default export is available)`
+					)
+				];
 			}
 			return;
 		}
 
-		if (!this.id) {
+		if (!this._id) {
 			return;
 		}
 
-		if (importedModule.isProvided(this.id) !== false) {
+		if (importedModule.isProvided(this._id) !== false) {
 			// It's provided or we are not sure
 			return;
 		}
 
 		// We are sure that it's not provided
 		const idIsNotNameMessage =
-			this.id !== this.name ? ` (reexported as '${this.name}')` : "";
-		const errorMessage = `"export '${this.id}'${
-			idIsNotNameMessage
-		} was not found in '${this.userRequest}'`;
-		const err = new Error(errorMessage);
-		err.hideStack = true;
-		return [err];
+			this._id !== this.name ? ` (reexported as '${this.name}')` : "";
+		const errorMessage = `"export '${this._id}'${idIsNotNameMessage} was not found in '${this.userRequest}'`;
+		return [new HarmonyLinkingError(errorMessage)];
 	}
 
 	updateHash(hash) {
 		super.updateHash(hash);
-		const hashValue = this.getHashValue(this.module);
+		const hashValue = this.getHashValue(this._module);
 		hash.update(hashValue);
 	}
 
@@ -380,6 +402,11 @@ class HarmonyExportImportedSpecifierDependency extends HarmonyImportDependency {
 		return (
 			importedModule.used + stringifiedUsedExport + stringifiedProvidedExport
 		);
+	}
+
+	disconnect() {
+		super.disconnect();
+		this.redirectedId = undefined;
 	}
 }
 
@@ -397,7 +424,7 @@ HarmonyExportImportedSpecifierDependency.Template = class HarmonyExportImportedS
 			const used = dep.originModule.isUsed(dep.name);
 			if (!used) return NaN;
 		} else {
-			const importedModule = dep.module;
+			const importedModule = dep._module;
 
 			const activeFromOtherStarExports = dep._discoverActiveExportsFromOtherStartExports();
 
@@ -432,9 +459,9 @@ HarmonyExportImportedSpecifierDependency.Template = class HarmonyExportImportedS
 	}
 
 	getContent(dep) {
-		const mode = dep.getMode();
+		const mode = dep.getMode(false);
 		const module = dep.originModule;
-		const importedModule = dep.module;
+		const importedModule = dep._module;
 		const importVar = dep.getImportVar();
 
 		switch (mode.type) {
@@ -456,6 +483,17 @@ HarmonyExportImportedSpecifierDependency.Template = class HarmonyExportImportedS
 						module.isUsed(mode.name),
 						importVar,
 						null
+					)
+				);
+
+			case "reexport-named-default":
+				return (
+					"/* harmony reexport (default from named exports) */ " +
+					this.getReexportStatement(
+						module,
+						module.isUsed(mode.name),
+						importVar,
+						""
 					)
 				);
 
@@ -549,20 +587,18 @@ HarmonyExportImportedSpecifierDependency.Template = class HarmonyExportImportedS
 
 				// Filter out exports which are defined by other exports
 				// and filter out default export because it cannot be reexported with *
-				if (activeExports.length > 0)
+				if (activeExports.size > 0) {
 					content +=
 						"if(" +
-						JSON.stringify(activeExports.concat("default")) +
+						JSON.stringify(Array.from(activeExports).concat("default")) +
 						".indexOf(__WEBPACK_IMPORT_KEY__) < 0) ";
-				else content += "if(__WEBPACK_IMPORT_KEY__ !== 'default') ";
+				} else {
+					content += "if(__WEBPACK_IMPORT_KEY__ !== 'default') ";
+				}
 				const exportsName = dep.originModule.exportsArgument;
 				return (
 					content +
-					`(function(key) { __webpack_require__.d(${
-						exportsName
-					}, key, function() { return ${
-						importVar
-					}[key]; }) }(__WEBPACK_IMPORT_KEY__));\n`
+					`(function(key) { __webpack_require__.d(${exportsName}, key, function() { return ${importVar}[key]; }) }(__WEBPACK_IMPORT_KEY__));\n`
 				);
 			}
 
@@ -573,34 +609,43 @@ HarmonyExportImportedSpecifierDependency.Template = class HarmonyExportImportedS
 
 	getReexportStatement(module, key, name, valueKey) {
 		const exportsName = module.exportsArgument;
-		const returnValue = this.getReturnValue(valueKey);
+		const returnValue = this.getReturnValue(name, valueKey);
 		return `__webpack_require__.d(${exportsName}, ${JSON.stringify(
 			key
-		)}, function() { return ${name}${returnValue}; });\n`;
+		)}, function() { return ${returnValue}; });\n`;
 	}
 
 	getReexportFakeNamespaceObjectStatement(module, key, name) {
 		const exportsName = module.exportsArgument;
 		return `__webpack_require__.d(${exportsName}, ${JSON.stringify(
 			key
-		)}, function() { return { "default": ${name} }; });\n`;
+		)}, function() { return __webpack_require__.t(${name}); });\n`;
 	}
 
 	getConditionalReexportStatement(module, key, name, valueKey) {
+		if (valueKey === false) {
+			return "/* unused export */\n";
+		}
 		const exportsName = module.exportsArgument;
-		const returnValue = this.getReturnValue(valueKey);
+		const returnValue = this.getReturnValue(name, valueKey);
 		return `if(__webpack_require__.o(${name}, ${JSON.stringify(
 			valueKey
 		)})) __webpack_require__.d(${exportsName}, ${JSON.stringify(
 			key
-		)}, function() { return ${name}${returnValue}; });\n`;
+		)}, function() { return ${returnValue}; });\n`;
 	}
 
-	getReturnValue(valueKey) {
+	getReturnValue(name, valueKey) {
 		if (valueKey === null) {
-			return "_default.a";
+			return `${name}_default.a`;
+		}
+		if (valueKey === "") {
+			return name;
+		}
+		if (valueKey === false) {
+			return "/* unused export */ undefined";
 		}
 
-		return valueKey && "[" + JSON.stringify(valueKey) + "]";
+		return `${name}[${JSON.stringify(valueKey)}]`;
 	}
 };

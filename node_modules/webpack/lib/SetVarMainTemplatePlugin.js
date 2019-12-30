@@ -4,14 +4,26 @@
 */
 "use strict";
 
-const ConcatSource = require("webpack-sources").ConcatSource;
+const { ConcatSource } = require("webpack-sources");
+
+/** @typedef {import("./Compilation")} Compilation */
 
 class SetVarMainTemplatePlugin {
+	/**
+	 * @param {string} varExpression the accessor where the library is exported
+	 * @param {boolean} copyObject specify copying the exports
+	 */
 	constructor(varExpression, copyObject) {
+		/** @type {string} */
 		this.varExpression = varExpression;
+		/** @type {boolean} */
 		this.copyObject = copyObject;
 	}
 
+	/**
+	 * @param {Compilation} compilation the compilation instance
+	 * @returns {void}
+	 */
 	apply(compilation) {
 		const { mainTemplate, chunkTemplate } = compilation;
 

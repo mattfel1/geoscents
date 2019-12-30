@@ -86,8 +86,8 @@ class Room {
 
     renamePlayer(socket, name, color) {
         if (this.players.has(socket.id)) {
-            if (name != '') this.players.get(socket.id).name = name;
-            if (color != 'random') this.players.get(socket.id).color = color;
+            if (name !== '') this.players.get(socket.id).name = name;
+            if (color !== 'random') this.players.get(socket.id).color = color;
             this.players.get(socket.id).choseName = true;
         }
       this.drawScorePanel(socket.id);
@@ -177,14 +177,14 @@ class Room {
     playerClicked(socket, playerClick) {
       if (this.players.has(socket.id)) {
           const player = this.players.get(socket.id);
-          if (playerClick.downCount < CONSTANTS.SCROLL_THRESHOLD && playerClick.mouseDown && this.state == CONSTANTS.GUESS_STATE && !player.clicked) {
+          if (playerClick.downCount < CONSTANTS.SCROLL_THRESHOLD && playerClick.mouseDown && this.state === CONSTANTS.GUESS_STATE && !player.clicked) {
               if (playerClick.cursorX < CONSTANTS.MAP_WIDTH && playerClick.cursorY < CONSTANTS.MAP_HEIGHT) {
                   player.clicked = true;
                   player.consecutiveRoundsInactive = 0;
                   player.row = playerClick.cursorY;
                   player.col = playerClick.cursorX;
                   player.clickedAt = this.timer;
-                  var geo = Geography.mercToGeo(player.row, player.col)
+                  var geo = Geography.mercToGeo(player.room, player.row, player.col);
                   player.lat = geo['lat'];
                   player.lon = geo['lon'];
                   // console.log('click at ' + player.row + ',' + player.col + ' (' + player.lat + ',' + player.lon + ')')
@@ -212,9 +212,9 @@ class Room {
         dict['recordBroken' + position] = true;
         player.giveMedal(position, category);
         var medal = '';
-        if (position == 1) medal = '🥇';
-        else if (position == 2) medal = '🥈';
-        else if (position == 3) medal = '🥉';
+        if (position === 1) medal = '🥇';
+        else if (position === 2) medal = '🥈';
+        else if (position === 3) medal = '🥉';
         if (this.clients.has(player.id)) {
             this.clients.get(player.id).emit("announce record", category, room, medal, player.name, player.score, player.color);
         }
@@ -264,7 +264,6 @@ class Room {
         const insertRecord = (p,c,d,r,pl) => {return this.insertRecord(p,c,d,r,pl)};
         const sufx = ["st", "nd", "rd"];
         const room = this.room;
-        const appendActivity = (update) => {this.appendActivity(update)};
         Array.from(this.sortPlayers()).forEach((player, id) => {
             var allStr =  "";
             var monStr = "";
@@ -286,7 +285,7 @@ class Room {
                 allStr = "<b>" + (getPosition(player.score,allRecord)) + sufx[(getPosition(player.score,allRecord)-1)] + "</b>" + " all time"
                 allRecord = copy(insertRecord(getPosition(player.score,allRecord), "all-time", copy(allRecord), room, player));
             }
-            if (dayStr != "" || wkStr != "" || monStr != "" || allStr != "") {
+            if (dayStr !== "" || wkStr !== "" || monStr !== "" || allStr !== "") {
                 const monthNames = ["Jan", "Feb", "Mar","Apr", "May", "Jun","Jul", "Aug", "Sep","Oct", "Nov", "Dec"];
                 const date = new Date();
                 const utcDate = new Date(date.toUTCString());
@@ -297,11 +296,11 @@ class Room {
                 const hour = time.getHours();
                 const minute = time.getMinutes();
                 var c1 = "";
-                if (allStr != "" && (monStr != "" | (monStr == "" && wkStr != "") || (monStr == "" && wkStr == "" && dayStr != ""))) c1 = ", ";
+                if (allStr !== "" && (monStr !== "" | (monStr === "" && wkStr !== "") || (monStr === "" && wkStr === "" && dayStr !== ""))) c1 = ", ";
                 var c2 = "";
-                if (monStr != "" && (wkStr != "" | (wkStr == "" && dayStr != ""))) c2 = ", ";
+                if (monStr !== "" && (wkStr !== "" | (wkStr === "" && dayStr !== ""))) c2 = ", ";
                 var c3 = "";
-                if (wkStr != "" && (dayStr != "")) c3 = ", ";
+                if (wkStr !== "" && (dayStr !== "")) c3 = ", ";
                 const payload = "- " + month + day + " (" + room + ") <font color=" + player.color + ">" + player.name + "</font> placed " + allStr + c1 + monStr + c2 + wkStr + c3 + dayStr;
                 helpers.prependRecentActivity(payload)
             }
@@ -318,7 +317,7 @@ class Room {
     }
 
     printScoresWithSelf(socket, socketId) {
-        if (this.room != CONSTANTS.LOBBY) {
+        if (this.room !== CONSTANTS.LOBBY) {
             socket.emit('post group', 'All-Time Records:', this.allRecord);
             socket.emit('post group', 'Monthly Records:', this.monthRecord);
             socket.emit('post group', 'Weekly Records:', this.weekRecord);
@@ -331,7 +330,7 @@ class Room {
         const sortedPlayers = this.sortPlayers();
         Array.from(sortedPlayers.values()).forEach(function(player, index) {
           var you = '';
-          if (player.id == socketId) {
+          if (player.id === socketId) {
               you = '*';
           }
           if (player.choseName) socket.emit('post score', player.rank, you + player.getName(), player.color, player.score, player.wins);
@@ -344,18 +343,18 @@ class Room {
 
     stringifyTarget(){
         var state = ''
-        if (this.target['country'] == 'United States' || this.target['country'] == 'USA' || this.target['country'] == 'Canada' || this.target['country'] == 'Mexico' || this.target['country'] == 'India' || this.target['country'] == 'China') {
+        if (this.target['country'] === 'United States' || this.target['country'] === 'USA' || this.target['country'] === 'Canada' || this.target['country'] === 'Mexico' || this.target['country'] === 'India' || this.target['country'] === 'China') {
             state = ', ' + this.target['admin_name'];
         }
         var pop = 0;
-        if (this.target['population'] != '') {
+        if (this.target['population'] !== '') {
             pop = this.target['population'];
         }
         return {
             'string': this.target['name'] + state + ', ' + this.target['country'],
             'pop': pop,
-            'majorcapital': this.target['capital'] == "primary",
-            'minorcapital': this.target['capital'] == 'admin' || this.target['capital'] == 'minor'
+            'majorcapital': this.target['capital'] === "primary",
+            'minorcapital': this.target['capital'] === 'admin' || this.target['capital'] === 'minor'
         }
     }
     updateHistory(player, round, score) {
@@ -377,42 +376,46 @@ class Room {
       const room = this.room;
       const round = this.round;
       const updateHistory = (p,r,s) => this.updateHistory(p,r,s);
-      const historyScore = (player, payload) => {this.historyScore(player, payload)}
+      const historyScore = (player, payload) => {this.historyScore(player, payload)};
       Array.from(this.players.values()).forEach(function(player) {
-          const timeBonus = player.clickedAt;
           const merc = Geography.geoToMerc(room,parseFloat(target['lat']), parseFloat(target['lon']));
-          var dist = Geography.mercDist(room, player.row, player.col, merc['row'], merc['col']);
-          if (!player.clicked || isNaN(dist)) {
-              dist = 9999;
+          player.geoError = Geography.geoDist(room, player.lat, player.lon, parseFloat(target['lat']), parseFloat(target['lon']));
+          player.mercError = Geography.mercDist(room, player.row, player.col, merc['row'], merc['col']);
+          if (!player.clicked || isNaN(player.mercError)) {
+              player.mercError = 9999;
+              player.geoError = 999999;
           }
-          const timeLogistic = CONSTANTS.LOGISTIC_C3/(2+Math.exp(CONSTANTS.LOGISTIC_C1*(-timeBonus+CONSTANTS.LOGISTIC_C2)))+CONSTANTS.LOGISTIC_C4;
-          const distGaussian = Math.exp(-Math.pow(dist, 2) / CONSTANTS.GAUSS_C1) * CONSTANTS.MULTIPLIER;
-          const update = distGaussian * timeLogistic;
+          const update = Geography.score(room, player.geoError, player.mercError, player.clickedAt);
           const newScore = Math.floor(player.score + update);
-          historyScore(player, " + " + Math.floor(update ) + " (Distance: " + Math.floor(dist) + ", Time Bonus: " + (Math.floor(timeBonus * 10) / 10) + "s)")
+          var playerScoreLine = " + " + Math.floor(update ) + " points (Distance: " + Math.floor(player.geoError) + " km, Time Bonus: " + (Math.floor(player.clickedAt * 10) / 10) + "s)";
+          if (player.geoError === 999999) {
+              playerScoreLine = " (Did not guess)";
+          }
+          historyScore(player, playerScoreLine);
           player.score = newScore;
           updateHistory(player, round, newScore);
         })
-      this.historyRound(this.round, this.stringifyTarget())
+      this.historyRound(this.round + 1, this.stringifyTarget())
     }
 
-    broadcastPoint(row, col, color, radius) {
-      this.clients.forEach(function(s,id) {
-          s.emit('draw point', {'row': row, 'col': col}, color, radius)
-      });
+    static broadcastPoint(socket, row, col, color, radius, distance) {
+      if (distance < 999999) {
+          socket.emit('draw point', {'row': row, 'col': col}, color, radius)
+          socket.emit('draw dist', {'row': row, 'col': col}, color, distance)
+      }
     }
 
-    broadcastAnswer(row, col) {
-      this.clients.forEach(function(s,id) {
-          s.emit('draw answer', {'row': row, 'col': col})
-      });
+    static broadcastAnswer(socket, row, col) {
+      // this.clients.forEach(function(s,id) {
+      socket.emit('draw answer', {'row': row, 'col': col})
+      // });
     }
 
-    revealAll() {
-        var answer = Geography.geoToMerc(this.room,this.target['lat'], this.target['lon']);
-        this.broadcastAnswer(answer['row'], answer['col']);
+    revealAll(socket) {
+        const answer = Geography.geoToMerc(this.room, this.target['lat'], this.target['lon']);
+        Room.broadcastAnswer(socket, answer['row'], answer['col']);
         this.players.forEach((player,id) => {
-            this.broadcastPoint(player.row, player.col, player.color, player.radius());
+            Room.broadcastPoint(socket, player.row, player.col, player.color, player.radius(), player.geoError);
         });
     }
 
@@ -441,7 +444,7 @@ class Room {
     }
 
     allPlayersClicked() {
-        return this.players.size > 0 && Array.from(this.players.values()).filter(player => !player.clicked).length == 0
+        return this.players.size > 0 && Array.from(this.players.values()).filter(player => !player.clicked).length === 0
     }
 
     numPlayers() {
@@ -449,7 +452,7 @@ class Room {
     }
 
     allReady() {
-      return this.players.size > 0 && Array.from(this.players.values()).filter(player => !player.ready).length == 0
+      return this.players.size > 0 && Array.from(this.players.values()).filter(player => !player.ready).length === 0
     }
 
     onSecond(fcn) {
@@ -459,35 +462,36 @@ class Room {
     }
 
     drawCommand(socket) {
-          const room = this.room;
-          const round = this.round;
-          if (this.state == CONSTANTS.PREPARE_GAME_STATE) {
-             socket.emit('fresh map', room);
-             socket.emit('draw prepare', round);
-          }
-          else if (this.state == CONSTANTS.BEGIN_GAME_STATE) {
-             socket.emit('play begin sound', room);
-             socket.emit('draw begin', round);
-          }
-          else if (this.state == CONSTANTS.GUESS_STATE) {
-             const thisTarget = this.stringifyTarget();
-             const citystring = thisTarget['string'];
-             var capital = "";
-             if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
-             if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
-             socket.emit('fresh map', room);
-             socket.emit('draw guess city', citystring, capital, round);
-          }
-          else if (this.state == CONSTANTS.REVEAL_STATE) {
-             const thisTarget = this.stringifyTarget();
-             const citystring = thisTarget['string'];
-             var capital = "";
-             if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
-             if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
-             socket.emit('fresh map', room);
-             socket.emit('draw reveal city', citystring, capital, round);
-             this.revealAll();
-          }
+        let capital;
+        const room = this.room;
+        const round = this.round;
+        if (this.state === CONSTANTS.PREPARE_GAME_STATE) {
+            socket.emit('fresh map', room);
+            socket.emit('draw prepare', round);
+        } else if (this.state === CONSTANTS.BEGIN_GAME_STATE) {
+            socket.emit('fresh map', room);
+            socket.emit('play begin sound', room);
+            socket.emit('draw begin', round);
+        } else if (this.state === CONSTANTS.GUESS_STATE) {
+            const thisTarget = this.stringifyTarget();
+            const citystring = thisTarget['string'];
+            const iso2 = this.target['iso2']
+            capital = "";
+            if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
+            if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
+            socket.emit('fresh map', room);
+            socket.emit('draw guess city', citystring, capital, iso2, round);
+        } else if (this.state === CONSTANTS.REVEAL_STATE) {
+            const thisTarget = this.stringifyTarget();
+            const citystring = thisTarget['string'];
+            const iso2 = this.target['iso2']
+            capital = "";
+            if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
+            if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
+            socket.emit('fresh map', room);
+            socket.emit('draw reveal city', citystring, capital, iso2, round);
+            this.revealAll(socket);
+        }
     }
     stateTransition(toState, toDuration) {
       this.state = toState;
@@ -514,7 +518,7 @@ class Room {
     fsm() {
       // Game flow state machine
       this.decrementTimer();
-      if (this.room == CONSTANTS.LOBBY) {
+      if (this.room === CONSTANTS.LOBBY) {
           this.timerColor = CONSTANTS.LOBBY_COLOR;
           this.state = CONSTANTS.LOBBY_STATE;
           this.clients.forEach(function (socket, id) {
@@ -525,19 +529,19 @@ class Room {
           this.bootInactive();
       }
       else {
-          if (this.numPlayers() == 0 && this.room != CONSTANTS.LOBBY) {
+          if (this.numPlayers() === 0 && this.room !== CONSTANTS.LOBBY) {
               this.timerColor = CONSTANTS.LOBBY_COLOR;
               this.state = CONSTANTS.IDLE_STATE;
               this.removePoppers();
-          } else if (this.numPlayers() > 0 && this.state == CONSTANTS.IDLE_STATE) {
+          } else if (this.numPlayers() > 0 && this.state === CONSTANTS.IDLE_STATE) {
               this.timerColor = CONSTANTS.LOBBY_COLOR;
               this.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
               this.round = 0;
-          } else if (this.state == CONSTANTS.BEGIN_GAME_STATE) {
+          } else if (this.state === CONSTANTS.BEGIN_GAME_STATE) {
               if (this.timer <= 0) {
                   this.stateTransition(CONSTANTS.SETUP_STATE, 0);
               }
-          } else if (this.state == CONSTANTS.PREPARE_GAME_STATE) {
+          } else if (this.state === CONSTANTS.PREPARE_GAME_STATE) {
               if (this.allReady() || this.timer <= 0) {
                   this.timerColor = CONSTANTS.BEGIN_COLOR;
                   this.blacklist = [];
@@ -546,9 +550,9 @@ class Room {
                   this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, CONSTANTS.BEGIN_GAME_DURATION);
                   Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
               }
-          } else if (this.state == CONSTANTS.SETUP_STATE) {
+          } else if (this.state === CONSTANTS.SETUP_STATE) {
               this.target = Geography.randomCity(this.room, this.blacklist);
-              if (this.room == CONSTANTS.US) this.blacklist.push(this.target['admin_name']);
+              if (this.room === CONSTANTS.US) this.blacklist.push(this.target['admin_name']);
               else this.blacklist.push(this.target['country']);
               this.timerColor = CONSTANTS.GUESS_COLOR;
               Array.from(this.players.values()).forEach((p, id) => {
@@ -556,7 +560,7 @@ class Room {
               });
               this.playedCities[this.round] = this.target;
               this.stateTransition(CONSTANTS.GUESS_STATE, CONSTANTS.GUESS_DURATION);
-          } else if (this.state == CONSTANTS.GUESS_STATE) {
+          } else if (this.state === CONSTANTS.GUESS_STATE) {
               if (this.timer <= 0 || this.allPlayersClicked()) {
                   this.updateScores();
                   this.sortPlayers();
@@ -567,7 +571,7 @@ class Room {
                   this.stateTransition(CONSTANTS.REVEAL_STATE, CONSTANTS.REVEAL_DURATION);
                   this.timerColor = CONSTANTS.REVEAL_COLOR;
               }
-          } else if (this.state == CONSTANTS.REVEAL_STATE) {
+          } else if (this.state === CONSTANTS.REVEAL_STATE) {
               if (this.timer <= 0 && this.round >= CONSTANTS.GAME_ROUNDS) {
                   this.round = 0;
                   this.stateTransition(CONSTANTS.PREPARE_GAME_DURATION, CONSTANTS.PREPARE_GAME_DURATION);
@@ -599,7 +603,7 @@ class Room {
           var senderName = getname(senderSocket);
           if (this.players.has(id)) {
               const player = this.players.get(id);
-              if (player.id == senderSocket.id) senderName = "*" + senderName;
+              if (player.id === senderSocket.id) senderName = "*" + senderName;
           }
           const sent_msg = "[ " + room + " <font color='" + senderColor + "'>" + senderName + "</font> ]: " + new_sent_msg + "<br>";
           socket.emit("update messages", room, sent_msg);
@@ -617,12 +621,12 @@ class Room {
     }
     historyRound(round, thisTarget) {
         const room = this.room;
-        var star = ""
+        let star = "";
         if (thisTarget['majorcapital']) star = "*";
         if (thisTarget['minorcapital']) star = "†";
-        const base = "Round " + round + ": " + star + thisTarget['string'] + " (pop: " + thisTarget['pop'].toLocaleString() + ")";
+        const base = "<b>Round " + round + "</b>: " + star + thisTarget['string'] + " (pop: " + thisTarget['pop'].toLocaleString() + ")";
         var part2 = "%2C+" + this.target['country'];
-        if (this.target['country'] == "USA") part2 = "%2C+" + this.target['admin_name'];
+        if (this.target['country'] === "USA") part2 = "%2C+" + this.target['admin_name'];
         var link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + this.target['name'] + part2 + "&go=Go&ns0=1\">Learn!</a><br>"
         this.clients.forEach((socket,id) => {
             socket.emit('add history',  room, base + link);
@@ -633,8 +637,8 @@ class Room {
         const room = this.room;
         this.clients.forEach((socket,id) => {
             var name = player.name;
-            if (player.id == id) name = "*" + name;
-            socket.emit('add history', room, "<font color=\"" + player.color +"\">  " + name + ": " + score + "</font><br>")
+            if (player.id === id) name = "*" + name;
+            socket.emit('add history', room, "<font color=\"" + player.color +"\"><b>  " + name + "</b>: " + score + "</font><br>")
         });
     }
 

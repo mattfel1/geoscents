@@ -24,7 +24,9 @@ class WebWorkerMainTemplatePlugin {
 						"// object to store loaded chunks",
 						'// "1" means "already loaded"',
 						"var installedChunks = {",
-						Template.indent(chunk.ids.map(id => `${id}: 1`).join(",\n")),
+						Template.indent(
+							chunk.ids.map(id => `${JSON.stringify(id)}: 1`).join(",\n")
+						),
 						"};"
 					]);
 				}
@@ -35,6 +37,7 @@ class WebWorkerMainTemplatePlugin {
 			"WebWorkerMainTemplatePlugin",
 			(_, chunk, hash) => {
 				const chunkFilename = mainTemplate.outputOptions.chunkFilename;
+				const chunkMaps = chunk.getChunkMaps();
 				return Template.asString([
 					"promises.push(Promise.resolve().then(function() {",
 					Template.indent([
@@ -42,6 +45,7 @@ class WebWorkerMainTemplatePlugin {
 						"if(!installedChunks[chunkId]) {",
 						Template.indent([
 							"importScripts(" +
+								"__webpack_require__.p + " +
 								mainTemplate.getAssetPath(JSON.stringify(chunkFilename), {
 									hash: `" + ${mainTemplate.renderCurrentHashCode(hash)} + "`,
 									hashWithLength: length =>
@@ -50,8 +54,47 @@ class WebWorkerMainTemplatePlugin {
 											length
 										)} + "`,
 									chunk: {
-										id: '" + chunkId + "'
-									}
+										id: '" + chunkId + "',
+										hash: `" + ${JSON.stringify(chunkMaps.hash)}[chunkId] + "`,
+										hashWithLength(length) {
+											const shortChunkHashMap = Object.create(null);
+											for (const chunkId of Object.keys(chunkMaps.hash)) {
+												if (typeof chunkMaps.hash[chunkId] === "string") {
+													shortChunkHashMap[chunkId] = chunkMaps.hash[
+														chunkId
+													].substr(0, length);
+												}
+											}
+											return `" + ${JSON.stringify(
+												shortChunkHashMap
+											)}[chunkId] + "`;
+										},
+										contentHash: {
+											javascript: `" + ${JSON.stringify(
+												chunkMaps.contentHash.javascript
+											)}[chunkId] + "`
+										},
+										contentHashWithLength: {
+											javascript: length => {
+												const shortContentHashMap = {};
+												const contentHash = chunkMaps.contentHash.javascript;
+												for (const chunkId of Object.keys(contentHash)) {
+													if (typeof contentHash[chunkId] === "string") {
+														shortContentHashMap[chunkId] = contentHash[
+															chunkId
+														].substr(0, length);
+													}
+												}
+												return `" + ${JSON.stringify(
+													shortContentHashMap
+												)}[chunkId] + "`;
+											}
+										},
+										name: `" + (${JSON.stringify(
+											chunkMaps.name
+										)}[chunkId]||chunkId) + "`
+									},
+									contentHashType: "javascript"
 								}) +
 								");"
 						]),
@@ -130,7 +173,7 @@ class WebWorkerMainTemplatePlugin {
 					)}];\n` +
 					`${globalObject}[${JSON.stringify(hotUpdateFunction)}] = ` +
 					Template.getFunctionContent(
-						require("./WebWorkerMainTemplate.runtime.js")
+						require("./WebWorkerMainTemplate.runtime")
 					)
 						.replace(/\/\/\$semicolon/g, ";")
 						.replace(/\$require\$/g, mainTemplate.requireFn)
@@ -142,12 +185,7 @@ class WebWorkerMainTemplatePlugin {
 		);
 		mainTemplate.hooks.hash.tap("WebWorkerMainTemplatePlugin", hash => {
 			hash.update("webworker");
-			hash.update("3");
-			hash.update(`${mainTemplate.outputOptions.publicPath}`);
-			hash.update(`${mainTemplate.outputOptions.filename}`);
-			hash.update(`${mainTemplate.outputOptions.chunkFilename}`);
-			hash.update(`${mainTemplate.outputOptions.chunkCallbackName}`);
-			hash.update(`${mainTemplate.outputOptions.globalObject}`);
+			hash.update("4");
 		});
 	}
 }

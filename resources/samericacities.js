@@ -1964,32 +1964,6 @@ module.exports = {
     "id": 1604478712
   },
   {
-    "name": "Adamstown",
-    "city_ascii": "Adamstown",
-    "lat": -25.0667,
-    "lon": -130.0833,
-    "country": "Pitcairn Islands",
-    "iso2": "PN",
-    "iso3": "PCN",
-    "admin_name": "",
-    "capital": "primary",
-    "population": "",
-    "id": 1612000000
-  },
-  {
-    "name": "Gustavia",
-    "city_ascii": "Gustavia",
-    "lat": 17.8958,
-    "lon": -62.8508,
-    "country": "Saint Barthelemy",
-    "iso2": "BL",
-    "iso3": "BLM",
-    "admin_name": "",
-    "capital": "primary",
-    "population": "",
-    "id": 1652681565
-  },
-  {
     "name": "Jamestown",
     "city_ascii": "Jamestown",
     "lat": -15.9264,
@@ -2261,19 +2235,6 @@ module.exports = {
     "capital": "admin",
     "population": 410972,
     "id": 1862546949
-  },
-  {
-    "name": "Merida",
-    "city_ascii": "Merida",
-    "lat": 8.4,
-    "lon": -71.13,
-    "country": "Venezuela",
-    "iso2": "VE",
-    "iso3": "VEN",
-    "admin_name": "Mérida",
-    "capital": "admin",
-    "population": 345489,
-    "id": 1862668122
   },
   {
     "name": "Ciudad Bolívar",

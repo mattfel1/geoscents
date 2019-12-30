@@ -2,6 +2,37 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.0.11 - 2019-08-10
+
+### Fixed
+
+* License metadata in `package.json` now in standard SPDX format
+
+## 2.0.10 - 2018-04-18
+
+### Fixed
+
+* Guard `global` usage in scope to avoid reference errors
+
+## 2.0.9 - 2018-04-17
+
+### Fixed
+
+* Guard `self` usage in scope to avoid Webpack reference errors
+
+## 2.0.8 - 2018-04-17
+
+### Fixed
+
+* Worker support now explicitly references `self` and `window` rather then using
+  `this` implicitly to fix issues in Webpack builds.
+
+## 2.0.7 - 2018-04-16
+
+### Fixed
+
+* Support `setTimeout` / `setInterval` in workers
+
 ## 2.0.6 - 2018-01-24
 
 ### Fixed

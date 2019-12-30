@@ -6,7 +6,9 @@
 
 const Module = require("./Module");
 const Template = require("./Template");
-const RawSource = require("webpack-sources").RawSource;
+const { RawSource } = require("webpack-sources");
+
+/** @typedef {import("./util/createHash").Hash} Hash */
 
 class MultiModule extends Module {
 	constructor(context, dependencies, name) {
@@ -15,10 +17,13 @@ class MultiModule extends Module {
 		// Info from Factory
 		this.dependencies = dependencies;
 		this.name = name;
+		this._identifier = `multi ${this.dependencies
+			.map(d => d.request)
+			.join(" ")}`;
 	}
 
 	identifier() {
-		return `multi ${this.dependencies.map(d => d.request).join(" ")}`;
+		return this._identifier;
 	}
 
 	readableIdentifier(requestShortener) {
@@ -42,6 +47,10 @@ class MultiModule extends Module {
 		return 16 + this.dependencies.length * 12;
 	}
 
+	/**
+	 * @param {Hash} hash the hash used to track dependencies
+	 * @returns {void}
+	 */
 	updateHash(hash) {
 		hash.update("multi module");
 		hash.update(this.name || "");
@@ -53,10 +62,13 @@ class MultiModule extends Module {
 		let idx = 0;
 		for (const dep of this.dependencies) {
 			if (dep.module) {
-				if (idx === this.dependencies.length - 1) str.push("module.exports = ");
+				if (idx === this.dependencies.length - 1) {
+					str.push("module.exports = ");
+				}
 				str.push("__webpack_require__(");
-				if (runtimeTemplate.outputOptions.pathinfo)
+				if (runtimeTemplate.outputOptions.pathinfo) {
 					str.push(Template.toComment(dep.request));
+				}
 				str.push(`${JSON.stringify(dep.module.id)}`);
 				str.push(")");
 			} else {

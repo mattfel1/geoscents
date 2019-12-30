@@ -4,8 +4,10 @@
 	*/
 "use strict";
 
+const { RawSource } = require("webpack-sources");
 const Module = require("./Module");
-const RawSource = require("webpack-sources").RawSource;
+
+/** @typedef {import("./util/createHash").Hash} Hash */
 
 class DllModule extends Module {
 	constructor(context, dependencies, name, type) {
@@ -44,6 +46,10 @@ class DllModule extends Module {
 		return 12;
 	}
 
+	/**
+	 * @param {Hash} hash the hash used to track dependencies
+	 * @returns {void}
+	 */
 	updateHash(hash) {
 		hash.update("dll module");
 		hash.update(this.name || "");

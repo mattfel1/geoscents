@@ -9,7 +9,7 @@ class History {
 
     breakHistory(room, winner, score, color, record) {
         const myRoom = this.myRoom;
-        if (room == myRoom) {
+        if (room === myRoom) {
             var newRecord = "";
             if (record) newRecord = " 🎉 NEW RECORD 🎉";
             var assembled = "<br>******* " + myRoom + " WINNER: <font color=\"" + color + "\">" + winner + " (" + score + " points)</font>" + newRecord + " *******<br>"
@@ -89,9 +89,9 @@ class History {
         // }
     }
     addHistory(room, payload) {
-        if (room == this.myRoom) {
-            var assembled = payload;
-            var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
+        if (room === this.myRoom) {
+            const assembled = payload;
+            const final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
             $('#gamehist').prepend(final_message);
             this.histcount = this.histcount + 1;
             // if (this.histcount > CONSTANTS.MAX_GAME_HIST) {

@@ -7,11 +7,15 @@
 const asyncLib = require("neo-async");
 const path = require("path");
 
-const Tapable = require("tapable").Tapable;
-const AsyncSeriesWaterfallHook = require("tapable").AsyncSeriesWaterfallHook;
-const SyncWaterfallHook = require("tapable").SyncWaterfallHook;
+const {
+	Tapable,
+	AsyncSeriesWaterfallHook,
+	SyncWaterfallHook
+} = require("tapable");
 const ContextModule = require("./ContextModule");
 const ContextElementDependency = require("./dependencies/ContextElementDependency");
+
+/** @typedef {import("./Module")} Module */
 
 const EMPTY_RESOLVE_OPTIONS = {};
 
@@ -19,9 +23,13 @@ module.exports = class ContextModuleFactory extends Tapable {
 	constructor(resolverFactory) {
 		super();
 		this.hooks = {
+			/** @type {AsyncSeriesWaterfallHook<TODO>} */
 			beforeResolve: new AsyncSeriesWaterfallHook(["data"]),
+			/** @type {AsyncSeriesWaterfallHook<TODO>} */
 			afterResolve: new AsyncSeriesWaterfallHook(["data"]),
+			/** @type {SyncWaterfallHook<string[]>} */
 			contextModuleFiles: new SyncWaterfallHook(["files"]),
+			/** @type {SyncWaterfallHook<TODO[]>} */
 			alternatives: new AsyncSeriesWaterfallHook(["modules"])
 		};
 		this._pluginCompat.tap("ContextModuleFactory", options => {
@@ -65,17 +73,24 @@ module.exports = class ContextModuleFactory extends Tapable {
 					loadersPrefix = "";
 				const idx = request.lastIndexOf("!");
 				if (idx >= 0) {
-					loaders = request.substr(0, idx + 1);
+					let loadersRequest = request.substr(0, idx + 1);
 					let i;
-					for (i = 0; i < loaders.length && loaders[i] === "!"; i++) {
+					for (
+						i = 0;
+						i < loadersRequest.length && loadersRequest[i] === "!";
+						i++
+					) {
 						loadersPrefix += "!";
 					}
-					loaders = loaders
+					loadersRequest = loadersRequest
 						.substr(i)
 						.replace(/!+$/, "")
 						.replace(/!!+/g, "!");
-					if (loaders === "") loaders = [];
-					else loaders = loaders.split("!");
+					if (loadersRequest === "") {
+						loaders = [];
+					} else {
+						loaders = loadersRequest.split("!");
+					}
 					resource = request.substr(idx + 1);
 				} else {
 					loaders = [];
@@ -220,9 +235,13 @@ module.exports = class ContextModuleFactory extends Tapable {
 											callback(null, alternatives);
 										}
 									);
-								} else callback();
+								} else {
+									callback();
+								}
 							});
-						} else callback();
+						} else {
+							callback();
+						}
 					},
 					(err, result) => {
 						if (err) return callback(err);
