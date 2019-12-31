@@ -6,11 +6,12 @@ const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
-const PORT = 80;
+const PORT = 3000;
 const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server);
-const helpers = require('../resources/helpers.js')
+const helpers = require('../resources/helpers.js');
+var d = new Date();
 
 // Game mechanics
 const CONSTANTS = require('../resources/constants.js');
@@ -198,6 +199,17 @@ io.on('connection', (socket) => {
 setInterval(() => {
     Object.values(rooms).forEach((room) => room.fsm());
 }, 1000 / CONSTANTS.FPS);
+// Handle reboot message
+setInterval( () => {
+    // if (d.getHours() === 23 && d.getMinutes() === 59) {
+        io.sockets.emit("update messages", CONSTANTS.LOBBY, "<font color=\"red\"><b>WARNING: Server will reboot within the next minute to reset records!  Please refresh the page after it freezes!</b></font>");
+        io.sockets.emit("update messages", CONSTANTS.WORLD, "<font color=\"red\"><b>WARNING: Server will reboot within the next minute to reset records!  Please refresh the page after it freezes!</b></font>");
+        io.sockets.emit("update messages", CONSTANTS.US, "<font color=\"red\"><b>WARNING: Server will reboot within the next minute to reset records!  Please refresh the page after it freezes!</b></font>");
+        io.sockets.emit("update messages", CONSTANTS.EURO, "<font color=\"red\"><b>WARNING: Server will reboot within the next minute to reset records!  Please refresh the page after it freezes!</b></font>");
+        io.sockets.emit("update messages", CONSTANTS.AFRICA, "<font color=\"red\"><b>WARNING: Server will reboot within the next minute to reset records!  Please refresh the page after it freezes!</b></font>");
+        io.sockets.emit("update messages", CONSTANTS.SAMERICA, "<font color=\"red\"><b>WARNING: Server will reboot within the next minute to reset records!  Please refresh the page after it freezes!</b></font>");
+    // }
+}, 5000);
 
 module.exports = {io};
 

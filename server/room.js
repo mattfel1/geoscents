@@ -318,7 +318,7 @@ class Room {
 
     printScoresWithSelf(socket, socketId) {
         if (this.room !== CONSTANTS.LOBBY) {
-            socket.emit('post group', 'All-Time Records:', this.allRecord);
+            socket.emit('post group', 'Yearly Records:', this.allRecord);
             socket.emit('post group', 'Monthly Records:', this.monthRecord);
             socket.emit('post group', 'Weekly Records:', this.weekRecord);
             socket.emit('post group', 'Daily Records:', this.dayRecord);

@@ -2029,19 +2029,6 @@ module.exports = {
     "id": 1670376659
   },
   {
-    "name": "Freetown",
-    "city_ascii": "Freetown",
-    "lat": 8.47,
-    "lon": -13.2342,
-    "country": "Sierra Leone",
-    "iso2": "SL",
-    "iso3": "SLE",
-    "admin_name": "Western Area",
-    "capital": "primary",
-    "population": 827000,
-    "id": 1694085071
-  },
-  {
     "name": "Philipsburg",
     "city_ascii": "Philipsburg",
     "lat": 18.0255,
