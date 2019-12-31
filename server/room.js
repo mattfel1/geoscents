@@ -325,7 +325,7 @@ class Room {
             socket.emit('post space');
         }
         else {
-            socket.emit('post lobby', helpers.readRecentActivity(5));
+            socket.emit('post lobby', helpers.readRecentActivity(15));
         }
         const sortedPlayers = this.sortPlayers();
         Array.from(sortedPlayers.values()).forEach(function(player, index) {
