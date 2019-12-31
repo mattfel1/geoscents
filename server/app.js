@@ -201,15 +201,17 @@ setInterval(() => {
 }, 1000 / CONSTANTS.FPS);
 // Handle reboot message
 setInterval( () => {
-    // if (d.getHours() === 23 && d.getMinutes() === 59) {
-        io.sockets.emit("update messages", CONSTANTS.LOBBY, "<font color=\"red\"><b>WARNING: Server will reboot within the next minute to reset records!  Please refresh the page after it freezes!</b></font>");
-        io.sockets.emit("update messages", CONSTANTS.WORLD, "<font color=\"red\"><b>WARNING: Server will reboot within the next minute to reset records!  Please refresh the page after it freezes!</b></font>");
-        io.sockets.emit("update messages", CONSTANTS.US, "<font color=\"red\"><b>WARNING: Server will reboot within the next minute to reset records!  Please refresh the page after it freezes!</b></font>");
-        io.sockets.emit("update messages", CONSTANTS.EURO, "<font color=\"red\"><b>WARNING: Server will reboot within the next minute to reset records!  Please refresh the page after it freezes!</b></font>");
-        io.sockets.emit("update messages", CONSTANTS.AFRICA, "<font color=\"red\"><b>WARNING: Server will reboot within the next minute to reset records!  Please refresh the page after it freezes!</b></font>");
-        io.sockets.emit("update messages", CONSTANTS.SAMERICA, "<font color=\"red\"><b>WARNING: Server will reboot within the next minute to reset records!  Please refresh the page after it freezes!</b></font>");
-    // }
-}, 5000);
+    console.log(d.getHours());
+    console.log(d.getMinutes());
+    if (d.getHours() === 10 && d.getMinutes() > 58) {
+        io.sockets.emit("update messages", CONSTANTS.LOBBY, "<font color=\"red\"><b>WARNING: Game will restart within the next minute to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.WORLD, "<font color=\"red\"><b>WARNING: Game will restart within the next minute to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.US, "<font color=\"red\"><b>WARNING: Game will restart within the next minute to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.EURO, "<font color=\"red\"><b>WARNING: Game will restart within the next minute to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.AFRICA, "<font color=\"red\"><b>WARNING: Game will restart within the next minute to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.SAMERICA, "<font color=\"red\"><b>WARNING: Game will restart within the next minute to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+    }
+}, 15000);
 
 module.exports = {io};
 
