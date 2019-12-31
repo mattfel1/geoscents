@@ -94,6 +94,8 @@ class Map {
         this.ctx.fillText('Welcome to GeoScents!', 480, 490);
         this.ctx.fillText('Locate cities as quickly and accurately as possible!',90,550);
 
+        this.ctx.font = "20px Arial";
+        this.ctx.fillText('[ Spinning globe is loading... ]', 90, 220);
         // Instructions
         this.ctx.font = "25px Arial";
         this.ctx.fillStyle = 'red';
