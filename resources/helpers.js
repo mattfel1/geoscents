@@ -1,5 +1,8 @@
 const fs = require('fs');
 const lineReader = require('line-reader');
+const CONSTANTS = require('../resources/constants.js');
+const logfile = '/root/connections.log';
+
 
 const log = (payload) => {
     const currentdate = new Date();
@@ -8,12 +11,16 @@ const log = (payload) => {
         + currentdate.getFullYear() + " @ "
         + currentdate.getHours() + ":"
         + currentdate.getMinutes() + ":";
-    if (fs.existsSync('/root/connections.log')) {
-        fs.appendFile('/root/connections.log', "[" + timestamp + "] " + payload + "\n", function (err) {
+    if (fs.existsSync(logfile)) {
+        fs.appendFile(logfile, "[" + timestamp + "] " + payload + "\n", function (err) {
             if (err) throw err;
             // console.log('Saved!');
         });
     }
+};
+
+const logHistogram = (rooms) => {
+    log("Current player histogram: Lobby (" + rooms[CONSTANTS.LOBBY].playerCount() + "), World (" + rooms[CONSTANTS.WORLD].playerCount() + "), US (" + rooms[CONSTANTS.US].playerCount() + "), Eurasia (" + rooms[CONSTANTS.EURO].playerCount() + "), Africa (" + rooms[CONSTANTS.AFRICA].playerCount() + "), SAmerica (" + rooms[CONSTANTS.SAMERICA].playerCount() + ")")
 };
 
 const readRecentActivity = (numel) => {
@@ -44,4 +51,4 @@ const prependRecentActivity = (payload) => {
     });
 };
 
-module.exports = {log, readRecentActivity, prependRecentActivity};
+module.exports = {log, logHistogram, readRecentActivity, prependRecentActivity};
