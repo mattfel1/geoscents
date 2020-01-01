@@ -3979,19 +3979,6 @@ module.exports = {
     "id": 1136159124
   },
   {
-    "name": "Willemstad",
-    "city_ascii": "Willemstad",
-    "lat": 12.2004,
-    "lon": -69.02,
-    "country": "Curaçao",
-    "iso2": "CW",
-    "iso3": "CUW",
-    "admin_name": "",
-    "capital": "primary",
-    "population": 146813,
-    "id": 1531000000
-  },
-  {
     "name": "Roseau",
     "city_ascii": "Roseau",
     "lat": 15.301,

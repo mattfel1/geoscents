@@ -2978,19 +2978,6 @@ module.exports = {
     "id": 1180574233
   },
   {
-    "name": "Funchal",
-    "city_ascii": "Funchal",
-    "lat": 32.65,
-    "lon": -16.88,
-    "country": "Portugal",
-    "iso2": "PT",
-    "iso3": "PRT",
-    "admin_name": "Madeira",
-    "capital": "admin",
-    "population": 204767,
-    "id": 1620995356
-  },
-  {
     "name": "Edéa",
     "city_ascii": "Edea",
     "lat": 3.8005,
