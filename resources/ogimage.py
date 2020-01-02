@@ -36,6 +36,6 @@ merid_count = (merid_range[1]-merid_range[0])/merid_lines
 #m.drawmeridians(np.arange(merid_range[0],merid_range[1],merid_count))
 
 # save figure at 150 dpi and show it
-plt.savefig('favicon.png',dpi=500,transparent=True)
+plt.savefig('ogimage.png',dpi=500,transparent=True)
 #plt.show()
 plt.clf()
