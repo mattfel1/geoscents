@@ -36,15 +36,15 @@ const recordGuesses = (room, citystring, dists, times) => {
         } catch (err) {
             history = {};
         }
-        // Add raw data
-        if (Object.keys(history).indexOf(citystring) === -1) {
-            history[citystring] = {"dists": dists, "times": times};
-        } else {
-            history[citystring]["dists"] = history[citystring]["dists"].concat(dists);
-            history[citystring]["times"] = history[citystring]["times"].concat(times);
-        }
-        // Compute new averages
         try {
+            // Add raw data
+            if (Object.keys(history).indexOf(citystring) === -1) {
+                history[citystring] = {"dists": dists, "times": times};
+            } else {
+                history[citystring]["dists"] = history[citystring]["dists"].concat(dists);
+                history[citystring]["times"] = history[citystring]["times"].concat(times);
+            }
+            // Compute new averages
             history[citystring]["mean_dist"] = history[citystring]["dists"].reduce((a, b) => a + b) / history[citystring]["dists"].length;
             history[citystring]["mean_time"] = history[citystring]["times"].reduce((a, b) => a + b) / history[citystring]["times"].length;
             history[citystring]["std_dist"] = Math.sqrt(history[citystring]["dists"].map(x => Math.pow(x - history[citystring]["mean_dist"], 2)).reduce((a, b) => a + b) / history[citystring]["dists"].length);
