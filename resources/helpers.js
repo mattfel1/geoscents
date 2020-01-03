@@ -19,6 +19,41 @@ const log = (payload) => {
     }
 };
 
+const recordGuesses = (room, citystring, dists, times) => {
+    function copy(x) {
+        return JSON.parse( JSON.stringify(x) );
+    }
+    const file = '/scratch/' + room + '_guesses';
+    if (!fs.existsSync(file)) {
+        fs.writeFile(file, "", { flag: 'wx' }, function (err) {
+            if (err) throw err;
+        });
+    }
+    else {
+        let history;
+        try {
+            history = JSON.parse(fs.readFileSync(file, 'utf8'));
+        } catch (err) {
+            history = {};
+        }
+        // Add raw data
+        if (Object.keys(history).indexOf(citystring) === -1) {
+            history[citystring] = {"dists": dists, "times": times};
+        } else {
+            history[citystring]["dists"] = history[citystring]["dists"].concat(dists);
+            history[citystring]["times"] = history[citystring]["times"].concat(times);
+        }
+        // Compute new averages
+        history[citystring]["mean_dist"] = history[citystring]["dists"].reduce((a,b) => a + b) / history[citystring]["dists"].length;
+        history[citystring]["mean_time"] = history[citystring]["times"].reduce((a,b) => a + b) / history[citystring]["times"].length;
+        history[citystring]["std_dist"] = Math.sqrt(history[citystring]["dists"].map(x => Math.pow(x-history[citystring]["mean_dist"],2)).reduce((a,b) => a+b)/history[citystring]["dists"].length);
+        history[citystring]["std_time"] = Math.sqrt(history[citystring]["times"].map(x => Math.pow(x-history[citystring]["mean_time"],2)).reduce((a,b) => a+b)/history[citystring]["times"].length);
+
+        // Commit back to file
+        fs.writeFile(file, JSON.stringify(copy(history)), function(err) {if(err){return console.log(err);}});
+    }
+};
+
 const logHistogram = (rooms) => {
     log("Current player histogram: Lobby (" + rooms[CONSTANTS.LOBBY].playerCount() + "), World (" + rooms[CONSTANTS.WORLD].playerCount() + "), US (" + rooms[CONSTANTS.US].playerCount() + "), Eurasia (" + rooms[CONSTANTS.EURO].playerCount() + "), Africa (" + rooms[CONSTANTS.AFRICA].playerCount() + "), SAmerica (" + rooms[CONSTANTS.SAMERICA].playerCount() + ")")
 };
@@ -51,4 +86,4 @@ const prependRecentActivity = (payload) => {
     });
 };
 
-module.exports = {log, logHistogram, readRecentActivity, prependRecentActivity};
+module.exports = {log, logHistogram, readRecentActivity, prependRecentActivity, recordGuesses};

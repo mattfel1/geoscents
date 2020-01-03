@@ -70,8 +70,8 @@ class Room {
     }
     // Player basic IO
     addPlayer(socket,info) {
-      var player = new Player(socket.id, this.players.size, this.room, socket.handshake.address, this.ordinalCounter, "Player " + this.ordinalCounter % 100,info);
-      this.clients.set(socket.id, socket);
+        const player = new Player(socket.id, this.players.size, this.room, socket.handshake.address, this.ordinalCounter, "Player " + this.ordinalCounter % 100, info);
+        this.clients.set(socket.id, socket);
       this.players.set(socket.id, player);
       this.ordinalCounter = this.ordinalCounter + 1;
       this.sortPlayers();
@@ -155,7 +155,7 @@ class Room {
           const color = player.color;
           const name = player.name;
           const room = this.room;
-          var boot_msg = "[ <font color='" + color + "'>" + name + " has been booted due to inactivity!</font> ]<br>";
+          const boot_msg = "[ <font color='" + color + "'>" + name + " has been booted due to inactivity!</font> ]<br>";
           this.players.delete(socket.id);
           this.clients.forEach(function(s,id) {
               s.emit('update messages', room, boot_msg)
@@ -184,7 +184,7 @@ class Room {
                   player.row = playerClick.cursorY;
                   player.col = playerClick.cursorX;
                   player.clickedAt = this.timer;
-                  var geo = Geography.mercToGeo(player.room, player.row, player.col);
+                  const geo = Geography.mercToGeo(player.room, player.row, player.col);
                   player.lat = geo['lat'];
                   player.lon = geo['lon'];
                   // console.log('click at ' + player.row + ',' + player.col + ' (' + player.lat + ',' + player.lon + ')')
@@ -198,8 +198,9 @@ class Room {
         function copy(x) {
             return JSON.parse( JSON.stringify(x) );
         }
-        var dict = copy(olddict);
-        var i;
+
+        const dict = copy(olddict);
+        let i;
         for (i = 3; i > position; i--) {
           dict['record' + i] = copy(dict['record' + (i-1)]);
           dict['recordColor' + i] = copy(dict['recordColor' + (i-1)]);
@@ -211,7 +212,7 @@ class Room {
         dict['recordName' + position] = copy(player.name);
         dict['recordBroken' + position] = true;
         player.giveMedal(position, category);
-        var medal = '';
+        let medal = '';
         if (position === 1) medal = '🥇';
         else if (position === 2) medal = '🥈';
         else if (position === 3) medal = '🥉';
@@ -256,19 +257,20 @@ class Room {
         function copy(x) {
             return JSON.parse( JSON.stringify(x) );
         }
-        var dayRecord = copy(this.dayRecord);
-        var weekRecord = copy(this.weekRecord);
-        var monthRecord = copy(this.monthRecord);
-        var allRecord = copy(this.allRecord);
+
+        let dayRecord = copy(this.dayRecord);
+        let weekRecord = copy(this.weekRecord);
+        let monthRecord = copy(this.monthRecord);
+        let allRecord = copy(this.allRecord);
         const getPosition = (score, category) => {return this.getPosition(score, category)};
         const insertRecord = (p,c,d,r,pl) => {return this.insertRecord(p,c,d,r,pl)};
         const sufx = ["st", "nd", "rd"];
         const room = this.room;
         Array.from(this.sortPlayers()).forEach((player, id) => {
-            var allStr =  "";
-            var monStr = "";
-            var wkStr = "";
-            var dayStr = "";
+            let allStr = "";
+            let monStr = "";
+            let wkStr = "";
+            let dayStr = "";
             if (getPosition(player.score,dayRecord) < 4) {
                 dayStr = "<b>" + (getPosition(player.score,dayRecord)) + sufx[(getPosition(player.score,dayRecord)-1)] + "</b>" + " today"
                 dayRecord = copy(insertRecord(getPosition(player.score,dayRecord), "day", copy(dayRecord), room, player));
@@ -295,11 +297,11 @@ class Room {
                 const day = time.getDate();
                 const hour = time.getHours();
                 const minute = time.getMinutes();
-                var c1 = "";
+                let c1 = "";
                 if (allStr !== "" && (monStr !== "" | (monStr === "" && wkStr !== "") || (monStr === "" && wkStr === "" && dayStr !== ""))) c1 = ", ";
-                var c2 = "";
+                let c2 = "";
                 if (monStr !== "" && (wkStr !== "" | (wkStr === "" && dayStr !== ""))) c2 = ", ";
-                var c3 = "";
+                let c3 = "";
                 if (wkStr !== "" && (dayStr !== "")) c3 = ", ";
                 const payload = "- " + month + day + " (" + room + ") <font color=" + player.color + ">" + player.name + "</font> placed " + allStr + c1 + monStr + c2 + wkStr + c3 + dayStr;
                 helpers.prependRecentActivity(payload)
@@ -329,8 +331,8 @@ class Room {
         }
         const sortedPlayers = this.sortPlayers();
         Array.from(sortedPlayers.values()).forEach(function(player, index) {
-          var you = '';
-          if (player.id === socketId) {
+            let you = '';
+            if (player.id === socketId) {
               you = '*';
           }
           if (player.choseName) socket.emit('post score', player.rank, you + player.getName(), player.color, player.score, player.wins);
@@ -342,11 +344,11 @@ class Room {
     }
 
     stringifyTarget(){
-        var state = ''
+        let state = '';
         if (this.target['country'] === 'United States' || this.target['country'] === 'USA' || this.target['country'] === 'Canada' || this.target['country'] === 'Mexico' || this.target['country'] === 'India' || this.target['country'] === 'China') {
             state = ', ' + this.target['admin_name'];
         }
-        var pop = 0;
+        let pop = 0;
         if (this.target['population'] !== '') {
             pop = this.target['population'];
         }
@@ -387,15 +389,19 @@ class Room {
           }
           const update = Geography.score(room, player.geoError, player.mercError, player.clickedAt);
           const newScore = Math.floor(player.score + update);
-          var playerScoreLine = " + " + Math.floor(update ) + " points (Distance: " + Math.floor(player.geoError) + " km, Time Bonus: " + (Math.floor(player.clickedAt * 10) / 10) + "s)";
+          let playerScoreLine = " + " + Math.floor(update) + " points (Distance: " + Math.floor(player.geoError) + " km, Time Bonus: " + (Math.floor(player.clickedAt * 10) / 10) + "s)";
           if (player.geoError === 999999) {
               playerScoreLine = " (Did not guess)";
           }
           historyScore(player, playerScoreLine);
           player.score = newScore;
           updateHistory(player, round, newScore);
-        })
-      this.historyRound(this.round + 1, this.stringifyTarget())
+        });
+      this.historyRound(this.round + 1, this.stringifyTarget());
+
+      const dists = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.geoError);
+      const times = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.clickedAt);
+      helpers.recordGuesses(this.room, this.stringifyTarget().string, dists, times);
     }
 
     static broadcastPoint(socket, row, col, color, radius, distance) {
@@ -509,7 +515,9 @@ class Room {
     }
 
     sortPlayers() {
-        var sortedPlayers = Array.from(this.players.values()).filter((p) => p.choseName).sort((a, b) => {return b.score - a.score});
+        const sortedPlayers = Array.from(this.players.values()).filter((p) => p.choseName).sort((a, b) => {
+            return b.score - a.score
+        });
         Array.from(sortedPlayers.values()).forEach((p,i) => {p.rank = i});
         this.winner = Array.from(sortedPlayers)[0];
         return sortedPlayers;
@@ -600,7 +608,7 @@ class Room {
       const senderColor = this.getPlayerColor(senderSocket);
       const room = this.room;
       this.clients.forEach((socket,id) => {
-          var senderName = getname(senderSocket);
+          let senderName = getname(senderSocket);
           if (this.players.has(id)) {
               const player = this.players.get(id);
               if (player.id === senderSocket.id) senderName = "*" + senderName;
@@ -625,9 +633,9 @@ class Room {
         if (thisTarget['majorcapital']) star = "*";
         if (thisTarget['minorcapital']) star = "†";
         const base = "<b>Round " + round + "</b>: " + star + thisTarget['string'] + " (pop: " + thisTarget['pop'].toLocaleString() + ")";
-        var part2 = "%2C+" + this.target['country'];
+        let part2 = "%2C+" + this.target['country'];
         if (this.target['country'] === "USA") part2 = "%2C+" + this.target['admin_name'];
-        var link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + this.target['name'] + part2 + "&go=Go&ns0=1\">Learn!</a><br>"
+        const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + this.target['name'] + part2 + "&go=Go&ns0=1\">Learn!</a><br>";
         this.clients.forEach((socket,id) => {
             socket.emit('add history',  room, base + link);
             socket.emit('add history', room, "<br>");
@@ -636,7 +644,7 @@ class Room {
     historyScore(player, score) {
         const room = this.room;
         this.clients.forEach((socket,id) => {
-            var name = player.name;
+            let name = player.name;
             if (player.id === id) name = "*" + name;
             socket.emit('add history', room, "<font color=\"" + player.color +"\"><b>  " + name + "</b>: " + score + "</font><br>")
         });
