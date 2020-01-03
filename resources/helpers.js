@@ -44,11 +44,12 @@ const recordGuesses = (room, citystring, dists, times) => {
             history[citystring]["times"] = history[citystring]["times"].concat(times);
         }
         // Compute new averages
-        history[citystring]["mean_dist"] = history[citystring]["dists"].reduce((a,b) => a + b) / history[citystring]["dists"].length;
-        history[citystring]["mean_time"] = history[citystring]["times"].reduce((a,b) => a + b) / history[citystring]["times"].length;
-        history[citystring]["std_dist"] = Math.sqrt(history[citystring]["dists"].map(x => Math.pow(x-history[citystring]["mean_dist"],2)).reduce((a,b) => a+b)/history[citystring]["dists"].length);
-        history[citystring]["std_time"] = Math.sqrt(history[citystring]["times"].map(x => Math.pow(x-history[citystring]["mean_time"],2)).reduce((a,b) => a+b)/history[citystring]["times"].length);
-
+        try {
+            history[citystring]["mean_dist"] = history[citystring]["dists"].reduce((a, b) => a + b) / history[citystring]["dists"].length;
+            history[citystring]["mean_time"] = history[citystring]["times"].reduce((a, b) => a + b) / history[citystring]["times"].length;
+            history[citystring]["std_dist"] = Math.sqrt(history[citystring]["dists"].map(x => Math.pow(x - history[citystring]["mean_dist"], 2)).reduce((a, b) => a + b) / history[citystring]["dists"].length);
+            history[citystring]["std_time"] = Math.sqrt(history[citystring]["times"].map(x => Math.pow(x - history[citystring]["mean_time"], 2)).reduce((a, b) => a + b) / history[citystring]["times"].length);
+        } catch (err) {};
         // Commit back to file
         fs.writeFile(file, JSON.stringify(copy(history)), function(err) {if(err){return console.log(err);}});
     }
