@@ -19,7 +19,7 @@ const log = (payload) => {
     }
 };
 
-const recordGuesses = (room, citystring, ips, dists, times) => {
+const recordGuesses = (room, citystring, city, admin, country, ips, dists, times) => {
     function copy(x) {
         return JSON.parse( JSON.stringify(x) );
     }
@@ -58,7 +58,10 @@ const recordGuesses = (room, citystring, ips, dists, times) => {
             history[citystring]["mean_time"] = history[citystring]["times"].reduce((a, b) => a + b) / history[citystring]["times"].length;
             history[citystring]["std_dist"] = Math.sqrt(history[citystring]["dists"].map(x => Math.pow(x - history[citystring]["mean_dist"], 2)).reduce((a, b) => a + b) / history[citystring]["dists"].length);
             history[citystring]["std_time"] = Math.sqrt(history[citystring]["times"].map(x => Math.pow(x - history[citystring]["mean_time"], 2)).reduce((a, b) => a + b) / history[citystring]["times"].length);
-        } catch (err) {};
+            history[citystring]["city"] = city;
+            history[citystring]["admin"] = admin;
+            history[citystring]["country"] = country;
+        } catch (err) {}
         // Commit back to file
         fs.writeFile(file, JSON.stringify(copy(history)), function(err) {if(err){return console.log(err);}});
     }

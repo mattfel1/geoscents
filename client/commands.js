@@ -35,7 +35,7 @@ class Commands {
     }
 
 
-    drawCommand(timeDescrip, citystring, capital, iso2, round, button) {
+    drawCommand(timeDescrip, citystring, capital, iso2, round, button, clicked) {
         this.ctx.globalAlpha = 0.9;
         this.ctx.fillStyle = CONSTANTS.BGCOLOR;
         this.ctx.fillRect(this.command_window['x'], this.command_window['y'], this.command_window['width'], this.command_window['height']);
@@ -59,11 +59,13 @@ class Commands {
         }
 
         if (button) {
-            this.ctx.fillStyle = "orange";
+            if (clicked) this.ctx.fillStyle = "lightgrey";
+            else this.ctx.fillStyle = "orange";
             this.ctx.fillRect(this.ready_button['x'], this.ready_button['y'], this.ready_button['width'], this.ready_button['height']);
             this.ctx.font = CONSTANTS.BUTTONS_FONT + "px Arial";
             this.ctx.fillStyle = 'black';
-            this.ctx.fillText('CLICK IF READY!', this.ready_button['x'] + 5, this.ready_button['y'] + 22)
+            if (clicked) this.ctx.fillText('YOU ARE READY!', this.ready_button['x'] + 5, this.ready_button['y'] + 22)
+            else this.ctx.fillText('CLICK IF READY!', this.ready_button['x'] + 5, this.ready_button['y'] + 22)
         }
     }
 

@@ -50,21 +50,21 @@ $(document).ready(function(){
     socket.on('update counts', (l,w,u,e,a,s) => {commands.updateCounts(l,w,u,e,a,s);commands.postButtons();})
     socket.on('draw buttons', () => {commands.postButtons()});
     socket.on('draw timer', (time,color) => {commands.postTime(time,color)});
-    socket.on('draw prepare', (round) => {commands.drawCommand(" seconds until new game auto-starts...", "", "", "", round, true)});
+    socket.on('draw prepare', (round) => {commands.drawCommand(" seconds until new game auto-starts...", "", "", "", round, true, false)});
     socket.on('draw begin', (round) => {
-        commands.drawCommand(" seconds until first round..  GET READY!", "", "", "", round, false);
+        commands.drawCommand(" seconds until first round..  GET READY!", "", "", "", round, false, false);
         sounds.playGameBeginSound();
     });
     socket.on('draw guess city', (city, capital, iso2, round) => {
-        commands.drawCommand( "Find!       ", city, capital, iso2, round, false);
+        commands.drawCommand( "Find!       ", city, capital, iso2, round, false, false);
         sounds.playRoundBeginSound();
     });
     socket.on('draw reveal city', (city, capital, iso2, round) => {
-        commands.drawCommand("            ", city, capital, iso2, round, false);
+        commands.drawCommand("            ", city, capital, iso2, round, false, false);
         sounds.playRoundEndSound();
     });
-    socket.on('draw booted', () => {commands.drawCommand("You have been booted due to inactivity!", "Please refresh to rejoin","", "",0, false)});
-    socket.on('draw idle', () => {commands.drawCommand("Waiting for players to join...", "", "", "", 0, false)})
+    socket.on('draw booted', () => {commands.drawCommand("You have been booted due to inactivity!", "Please refresh to rejoin","", "",0, false, false)});
+    socket.on('draw idle', () => {commands.drawCommand("Waiting for players to join...", "", "", "", 0, false, false)});
 
     /**** Chat *****/
     const chat = new Chat(socket);
@@ -147,7 +147,8 @@ $(document).ready(function(){
     canvas.addEventListener('click', function(evt) {
         var mousePos = getMousePosInPanel(canvas, evt);
         if (isInside(mousePos,commands.ready_button) && myRoom !== CONSTANTS.LOBBY) {
-            socket.emit('playerReady')
+            socket.emit('playerReady');
+            commands.drawCommand(" seconds until new game auto-starts...", "", "", "", 0, true, true)
         }
     }, false);
 
