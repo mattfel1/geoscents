@@ -94,7 +94,13 @@ const score = (room, geoDist, mercDist, timeBonus) => {
     // const distGaussian = Math.exp(-Math.pow(mercDist, 2) / CONSTANTS.GAUSS_C1) * CONSTANTS.MULTIPLIER;
     // return distGaussian * timeLogistic;
     // Geo distance based score
-    const timePortion = Math.min(13 / 12 - (CONSTANTS.GUESS_DURATION - timeBonus) * 3 / 36, 1);
+    const minTimePortion = 1/3;
+    const timeCushion = 1.5;
+    const slope = (1 - minTimePortion) / (timeCushion - 10);
+    const invTime = CONSTANTS.GUESS_DURATION - timeBonus;
+    const timeLine = slope * (invTime - timeCushion) + 1;
+    const timePortion = Math.min(1, timeLine);
+    // const timePortion = Math.min(13 / 12 - (CONSTANTS.GUESS_DURATION - timeBonus) * 3 / 36, 1);
     // // Logistic distance score
     // const distPortion = 620 / (1 + Math.exp(0.003*(scaledDist - 1000)));
     // Gaussian distance score

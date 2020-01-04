@@ -122,6 +122,7 @@ $(document).ready(function(){
     };
     const mouseDownHandler = (e) => {
       playerClick.mouseDown = true
+      console.log("Detected player click!");
 
       var rect = canvas.getBoundingClientRect();
       playerClick.cursorX = e.clientX - rect.left
@@ -135,7 +136,7 @@ $(document).ready(function(){
     const touchDownHandler = (e) => {
       playerClick.touchDown = true;
       playerClick.mouseDown = true;
-
+      console.log("Detected player touch!");
       var rect = canvas.getBoundingClientRect();
       playerClick.cursorX = e.touches[0].clientX - rect.left
       playerClick.cursorY = e.touches[0].clientY - rect.top
