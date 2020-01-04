@@ -19,7 +19,7 @@ const log = (payload) => {
     }
 };
 
-const recordGuesses = (room, citystring, dists, times) => {
+const recordGuesses = (room, citystring, ips, dists, times) => {
     function copy(x) {
         return JSON.parse( JSON.stringify(x) );
     }
@@ -37,18 +37,26 @@ const recordGuesses = (room, citystring, dists, times) => {
             history = {};
         }
         try {
-            // Add raw data
-            if (Object.keys(history).indexOf(citystring) === -1) {
-                history[citystring] = {"dists": dists, "times": times};
-            } else {
-                history[citystring]["dists"] = history[citystring]["dists"].concat(dists);
-                history[citystring]["times"] = history[citystring]["times"].concat(times);
-            }
-            // Compute new averages
-            history[citystring]["mean_dist"] = history[citystring]["dists"].reduce((a, b) => a + b) / history[citystring]["dists"].length;
-            history[citystring]["mean_time"] = history[citystring]["times"].reduce((a, b) => a + b) / history[citystring]["times"].length;
-            history[citystring]["std_dist"] = Math.sqrt(history[citystring]["dists"].map(x => Math.pow(x - history[citystring]["mean_dist"], 2)).reduce((a, b) => a + b) / history[citystring]["dists"].length);
-            history[citystring]["std_time"] = Math.sqrt(history[citystring]["times"].map(x => Math.pow(x - history[citystring]["mean_time"], 2)).reduce((a, b) => a + b) / history[citystring]["times"].length);
+            Object.keys(history).forEach(function (key,_) {
+                history[key]["ips"] = [];
+                Object.values(history[key]["dists"]).forEach(function (_,_) {
+                        history[key]["ips"] = history[key]["ips"].concat(["::ffff:127.0.0.1"])
+                });
+            });
+
+            // // Add raw data
+            // if (Object.keys(history).indexOf(citystring) === -1) {
+            //     history[citystring] = {"dists": dists, "times": times, "ips": ips};
+            // } else {
+            //     history[citystring]["dists"] = history[citystring]["dists"].concat(dists);
+            //     history[citystring]["times"] = history[citystring]["times"].concat(times);
+            //     history[citystring]["ips"] = history[citystring]["ips"].concat(ips);
+            // }
+            // // Compute new averages
+            // history[citystring]["mean_dist"] = history[citystring]["dists"].reduce((a, b) => a + b) / history[citystring]["dists"].length;
+            // history[citystring]["mean_time"] = history[citystring]["times"].reduce((a, b) => a + b) / history[citystring]["times"].length;
+            // history[citystring]["std_dist"] = Math.sqrt(history[citystring]["dists"].map(x => Math.pow(x - history[citystring]["mean_dist"], 2)).reduce((a, b) => a + b) / history[citystring]["dists"].length);
+            // history[citystring]["std_time"] = Math.sqrt(history[citystring]["times"].map(x => Math.pow(x - history[citystring]["mean_time"], 2)).reduce((a, b) => a + b) / history[citystring]["times"].length);
         } catch (err) {};
         // Commit back to file
         fs.writeFile(file, JSON.stringify(copy(history)), function(err) {if(err){return console.log(err);}});

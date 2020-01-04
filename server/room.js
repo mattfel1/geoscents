@@ -401,7 +401,8 @@ class Room {
 
       const dists = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.geoError);
       const times = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.clickedAt);
-      helpers.recordGuesses(this.room, this.stringifyTarget().string, dists, times);
+      const ips = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.ip);
+      helpers.recordGuesses(this.room, this.stringifyTarget().string, ips, dists, times);
     }
 
     static broadcastPoint(socket, row, col, color, radius, distance) {

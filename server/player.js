@@ -20,6 +20,7 @@ class Player {
 		this.score = 0;
 		this.rank = rank;
         this.wins = 0;
+        this.ip = ip;
         this.consecutiveRoundsInactive = 0;
         this.consecutiveSecondsInactive = 0;
         this.ready = '';
