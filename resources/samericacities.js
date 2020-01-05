@@ -170,6 +170,19 @@ module.exports = {
       "id": 1862309871
     },
     {
+      "city": "Manaus",
+      "city_ascii": "Manaus",
+      "lat": -3.1,
+      "lng": -60,
+      "country": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "admin_name": "Amazonas",
+      "capital": "admin",
+      "population": 1753000,
+      "id": 1076607274
+    },
+    {
       "city": "Quito",
       "city_ascii": "Quito",
       "lat": -0.215,
@@ -454,6 +467,19 @@ module.exports = {
       "capital": "admin",
       "population": 1000000,
       "id": 1068793894
+    },
+    {
+      "city": "Natal",
+      "city_ascii": "Natal",
+      "lat": -6.9838,
+      "lng": -60.2699,
+      "country": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "admin_name": "Amazonas",
+      "capital": "",
+      "population": 980588,
+      "id": 1076336975
     },
     {
       "city": "Mendoza",
@@ -1067,6 +1093,19 @@ module.exports = {
       "id": 1170481949
     },
     {
+      "city": "Porto Velho",
+      "city_ascii": "Porto Velho",
+      "lat": -8.75,
+      "lng": -63.9,
+      "country": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "admin_name": "Rond\u00f4nia",
+      "capital": "admin",
+      "population": 306180,
+      "id": 1076045591
+    },
+    {
       "city": "San Salvador de Jujuy",
       "city_ascii": "San Salvador de Jujuy",
       "lat": -24.1833,
@@ -1197,6 +1236,19 @@ module.exports = {
       "id": 1170855299
     },
     {
+      "city": "Crato",
+      "city_ascii": "Crato",
+      "lat": -7.4639,
+      "lng": -63.04,
+      "country": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "admin_name": "Amazonas",
+      "capital": "",
+      "population": 273883,
+      "id": 1076425706
+    },
+    {
       "city": "Temuco",
       "city_ascii": "Temuco",
       "lat": -38.73,
@@ -1262,6 +1314,19 @@ module.exports = {
       "id": 1170764265
     },
     {
+      "city": "Rio Branco",
+      "city_ascii": "Rio Branco",
+      "lat": -9.9666,
+      "lng": -67.8,
+      "country": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "admin_name": "Acre",
+      "capital": "admin",
+      "population": 257642,
+      "id": 1076391263
+    },
+    {
       "city": "Buenaventura",
       "city_ascii": "Buenaventura",
       "lat": 3.8724,
@@ -1325,6 +1390,19 @@ module.exports = {
       "capital": "admin",
       "population": 242092,
       "id": 1032525768
+    },
+    {
+      "city": "Boa Vista",
+      "city_ascii": "Boa Vista",
+      "lat": 2.8161,
+      "lng": -60.666,
+      "country": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "admin_name": "Roraima",
+      "capital": "admin",
+      "population": 235150,
+      "id": 1076621300
     },
     {
       "city": "Punto Fijo",
@@ -2679,6 +2757,19 @@ module.exports = {
       "id": 1604871130
     },
     {
+      "city": "Vilhena",
+      "city_ascii": "Vilhena",
+      "lat": -12.7166,
+      "lng": -60.1166,
+      "country": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "admin_name": "Rond\u00f4nia",
+      "capital": "",
+      "population": 63231,
+      "id": 1076196581
+    },
+    {
       "city": "Yopal",
       "city_ascii": "Yopal",
       "lat": 5.347,
@@ -2731,6 +2822,19 @@ module.exports = {
       "id": 1032613063
     },
     {
+      "city": "Manacapuru",
+      "city_ascii": "Manacapuru",
+      "lat": -3.2896,
+      "lng": -60.62,
+      "country": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "admin_name": "Amazonas",
+      "capital": "",
+      "population": 59102,
+      "id": 1076484341
+    },
+    {
       "city": "San Andr\u00e9s",
       "city_ascii": "San Andres",
       "lat": 12.5621,
@@ -2742,6 +2846,19 @@ module.exports = {
       "capital": "admin",
       "population": 58257,
       "id": 1170563968
+    },
+    {
+      "city": "Ariquemes",
+      "city_ascii": "Ariquemes",
+      "lat": -9.9396,
+      "lng": -63.08,
+      "country": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "admin_name": "Rond\u00f4nia",
+      "capital": "",
+      "population": 58096,
+      "id": 1076442639
     },
     {
       "city": "Abancay",
@@ -2770,6 +2887,19 @@ module.exports = {
       "id": 1604230427
     },
     {
+      "city": "Coari",
+      "city_ascii": "Coari",
+      "lat": -4.08,
+      "lng": -63.13,
+      "country": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "admin_name": "Amazonas",
+      "capital": "",
+      "population": 53305,
+      "id": 1076899406
+    },
+    {
       "city": "Puerto Ayacucho",
       "city_ascii": "Puerto Ayacucho",
       "lat": 5.6639,
@@ -2794,6 +2924,19 @@ module.exports = {
       "capital": "admin",
       "population": 51534,
       "id": 1862849758
+    },
+    {
+      "city": "Itacoatiara",
+      "city_ascii": "Itacoatiara",
+      "lat": -3.14,
+      "lng": -58.44,
+      "country": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "admin_name": "Amazonas",
+      "capital": "",
+      "population": 51509,
+      "id": 1076759384
     },
     {
       "city": "Trujillo",
@@ -3212,6 +3355,19 @@ module.exports = {
       "id": 1032251925
     },
     {
+      "city": "Guajar\u00e1-Mirim",
+      "city_ascii": "Guajara-Mirim",
+      "lat": -10.8,
+      "lng": -65.3499,
+      "country": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "admin_name": "Rond\u00f4nia",
+      "capital": "",
+      "population": 69586,
+      "id": 1076692558
+    },
+    {
       "city": "Villa Carlos Paz",
       "city_ascii": "Villa Carlos Paz",
       "lat": -31.42,
@@ -3288,6 +3444,19 @@ module.exports = {
       "capital": "minor",
       "population": 66663,
       "id": 1032781204
+    },
+    {
+      "city": "Ji-Paran\u00e1",
+      "city_ascii": "Ji-Parana",
+      "lat": -10.8333,
+      "lng": -61.967,
+      "country": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "admin_name": "Rond\u00f4nia",
+      "capital": "",
+      "population": 65016,
+      "id": 1076313540
     },
     {
       "city": "Mayag\u00fcez",
@@ -3444,6 +3613,19 @@ module.exports = {
       "capital": "minor",
       "population": 57029,
       "id": 1032081531
+    },
+    {
+      "city": "Cruzeiro do Sul",
+      "city_ascii": "Cruzeiro do Sul",
+      "lat": -7.63,
+      "lng": -72.67,
+      "country": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "admin_name": "Acre",
+      "capital": "",
+      "population": 56862,
+      "id": 1076881427
     },
     {
       "city": "Los Andes",
@@ -3639,6 +3821,19 @@ module.exports = {
       "capital": "",
       "population": 52493,
       "id": 1604707495
+    },
+    {
+      "city": "Tef\u00e9",
+      "city_ascii": "Tefe",
+      "lat": -3.36,
+      "lng": -64.7,
+      "country": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "admin_name": "Amazonas",
+      "capital": "",
+      "population": 51437,
+      "id": 1076049089
     },
     {
       "city": "Tarma",

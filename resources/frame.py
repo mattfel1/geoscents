@@ -20,17 +20,17 @@ file = 'cities.js'
 #lonrng = [72,180]
 #blacklist =  ['Thailand']
 
-outfile = 'asiacities.js'
-latrng = [2,59]
-pop = 400000
-lonrng = [27,156]
-blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', 'Cyprus', 'South Sudan', 'Northern Mariana Islands', 'Guam', 'Macau', 'Sudan']
+#outfile = 'asiacities.js'
+#latrng = [2,59]
+#pop = 400000
+#lonrng = [27,156]
+#blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', 'Cyprus', 'South Sudan', 'Northern Mariana Islands', 'Guam', 'Macau', 'Sudan']
 
-#outfile = 'samericacities.js'
-#latrng = [-54,20]
-#pop = 50000
-#lonrng = [-138, -58]
-#blacklist = ['Mexico', 'Haiti', 'Brazil', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe']
+outfile = 'samericacities.js'
+latrng = [-54,20]
+pop = 50000
+lonrng = [-138, -58]
+blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe']
 
 #outfile = 'eurocities.js'
 #latrng = [37,64]
