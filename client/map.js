@@ -12,6 +12,12 @@ usImg.src = "/resources/us.png";
 var euroImg = new Image();
 euroImg.src = "/resources/euro.png";
 
+var oceaniaImg = new Image();
+oceaniaImg.src = "/resources/oceania.png";
+
+var asiaImg = new Image();
+asiaImg.src = "/resources/asia.png";
+
 var africaImg = new Image();
 africaImg.src = "/resources/africa.png";
 
@@ -141,6 +147,18 @@ class Map {
                 ctx.drawImage(africaImg, 0, 0)
             };
           africaImg.onload();
+      }
+      else if (room == CONSTANTS.ASIA){
+            asiaImg.onload = function () {
+                ctx.drawImage(asiaImg, 0, 0)
+            };
+          asiaImg.onload();
+      }
+      else if (room == CONSTANTS.OCEANIA){
+            oceaniaImg.onload = function () {
+                ctx.drawImage(oceaniaImg, 0, 0)
+            };
+          oceaniaImg.onload();
       }
       else if (room == CONSTANTS.SAMERICA){
             samericaImg.onload = function () {

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const lineReader = require('line-reader');
 const CONSTANTS = require('../resources/constants.js');
-const logfile = '/root/connections.log';
+const logfile = '/scratch/connections.log';
 
 
 const log = (payload) => {
@@ -68,7 +68,15 @@ const recordGuesses = (room, citystring, city, admin, country, ips, dists, times
 };
 
 const logHistogram = (rooms) => {
-    log("Current player histogram: Lobby (" + rooms[CONSTANTS.LOBBY].playerCount() + "), World (" + rooms[CONSTANTS.WORLD].playerCount() + "), US (" + rooms[CONSTANTS.US].playerCount() + "), Eurasia (" + rooms[CONSTANTS.EURO].playerCount() + "), Africa (" + rooms[CONSTANTS.AFRICA].playerCount() + "), SAmerica (" + rooms[CONSTANTS.SAMERICA].playerCount() + ")")
+    log("Current player histogram: Lobby (" + rooms[CONSTANTS.LOBBY].playerCount() +
+        "), World (" + rooms[CONSTANTS.WORLD].playerCount() +
+        "), US (" + rooms[CONSTANTS.US].playerCount() +
+        "), Europe (" + rooms[CONSTANTS.EURO].playerCount() +
+        "), Africa (" + rooms[CONSTANTS.AFRICA].playerCount() +
+        "), SAmerica (" + rooms[CONSTANTS.SAMERICA].playerCount() +
+        "), Asia (" + rooms[CONSTANTS.ASIA].playerCount() +
+        "), Oceania (" + rooms[CONSTANTS.OCEANIA].playerCount()
+        )
 };
 
 const readRecentActivity = (numel) => {

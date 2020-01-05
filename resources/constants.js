@@ -2,10 +2,6 @@ module.exports = {
 
     // Players
     COLORS: ["red", "blue", "purple", "magenta", "grey", "orange", "green", "#1f77b4", "#2ca02c", "#995c00", "#9467bd", "#8c564b", "#e377c2", "#adad1f", "#17becf"],
-    RANDOM_NAMES: ['Emma','Liam','Noah','Olivia','Ava','Isabella','Sophia','Elijah','Logan','Mia','Mason','James','Aiden','Ethan','Lucas','Jacob',
-        'Michael','Matthew','Benjamin','Amelia','Charlotte','Alexander','William','Daniel','Jayden','Merica!','happy','lucky','sleepy','funky',
-        'KnuckleHed','geoMASTA','fish','dog','cat','meow','ruff','woof','AAAAAAAAAA','knightmare','asdf','aoeu','qwerty','Naughty', 'xkcd',
-        'hector', 'dz', 'swed', 'tobies', 'masta', 'coooool', 'BLOOP!', 'Shwoop'],
     TRUTH_COLOR: 'white',
 
     // Map and Panel
@@ -13,7 +9,7 @@ module.exports = {
     MAP_WIDTH: 1530,
     MAP_HEIGHT: 900,
     WORLD_MIN_LAT: 77.0, // Latitude of top edge of map
-    WORLD_MAX_LAT: -65.0, // Latitude of bottom edge of map
+    WORLD_MAX_LAT: -65.5, // Latitude of bottom edge of map
     WORLD_MIN_LON: -180, // Latitude of top edge of map
     WORLD_MAX_LON: 180, // Latitude of bottom edge of map
     WORLD_LAT_TS: 0,
@@ -22,21 +18,31 @@ module.exports = {
     US_MIN_LON: -141.0, // Latitude of top edge of map
     US_MAX_LON: -43.0, // Latitude of bottom edge of map
     US_LAT_TS: 0,
-    EURO_MIN_LAT: 62.0, // Latitude of top edge of map
-    EURO_MAX_LAT: 22.0, // Latitude of bottom edge of map
-    EURO_MIN_LON: -14, // Latitude of top edge of map
-    EURO_MAX_LON: 83, // Latitude of bottom edge of map
+    EURO_MIN_LAT: 66.3, // Latitude of top edge of map
+    EURO_MAX_LAT: 35.0, // Latitude of bottom edge of map
+    EURO_MIN_LON: -36, // Latitude of top edge of map
+    EURO_MAX_LON: 52, // Latitude of bottom edge of map
     EURO_LAT_TS: 0,
     AFRICA_MIN_LAT: 41.0, // Latitude of top edge of map
     AFRICA_MAX_LAT: -36.0, // Latitude of bottom edge of map
     AFRICA_MIN_LON: -60, // Latitude of top edge of map
     AFRICA_MAX_LON: 82, // Latitude of bottom edge of map  
     AFRICA_LAT_TS: 0,
+    ASIA_MIN_LAT: 61.0, // Latitude of top edge of map
+    ASIA_MAX_LAT: -0.5, // Latitude of bottom edge of map
+    ASIA_MIN_LON: 25, // Latitude of top edge of map
+    ASIA_MAX_LON: 158, // Latitude of bottom edge of map
+    ASIA_LAT_TS: 0,
     SAMERICA_MIN_LAT: 24.0, // Latitude of top edge of map
     SAMERICA_MAX_LAT: -56.0, // Latitude of bottom edge of map
     SAMERICA_MIN_LON: -140, // Latitude of top edge of map
     SAMERICA_MAX_LON: 17, // Latitude of bottom edge of map
     SAMERICA_LAT_TS: 0,
+    OCEANIA_MIN_LAT: 10.5, // Latitude of top edge of map
+    OCEANIA_MAX_LAT: -48.0, // Latitude of bottom edge of map
+    OCEANIA_MIN_LON: 69, // Latitude of top edge of map
+    OCEANIA_MAX_LON: 180, // Latitude of bottom edge of map
+    OCEANIA_LAT_TS: 0,
     VERT_WRITE_CELLS: 30,
     HORZ_WRITE_CELLS: 15,
 
@@ -102,7 +108,9 @@ module.exports = {
     WORLD: 'World',
     LOBBY: 'Lobby',
     US: 'N. America',
-    EURO: 'Eurasia',
+    EURO: 'Europe',
+    ASIA: 'Asia',
+    OCEANIA: 'Oceania',
     AFRICA: 'Africa',
     SAMERICA: "S. America",
     MAX_INACTIVE: 10, // Rounds of no click before you get booted

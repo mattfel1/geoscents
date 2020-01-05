@@ -19,7 +19,7 @@ class Room {
       this.playersHistory = new Map();
       this.ordinalCounter = 0;
       this.timer = CONSTANTS.GUESS_DURATION;
-      this.target = {'name':'', 'country':'', 'capital':''};
+      this.target = {'city':'', 'country':'', 'capital':''};
       this.playedCities = {};
       this.state = CONSTANTS.IDLE_STATE;
       this.round = 0;
@@ -186,7 +186,7 @@ class Room {
                   player.clickedAt = this.timer;
                   const geo = Geography.mercToGeo(player.room, player.row, player.col);
                   player.lat = geo['lat'];
-                  player.lon = geo['lon'];
+                  player.lon = geo['lng'];
                   // console.log('click at ' + player.row + ',' + player.col + ' (' + player.lat + ',' + player.lon + ')')
                   socket.emit('draw point', {'row': player.row, 'col': player.col}, player.color, player.radius())
               }
@@ -345,7 +345,7 @@ class Room {
 
     stringifyTarget(){
         let state = '';
-        if (this.target['country'] === 'United States' || this.target['country'] === 'USA' || this.target['country'] === 'Canada' || this.target['country'] === 'Mexico' || this.target['country'] === 'India' || this.target['country'] === 'China') {
+        if (this.target['country'] === 'United States' || this.target['country'] === 'USA' || this.target['country'] === 'Canada' || this.target['country'] === 'Mexico' || this.target['country'] === 'India' || this.target['country'] === 'China' || this.target['country'] === 'Australia') {
             state = ', ' + this.target['admin_name'];
         }
         let pop = 0;
@@ -353,7 +353,7 @@ class Room {
             pop = this.target['population'];
         }
         return {
-            'string': this.target['name'] + state + ', ' + this.target['country'],
+            'string': this.target['city'] + state + ', ' + this.target['country'],
             'pop': pop,
             'majorcapital': this.target['capital'] === "primary",
             'minorcapital': this.target['capital'] === 'admin' || this.target['capital'] === 'minor'
@@ -380,8 +380,8 @@ class Room {
       const updateHistory = (p,r,s) => this.updateHistory(p,r,s);
       const historyScore = (player, payload) => {this.historyScore(player, payload)};
       Array.from(this.players.values()).forEach(function(player) {
-          const merc = Geography.geoToMerc(room,parseFloat(target['lat']), parseFloat(target['lon']));
-          player.geoError = Geography.geoDist(room, player.lat, player.lon, parseFloat(target['lat']), parseFloat(target['lon']));
+          const merc = Geography.geoToMerc(room,parseFloat(target['lat']), parseFloat(target['lng']));
+          player.geoError = Geography.geoDist(room, player.lat, player.lon, parseFloat(target['lat']), parseFloat(target['lng']));
           player.mercError = Geography.mercDist(room, player.row, player.col, merc['row'], merc['col']);
           if (!player.clicked || isNaN(player.mercError)) {
               player.mercError = 9999;
@@ -419,7 +419,7 @@ class Room {
     }
 
     revealAll(socket) {
-        const answer = Geography.geoToMerc(this.room, this.target['lat'], this.target['lon']);
+        const answer = Geography.geoToMerc(this.room, this.target['lat'], this.target['lng']);
         Room.broadcastAnswer(socket, answer['row'], answer['col']);
         this.players.forEach((player,id) => {
             Room.broadcastPoint(socket, player.row, player.col, player.color, player.radius(), player.geoError);
@@ -561,7 +561,7 @@ class Room {
               }
           } else if (this.state === CONSTANTS.SETUP_STATE) {
               this.target = Geography.randomCity(this.room, this.blacklist);
-              if (this.room === CONSTANTS.US) this.blacklist.push(this.target['admin_name']);
+              if (this.room === CONSTANTS.US || this.room === CONSTANTS.OCEANIA) this.blacklist.push(this.target['admin_name']);
               else this.blacklist.push(this.target['country']);
               this.timerColor = CONSTANTS.GUESS_COLOR;
               Array.from(this.players.values()).forEach((p, id) => {
@@ -636,7 +636,7 @@ class Room {
         const base = "<b>Round " + round + "</b>: " + star + thisTarget['string'] + " (pop: " + thisTarget['pop'].toLocaleString() + ")";
         let part2 = "%2C+" + this.target['country'];
         if (this.target['country'] === "USA") part2 = "%2C+" + this.target['admin_name'];
-        const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + this.target['name'] + part2 + "&go=Go&ns0=1\">Learn!</a><br>";
+        const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + this.target['city'] + part2 + "&go=Go&ns0=1\">Learn!</a><br>";
         this.clients.forEach((socket,id) => {
             socket.emit('add history',  room, base + link);
             socket.emit('add history', room, "<br>");

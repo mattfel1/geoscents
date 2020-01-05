@@ -47,7 +47,7 @@ $(document).ready(function(){
     const sounds = new Sounds(socket);
 
     const commands = new Commands(socket);
-    socket.on('update counts', (l,w,u,e,a,s) => {commands.updateCounts(l,w,u,e,a,s);commands.postButtons();})
+    socket.on('update counts', (l,w,u,e,a,s,as,oc) => {commands.updateCounts(l,w,u,e,a,s,as,oc);commands.postButtons();})
     socket.on('draw buttons', () => {commands.postButtons()});
     socket.on('draw timer', (time,color) => {commands.postTime(time,color)});
     socket.on('draw prepare', (round) => {commands.drawCommand(" seconds until new game auto-starts...", "", "", "", round, true, false)});

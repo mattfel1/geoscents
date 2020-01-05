@@ -5,6 +5,8 @@ const WORLDCITIES = require('../resources/worldcities.js').CITIES;
 const USCITIES = require('../resources/uscities.js').CITIES;
 const EUROCITIES = require('../resources/eurocities.js').CITIES;
 const AFRICACITIES = require('../resources/africacities.js').CITIES;
+const ASIACITIES = require('../resources/asiacities.js').CITIES;
+const OCEANIACITIES = require('../resources/oceaniacities.js').CITIES;
 const SAMERICACITIES = require('../resources/samericacities.js').CITIES;
 const CONSTANTS = require('../resources/constants.js');
 
@@ -36,6 +38,18 @@ const randomCity = (room, blacklist) => {
             if (!blacklist.includes(proposal['country']) || i >= 10) acceptable = true;
             else i = i + 1;
         }
+    } else if (room === CONSTANTS.ASIA) {
+        while (!acceptable) {
+            proposal = ASIACITIES[Math.floor(Math.random() * ASIACITIES.length)];
+            if (!blacklist.includes(proposal['country']) || i >= 10) acceptable = true;
+            else i = i + 1;
+        }
+    } else if (room === CONSTANTS.OCEANIA) {
+        while (!acceptable) {
+            proposal = OCEANIACITIES[Math.floor(Math.random() * OCEANIACITIES.length)];
+            if (!blacklist.includes(proposal['admin_name']) || i >= 10) acceptable = true;
+            else i = i + 1;
+        }
     } else if (room === CONSTANTS.SAMERICA) {
         while (!acceptable) {
             proposal = SAMERICACITIES[Math.floor(Math.random() * SAMERICACITIES.length)];
@@ -55,7 +69,7 @@ const randomCity = (room, blacklist) => {
 const mercDist = (room,row1,col1,row2,col2) => {
     const row_err = Math.pow(row1 - row2, 2);
     let col_err = Math.min(Math.pow(col1 - col2, 2), Math.pow(col1 - col2 + CONSTANTS.MAP_WIDTH, 2), Math.pow(col1 - col2 - CONSTANTS.MAP_WIDTH, 2));
-    if (room === CONSTANTS.US || room === CONSTANTS.EURO || room === CONSTANTS.AFRICA || room === CONSTANTS.SAMERICA) { // No wrap
+    if (room === CONSTANTS.US || room === CONSTANTS.EURO || room === CONSTANTS.AFRICA || room === CONSTANTS.SAMERICA || room == CONSTANTS.ASIA || room == CONSTANTS.OCEANIA) { // No wrap
         col_err = Math.pow(col1 - col2, 2);
     }
     return Math.sqrt(row_err + col_err);
@@ -77,6 +91,8 @@ const geoDist = (room,lat1,lon1,lat2,lon2) => {
 const fullDiag = 2 * geoDist(CONSTANTS.WORLD, (CONSTANTS.WORLD_MAX_LAT + CONSTANTS.WORLD_MIN_LAT) / 2, (CONSTANTS.WORLD_MAX_LON + CONSTANTS.WORLD_MIN_LON) / 2, CONSTANTS.WORLD_MIN_LAT, CONSTANTS.WORLD_MIN_LON);
 const euroDiag = geoDist(CONSTANTS.EURO, CONSTANTS.EURO_MAX_LAT, CONSTANTS.EURO_MAX_LON, CONSTANTS.EURO_MIN_LAT, CONSTANTS.EURO_MIN_LON);
 const africaDiag = geoDist(CONSTANTS.AFRICA, CONSTANTS.AFRICA_MAX_LAT, CONSTANTS.AFRICA_MAX_LON, CONSTANTS.AFRICA_MIN_LAT, CONSTANTS.AFRICA_MIN_LON);
+const asiaDiag = geoDist(CONSTANTS.ASIA, CONSTANTS.ASIA_MAX_LAT, CONSTANTS.ASIA_MAX_LON, CONSTANTS.ASIA_MIN_LAT, CONSTANTS.ASIA_MIN_LON);
+const oceaniaDiag = geoDist(CONSTANTS.OCEANIA, CONSTANTS.OCEANIA_MAX_LAT, CONSTANTS.OCEANIA_MAX_LON, CONSTANTS.OCEANIA_MIN_LAT, CONSTANTS.OCEANIA_MIN_LON);
 const usDiag = geoDist(CONSTANTS.US, CONSTANTS.US_MAX_LAT, CONSTANTS.US_MAX_LON, CONSTANTS.US_MIN_LAT, CONSTANTS.US_MIN_LON);
 const samericaDiag = geoDist(CONSTANTS.SAMERICA, CONSTANTS.SAMERICA_MAX_LAT, CONSTANTS.SAMERICA_MAX_LON, CONSTANTS.SAMERICA_MIN_LAT, CONSTANTS.SAMERICA_MIN_LON);
 
@@ -86,6 +102,8 @@ const score = (room, geoDist, mercDist, timeBonus) => {
     if (room === CONSTANTS.EURO) scalingFactor = fullDiag / euroDiag;
     else if (room === CONSTANTS.EURO) scalingFactor = fullDiag / euroDiag;
     else if (room === CONSTANTS.AFRICA) scalingFactor = fullDiag / africaDiag;
+    else if (room === CONSTANTS.ASIA) scalingFactor = fullDiag / asiaDiag;
+    else if (room === CONSTANTS.OCEANIA) scalingFactor = fullDiag / oceaniaDiag;
     else if (room === CONSTANTS.US) scalingFactor = fullDiag / usDiag;
     else if (room === CONSTANTS.SAMERICA) scalingFactor = fullDiag / samericaDiag;
 
@@ -132,6 +150,18 @@ const mercToGeo = (room,row,col) => {
         min_lon = CONSTANTS.AFRICA_MIN_LON;
         max_lon = CONSTANTS.AFRICA_MAX_LON;
         lat_ts = CONSTANTS.AFRICA_LAT_TS;
+    } else if (room === CONSTANTS.ASIA) {
+        zero_lat = CONSTANTS.ASIA_MIN_LAT;
+        max_lat = CONSTANTS.ASIA_MAX_LAT;
+        min_lon = CONSTANTS.ASIA_MIN_LON;
+        max_lon = CONSTANTS.ASIA_MAX_LON;
+        lat_ts = CONSTANTS.ASIA_LAT_TS;
+    } else if (room === CONSTANTS.OCEANIA) {
+        zero_lat = CONSTANTS.OCEANIA_MIN_LAT;
+        max_lat = CONSTANTS.OCEANIA_MAX_LAT;
+        min_lon = CONSTANTS.OCEANIA_MIN_LON;
+        max_lon = CONSTANTS.OCEANIA_MAX_LON;
+        lat_ts = CONSTANTS.OCEANIA_LAT_TS;
     } else if (room === CONSTANTS.SAMERICA) {
         zero_lat = CONSTANTS.SAMERICA_MIN_LAT;
         max_lat = CONSTANTS.SAMERICA_MAX_LAT;
@@ -143,7 +173,7 @@ const mercToGeo = (room,row,col) => {
     const eqRange = Math.atanh(Math.sin(max_lat * Math.PI/180)) - eqMin;
     const lon = ((col) * (max_lon - min_lon) / CONSTANTS.MAP_WIDTH) + min_lon;
     const lat = Math.asin(Math.tanh(((row) * eqRange / CONSTANTS.MAP_HEIGHT) + eqMin)) * 180 / Math.PI;
-    return {'lat': lat, 'lon': lon}
+    return {'lat': lat, 'lng': lon}
 };
 
 const geoToMerc = (room,lat, lon) => {
@@ -170,6 +200,18 @@ const geoToMerc = (room,lat, lon) => {
         min_lon = CONSTANTS.AFRICA_MIN_LON;
         max_lon = CONSTANTS.AFRICA_MAX_LON;
         lat_ts = CONSTANTS.AFRICA_LAT_TS;
+    } else if (room === CONSTANTS.ASIA) {
+        zero_lat = CONSTANTS.ASIA_MIN_LAT;
+        max_lat = CONSTANTS.ASIA_MAX_LAT;
+        min_lon = CONSTANTS.ASIA_MIN_LON;
+        max_lon = CONSTANTS.ASIA_MAX_LON;
+        lat_ts = CONSTANTS.ASIA_LAT_TS;
+    } else if (room === CONSTANTS.OCEANIA) {
+        zero_lat = CONSTANTS.OCEANIA_MIN_LAT;
+        max_lat = CONSTANTS.OCEANIA_MAX_LAT;
+        min_lon = CONSTANTS.OCEANIA_MIN_LON;
+        max_lon = CONSTANTS.OCEANIA_MAX_LON;
+        lat_ts = CONSTANTS.OCEANIA_LAT_TS;
     } else if (room === CONSTANTS.SAMERICA) {
         zero_lat = CONSTANTS.SAMERICA_MIN_LAT;
         max_lat = CONSTANTS.SAMERICA_MAX_LAT;
