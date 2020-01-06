@@ -1,5 +1,6 @@
-[
-  {
+module.exports = {
+  CITIES: [
+      {
     "city": "Tokyo",
     "city_ascii": "Tokyo",
     "lat": 35.685,
@@ -7760,4 +7761,4 @@
     "population": 219599,
     "id": 1156369972
   }
-]
+]};

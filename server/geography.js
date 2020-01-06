@@ -11,6 +11,8 @@ const SAMERICACITIES = require('../resources/samericacities.js').CITIES;
 const CONSTANTS = require('../resources/constants.js');
 
 const randomCity = (room, blacklist) => {
+    console.log(ASIACITIES)
+    console.log(AFRICACITIES)
     let acceptable = false;
     let i = 0;
     let proposal = null;
