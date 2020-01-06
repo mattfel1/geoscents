@@ -83,6 +83,7 @@ const WELCOME_MESSAGE1 = 'Welcome to Geoscents, an online multiplayer world geog
                           'running!  Feel free to make pull requests or leave feedback on github.' +
                           ' This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>.';
 
+const WELCOME_MESSAGE2 = '[ <b>UPDATE 1/6/2019</b> ] The yearly records are supposed to reset on 1/1/2020, but because of a mistake with cron, they were erroneously reset again on 1/6/2020.  Sorry!'
 
 io.on('connection', (socket) => {
 	console.log('a user connected:', socket.id);
@@ -93,6 +94,7 @@ io.on('connection', (socket) => {
       helpers.logHistogram(rooms);
       helpers.log("User connected    " + socket.handshake.address);
 	  socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
+	  socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE2);
 	});
 	socket.on('disconnect', function() {
       if (playerRooms.has(socket.id)) {
