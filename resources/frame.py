@@ -14,17 +14,17 @@ file = 'cities.js'
 #lonrng = [-141, -43]
 #blacklist = ['Barbados', 'Curaçao', 'Aruba', 'Saint Vincent And The Grenadines', 'Saint Lucia', 'Antigua And Barbuda', 'Grenada', 'Dominica', 'Saint Kitts And Nevis', 'Sint Maarten', 'Martinique', 'Guadeloupe']
 
-#outfile = 'oceaniacities.js'
-#latrng = [-46,9]
-#pop = 10000
-#lonrng = [72,180]
-#blacklist =  ['Thailand']
+outfile = 'oceaniacities.js'
+latrng = [-46,9]
+pop = 10000
+lonrng = [72,180]
+blacklist =  ['Thailand', 'Sri Lanka', 'India']
 
-outfile = 'asiacities.js'
-latrng = [2,59]
-pop = 400000
-lonrng = [27,156]
-blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', 'Cyprus', 'South Sudan', 'Northern Mariana Islands', 'Guam', 'Macau', 'Sudan', 'Belarus']
+#outfile = 'asiacities.js'
+#latrng = [2,59]
+#pop = 400000
+#lonrng = [27,156]
+#blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', 'Cyprus', 'South Sudan', 'Northern Mariana Islands', 'Guam', 'Macau', 'Sudan', 'Belarus']
 
 #outfile = 'samericacities.js'
 #latrng = [-54,20]
