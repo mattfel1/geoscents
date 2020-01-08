@@ -612,7 +612,7 @@ class Room {
               const player = this.players.get(id);
               if (player.id === senderSocket.id) senderName = "*" + senderName;
           }
-          const sent_msg = "[ " + room + " <font color='" + senderColor + "'>" + senderName + "</font> ]: " + new_sent_msg + "<br>";
+          const sent_msg = "[ " + room + " <b><font color='" + senderColor + "'>" + senderName + "</font></b> ]: " + new_sent_msg + "<br>";
           socket.emit("update messages", room, sent_msg);
           cb();
       });
