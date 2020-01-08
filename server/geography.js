@@ -11,67 +11,95 @@ const SAMERICACITIES = require('../resources/samericacities.js').CITIES;
 const CONSTANTS = require('../resources/constants.js');
 
 const randomCity = (room, blacklist) => {
-    console.log(ASIACITIES)
-    console.log(AFRICACITIES)
     let acceptable = false;
     let i = 0;
     let proposal = null;
+    let timeout = 20;
     if (room === CONSTANTS.WORLD) {
         while (!acceptable) {
             proposal = WORLDCITIES[Math.floor(Math.random() * WORLDCITIES.length)];
-            if (!blacklist.includes(proposal['country']) || i >= 10) acceptable = true;
+            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
     } else if (room === CONSTANTS.US) {
         while (!acceptable) {
             proposal = USCITIES[Math.floor(Math.random() * USCITIES.length)];
-            if (!blacklist.includes(proposal['admin_name']) || i >= 10) acceptable = true;
+            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
     } else if (room === CONSTANTS.EURO) {
         while (!acceptable) {
             proposal = EUROCITIES[Math.floor(Math.random() * EUROCITIES.length)];
-            if (!blacklist.includes(proposal['country']) || i >= 10) acceptable = true;
+            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
     } else if (room === CONSTANTS.AFRICA) {
         while (!acceptable) {
             proposal = AFRICACITIES[Math.floor(Math.random() * AFRICACITIES.length)];
-            if (!blacklist.includes(proposal['country']) || i >= 10) acceptable = true;
+            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
     } else if (room === CONSTANTS.ASIA) {
         while (!acceptable) {
             proposal = ASIACITIES[Math.floor(Math.random() * ASIACITIES.length)];
-            if (!blacklist.includes(proposal['country']) || i >= 10) acceptable = true;
+            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
     } else if (room === CONSTANTS.OCEANIA) {
         while (!acceptable) {
             proposal = OCEANIACITIES[Math.floor(Math.random() * OCEANIACITIES.length)];
-            if (!blacklist.includes(proposal['admin_name']) || i >= 10) acceptable = true;
+            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
     } else if (room === CONSTANTS.SAMERICA) {
         while (!acceptable) {
             proposal = SAMERICACITIES[Math.floor(Math.random() * SAMERICACITIES.length)];
-            if (!blacklist.includes(proposal['country']) || i >= 10) acceptable = true;
+            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
     } else {
         while (!acceptable) {
             proposal = WORLDCITIES[Math.floor(Math.random() * WORLDCITIES.length)];
-            if (!blacklist.includes(proposal['country']) || i >= 10) acceptable = true;
+            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
     }
-    return proposal;
+    if (requireUniqueAdmin(room, proposal)) {blacklist.push(proposal['admin_name'])}
+    else blacklist.push(proposal['country']);
+    return [proposal, blacklist];
+};
+
+// Include the admin field when displaying city/country string to player
+const includeAdmin = (target) => {
+    return target['country'] === 'United States' ||
+    target['country'] === 'USA' ||
+    target['country'] === 'Canada' ||
+    target['country'] === 'Mexico' ||
+    target['country'] === 'India' ||
+    target['country'] === 'China' ||
+    target['country'] === 'Australia' ||
+    target['country'] === 'Russia' ||
+    target['country'] === 'Indonesia' ||
+    target['country'] === 'Brazil'
+};
+
+// Allow this country to be repeated if the state is unique
+const requireUniqueAdmin = (room, target) => {
+    if (room === CONSTANTS.US && (target['country'] === 'USA' || target['country'] === 'Canada')) {return true}
+    else if (room === CONSTANTS.ASIA && (target['country'] === 'China' || target['country'] === 'India')) {return true}
+    else if (room === CONSTANTS.OCEANIA && target['country'] === 'Australia') {return true}
+    else return false
+};
+
+const uniqueInBlacklist = (room, target, blacklist) => {
+    if (requireUniqueAdmin(room, target)) return !blacklist.includes(target['admin_name']);
+    else return !blacklist.includes(target['country']);
 };
 
 const mercDist = (room,row1,col1,row2,col2) => {
     const row_err = Math.pow(row1 - row2, 2);
     let col_err = Math.min(Math.pow(col1 - col2, 2), Math.pow(col1 - col2 + CONSTANTS.MAP_WIDTH, 2), Math.pow(col1 - col2 - CONSTANTS.MAP_WIDTH, 2));
-    if (room === CONSTANTS.US || room === CONSTANTS.EURO || room === CONSTANTS.AFRICA || room === CONSTANTS.SAMERICA || room == CONSTANTS.ASIA || room == CONSTANTS.OCEANIA) { // No wrap
+    if (room === CONSTANTS.US || room === CONSTANTS.EURO || room === CONSTANTS.AFRICA || room === CONSTANTS.SAMERICA || room === CONSTANTS.ASIA || room === CONSTANTS.OCEANIA) { // No wrap
         col_err = Math.pow(col1 - col2, 2);
     }
     return Math.sqrt(row_err + col_err);
@@ -240,5 +268,7 @@ module.exports = {
     geoDist,
     mercToGeo,
     geoToMerc,
-    score
+    score,
+    includeAdmin,
+    requireUniqueAdmin
 }

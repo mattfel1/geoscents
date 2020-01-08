@@ -18,7 +18,7 @@ outfile = 'oceaniacities.js'
 latrng = [-46,9]
 pop = 10000
 lonrng = [72,180]
-blacklist =  ['Thailand', 'Sri Lanka', 'India']
+blacklist =  ['Thailand', 'Sri Lanka', 'India', 'Philippines']
 
 #outfile = 'asiacities.js'
 #latrng = [2,59]

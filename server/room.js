@@ -345,18 +345,9 @@ class Room {
 
     stringifyTarget(){
         let state = '';
-        if (this.target['country'] === 'United States' ||
-            this.target['country'] === 'USA' ||
-            this.target['country'] === 'Canada' ||
-            this.target['country'] === 'Mexico' ||
-            this.target['country'] === 'India' ||
-            this.target['country'] === 'China' ||
-            this.target['country'] === 'Australia' ||
-            this.target['country'] === 'Russia' ||
-            this.target['country'] === 'Indonesia' ||
-            this.target['country'] === 'Brazil') {
-              state = ', ' + this.target['admin_name'];
-            }
+        if (Geography.includeAdmin(this.target)) {
+            state = ', ' + this.target['admin_name'];
+        }
         let pop = 0;
         if (this.target['population'] !== '') {
             pop = this.target['population'];
@@ -569,9 +560,7 @@ class Room {
                   Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
               }
           } else if (this.state === CONSTANTS.SETUP_STATE) {
-              this.target = Geography.randomCity(this.room, this.blacklist);
-              if (this.room === CONSTANTS.US || this.room === CONSTANTS.OCEANIA) this.blacklist.push(this.target['admin_name']);
-              else this.blacklist.push(this.target['country']);
+              [this.target, this.blacklist] = Geography.randomCity(this.room, this.blacklist);
               this.timerColor = CONSTANTS.GUESS_COLOR;
               Array.from(this.players.values()).forEach((p, id) => {
                   p.reset()

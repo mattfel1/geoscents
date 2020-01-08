@@ -1,5 +1,5 @@
 module.exports = {
-    CITIES: [
+  CITIES: [
   {
     "city": "Jakarta",
     "city_ascii": "Jakarta",
@@ -170,19 +170,6 @@ module.exports = {
     "id": 1458988644
   },
   {
-    "city": "Davao",
-    "city_ascii": "Davao",
-    "lat": 7.11,
-    "lng": 125.63,
-    "country": "Philippines",
-    "iso2": "PH",
-    "iso3": "PHL",
-    "admin_name": "Davao",
-    "capital": "admin",
-    "population": 1402000,
-    "id": 1608906877
-  },
-  {
     "city": "Semarang",
     "city_ascii": "Semarang",
     "lat": -6.9666,
@@ -259,19 +246,6 @@ module.exports = {
     "capital": "",
     "population": 1134616,
     "id": 1036468001
-  },
-  {
-    "city": "Cagayan de Oro",
-    "city_ascii": "Cagayan de Oro",
-    "lat": 8.4508,
-    "lng": 124.6853,
-    "country": "Philippines",
-    "iso2": "PH",
-    "iso3": "PHL",
-    "admin_name": "Cagayan de Oro",
-    "capital": "admin",
-    "population": 1121561,
-    "id": 1608831546
   },
   {
     "city": "Wellington",
@@ -469,19 +443,6 @@ module.exports = {
     "id": 1458509635
   },
   {
-    "city": "General Santos",
-    "city_ascii": "General Santos",
-    "lat": 6.1108,
-    "lng": 125.1747,
-    "country": "Philippines",
-    "iso2": "PH",
-    "iso3": "PHL",
-    "admin_name": "General Santos",
-    "capital": "admin",
-    "population": 950530,
-    "id": 1608171585
-  },
-  {
     "city": "Bogor",
     "city_ascii": "Bogor",
     "lat": -6.57,
@@ -584,19 +545,6 @@ module.exports = {
     "capital": "admin",
     "population": 788706,
     "id": 1458467506
-  },
-  {
-    "city": "Zamboanga City",
-    "city_ascii": "Zamboanga City",
-    "lat": 6.92,
-    "lng": 122.08,
-    "country": "Philippines",
-    "iso2": "PH",
-    "iso3": "PHL",
-    "admin_name": "Zamboanga",
-    "capital": "admin",
-    "population": 773000,
-    "id": 1608189351
   },
   {
     "city": "Denpasar",
@@ -831,19 +779,6 @@ module.exports = {
     "capital": "admin",
     "population": 481654,
     "id": 1458194263
-  },
-  {
-    "city": "Iligan",
-    "city_ascii": "Iligan",
-    "lat": 8.1712,
-    "lng": 124.2154,
-    "country": "Philippines",
-    "iso2": "PH",
-    "iso3": "PHL",
-    "admin_name": "Iligan",
-    "capital": "admin",
-    "population": 464599,
-    "id": 1608000268
   },
   {
     "city": "Cranbourne",
@@ -1091,19 +1026,6 @@ module.exports = {
     "capital": "admin",
     "population": 282396,
     "id": 1360696757
-  },
-  {
-    "city": "Cotabato",
-    "city_ascii": "Cotabato",
-    "lat": 7.2169,
-    "lng": 124.2484,
-    "country": "Philippines",
-    "iso2": "PH",
-    "iso3": "PHL",
-    "admin_name": "Cotabato",
-    "capital": "admin",
-    "population": 279519,
-    "id": 1608753128
   },
   {
     "city": "Sukabumi",
@@ -1405,19 +1327,6 @@ module.exports = {
     "id": 1458170112
   },
   {
-    "city": "Butuan",
-    "city_ascii": "Butuan",
-    "lat": 8.9495,
-    "lng": 125.5436,
-    "country": "Philippines",
-    "iso2": "PH",
-    "iso3": "PHL",
-    "admin_name": "Butuan",
-    "capital": "admin",
-    "population": 190557,
-    "id": 1608000722
-  },
-  {
     "city": "Ternate",
     "city_ascii": "Ternate",
     "lat": 0.793,
@@ -1559,19 +1468,6 @@ module.exports = {
     "capital": "",
     "population": 160991,
     "id": 1036870987
-  },
-  {
-    "city": "Pagadian",
-    "city_ascii": "Pagadian",
-    "lat": 7.853,
-    "lng": 123.507,
-    "country": "Philippines",
-    "iso2": "PH",
-    "iso3": "PHL",
-    "admin_name": "Zamboanga del Sur",
-    "capital": "admin",
-    "population": 159590,
-    "id": 1608329397
   },
   {
     "city": "Cairns",
@@ -1910,19 +1806,6 @@ module.exports = {
     "capital": "",
     "population": 101659,
     "id": 1458126062
-  },
-  {
-    "city": "Ozamiz City",
-    "city_ascii": "Ozamiz City",
-    "lat": 8.1462,
-    "lng": 123.8444,
-    "country": "Philippines",
-    "iso2": "PH",
-    "iso3": "PHL",
-    "admin_name": "Misamis Occidental",
-    "capital": "",
-    "population": 97806,
-    "id": 1608100412
   },
   {
     "city": "Darwin",
