@@ -164,7 +164,7 @@ io.on('connection', (socket) => {
     });
     socket.on('renderMap', (style) => {
         const room = playerRooms.get(socket.id);
-        helpers.log("Player " +  socket.handshake.address + " " + room.getPlayerName(socket) + " switched to map style " + style);
+        helpers.log("Player " +  socket.handshake.address + " switched to map style " + style);
     
 	io.sockets.emit('render map', socket.id, style, room.room);
     });
