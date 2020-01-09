@@ -84,10 +84,10 @@ var playerRooms = new Map();
 const WELCOME_MESSAGE1 = '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
                           'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
                           'If you are enjoying this game, consider donating at the bottom of the page to help keep the server ' +
-                          'running!  Feel free to make pull requests or leave feedback on github.';
-const REFERENCE1 = '[ <b>REFERENCE</b> ] Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
-const REFERENCE2 = '[ <b>REFERENCE</b> ] This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>.'
-const REFERENCE3 = '[ <b>REFERENCE</b> ] The jingle at the start of the game was composed and recorded by Marc Ryan Feldman.'
+                          'running!  Feel free to make pull requests or leave feedback on github.<br>';
+const REFERENCE1 = '[ <b>REFERENCE</b> ] Terrain map rendering provided by by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.  Satellite map rendering provided by Google Tiles.  All maps generated using python cartopy 0.17.0<br>'
+const REFERENCE2 = '[ <b>REFERENCE</b> ] This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>.<br>'
+const REFERENCE3 = '[ <b>REFERENCE</b> ] The jingle at the start of the game was composed and recorded by Marc Ryan Feldman.<br>'
 
 //const WELCOME_MESSAGE2 = '[ <b>UPDATE 1/6/2019</b> ] The yearly records are supposed to reset on 1/1/2020, but because of a mistake with cron, they were erroneously reset again on 1/6/2020.  Sorry!<br>'
 
