@@ -15,6 +15,9 @@ class Commands {
         this.oceania_count = 0;
         this.samerica_count = 0;
         this.lobby_count = 0;
+        this.mapStyle = 'terrain';
+        this.lastCommand = {'timeDescrip': '', 'citystring': '', 'capital': false, 'iso2': '', 'round': 0, 'button': false, 'clicked': false};
+        this.lastTime = {'time': 10, 'color': 'white'};
         this.ready_button = {
             x:this.canvas.width*5/9,
             y:5,
@@ -36,8 +39,14 @@ class Commands {
         this.muted = false;
     }
 
-
+    drawLastCommand(id) {
+        if (this.myRoom !== CONSTANTS.LOBBY) {
+            this.drawCommand(this.lastCommand['timeDescrip'], this.lastCommand['citystring'], this.lastCommand['capital'], this.lastCommand['iso2'], this.lastCommand['round'], this.lastCommand['button'], this.lastCommand['clicked']);
+            this.postTime(this.lastTime['time'], this.lastTime['color']);
+        }
+    }
     drawCommand(timeDescrip, citystring, capital, iso2, round, button, clicked) {
+        this.lastCommand = {'timeDescrip': timeDescrip, 'citystring': citystring, 'capital': capital, 'iso2': iso2, 'round': round, 'button': button, 'clicked': clicked};
         this.ctx.globalAlpha = 0.9;
         this.ctx.fillStyle = CONSTANTS.BGCOLOR;
         this.ctx.fillRect(this.command_window['x'], this.command_window['y'], this.command_window['width'], this.command_window['height']);
@@ -85,8 +94,17 @@ class Commands {
     postButtons() {
         const socket = this.socket;
         $('#commands').empty();
-        if (this.muted) $('#commands').append($("<button class='mute-btn' id='mute_button'>🔇 <font color=\"white\">(muted)</font></button>"));
-        else $('#commands').append($("<button class='mute-btn' id='mute_button'>🔊</button>"));
+
+        let pressed1 = ''; if (this.mapStyle === 'classic') pressed1 = '-clicked';
+        let pressed2 = ''; if (this.mapStyle === 'terrain') pressed2 = '-clicked';
+        let pressed3 = ''; if (this.mapStyle === 'satellite') pressed3 = '-clicked';
+        let button1 = "<div id='classic_button' class='map-style-btn-container'><button class='map-style-btn" + pressed1 + "'>Classic</button></div>";
+        let button2 = "<div id='terrain_button' class='map-style-btn-container'><button class='map-style-btn" + pressed2 + "'>Terrain</button></div>";
+        let button3 = "<div id='satellite_button' class='map-style-btn-container'><button class='map-style-btn" + pressed3 + "'>Satellite</button></div>";
+        $('#commands').append($("<div id='map-btns' style=\"display: inline-block\">" + button1 + button2 + button3 + "</div>"));
+
+        if (this.muted) $('#commands').append($("<button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔇 <font color=\"white\">(muted)</font></button>"));
+        else $('#commands').append($("<button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔊</button><br>"));
         $('#commands').append($("<button class='lobby-btn' id='lobby_button'>To Lobby (" + this.lobby_count + " players)</button><br>"))
         $('#commands').append($("<button class='room-btn' id='world_button'>World (" + this.world_count + " players)</button><br>"))
         $('#commands').append($("<button class='room-btn' id='euro_button'>Europe (" + this.euro_count + " players)</button>  "))
@@ -98,19 +116,38 @@ class Commands {
 
         var room = this.myRoom;
         $('#mute_button').bind("click", () => {socket.emit('mute')});
-        $('#lobby_button').bind("click", () => {if (room != CONSTANTS.LOBBY) socket.emit('moveTo', CONSTANTS.LOBBY)});
-        $('#world_button').bind("click", () => {if (room != CONSTANTS.WORLD) socket.emit('moveTo', CONSTANTS.WORLD)});
-        $('#us_button').bind("click", () => {if (room != CONSTANTS.US) socket.emit('moveTo', CONSTANTS.US)});
-        $('#euro_button').bind("click", () => {if (room != CONSTANTS.EURO) socket.emit('moveTo', CONSTANTS.EURO)});
-        $('#africa_button').bind("click", () => {if (room != CONSTANTS.AFRICA) socket.emit('moveTo', CONSTANTS.AFRICA)});
-        $('#asia_button').bind("click", () => {if (room != CONSTANTS.ASIA) socket.emit('moveTo', CONSTANTS.ASIA)});
-        $('#oceania_button').bind("click", () => {if (room != CONSTANTS.OCEANIA) socket.emit('moveTo', CONSTANTS.OCEANIA)});
-        $('#samerica_button').bind("click", () => {if (room != CONSTANTS.SAMERICA) socket.emit('moveTo', CONSTANTS.SAMERICA)});
+        $('#classic_button').bind("click", () => {socket.emit('renderMap', 'classic')});
+        $('#terrain_button').bind("click", () => {socket.emit('renderMap', 'terrain')});
+        $('#satellite_button').bind("click", () => {socket.emit('renderMap', 'satellite')});
+        $('#lobby_button').bind("click", () => {if (room !== CONSTANTS.LOBBY) socket.emit('moveTo', CONSTANTS.LOBBY)});
+        $('#world_button').bind("click", () => {if (room !== CONSTANTS.WORLD) socket.emit('moveTo', CONSTANTS.WORLD)});
+        $('#us_button').bind("click", () => {if (room !== CONSTANTS.US) socket.emit('moveTo', CONSTANTS.US)});
+        $('#euro_button').bind("click", () => {if (room !== CONSTANTS.EURO) socket.emit('moveTo', CONSTANTS.EURO)});
+        $('#africa_button').bind("click", () => {if (room !== CONSTANTS.AFRICA) socket.emit('moveTo', CONSTANTS.AFRICA)});
+        $('#asia_button').bind("click", () => {if (room !== CONSTANTS.ASIA) socket.emit('moveTo', CONSTANTS.ASIA)});
+        $('#oceania_button').bind("click", () => {if (room !== CONSTANTS.OCEANIA) socket.emit('moveTo', CONSTANTS.OCEANIA)});
+        $('#samerica_button').bind("click", () => {if (room !== CONSTANTS.SAMERICA) socket.emit('moveTo', CONSTANTS.SAMERICA)});
 
     }
 
+    setStyle(id, style) {
+        if (this.socket.id === id) {
+            this.mapStyle = style;
+            $('#classic_button').empty();
+            let pressed1 = ''; if (this.mapStyle === 'classic') pressed1 = '-clicked';
+            $('#classic_button').append($("<button class='map-style-btn" + pressed1 + "'>Classic</button>"));
+            $('#terrain_button').empty();
+            let pressed2 = ''; if (this.mapStyle === 'terrain') pressed2 = '-clicked';
+            $('#terrain_button').append($("<button class='map-style-btn" + pressed2 + "'>Terrain</button>"));
+            $('#satellite_button').empty();
+            let pressed3 = ''; if (this.mapStyle === 'satellite') pressed3 = '-clicked';
+            $('#satellite_button').append($("<button class='map-style-btn" + pressed3 + "'>Satellite</button>"));
+            this.drawLastCommand(id);
+        }
+    }
 
     postTime(time, color) {
+        this.lastTime = {'time': time, 'color': color};
         this.ctx.fillStyle = color;
         this.ctx.clearRect(this.timer_window['x'], this.timer_window['y'], this.timer_window['width'], this.timer_window['height']);
         this.ctx.fillRect(this.timer_window['x'], this.timer_window['y'], this.timer_window['width'], this.timer_window['height']);

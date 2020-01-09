@@ -1,28 +1,44 @@
 const CONSTANTS = require('../resources/constants.js')
 
-var globeImage = new Image();
-globeImage.src = "/resources/spritesheet.png";
+var globeImage = {'classic': new Image(), 'terrain': new Image(), 'satellite': new Image()};
+globeImage['classic'].src = "/resources/spritesheet_classic.png";
+globeImage['terrain'].src = "/resources/spritesheet_terrain.png";
+globeImage['satellite'].src = "/resources/spritesheet_satellite.png";
 
-var worldImg = new Image();
-worldImg.src = "/resources/world.png";
+var worldImg = {'classic': new Image(), 'terrain': new Image(), 'satellite': new Image()};
+worldImg['classic'].src = "/resources/world_classic.png";
+worldImg['terrain'].src = "/resources/world_terrain.png";
+worldImg['satellite'].src = "/resources/world_satellite.png";
 
-var usImg = new Image();
-usImg.src = "/resources/us.png";
+var usImg = {'classic': new Image(), 'terrain': new Image(), 'satellite': new Image()};
+usImg['classic'].src = "/resources/us_classic.png";
+usImg['terrain'].src = "/resources/us_terrain.png";
+usImg['satellite'].src = "/resources/us_satellite.png";
 
-var euroImg = new Image();
-euroImg.src = "/resources/euro.png";
+var euroImg = {'classic': new Image(), 'terrain': new Image(), 'satellite': new Image()};
+euroImg['classic'].src = "/resources/euro_classic.png";
+euroImg['terrain'].src = "/resources/euro_terrain.png";
+euroImg['satellite'].src = "/resources/euro_satellite.png";
 
-var oceaniaImg = new Image();
-oceaniaImg.src = "/resources/oceania.png";
+var oceaniaImg = {'classic': new Image(), 'terrain': new Image(), 'satellite': new Image()};
+oceaniaImg['classic'].src = "/resources/oceania_classic.png";
+oceaniaImg['terrain'].src = "/resources/oceania_terrain.png";
+oceaniaImg['satellite'].src = "/resources/oceania_satellite.png";
 
-var asiaImg = new Image();
-asiaImg.src = "/resources/asia.png";
+var asiaImg = {'classic': new Image(), 'terrain': new Image(), 'satellite': new Image()};
+asiaImg['classic'].src = "/resources/asia_classic.png";
+asiaImg['terrain'].src = "/resources/asia_terrain.png";
+asiaImg['satellite'].src = "/resources/asia_satellite.png";
 
-var africaImg = new Image();
-africaImg.src = "/resources/africa.png";
+var africaImg = {'classic': new Image(), 'terrain': new Image(), 'satellite': new Image()};
+africaImg['classic'].src = "/resources/africa_classic.png";
+africaImg['terrain'].src = "/resources/africa_terrain.png";
+africaImg['satellite'].src = "/resources/africa_satellite.png";
 
-var samericaImg = new Image();
-samericaImg.src = "/resources/samerica.png";
+var samericaImg = {'classic': new Image(), 'terrain': new Image(), 'satellite': new Image()};
+samericaImg['classic'].src = "/resources/samerica_classic.png";
+samericaImg['terrain'].src = "/resources/samerica_terrain.png";
+samericaImg['satellite'].src = "/resources/samerica_satellite.png";
 
 var frame_cnt = 0;
 var frames = 120;
@@ -33,8 +49,15 @@ class Map {
         this.socket = socket;
         this.occupiedCells = []; // For keeping track of which "cells" we can write distance popups in
         this.myRoom = CONSTANTS.LOBBY;
+        this.mapStyle = 'terrain';
         this.canvas = window.document.getElementById('map');
         this.ctx = this.canvas.getContext('2d');
+        this.command_window = {
+            x: this.canvas.width*1/4,
+            y: 0,
+            width: this.canvas.width*3/5,
+            height: 40
+        };
     }
 
     canvas_arrow(fromx, fromy, tox, toy){
@@ -72,13 +95,14 @@ class Map {
     }
 
     drawAnimation() {
+        const mapStyle = this.mapStyle;
         frame_cnt = (frame_cnt + 1) % (frames*rate);
         const sx = Math.floor(frame_cnt/rate) * 450;
         var ctx = this.ctx;
-        globeImage.onload = function (sx) {
-          return ctx.drawImage(globeImage, sx,0,450,450,20, 20,450,450);
+        globeImage[mapStyle].onload = function (sx) {
+          return ctx.drawImage(globeImage[mapStyle], sx,0,450,450,20, 20,450,450);
         };
-        globeImage.onload(sx);
+        globeImage[mapStyle].onload(sx);
     };
 
 
@@ -90,6 +114,7 @@ class Map {
     drawMap(room) {
       var ctx = this.ctx;
       this.occupiedCells = [];
+      const mapStyle = this.mapStyle;
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       if (room == CONSTANTS.LOBBY){
         // Banner message
@@ -103,19 +128,23 @@ class Map {
         this.ctx.font = "20px Arial";
         this.ctx.fillText('[ Spinning globe is loading... ]', 90, 220);
         // Instructions
+        this.ctx.globalAlpha = 0.5;
+        this.ctx.fillStyle = 'grey';
+        this.ctx.fillRect(this.command_window['x'], this.command_window['y'], this.command_window['width'], this.command_window['height']);
+        this.ctx.globalAlpha = 1;
         this.ctx.font = "25px Arial";
         this.ctx.fillStyle = 'red';
         this.ctx.strokeStyle = 'red';
         this.ctx.fillText('Choose a map to play on here', 780, 125);
         this.canvas_arrow(1150, 120, this.canvas.width-20, 120);
 
-        this.ctx.fillText('Toggle volume', 1165, 50);
-        this.canvas_arrow(1350, 45, this.canvas.width-20, 45);
+        this.ctx.fillText('Toggle volume and map texture', 1040, 80);
+        this.canvas_arrow(1400, 75, this.canvas.width-20, 35);
 
         this.ctx.fillText('Rankings will show here', 850, 305);
         this.canvas_arrow(1150, 300, this.canvas.width-20, 300);
 
-        this.ctx.fillText('Target city and timer will appear here', 500, 40);
+        this.ctx.fillText('Target city and time remaining will appear here', 500, 25);
 
         this.ctx.fillText('See results and learn here', 850, 660);
         this.canvas_arrow(1100, 680, this.canvas.width - 200, this.canvas.height - 20);
@@ -125,48 +154,56 @@ class Map {
 
       }
       else if (room == CONSTANTS.WORLD){
-            worldImg.onload = function () {
-                ctx.drawImage(worldImg, 0, 0)
+            worldImg[this.mapStyle].onload = function () {
+                ctx.drawImage(worldImg[mapStyle], 0, 0)
             };
-          worldImg.onload();
+
+          worldImg[mapStyle].onload();
       }
       else if (room == CONSTANTS.US){
-            usImg.onload = function () {
-                ctx.drawImage(usImg, 0, 0)
+            usImg[mapStyle].onload = function () {
+                ctx.drawImage(usImg[mapStyle], 0, 0)
             };
-          usImg.onload();
+          usImg[mapStyle].onload();
       }
       else if (room == CONSTANTS.EURO){
-            euroImg.onload = function () {
-                ctx.drawImage(euroImg, 0, 0)
+            euroImg[mapStyle].onload = function () {
+                ctx.drawImage(euroImg[mapStyle], 0, 0)
             };
-          euroImg.onload();
+          euroImg[mapStyle].onload();
       }
       else if (room == CONSTANTS.AFRICA){
-            africaImg.onload = function () {
-                ctx.drawImage(africaImg, 0, 0)
+            africaImg[mapStyle].onload = function () {
+                ctx.drawImage(africaImg[mapStyle], 0, 0)
             };
-          africaImg.onload();
+          africaImg[mapStyle].onload();
       }
       else if (room == CONSTANTS.ASIA){
-            asiaImg.onload = function () {
-                ctx.drawImage(asiaImg, 0, 0)
+            asiaImg[mapStyle].onload = function () {
+                ctx.drawImage(asiaImg[mapStyle], 0, 0)
             };
-          asiaImg.onload();
+          asiaImg[mapStyle].onload();
       }
       else if (room == CONSTANTS.OCEANIA){
-            oceaniaImg.onload = function () {
-                ctx.drawImage(oceaniaImg, 0, 0)
+            oceaniaImg[mapStyle].onload = function () {
+                ctx.drawImage(oceaniaImg[mapStyle], 0, 0)
             };
-          oceaniaImg.onload();
+          oceaniaImg[mapStyle].onload();
       }
       else if (room == CONSTANTS.SAMERICA){
-            samericaImg.onload = function () {
-                ctx.drawImage(samericaImg, 0, 0)
+            samericaImg[mapStyle].onload = function () {
+                ctx.drawImage(samericaImg[mapStyle], 0, 0)
             };
-          samericaImg.onload();
+          samericaImg[mapStyle].onload();
       }
 
+    }
+
+    setStyle(id, style, room) {
+        if (this.socket.id == id) {
+            this.mapStyle = style;
+            this.drawMap(room);
+        }
     }
 
     cellOf(coords) {

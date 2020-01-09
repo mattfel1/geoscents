@@ -155,7 +155,7 @@ class Room {
           const color = player.color;
           const name = player.name;
           const room = this.room;
-          const boot_msg = "[ <font color='" + color + "'>" + name + " has been booted due to inactivity!</font> ]<br>";
+          const boot_msg = "[ <font color='" + color + "'><b>" + name + "</b> has been booted due to inactivity!</font> ]<br>";
           this.players.delete(socket.id);
           this.clients.forEach(function(s,id) {
               s.emit('update messages', room, boot_msg)
@@ -478,7 +478,7 @@ class Room {
         } else if (this.state === CONSTANTS.BEGIN_GAME_STATE) {
             socket.emit('fresh map', room);
             socket.emit('play begin sound', room);
-            socket.emit('draw begin', round);
+            socket.emit('draw begin', this.timer, round);
         } else if (this.state === CONSTANTS.GUESS_STATE) {
             const thisTarget = this.stringifyTarget();
             const citystring = thisTarget['string'];

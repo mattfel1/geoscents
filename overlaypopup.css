@@ -71,7 +71,42 @@
 	.close-btn:hover {
 		background: #05abe0;
 	}
-
+	.map-style-btn {
+			cursor: pointer;
+			border: 1px solid #333;
+			padding: 1px 1px;
+			margin: 1px 1px;
+			font-size: 9px;
+			background: #dddddd; /* fallback */
+			background: -moz-linear-gradient(top,  #dddddd 0%, #bbbbbb 4%, #999999 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dddddd), color-stop(4%,#bbbbbb), color-stop(100%,#999999));
+			background: -webkit-linear-gradient(top,  #dddddd 0%,#bbbbbb 4%,#999999 100%);
+			background: -o-linear-gradient(top,  #dddddd 0%,#bbbbbb 4%,#999999 100%);
+			background: -ms-linear-gradient(top,  #dddddd 0%,#bbbbbb 4%,#999999 100%);
+			background: linear-gradient(to bottom,  #dddddd 0%,#bbbbbb 4%,#999999 100%);
+			border-radius: 1px;
+			box-shadow: 0 0 4px rgba(0,0,0,0.3);
+		}
+		.map-style-btn-container {
+			padding: 0px 0px;
+			margin: -5px 0px;
+		}
+	.map-style-btn-clicked {
+			cursor: pointer;
+			border: 1px solid #333;
+			padding: 1px 1px;
+			margin: 1px 1px;
+			font-size: 9px;
+			background: #dddddd; /* fallback */
+			background: -moz-linear-gradient(top,  #777777 0%, #555555 4%, #999999 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#777777), color-stop(4%,#555555), color-stop(100%,#999999));
+			background: -webkit-linear-gradient(top,  #777777 0%,#555555 4%,#999999 100%);
+			background: -o-linear-gradient(top,  #777777 0%,#555555 4%,#999999 100%);
+			background: -ms-linear-gradient(top,  #777777 0%,#555555 4%,#999999 100%);
+			background: linear-gradient(to bottom,  #777777 0%,#555555 4%,#999999 100%);
+			border-radius: 1px;
+			box-shadow: 0 0 4px rgba(0,0,0,0.3);
+		}
 /* media query for most mobile devices */
 @media only screen and (min-width: 0px) and (max-width: 480px){
 

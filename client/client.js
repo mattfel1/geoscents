@@ -51,9 +51,9 @@ $(document).ready(function(){
     socket.on('draw buttons', () => {commands.postButtons()});
     socket.on('draw timer', (time,color) => {commands.postTime(time,color)});
     socket.on('draw prepare', (round) => {commands.drawCommand(" seconds until new game auto-starts...", "", "", "", round, true, false)});
-    socket.on('draw begin', (round) => {
+    socket.on('draw begin', (time, round) => {
         commands.drawCommand(" seconds until first round..  GET READY!", "", "", "", round, false, false);
-        sounds.playGameBeginSound();
+        if (time === CONSTANTS.BEGIN_GAME_DURATION) sounds.playGameBeginSound();
     });
     socket.on('draw guess city', (city, capital, iso2, round) => {
         commands.drawCommand( "Find!       ", city, capital, iso2, round, false, false);
@@ -64,7 +64,7 @@ $(document).ready(function(){
         sounds.playRoundEndSound();
     });
     socket.on('draw booted', () => {commands.drawCommand("You have been booted due to inactivity!", "Please refresh to rejoin","", "",0, false, false)});
-    socket.on('draw idle', () => {commands.drawCommand("Waiting for players to join...", "", "", "", 0, false, false)});
+    socket.on('draw idle', () => {commands.drawCommand("Waiting for players to join...t", "", "", "", 0, false, false)});
 
     /**** Chat *****/
     const chat = new Chat(socket);
@@ -83,7 +83,7 @@ $(document).ready(function(){
     socket.on("mute player", function(id){
         sounds.muteMe(id);
         commands.muted = sounds.muted;
-    })
+    });
 
     /**** Map *****/
     const map = new Map(socket);
@@ -93,6 +93,10 @@ $(document).ready(function(){
     socket.on('fresh map', (room) => map.drawMap(room));
     socket.on('blank map', (room) => map.drawBlank(room));
     socket.on('animate', () => map.drawAnimation());
+    socket.on("render map", function(id, style, room){
+        map.setStyle(id, style, room);
+        commands.setStyle(id, style);
+    });
 
     /**** History *****/
     const history = new History(socket);
