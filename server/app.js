@@ -164,7 +164,9 @@ io.on('connection', (socket) => {
     });
     socket.on('renderMap', (style) => {
         const room = playerRooms.get(socket.id).room;
-        io.sockets.emit('render map', socket.id, style, room);
+        helpers.log("Player " +  socket.handshake.address + " " + room.getPlayerName(socket) + " switched to map style " + style);
+    
+	io.sockets.emit('render map', socket.id, style, room);
     });
     socket.on('moveTo', (dest) => {
       if (playerRooms.has(socket.id)) {
