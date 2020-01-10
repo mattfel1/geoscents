@@ -203,7 +203,7 @@ io.on('connection', (socket) => {
 	});
     socket.on("send message", function(sent_msg, callback) {
       const msg = sent_msg;
-      const isFeedback = msg.toLowerCase().trim().startsWith('feedback');
+      const isFeedback = (msg.toLowerCase().trim().startsWith('feedback') || msg.toLowerCase().trim().startsWith('"feedback"'));
       const cb = () => {callback()};
       Object.values(rooms).forEach(function(room) {
           if (room.hasPlayer(socket)) {
