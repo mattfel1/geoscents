@@ -603,7 +603,7 @@ class Room {
     }
 
     distributeMessage(senderSocket, new_sent_msg, cb) {
-      const getname = (s) => this.getPlayerName(s)
+      const getname = (s) => this.getPlayerName(s);
       const senderColor = this.getPlayerColor(senderSocket);
       const room = this.room;
       this.clients.forEach((socket,id) => {
@@ -614,6 +614,16 @@ class Room {
           }
           const sent_msg = "[ " + room + " <b><font color='" + senderColor + "'>" + senderName + "</font></b> ]: " + new_sent_msg + "<br>";
           socket.emit("update messages", room, sent_msg);
+          cb();
+      });
+    };
+    whisperMessage(senderSocket, msg, cb) {
+      const room = this.room;
+      this.clients.forEach((socket,id) => {
+          if (this.players.has(id)) {
+              const player = this.players.get(id);
+              if (player.id === senderSocket.id) socket.emit("update messages", room, msg)
+          }
           cb();
       });
     };

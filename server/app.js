@@ -81,14 +81,14 @@ const rooms = {
 };
 var playerRooms = new Map();
 
-const WELCOME_MESSAGE1 = '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
+const WELCOME_MESSAGE2 = '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
                           'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
                           'If you are enjoying this game, please share it with a friend!  If you really love it, consider donating at the bottom of the page to help keep the server ' +
                           'running!<br>';
-const WELCOME_MESSAGE2 = '[ <b>GREETING</b> ] If you have any feedback, feel free to post an issue on the github, or simply scream it directly into this chat box, starting with the word "feedback" and I will see it!<br>';
-const REFERENCE1 = '[ <b>REFERENCE</b> ] Terrain map rendering provided by by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.  Satellite map rendering provided by Google Tiles.  All maps generated using python cartopy 0.17.0<br>'
-const REFERENCE2 = '[ <b>REFERENCE</b> ] This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>.<br>'
-const REFERENCE3 = '[ <b>REFERENCE</b> ] The jingle at the start of the game was composed and recorded by Marc Ryan Feldman.<br>'
+const WELCOME_MESSAGE1 = '[ <b>GREETING</b> ] If you have feedback, simply scream it directly into this chat box, starting with the word "feedback".  You can also post feedback on the github as an issue if you prefer.<br>';
+const REFERENCE1 = '<font size=2>[ <b>REFERENCE</b> ] Terrain map rendering provided by by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.  Satellite map rendering provided by Google Tiles.  All maps generated using python cartopy 0.17.0</font><br>'
+const REFERENCE2 = '<font size=2>[ <b>REFERENCE</b> ] This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>.</font><br>'
+const REFERENCE3 = '<font size=2>[ <b>REFERENCE</b> ] The jingle at the start of the game was composed and recorded by Marc Ryan Feldman.</font><br>'
 
 //const WELCOME_MESSAGE2 = '[ <b>UPDATE 1/6/2019</b> ] The yearly records are supposed to reset on 1/1/2020, but because of a mistake with cron, they were erroneously reset again on 1/6/2020.  Sorry!<br>'
 
@@ -203,6 +203,7 @@ io.on('connection', (socket) => {
 	});
     socket.on("send message", function(sent_msg, callback) {
       const msg = sent_msg;
+      const isFeedback = msg.toLowerCase().trim().startsWith('feedback');
       const cb = () => {callback()};
       Object.values(rooms).forEach(function(room) {
           if (room.hasPlayer(socket)) {
@@ -216,6 +217,7 @@ io.on('connection', (socket) => {
               CONSTANTS.PROFANITY.forEach((word) => {new_sent_msg = replaceAll(new_sent_msg, word, "****")});
               helpers.log("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + ": " + new_sent_msg);
               room.distributeMessage(socket, new_sent_msg, cb);
+              if (isFeedback) room.whisperMessage(socket, "<i>Your feedback has been noted!  Thank you for playing and commenting!</i><br>", cb);
           }
       });
     });
