@@ -34,6 +34,21 @@ class Chat {
         }
       }
     }
+    addCustomMessage(room, msg, fontsize) {
+      if (room == this.myRoom) {
+        var final_message = $("<font style=\"font-size:" + fontsize + "px;\" />").html(msg);
+        if (!this.windowActive) {
+            this.hasNewMessage = true;
+        }
+        var historyDiv = $('#history');
+        historyDiv.prepend(final_message);
+        this.chatCount = this.chatCount + 1;
+        if (this.chatCount > CONSTANTS.MAX_CHAT_HIST) {
+            historyDiv.children().last().remove();
+            this.chatCount = this.chatCount - 1;
+        }
+      }
+    }
     listen() {
         const socket = this.socket;
          $("form#chat").submit(function(e) {

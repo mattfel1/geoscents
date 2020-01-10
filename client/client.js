@@ -76,6 +76,10 @@ $(document).ready(function(){
       chat.isBlur();
     };
     chat.listen();
+    socket.on("update custom messages", function(room, msg, font){
+        chat.addCustomMessage(room, msg, font);
+        sounds.newMessage(room)
+    });
     socket.on("update messages", function(room, msg){
         chat.addMessage(room, msg);
         sounds.newMessage(room)
