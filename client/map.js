@@ -135,21 +135,21 @@ class Map {
         this.ctx.font = "25px Arial";
         this.ctx.fillStyle = 'red';
         this.ctx.strokeStyle = 'red';
-        this.ctx.fillText('Choose a map to play on here', 780, 125);
+        this.ctx.fillText('Join a game', 990, 125);
         this.canvas_arrow(1150, 120, this.canvas.width-20, 120);
 
         this.ctx.fillText('Toggle volume and map texture', 1040, 80);
         this.canvas_arrow(1400, 75, this.canvas.width-20, 35);
 
-        this.ctx.fillText('Rankings will show here', 850, 305);
+        this.ctx.fillText('See player rankings', 900, 305);
         this.canvas_arrow(1150, 300, this.canvas.width-20, 300);
 
-        this.ctx.fillText('Target city and time remaining will appear here', 500, 25);
+        this.ctx.fillText('Target city and time remaining will appear in this panel', 500, 25);
 
-        this.ctx.fillText('See results and learn here', 850, 660);
+        this.ctx.fillText('See game history and learn about cities', 850, 660);
         this.canvas_arrow(1100, 680, this.canvas.width - 200, this.canvas.height - 20);
 
-        this.ctx.fillText('Discuss here', 130, 660);
+        this.ctx.fillText('Discuss', 160, 660);
         this.canvas_arrow(200, 680, 200, this.canvas.height-20);
 
       }
