@@ -284,7 +284,7 @@ class Room {
                 monthRecord = copy(insertRecord(getPosition(player.score,monthRecord), "month", copy(monthRecord), room, player));
             }
             if (getPosition(player.score,allRecord) < 4) {
-                allStr = "<b>" + (getPosition(player.score,allRecord)) + sufx[(getPosition(player.score,allRecord)-1)] + "</b>" + " all time"
+                allStr = "<b>" + (getPosition(player.score,allRecord)) + sufx[(getPosition(player.score,allRecord)-1)] + "</b>" + " this year"
                 allRecord = copy(insertRecord(getPosition(player.score,allRecord), "all-time", copy(allRecord), room, player));
             }
             if (dayStr !== "" || wkStr !== "" || monStr !== "" || allStr !== "") {
