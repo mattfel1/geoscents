@@ -39,7 +39,7 @@ Because the game uses Mercator projections with the latitude of true scale set t
 
 The equations used to calculate score are:<br><br>
 timeComponent = min(1, 1 - 0.07843 * (t - 1.5))<br>
-distComponent = min(600, e^(-sf * (sf*dist)^2 / 600000)*605<br>
+distComponent = min(600, e^(-sf * (sf*dist)^2 / 600000)*605)<br>
 score = timeComponent * distComponent<br><br>
 
 sf is a scaling factor, which is 1 for the world map and is computed by the diagonal of the world map, in km, divided by the diagonal of the map you are playing on.<br>
