@@ -85,7 +85,7 @@ const rooms = {
 };
 var playerRooms = new Map();
 
-const WELCOME_MESSAGE3 = '[ <b>ANOMALIES</b> ] <a href="http://geoscents.net/resources/anomalies.html" target="_blank">Click here</a> for info about geopolitical anomalies in the game!<br>';
+const WELCOME_MESSAGE3 = '[ <b>ABOUT</b> ] <a href="http://geoscents.net/resources/anomalies.html" target="_blank">Click here</a> for info about geopolitical anomalies and details about the game!<br>';
 const WELCOME_MESSAGE2 = '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
                           'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
                           'If you are enjoying this game, please share it with a friend!  If you really love it, consider donating at the bottom of the page to help keep the server ' +

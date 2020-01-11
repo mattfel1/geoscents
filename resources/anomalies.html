@@ -21,5 +21,46 @@ It is a space launch facility that was leased by the Kazakh government to Russia
 <a href="https://en.wikipedia.org/wiki/Kosovo">Kosovo</a> is shown as a regular (non-disputed red border) in this map.  
 According to the <a href="https://www.naturalearthdata.com/features/">Natural Earth Data features database</a>, Kosovo is a real country even though about 49% of UN nations recognize it.
 
+
+<h1>Game FAQ</h1>
+
+<h3>City Selection</h3>
+Cities are selected from the <a href="https://simplemaps.com/data/world-cities">simplemaps</a> database.  For the most part, each game of 11 rounds should only include one city per country.
+The exceptions are:
+<ul>
+  <li>For the Asia, N. America, and Oceania maps, China, India, U.S., Canada, and Mexico can be repeated as long as the administrative name (province, state, or territory) is different.</li>
+  <li>The game make 20 attempts to find a random city whose country and/or administrative name has not already been used.  If it has still failed, it will just give whatever city.  This happens most often in Oceania and S. America maps.</li>
+</ul>
+
+<h3>Scoring</h3>
+Your score is based on your distance to the city and how quickly you clicked.
+The maximum score you can get per round is <b>600</b>, so the max score for an 11 round game is <b>6600</b>.  
+Because the game uses Mercator projections with the latitude of true scale set to the equator (even on the continent maps), this means that your distance in km is more forgiving as you move away from the equator.
+
+The equations used to calculate score are:<br><br>
+timeComponent = min(1, 1 - 0.07843 * (t - 1.5))<br>
+distComponent = min(600, e^(-sf * (sf*dist)^2 / 600000)*605<br>
+score = timeComponent * distComponent<br><br>
+
+sf is a scaling factor, which is 1 for the world map and is computed by the diagonal of the world map, in km, divided by the diagonal of the map you are playing on.<br>
+dist is the distance you are to the city, in km.<br>
+t is how many seconds elapsed before you clicked (i.e. 10 minus time remaining in round).<br><br>
+
+These plots show how the two score components work for the World map (sf = 1).<br>
+
+<table style="width:100%">
+  <tr>
+    <th>timeComponent</th>
+    <th>distComponent</th> 
+  </tr>
+  <tr>
+    <td><img src="time.png" width="800"></td>
+    <td><img src="dist.png" width="800"></td>
+  </tr>
+</table>
+
+
+
+
 </body>
 </html>
