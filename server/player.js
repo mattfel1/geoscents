@@ -30,6 +30,7 @@ class Player {
         this.room = room;
         this.choseName = false;
         this.name = name;
+		this.optOut = false;
 
 
         // Override values based on info map
@@ -38,6 +39,7 @@ class Player {
 			this.color = info['color'];
 			this.wins = info['wins'];
 			this.name = info['name'];
+			this.optOut = info['optOut']
 		}
     }
 

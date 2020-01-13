@@ -85,15 +85,18 @@ const rooms = {
 };
 var playerRooms = new Map();
 
-const WELCOME_MESSAGE3 = '[ <b>ABOUT</b> ] <a href="http://geoscents.net/resources/anomalies.html" target="_blank">Click here</a> for info about geopolitical anomalies and details about the game!<br>';
-const WELCOME_MESSAGE2 = '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
+const ABOUT_MESSAGE = '[ <b>ABOUT</b> ] <a href="http://geoscents.net/resources/anomalies.html" target="_blank">Click here</a> for info about geopolitical anomalies and details about the game!<br>';
+const PRIVACY_POLICY = '[ <b>PRIVACY POLICY</b> ] When you visit <a href="http://geoscents.net">http://geoscents.net</a>, we store your public IP address and your game history securely on our server.  We do not use cookies to track you after you leave this page.' +
+                       ' The IP addresses are replaced with country and region names, and then this data is published to <a href="https://github.com/mattfel1/geoscents_stats">https://github.com/mattfel1/geoscents_stats</a>.    The purpose of this is to create a fun and interesting' +
+                       ' dataset on how well people around the world know geography!  This data is not used for any commercial purposes.  If you would like to opt out, simply type "private" into the chat box.  If you would like to opt in, type "public" into the chat box.<br>'
+const WELCOME_MESSAGE1 = '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
                           'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
+                          '<br>If you have feedback, simply shout it directly into this chat box, starting with the word "feedback".  You can also post feedback on the <a href="https://github.com/mattfel1/geoscents">geoscents github</a> as an issue if you prefer.<br>' +
                           'If you are enjoying this game, please share it with a friend!  If you really love it, consider donating at the bottom of the page to help keep the server ' +
                           'running!<br>';
-const WELCOME_MESSAGE1 = '[ <b>GREETING</b> ] If you have feedback, simply shout it directly into this chat box, starting with the word "feedback".  You can also post feedback on the <a href="https://github.com/mattfel1/geoscents">geoscents github</a> as an issue if you prefer.<br>';
-const REFERENCE1 = '[ <b>REFERENCE</b> ] Terrain map rendering provided by by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.  Satellite map rendering provided by Google Tiles.  All maps generated using python cartopy 0.17.0<br>'
-const REFERENCE2 = '[ <b>REFERENCE</b> ] This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>.<br>'
-const REFERENCE3 = '[ <b>REFERENCE</b> ] The jingle at the start of the game was composed and recorded by Marc Ryan Feldman.<br>'
+const REFERENCE1 = '[ <b>REFERENCES</b> ] Terrain map rendering provided by by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.  Satellite map rendering provided by Google Tiles.  All maps generated using python cartopy 0.17.0.  '
+const REFERENCE2 = 'This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>.  '
+const REFERENCE3 = 'The jingle at the start of the game was composed and recorded by Marc Ryan Feldman.<br>'
 
 //const WELCOME_MESSAGE2 = '[ <b>UPDATE 1/6/2019</b> ] The yearly records are supposed to reset on 1/1/2020, but because of a mistake with cron, they were erroneously reset again on 1/6/2020.  Sorry!<br>'
 
@@ -108,8 +111,9 @@ io.on('connection', (socket) => {
       socket.emit("update custom messages", CONSTANTS.LOBBY, REFERENCE3, 10);
       socket.emit("update custom messages", CONSTANTS.LOBBY, REFERENCE2, 10);
       socket.emit("update custom messages", CONSTANTS.LOBBY, REFERENCE1, 10);
-	  socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE3);
-	  socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE2);
+      socket.emit("update custom messages", CONSTANTS.LOBBY, PRIVACY_POLICY, 10);
+	  socket.emit("update custom messages", CONSTANTS.LOBBY, ABOUT_MESSAGE, 10);
+	  // socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE2);
 	  socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
 	  //socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE2);
 	});
@@ -183,11 +187,13 @@ io.on('connection', (socket) => {
           const oldColor = rooms[origin].getPlayerColor(socket);
           const oldName = rooms[origin].getPlayerRawName(socket);
           const oldWins = rooms[origin].getPlayerWins(socket);
+          const oldOptOut = rooms[origin].getPlayerOptOut(socket);
           const info = {
               'moved': true,
               'color': oldColor,
               'name': oldName,
-              'wins': oldWins
+              'wins': oldWins,
+              'optOut': oldOptOut
           }
           var leave_msg = "[ <font color='" + rooms[origin].getPlayerColor(socket) + "'><b>" + rooms[origin].getPlayerRawName(socket) + "</b> has left " + origin + " and joined " + dest + "!</font> ]<br>";
           io.sockets.emit("update messages", origin, leave_msg)
@@ -210,6 +216,8 @@ io.on('connection', (socket) => {
     socket.on("send message", function(sent_msg, callback) {
       const msg = sent_msg;
       const isFeedback = (msg.toLowerCase().trim().startsWith('feedback') || msg.toLowerCase().trim().startsWith('"feedback"'));
+      const isOptOut = (msg.toLowerCase().trim().startsWith('private') || msg.toLowerCase().trim().startsWith('"private"'));
+      const isOptIn = (msg.toLowerCase().trim().startsWith('public') || msg.toLowerCase().trim().startsWith('"public"'));
       const cb = () => {callback()};
       Object.values(rooms).forEach(function(room) {
           if (room.hasPlayer(socket)) {
@@ -221,9 +229,17 @@ io.on('connection', (socket) => {
               };
               var new_sent_msg = msg;
               CONSTANTS.PROFANITY.forEach((word) => {new_sent_msg = replaceAll(new_sent_msg, word, "****")});
-              helpers.log("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + ": " + new_sent_msg);
+              helpers.log("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + ": " + msg);
               room.distributeMessage(socket, new_sent_msg, cb);
               if (isFeedback) room.whisperMessage(socket, "<i>Your feedback has been noted!  Thank you for playing and commenting!</i><br>", cb);
+              if (isOptOut) {
+                  room.whisperMessage(socket, "<i>Your IP address has been masked.  Thank you for playing the game!</i><br>", cb);
+                  room.players.get(socket.id).optOut = true;
+              }
+              if (isOptIn) {
+                  room.whisperMessage(socket, "<i>Your IP address has been unmasked.  Thank you for playing the game and helping to build up the dataset!</i><br>", cb);
+                  room.players.get(socket.id).optOut = false;
+              }
           }
       });
     });

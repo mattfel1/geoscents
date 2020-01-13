@@ -124,10 +124,18 @@ class Room {
     }
     getPlayerWins(socket) {
         if (this.players.has(socket.id)) {
-            return this.players.get(socket.id).wins
+            return this.players.get(socket.id).wins;
         }
         else {
-            return 0
+            return 0;
+        }
+    }
+    getPlayerOptOut(socket) {
+        if (this.players.has(socket.id)) {
+            return this.players.get(socket.id).optOut;
+        }
+        else {
+            return false;
         }
     }
 
@@ -399,9 +407,10 @@ class Room {
         });
       this.historyRound(this.round + 1, this.stringifyTarget());
 
+      const respectOptOut = (x) => {if (x.optOut) return 'optOut' + x.ip; else return x.ip;};
       const dists = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.geoError);
       const times = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.clickedAt);
-      const ips = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.ip);
+      const ips = Array.from(this.players.values()).filter(player => player.clicked).map(x => respectOptOut(x))
       helpers.recordGuesses(this.room, this.stringifyTarget().string, this.target['city'], this.target['admin_name'], this.target['country'], ips, dists, times);
     }
 
