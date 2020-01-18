@@ -4785,6 +4785,19 @@ module.exports = {
     "id": 1348655615
   },
   {
+    "city": "Gibraltar",
+    "city_ascii": "Gibraltar",
+    "lat": 36.1324,
+    "lng": -5.3781,
+    "country": "Gibraltar",
+    "iso2": "GI",
+    "iso3": "GIB",
+    "admin_name": "",
+    "capital": "",
+    "population": 187083,
+    "id": 1292385245
+  },
+  {
     "city": "Olsztyn",
     "city_ascii": "Olsztyn",
     "lat": 53.8,
@@ -7292,5 +7305,18 @@ module.exports = {
     "capital": "admin",
     "population": 100000,
     "id": 1688081964
+  },
+  {
+    "city": "Douglas",
+    "city_ascii": "Douglas",
+    "lat": 54.1504,
+    "lng": -4.48,
+    "country": "Isle Of Man",
+    "iso2": "IM",
+    "iso3": "IMN",
+    "admin_name": "",
+    "capital": "",
+    "population": 35854,
+    "id": 1833688345
   }
 ]};

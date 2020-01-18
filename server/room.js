@@ -351,22 +351,6 @@ class Room {
         this.timer = this.timer - 1 / CONSTANTS.FPS
     }
 
-    stringifyTarget(){
-        let state = '';
-        if (Geography.includeAdmin(this.target)) {
-            state = ', ' + this.target['admin_name'];
-        }
-        let pop = 0;
-        if (this.target['population'] !== '') {
-            pop = this.target['population'];
-        }
-        return {
-            'string': this.target['city'] + state + ', ' + this.target['country'],
-            'pop': pop,
-            'majorcapital': this.target['capital'] === "primary",
-            'minorcapital': this.target['capital'] === 'admin' || this.target['capital'] === 'minor'
-        }
-    }
     updateHistory(player, round, score) {
         if (this.playersHistory.has(player)) {
           var dict = this.playersHistory.get(player);
@@ -405,13 +389,13 @@ class Room {
           player.score = newScore;
           updateHistory(player, round, newScore);
         });
-      this.historyRound(this.round + 1, this.stringifyTarget());
+      this.historyRound(this.round + 1, Geography.stringifyTarget(this.target));
 
       const respectOptOut = (x) => {if (x.optOut) return 'optOut' + x.ip; else return x.ip;};
       const dists = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.geoError);
       const times = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.clickedAt);
       const ips = Array.from(this.players.values()).filter(player => player.clicked).map(x => respectOptOut(x))
-      helpers.recordGuesses(this.room, this.stringifyTarget().string, this.target['city'], this.target['admin_name'], this.target['country'], ips, dists, times);
+      helpers.recordGuesses(this.room, Geography.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], ips, dists, times);
     }
 
     static broadcastPoint(socket, row, col, color, radius, distance) {
@@ -489,7 +473,7 @@ class Room {
             socket.emit('play begin sound', room);
             socket.emit('draw begin', this.timer, round);
         } else if (this.state === CONSTANTS.GUESS_STATE) {
-            const thisTarget = this.stringifyTarget();
+            const thisTarget = Geography.stringifyTarget(this.target);
             const citystring = thisTarget['string'];
             const iso2 = this.target['iso2']
             capital = "";
@@ -498,7 +482,7 @@ class Room {
             socket.emit('fresh map', room);
             socket.emit('draw guess city', citystring, capital, iso2, round);
         } else if (this.state === CONSTANTS.REVEAL_STATE) {
-            const thisTarget = this.stringifyTarget();
+            const thisTarget = Geography.stringifyTarget(this.target);
             const citystring = thisTarget['string'];
             const iso2 = this.target['iso2']
             capital = "";

@@ -1,6 +1,6 @@
 module.exports = {
   CITIES: [
-      {
+  {
     "city": "Tokyo",
     "city_ascii": "Tokyo",
     "lat": 35.685,
@@ -2976,19 +2976,6 @@ module.exports = {
     "capital": "primary",
     "population": 1102000,
     "id": 1051074169
-  },
-  {
-    "city": "Mogadishu",
-    "city_ascii": "Mogadishu",
-    "lat": 2.0667,
-    "lng": 45.3667,
-    "country": "Somalia",
-    "iso2": "SO",
-    "iso3": "SOM",
-    "admin_name": "Banaadir",
-    "capital": "primary",
-    "population": 1100000,
-    "id": 1706893395
   },
   {
     "city": "Tbilisi",
@@ -7761,4 +7748,5 @@ module.exports = {
     "population": 219599,
     "id": 1156369972
   }
-]};
+]
+}

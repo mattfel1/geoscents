@@ -83,6 +83,40 @@ const includeAdmin = (target) => {
     target['country'] === 'Brazil'
 };
 
+const stringifyTarget = (target) => {
+    let state = '';
+    if (includeAdmin(target)) {
+        state = ', ' + target['admin_name'];
+    }
+    let pop = 0;
+    if (target['population'] !== '') {
+        pop = target['population'];
+    }
+    return {
+        'string': target['city'] + state + ', ' + target['country'],
+        'pop': pop,
+        'majorcapital': target['capital'] === "primary",
+        'minorcapital': target['capital'] === 'admin' || target['capital'] === 'minor'
+    }
+};
+
+const stringifyTargetAscii = (target) => {
+    let state = '';
+    if (includeAdmin(target)) {
+        state = ', ' + target['admin_name'];
+    }
+    let pop = 0;
+    if (target['population'] !== '') {
+        pop = target['population'];
+    }
+    return {
+        'string': target['city_ascii'] + state + ', ' + target['country'],
+        'pop': pop,
+        'majorcapital': target['capital'] === "primary",
+        'minorcapital': target['capital'] === 'admin' || target['capital'] === 'minor'
+    }
+};
+
 // Allow this country to be repeated if the state is unique
 const requireUniqueAdmin = (room, target) => {
     if (room === CONSTANTS.US && (target['country'] === 'USA' || target['country'] === 'Canada')) {return true}
@@ -270,5 +304,7 @@ module.exports = {
     geoToMerc,
     score,
     includeAdmin,
-    requireUniqueAdmin
+    requireUniqueAdmin,
+    stringifyTarget,
+    stringifyTargetAscii
 }
