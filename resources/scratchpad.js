@@ -16,39 +16,77 @@ function copy(x) {
 }
 
 // Set up which files
-//const room = 'World';
-//const allcities = WORLDCITIES;
-//const killlist = ["Bakersfield, California, USA", "New Haven, Connecticut, USA"];
+var room = 'World';
+var allcities = WORLDCITIES;
+var killlist = ["Bakersfield, California, USA", "New Haven, Connecticut, USA"];
+scrub(room, allcities, killlist);
 
-//const room = 'Asia';
-//const allcities = ASIACITIES;
-//const killlist = ["Vila Velha, Espírito Santo, Brazil"];
+room = 'Asia';
+allcities = ASIACITIES;
+killlist = ["Vila Velha, Espírito Santo, Brazil",  'Douglas, Isle Of Man',  'Gibraltar, Gibraltar',  'Fès, Morocco',  'Giza, Egypt',  'Port Said, Egypt',  'Ismailia, Egypt',  'Benghazi, Libya',  'Armavir, Russia'
+];
+scrub(room, allcities, killlist);
 
-//const room = 'S. America';
-//const allcities = SAMERICACITIES;
-//const killlist = ["Vila Velha, Espírito Santo, Brazil"];
+room = 'S. America';
+allcities = SAMERICACITIES;
+killlist = ["Vila Velha, Espírito Santo, Brazil"];
+scrub(room, allcities, killlist);
 
-//const room = 'N. America';
-//const allcities = USCITIES;
-//const killlist = ["Vila Velha, Espírito Santo, Brazil"];
+console.log('namerica')
+room = 'N. America';
+allcities = USCITIES;
+killlist = ["Vila Velha, Espírito Santo, Brazil",   'Hamilton, Bermuda','Grand Turk, Turks And Caicos Islands','Buffalo, Nat’l River, United States'];
+scrub(room, allcities, killlist);
 
-const room = 'Europe';
-const allcities = EUROCITIES;
-const killlist = [  'Fès, Morocco',  'undefined',  'Samarkand, Uzbekistan',  'Saidu Sharif, Pakistan',  'Giza, Egypt',  'Port Said, Egypt',  'Ismailia, Egypt',  'Homs, Syria',  'Hyderabad City, Pakistan',  'Benghazi, Libya'];
+room = 'Europe';
+allcities = EUROCITIES;
+killlist = [  'Fès, Morocco',  'undefined',  'Samarkand, Uzbekistan',  'Saidu Sharif, Pakistan',  'Giza, Egypt',  'Port Said, Egypt',  'Ismailia, Egypt',  'Homs, Syria',  'Hyderabad City, Pakistan',  'Benghazi, Libya'];
+scrub(room, allcities, killlist);
 
-//const room = 'Africa';
-//const allcities = AFRICACITIES;
-//const killlist = ["Vila Velha, Espírito Santo, Brazil"];
+room = 'Africa';
+allcities = AFRICACITIES;
+killlist = ["Vila Velha, Espírito Santo, Brazil"];
+scrub(room, allcities, killlist);
 
-//const room = 'Oceania';
-//const allcities = OCEANIACITIES;
-//const killlist = [  'Praya, Indonesia',  'Tasikmalaya, Indonesia',  'Kupang, Indonesia',  'Banyuwangi, Indonesia',  'Tuban, Indonesia'];
+room = 'Oceania';
+allcities = OCEANIACITIES;
+killlist = [  'Praya, Indonesia',  'Tasikmalaya, Indonesia',  'Kupang, Indonesia',  'Banyuwangi, Indonesia',  'Tuban, Indonesia'];
+scrub(room, allcities, killlist);
 
-
+function scrub(room, allcities, killlist) {
+const append = (newEntry, oldDict, newDict) => {
+	var newData = newDict
+	var oldData = oldDict
+        if (newData != null) {
+            newData["dists"] = newData["dists"].concat(oldData["dists"]);
+            newData["times"] = newData["times"].concat(oldData["times"]);
+            newData["ips"] = newData["ips"].concat(oldData["ips"]);
+            // Compute new averages
+            newData["mean_dist"] = newData["dists"].reduce((a, b) => a + b) / newData["dists"].length;
+            newData["mean_time"] = newData["times"].reduce((a, b) => a + b) / newData["times"].length;
+            newData["std_dist"] = Math.sqrt(newData["dists"].map(x => Math.pow(x - newData["mean_dist"], 2)).reduce((a, b) => a + b) / newData["dists"].length);
+            newData["std_time"] = Math.sqrt(newData["times"].map(x => Math.pow(x - newData["mean_time"], 2)).reduce((a, b) => a + b) / newData["times"].length);
+        } else {
+            console.log('no new entry for ' + newEntry);
+            newData = oldData;
+        }
+	return newData
+}
+	
 // Load guess history
 const file = '/scratch/' + room + '_guesses';
 // const file = '/home/mattfel/geoscents_stats/' + room + '.json';
 history = JSON.parse(fs.readFileSync(file, 'utf8'));
+if (room == "Asia") {
+	const toadd = JSON.parse(fs.readFileSync(file.replace('Asia','Europe'), 'utf8'));
+	Object.keys(toadd).forEach(k => {
+		if (Object.keys(history).filter(val => val == k).length == 1) {
+			history[k] = append(k, history[k], toadd[k]);
+		} else {
+			history[k] = toadd[k]
+		}
+	})
+}
 const loggedcities = Object.keys(history);
 
 // Load cities in database
@@ -66,8 +104,8 @@ Object.keys(allcities).forEach((v) => {
 const diffArray = (arr1, arr2) => arr1.concat(arr2).filter(val => !(arr1.includes(val) && arr2.includes(val)));
 
 const mustUnify = loggedcities.filter(val => !realcities.includes(val));
-console.log("have history but no entry for: ");
-console.log(mustUnify);
+//console.log("have history but no entry for: ");
+//console.log(mustUnify);
 
 const makeNewEntry = (oldEntry) => {
     const justCity = oldEntry.toString().split(',')[0] + ',';
@@ -148,11 +186,11 @@ const makeNewEntry = (oldEntry) => {
 
 const keeplist = ["Macau, Macau", "Nouméa, New Caledonia", "Bhavnagar, Gujarāt, India", "Gibraltar, Gibraltar", "Grand Turk, Turks And Caicos Islands", "Papeete, French Polynesia", "Douglas, Isle Of Man", "Hamilton, Bermuda", "Avarua, Cook Islands", "Stanley, Falkland Islands (Islas Malvinas)"];
 const addOldToNew = (oldEntry, newEntry) => {
-    if (keeplist.filter( val => val == oldEntry).length == 1) {
-        //console.log('preserve ' + oldEntry);
-    }
-    else if (killlist.filter(val => val == oldEntry || val == newEntry).length == 1 || newEntry == undefined) {
+    if (killlist.filter(val => val == oldEntry || val == newEntry).length == 1 || newEntry == undefined) {
 	delete history[oldEntry];
+    }
+    else if (keeplist.filter( val => val == oldEntry).length == 1) {
+        //console.log('preserve ' + oldEntry);
     }
     else if (newEntry == "DELETE") {
         //console.log("killing " + oldEntry)
@@ -160,27 +198,15 @@ const addOldToNew = (oldEntry, newEntry) => {
     } else {
         oldData = history[oldEntry];
         newData = history[newEntry];
-        if (newData != null) {
-            newData["dists"] = newData["dists"].concat(oldData["dists"]);
-            newData["times"] = newData["times"].concat(oldData["times"]);
-            newData["ips"] = newData["ips"].concat(oldData["ips"]);
-            // Compute new averages
-            newData["mean_dist"] = newData["dists"].reduce((a, b) => a + b) / newData["dists"].length;
-            newData["mean_time"] = newData["times"].reduce((a, b) => a + b) / newData["times"].length;
-            newData["std_dist"] = Math.sqrt(newData["dists"].map(x => Math.pow(x - newData["mean_dist"], 2)).reduce((a, b) => a + b) / newData["dists"].length);
-            newData["std_time"] = Math.sqrt(newData["times"].map(x => Math.pow(x - newData["mean_time"], 2)).reduce((a, b) => a + b) / newData["times"].length);
-        } else {
-            console.log('no new entry for ' + newEntry);
-	    newData = oldData;
-        }
-        history[newEntry] = newData;
+        newData = append(newEntry, oldData, newData);
+	history[newEntry] = newData;
         delete history[oldEntry];
     }
 };
 // Unify
 mustUnify.forEach(val => {
         const newEntry = makeNewEntry(val);
-        if (newEntry != val || killlist.filter(k => k == val).length == 1) {
+        if (newEntry != val || killlist.filter(k => k == val || newEntry == k).length == 1) {
             addOldToNew(val, newEntry);
         }
     }
@@ -194,3 +220,7 @@ const loggedcities2 = Object.keys(history);
 const mustUnify2 = loggedcities2.filter(val => !realcities.includes(val));
 console.log("NOW have history but no entry for: ");
 console.log(mustUnify2);
+
+
+fs.writeFile(file + '_scrub', JSON.stringify(copy(history)), function(err) {if(err){return console.log(err);}});
+}
