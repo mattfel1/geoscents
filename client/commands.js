@@ -109,7 +109,7 @@ class Commands {
         else $('#commands').append($("<button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔊</button><br>"));
         $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>To Lobby</b> <font size=2>(" + this.lobby_count + " players)</font></button><br>"))
         $('#commands').append($("<button class='room-btn' id='world_button'><b>World</b> <br><font size=2>(" + this.world_count + " players)</font></button>"))
-        $('#commands').append($("<button class='special-room-btn' id='misc_button'><b>Trivia</b> <br><font size=2>(" + this.misc_count + " players)</font></button><br>  "))
+        // $('#commands').append($("<button class='special-room-btn' id='misc_button'><b>Trivia</b> <br><font size=2>(" + this.misc_count + " players)</font></button><br>  "))
         $('#commands').append($("<button class='room-btn' id='euro_button'><b>Europe</b> <br><font size=2>(" + this.euro_count + " players)</font></button>  "))
         $('#commands').append($("<button class='room-btn' id='africa_button'><b>Africa</b> <br><font size=2>(" + this.africa_count + " players)</font></button>  "))
         $('#commands').append($("<button class='room-btn' id='asia_button'><b>Asia</b> <br><font size=2>(" + this.asia_count + " players)</font></button>  "))
