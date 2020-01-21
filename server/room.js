@@ -637,7 +637,9 @@ class Room {
         const base = "<b>Round " + round + "</b>: " + star + thisTarget['string'] + " (pop: " + thisTarget['pop'].toLocaleString() + ")";
         let part2 = "%2C+" + this.target['country'];
         if (this.target['country'] === "USA") part2 = "%2C+" + this.target['admin_name'];
-        const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://en.wikipedia.org/wiki/Special:Search?search=" + this.target['city'] + part2 + "&go=Go&ns0=1\">Learn!</a><br>";
+        let wiki = "https://en.wikipedia.org/wiki/Special:Search?search=" + this.target['city'] + part2 + "&go=Go&ns0=1";
+        if (this.target['wiki'] != null) wiki = this.target['wiki'];
+        const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + wiki + "\">Learn!</a><br>";
         this.clients.forEach((socket,id) => {
             socket.emit('add history',  room, base + link);
             socket.emit('add history', room, "<br>");

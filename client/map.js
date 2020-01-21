@@ -10,6 +10,11 @@ worldImg['classic'].src = "/resources/world_classic.png";
 worldImg['terrain'].src = "/resources/world_terrain.png";
 worldImg['satellite'].src = "/resources/world_satellite.png";
 
+var miscImg = {'classic': new Image(), 'terrain': new Image(), 'satellite': new Image()};
+miscImg['classic'].src = "/resources/world_classic.png";
+miscImg['terrain'].src = "/resources/world_terrain.png";
+miscImg['satellite'].src = "/resources/world_satellite.png";
+
 var usImg = {'classic': new Image(), 'terrain': new Image(), 'satellite': new Image()};
 usImg['classic'].src = "/resources/us_classic.png";
 usImg['terrain'].src = "/resources/us_terrain.png";
@@ -160,6 +165,13 @@ class Map {
 
           worldImg[mapStyle].onload();
       }
+      else if (room == CONSTANTS.MISC){
+            miscImg[this.mapStyle].onload = function () {
+                ctx.drawImage(miscImg[mapStyle], 0, 0)
+            };
+
+          miscImg[mapStyle].onload();
+      }
       else if (room == CONSTANTS.US){
             usImg[mapStyle].onload = function () {
                 ctx.drawImage(usImg[mapStyle], 0, 0)
@@ -269,32 +281,32 @@ class Map {
         this.ctx.closePath()
     }
     drawDist(coords, color, distance) {
-        var cell = this.cellOf(coords);
-        var cell_row = cell['row'];
-        var cell_col = cell['col'] + 1;
-        var inc_dir = 1;
-        var attempts = 0;
-        // console.log("coords " + coords['col'] + " " + coords['row'] + " are in cell " + cell['col'] + " " + cell['row']);
-        while (this.occupiedCells.includes((cell_col, cell_row)) && attempts < 7) {
-            cell_row = cell_row + inc_dir;
-            if (cell_row == CONSTANTS.VERT_WRITE_CELLS) {
-                inc_dir = -1;
-            }
-            attempts = attempts + 1;
-        }
-        const loc = this.cellPxCoords({'col': cell_col, 'row': cell_row});
-        // console.log("final placement in " + cell_col + " " + cell_row + " aka " + loc['col'] + " " + loc['row']);
-        this.occupiedCells += (cell_col, cell_row);
+        // var cell = this.cellOf(coords);
+        // var cell_row = cell['row'];
+        // var cell_col = cell['col'] + 1;
+        // var inc_dir = 1;
+        // var attempts = 0;
+        // // console.log("coords " + coords['col'] + " " + coords['row'] + " are in cell " + cell['col'] + " " + cell['row']);
+        // while (this.occupiedCells.includes((cell_col, cell_row)) && attempts < 7) {
+        //     cell_row = cell_row + inc_dir;
+        //     if (cell_row == CONSTANTS.VERT_WRITE_CELLS) {
+        //         inc_dir = -1;
+        //     }
+        //     attempts = attempts + 1;
+        // }
+        // const loc = this.cellPxCoords({'col': cell_col, 'row': cell_row});
+        // // console.log("final placement in " + cell_col + " " + cell_row + " aka " + loc['col'] + " " + loc['row']);
+        // this.occupiedCells += (cell_col, cell_row);
 
-        const oldctx = this.ctx;
-        this.ctx.globalAlpha = 0.5;
-        this.ctx.fillStyle = CONSTANTS.SCOREBOX_COLOR;
-        this.ctx.fillRect(loc['col'] + 2, loc['row'] + 2, loc['width'] - 2, loc['height'] - 2);
-        this.ctx.globalAlpha = 1;
-        this.ctx.font = CONSTANTS.INFO_LITTLE_FONT + "px Arial";
-        this.ctx.fillStyle = color;
-        this.ctx.fillText(Math.floor(distance) + " km", loc['col'] + 5, loc['row'] + 20);
-        this.ctx = oldctx;
+        // const oldctx = this.ctx;
+        // this.ctx.globalAlpha = 0.5;
+        // this.ctx.fillStyle = CONSTANTS.SCOREBOX_COLOR;
+        // this.ctx.fillRect(loc['col'] + 2, loc['row'] + 2, loc['width'] - 2, loc['height'] - 2);
+        // this.ctx.globalAlpha = 1;
+        // this.ctx.font = CONSTANTS.INFO_LITTLE_FONT + "px Arial";
+        // this.ctx.fillStyle = color;
+        // this.ctx.fillText(Math.floor(distance) + " km", loc['col'] + 5, loc['row'] + 20);
+        // this.ctx = oldctx;
     }
 }
 

@@ -29,6 +29,7 @@
 	.room-btn {
 		cursor: pointer;
 		border: 1px solid #333;
+		width: 100px;
 		padding: 2px 2px;
 		margin: 3px 3px;
 		font-size: 16px;
@@ -39,6 +40,23 @@
 		background: -o-linear-gradient(top,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
 		background: -ms-linear-gradient(top,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
 		background: linear-gradient(to bottom,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
+		border-radius: 2px;
+		box-shadow: 0 0 4px rgba(0,0,0,0.3);
+	}
+	.special-room-btn {
+		cursor: pointer;
+		border: 1px solid #333;
+		width: 100px;
+		padding: 2px 2px;
+		margin: 3px 3px;
+		font-size: 16px;
+		background: #ffe200; /* fallback */
+		background: -moz-linear-gradient(top,  #ffe200 0%, #dbc300 4%, #bda800 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffe200), color-stop(4%,#dbc300), color-stop(100%,#bda800));
+		background: -webkit-linear-gradient(top,  #ffe200 0%,#dbc300 4%,#bda800 100%);
+		background: -o-linear-gradient(top,  #ffe200 0%,#dbc300 4%,#bda800 100%);
+		background: -ms-linear-gradient(top,  #ffe200 0%,#dbc300 4%,#bda800 100%);
+		background: linear-gradient(to bottom,  #ffe200 0%,#dbc300 4%,#bda800 100%);
 		border-radius: 2px;
 		box-shadow: 0 0 4px rgba(0,0,0,0.3);
 	}

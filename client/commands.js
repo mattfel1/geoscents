@@ -14,6 +14,7 @@ class Commands {
         this.asia_count = 0;
         this.oceania_count = 0;
         this.samerica_count = 0;
+        this.misc_count = 0;
         this.lobby_count = 0;
         this.mapStyle = 'terrain';
         this.lastCommand = {'timeDescrip': '', 'citystring': '', 'capital': false, 'iso2': '', 'round': 0, 'button': false, 'clicked': false};
@@ -81,7 +82,7 @@ class Commands {
     }
 
 
-    updateCounts(l,w,u,e,a,s,as,oc) {
+    updateCounts(l,w,u,e,a,s,as,oc,m) {
        this.lobby_count = l;
        this.world_count = w;
        this.us_count = u;
@@ -90,6 +91,7 @@ class Commands {
        this.asia_count = as;
        this.oceania_count = oc;
        this.samerica_count = s;
+       this.misc_count = m;
     }
     postButtons() {
         const socket = this.socket;
@@ -105,14 +107,15 @@ class Commands {
 
         if (this.muted) $('#commands').append($("<button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔇 <font color=\"white\">(muted)</font></button>"));
         else $('#commands').append($("<button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔊</button><br>"));
-        $('#commands').append($("<button class='lobby-btn' id='lobby_button'>To Lobby (" + this.lobby_count + " players)</button><br>"))
-        $('#commands').append($("<button class='room-btn' id='world_button'>World (" + this.world_count + " players)</button><br>"))
-        $('#commands').append($("<button class='room-btn' id='euro_button'>Europe (" + this.euro_count + " players)</button>  "))
-        $('#commands').append($("<button class='room-btn' id='africa_button'>Africa (" + this.africa_count + " players)</button>  "))
-        $('#commands').append($("<button class='room-btn' id='asia_button'>Asia (" + this.asia_count + " players)</button>  "))
-        $('#commands').append($("<button class='room-btn' id='oceania_button'>Oceania (" + this.oceania_count + " players)</button>  "))
-        $('#commands').append($("<button class='room-btn' id='us_button'>N. America (" + this.us_count + " players)</button>  "))
-        $('#commands').append($("<button class='room-btn' id='samerica_button'>S. America (" + this.samerica_count + " players)</button>  "))
+        $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>To Lobby</b> <font size=2>(" + this.lobby_count + " players)</font></button><br>"))
+        $('#commands').append($("<button class='room-btn' id='world_button'><b>World</b> <br><font size=2>(" + this.world_count + " players)</font></button>"))
+        $('#commands').append($("<button class='special-room-btn' id='misc_button'><b>Trivia</b> <br><font size=2>(" + this.misc_count + " players)</font></button><br>  "))
+        $('#commands').append($("<button class='room-btn' id='euro_button'><b>Europe</b> <br><font size=2>(" + this.euro_count + " players)</font></button>  "))
+        $('#commands').append($("<button class='room-btn' id='africa_button'><b>Africa</b> <br><font size=2>(" + this.africa_count + " players)</font></button>  "))
+        $('#commands').append($("<button class='room-btn' id='asia_button'><b>Asia</b> <br><font size=2>(" + this.asia_count + " players)</font></button>  "))
+        $('#commands').append($("<button class='room-btn' id='oceania_button'><b>Oceania</b> <br><font size=2>(" + this.oceania_count + " players)</font></button>  "))
+        $('#commands').append($("<button class='room-btn' id='us_button'><b>N. America</b> <br><font size=2>(" + this.us_count + " players)</font></button>  "))
+        $('#commands').append($("<button class='room-btn' id='samerica_button'><b>S. America</b> <br><font size=2>(" + this.samerica_count + " players)</font></button>  "))
 
         var room = this.myRoom;
         $('#mute_button').bind("click", () => {socket.emit('mute')});
@@ -121,6 +124,7 @@ class Commands {
         $('#satellite_button').bind("click", () => {socket.emit('renderMap', 'satellite')});
         $('#lobby_button').bind("click", () => {if (room !== CONSTANTS.LOBBY) socket.emit('moveTo', CONSTANTS.LOBBY)});
         $('#world_button').bind("click", () => {if (room !== CONSTANTS.WORLD) socket.emit('moveTo', CONSTANTS.WORLD)});
+        $('#misc_button').bind("click", () => {if (room !== CONSTANTS.MISC) socket.emit('moveTo', CONSTANTS.MISC)});
         $('#us_button').bind("click", () => {if (room !== CONSTANTS.US) socket.emit('moveTo', CONSTANTS.US)});
         $('#euro_button').bind("click", () => {if (room !== CONSTANTS.EURO) socket.emit('moveTo', CONSTANTS.EURO)});
         $('#africa_button').bind("click", () => {if (room !== CONSTANTS.AFRICA) socket.emit('moveTo', CONSTANTS.AFRICA)});

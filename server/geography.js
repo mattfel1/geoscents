@@ -2,6 +2,7 @@
  * Class for storing all geography methods
  */
 const WORLDCITIES = require('../resources/worldcities.js').CITIES;
+const MISCCITIES = require('../resources/misccities.js').CITIES;
 const USCITIES = require('../resources/uscities.js').CITIES;
 const EUROCITIES = require('../resources/eurocities.js').CITIES;
 const AFRICACITIES = require('../resources/africacities.js').CITIES;
@@ -9,6 +10,7 @@ const ASIACITIES = require('../resources/asiacities.js').CITIES;
 const OCEANIACITIES = require('../resources/oceaniacities.js').CITIES;
 const SAMERICACITIES = require('../resources/samericacities.js').CITIES;
 const CONSTANTS = require('../resources/constants.js');
+// var idx = 0;
 
 const randomCity = (room, blacklist) => {
     let acceptable = false;
@@ -18,6 +20,14 @@ const randomCity = (room, blacklist) => {
     if (room === CONSTANTS.WORLD) {
         while (!acceptable) {
             proposal = WORLDCITIES[Math.floor(Math.random() * WORLDCITIES.length)];
+            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
+            else i = i + 1;
+        }
+    } else if (room === CONSTANTS.MISC) {
+        while (!acceptable) {
+            proposal = MISCCITIES[Math.floor(Math.random() * MISCCITIES.length)];
+            // proposal = MISCCITIES[idx];
+            // idx = idx + 1
             if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
@@ -65,6 +75,7 @@ const randomCity = (room, blacklist) => {
         }
     }
     if (requireUniqueAdmin(room, proposal)) {blacklist.push(proposal['admin_name'])}
+    else if (room == CONSTANTS.MISC) blacklist.push(stringifyTarget(proposal)['string'])
     else blacklist.push(proposal['country']);
     return [proposal, blacklist];
 };
@@ -92,8 +103,12 @@ const stringifyTarget = (target) => {
     if (target['population'] !== '') {
         pop = target['population'];
     }
+    let comma = ', '
+    if (target['country'] == '') {
+        comma = ''
+    }
     return {
-        'string': target['city'] + state + ', ' + target['country'],
+        'string': target['city'] + state + comma + target['country'],
         'pop': pop,
         'majorcapital': target['capital'] === "primary",
         'minorcapital': target['capital'] === 'admin' || target['capital'] === 'minor'
@@ -109,8 +124,12 @@ const stringifyTargetAscii = (target) => {
     if (target['population'] !== '') {
         pop = target['population'];
     }
+    let comma = ', '
+    if (target['country'] == '') {
+        comma = ''
+    }
     return {
-        'string': target['city_ascii'] + state + ', ' + target['country'],
+        'string': target['city_ascii'] + state + comma + target['country'],
         'pop': pop,
         'majorcapital': target['capital'] === "primary",
         'minorcapital': target['capital'] === 'admin' || target['capital'] === 'minor'
@@ -126,7 +145,8 @@ const requireUniqueAdmin = (room, target) => {
 };
 
 const uniqueInBlacklist = (room, target, blacklist) => {
-    if (requireUniqueAdmin(room, target)) return !blacklist.includes(target['admin_name']);
+    if (room == CONSTANTS.MISC) return !blacklist.includes(stringifyTarget(target))
+    else if (requireUniqueAdmin(room, target)) return !blacklist.includes(target['admin_name']);
     else return !blacklist.includes(target['country']);
 };
 
@@ -153,6 +173,7 @@ const geoDist = (room,lat1,lon1,lat2,lon2) => {
 };
 
 const fullDiag = 2 * geoDist(CONSTANTS.WORLD, (CONSTANTS.WORLD_MAX_LAT + CONSTANTS.WORLD_MIN_LAT) / 2, (CONSTANTS.WORLD_MAX_LON + CONSTANTS.WORLD_MIN_LON) / 2, CONSTANTS.WORLD_MIN_LAT, CONSTANTS.WORLD_MIN_LON);
+const miscDiag = fullDiag
 const euroDiag = geoDist(CONSTANTS.EURO, CONSTANTS.EURO_MAX_LAT, CONSTANTS.EURO_MAX_LON, CONSTANTS.EURO_MIN_LAT, CONSTANTS.EURO_MIN_LON);
 const africaDiag = geoDist(CONSTANTS.AFRICA, CONSTANTS.AFRICA_MAX_LAT, CONSTANTS.AFRICA_MAX_LON, CONSTANTS.AFRICA_MIN_LAT, CONSTANTS.AFRICA_MIN_LON);
 const asiaDiag = geoDist(CONSTANTS.ASIA, CONSTANTS.ASIA_MAX_LAT, CONSTANTS.ASIA_MAX_LON, CONSTANTS.ASIA_MIN_LAT, CONSTANTS.ASIA_MIN_LON);
@@ -164,7 +185,6 @@ const score = (room, geoDist, mercDist, timeBonus) => {
     // Scale geoDist based on the length of the map's diagonal
     let scalingFactor = 1;
     if (room === CONSTANTS.EURO) scalingFactor = fullDiag / euroDiag;
-    else if (room === CONSTANTS.EURO) scalingFactor = fullDiag / euroDiag;
     else if (room === CONSTANTS.AFRICA) scalingFactor = fullDiag / africaDiag;
     else if (room === CONSTANTS.ASIA) scalingFactor = fullDiag / asiaDiag;
     else if (room === CONSTANTS.OCEANIA) scalingFactor = fullDiag / oceaniaDiag;

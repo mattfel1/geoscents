@@ -13,6 +13,11 @@ module.exports = {
     WORLD_MIN_LON: -180, // Latitude of top edge of map
     WORLD_MAX_LON: 180, // Latitude of bottom edge of map
     WORLD_LAT_TS: 0,
+    MISC_MIN_LAT: 77.0, // Latitude of top edge of map
+    MISC_MAX_LAT: -65.5, // Latitude of bottom edge of map
+    MISC_MIN_LON: -180, // Latitude of top edge of map
+    MISC_MAX_LON: 180, // Latitude of bottom edge of map
+    MISC_LAT_TS: 0,
     US_MIN_LAT: 56.0, // Latitude of top edge of map
     US_MAX_LAT: 10.0, // Latitude of bottom edge of map
     US_MIN_LON: -141.0, // Latitude of top edge of map
@@ -111,6 +116,7 @@ module.exports = {
     EURO: 'Europe',
     ASIA: 'Asia',
     OCEANIA: 'Oceania',
+    MISC: 'Misc',
     AFRICA: 'Africa',
     SAMERICA: "S. America",
     MAX_INACTIVE: 10, // Rounds of no click before you get booted

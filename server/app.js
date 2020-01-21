@@ -81,6 +81,7 @@ const rooms = {
     'Africa': new Room(CONSTANTS.AFRICA),
     'Asia': new Room(CONSTANTS.ASIA),
     'Oceania': new Room(CONSTANTS.OCEANIA),
+    'Misc': new Room(CONSTANTS.MISC),
     'Lobby': new Room(CONSTANTS.LOBBY)
 };
 var playerRooms = new Map();
@@ -105,7 +106,7 @@ io.on('connection', (socket) => {
 	socket.on('newPlayer', () => {
 	  rooms[CONSTANTS.LOBBY].addPlayer(socket, {'moved': false});
       playerRooms.set(socket.id, rooms[CONSTANTS.LOBBY]);
-      io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount());
+      io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount(),rooms[CONSTANTS.MISC].playerCount());
       helpers.logHistogram(rooms);
       helpers.log("User connected    " + socket.handshake.address);
       socket.emit("update custom messages", CONSTANTS.LOBBY, REFERENCE3, 10);
@@ -126,7 +127,7 @@ io.on('connection', (socket) => {
               io.sockets.emit("update messages", room.room, leave_msg);
           }
           room.killPlayer(socket);
-          io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount());
+      	  io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount(),rooms[CONSTANTS.MISC].playerCount());
       }
 	});
 	socket.on('playerJoin', (newname, newcolor, callback) => {
@@ -144,7 +145,8 @@ io.on('connection', (socket) => {
 	        rooms[CONSTANTS.LOBBY].renamePlayer(socket, name, color);
             var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'><b>" + rooms[CONSTANTS.LOBBY].getPlayerRawName(socket) + "</b> has entered the lobby!</font> ] " + badname + "<br>";
             io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
-            io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount());
+      	    io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount(),rooms[CONSTANTS.MISC].playerCount());
+		    
             helpers.logHistogram(rooms)
 	    }
         callback()
@@ -169,7 +171,7 @@ io.on('connection', (socket) => {
        if (playerRooms.has(socketid)) {
            playerRooms.delete(socketid);
        }
-       io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount());
+       io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount(),rooms[CONSTANTS.MISC].playerCount());
     });
     socket.on('mute', () => {
         io.sockets.emit('mute player', socket.id)
@@ -203,7 +205,8 @@ io.on('connection', (socket) => {
           playerRooms.set(socket.id, rooms[dest]);
           var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'><b>" + rooms[dest].getPlayerRawName(socket) + "</b> has joined " + dest + "!</font> ]<br>";
           io.sockets.emit("update messages", dest, join_msg);
-          io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount());
+          if (dest == CONSTANTS.MISC) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
+          io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount(),rooms[CONSTANTS.MISC].playerCount());
           helpers.logHistogram(rooms)
       }
     });
@@ -259,6 +262,7 @@ setInterval( () => {
         io.sockets.emit("update messages", CONSTANTS.AFRICA, "<font color=\"red\"><b>WARNING: Game will restart within the next minute to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
         io.sockets.emit("update messages", CONSTANTS.ASIA, "<font color=\"red\"><b>WARNING: Game will restart within the next minute to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
         io.sockets.emit("update messages", CONSTANTS.OCEANIA, "<font color=\"red\"><b>WARNING: Game will restart within the next minute to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.MISC, "<font color=\"red\"><b>WARNING: Game will restart within the next minute to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
         io.sockets.emit("update messages", CONSTANTS.SAMERICA, "<font color=\"red\"><b>WARNING: Game will restart within the next minute to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
     }
 }, 15000);
