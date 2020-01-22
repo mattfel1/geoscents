@@ -145,7 +145,7 @@ const requireUniqueAdmin = (room, target) => {
 };
 
 const uniqueInBlacklist = (room, target, blacklist) => {
-    if (room == CONSTANTS.MISC) return !blacklist.includes(stringifyTarget(target))
+    if (room == CONSTANTS.MISC) return !blacklist.includes(stringifyTarget(target)['string'])
     else if (requireUniqueAdmin(room, target)) return !blacklist.includes(target['admin_name']);
     else return !blacklist.includes(target['country']);
 };
