@@ -1592,66 +1592,66 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Very_Large_Telescope"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Extremely Large Telescope (ELT)",
+      "city_ascii": "",
+      "lat": -24.59328,
+      "lng": -70.19717,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Extremely_Large_Telescope"
+    },
+    {
+      "city": "Giant Magellan Telescope (GMT)",
+      "city_ascii": "",
+      "lat": -29.0283,
+      "lng": -70.6858,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Giant_Magellan_Telescope"
+    },
+    {
+      "city": "Christ of the Abyss",
+      "city_ascii": "",
+      "lat": 44.314038,
+      "lng": 9.174979,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Christ_of_the_Abyss"
+    },
+    {
+      "city": "Tian Tan Buddha",
+      "city_ascii": "",
+      "lat": 22.254106,
+      "lng": 113.905144,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Tian_Tan_Buddha"
+    },
+    {
+      "city": "The Little Mermaid (statue)",
+      "city_ascii": "",
+      "lat": 55.692861,
+      "lng": 12.599278,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/The_Little_Mermaid_(statue)"
+    },
+    {
+      "city": "Venus de Milo (statue)",
+      "city_ascii": "",
+      "lat": 48.859958,
+      "lng": 2.337269,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Venus_de_Milo"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
