@@ -1012,28 +1012,476 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Itsukushima_Shrine"
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    {
+      "city": "Sognefjord",
+      "city_ascii": "",
+      "lat": 61.1,
+      "lng": 5.166667,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Sognefjord"
+    },
+    {
+      "city": "Fort Knox",
+      "city_ascii": "",
+      "lat": 37.92,
+      "lng": -85.96,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Fort_Knox"
+    },
+    {
+      "city": "Bering Strait",
+      "city_ascii": "",
+      "lat": 66.5,
+      "lng": -169,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Bering_Strait"
+    },
+    {
+      "city": "Pearl Harbor",
+      "city_ascii": "",
+      "lat": 21.34927,
+      "lng": -157.94397,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Naval_Station_Pearl_Harbor"
+    },
+    {
+      "city": "Forbidden City (故宫)",
+      "city_ascii": "",
+      "lat": 39.915987,
+      "lng": 116.397925,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Forbidden_City"
+    },
+    {
+      "city": "Kinkaku-ji (金閣寺)",
+      "city_ascii": "",
+      "lat": 35.011667,
+      "lng": 135.768333,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Kinkaku-ji"
+    },
+    {
+      "city": "Nikkō Tōshō-gū (日光東照宮)",
+      "city_ascii": "",
+      "lat": 36.758064,
+      "lng": 139.598958,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Nikkō_Tōshō-gū"
+    },
+    {
+      "city": "Abu Simbel Temples",
+      "city_ascii": "",
+      "lat": 22.336944,
+      "lng": 31.625556,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Abu_Simbel_temples"
+    },
+    {
+      "city": "Battle of Marathon",
+      "city_ascii": "",
+      "lat": 38.118056,
+      "lng": 23.978333,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Battle_of_Marathon"
+    },
+    {
+      "city": "Grand Canyon",
+      "city_ascii": "",
+      "lat": 36.3,
+      "lng": -112.6,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Grand_Canyon"
+    },
+    {
+      "city": "Cave of the Crystals (Cueva de los Cristales)",
+      "city_ascii": "",
+      "lat": 27.850833,
+      "lng": -105.496389,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Cave_of_the_Crystals"
+    },
+    {
+      "city": "Magura Cave Prehistoric Paintings",
+      "city_ascii": "",
+      "lat": 43.727778,
+      "lng": 22.582778,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Magura_Cave"
+    },
+    {
+      "city": "Mount Rushmore",
+      "city_ascii": "",
+      "lat": 43.878889,
+      "lng": -103.459722,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Mount_Rushmore"
+    },
+    {
+      "city": "Alcatraz Island",
+      "city_ascii": "",
+      "lat": 37.826667,
+      "lng": -122.422778,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Alcatraz_Island"
+    },
+    {
+      "city": "Wright Flyer (First heavier-than-air powered flight) ",
+      "city_ascii": "",
+      "lat": 36.025556,
+      "lng": -75.67,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Wright_Flyer"
+    },
+    {
+      "city": "I Have a Dream Speech",
+      "city_ascii": "",
+      "lat": 38.889278,
+      "lng": -77.050139,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/I_Have_a_Dream"
+    },
+    {
+      "city": "Nazca Lines",
+      "city_ascii": "",
+      "lat": -14.716667,
+      "lng": -75.133333,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Nazca_Lines"
+    },
+    {
+      "city": "Location of Golden Plates found by Joseph Smith",
+      "city_ascii": "",
+      "lat": 43.28,
+      "lng": -77.05,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Golden_plates"
+    },
+    {
+      "city": "14th Dalai Lama Birthplace",
+      "city_ascii": "",
+      "lat": 36.378083,
+      "lng": 101.865889,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/14th_Dalai_Lama"
+    },
+    {
+      "city": "Debre Damo Monastery",
+      "city_ascii": "",
+      "lat": 14.373889,
+      "lng": 39.290278,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Debre_Damo"
+    },
+    {
+      "city": "Taktsang Palphug Monastery",
+      "city_ascii": "",
+      "lat": 27.491911,
+      "lng": 89.363489,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Paro_Taktsang"
+    },
+    {
+      "city": "Abuna Yemata Guh Church",
+      "city_ascii": "",
+      "lat": 13.91526,
+      "lng": 39.343071,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Abuna_Yemata_Guh"
+    },
+    {
+      "city": "Antelope Canyon",
+      "city_ascii": "",
+      "lat": 36.952766,
+      "lng": -111.441268,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Antelope_Canyon"
+    },
+    {
+      "city": "Newnes Glowworm Tunnel",
+      "city_ascii": "",
+      "lat": -33.238727,
+      "lng": 150.226593,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Glowworm_Tunnel"
+    },
+    {
+      "city": "Waitomo Glowworm Caves",
+      "city_ascii": "",
+      "lat": -38.26065,
+      "lng": 175.103339,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Waitomo_Glowworm_Caves"
+    },
+    {
+      "city": "That Wanaka Tree",
+      "city_ascii": "",
+      "lat": -45.0311,
+      "lng": 168.6644,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Queenstown-Lakes_District"
+    },
+    {
+      "city": "Discovery of early Australopithecus, a.k.a Lucy",
+      "city_ascii": "",
+      "lat": 11.12,
+      "lng": 40.58,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Lucy_(Australopithecus)"
+    },
+    {
+      "city": "Discovery of Neanderthals",
+      "city_ascii": "",
+      "lat": 51.226129,
+      "lng": 6.951058,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Neandertal_(valley)"
+    },
+    {
+      "city": "Discovery of Denisovans",
+      "city_ascii": "",
+      "lat": 51.3975,
+      "lng": 84.676111,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Denisovan"
+    },
+    {
+      "city": "Valley of the Kings",
+      "city_ascii": "",
+      "lat": 25.740833,
+      "lng": 32.602222,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Valley_of_the_Kings"
+    },
+    {
+      "city": "Galápagos Islands",
+      "city_ascii": "Galapagos Islands",
+      "lat": -0.666667,
+      "lng":  -90.55,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Gal%C3%A1pagos_Islands"
+    },
+    {
+      "city": "Execution of the Romanov family",
+      "city_ascii": "",
+      "lat": 56.833333,
+      "lng":  60.583333,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Execution_of_the_Romanov_family"
+    },
+    {
+      "city": "Auschwitz concentration camp",
+      "city_ascii": "",
+      "lat": 50.035833,
+      "lng": 19.178333,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Auschwitz_concentration_camp"
+    },
+    {
+      "city": "Guantanamo Bay Detention Camp",
+      "city_ascii": "",
+      "lat": 19.902222,
+      "lng": -75.098889,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Guantanamo_Bay_detention_camp"
+    },
+{
+      "city": "Pompeii (Mount Vesuvius)",
+      "city_ascii": "",
+      "lat": 40.75,
+      "lng": 14.5,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Pompei"
+    },
+    {
+      "city": "Tikal",
+      "city_ascii": "",
+      "lat": 17.221944,
+      "lng": -89.623611,
+      "country": "Maya Civilization",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Tikal"
+    },
+    {
+      "city": "Leptis Magna",
+      "city_ascii": "",
+      "lat": 32.639167, 
+      "lng": 14.290556,
+      "country": "Carthaginian Empire",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Leptis_Magna"
+    },
+    {
+      "city": "Edward Jenner Develops the First Successful Vaccine",
+      "city_ascii": "",
+      "lat": 51.691, 
+      "lng": -2.459,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Smallpox_vaccine#Variolation"
+    },
+    {
+      "city": "Longmen Grottoes",
+      "city_ascii": "",
+      "lat": 34.555556, 
+      "lng": 112.469722,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Longmen_Grottoes"
+    },
+    {
+      "city": "Ellora Caves",
+      "city_ascii": "",
+      "lat": 20.0268,
+      "lng": 75.1771,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Ellora_Caves"
+    },
+    {
+      "city": "Ta Prohm Temple",
+      "city_ascii": "",
+      "lat": 13.435,
+      "lng": 103.889167,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Ta_Prohm"
+    },
+    {
+      "city": "Rosalind Franklin takes first diffraction photo of DNA",
+      "city_ascii": "",
+      "lat": 51.511944,
+      "lng": -0.116111,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Photo_51"
+    },
+    {
+      "city": "Tenochtitlan",
+      "city_ascii": "",
+      "lat": 19.433333,
+      "lng": -99.133333,
+      "country": "Aztec Empire",
+      "population": 0,
+      "capital": "primary",
+      "wiki": "https://en.wikipedia.org/wiki/Tenochtitlan"
+    },
+    {
+      "city": "Tiwanaku",
+      "city_ascii": "",
+      "lat": -16.554722, 
+      "lng": -68.673333,
+      "country": "Tiwanaku Empire",
+      "population": 0,
+      "capital": "primary",
+      "wiki": "https://en.wikipedia.org/wiki/Tiwanaku"
+    },
+    {
+      "city": "Uaxactun",
+      "city_ascii": "",
+      "lat": 17.393561,
+      "lng": -89.634533,
+      "country": "Mayan Civilization",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Uaxactun"
+    },
+    {
+      "city": "Lake Titicaca",
+      "city_ascii": "",
+      "lat": -15.75,
+      "lng": -69.416667,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Lake_Titicaca"
+    },
+    {
+      "city": "Cusco",
+      "city_ascii": "",
+      "lat": -13.525,
+      "lng": -71.972222,
+      "country": "Incan Empire",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Cusco"
+    },
+    
   ]
 };
