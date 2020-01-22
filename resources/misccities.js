@@ -1479,9 +1479,571 @@ module.exports = {
       "lng": -71.972222,
       "country": "Incan Empire",
       "population": 0,
-      "capital": "",
+      "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Cusco"
     },
+    {
+      "city": "Svalbard Global Seed Vault",
+      "city_ascii": "",
+      "lat": 78.235867,
+      "lng": 15.491374,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Svalbard_Global_Seed_Vault"
+    },
+    {
+      "city": "Petronas Towers",
+      "city_ascii": "",
+      "lat": 3.158,
+      "lng": 101.712,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Petronas_Towers"
+    },
+    {
+      "city": "Sinking of the RMS Lusitania",
+      "city_ascii": "",
+      "lat": 51.416667,
+      "lng": -8.55,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Sinking_of_the_RMS_Lusitania"
+    },
+    {
+      "city": "Ryugyong Hotel (류경려관)",
+      "city_ascii": "",
+      "lat": 39.036667,
+      "lng": 125.730833,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Ryugyong_Hotel"
+    },
+    {
+      "city": "Chicxulub Crater",
+      "city_ascii": "",
+      "lat": 21.4,
+      "lng": -89.516667,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Chicxulub_crater"
+    },
+    {
+      "city": "Vredefort Crater",
+      "city_ascii": "",
+      "lat": -27,
+      "lng": 27.5,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Vredefort_crater"
+    },
+    {
+      "city": "Wolfe Creek Crater",
+      "city_ascii": "",
+      "lat": -19.171667,
+      "lng": 127.795556,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Wolfe_Creek_Crater"
+    },
+    {
+      "city": "Meteor Crater",
+      "city_ascii": "",
+      "lat": 35.027222,
+      "lng": -111.0225,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Meteor_Crater"
+    },
+    {
+      "city": "Elugelab (First H-Bomb Test Site)",
+      "city_ascii": "",
+      "lat": 11.666667,
+      "lng": 162.186944,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Elugelab"
+    },
+    {
+      "city": "Taal Volcano",
+      "city_ascii": "",
+      "lat": 14.01,
+      "lng": 120.9975,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Taal_Volcano"
+    },
+    {
+      "city": "Very Large Telescope (VLT)",
+      "city_ascii": "",
+      "lat": -24.62733,
+      "lng": -70.40417,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Very_Large_Telescope"
+    },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+
+
     
   ]
 };

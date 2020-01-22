@@ -107,15 +107,33 @@ class Commands {
 
         if (this.muted) $('#commands').append($("<button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔇 <font color=\"white\">(muted)</font></button>"));
         else $('#commands').append($("<button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔊</button><br>"));
-        $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>To Lobby</b> <font size=2>(" + this.lobby_count + " players)</font></button><br>"))
-        $('#commands').append($("<button class='room-btn' id='world_button'><b>World</b> <br><font size=2>(" + this.world_count + " players)</font></button>"))
-        $('#commands').append($("<button class='special-room-btn' id='misc_button'><b>Trivia</b> <br><font size=2>(" + this.misc_count + " players)</font></button><br>  "))
-        $('#commands').append($("<button class='room-btn' id='euro_button'><b>Europe</b> <br><font size=2>(" + this.euro_count + " players)</font></button>  "))
-        $('#commands').append($("<button class='room-btn' id='africa_button'><b>Africa</b> <br><font size=2>(" + this.africa_count + " players)</font></button>  "))
-        $('#commands').append($("<button class='room-btn' id='asia_button'><b>Asia</b> <br><font size=2>(" + this.asia_count + " players)</font></button>  "))
-        $('#commands').append($("<button class='room-btn' id='oceania_button'><b>Oceania</b> <br><font size=2>(" + this.oceania_count + " players)</font></button>  "))
-        $('#commands').append($("<button class='room-btn' id='us_button'><b>N. America</b> <br><font size=2>(" + this.us_count + " players)</font></button>  "))
-        $('#commands').append($("<button class='room-btn' id='samerica_button'><b>S. America</b> <br><font size=2>(" + this.samerica_count + " players)</font></button>  "))
+        let lobby_string = "(" + this.lobby_count + " players)"
+        if (this.lobby_count > 0) lobby_string = "<b>" + lobby_string + "</b>"
+        $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>To Lobby</b> <font size=2>" + lobby_string + "</font></button><br>"))
+        let world_string = "(" + this.world_count + " players)"
+        if (this.world_count > 0) world_string = "<b>" + world_string + "</b>"
+        $('#commands').append($("<button class='room-btn' id='world_button'><b>World</b> <br><font size=2>" + world_string + "</font></button>"))
+        let misc_string = "(" + this.misc_count + " players)"
+        if (this.misc_count > 0) misc_string = "<b>" + misc_string + "</b>"
+        $('#commands').append($("<button class='special-room-btn' id='misc_button'><b>Trivia</b> <br><font size=2>" + misc_string + "</font></button><br>  "))
+        let euro_string = "(" + this.euro_count + " players)"
+        if (this.euro_count > 0) euro_string = "<b>" + euro_string + "</b>"
+        $('#commands').append($("<button class='room-btn' id='euro_button'><b>Europe</b> <br><font size=2>" + euro_string + "</font></button>  "))
+        let africa_string = "(" + this.africa_count + " players)"
+        if (this.africa_count > 0) africa_string = "<b>" + africa_string + "</b>"
+        $('#commands').append($("<button class='room-btn' id='africa_button'><b>Africa</b> <br><font size=2>" + africa_string + "</font></button>  "))
+        let asia_string = "(" + this.asia_count + " players)"
+        if (this.asia_count > 0) asia_string = "<b>" + asia_string + "</b>"
+        $('#commands').append($("<button class='room-btn' id='asia_button'><b>Asia</b> <br><font size=2>" + asia_string + "</font></button>  "))
+        let oceania_string = "(" + this.oceania_count + " players)"
+        if (this.oceania_count > 0) oceania_string = "<b>" + oceania_string + "</b>"
+        $('#commands').append($("<button class='room-btn' id='oceania_button'><b>Oceania</b> <br><font size=2>" + oceania_string + "</font></button>  "))
+        let us_string = "(" + this.us_count + " players)"
+        if (this.us_count > 0) us_string = "<b>" + us_string + "</b>"
+        $('#commands').append($("<button class='room-btn' id='us_button'><b>N. America</b> <br><font size=2>" + us_string + "</font></button>  "))
+        let samerica_string = "(" + this.samerica_count + " players)"
+        if (this.samerica_count > 0) samerica_string = "<b>" + samerica_string + "</b>"
+        $('#commands').append($("<button class='room-btn' id='samerica_button'><b>S. America</b> <br><font size=2>" + samerica_string + "</font></button>  "))
 
         var room = this.myRoom;
         $('#mute_button').bind("click", () => {socket.emit('mute')});
