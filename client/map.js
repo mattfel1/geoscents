@@ -11,9 +11,9 @@ worldImg['terrain'].src = "/resources/world_terrain.png";
 worldImg['satellite'].src = "/resources/world_satellite.png";
 
 var miscImg = {'classic': new Image(), 'terrain': new Image(), 'satellite': new Image()};
-miscImg['classic'].src = "/resources/world_classic.png";
-miscImg['terrain'].src = "/resources/world_terrain.png";
-miscImg['satellite'].src = "/resources/world_satellite.png";
+miscImg['classic'].src = "/resources/misc_classic.png";
+miscImg['terrain'].src = "/resources/misc_terrain.png";
+miscImg['satellite'].src = "/resources/misc_satellite.png";
 
 var usImg = {'classic': new Image(), 'terrain': new Image(), 'satellite': new Image()};
 usImg['classic'].src = "/resources/us_classic.png";

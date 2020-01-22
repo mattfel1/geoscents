@@ -228,6 +228,12 @@ const mercToGeo = (room,row,col) => {
         min_lon = CONSTANTS.EURO_MIN_LON;
         max_lon = CONSTANTS.EURO_MAX_LON;
         lat_ts = CONSTANTS.EURO_LAT_TS;
+    } else if (room === CONSTANTS.MISC) {
+        zero_lat = CONSTANTS.MISC_MIN_LAT;
+        max_lat = CONSTANTS.MISC_MAX_LAT;
+        min_lon = CONSTANTS.MISC_MIN_LON;
+        max_lon = CONSTANTS.MISC_MAX_LON;
+        lat_ts = CONSTANTS.MISC_LAT_TS;
     } else if (room === CONSTANTS.AFRICA) {
         zero_lat = CONSTANTS.AFRICA_MIN_LAT;
         max_lat = CONSTANTS.AFRICA_MAX_LAT;
@@ -278,6 +284,12 @@ const geoToMerc = (room,lat, lon) => {
         min_lon = CONSTANTS.EURO_MIN_LON;
         max_lon = CONSTANTS.EURO_MAX_LON;
         lat_ts = CONSTANTS.EURO_LAT_TS;
+    } else if (room === CONSTANTS.MISC) {
+        zero_lat = CONSTANTS.MISC_MIN_LAT;
+        max_lat = CONSTANTS.MISC_MAX_LAT;
+        min_lon = CONSTANTS.MISC_MIN_LON;
+        max_lon = CONSTANTS.MISC_MAX_LON;
+        lat_ts = CONSTANTS.MISC_LAT_TS;
     } else if (room === CONSTANTS.AFRICA) {
         zero_lat = CONSTANTS.AFRICA_MIN_LAT;
         max_lat = CONSTANTS.AFRICA_MAX_LAT;
