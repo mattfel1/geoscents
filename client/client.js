@@ -127,10 +127,11 @@ $(document).ready(function(){
 
     const mouseUpHandler = (e) => {
       playerClick.mouseDown = false
+      playerClick.downCount = 0;
+      playerClick.touchDown = false;
     };
     const mouseDownHandler = (e) => {
       playerClick.mouseDown = true
-      console.log("Detected player click!");
 
       var rect = canvas.getBoundingClientRect();
       playerClick.cursorX = e.clientX - rect.left
@@ -139,12 +140,12 @@ $(document).ready(function(){
     const touchUpHandler = (e) => {
       socket.emit('playerClick', playerClick);
       playerClick.downCount = 0;
-      playerClick.mouseDown = false
+      playerClick.mouseDown = false;
+      playerClick.touchDown = false;
     };
     const touchDownHandler = (e) => {
       playerClick.touchDown = true;
       playerClick.mouseDown = true;
-      console.log("Detected player touch!");
       var rect = canvas.getBoundingClientRect();
       playerClick.cursorX = e.touches[0].clientX - rect.left
       playerClick.cursorY = e.touches[0].clientY - rect.top

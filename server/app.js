@@ -81,7 +81,7 @@ const rooms = {
     'Africa': new Room(CONSTANTS.AFRICA),
     'Asia': new Room(CONSTANTS.ASIA),
     'Oceania': new Room(CONSTANTS.OCEANIA),
-    'Misc': new Room(CONSTANTS.MISC),
+    'Trivia': new Room(CONSTANTS.MISC),
     'Lobby': new Room(CONSTANTS.LOBBY)
 };
 var playerRooms = new Map();

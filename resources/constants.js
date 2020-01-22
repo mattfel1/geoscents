@@ -116,7 +116,7 @@ module.exports = {
     EURO: 'Europe',
     ASIA: 'Asia',
     OCEANIA: 'Oceania',
-    MISC: 'Misc',
+    MISC: 'Trivia',
     AFRICA: 'Africa',
     SAMERICA: "S. America",
     MAX_INACTIVE: 10, // Rounds of no click before you get booted
