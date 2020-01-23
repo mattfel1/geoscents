@@ -2267,6 +2267,58 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Everglades_National_Park"
     },
+    {
+      "city": "Gros Morne",
+      "city_ascii": "",
+      "lat": 49.689444,
+      "lng": -57.738056,
+      "country": "Canada",
+      "iso2": "CA",
+      "admin_name": "Nat’l Park",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Gros_Morne_National_Park"
+    },
+    {
+      "city": "Jasper",
+      "city_ascii": "",
+      "lat": 52.8,
+      "lng": -117.9,
+      "country": "Canada",
+      "iso2": "CA",
+      "admin_name": "Nat’l Park",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Jasper_National_Park"
+    },
+    {
+      "city": "Kluane",
+      "city_ascii": "",
+      "lat": 60.61943,
+      "lng": -138.331,
+      "country": "Canada",
+      "iso2": "CA",
+      "admin_name": "Nat’l Park",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Kluane_National_Park_and_Reserve"
+    },
+    {
+      "city": "Pacific Rim",
+      "city_ascii": "",
+      "lat": 48.636111,
+      "lng": -124.769167,
+      "country": "Canada",
+      "iso2": "CA",
+      "admin_name": "Nat’l Park",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Pacific_Rim_National_Park_Reserve"
+    },
+
+
+
+
     // {
     //   "city": "",
     //   "city_ascii": "",
