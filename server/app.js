@@ -177,10 +177,13 @@ io.on('connection', (socket) => {
         io.sockets.emit('mute player', socket.id)
     });
     socket.on('renderMap', (style) => {
-        const room = playerRooms.get(socket.id);
-        helpers.log("Player " +  socket.handshake.address + " switched to map style " + style);
-    
-	// io.sockets.emit('render map', socket.id, style, room.room);
+        if (playerRooms.get(socket.id) != null) {
+          const room = playerRooms.get(socket.id);
+          helpers.log("Player " +  socket.handshake.address + " switched to map style " + style);
+          io.sockets.emit('render map', socket.id, style, room.room);          
+        } else {
+          helpers.log("Player " + socket.handshake.address + " tried to switch maps without being in a room!")
+        }
     });
     socket.on('moveTo', (dest) => {
       if (playerRooms.has(socket.id)) {
