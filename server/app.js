@@ -171,7 +171,7 @@ io.on('connection', (socket) => {
        if (playerRooms.has(socketid)) {
            playerRooms.delete(socketid);
        }
-       io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount(),rooms[CONSTANTS.MISC].playerCount());
+       // io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount(),rooms[CONSTANTS.MISC].playerCount());
     });
     socket.on('mute', () => {
         io.sockets.emit('mute player', socket.id)
