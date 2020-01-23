@@ -180,7 +180,7 @@ io.on('connection', (socket) => {
         const room = playerRooms.get(socket.id);
         helpers.log("Player " +  socket.handshake.address + " switched to map style " + style);
     
-	io.sockets.emit('render map', socket.id, style, room.room);
+	// io.sockets.emit('render map', socket.id, style, room.room);
     });
     socket.on('moveTo', (dest) => {
       if (playerRooms.has(socket.id)) {
