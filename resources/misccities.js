@@ -2231,6 +2231,7 @@ module.exports = {
       "lat": 37.880556,
       "lng": 41.1275,
       "country": "Turkey",
+      "iso2": "TR",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Batman,_Turkey"
