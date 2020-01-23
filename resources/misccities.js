@@ -2315,6 +2315,18 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Pacific_Rim_National_Park_Reserve"
     },
+    {
+      "city": "Yoho",
+      "city_ascii": "",
+      "lat": 51.395278,
+      "lng": -116.486667,
+      "country": "Canada",
+      "iso2": "CA",
+      "admin_name": "Nat’l Park",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Yoho_National_Park"
+    },
 
 
 
