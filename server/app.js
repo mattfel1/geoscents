@@ -177,7 +177,7 @@ io.on('connection', (socket) => {
         io.sockets.emit('mute player', socket.id)
     });
     socket.on('renderMap', (style) => {
-        if (playerRooms.get(socket.id) != null) {
+        if (playerRooms.has(socket.id)) {
           const room = playerRooms.get(socket.id);
           helpers.log("Player " +  socket.handshake.address + " switched to map style " + style);
           io.sockets.emit('render map', socket.id, style, room.room);          
