@@ -1183,7 +1183,7 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/Nazca_Lines"
     },
     {
-      "city": "Location of Golden Plates found by Joseph Smith",
+      "city": "Joseph Smith Discovers the Golden Plates (Book of Mormon)",
       "city_ascii": "",
       "lat": 43.28,
       "lng": -77.05,
