@@ -743,7 +743,7 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/Bagan"
     },
     {
-      "city": "Site of First Phone Call (by Alexander Graham Bell)",
+      "city": "Alexander Graham Bell makes First Phone Call",
       "city_ascii": "",
       "lat": 48.358056,
       "lng": -71.063611,
@@ -2328,10 +2328,106 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Yoho_National_Park"
     },
-
-
-
-
+    {
+      "city": "Code of Hammurabi Discovery Site",
+      "city_ascii": "",
+      "lat": 32.190556,
+      "lng": 48.257778,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Code_of_Hammurabi"
+    },
+    {
+      "city": "Susa",
+      "city_ascii": "",
+      "lat": 32.190556,
+      "lng": 48.257778,
+      "country": "Parthian / Sasanian Empire",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Susa"
+    },    
+    {
+      "city": "Istakhr",
+      "city_ascii": "",
+      "lat": 29.980833,
+      "lng": 52.909444,
+      "country": "Sasanian Empire",
+      "population": 0,
+      "capital": "primary",
+      "wiki": "https://en.wikipedia.org/wiki/Istakhr"
+    },    
+    {
+      "city": "Karakorum",
+      "city_ascii": "",
+      "lat": 47.210278,
+      "lng": 102.847778,
+      "country": "Mongol Empire",
+      "population": 0,
+      "capital": "primary",
+      "wiki": "https://en.wikipedia.org/wiki/Karakorum"
+    },    
+    {
+      "city": "Cirta",
+      "city_ascii": "",
+      "lat": 36.3675,
+      "lng": 6.611944,
+      "country": "Berber Kingdom of Numidia",
+      "population": 0,
+      "capital": "primary",
+      "wiki": "https://en.wikipedia.org/wiki/Cirta"
+    },    
+    {
+      "city": "Kerma",
+      "city_ascii": "",
+      "lat": 19.600803,
+      "lng": 30.409731,
+      "country": "Kerma Kingdom of Nubia",
+      "population": 0,
+      "capital": "primary",
+      "wiki": "https://en.wikipedia.org/wiki/Kerma"
+    },    
+    {
+      "city": "Harappa",
+      "city_ascii": "",
+      "lat": 30.628889,
+      "lng": 72.863889,
+      "country": "Indus Valley Civilization",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Harappa"
+    },
+    {
+      "city": "Yangcheng (陽城)",
+      "city_ascii": "",
+      "lat": 34.455278,
+      "lng": 113.025278,
+      "country": "Xia Dynasty, China",
+      "population": 0,
+      "capital": "primary",
+      "wiki": "https://en.wikipedia.org/wiki/Yangcheng_(historical_city)"
+    },
+    {
+      "city": "Chang'an (长安)",
+      "city_ascii": "",
+      "lat": 34.266667,
+      "lng": 108.9,
+      "country": "Han Dynasty, China",
+      "population": 0,
+      "capital": "primary",
+      "wiki": "https://en.wikipedia.org/wiki/Chang%27an"
+    },
+    {
+      "city": "New Echota",
+      "city_ascii": "",
+      "lat": 34.539444,
+      "lng": -84.908611,
+      "country": "Cherokee Nation (pre-1830)",
+      "population": 0,
+      "capital": "primary",
+      "wiki": "https://en.wikipedia.org/wiki/New_Echota"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
@@ -2342,7 +2438,86 @@ module.exports = {
     //   "capital": "",
     //   "wiki": ""
     // },
-
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
 
     
   ]
