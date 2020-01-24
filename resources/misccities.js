@@ -2428,6 +2428,117 @@ module.exports = {
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/New_Echota"
     },
+    {
+      "city": "Rössing Uranium Mine",
+      "city_ascii": "",
+      "lat": -22.484167,
+      "lng": 15.048889,
+      "iso2": "NA",
+      "country": "Namibia",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Rössing_uranium_mine"
+    },
+    {
+      "city": "Spitzkoppe ('Matterhorn of Namibia')",
+      "city_ascii": "",
+      "lat": -21.824722,
+      "lng": 15.194167,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Spitzkoppe"
+    },
+    {
+      "city": "2013 Chelyabinsk Meteor",
+      "city_ascii": "",
+      "lat": 55.15,
+      "lng": 61.41,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Chelyabinsk_meteor"
+    },
+    {
+      "city": "Apollo 11 Splashdown (First Moon Landing)",
+      "city_ascii": "",
+      "lat": 10.6, 
+      "lng": 172.4,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Apollo_11#Splashdown_and_quarantine"
+    },
+    {
+      "city": "1969 Woodstock Music Festival",
+      "city_ascii": "",
+      "lat": 41.701,
+      "lng": -74.88,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Woodstock"
+    },
+    {
+      "city": "NASA Mission Control Center (MCC-H)",
+      "city_ascii": "",
+      "lat": 29.558056,
+      "lng": -95.088333,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Christopher_C._Kraft_Jr._Mission_Control_Center"
+    },
+    {
+      "city": "Battle of Cannae",
+      "city_ascii": "",
+      "lat": 41.306389,
+      "lng": 16.1325,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Battle_of_Cannae"
+    },
+    {
+      "city": "Battle of the Teutoburg Forest",
+      "city_ascii": "",
+      "lat": 52.408056,
+      "lng": 8.129444,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Battle_of_the_Teutoburg_Forest"
+    },
+    {
+      "city": "Battle of the Trebia",
+      "city_ascii": "",
+      "lat": 45.05,
+      "lng": 9.6,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Battle_of_the_Trebia"
+    },
+    {
+      "city": "Battle of Lake Trasimene",
+      "city_ascii": "",
+      "lat": 43.139444,
+      "lng": 12.1075,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Battle_of_Lake_Trasimene"
+    },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
     // {
     //   "city": "",
     //   "city_ascii": "",
