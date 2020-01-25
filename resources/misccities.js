@@ -2646,14 +2646,14 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/The_Great_Wave_off_Kanagawa"
     },
     // {
-    //   "city": "",
+    //   "city": "Matt Programs GeoScents Game",
     //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
+    //   "lat": 37.429167,
+    //   "lng": -122.138056,
     //   "country": "",
     //   "population": 0,
     //   "capital": "",
-    //   "wiki": ""
+    //   "wiki": "http://geoscents.net"
     // },
     // {
     //   "city": "",
