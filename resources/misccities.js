@@ -1553,7 +1553,7 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/Wolfe_Creek_Crater"
     },
     {
-      "city": "Meteor Crater",
+      "city": "Meteor Crater (Canyon Diablo Crater)",
       "city_ascii": "",
       "lat": 35.027222,
       "lng": -111.0225,
@@ -2529,6 +2529,102 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_Lake_Trasimene"
     },
+    {
+      "city": "Millennium Seed Bank (MSB)",
+      "city_ascii": "",
+      "lat": 51.068578,
+      "lng": -0.090209,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Millennium_Seed_Bank_Partnership"
+    },
+    {
+      "city": "Australian Grains Genebank (AGG)",
+      "city_ascii": "",
+      "lat": -36.716667,
+      "lng": 142.2,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Australian_Grains_Genebank"
+    },
+    {
+      "city": "Last Known Passenger Pigeon ('Martha') Dies in 1914",
+      "city_ascii": "",
+      "lat": 39.145,
+      "lng": -84.508,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Passenger_pigeon"
+    },
+    {
+      "city": "Crater Lake",
+      "city_ascii": "",
+      "lat": 42.95,
+      "lng": -122.1,
+      "country": "United States",
+      "iso2": "US",
+      "population": 0,
+      "admin_name": "Nat’l Park",
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Crater_Lake"
+    },
+    {
+      "city": "Dry Tortugas",
+      "city_ascii": "",
+      "lat": 24.628588,
+      "lng": -82.873287,
+      "country": "United States",
+      "iso2": "US",
+      "population": 0,
+      "admin_name": "Nat’l Park",
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Dry_Tortugas_National_Park"
+    },
+    {
+      "city": "Biscayne",
+      "city_ascii": "",
+      "lat": 25.469444,
+      "lng": -80.186111,
+      "country": "United States",
+      "iso2": "US",
+      "population": 0,
+      "admin_name": "Nat’l Park",
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Biscayne_National_Park"
+    },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
     // {
     //   "city": "",
     //   "city_ascii": "",
