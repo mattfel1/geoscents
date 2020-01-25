@@ -2595,56 +2595,56 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Biscayne_National_Park"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Copernicus Creates Heliocentric Model of Solar System ('Commentariolus')",
+      "city_ascii": "",
+      "lat": 54.116667,
+      "lng": 20.583333,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Nicolaus_Copernicus#Heliocentrism"
+    },
+    {
+      "city": "Niccolò Machiavelli Writes 'The Prince' (Political Treatise)",
+      "city_ascii": "",
+      "lat": 43.682778,
+      "lng": 11.197222,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Niccolò_Machiavelli#Machiavellian"
+    },
+    {
+      "city": "Adam Smith Begins Writing 'The Wealth of Nations'",
+      "city_ascii": "",
+      "lat": 43.6045,
+      "lng": 1.444,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Adam_Smith#The_Wealth_of_Nations"
+    },
+    {
+      "city": "Vincent van Gogh Paints 'The Starry Night'",
+      "city_ascii": "",
+      "lat": 43.79,
+      "lng": 4.8325,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/The_Starry_Night"
+    },
+    {
+      "city": "Hokusai Creates The Great Wave off Kanagawa (神奈川沖浪裏)",
+      "city_ascii": "",
+      "lat": 35.685,
+      "lng": 139.7514,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/The_Great_Wave_off_Kanagawa"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
