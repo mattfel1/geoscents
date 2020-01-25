@@ -237,7 +237,10 @@ io.on('connection', (socket) => {
               CONSTANTS.PROFANITY.forEach((word) => {new_sent_msg = replaceAll(new_sent_msg, word, "****")});
               helpers.log("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + ": " + msg);
               room.distributeMessage(socket, new_sent_msg, cb);
-              if (isFeedback) room.whisperMessage(socket, "<i>Your feedback has been noted!  Thank you for playing and commenting!</i><br>", cb);
+              if (isFeedback) {
+		      room.whisperMessage(socket, "<i>Your feedback has been noted!  Thank you for playing and commenting!</i><br>", cb);
+                      helpers.logFeedback("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + ": " + msg);
+	      }
               if (isOptOut) {
                   room.whisperMessage(socket, "<i>Your IP address has been masked.  Thank you for playing the game!</i><br>", cb);
                   room.players.get(socket.id).optOut = true;

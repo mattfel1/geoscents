@@ -1,7 +1,7 @@
 const fs = require('fs');
 const CONSTANTS = require('../resources/constants.js');
 const logfile = '/scratch/connections.log';
-
+const feedbackfile = '/scratch/feedback.log';
 
 const log = (payload) => {
     const currentdate = new Date();
@@ -12,6 +12,21 @@ const log = (payload) => {
         + currentdate.getMinutes() + ":";
     if (fs.existsSync(logfile)) {
         fs.appendFile(logfile, "[" + timestamp + "] " + payload + "\n", function (err) {
+            if (err) throw err;
+            // console.log('Saved!');
+        });
+    }
+};
+
+const logFeedback = (payload) => {
+    const currentdate = new Date();
+    const timestamp = currentdate.getDate() + "/"
+        + (currentdate.getMonth() + 1) + "/"
+        + currentdate.getFullYear() + " @ "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":";
+    if (fs.existsSync(feedbackfile)) {
+        fs.appendFile(feedbackfile, "[" + timestamp + "] " + payload + "\n", function (err) {
             if (err) throw err;
             // console.log('Saved!');
         });
@@ -67,7 +82,7 @@ const recordGuesses = (room, citystring, city, admin, country, ips, dists, times
 };
 
 const logHistogram = (rooms) => {
-    const totalPlayers = rooms[CONSTANTS.LOBBY].playerCount() + rooms[CONSTANTS.WORLD].playerCount() + rooms[CONSTANTS.US].playerCount() + rooms[CONSTANTS.EURO].playerCount() + rooms[CONSTANTS.AFRICA].playerCount() + rooms[CONSTANTS.SAMERICA].playerCount() + rooms[CONSTANTS.ASIA].playerCount() + rooms[CONSTANTS.OCEANIA].playerCount();
+    const totalPlayers = rooms[CONSTANTS.LOBBY].playerCount() + rooms[CONSTANTS.WORLD].playerCount() + rooms[CONSTANTS.US].playerCount() + rooms[CONSTANTS.EURO].playerCount() + rooms[CONSTANTS.AFRICA].playerCount() + rooms[CONSTANTS.SAMERICA].playerCount() + rooms[CONSTANTS.ASIA].playerCount() + rooms[CONSTANTS.OCEANIA].playerCount() + rooms[CONSTANTS.MISC].playerCount();
     log("There are " + totalPlayers + " players: Lobby (" + rooms[CONSTANTS.LOBBY].playerCount() +
         "), World (" + rooms[CONSTANTS.WORLD].playerCount() +
         "), US (" + rooms[CONSTANTS.US].playerCount() +
@@ -75,7 +90,8 @@ const logHistogram = (rooms) => {
         "), Africa (" + rooms[CONSTANTS.AFRICA].playerCount() +
         "), SAmerica (" + rooms[CONSTANTS.SAMERICA].playerCount() +
         "), Asia (" + rooms[CONSTANTS.ASIA].playerCount() +
-        "), Oceania (" + rooms[CONSTANTS.OCEANIA].playerCount() + ")"
+        "), Oceania (" + rooms[CONSTANTS.OCEANIA].playerCount() +
+        "), Trivia (" + rooms[CONSTANTS.TRIVIA].playerCount() + ")"
         )
 };
 
@@ -107,4 +123,4 @@ const prependRecentActivity = (payload) => {
     });
 };
 
-module.exports = {log, logHistogram, readRecentActivity, prependRecentActivity, recordGuesses};
+module.exports = {log, logFeedback, logHistogram, readRecentActivity, prependRecentActivity, recordGuesses};
