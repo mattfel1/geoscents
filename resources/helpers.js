@@ -91,7 +91,7 @@ const logHistogram = (rooms) => {
         "), SAmerica (" + rooms[CONSTANTS.SAMERICA].playerCount() +
         "), Asia (" + rooms[CONSTANTS.ASIA].playerCount() +
         "), Oceania (" + rooms[CONSTANTS.OCEANIA].playerCount() +
-        "), Trivia (" + rooms[CONSTANTS.TRIVIA].playerCount() + ")"
+        "), Trivia (" + rooms[CONSTANTS.MISC].playerCount() + ")"
         )
 };
 
