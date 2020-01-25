@@ -347,9 +347,9 @@ module.exports = {
       "city_ascii": "",
       "lat": -20.266667,
       "lng": 30.933333,
-      "country": "",
+      "country": "Kingdom of Zimbabwe",
       "population": 0,
-      "capital": "",
+      "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Great_Zimbabwe"
     },
     {
