@@ -2695,46 +2695,46 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Kongou_Falls"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Guaíra Falls",
+      "city_ascii": "",
+      "lat": -24.073056,
+      "lng": -54.283611,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Guaíra_Falls"
+    },
+    {
+      "city": "Khone Phapheng Falls (ນ້ຳຕົກຕາດຄອນພະເພັງ)",
+      "city_ascii": "",
+      "lat": 13.948056,
+      "lng": 105.940556,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Khone_Phapheng_Falls"
+    },
+    {
+      "city": "Pará Falls",
+      "city_ascii": "",
+      "lat": 6.311111,
+      "lng": -64.523889,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Pará_Falls"
+    },
+    {
+      "city": "Dettifoss (waterfall)",
+      "city_ascii": "",
+      "lat": 65.814667,
+      "lng": -16.384472,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Dettifoss"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
