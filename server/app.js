@@ -159,6 +159,7 @@ io.on('connection', (socket) => {
         io.sockets.emit("update messages", CONSTANTS.AFRICA, text);
         io.sockets.emit("update messages", CONSTANTS.ASIA, text);
         io.sockets.emit("update messages", CONSTANTS.OCEANIA, text);
+        io.sockets.emit("update messages", CONSTANTS.MISC, text);
         io.sockets.emit("update messages", CONSTANTS.SAMERICA, text);
     });
     socket.on('playerReady', () => {
