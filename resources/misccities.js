@@ -73,7 +73,7 @@ module.exports = {
     },
     // 8th wonders
     {
-      "city": "Angkor Wat",
+      "city": "Angkor Wat (អង្គរវត្ត)",
       "city_ascii": "",
       "lat": 13.4125,
       "lng": 103.866667,
@@ -2645,15 +2645,95 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/The_Great_Wave_off_Kanagawa"
     },
+    {
+      "city": "Birthplace of Archimedes",
+      "city_ascii": "",
+      "lat": 37.069167,
+      "lng": 15.2875,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Archimedes"
+    },
+    {
+      "city": "Hacienda Nápoles (Pablo Escobar's estate)",
+      "city_ascii": "",
+      "lat": 5.926,
+      "lng": -74.721825,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Hacienda_Nápoles"
+    },
+    {
+      "city": "Grand Palace (พระบรมมหาราชวัง)",
+      "city_ascii": "",
+      "lat": 13.7501,
+      "lng": 100.492,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Grand_Palace"
+    },
+    {
+      "city": "Drottningholm Palace",
+      "city_ascii": "",
+      "lat": 59.321667,
+      "lng": 17.886111,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Drottningholm_Palace"
+    },
+    {
+      "city": "Kongou Falls",
+      "city_ascii": "",
+      "lat": 0.290739,
+      "lng": 12.58905,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Kongou_Falls"
+    },
     // {
-    //   "city": "Matt Programs GeoScents Game",
+    //   "city": "",
     //   "city_ascii": "",
-    //   "lat": 37.429167,
-    //   "lng": -122.138056,
+    //   "lat": ,
+    //   "lng": ,
     //   "country": "",
     //   "population": 0,
     //   "capital": "",
-    //   "wiki": "http://geoscents.net"
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
     // },
     // {
     //   "city": "",
