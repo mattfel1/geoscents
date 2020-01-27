@@ -36,19 +36,19 @@ file = 'cities.js'
 #blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe']
 #whitelist = []
 
-# outfile = 'eurocities.js'
-# latrng = [37,64]
-# pop = 100000
-# lonrng = [-36, 52]
-# blacklist = ['Azerbaijan', 'Iran', 'Armenia', 'Georgia', 'Kazakhstan', 'Iraq', 'Syria']
-# whitelist = ['Isle Of Man', 'Gibraltar']
-
-outfile = 'africacities.js'
-latrng = [-34,39]
+outfile = 'eurocities.js'
+latrng = [37,64]
 pop = 100000
-lonrng = [-58, 80]
-blacklist = ['India', 'Brazil', 'Pakistan', 'Iran', 'Iraq', 'Saudi Arabia', 'Afghanistan', 'Greece', 'Israel', 'Portugal', 'Syria', 'Turkey', 'Kuwait', 'Yemen', 'Paraguay', 'Lebanon', 'Qatar', 'United Arab Emirates', 'Spain', 'Tajikistan', 'Jordan', 'Oman', 'Turkmenistan', 'Bahrain', 'Malta', 'Suriname', 'Cyprus', 'Sri Lanka', 'Maldives', 'West Bank', 'Italy', 'Uzbekistan', 'China', 'Argentina', 'Uruguay']
-whitelist = ['Gibraltar']
+lonrng = [-36, 52]
+blacklist = ['Azerbaijan', 'Iran', 'Armenia', 'Georgia', 'Kazakhstan', 'Iraq', 'Syria', 'Tunisia']
+whitelist = ['Isle Of Man', 'Gibraltar']
+
+# outfile = 'africacities.js'
+# latrng = [-34,39]
+# pop = 100000
+# lonrng = [-58, 80]
+# blacklist = ['India', 'Brazil', 'Pakistan', 'Iran', 'Iraq', 'Saudi Arabia', 'Afghanistan', 'Greece', 'Israel', 'Portugal', 'Syria', 'Turkey', 'Kuwait', 'Yemen', 'Paraguay', 'Lebanon', 'Qatar', 'United Arab Emirates', 'Spain', 'Tajikistan', 'Jordan', 'Oman', 'Turkmenistan', 'Bahrain', 'Malta', 'Suriname', 'Cyprus', 'Sri Lanka', 'Maldives', 'West Bank', 'Italy', 'Uzbekistan', 'China', 'Argentina', 'Uruguay']
+# whitelist = ['Gibraltar']
 
 countries = []
 with open(file) as json_file:

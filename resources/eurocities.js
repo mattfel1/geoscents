@@ -5929,19 +5929,6 @@ module.exports = {
     "id": 1724759742
   },
   {
-    "city": "Bizerte",
-    "city_ascii": "Bizerte",
-    "lat": 37.2904,
-    "lng": 9.855,
-    "country": "Tunisia",
-    "iso2": "TN",
-    "iso3": "TUN",
-    "admin_name": "Bizerte",
-    "capital": "admin",
-    "population": 139843,
-    "id": 1788330365
-  },
-  {
     "city": "G\u00f6ttingen",
     "city_ascii": "Gottingen",
     "lat": 51.5204,

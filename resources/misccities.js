@@ -1623,7 +1623,7 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/Christ_of_the_Abyss"
     },
     {
-      "city": "Tian Tan Buddha",
+      "city": "Tian Tan Buddha (天壇大佛)",
       "city_ascii": "",
       "lat": 22.254106,
       "lng": 113.905144,
