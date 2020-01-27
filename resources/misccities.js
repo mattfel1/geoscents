@@ -1643,7 +1643,7 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/The_Little_Mermaid_(statue)"
     },
     {
-      "city": "Venus de Milo (statue)",
+      "city": "Venus de Milo Statue (Αφροδίτη της Μήλου)",
       "city_ascii": "",
       "lat": 48.859958,
       "lng": 2.337269,
@@ -2745,25 +2745,25 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Buzludzha_monument"
     },
+    {
+      "city": "SS Ayrfield ('The Floating Forest') in Homebush Bay",
+      "city_ascii": "",
+      "lat": -33.84801,
+      "lng": 151.06488,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Homebush_Bay"
+    },
     // {
-    //   "city": "",
+    //   "city": "Submerged City of Shicheng (狮城)",
     //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
+    //   "lat": 29.609167,
+    //   "lng": 118.99,
     //   "country": "",
     //   "population": 0,
     //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
+    //   "wiki": "https://en.wikipedia.org/wiki/Qiandao_Lake#Submerged_city_of_Shi_Cheng"
     // },
     // {
     //   "city": "",
