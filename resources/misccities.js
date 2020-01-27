@@ -2755,16 +2755,16 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Homebush_Bay"
     },
-    // {
-    //   "city": "Submerged City of Shicheng (狮城)",
-    //   "city_ascii": "",
-    //   "lat": 29.609167,
-    //   "lng": 118.99,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": "https://en.wikipedia.org/wiki/Qiandao_Lake#Submerged_city_of_Shi_Cheng"
-    // },
+    {
+      "city": "Submerged City of Shicheng (狮城)",
+      "city_ascii": "",
+      "lat": 29.609167,
+      "lng": 118.99,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Qiandao_Lake#Submerged_city_of_Shi_Cheng"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
