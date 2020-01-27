@@ -107,32 +107,32 @@ class Commands {
 
         if (this.muted) $('#commands').append($("<button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔇 <font color=\"white\">(muted)</font></button>"));
         else $('#commands').append($("<button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔊</button><br>"));
-        let lobby_string = "(" + this.lobby_count + " players)"
-        if (this.lobby_count > 0) lobby_string = "<b>" + lobby_string + "</b>"
+        let lobby_string; 
+        if (this.lobby_count > 0) {lobby_string = "<b>(" + this.lobby_count + " players)</b>"} else {lobby_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>To Lobby</b> <font size=2>" + lobby_string + "</font></button><br>"))
-        let world_string = "(" + this.world_count + " players)"
-        if (this.world_count > 0) world_string = "<b>" + world_string + "</b>"
+        let world_string; 
+        if (this.world_count > 0) {world_string = "<b>(" + this.world_count + " players)</b>"} else {world_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='world_button'><b>World</b> <br><font size=2>" + world_string + "</font></button>"))
-        let misc_string = "(" + this.misc_count + " players)"
-        if (this.misc_count > 0) misc_string = "<b>" + misc_string + "</b>"
+        let misc_string; 
+        if (this.misc_count > 0) {misc_string = "<b>(" + this.misc_count + " players)</b>"} else {misc_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='special-room-btn' id='misc_button'><b>Trivia</b> <br><font size=2>" + misc_string + "</font></button><br>  "))
-        let euro_string = "(" + this.euro_count + " players)"
-        if (this.euro_count > 0) euro_string = "<b>" + euro_string + "</b>"
+        let euro_string; 
+        if (this.euro_count > 0) {euro_string = "<b>(" + this.euro_count + " players)</b>"} else {euro_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='euro_button'><b>Europe</b> <br><font size=2>" + euro_string + "</font></button>  "))
-        let africa_string = "(" + this.africa_count + " players)"
-        if (this.africa_count > 0) africa_string = "<b>" + africa_string + "</b>"
+        let africa_string; 
+        if (this.africa_count > 0) {africa_string = "<b>(" + this.africa_count + " players)</b>"} else {africa_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='africa_button'><b>Africa</b> <br><font size=2>" + africa_string + "</font></button>  "))
-        let asia_string = "(" + this.asia_count + " players)"
-        if (this.asia_count > 0) asia_string = "<b>" + asia_string + "</b>"
+        let asia_string; 
+        if (this.asia_count > 0) {asia_string = "<b>(" + this.asia_count + " players)</b>"} else {asia_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='asia_button'><b>Asia</b> <br><font size=2>" + asia_string + "</font></button>  "))
-        let oceania_string = "(" + this.oceania_count + " players)"
-        if (this.oceania_count > 0) oceania_string = "<b>" + oceania_string + "</b>"
+        let oceania_string; 
+        if (this.oceania_count > 0) {oceania_string = "<b>(" + this.oceania_count + " players)</b>"} else {oceania_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='oceania_button'><b>Oceania</b> <br><font size=2>" + oceania_string + "</font></button>  "))
-        let us_string = "(" + this.us_count + " players)"
-        if (this.us_count > 0) us_string = "<b>" + us_string + "</b>"
+        let us_string; 
+        if (this.us_count > 0) {us_string = "<b>(" + this.us_count + " players)</b>"} else {us_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='us_button'><b>N. America</b> <br><font size=2>" + us_string + "</font></button>  "))
-        let samerica_string = "(" + this.samerica_count + " players)"
-        if (this.samerica_count > 0) samerica_string = "<b>" + samerica_string + "</b>"
+        let samerica_string; 
+        if (this.samerica_count > 0) {samerica_string = "<b>(" + this.samerica_count + " players)</b>"} else {samerica_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='samerica_button'><b>S. America</b> <br><font size=2>" + samerica_string + "</font></button>  "))
 
         var room = this.myRoom;
