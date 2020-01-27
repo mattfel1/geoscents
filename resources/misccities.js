@@ -1270,7 +1270,7 @@ module.exports = {
       "country": "",
       "population": 0,
       "capital": "",
-      "wiki": "https://en.wikipedia.org/wiki/Queenstown-Lakes_District"
+      "wiki": "https://www.atlasobscura.com/places/lone-tree-of-lake-wanaka"
     },
     {
       "city": "Discovery of early Australopithecus, a.k.a Lucy",
@@ -2735,16 +2735,16 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Dettifoss"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Buzludhzha Monument (Бузлуджа)",
+      "city_ascii": "",
+      "lat": 42.7358,
+      "lng": 25.3938,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Buzludzha_monument"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
