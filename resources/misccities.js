@@ -253,7 +253,7 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/Chapel_of_the_Rosario,_Puebla"
     },
     {
-      "city": "Terracotta Army",
+      "city": "Terracotta Army (兵马俑)",
       "city_ascii": "",
       "lat": 34.385,
       "lng": 109.273056,
@@ -303,7 +303,7 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/Parliament_Hill"
     },
     {
-      "city": "The Kremlin",
+      "city": "The Kremlin (Моско́вский Кремль)",
       "city_ascii": "",
       "lat": 55.751667,
       "lng": 37.617778,
@@ -333,7 +333,7 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/Null_Island"
     },
     {
-      "city": "Saint Basil's Cathedral",
+      "city": "Saint Basil's Cathedral (собо́р Васи́лия Блаже́нного)",
       "city_ascii": "",
       "lat": 55.75725,
       "lng": 37.623056,
@@ -2765,36 +2765,36 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Qiandao_Lake#Submerged_city_of_Shi_Cheng"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Peñón de Vélez de la Gomera (Shortest International Border)",
+      "city_ascii": "",
+      "lat": 35.172581,
+      "lng": -4.300803,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Peñón_de_Vélez_de_la_Gomera"
+    },
+    {
+      "city": "Byblos (Βύβλος) / Jbeil (جبيل‎)",
+      "city_ascii": "",
+      "lat": 34.123611,
+      "lng": 35.651111,
+      "country": "Phoenicia",
+      "population": 0,
+      "capital": "primary",
+      "wiki": "https://en.wikipedia.org/wiki/Byblos"
+    },
+    {
+      "city": "Tyre (صور‎)",
+      "city_ascii": "",
+      "lat": 33.270833,
+      "lng": 35.196111,
+      "country": "Phoenicia",
+      "population": 0,
+      "capital": "primary",
+      "wiki": "https://en.wikipedia.org/wiki/Tyre,_Lebanon"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
