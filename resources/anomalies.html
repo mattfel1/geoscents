@@ -63,10 +63,10 @@ These plots show how the two score components work for the World map (sf = 1).<b
 The game resets every day at midnight GMT.  Sorry if you are playing a game during the reboot!  You should see plenty of warnings in the minutes leading up to the game reset.<br>
 Sometimes the Weekly records are better than the Monthly records.  This is because these are the cronjobs that run the game:<br><br>
 
-59 10 * * * rm /scratch/*day*<br>
-59 10 * * 1 rm /scratch/*week*<br>
-59 10 1 * * rm /scratch/*month*<br>
-59 10 1 1 * rm /scratch/*year*<br><br>
+59 0 * * * rm /scratch/*day*<br>
+59 0 * * 1 rm /scratch/*week*<br>
+59 0 1 * * rm /scratch/*month*<br>
+59 0 1 1 * rm /scratch/*year*<br><br>
 
 Therefore, it is possible for the monthly records to get reset on the first of the month, but the weekly records will not get reset until the first day of the week.
 
