@@ -2805,16 +2805,16 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_Hastings"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Osun-Osogbo Sacred Grove",
+      "city_ascii": "",
+      "lat": 7.755556,
+      "lng": 4.552222,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Osun-Osogbo"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
