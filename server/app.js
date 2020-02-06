@@ -261,6 +261,18 @@ setInterval(() => {
 }, 1000 / CONSTANTS.FPS);
 // Handle reboot message
 setInterval( () => {
+    if (d.getHours() === 17) {
+        io.sockets.emit("update messages", CONSTANTS.LOBBY, "<font color=\"red\"><b>TEST ALERT</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.WORLD, "<font color=\"red\"><b>TEST ALERT</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.US, "<font color=\"red\"><b>TEST ALERT</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.EURO, "<font color=\"red\"><b>TEST ALERT</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.AFRICA, "<font color=\"red\"><b>TEST ALERT</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.ASIA, "<font color=\"red\"><b>TEST ALERT</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.OCEANIA, "<font color=\"red\"><b>TEST ALERT</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.MISC, "<font color=\"red\"><b>TEST ALERT</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.SAMERICA, "<font color=\"red\"><b>TEST ALERT</b></font><br>");
+
+    }
     if (d.getHours() === 23 && d.getMinutes() > 58) {
         io.sockets.emit("update messages", CONSTANTS.LOBBY, "<font color=\"red\"><b>WARNING: Game will restart within the next minute to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
         io.sockets.emit("update messages", CONSTANTS.WORLD, "<font color=\"red\"><b>WARNING: Game will restart within the next minute to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
