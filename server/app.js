@@ -261,6 +261,8 @@ setInterval(() => {
 }, 1000 / CONSTANTS.FPS);
 // Handle reboot message
 setInterval( () => {
+    console.log(d.getHours())
+    console.log(d.getMinutes())
     if (d.getHours() === 17) {
         io.sockets.emit("update messages", CONSTANTS.LOBBY, "<font color=\"red\"><b>TEST ALERT</b></font><br>");
         io.sockets.emit("update messages", CONSTANTS.WORLD, "<font color=\"red\"><b>TEST ALERT</b></font><br>");
