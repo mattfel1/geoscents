@@ -261,18 +261,18 @@ setInterval(() => {
 }, 1000 / CONSTANTS.FPS);
 // Handle reboot message
 setInterval( () => {
-    if (d.getHours() === 17) { // && d.getMinutes() > 55) {
-        io.sockets.emit("update messages", CONSTANTS.LOBBY, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 23:59 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.WORLD, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 23:59 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.US, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 23:59 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.EURO, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 23:59 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.AFRICA, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 23:59 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.ASIA, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 23:59 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.OCEANIA, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 23:59 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.MISC, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 23:59 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.SAMERICA, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 23:59 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+    if (d.getHours() === 23 && d.getMinutes() > 55) {
+        io.sockets.emit("update messages", CONSTANTS.LOBBY, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.WORLD, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.US, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.EURO, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.AFRICA, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.ASIA, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.OCEANIA, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.MISC, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
+        io.sockets.emit("update messages", CONSTANTS.SAMERICA, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
     }
-}, 15000);
+}, 20000);
 
 module.exports = {io};
 
