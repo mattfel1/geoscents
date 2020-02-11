@@ -1,6 +1,7 @@
 const fs = require('fs');
 const CONSTANTS = require('../resources/constants.js');
 const logfile = '/scratch/connections.log';
+const histfile = '/scratch/histograms.log';
 const feedbackfile = '/scratch/feedback.log';
 
 const log = (payload) => {
@@ -83,7 +84,7 @@ const recordGuesses = (room, citystring, city, admin, country, ips, dists, times
 
 const logHistogram = (rooms) => {
     const totalPlayers = rooms[CONSTANTS.LOBBY].playerCount() + rooms[CONSTANTS.WORLD].playerCount() + rooms[CONSTANTS.US].playerCount() + rooms[CONSTANTS.EURO].playerCount() + rooms[CONSTANTS.AFRICA].playerCount() + rooms[CONSTANTS.SAMERICA].playerCount() + rooms[CONSTANTS.ASIA].playerCount() + rooms[CONSTANTS.OCEANIA].playerCount() + rooms[CONSTANTS.MISC].playerCount();
-    log("There are " + totalPlayers + " players: Lobby (" + rooms[CONSTANTS.LOBBY].playerCount() +
+    const payload = "There are " + totalPlayers + " players: Lobby (" + rooms[CONSTANTS.LOBBY].playerCount() +
         "), World (" + rooms[CONSTANTS.WORLD].playerCount() +
         "), US (" + rooms[CONSTANTS.US].playerCount() +
         "), Europe (" + rooms[CONSTANTS.EURO].playerCount() +
@@ -92,7 +93,18 @@ const logHistogram = (rooms) => {
         "), Asia (" + rooms[CONSTANTS.ASIA].playerCount() +
         "), Oceania (" + rooms[CONSTANTS.OCEANIA].playerCount() +
         "), Trivia (" + rooms[CONSTANTS.MISC].playerCount() + ")"
-        )
+    const currentdate = new Date();
+    const timestamp = currentdate.getDate() + "/"
+        + (currentdate.getMonth() + 1) + "/"
+        + currentdate.getFullYear() + " @ "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":";
+    if (fs.existsSync(histfile)) {
+        fs.appendFile(histfile, "[" + timestamp + "] " + payload + "\n", function (err) {
+            if (err) throw err;
+            // console.log('Saved!');
+        });
+    }
 };
 
 const readRecentActivity = (numel) => {
