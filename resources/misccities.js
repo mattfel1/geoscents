@@ -1468,6 +1468,7 @@ module.exports = {
       "lat": -15.75,
       "lng": -69.416667,
       "country": "",
+      "iso2": "PE",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Lake_Titicaca"
@@ -1488,6 +1489,7 @@ module.exports = {
       "lat": 78.235867,
       "lng": 15.491374,
       "country": "",
+      "iso2": "NO",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Svalbard_Global_Seed_Vault"
@@ -1497,6 +1499,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 3.158,
       "lng": 101.712,
+      "iso2": "MY",
       "country": "",
       "population": 0,
       "capital": "",
@@ -1518,6 +1521,7 @@ module.exports = {
       "lat": 39.036667,
       "lng": 125.730833,
       "country": "",
+      "iso2": "KP",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Ryugyong_Hotel"
@@ -1528,6 +1532,7 @@ module.exports = {
       "lat": 21.4,
       "lng": -89.516667,
       "country": "",
+      "iso2": "MX",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Chicxulub_crater"
@@ -1537,6 +1542,7 @@ module.exports = {
       "city_ascii": "",
       "lat": -27,
       "lng": 27.5,
+      "iso2": "ZA",
       "country": "",
       "population": 0,
       "capital": "",
@@ -1549,6 +1555,7 @@ module.exports = {
       "lng": 127.795556,
       "country": "",
       "population": 0,
+      "iso2": "AU",
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Wolfe_Creek_Crater"
     },
@@ -1557,6 +1564,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 35.027222,
       "lng": -111.0225,
+      "iso2": "US",
       "country": "",
       "population": 0,
       "capital": "",
@@ -1568,6 +1576,7 @@ module.exports = {
       "lat": 11.666667,
       "lng": 162.186944,
       "country": "",
+      "iso2": "MH",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Elugelab"
@@ -1578,6 +1587,7 @@ module.exports = {
       "lat": 14.01,
       "lng": 120.9975,
       "country": "",
+      "iso2": "PH",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Taal_Volcano"
@@ -1588,6 +1598,7 @@ module.exports = {
       "lat": -24.62733,
       "lng": -70.40417,
       "country": "",
+      "iso2": "CL",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Very_Large_Telescope"
@@ -1599,6 +1610,7 @@ module.exports = {
       "lng": -70.19717,
       "country": "",
       "population": 0,
+      "iso2": "CL",
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Extremely_Large_Telescope"
     },
@@ -1904,6 +1916,7 @@ module.exports = {
       "lng": -84.328333,
       "country": "",
       "population": 0,
+      "iso2": "US",
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Centers_for_Disease_Control_and_Prevention"
     },
@@ -1912,6 +1925,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 50.84,
       "lng": 4.38,
+      "iso2": "EU",
       "country": "",
       "population": 0,
       "capital": "",
@@ -2002,6 +2016,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 44.352,
       "lng": -103.751,
+      "iso2": "US",
       "country": "",
       "population": 0,
       "capital": "",
@@ -2012,6 +2027,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 31.314444,
       "lng": -85.854028,
+      "iso2": "US",
       "country": "",
       "population": 0,
       "capital": "",
@@ -2024,6 +2040,7 @@ module.exports = {
       "lng": 18.068611,
       "country": "",
       "population": 0,
+      "iso2": "SE",
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Nobel_Prize"
     },
@@ -2035,6 +2052,7 @@ module.exports = {
       "country": "",
       "population": 0,
       "capital": "",
+      "iso2": "NO",
       "wiki": "https://en.wikipedia.org/wiki/Nobel_Prize"
     },
     {
@@ -2042,6 +2060,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 46.948519,
       "lng": 7.447447,
+      "iso2": "CH",
       "country": "",
       "population": 0,
       "capital": "",
@@ -2054,6 +2073,7 @@ module.exports = {
       "lng": -104.67638,
       "country": "",
       "population": 0,
+      "iso2": "US",
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Blue_Mustang"
     },
@@ -2064,12 +2084,14 @@ module.exports = {
       "lng": -77.026,
       "country": "",
       "population": 0,
+      "iso2": "US",
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Smithsonian_Institution"
     },
     {
       "city": "Gereja Ayam ('Chicken Church')",
       "city_ascii": "",
+      "iso2": "ID",
       "lat": -7.605694,
       "lng": 110.1805,
       "country": "",
@@ -2082,6 +2104,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 50.84499,
       "lng": 4.34998,
+      "iso2": "BE",
       "country": "",
       "population": 0,
       "capital": "",
@@ -2241,6 +2264,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 45.096389,
       "lng": -94.410833,
+      "iso2": "US",
       "admin_name": "Minnesota",
       "country": "United States",
       "population": 0,
@@ -2252,6 +2276,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 37.9475,
       "lng": -119.7869,
+      "iso2": "US",
       "country": "",
       "population": 0,
       "capital": "",
@@ -2262,6 +2287,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 25.3125,
       "lng": -80.6875,
+      "iso2": "US",
       "country": "United States",
       "admin_name": "Nat’l Park",
       "population": 0,
@@ -2425,6 +2451,7 @@ module.exports = {
       "lng": -84.908611,
       "country": "Cherokee Nation (pre-1830)",
       "population": 0,
+      "iso2": "CE",  
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/New_Echota"
     },
@@ -2445,6 +2472,7 @@ module.exports = {
       "lat": -21.824722,
       "lng": 15.194167,
       "country": "",
+      "iso2": "NA",  
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Spitzkoppe"
@@ -2457,6 +2485,7 @@ module.exports = {
       "country": "",
       "population": 0,
       "capital": "",
+      "iso2": "RU",  
       "wiki": "https://en.wikipedia.org/wiki/Chelyabinsk_meteor"
     },
     {
@@ -2476,6 +2505,7 @@ module.exports = {
       "lng": -74.88,
       "country": "",
       "population": 0,
+      "iso2": "US",  
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Woodstock"
     },
@@ -2484,6 +2514,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 29.558056,
       "lng": -95.088333,
+      "iso2": "US",  
       "country": "",
       "population": 0,
       "capital": "",
@@ -2623,7 +2654,7 @@ module.exports = {
       "country": "",
       "population": 0,
       "capital": "",
-      "wiki": "https://en.wikipedia.org/wiki/Adam_Smith#The_Wealth_of_Nations"
+      "wiki": "https://en.wikipedia.org/wiki/Adma_Smith#The_Wealth_of_Nations"
     },
     {
       "city": "Vincent van Gogh Paints 'The Starry Night'",
@@ -2642,6 +2673,7 @@ module.exports = {
       "lng": 139.7514,
       "country": "",
       "population": 0,
+      "iso2": "ED",
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/The_Great_Wave_off_Kanagawa"
     },
@@ -2662,6 +2694,7 @@ module.exports = {
       "lng": -74.721825,
       "country": "",
       "population": 0,
+      "iso2": "CO",
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Hacienda_Nápoles"
     },
@@ -2671,6 +2704,7 @@ module.exports = {
       "lat": 13.7501,
       "lng": 100.492,
       "country": "",
+      "iso2": "TH",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Grand_Palace"
@@ -2683,6 +2717,7 @@ module.exports = {
       "country": "",
       "population": 0,
       "capital": "",
+      "iso2": "SE",
       "wiki": "https://en.wikipedia.org/wiki/Drottningholm_Palace"
     },
     {
@@ -2690,6 +2725,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 0.290739,
       "lng": 12.58905,
+      "iso2": "GA",
       "country": "",
       "population": 0,
       "capital": "",
@@ -2711,6 +2747,7 @@ module.exports = {
       "lat": 13.948056,
       "lng": 105.940556,
       "country": "",
+      "iso2": "LA",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Khone_Phapheng_Falls"
@@ -2722,6 +2759,7 @@ module.exports = {
       "lng": -64.523889,
       "country": "",
       "population": 0,
+      "iso2": "VE",
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Pará_Falls"
     },
@@ -2733,6 +2771,7 @@ module.exports = {
       "country": "",
       "population": 0,
       "capital": "",
+      "iso2": "IS",
       "wiki": "https://en.wikipedia.org/wiki/Dettifoss"
     },
     {
@@ -2741,6 +2780,7 @@ module.exports = {
       "lat": 42.7358,
       "lng": 25.3938,
       "country": "",
+      "iso2": "BG",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Buzludzha_monument"
@@ -2751,6 +2791,7 @@ module.exports = {
       "lat": -33.84801,
       "lng": 151.06488,
       "country": "",
+      "iso2": "AU",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Homebush_Bay"
@@ -2760,6 +2801,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 29.609167,
       "lng": 118.99,
+      "iso2": "CN",
       "country": "",
       "population": 0,
       "capital": "",
@@ -2812,6 +2854,7 @@ module.exports = {
       "lng": 4.552222,
       "country": "",
       "population": 0,
+      "iso2": "NG",
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Osun-Osogbo"
     },
@@ -3012,16 +3055,17 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/1930_FIFA_World_Cup"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Roscosmos (Роскосмос) Headquarters",
+      "city_ascii": "",
+      "lat": 55.755833,
+      "lng": 37.617222,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "iso2": "RU",
+      "wiki": "https://en.wikipedia.org/wiki/Roscosmos"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
