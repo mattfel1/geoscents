@@ -19,6 +19,7 @@ module.exports = {
       "lng": 44.4275,
       "country": "",
       "population": 0,
+      "iso2": "IQ",
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Hanging_Gardens_of_Babylon"
     },
@@ -28,6 +29,7 @@ module.exports = {
       "lat": 37.949722,
       "lng": 27.363889,
       "country": "",
+      "iso2": "TR",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Temple_of_Artemis"
@@ -38,6 +40,7 @@ module.exports = {
       "lat": 37.637861,
       "lng": 21.63,
       "country": "",
+      "iso2": "GR",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Statue_of_Zeus_at_Olympia"
@@ -48,6 +51,7 @@ module.exports = {
       "lat": 37.0379,
       "lng": 27.4241,
       "country": "",
+      "iso2": "TR",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Mausoleum_at_Halicarnassus"
@@ -58,6 +62,7 @@ module.exports = {
       "lat": 36.451111,
       "lng": 28.227778,
       "country": "",
+      "iso2": "GR",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Colossus_of_Rhodes"
@@ -68,6 +73,7 @@ module.exports = {
       "lat": 31.213889,
       "lng": 29.885556,
       "country": "",
+      "iso2": "EG",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Lighthouse_of_Alexandria"
@@ -2222,6 +2228,7 @@ module.exports = {
       "lat": 59.942,
       "lng": 30.299,
       "country": "",
+      "iso2": "RU",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Classical_conditioning#Pavlov's_research"
@@ -2232,6 +2239,7 @@ module.exports = {
       "lat": 31.2,
       "lng": 29.916667,
       "country": "",
+      "iso2": "EG",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Eratosthenes#Measurement_of_the_Earth's_circumference"
