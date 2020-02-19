@@ -1762,6 +1762,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 48.859958,
       "lng": 2.337269,
+      "iso2": "FR",
       "country": "",
       "population": 0,
       "capital": "",
