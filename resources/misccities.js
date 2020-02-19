@@ -2220,6 +2220,7 @@ module.exports = {
       "lat": 50,
       "lng": 8.266667,
       "country": "",
+      "iso2": "DE",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Johannes_Gutenberg"
@@ -3189,26 +3190,28 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/La_Brea_Tar_Pits"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Sh*tten Bay",
+      "city_ascii": "",
+      "lat": 17.220418,
+      "lng": -62.660225,
+      "country": "",
+      "iso2": "KN",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://www.inspirock.com/st-kitts-and-nevis/basseterre/shitten-bay-a1595644453"
+    },
+    {
+      "city": "F*cking",
+      "city_ascii": "",
+      "lat": 48.067222,
+      "lng": 12.863611,
+      "country": "Austria",
+      "population": 0,
+      "iso2": "AT",
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Fucking,_Austria"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
