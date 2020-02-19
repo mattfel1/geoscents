@@ -1169,6 +1169,7 @@ module.exports = {
       "lat": 38.118056,
       "lng": 23.978333,
       "country": "",
+      "iso2": "GR",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_Marathon"
@@ -2669,6 +2670,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 51.068578,
       "lng": -0.090209,
+      "iso2": "UK",
       "country": "",
       "population": 0,
       "capital": "",
@@ -2731,10 +2733,11 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/Biscayne_National_Park"
     },
     {
-      "city": "Copernicus Creates Heliocentric Model of Solar System ('Commentariolus')",
+      "city": "Copernicus Creates Heliocentric Model of Solar System",
       "city_ascii": "",
       "lat": 54.116667,
       "lng": 20.583333,
+      "iso2": "PL",
       "country": "",
       "population": 0,
       "capital": "",
@@ -2746,6 +2749,7 @@ module.exports = {
       "lat": 43.682778,
       "lng": 11.197222,
       "country": "",
+      "iso2": "IT",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Niccolò_Machiavelli#Machiavellian"
@@ -2756,6 +2760,7 @@ module.exports = {
       "lat": 43.6045,
       "lng": 1.444,
       "country": "",
+      "iso2": "FR",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Adma_Smith#The_Wealth_of_Nations"
@@ -2766,6 +2771,7 @@ module.exports = {
       "lat": 43.79,
       "lng": 4.8325,
       "country": "",
+      "iso2": "FR",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/The_Starry_Night"
@@ -2787,6 +2793,7 @@ module.exports = {
       "lat": 37.069167,
       "lng": 15.2875,
       "country": "",
+      "iso2": "IT",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Archimedes"
