@@ -15,7 +15,6 @@ const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server);
 const helpers = require('../resources/helpers.js');
-var d = new Date();
 
 // Game mechanics
 const CONSTANTS = require('../resources/constants.js');
@@ -261,6 +260,7 @@ setInterval(() => {
 }, 1000 / CONSTANTS.FPS);
 // Handle reboot message
 setInterval( () => {
+    var d = new Date();
     if (d.getHours() === 23 && d.getMinutes() > 55) {
         io.sockets.emit("update messages", CONSTANTS.LOBBY, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
         io.sockets.emit("update messages", CONSTANTS.WORLD, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
