@@ -2253,6 +2253,7 @@ module.exports = {
       "lat": 41.504,
       "lng": -81.608,
       "country": "",
+      "iso2": "US",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Michelson–Morley_experiment"
@@ -2262,6 +2263,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 48.856613,
       "lng": 2.352222,
+      "iso2": "FR",
       "country": "",
       "population": 0,
       "capital": "",
@@ -2273,6 +2275,7 @@ module.exports = {
       "lat": 41.789722,
       "lng": -87.599722,
       "country": "",
+      "iso2": "US",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Oil_drop_experiment"
@@ -2283,6 +2286,7 @@ module.exports = {
       "lat": 41.008056,
       "lng": 29.015833,
       "country": "",
+      "iso2": "TR",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Florence_Nightingale#Statistics_and_sanitary_reform"

@@ -35,9 +35,13 @@ class Scoreboard {
     postSpace() {
        $('#scoreboard').append("<br>-------------------------------------------<br><b>Scoreboard:</b><br>")
     }
-    postLobby(recent) {
-       $('#scoreboard').append("<b>Recent Records:</b><br>");
-       $('#scoreboard').append(recent);
+    postLobby(recent, hall) {
+       $('#scoreboard').append("<b>" + CONSTANTS.FAMESCORE + "+ Hall of Fame (maximum 6600 points)</b><br>");
+       $('#scoreboard').append(hall);
+       $('#scoreboard').append("<br>-------------------------------------------<br>")
+       $('#scoreboard').append("<br><b>Recent Records:</b><br>");
+       $('#scoreboard').append("<font size=\"1\">" + recent + "</font>");
+       $('#scoreboard').append("<br>-------------------------------------------<br>")
        $('#scoreboard').append("<br><b>Players in Lobby:</b><br>");
     }
 }

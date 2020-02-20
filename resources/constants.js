@@ -103,6 +103,7 @@ module.exports = {
     BUTTONS_SPACING: 15,
     BUTTONS_WIDTH: 252,
     BUTTONS_FONT: 22,
+    FAMESCORE: 6500,
 
 
     // Rooms

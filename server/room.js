@@ -275,43 +275,49 @@ class Room {
         const sufx = ["st", "nd", "rd"];
         const room = this.room;
         Array.from(this.sortPlayers()).forEach((player, id) => {
+            const monthNames = ["Jan", "Feb", "Mar","Apr", "May", "Jun","Jul", "Aug", "Sep","Oct", "Nov", "Dec"];
+            const date = new Date();
+            const utcDate = new Date(date.toUTCString());
+            // utcDate.setHours(utcDate.getHours()-8); // PST
+            const time = new Date(utcDate);
+            const month = monthNames[time.getMonth()];
+            const day = time.getDate();
+            const hour = time.getHours();
+            const minute = time.getMinutes();
+              if (player.score > CONSTANTS.FAMESCORE) {
+              this.clients.get(player.id).emit("announce hall", room, player.name, player.score, player.color);
+              const payload = "- " + month + day + ": <font color=" + player.color + ">" + player.name + "</font> scored " + player.score + " on " + room;
+              helpers.prependHallOfFame(payload)
+            }
             let allStr = "";
             let monStr = "";
             let wkStr = "";
             let dayStr = "";
             if (getPosition(player.score,dayRecord) < 4) {
-                dayStr = "<b>" + (getPosition(player.score,dayRecord)) + sufx[(getPosition(player.score,dayRecord)-1)] + "</b>" + " today"
+                dayStr = "<b>" + (getPosition(player.score,dayRecord)) + sufx[(getPosition(player.score,dayRecord)-1)] + "</b>" + " daily"
                 dayRecord = copy(insertRecord(getPosition(player.score,dayRecord), "day", copy(dayRecord), room, player));
             }
             if (getPosition(player.score,weekRecord) < 4) {
-                wkStr = "<b>" + (getPosition(player.score,weekRecord)) + sufx[(getPosition(player.score,weekRecord)-1)] + "</b>" + " this week"
+                wkStr = "<b>" + (getPosition(player.score,weekRecord)) + sufx[(getPosition(player.score,weekRecord)-1)] + "</b>" + " weekly"
                 weekRecord = copy(insertRecord(getPosition(player.score,weekRecord), "week", copy(weekRecord), room, player));
             }
             if (getPosition(player.score,monthRecord) < 4) {
-                monStr = "<b>" + (getPosition(player.score,monthRecord)) + sufx[(getPosition(player.score,monthRecord)-1)] + "</b>" + " this month"
+                monStr = "<b>" + (getPosition(player.score,monthRecord)) + sufx[(getPosition(player.score,monthRecord)-1)] + "</b>" + " monthly"
                 monthRecord = copy(insertRecord(getPosition(player.score,monthRecord), "month", copy(monthRecord), room, player));
             }
             if (getPosition(player.score,allRecord) < 4) {
-                allStr = "<b>" + (getPosition(player.score,allRecord)) + sufx[(getPosition(player.score,allRecord)-1)] + "</b>" + " this year"
+                allStr = "<b>" + (getPosition(player.score,allRecord)) + sufx[(getPosition(player.score,allRecord)-1)] + "</b>" + " yearly"
                 allRecord = copy(insertRecord(getPosition(player.score,allRecord), "all-time", copy(allRecord), room, player));
             }
             if (dayStr !== "" || wkStr !== "" || monStr !== "" || allStr !== "") {
-                const monthNames = ["Jan", "Feb", "Mar","Apr", "May", "Jun","Jul", "Aug", "Sep","Oct", "Nov", "Dec"];
-                const date = new Date();
-                const utcDate = new Date(date.toUTCString());
-                utcDate.setHours(utcDate.getHours()-8); // PST
-                const time = new Date(utcDate);
-                const month = monthNames[time.getMonth()];
-                const day = time.getDate();
-                const hour = time.getHours();
-                const minute = time.getMinutes();
+
                 let c1 = "";
                 if (allStr !== "" && (monStr !== "" | (monStr === "" && wkStr !== "") || (monStr === "" && wkStr === "" && dayStr !== ""))) c1 = ", ";
                 let c2 = "";
                 if (monStr !== "" && (wkStr !== "" | (wkStr === "" && dayStr !== ""))) c2 = ", ";
                 let c3 = "";
                 if (wkStr !== "" && (dayStr !== "")) c3 = ", ";
-                const payload = "- " + month + day + " (" + room + ") <font color=" + player.color + ">" + player.name + "</font> placed " + allStr + c1 + monStr + c2 + wkStr + c3 + dayStr;
+                const payload = "- " + month + day + " (" + room + ") <font color=" + player.color + ">" + player.name + "</font>: " + allStr + c1 + monStr + c2 + wkStr + c3 + dayStr;
                 helpers.prependRecentActivity(payload)
             }
         });
@@ -335,7 +341,7 @@ class Room {
             socket.emit('post space');
         }
         else {
-            socket.emit('post lobby', helpers.readRecentActivity(15));
+            socket.emit('post lobby', helpers.readRecentActivity(8), helpers.readHallOfFame(20));
         }
         const sortedPlayers = this.sortPlayers();
         Array.from(sortedPlayers.values()).forEach(function(player, index) {

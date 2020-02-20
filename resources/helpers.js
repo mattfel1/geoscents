@@ -135,4 +135,32 @@ const prependRecentActivity = (payload) => {
     });
 };
 
-module.exports = {log, logFeedback, logHistogram, readRecentActivity, prependRecentActivity, recordGuesses};
+const readHallOfFame = (numel) => {
+    var result = "";
+    if (!fs.existsSync('/scratch/hall_of_fame')) {
+        fs.writeFile('/scratch/hall_of_fame', "", { flag: 'wx' }, function (err) {
+            if (err) throw err;
+        });
+    }
+    fs.readFileSync('/scratch/hall_of_fame', 'utf-8')
+        .split('\n').map( (line, i) => {if (i < numel) result = result + line + "<br>"});
+    return result;
+};
+
+const prependHallOfFame = (payload) => {
+    if (!fs.existsSync('/scratch/hall_of_fame')) {
+        fs.writeFile('/scratch/hall_of_fame', "", { flag: 'wx' }, function (err) {
+            if (err) throw err;
+        });
+    }
+    const data = fs.readFileSync('/scratch/hall_of_fame');
+    const fd = fs.openSync('/scratch/hall_of_fame', 'w+');
+    const insert = new Buffer(payload + "\n"); // TODO: use safer Buffer api
+    fs.writeSync(fd, insert, 0, insert.length, 0);
+    fs.writeSync(fd, data, 0, data.length, insert.length);
+    fs.close(fd, (err) => {
+      if (err) throw err;
+    });
+};
+
+module.exports = {log, logFeedback, logHistogram, readRecentActivity, prependRecentActivity, recordGuesses, readHallOfFame, prependHallOfFame};
