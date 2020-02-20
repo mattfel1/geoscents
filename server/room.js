@@ -286,7 +286,7 @@ class Room {
             const minute = time.getMinutes();
               if (player.score > CONSTANTS.FAMESCORE) {
               this.clients.get(player.id).emit("announce hall", room, player.name, player.score, player.color);
-              const payload = "- " + month + day + ": <font color=" + player.color + ">" + player.name + "</font> scored " + player.score + " on " + room;
+              const payload = "- " + month + day + ": <font color=" + player.color + ">" + player.name + "</font> scored <b>" + player.score + "</b> on " + room;
               helpers.prependHallOfFame(payload)
             }
             let allStr = "";
