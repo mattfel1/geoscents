@@ -9,5 +9,5 @@ echo "" >> /scratch/email.txt
 wget -O lookup ip-api.com/json/$ip
 cat lookup >> /scratch/email.txt
 
-cat /scratch/email.txt | sendmail feldman.matthew1@gmail.com
+cat /scratch/email.txt | sendmail mattfel@protonmail.com
 
