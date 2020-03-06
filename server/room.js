@@ -399,9 +399,11 @@ class Room {
 
       const respectOptOut = (x) => {if (x.optOut) return 'optOut' + x.ip; else return x.ip;};
       const dists = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.geoError);
+      const lats = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.lat);
+      const lons = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.lon);
       const times = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.clickedAt);
       const ips = Array.from(this.players.values()).filter(player => player.clicked).map(x => respectOptOut(x))
-      helpers.recordGuesses(this.room, Geography.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], ips, dists, times);
+      helpers.recordGuesses(this.room, Geography.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], ips, dists, times, lats, lons);
     }
 
     static broadcastPoint(socket, row, col, color, radius, distance) {

@@ -791,11 +791,12 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/St._Peter%27s_Basilica"
     },
     {
-      "city": "Bagan",
+      "city": "Bagan (ပုဂံ)",
       "city_ascii": "",
       "lat": 21.166667,
       "lng": 94.866667,
       "country": "Pagan Kingdom",
+      "iso2": "MM",
       "population": 0,
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Bagan"
@@ -805,6 +806,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 48.358056,
       "lng": -71.063611,
+      "iso2": "CA",
       "country": "",
       "population": 0,
       "capital": "",
@@ -3216,16 +3218,17 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Fucking,_Austria"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "'Hottest recorded temperature' (measured 136.4°F / 58°C in 1922)",
+      "city_ascii": "",
+      "lat": 32.530833,
+      "lng": 13.021111,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "iso2": "LY",
+      "wiki": "https://www.mnn.com/earth-matters/climate-weather/photos/10-of-the-hottest-places-on-earth/el-azizia-libya"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
