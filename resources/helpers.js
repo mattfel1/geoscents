@@ -65,23 +65,23 @@ const recordGuesses = (room, citystring, city, admin, country, ips, dists, times
             //     });
             // });
 
-            // Patch for truncating decimals
-            Object.keys(history).forEach(function (key,_) {
-                history[key]["dists"] = history[key]["dists"].map(x => trunc(x,1));
-                history[key]["times"] = history[key]["times"].map(x => trunc(x,1));
-            });
+            // // Patch for truncating decimals
+            // Object.keys(history).forEach(function (key,_) {
+            //     history[key]["dists"] = history[key]["dists"].map(x => trunc(x,1));
+            //     history[key]["times"] = history[key]["times"].map(x => trunc(x,1));
+            // });
 
-            // Patch for back-filling dummy coords for the entries before I started tracked this
-            Object.keys(history).forEach(function (key,_) {
-                history[key]["lats"] = [];
-                history[key]["lons"] = [];
-                Object.values(history[key]["dists"]).forEach(function (_,_) {
-                        history[key]["lats"] = history[key]["lats"].concat(["x"])
-                        history[key]["lons"] = history[key]["lons"].concat(["x"])
-                });
-                history[key]["mean_lat"] = 0;
-                history[key]["mean_lon"] = 0;
-            });
+            // // Patch for back-filling dummy coords for the entries before I started tracked this
+            // Object.keys(history).forEach(function (key,_) {
+            //     history[key]["lats"] = [];
+            //     history[key]["lons"] = [];
+            //     Object.values(history[key]["dists"]).forEach(function (_,_) {
+            //             history[key]["lats"] = history[key]["lats"].concat(["x"])
+            //             history[key]["lons"] = history[key]["lons"].concat(["x"])
+            //     });
+            //     history[key]["mean_lat"] = 0;
+            //     history[key]["mean_lon"] = 0;
+            // });
 
             // Add raw data
             if (Object.keys(history).indexOf(citystring) === -1) {
