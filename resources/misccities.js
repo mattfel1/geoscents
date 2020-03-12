@@ -3229,26 +3229,28 @@ module.exports = {
       "iso2": "LY",
       "wiki": "https://www.mnn.com/earth-matters/climate-weather/photos/10-of-the-hottest-places-on-earth/el-azizia-libya"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Origin of COVID-19 (Coronavirus) Outbreak",
+      "city_ascii": "",
+      "lat": 30.587222,
+      "lng": 114.288056,
+      "country": "",
+      "population": 0,
+      "iso2": "CN",
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/2019–20_coronavirus_outbreak"
+    },
+    {
+      "city": "Origin of 2002-2004 SARS Outbreak",
+      "city_ascii": "",
+      "lat": 3.016667,
+      "lng": 113.116667,
+      "iso2": "CN",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/2002–04_SARS_outbreak"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
