@@ -85,7 +85,7 @@ const recordGuesses = (room, citystring, city, admin, country, ips, dists, times
 
             // Add raw data
             if (Object.keys(history).indexOf(citystring) === -1) {
-                history[citystring] = {"dists": dists, "times": times, "ips": ips};
+                history[citystring] = {"dists": dists, "times": times, "ips": ips, "lats": lats, "lons": lons};
             } else {
                 history[citystring]["dists"] = history[citystring]["dists"].concat(dists.map(x => trunc(x,1)));
                 history[citystring]["times"] = history[citystring]["times"].concat(times.map(x => trunc(x,1)));
