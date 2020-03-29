@@ -403,7 +403,7 @@ class Room {
       const lons = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.lon);
       const times = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.clickedAt);
       const ips = Array.from(this.players.values()).filter(player => player.clicked).map(x => respectOptOut(x))
-      helpers.recordGuesses(this.room, Geography.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], ips, dists, times, lats, lons, this.target['lat'], this.target['lon']);
+      helpers.recordGuesses(this.room, Geography.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], ips, dists, times, lats, lons, this.target['lat'], this.target['lon'], helpers.makeLink(room, this.target));
     }
 
     static broadcastPoint(socket, row, col, color, radius, distance) {
@@ -643,11 +643,8 @@ class Room {
         if (thisTarget['majorcapital']) star = "*";
         if (thisTarget['minorcapital']) star = "†";
         const base = "<b>Round " + round + "</b>: " + star + thisTarget['string'] + " (pop: " + thisTarget['pop'].toLocaleString() + ")";
-        let part2 = "%2C+" + this.target['country'];
-        if (this.target['country'] === "USA") part2 = "%2C+" + this.target['admin_name'];
-        let wiki = "https://en.wikipedia.org/wiki/Special:Search?search=" + this.target['city'] + part2 + "&go=Go&ns0=1";
-        if (this.target['wiki'] != null) wiki = this.target['wiki'];
-        const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + wiki + "\">Learn!</a><br>";
+        const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + helpers.makeLink(room, thisTarget) + "\">Learn!</a><br>";
+
         this.clients.forEach((socket,id) => {
             socket.emit('add history',  room, base + link);
             socket.emit('add history', room, "<br>");

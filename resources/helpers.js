@@ -39,7 +39,14 @@ const logFeedback = (payload) => {
     }
 };
 
-const recordGuesses = (room, citystring, city, admin, country, ips, dists, times, lats, lons, true_lat, true_lon) => {
+const makeLink = (room, thisTarget) => {
+    let part2 = "%2C+" + thisTarget['country'];
+    if (thisTarget['country'] === "USA") part2 = "%2C+" + thisTarget['admin_name'];
+    let wiki = "https://en.wikipedia.org/wiki/Special:Search?search=" + thisTarget['city'] + part2 + "&go=Go&ns0=1";
+    if (thisTarget['wiki'] != null) wiki = thisTarget['wiki'];
+    return wiki;
+}
+const recordGuesses = (room, citystring, city, admin, country, ips, dists, times, lats, lons, true_lat, true_lon, link) => {
     function copy(x) {
         return JSON.parse( JSON.stringify(x) );
     }
@@ -96,6 +103,7 @@ const recordGuesses = (room, citystring, city, admin, country, ips, dists, times
             // Compute new averages
             history[citystring]["true_lat"] = true_lat;
             history[citystring]["true_lon"] = true_lon;
+            history[citystring]["wiki"] = link;
             history[citystring]["mean_dist"] = trunc(history[citystring]["dists"].reduce((a, b) => a + b) / history[citystring]["dists"].length, 1);
             let trueLats = history[citystring]["lats"].filter(x => x != "x");
             let trueLons = history[citystring]["lons"].filter(x => x != "x");
@@ -196,4 +204,4 @@ const prependHallOfFame = (payload) => {
     });
 };
 
-module.exports = {log, logFeedback, logHistogram, readRecentActivity, prependRecentActivity, recordGuesses, readHallOfFame, prependHallOfFame};
+module.exports = {log, logFeedback, logHistogram, readRecentActivity, prependRecentActivity, recordGuesses, readHallOfFame, prependHallOfFame, makeLink};
