@@ -403,7 +403,7 @@ class Room {
       const lons = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.lon);
       const times = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.clickedAt);
       const ips = Array.from(this.players.values()).filter(player => player.clicked).map(x => respectOptOut(x))
-      helpers.recordGuesses(this.room, Geography.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], ips, dists, times, lats, lons);
+      helpers.recordGuesses(this.room, Geography.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], ips, dists, times, lats, lons, this.target['lat'], this.target['lon']);
     }
 
     static broadcastPoint(socket, row, col, color, radius, distance) {

@@ -39,7 +39,7 @@ const logFeedback = (payload) => {
     }
 };
 
-const recordGuesses = (room, citystring, city, admin, country, ips, dists, times, lats, lons) => {
+const recordGuesses = (room, citystring, city, admin, country, ips, dists, times, lats, lons, true_lat, true_lon) => {
     function copy(x) {
         return JSON.parse( JSON.stringify(x) );
     }
@@ -94,6 +94,8 @@ const recordGuesses = (room, citystring, city, admin, country, ips, dists, times
                 history[citystring]["lons"] = history[citystring]["lons"].concat(lons.map(x => trunc(x,3)));
             }
             // Compute new averages
+            history[citystring]["true_lat"] = true_lat;
+            history[citystring]["true_lon"] = true_lon;
             history[citystring]["mean_dist"] = trunc(history[citystring]["dists"].reduce((a, b) => a + b) / history[citystring]["dists"].length, 1);
             let trueLats = history[citystring]["lats"].filter(x => x != "x");
             let trueLons = history[citystring]["lons"].filter(x => x != "x");

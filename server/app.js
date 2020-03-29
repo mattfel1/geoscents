@@ -55,6 +55,10 @@ app.get('/resources/flags/*.png', (req, res, next) => {
     const wildcard = req.params['0'];
 	res.sendFile(path.join(__dirname, '..', 'resources/flags/' + wildcard + '.png'));
 });
+app.get('/visualization/*', (req, res, next) => {
+    const wildcard = req.params['0'];
+	res.sendFile(path.join(__dirname, '..', 'visualization/' + wildcard));
+});
 
 app.use((req, res, next) => {
 	const err = new Error('Not Found');
@@ -273,6 +277,7 @@ setInterval( () => {
         io.sockets.emit("update messages", CONSTANTS.SAMERICA, "<font size=20 color=\"red\"><b>WARNING: Game will restart at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ") to reset records!  Please refresh the page after it freezes!  Sorry for the inconvenience!</b></font><br>");
     }
 }, 20000);
+
 
 module.exports = {io};
 
