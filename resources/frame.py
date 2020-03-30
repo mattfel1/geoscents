@@ -29,19 +29,19 @@ file = 'cities.js'
 # blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', 'Cyprus', 'South Sudan', 'Northern Mariana Islands', 'Guam', 'Macau', 'Sudan', 'Belarus', 'Somalia']
 # whitelist = []
 
-#outfile = 'samericacities.js'
-#latrng = [-54,20]
-#pop = 50000
-#lonrng = [-138, -58]
-#blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe']
-#whitelist = []
+outfile = 'samericacities.js'
+latrng = [-54,20]
+pop = 50000
+lonrng = [-138, -56]
+blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe']
+whitelist = []
 
-outfile = 'eurocities.js'
-latrng = [37,64]
-pop = 100000
-lonrng = [-36, 52]
-blacklist = ['Azerbaijan', 'Iran', 'Armenia', 'Georgia', 'Kazakhstan', 'Iraq', 'Syria', 'Tunisia']
-whitelist = ['Isle Of Man', 'Gibraltar']
+#outfile = 'eurocities.js'
+#latrng = [37,64]
+#pop = 100000
+#lonrng = [-36, 52]
+#blacklist = ['Azerbaijan', 'Iran', 'Armenia', 'Georgia', 'Kazakhstan', 'Iraq', 'Syria', 'Tunisia']
+#whitelist = ['Isle Of Man', 'Gibraltar']
 
 # outfile = 'africacities.js'
 # latrng = [-34,39]
