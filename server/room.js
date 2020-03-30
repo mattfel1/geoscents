@@ -643,7 +643,7 @@ class Room {
         if (thisTarget['majorcapital']) star = "*";
         if (thisTarget['minorcapital']) star = "†";
         const base = "<b>Round " + round + "</b>: " + star + thisTarget['string'] + " (pop: " + thisTarget['pop'].toLocaleString() + ")";
-        const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + helpers.makeLink(room, thisTarget) + "\">Learn!</a><br>";
+        const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + helpers.makeLink(room, this.target) + "\">Learn!</a><br>";
 
         this.clients.forEach((socket,id) => {
             socket.emit('add history',  room, base + link);
