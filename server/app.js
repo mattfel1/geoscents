@@ -92,10 +92,10 @@ var playerRooms = new Map();
 const ABOUT_MESSAGE = '[ <b>ABOUT</b> ] <a href="http://geoscents.net/resources/anomalies.html" target="_blank">Click here</a> for info about geopolitical anomalies and details about the game!<br>';
 const PRIVACY_POLICY = '[ <b>PRIVACY POLICY</b> ] We do not use cookies to track you after you leave this page.' +
                        ' For educational purposes, we store your public IP address and your game history securely on our server. The IP addresses are replaced with country and region names, and then this data is published to <a href="http://geoscents.net/visualization/index.html">http://geoscents.net/visualization/index.html</a>.' +
-                       ' This data is not used for any commercial purposes.  If you would like to opt out, simply type "private" into the chat box.  If you would like to opt in, type "public" into the chat box.<br>'
+                       ' This data is not used for any commercial purposes.  If you would like to opt out, simply type /private into the chat box.  If you would like to opt in, type /public into the chat box.<br>'
 const WELCOME_MESSAGE1 = '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
                           'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
-                          '<br>If you have feedback, simply shout it directly into this chat box, starting with the word "feedback".' +
+                          '<br>If you have feedback, simply shout it directly into this chat box, starting with the /feedback.' +
                           'If you are enjoying this game, please share it with a friend!  If you really love it, consider donating at the bottom of the page to help keep the server ' +
                           'running!<br>';
 const REFERENCE1 = '[ <b>REFERENCES</b> ] Terrain map rendering provided by by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.  Satellite map rendering provided by Google Tiles.  All maps generated using python cartopy 0.17.0.  '
@@ -103,6 +103,18 @@ const REFERENCE2 = 'This game uses the most populous and important cities from t
 const REFERENCE3 = 'The jingle at the start of the game was composed and recorded by Marc Ryan Feldman.<br>'
 
 //const WELCOME_MESSAGE2 = '[ <b>UPDATE 1/6/2019</b> ] The yearly records are supposed to reset on 1/1/2020, but because of a mistake with cron, they were erroneously reset again on 1/6/2020.  Sorry!<br>'
+
+const announce = (text) => {
+  io.sockets.emit("update messages", CONSTANTS.LOBBY, text);
+  io.sockets.emit("update messages", CONSTANTS.WORLD, text);
+  io.sockets.emit("update messages", CONSTANTS.US, text);
+  io.sockets.emit("update messages", CONSTANTS.EURO, text);
+  io.sockets.emit("update messages", CONSTANTS.AFRICA, text);
+  io.sockets.emit("update messages", CONSTANTS.ASIA, text);
+  io.sockets.emit("update messages", CONSTANTS.OCEANIA, text);
+  io.sockets.emit("update messages", CONSTANTS.MISC, text);
+  io.sockets.emit("update messages", CONSTANTS.SAMERICA, text);
+}
 
 io.on('connection', (socket) => {
 	console.log('a user connected:', socket.id);
@@ -154,16 +166,8 @@ io.on('connection', (socket) => {
 	    }
         callback()
     });
-	socket.on('announcement', (text) => {
-        io.sockets.emit("update messages", CONSTANTS.LOBBY, text);
-        io.sockets.emit("update messages", CONSTANTS.WORLD, text);
-        io.sockets.emit("update messages", CONSTANTS.US, text);
-        io.sockets.emit("update messages", CONSTANTS.EURO, text);
-        io.sockets.emit("update messages", CONSTANTS.AFRICA, text);
-        io.sockets.emit("update messages", CONSTANTS.ASIA, text);
-        io.sockets.emit("update messages", CONSTANTS.OCEANIA, text);
-        io.sockets.emit("update messages", CONSTANTS.MISC, text);
-        io.sockets.emit("update messages", CONSTANTS.SAMERICA, text);
+  	socket.on('announcement', (text) => {
+      announce(text);
     });
     socket.on('playerReady', () => {
       if (playerRooms.has(socket.id)) {
@@ -212,7 +216,7 @@ io.on('connection', (socket) => {
           playerRooms.set(socket.id, rooms[dest]);
           var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'><b>" + rooms[dest].getPlayerRawName(socket) + "</b> has joined " + dest + "!</font> ]<br>";
           io.sockets.emit("update messages", dest, join_msg);
-          if (dest == CONSTANTS.MISC) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
+          // if (dest == CONSTANTS.MISC) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
           io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount(),rooms[CONSTANTS.MISC].playerCount());
           helpers.logHistogram(rooms)
       }
@@ -225,9 +229,11 @@ io.on('connection', (socket) => {
 	});
     socket.on("send message", function(sent_msg, callback) {
       const msg = sent_msg;
-      const isFeedback = (msg.toLowerCase().trim().startsWith('feedback') || msg.toLowerCase().trim().startsWith('"feedback"'));
-      const isOptOut = (msg.toLowerCase().trim().startsWith('private') || msg.toLowerCase().trim().startsWith('"private"'));
-      const isOptIn = (msg.toLowerCase().trim().startsWith('public') || msg.toLowerCase().trim().startsWith('"public"'));
+      const isFeedback = (msg.toLowerCase().trim().startsWith('/feedback'));
+      const isOptOut = (msg.toLowerCase().trim().startsWith('/private'));
+      const isOptIn = (msg.toLowerCase().trim().startsWith('/public'));
+      const isAnnounce = (msg.toLowerCase().trim().startsWith('/announce'));
+      const isWhisper = (msg.toLowerCase().trim().startsWith('/whisper'));
       const cb = () => {callback()};
       Object.values(rooms).forEach(function(room) {
           if (room.hasPlayer(socket)) {
@@ -240,18 +246,27 @@ io.on('connection', (socket) => {
               var new_sent_msg = msg;
               CONSTANTS.PROFANITY.forEach((word) => {new_sent_msg = replaceAll(new_sent_msg, word, "****")});
               helpers.log("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + ": " + msg);
-              room.distributeMessage(socket, new_sent_msg, cb);
               if (isFeedback) {
-		      room.whisperMessage(socket, "<i>Your feedback has been noted!  Thank you for playing and commenting!</i><br>", cb);
-                      helpers.logFeedback("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + ": " + msg);
-	      }
-              if (isOptOut) {
+                room.distributeMessage(socket, new_sent_msg, cb);
+		            room.whisperMessage(socket, "<i>Your feedback has been noted!  Thank you for playing and commenting!</i><br>", cb);
+                helpers.logFeedback("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + ": " + msg);
+	            }
+              else if (isOptOut) {
                   room.whisperMessage(socket, "<i>Your IP address has been masked.  Thank you for playing the game!</i><br>", cb);
                   room.players.get(socket.id).optOut = true;
               }
-              if (isOptIn) {
+              else if (isOptIn) {
                   room.whisperMessage(socket, "<i>Your IP address has been unmasked.  Thank you for playing the game and helping to build up the dataset!</i><br>", cb);
                   room.players.get(socket.id).optOut = false;
+              }
+              else if (isAnnounce) {
+                //tbd
+              }
+              else if (isWhisper) {
+                //tbd
+              }
+              else {
+                room.distributeMessage(socket, new_sent_msg, cb);
               }
           }
       });
@@ -266,15 +281,7 @@ setInterval(() => {
 setInterval( () => {
     var d = new Date();
     if (d.getHours() === 23 && d.getMinutes() > 57) {
-        io.sockets.emit("update messages", CONSTANTS.LOBBY, "<font size=20 color=\"red\"><b>WARNING: Game will go down for a few minutes to refresh records at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ")!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.WORLD, "<font size=20 color=\"red\"><b>WARNING: Game will go down for a few minutes to refresh records at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ")!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.US, "<font size=20 color=\"red\"><b>WARNING: Game will go down for a few minutes to refresh records at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ")!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.EURO, "<font size=20 color=\"red\"><b>WARNING: Game will go down for a few minutes to refresh records at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ")!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.AFRICA, "<font size=20 color=\"red\"><b>WARNING: Game will go down for a few minutes to refresh records at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ")!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.ASIA, "<font size=20 color=\"red\"><b>WARNING: Game will go down for a few minutes to refresh records at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ")!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.OCEANIA, "<font size=20 color=\"red\"><b>WARNING: Game will go down for a few minutes to refresh records at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ")!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.MISC, "<font size=20 color=\"red\"><b>WARNING: Game will go down for a few minutes to refresh records at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ")!  Sorry for the inconvenience!</b></font><br>");
-        io.sockets.emit("update messages", CONSTANTS.SAMERICA, "<font size=20 color=\"red\"><b>WARNING: Game will go down for a few minutes to refresh records at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ")!  Sorry for the inconvenience!</b></font><br>");
+        announce("<font size=20 color=\"red\"><b>WARNING: Game will go down for a few minutes to refresh records at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ")!  Sorry for the inconvenience!</b></font><br>")
     }
 }, 20000);
 
