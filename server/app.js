@@ -55,10 +55,10 @@ app.get('/resources/flags/*.png', (req, res, next) => {
     const wildcard = req.params['0'];
 	res.sendFile(path.join(__dirname, '..', 'resources/flags/' + wildcard + '.png'));
 });
-app.get('/visualization/*', (req, res, next) => {
-    const wildcard = req.params['0'];
-	res.sendFile(path.join(__dirname, '..', 'visualization/' + wildcard));
-});
+// app.get('/visualization/*', (req, res, next) => {
+//     const wildcard = req.params['0'];
+// 	res.sendFile(path.join(__dirname, '..', 'visualization/' + wildcard));
+// });
 
 app.use((req, res, next) => {
 	const err = new Error('Not Found');
