@@ -55,9 +55,9 @@ app.get('/resources/flags/*.png', (req, res, next) => {
     const wildcard = req.params['0'];
 	res.sendFile(path.join(__dirname, '..', 'resources/flags/' + wildcard + '.png'));
 });
-app.get('/visualization/*', (req, res, next) => {
+app.get('/plots/*', (req, res, next) => {
     const wildcard = req.params['0'];
-	res.sendFile(path.join(__dirname, '..', 'visualization/' + wildcard));
+	res.sendFile(path.join(__dirname, '..', 'plots/' + wildcard));
 });
 
 app.use((req, res, next) => {
