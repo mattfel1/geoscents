@@ -1,6 +1,19 @@
 module.exports = {
   CITIES: [
   {
+    "city": "S\u00e3o Paulo",
+    "city_ascii": "Sao Paulo",
+    "lat": -23.5587,
+    "lng": -46.625,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "admin",
+    "population": 18845000,
+    "id": 1076532519
+  },
+  {
     "city": "Buenos Aires",
     "city_ascii": "Buenos Aires",
     "lat": -34.6025,
@@ -12,6 +25,19 @@ module.exports = {
     "capital": "primary",
     "population": 12795000,
     "id": 1032717330
+  },
+  {
+    "city": "Rio de Janeiro",
+    "city_ascii": "Rio de Janeiro",
+    "lat": -22.925,
+    "lng": -43.225,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio de Janeiro",
+    "capital": "admin",
+    "population": 11748000,
+    "id": 1076887657
   },
   {
     "city": "Lima",
@@ -53,6 +79,84 @@ module.exports = {
     "id": 1152554349
   },
   {
+    "city": "Belo Horizonte",
+    "city_ascii": "Belo Horizonte",
+    "lat": -19.915,
+    "lng": -43.915,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "admin",
+    "population": 5575000,
+    "id": 1076967355
+  },
+  {
+    "city": "Porto Alegre",
+    "city_ascii": "Porto Alegre",
+    "lat": -30.05,
+    "lng": -51.2,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "admin",
+    "population": 3917000,
+    "id": 1076658221
+  },
+  {
+    "city": "Bras\u00edlia",
+    "city_ascii": "Brasilia",
+    "lat": -15.7833,
+    "lng": -47.9161,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Distrito Federal",
+    "capital": "primary",
+    "population": 3716996,
+    "id": 1076144436
+  },
+  {
+    "city": "Recife",
+    "city_ascii": "Recife",
+    "lat": -8.0756,
+    "lng": -34.9156,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Pernambuco",
+    "capital": "admin",
+    "population": 3651000,
+    "id": 1076137337
+  },
+  {
+    "city": "Fortaleza",
+    "city_ascii": "Fortaleza",
+    "lat": -3.75,
+    "lng": -38.58,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Cear\u00e1",
+    "capital": "admin",
+    "population": 3602319,
+    "id": 1076567885
+  },
+  {
+    "city": "Salvador",
+    "city_ascii": "Salvador",
+    "lat": -12.97,
+    "lng": -38.48,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Bahia",
+    "capital": "admin",
+    "population": 3484000,
+    "id": 1076923789
+  },
+  {
     "city": "Medell\u00edn",
     "city_ascii": "Medellin",
     "lat": 6.275,
@@ -66,6 +170,19 @@ module.exports = {
     "id": 1170680389
   },
   {
+    "city": "Curitiba",
+    "city_ascii": "Curitiba",
+    "lat": -25.42,
+    "lng": -49.32,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Paran\u00e1",
+    "capital": "admin",
+    "population": 3084000,
+    "id": 1076701712
+  },
+  {
     "city": "Caracas",
     "city_ascii": "Caracas",
     "lat": 10.501,
@@ -77,6 +194,19 @@ module.exports = {
     "capital": "primary",
     "population": 2985000,
     "id": 1862748204
+  },
+  {
+    "city": "Campinas",
+    "city_ascii": "Campinas",
+    "lat": -22.9,
+    "lng": -47.1,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 2791000,
+    "id": 1076145766
   },
   {
     "city": "Guayaquil",
@@ -103,6 +233,19 @@ module.exports = {
     "capital": "admin",
     "population": 2254000,
     "id": 1170417589
+  },
+  {
+    "city": "Bel\u00e9m",
+    "city_ascii": "Belem",
+    "lat": -1.45,
+    "lng": -48.48,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Par\u00e1",
+    "capital": "admin",
+    "population": 2167000,
+    "id": 1076646823
   },
   {
     "city": "Santo Domingo",
@@ -142,6 +285,19 @@ module.exports = {
     "capital": "admin",
     "population": 2072000,
     "id": 1862072711
+  },
+  {
+    "city": "Goi\u00e2nia",
+    "city_ascii": "Goiania",
+    "lat": -16.72,
+    "lng": -49.3,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Goi\u00e1s",
+    "capital": "admin",
+    "population": 2022000,
+    "id": 1076034054
   },
   {
     "city": "Asunci\u00f3n",
@@ -196,6 +352,32 @@ module.exports = {
     "id": 1076607274
   },
   {
+    "city": "Santos",
+    "city_ascii": "Santos",
+    "lat": -23.9537,
+    "lng": -46.3329,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 1709000,
+    "id": 1076033299
+  },
+  {
+    "city": "Vit\u00f3ria",
+    "city_ascii": "Vitoria",
+    "lat": -20.324,
+    "lng": -40.366,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Esp\u00edrito Santo",
+    "capital": "admin",
+    "population": 1704000,
+    "id": 1076376829
+  },
+  {
     "city": "Quito",
     "city_ascii": "Quito",
     "lat": -0.215,
@@ -248,6 +430,19 @@ module.exports = {
     "id": 1858107000
   },
   {
+    "city": "Niter\u00f3i",
+    "city_ascii": "Niteroi",
+    "lat": -22.9,
+    "lng": -43.1,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio de Janeiro",
+    "capital": "",
+    "population": 1500513,
+    "id": 1076501425
+  },
+  {
     "city": "C\u00f3rdoba",
     "city_ascii": "Cordoba",
     "lat": -31.4,
@@ -259,6 +454,32 @@ module.exports = {
     "capital": "admin",
     "population": 1452000,
     "id": 1032803249
+  },
+  {
+    "city": "Vila Velha",
+    "city_ascii": "Vila Velha",
+    "lat": -20.3676,
+    "lng": -40.318,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Esp\u00edrito Santo",
+    "capital": "",
+    "population": 1209091,
+    "id": 1076404077
+  },
+  {
+    "city": "Vila Velha",
+    "city_ascii": "Vila Velha",
+    "lat": 3.2167,
+    "lng": -51.2167,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Amap\u00e1",
+    "capital": "",
+    "population": 1209091,
+    "id": 1076575691
   },
   {
     "city": "Rosario",
@@ -274,6 +495,19 @@ module.exports = {
     "id": 1032770677
   },
   {
+    "city": "Macei\u00f3",
+    "city_ascii": "Maceio",
+    "lat": -9.62,
+    "lng": -35.73,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Alagoas",
+    "capital": "admin",
+    "population": 1186000,
+    "id": 1076440479
+  },
+  {
     "city": "Barquisimeto",
     "city_ascii": "Barquisimeto",
     "lat": 10.05,
@@ -285,6 +519,45 @@ module.exports = {
     "capital": "admin",
     "population": 1116000,
     "id": 1862860739
+  },
+  {
+    "city": "Natal",
+    "city_ascii": "Natal",
+    "lat": -5.78,
+    "lng": -35.24,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Norte",
+    "capital": "admin",
+    "population": 1088000,
+    "id": 1076697777
+  },
+  {
+    "city": "S\u00e3o Lu\u00eds",
+    "city_ascii": "Sao Luis",
+    "lat": -2.516,
+    "lng": -44.266,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Maranh\u00e3o",
+    "capital": "admin",
+    "population": 1038000,
+    "id": 1076819308
+  },
+  {
+    "city": "Florian\u00f3polis",
+    "city_ascii": "Florianopolis",
+    "lat": -27.58,
+    "lng": -48.52,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Santa Catarina",
+    "capital": "admin",
+    "population": 1023000,
+    "id": 1076190259
   },
   {
     "city": "Bucaramanga",
@@ -337,6 +610,19 @@ module.exports = {
     "capital": "primary",
     "population": 264350,
     "id": 1328160906
+  },
+  {
+    "city": "Paramaribo",
+    "city_ascii": "Paramaribo",
+    "lat": 5.835,
+    "lng": -55.167,
+    "country": "Suriname",
+    "iso2": "SR",
+    "iso3": "SUR",
+    "admin_name": "Paramaribo",
+    "capital": "primary",
+    "population": 254169,
+    "id": 1740518660
   },
   {
     "city": "Sucre",
@@ -495,6 +781,19 @@ module.exports = {
     "id": 1068793894
   },
   {
+    "city": "Joinvile",
+    "city_ascii": "Joinvile",
+    "lat": -26.32,
+    "lng": -48.8399,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Santa Catarina",
+    "capital": "",
+    "population": 988000,
+    "id": 1076050637
+  },
+  {
     "city": "Natal",
     "city_ascii": "Natal",
     "lat": -6.9838,
@@ -506,6 +805,45 @@ module.exports = {
     "capital": "",
     "population": 980588,
     "id": 1076336975
+  },
+  {
+    "city": "Jo\u00e3o Pessoa",
+    "city_ascii": "Joao Pessoa",
+    "lat": -7.1011,
+    "lng": -34.8761,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Para\u00edba",
+    "capital": "admin",
+    "population": 956000,
+    "id": 1076922014
+  },
+  {
+    "city": "Olinda",
+    "city_ascii": "Olinda",
+    "lat": -8,
+    "lng": -34.85,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Pernambuco",
+    "capital": "",
+    "population": 921840,
+    "id": 1076784718
+  },
+  {
+    "city": "Teresina",
+    "city_ascii": "Teresina",
+    "lat": -5.095,
+    "lng": -42.78,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Piau\u00ed",
+    "capital": "admin",
+    "population": 907000,
+    "id": 1076727667
   },
   {
     "city": "Mendoza",
@@ -547,6 +885,19 @@ module.exports = {
     "id": 1170886102
   },
   {
+    "city": "Novo Hamburgo",
+    "city_ascii": "Novo Hamburgo",
+    "lat": -29.7096,
+    "lng": -51.14,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "",
+    "population": 876990,
+    "id": 1076221386
+  },
+  {
     "city": "Callao",
     "city_ascii": "Callao",
     "lat": -12.07,
@@ -571,6 +922,19 @@ module.exports = {
     "capital": "admin",
     "population": 854000,
     "id": 1152337970
+  },
+  {
+    "city": "Igua\u00e7u",
+    "city_ascii": "Iguacu",
+    "lat": -22.74,
+    "lng": -43.47,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio de Janeiro",
+    "capital": "",
+    "population": 844583,
+    "id": 1076339714
   },
   {
     "city": "San Miguel de Tucum\u00e1n",
@@ -612,6 +976,19 @@ module.exports = {
     "id": 1076112309
   },
   {
+    "city": "Campo Grande",
+    "city_ascii": "Campo Grande",
+    "lat": -20.45,
+    "lng": -54.6166,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Mato Grosso do Sul",
+    "capital": "admin",
+    "population": 778000,
+    "id": 1076660445
+  },
+  {
     "city": "Trujillo",
     "city_ascii": "Trujillo",
     "lat": -8.12,
@@ -623,6 +1000,19 @@ module.exports = {
     "capital": "admin",
     "population": 765171,
     "id": 1604613706
+  },
+  {
+    "city": "S\u00e3o Jos\u00e9 dos Campos",
+    "city_ascii": "Sao Jose dos Campos",
+    "lat": -23.2,
+    "lng": -45.8799,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 753769,
+    "id": 1076783887
   },
   {
     "city": "Ciudad Guayana",
@@ -651,6 +1041,19 @@ module.exports = {
     "id": 1170743755
   },
   {
+    "city": "Jaboat\u00e3o",
+    "city_ascii": "Jaboatao",
+    "lat": -8.11,
+    "lng": -35.02,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Pernambuco",
+    "capital": "",
+    "population": 702621,
+    "id": 1076000699
+  },
+  {
     "city": "Soledad",
     "city_ascii": "Soledad",
     "lat": 10.92,
@@ -677,6 +1080,45 @@ module.exports = {
     "id": 1032403831
   },
   {
+    "city": "Aracaju",
+    "city_ascii": "Aracaju",
+    "lat": -10.9,
+    "lng": -37.12,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Sergipe",
+    "capital": "admin",
+    "population": 685356,
+    "id": 1076527830
+  },
+  {
+    "city": "S\u00e3o Jos\u00e9 dos Pinhais",
+    "city_ascii": "Sao Jose dos Pinhais",
+    "lat": -25.57,
+    "lng": -49.18,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Paran\u00e1",
+    "capital": "",
+    "population": 665063,
+    "id": 1076174955
+  },
+  {
+    "city": "Santo Andr\u00e9",
+    "city_ascii": "Santo Andre",
+    "lat": -23.6528,
+    "lng": -46.5278,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 662373,
+    "id": 1076625886
+  },
+  {
     "city": "Barcelona",
     "city_ascii": "Barcelona",
     "lat": 10.1304,
@@ -688,6 +1130,19 @@ module.exports = {
     "capital": "admin",
     "population": 600954,
     "id": 1862418619
+  },
+  {
+    "city": "Canoas",
+    "city_ascii": "Canoas",
+    "lat": -29.92,
+    "lng": -51.18,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "",
+    "population": 600000,
+    "id": 1076009922
   },
   {
     "city": "Chiclayo",
@@ -716,6 +1171,32 @@ module.exports = {
     "id": 1170386718
   },
   {
+    "city": "Uberl\u00e2ndia",
+    "city_ascii": "Uberlandia",
+    "lat": -18.9,
+    "lng": -48.28,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 563536,
+    "id": 1076495001
+  },
+  {
+    "city": "Sorocaba",
+    "city_ascii": "Sorocaba",
+    "lat": -23.49,
+    "lng": -47.47,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 563281,
+    "id": 1076758708
+  },
+  {
     "city": "Mar del Plata",
     "city_ascii": "Mar del Plata",
     "lat": -38,
@@ -729,6 +1210,19 @@ module.exports = {
     "id": 1032456103
   },
   {
+    "city": "Ribeir\u00e3o Pr\u00eato",
+    "city_ascii": "Ribeirao Preto",
+    "lat": -21.17,
+    "lng": -47.83,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 551267,
+    "id": 1076524478
+  },
+  {
     "city": "Puerto La Cruz",
     "city_ascii": "Puerto La Cruz",
     "lat": 10.17,
@@ -740,6 +1234,19 @@ module.exports = {
     "capital": "minor",
     "population": 546616,
     "id": 1862856141
+  },
+  {
+    "city": "Londrina",
+    "city_ascii": "Londrina",
+    "lat": -23.3,
+    "lng": -51.18,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Paran\u00e1",
+    "capital": "",
+    "population": 520238,
+    "id": 1076723241
   },
   {
     "city": "Bello",
@@ -768,6 +1275,19 @@ module.exports = {
     "id": 1032926124
   },
   {
+    "city": "Jundia\u00ed",
+    "city_ascii": "Jundiai",
+    "lat": -23.2,
+    "lng": -46.88,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 505548,
+    "id": 1076998392
+  },
+  {
     "city": "Vi\u00f1a del Mar",
     "city_ascii": "Vina del Mar",
     "lat": -33.03,
@@ -794,6 +1314,19 @@ module.exports = {
     "id": 1600667303
   },
   {
+    "city": "Macap\u00e1",
+    "city_ascii": "Macapa",
+    "lat": 0.033,
+    "lng": -51.05,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Amap\u00e1",
+    "capital": "admin",
+    "population": 499166,
+    "id": 1076189884
+  },
+  {
     "city": "Santa Fe",
     "city_ascii": "Santa Fe",
     "lat": -31.6239,
@@ -807,6 +1340,45 @@ module.exports = {
     "id": 1032817575
   },
   {
+    "city": "Feira de Santana",
+    "city_ascii": "Feira de Santana",
+    "lat": -12.25,
+    "lng": -38.97,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Bahia",
+    "capital": "",
+    "population": 481911,
+    "id": 1076892244
+  },
+  {
+    "city": "Americana",
+    "city_ascii": "Americana",
+    "lat": -22.7499,
+    "lng": -47.33,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 479472,
+    "id": 1076922153
+  },
+  {
+    "city": "Juiz de Fora",
+    "city_ascii": "Juiz de Fora",
+    "lat": -21.77,
+    "lng": -43.375,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 470193,
+    "id": 1076006144
+  },
+  {
     "city": "Iquitos",
     "city_ascii": "Iquitos",
     "lat": -3.75,
@@ -818,6 +1390,19 @@ module.exports = {
     "capital": "admin",
     "population": 458729,
     "id": 1604493809
+  },
+  {
+    "city": "Volta Redonda",
+    "city_ascii": "Volta Redonda",
+    "lat": -22.5196,
+    "lng": -44.095,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio de Janeiro",
+    "capital": "",
+    "population": 456362,
+    "id": 1076343513
   },
   {
     "city": "San Juan",
@@ -844,6 +1429,19 @@ module.exports = {
     "capital": "minor",
     "population": 441094,
     "id": 1862398719
+  },
+  {
+    "city": "Foz do Igua\u00e7u",
+    "city_ascii": "Foz do Iguacu",
+    "lat": -25.5235,
+    "lng": -54.53,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Paran\u00e1",
+    "capital": "",
+    "population": 440455,
+    "id": 1076025805
   },
   {
     "city": "San Crist\u00f3bal",
@@ -898,6 +1496,19 @@ module.exports = {
     "id": 1170245063
   },
   {
+    "city": "Campina Grande",
+    "city_ascii": "Campina Grande",
+    "lat": -7.23,
+    "lng": -35.88,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Para\u00edba",
+    "capital": "",
+    "population": 417261,
+    "id": 1076218697
+  },
+  {
     "city": "Huancayo",
     "city_ascii": "Huancayo",
     "lat": -12.08,
@@ -924,6 +1535,32 @@ module.exports = {
     "id": 1862546949
   },
   {
+    "city": "Ipatinga",
+    "city_ascii": "Ipatinga",
+    "lat": -19.4796,
+    "lng": -42.52,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 407894,
+    "id": 1076484921
+  },
+  {
+    "city": "Taubat\u00e9",
+    "city_ascii": "Taubate",
+    "lat": -23.0195,
+    "lng": -45.56,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 403560,
+    "id": 1076146252
+  },
+  {
     "city": "Piura",
     "city_ascii": "Piura",
     "lat": -5.21,
@@ -935,6 +1572,19 @@ module.exports = {
     "capital": "admin",
     "population": 396932,
     "id": 1604331641
+  },
+  {
+    "city": "Campos",
+    "city_ascii": "Campos",
+    "lat": -21.75,
+    "lng": -41.32,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio de Janeiro",
+    "capital": "",
+    "population": 387417,
+    "id": 1076606365
   },
   {
     "city": "Resistencia",
@@ -963,6 +1613,19 @@ module.exports = {
     "id": 1170320545
   },
   {
+    "city": "Caxias do Sul",
+    "city_ascii": "Caxias do Sul",
+    "lat": -29.18,
+    "lng": -51.17,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "",
+    "population": 381270,
+    "id": 1076809957
+  },
+  {
     "city": "Manizales",
     "city_ascii": "Manizales",
     "lat": 5.06,
@@ -989,6 +1652,19 @@ module.exports = {
     "id": 1170426927
   },
   {
+    "city": "S\u00e3o Jos\u00e9 do Rio Pr\u00eato",
+    "city_ascii": "Sao Jose do Rio Preto",
+    "lat": -20.7996,
+    "lng": -49.39,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 374699,
+    "id": 1076760827
+  },
+  {
     "city": "Cusco",
     "city_ascii": "Cusco",
     "lat": -13.525,
@@ -1000,6 +1676,32 @@ module.exports = {
     "capital": "admin",
     "population": 361182,
     "id": 1604162901
+  },
+  {
+    "city": "Encarnaci\u00f3n",
+    "city_ascii": "Encarnacion",
+    "lat": -27.3472,
+    "lng": -55.8739,
+    "country": "Paraguay",
+    "iso2": "PY",
+    "iso3": "PRY",
+    "admin_name": "Itap\u00faa",
+    "capital": "admin",
+    "population": 357119,
+    "id": 1600377819
+  },
+  {
+    "city": "Posadas",
+    "city_ascii": "Posadas",
+    "lat": -27.3578,
+    "lng": -55.8851,
+    "country": "Argentina",
+    "iso2": "AR",
+    "iso3": "ARG",
+    "admin_name": "Misiones",
+    "capital": "admin",
+    "population": 357119,
+    "id": 1032970696
   },
   {
     "city": "Santiago del Estero",
@@ -1054,6 +1756,19 @@ module.exports = {
     "id": 1862668122
   },
   {
+    "city": "Piracicaba",
+    "city_ascii": "Piracicaba",
+    "lat": -22.71,
+    "lng": -47.64,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 342209,
+    "id": 1076166252
+  },
+  {
     "city": "San Juan",
     "city_ascii": "San Juan",
     "lat": 18.4037,
@@ -1091,6 +1806,110 @@ module.exports = {
     "capital": "admin",
     "population": 338000,
     "id": 1862318264
+  },
+  {
+    "city": "Bauru",
+    "city_ascii": "Bauru",
+    "lat": -22.33,
+    "lng": -49.08,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 335024,
+    "id": 1076905338
+  },
+  {
+    "city": "Montes Claros",
+    "city_ascii": "Montes Claros",
+    "lat": -16.72,
+    "lng": -43.86,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 332379,
+    "id": 1076113275
+  },
+  {
+    "city": "Maring\u00e1",
+    "city_ascii": "Maringa",
+    "lat": -23.4095,
+    "lng": -51.93,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Paran\u00e1",
+    "capital": "",
+    "population": 328335,
+    "id": 1076013378
+  },
+  {
+    "city": "Itaja\u00ed",
+    "city_ascii": "Itajai",
+    "lat": -26.8996,
+    "lng": -48.68,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Santa Catarina",
+    "capital": "",
+    "population": 327126,
+    "id": 1076348188
+  },
+  {
+    "city": "Ciudad del Este",
+    "city_ascii": "Ciudad del Este",
+    "lat": -25.5167,
+    "lng": -54.6161,
+    "country": "Paraguay",
+    "iso2": "PY",
+    "iso3": "PRY",
+    "admin_name": "Alto Paran\u00e1",
+    "capital": "admin",
+    "population": 320872,
+    "id": 1600265252
+  },
+  {
+    "city": "Pelotas",
+    "city_ascii": "Pelotas",
+    "lat": -31.75,
+    "lng": -52.33,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "",
+    "population": 320674,
+    "id": 1076815692
+  },
+  {
+    "city": "Itu",
+    "city_ascii": "Itu",
+    "lat": -23.26,
+    "lng": -47.3,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 320170,
+    "id": 1076622789
+  },
+  {
+    "city": "An\u00e1polis",
+    "city_ascii": "Anapolis",
+    "lat": -16.3196,
+    "lng": -48.96,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Goi\u00e1s",
+    "capital": "",
+    "population": 319587,
+    "id": 1076208869
   },
   {
     "city": "Cuman\u00e1",
@@ -1171,6 +1990,19 @@ module.exports = {
     "id": 1170481949
   },
   {
+    "city": "Vit\u00f3ria da Conquista",
+    "city_ascii": "Vitoria da Conquista",
+    "lat": -14.85,
+    "lng": -40.84,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Bahia",
+    "capital": "",
+    "population": 308204,
+    "id": 1076812020
+  },
+  {
     "city": "Porto Velho",
     "city_ascii": "Porto Velho",
     "lat": -8.75,
@@ -1197,6 +2029,19 @@ module.exports = {
     "id": 1032815808
   },
   {
+    "city": "Franca",
+    "city_ascii": "Franca",
+    "lat": -20.53,
+    "lng": -47.39,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 305041,
+    "id": 1076740256
+  },
+  {
     "city": "Los Teques",
     "city_ascii": "Los Teques",
     "lat": 10.42,
@@ -1208,6 +2053,45 @@ module.exports = {
     "capital": "admin",
     "population": 303470,
     "id": 1862066931
+  },
+  {
+    "city": "Blumenau",
+    "city_ascii": "Blumenau",
+    "lat": -26.92,
+    "lng": -49.09,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Santa Catarina",
+    "capital": "",
+    "population": 293949,
+    "id": 1076618665
+  },
+  {
+    "city": "Ponta Grossa",
+    "city_ascii": "Ponta Grossa",
+    "lat": -25.09,
+    "lng": -50.16,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Paran\u00e1",
+    "capital": "",
+    "population": 292177,
+    "id": 1076716439
+  },
+  {
+    "city": "Limeira",
+    "city_ascii": "Limeira",
+    "lat": -22.5495,
+    "lng": -47.4,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 289665,
+    "id": 1076508566
   },
   {
     "city": "Talcahuano",
@@ -1234,6 +2118,19 @@ module.exports = {
     "capital": "admin",
     "population": 286878,
     "id": 1218041020
+  },
+  {
+    "city": "Petr\u00f3polis",
+    "city_ascii": "Petropolis",
+    "lat": -22.5095,
+    "lng": -43.2,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio de Janeiro",
+    "capital": "",
+    "population": 286071,
+    "id": 1076352504
   },
   {
     "city": "Barinas",
@@ -1316,6 +2213,19 @@ module.exports = {
   {
     "city": "Crato",
     "city_ascii": "Crato",
+    "lat": -7.2296,
+    "lng": -39.42,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Cear\u00e1",
+    "capital": "",
+    "population": 273883,
+    "id": 1076894967
+  },
+  {
+    "city": "Crato",
+    "city_ascii": "Crato",
     "lat": -7.4639,
     "lng": -63.04,
     "country": "Brazil",
@@ -1353,6 +2263,19 @@ module.exports = {
     "id": 1032266693
   },
   {
+    "city": "Cabo Frio",
+    "city_ascii": "Cabo Frio",
+    "lat": -22.89,
+    "lng": -42.04,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio de Janeiro",
+    "capital": "",
+    "population": 261721,
+    "id": 1076449553
+  },
+  {
     "city": "Sincelejo",
     "city_ascii": "Sincelejo",
     "lat": 9.2904,
@@ -1366,6 +2289,19 @@ module.exports = {
     "id": 1170364198
   },
   {
+    "city": "Petrolina",
+    "city_ascii": "Petrolina",
+    "lat": -9.38,
+    "lng": -40.51,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Pernambuco",
+    "capital": "",
+    "population": 260985,
+    "id": 1076843988
+  },
+  {
     "city": "Acarigua",
     "city_ascii": "Acarigua",
     "lat": 9.5804,
@@ -1377,6 +2313,19 @@ module.exports = {
     "capital": "minor",
     "population": 260921,
     "id": 1862134462
+  },
+  {
+    "city": "Uberaba",
+    "city_ascii": "Uberaba",
+    "lat": -19.78,
+    "lng": -47.95,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 260843,
+    "id": 1076230331
   },
   {
     "city": "Popay\u00e1n",
@@ -1405,6 +2354,19 @@ module.exports = {
     "id": 1076391263
   },
   {
+    "city": "Cascavel",
+    "city_ascii": "Cascavel",
+    "lat": -24.9596,
+    "lng": -53.46,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Paran\u00e1",
+    "capital": "",
+    "population": 257172,
+    "id": 1076509946
+  },
+  {
     "city": "Buenaventura",
     "city_ascii": "Buenaventura",
     "lat": 3.8724,
@@ -1418,6 +2380,19 @@ module.exports = {
     "id": 1170287988
   },
   {
+    "city": "Governador Valadares",
+    "city_ascii": "Governador Valadares",
+    "lat": -18.87,
+    "lng": -41.97,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 250878,
+    "id": 1076271003
+  },
+  {
     "city": "V\u00e1rzea Grande",
     "city_ascii": "Varzea Grande",
     "lat": -15.65,
@@ -1429,6 +2404,19 @@ module.exports = {
     "capital": "",
     "population": 249752,
     "id": 1076359879
+  },
+  {
+    "city": "Santa Maria",
+    "city_ascii": "Santa Maria",
+    "lat": -29.6833,
+    "lng": -53.8,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "",
+    "population": 249219,
+    "id": 1076178738
   },
   {
     "city": "San Bernardo",
@@ -1470,6 +2458,19 @@ module.exports = {
     "id": 1604174464
   },
   {
+    "city": "Caruaru",
+    "city_ascii": "Caruaru",
+    "lat": -8.28,
+    "lng": -35.98,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Pernambuco",
+    "capital": "",
+    "population": 242094,
+    "id": 1076397475
+  },
+  {
     "city": "Neuqu\u00e9n",
     "city_ascii": "Neuquen",
     "lat": -38.95,
@@ -1481,6 +2482,19 @@ module.exports = {
     "capital": "admin",
     "population": 242092,
     "id": 1032525768
+  },
+  {
+    "city": "Palmas",
+    "city_ascii": "Palmas",
+    "lat": -10.2377,
+    "lng": -48.2878,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Tocantins",
+    "capital": "admin",
+    "population": 235315,
+    "id": 1076052802
   },
   {
     "city": "Boa Vista",
@@ -1535,6 +2549,32 @@ module.exports = {
     "id": 1152672356
   },
   {
+    "city": "Ilh\u00e9us",
+    "city_ascii": "Ilheus",
+    "lat": -14.78,
+    "lng": -39.05,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Bahia",
+    "capital": "",
+    "population": 230622,
+    "id": 1076021121
+  },
+  {
+    "city": "Santar\u00e9m",
+    "city_ascii": "Santarem",
+    "lat": -2.4333,
+    "lng": -54.7,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Par\u00e1",
+    "capital": "",
+    "population": 230428,
+    "id": 1076256494
+  },
+  {
     "city": "Iquique",
     "city_ascii": "Iquique",
     "lat": -20.25,
@@ -1561,6 +2601,32 @@ module.exports = {
     "id": 1068265899
   },
   {
+    "city": "Juazeiro do Norte",
+    "city_ascii": "Juazeiro do Norte",
+    "lat": -7.21,
+    "lng": -39.32,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Cear\u00e1",
+    "capital": "",
+    "population": 225230,
+    "id": 1076912078
+  },
+  {
+    "city": "Itabuna",
+    "city_ascii": "Itabuna",
+    "lat": -14.7896,
+    "lng": -39.28,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Bahia",
+    "capital": "",
+    "population": 221938,
+    "id": 1076003792
+  },
+  {
     "city": "Formosa",
     "city_ascii": "Formosa",
     "lat": -26.1728,
@@ -1572,6 +2638,19 @@ module.exports = {
     "capital": "admin",
     "population": 221383,
     "id": 1032802536
+  },
+  {
+    "city": "Imperatriz",
+    "city_ascii": "Imperatriz",
+    "lat": -5.52,
+    "lng": -47.49,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Maranh\u00e3o",
+    "capital": "",
+    "population": 218106,
+    "id": 1076486025
   },
   {
     "city": "San Pedro de Macor\u00eds",
@@ -1613,6 +2692,32 @@ module.exports = {
     "id": 1218378191
   },
   {
+    "city": "Mar\u00edlia",
+    "city_ascii": "Marilia",
+    "lat": -22.21,
+    "lng": -49.95,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 212218,
+    "id": 1076042151
+  },
+  {
+    "city": "Presidente Prudente",
+    "city_ascii": "Presidente Prudente",
+    "lat": -22.12,
+    "lng": -51.39,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 209502,
+    "id": 1076239965
+  },
+  {
     "city": "La Romana",
     "city_ascii": "La Romana",
     "lat": 18.417,
@@ -1624,6 +2729,97 @@ module.exports = {
     "capital": "admin",
     "population": 208437,
     "id": 1214760518
+  },
+  {
+    "city": "S\u00e3o Carlos",
+    "city_ascii": "Sao Carlos",
+    "lat": -22.02,
+    "lng": -47.89,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 205035,
+    "id": 1076673445
+  },
+  {
+    "city": "Crici\u00fama",
+    "city_ascii": "Criciuma",
+    "lat": -28.68,
+    "lng": -49.39,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Santa Catarina",
+    "capital": "",
+    "population": 204217,
+    "id": 1076000206
+  },
+  {
+    "city": "Guaratinguet\u00e1",
+    "city_ascii": "Guaratingueta",
+    "lat": -22.82,
+    "lng": -45.19,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 203580,
+    "id": 1076125544
+  },
+  {
+    "city": "Timon",
+    "city_ascii": "Timon",
+    "lat": -5.115,
+    "lng": -42.845,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Maranh\u00e3o",
+    "capital": "",
+    "population": 203157,
+    "id": 1076758286
+  },
+  {
+    "city": "Mossor\u00f3",
+    "city_ascii": "Mossoro",
+    "lat": -5.19,
+    "lng": -37.34,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Norte",
+    "capital": "",
+    "population": 202583,
+    "id": 1076461194
+  },
+  {
+    "city": "Sete Lagoas",
+    "city_ascii": "Sete Lagoas",
+    "lat": -19.4496,
+    "lng": -44.25,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 201334,
+    "id": 1076863850
+  },
+  {
+    "city": "Rivera",
+    "city_ascii": "Rivera",
+    "lat": -30.8996,
+    "lng": -55.56,
+    "country": "Uruguay",
+    "iso2": "UY",
+    "iso3": "URY",
+    "admin_name": "Rivera",
+    "capital": "admin",
+    "population": 200000,
+    "id": 1858819782
   },
   {
     "city": "Talca",
@@ -1678,6 +2874,19 @@ module.exports = {
     "id": 1862429150
   },
   {
+    "city": "Divin\u00f3polis",
+    "city_ascii": "Divinopolis",
+    "lat": -20.1495,
+    "lng": -44.9,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 193832,
+    "id": 1076716552
+  },
+  {
     "city": "Barrancabermeja",
     "city_ascii": "Barrancabermeja",
     "lat": 7.09,
@@ -1717,6 +2926,45 @@ module.exports = {
     "id": 1032260908
   },
   {
+    "city": "Rio Grande",
+    "city_ascii": "Rio Grande",
+    "lat": -32.0495,
+    "lng": -52.12,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "",
+    "population": 187838,
+    "id": 1076567920
+  },
+  {
+    "city": "Arapiraca",
+    "city_ascii": "Arapiraca",
+    "lat": -9.75,
+    "lng": -36.67,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Alagoas",
+    "capital": "",
+    "population": 187668,
+    "id": 1076615737
+  },
+  {
+    "city": "Cachoeiro de Itapemirim",
+    "city_ascii": "Cachoeiro de Itapemirim",
+    "lat": -20.85,
+    "lng": -41.13,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Esp\u00edrito Santo",
+    "capital": "",
+    "population": 187019,
+    "id": 1076536175
+  },
+  {
     "city": "Arica",
     "city_ascii": "Arica",
     "lat": -18.5,
@@ -1743,6 +2991,19 @@ module.exports = {
     "id": 1218160109
   },
   {
+    "city": "Rio Claro",
+    "city_ascii": "Rio Claro",
+    "lat": -22.41,
+    "lng": -47.56,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 180147,
+    "id": 1076411428
+  },
+  {
     "city": "Potos\u00ed",
     "city_ascii": "Potosi",
     "lat": -19.5696,
@@ -1754,6 +3015,19 @@ module.exports = {
     "capital": "admin",
     "population": 179901,
     "id": 1068933987
+  },
+  {
+    "city": "Passo Fundo",
+    "city_ascii": "Passo Fundo",
+    "lat": -28.25,
+    "lng": -52.42,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "",
+    "population": 179529,
+    "id": 1076763340
   },
   {
     "city": "Sangolqu\u00ed",
@@ -1821,6 +3095,19 @@ module.exports = {
     "id": 1218552075
   },
   {
+    "city": "Nova Friburgo",
+    "city_ascii": "Nova Friburgo",
+    "lat": -22.26,
+    "lng": -42.54,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio de Janeiro",
+    "capital": "",
+    "population": 171991,
+    "id": 1076922983
+  },
+  {
     "city": "Bayam\u00f3n",
     "city_ascii": "Bayamon",
     "lat": 18.3793,
@@ -1834,6 +3121,32 @@ module.exports = {
     "id": 1630035622
   },
   {
+    "city": "Ara\u00e7atuba",
+    "city_ascii": "Aracatuba",
+    "lat": -21.21,
+    "lng": -50.45,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 170024,
+    "id": 1076630308
+  },
+  {
+    "city": "Barra Mansa",
+    "city_ascii": "Barra Mansa",
+    "lat": -22.56,
+    "lng": -44.17,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio de Janeiro",
+    "capital": "",
+    "population": 169386,
+    "id": 1076686083
+  },
+  {
     "city": "Ayacucho",
     "city_ascii": "Ayacucho",
     "lat": -13.175,
@@ -1845,6 +3158,19 @@ module.exports = {
     "capital": "admin",
     "population": 166314,
     "id": 1604300430
+  },
+  {
+    "city": "Marab\u00e1",
+    "city_ascii": "Maraba",
+    "lat": -5.35,
+    "lng": -49.116,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Par\u00e1",
+    "capital": "",
+    "population": 166182,
+    "id": 1076974144
   },
   {
     "city": "Ocumare del Tuy",
@@ -1873,6 +3199,19 @@ module.exports = {
     "id": 1780361077
   },
   {
+    "city": "Carpina",
+    "city_ascii": "Carpina",
+    "lat": -7.84,
+    "lng": -35.26,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Pernambuco",
+    "capital": "",
+    "population": 165579,
+    "id": 1076005200
+  },
+  {
     "city": "Tulu\u00e1",
     "city_ascii": "Tulua",
     "lat": 4.0904,
@@ -1884,6 +3223,19 @@ module.exports = {
     "capital": "minor",
     "population": 165501,
     "id": 1170721938
+  },
+  {
+    "city": "Lajes",
+    "city_ascii": "Lajes",
+    "lat": -27.8096,
+    "lng": -50.31,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Santa Catarina",
+    "capital": "",
+    "population": 164676,
+    "id": 1076517475
   },
   {
     "city": "La Vega",
@@ -1910,6 +3262,19 @@ module.exports = {
     "capital": "admin",
     "population": 162620,
     "id": 1032864257
+  },
+  {
+    "city": "Dourados",
+    "city_ascii": "Dourados",
+    "lat": -22.23,
+    "lng": -54.81,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Mato Grosso do Sul",
+    "capital": "",
+    "population": 162202,
+    "id": 1076544482
   },
   {
     "city": "Tunja",
@@ -1951,6 +3316,19 @@ module.exports = {
     "id": 1604666111
   },
   {
+    "city": "Chapec\u00f3",
+    "city_ascii": "Chapeco",
+    "lat": -27.1,
+    "lng": -52.64,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Santa Catarina",
+    "capital": "",
+    "population": 160157,
+    "id": 1076258255
+  },
+  {
     "city": "Valdivia",
     "city_ascii": "Valdivia",
     "lat": -39.795,
@@ -1977,6 +3355,45 @@ module.exports = {
     "id": 1068356085
   },
   {
+    "city": "Punta del Este",
+    "city_ascii": "Punta del Este",
+    "lat": -34.97,
+    "lng": -54.95,
+    "country": "Uruguay",
+    "iso2": "UY",
+    "iso3": "URY",
+    "admin_name": "Maldonado",
+    "capital": "",
+    "population": 159000,
+    "id": 1858267433
+  },
+  {
+    "city": "Rio Largo",
+    "city_ascii": "Rio Largo",
+    "lat": -9.48,
+    "lng": -35.84,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Alagoas",
+    "capital": "",
+    "population": 158545,
+    "id": 1076018887
+  },
+  {
+    "city": "Barreiras",
+    "city_ascii": "Barreiras",
+    "lat": -12.14,
+    "lng": -45,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Bahia",
+    "capital": "",
+    "population": 158292,
+    "id": 1076854674
+  },
+  {
     "city": "Hu\u00e1nuco",
     "city_ascii": "Huanuco",
     "lat": -9.92,
@@ -1988,6 +3405,19 @@ module.exports = {
     "capital": "admin",
     "population": 158145,
     "id": 1604589102
+  },
+  {
+    "city": "Sobral",
+    "city_ascii": "Sobral",
+    "lat": -3.69,
+    "lng": -40.35,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Cear\u00e1",
+    "capital": "",
+    "population": 157996,
+    "id": 1076577102
   },
   {
     "city": "La Serena",
@@ -2055,6 +3485,19 @@ module.exports = {
     "id": 1604035626
   },
   {
+    "city": "Rondon\u00f3polis",
+    "city_ascii": "Rondonopolis",
+    "lat": -16.4695,
+    "lng": -54.64,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Mato Grosso",
+    "capital": "",
+    "population": 152912,
+    "id": 1076627175
+  },
+  {
     "city": "San Francisco de Macor\u00eds",
     "city_ascii": "San Francisco de Macoris",
     "lat": 19.3,
@@ -2079,6 +3522,19 @@ module.exports = {
     "capital": "admin",
     "population": 151642,
     "id": 1862645590
+  },
+  {
+    "city": "Guarapuava",
+    "city_ascii": "Guarapuava",
+    "lat": -25.38,
+    "lng": -51.48,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Paran\u00e1",
+    "capital": "",
+    "population": 150850,
+    "id": 1076415327
   },
   {
     "city": "Chill\u00e1n",
@@ -2118,6 +3574,32 @@ module.exports = {
     "capital": "admin",
     "population": 146741,
     "id": 1218479054
+  },
+  {
+    "city": "Po\u00e7os de Caldas",
+    "city_ascii": "Pocos de Caldas",
+    "lat": -21.78,
+    "lng": -46.57,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 146588,
+    "id": 1076336113
+  },
+  {
+    "city": "Santo Agostinho",
+    "city_ascii": "Santo Agostinho",
+    "lat": -8.29,
+    "lng": -35.03,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Pernambuco",
+    "capital": "",
+    "population": 146219,
+    "id": 1076363089
   },
   {
     "city": "Los \u00c1ngeles",
@@ -2172,6 +3654,19 @@ module.exports = {
     "id": 1152168074
   },
   {
+    "city": "Maca\u00e9",
+    "city_ascii": "Macae",
+    "lat": -22.38,
+    "lng": -41.79,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio de Janeiro",
+    "capital": "",
+    "population": 143029,
+    "id": 1076074287
+  },
+  {
     "city": "Cajamarca",
     "city_ascii": "Cajamarca",
     "lat": -7.15,
@@ -2183,6 +3678,19 @@ module.exports = {
     "capital": "admin",
     "population": 142665,
     "id": 1604091119
+  },
+  {
+    "city": "Paranagu\u00e1",
+    "city_ascii": "Paranagua",
+    "lat": -25.5279,
+    "lng": -48.5345,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Paran\u00e1",
+    "capital": "",
+    "population": 141013,
+    "id": 1076265266
   },
   {
     "city": "Comodoro Rivadavia",
@@ -2198,6 +3706,32 @@ module.exports = {
     "id": 1032042035
   },
   {
+    "city": "Parna\u00edba",
+    "city_ascii": "Parnaiba",
+    "lat": -2.91,
+    "lng": -41.77,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Piau\u00ed",
+    "capital": "",
+    "population": 138008,
+    "id": 1076568871
+  },
+  {
+    "city": "Castanhal",
+    "city_ascii": "Castanhal",
+    "lat": -1.2896,
+    "lng": -47.93,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Par\u00e1",
+    "capital": "",
+    "population": 137406,
+    "id": 1076216938
+  },
+  {
     "city": "Cerro de Pasco",
     "city_ascii": "Cerro de Pasco",
     "lat": -10.69,
@@ -2209,6 +3743,19 @@ module.exports = {
     "capital": "admin",
     "population": 137232,
     "id": 1604446908
+  },
+  {
+    "city": "Jequi\u00e9",
+    "city_ascii": "Jequie",
+    "lat": -13.85,
+    "lng": -40.08,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Bahia",
+    "capital": "",
+    "population": 135574,
+    "id": 1076558785
   },
   {
     "city": "Cartago",
@@ -2224,6 +3771,19 @@ module.exports = {
     "id": 1170225267
   },
   {
+    "city": "Caxias",
+    "city_ascii": "Caxias",
+    "lat": -4.833,
+    "lng": -43.35,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Maranh\u00e3o",
+    "capital": "",
+    "population": 134640,
+    "id": 1076325693
+  },
+  {
     "city": "R\u00edohacha",
     "city_ascii": "Riohacha",
     "lat": 11.5403,
@@ -2235,6 +3795,19 @@ module.exports = {
     "capital": "admin",
     "population": 133186,
     "id": 1170903069
+  },
+  {
+    "city": "Pindamonhangaba",
+    "city_ascii": "Pindamonhangaba",
+    "lat": -22.92,
+    "lng": -45.47,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 132218,
+    "id": 1076937468
   },
   {
     "city": "Ci\u00e9naga",
@@ -2276,6 +3849,19 @@ module.exports = {
     "id": 1170838212
   },
   {
+    "city": "Jaragu\u00e1 do Sul",
+    "city_ascii": "Jaragua do Sul",
+    "lat": -26.48,
+    "lng": -49.1,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Santa Catarina",
+    "capital": "",
+    "population": 130130,
+    "id": 1076588128
+  },
+  {
     "city": "Copiap\u00f3",
     "city_ascii": "Copiapo",
     "lat": -27.36,
@@ -2300,6 +3886,19 @@ module.exports = {
     "capital": "minor",
     "population": 127742,
     "id": 1032067887
+  },
+  {
+    "city": "Bragan\u00e7a Paulista",
+    "city_ascii": "Braganca Paulista",
+    "lat": -22.95,
+    "lng": -46.55,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 127676,
+    "id": 1076245528
   },
   {
     "city": "Sogamoso",
@@ -2341,6 +3940,32 @@ module.exports = {
     "id": 1862777685
   },
   {
+    "city": "Itapetininga",
+    "city_ascii": "Itapetininga",
+    "lat": -23.59,
+    "lng": -48.04,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 126243,
+    "id": 1076425970
+  },
+  {
+    "city": "Alagoinhas",
+    "city_ascii": "Alagoinhas",
+    "lat": -12.14,
+    "lng": -38.43,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Bahia",
+    "capital": "",
+    "population": 124070,
+    "id": 1076155953
+  },
+  {
     "city": "Hig\u00fcey",
     "city_ascii": "Higuey",
     "lat": 18.616,
@@ -2367,6 +3992,19 @@ module.exports = {
     "id": 1076680267
   },
   {
+    "city": "P\u00f4rto Seguro",
+    "city_ascii": "Porto Seguro",
+    "lat": -16.4296,
+    "lng": -39.08,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Bahia",
+    "capital": "",
+    "population": 123173,
+    "id": 1076932180
+  },
+  {
     "city": "San Fernando",
     "city_ascii": "San Fernando",
     "lat": 7.9,
@@ -2378,6 +4016,19 @@ module.exports = {
     "capital": "admin",
     "population": 122701,
     "id": 1862404343
+  },
+  {
+    "city": "Barbacena",
+    "city_ascii": "Barbacena",
+    "lat": -21.22,
+    "lng": -43.77,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 122211,
+    "id": 1076877003
   },
   {
     "city": "Ponce",
@@ -2404,6 +4055,19 @@ module.exports = {
     "capital": "minor",
     "population": 119897,
     "id": 1214279422
+  },
+  {
+    "city": "Ja\u00fa",
+    "city_ascii": "Jau",
+    "lat": -22.2896,
+    "lng": -48.57,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 119206,
+    "id": 1076312559
   },
   {
     "city": "Anaco",
@@ -2471,6 +4135,32 @@ module.exports = {
     "id": 1604227042
   },
   {
+    "city": "Pouso Alegre",
+    "city_ascii": "Pouso Alegre",
+    "lat": -22.22,
+    "lng": -45.94,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 115201,
+    "id": 1076082333
+  },
+  {
+    "city": "Botucatu",
+    "city_ascii": "Botucatu",
+    "lat": -22.8796,
+    "lng": -48.45,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 113862,
+    "id": 1076113865
+  },
+  {
     "city": "Curic\u00f3",
     "city_ascii": "Curico",
     "lat": -34.98,
@@ -2484,6 +4174,32 @@ module.exports = {
     "id": 1152564798
   },
   {
+    "city": "Santa Cruz do Sul",
+    "city_ascii": "Santa Cruz do Sul",
+    "lat": -29.71,
+    "lng": -52.44,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "",
+    "population": 113625,
+    "id": 1076862896
+  },
+  {
+    "city": "Conselheiro Lafaiete",
+    "city_ascii": "Conselheiro Lafaiete",
+    "lat": -20.67,
+    "lng": -43.79,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 111596,
+    "id": 1076456009
+  },
+  {
     "city": "Santa Rosa",
     "city_ascii": "Santa Rosa",
     "lat": -36.62,
@@ -2495,6 +4211,19 @@ module.exports = {
     "capital": "admin",
     "population": 111424,
     "id": 1032215828
+  },
+  {
+    "city": "Garanhuns",
+    "city_ascii": "Garanhuns",
+    "lat": -8.89,
+    "lng": -36.5,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Pernambuco",
+    "capital": "",
+    "population": 110085,
+    "id": 1076673653
   },
   {
     "city": "Milagro",
@@ -2523,6 +4252,19 @@ module.exports = {
     "id": 1170309931
   },
   {
+    "city": "Catanduva",
+    "city_ascii": "Catanduva",
+    "lat": -21.14,
+    "lng": -48.98,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 109612,
+    "id": 1076772178
+  },
+  {
     "city": "Tumbes",
     "city_ascii": "Tumbes",
     "lat": -3.57,
@@ -2549,6 +4291,32 @@ module.exports = {
     "id": 1032221516
   },
   {
+    "city": "Apucarana",
+    "city_ascii": "Apucarana",
+    "lat": -23.55,
+    "lng": -51.47,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Paran\u00e1",
+    "capital": "",
+    "population": 107085,
+    "id": 1076256387
+  },
+  {
+    "city": "Bag\u00e9",
+    "city_ascii": "Bage",
+    "lat": -31.32,
+    "lng": -54.1,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "",
+    "population": 106098,
+    "id": 1076515015
+  },
+  {
     "city": "Salto",
     "city_ascii": "Salto",
     "lat": -31.3903,
@@ -2560,6 +4328,19 @@ module.exports = {
     "capital": "admin",
     "population": 105690,
     "id": 1858575950
+  },
+  {
+    "city": "Linhares",
+    "city_ascii": "Linhares",
+    "lat": -19.39,
+    "lng": -40.05,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Esp\u00edrito Santo",
+    "capital": "",
+    "population": 105075,
+    "id": 1076355611
   },
   {
     "city": "Tandil",
@@ -2588,6 +4369,45 @@ module.exports = {
     "id": 1152830501
   },
   {
+    "city": "Pedro Juan Caballero",
+    "city_ascii": "Pedro Juan Caballero",
+    "lat": -22.5446,
+    "lng": -55.76,
+    "country": "Paraguay",
+    "iso2": "PY",
+    "iso3": "PRY",
+    "admin_name": "Amambay",
+    "capital": "admin",
+    "population": 102787,
+    "id": 1600089732
+  },
+  {
+    "city": "Barretos",
+    "city_ascii": "Barretos",
+    "lat": -20.55,
+    "lng": -48.58,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 101220,
+    "id": 1076042195
+  },
+  {
+    "city": "Te\u00f3filo Otoni",
+    "city_ascii": "Teofilo Otoni",
+    "lat": -17.87,
+    "lng": -41.5,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 101170,
+    "id": 1076465745
+  },
+  {
     "city": "Duitama",
     "city_ascii": "Duitama",
     "lat": 5.8305,
@@ -2614,6 +4434,84 @@ module.exports = {
     "id": 1170903510
   },
   {
+    "city": "Passos",
+    "city_ascii": "Passos",
+    "lat": -20.71,
+    "lng": -46.61,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 98752,
+    "id": 1076782492
+  },
+  {
+    "city": "Ub\u00e1",
+    "city_ascii": "Uba",
+    "lat": -21.1196,
+    "lng": -42.95,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 97828,
+    "id": 1076389529
+  },
+  {
+    "city": "Ourinhos",
+    "city_ascii": "Ourinhos",
+    "lat": -22.97,
+    "lng": -49.87,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 97799,
+    "id": 1076551408
+  },
+  {
+    "city": "Trindade",
+    "city_ascii": "Trindade",
+    "lat": -16.65,
+    "lng": -49.5,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Goi\u00e1s",
+    "capital": "",
+    "population": 97521,
+    "id": 1076815881
+  },
+  {
+    "city": "Arapongas",
+    "city_ascii": "Arapongas",
+    "lat": -23.41,
+    "lng": -51.43,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Paran\u00e1",
+    "capital": "",
+    "population": 97512,
+    "id": 1076623771
+  },
+  {
+    "city": "Araguari",
+    "city_ascii": "Araguari",
+    "lat": -18.64,
+    "lng": -48.2,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 96565,
+    "id": 1076402865
+  },
+  {
     "city": "Corumb\u00e1",
     "city_ascii": "Corumba",
     "lat": -19.016,
@@ -2625,6 +4523,32 @@ module.exports = {
     "capital": "",
     "population": 96520,
     "id": 1076131775
+  },
+  {
+    "city": "Erechim",
+    "city_ascii": "Erechim",
+    "lat": -27.63,
+    "lng": -52.27,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "",
+    "population": 96087,
+    "id": 1076359548
+  },
+  {
+    "city": "Juazeiro",
+    "city_ascii": "Juazeiro",
+    "lat": -9.42,
+    "lng": -40.5,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Bahia",
+    "capital": "",
+    "population": 95132,
+    "id": 1076632040
   },
   {
     "city": "Latacunga",
@@ -2640,6 +4564,32 @@ module.exports = {
     "id": 1218947988
   },
   {
+    "city": "Bento Gon\u00e7alves",
+    "city_ascii": "Bento Goncalves",
+    "lat": -29.1695,
+    "lng": -51.52,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "",
+    "population": 94271,
+    "id": 1076492877
+  },
+  {
+    "city": "Tatu\u00ed",
+    "city_ascii": "Tatui",
+    "lat": -23.35,
+    "lng": -47.86,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 93580,
+    "id": 1076587962
+  },
+  {
     "city": "Quibd\u00f3",
     "city_ascii": "Quibdo",
     "lat": 5.6904,
@@ -2653,6 +4603,58 @@ module.exports = {
     "id": 1170186734
   },
   {
+    "city": "Patos",
+    "city_ascii": "Patos",
+    "lat": -7.0196,
+    "lng": -37.29,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Para\u00edba",
+    "capital": "",
+    "population": 92575,
+    "id": 1076232522
+  },
+  {
+    "city": "Tubar\u00e3o",
+    "city_ascii": "Tubarao",
+    "lat": -28.48,
+    "lng": -49.02,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Santa Catarina",
+    "capital": "",
+    "population": 92275,
+    "id": 1076663243
+  },
+  {
+    "city": "Muria\u00e9",
+    "city_ascii": "Muriae",
+    "lat": -21.13,
+    "lng": -42.39,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 91173,
+    "id": 1076003733
+  },
+  {
+    "city": "Itanha\u00e9m",
+    "city_ascii": "Itanhaem",
+    "lat": -24.18,
+    "lng": -46.8,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 90385,
+    "id": 1076274068
+  },
+  {
     "city": "Barahona",
     "city_ascii": "Barahona",
     "lat": 18.2004,
@@ -2664,6 +4666,45 @@ module.exports = {
     "capital": "admin",
     "population": 90128,
     "id": 1214900129
+  },
+  {
+    "city": "Santana do Livramento",
+    "city_ascii": "Santana do Livramento",
+    "lat": -30.88,
+    "lng": -55.53,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "",
+    "population": 89694,
+    "id": 1076271841
+  },
+  {
+    "city": "Nova Lima",
+    "city_ascii": "Nova Lima",
+    "lat": -19.98,
+    "lng": -43.85,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 88399,
+    "id": 1076876220
+  },
+  {
+    "city": "Brusque",
+    "city_ascii": "Brusque",
+    "lat": -27.13,
+    "lng": -48.93,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Santa Catarina",
+    "capital": "",
+    "population": 88284,
+    "id": 1076418225
   },
   {
     "city": "Coronel Oviedo",
@@ -2692,6 +4733,19 @@ module.exports = {
     "id": 1862865294
   },
   {
+    "city": "Assis",
+    "city_ascii": "Assis",
+    "lat": -22.6596,
+    "lng": -50.42,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 87471,
+    "id": 1076782502
+  },
+  {
     "city": "Huaraz",
     "city_ascii": "Huaraz",
     "lat": -9.53,
@@ -2716,6 +4770,32 @@ module.exports = {
     "capital": "admin",
     "population": 85700,
     "id": 1032471024
+  },
+  {
+    "city": "Paulo Afonso",
+    "city_ascii": "Paulo Afonso",
+    "lat": -9.3307,
+    "lng": -38.2657,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Bahia",
+    "capital": "",
+    "population": 85350,
+    "id": 1076084498
+  },
+  {
+    "city": "Ituiutaba",
+    "city_ascii": "Ituiutaba",
+    "lat": -18.97,
+    "lng": -49.46,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 85345,
+    "id": 1076873111
   },
   {
     "city": "C\u00e1ceres",
@@ -2744,6 +4824,32 @@ module.exports = {
     "id": 1068929509
   },
   {
+    "city": "Santana",
+    "city_ascii": "Santana",
+    "lat": -0.0396,
+    "lng": -51.18,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Amap\u00e1",
+    "capital": "",
+    "population": 83927,
+    "id": 1076974952
+  },
+  {
+    "city": "Cod\u00f3",
+    "city_ascii": "Codo",
+    "lat": -4.4796,
+    "lng": -43.88,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Maranh\u00e3o",
+    "capital": "",
+    "population": 83288,
+    "id": 1076537068
+  },
+  {
     "city": "Tulc\u00e1n",
     "city_ascii": "Tulcan",
     "lat": 0.822,
@@ -2755,6 +4861,58 @@ module.exports = {
     "capital": "admin",
     "population": 83000,
     "id": 1218976878
+  },
+  {
+    "city": "Arax\u00e1",
+    "city_ascii": "Araxa",
+    "lat": -19.5796,
+    "lng": -46.95,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 82595,
+    "id": 1076259402
+  },
+  {
+    "city": "Lavras",
+    "city_ascii": "Lavras",
+    "lat": -21.2496,
+    "lng": -45.01,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 81472,
+    "id": 1076751259
+  },
+  {
+    "city": "Avar\u00e9",
+    "city_ascii": "Avare",
+    "lat": -23.11,
+    "lng": -48.93,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 81285,
+    "id": 1076118860
+  },
+  {
+    "city": "Formosa",
+    "city_ascii": "Formosa",
+    "lat": -15.5395,
+    "lng": -47.34,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Goi\u00e1s",
+    "capital": "",
+    "population": 81232,
+    "id": 1076601172
   },
   {
     "city": "Pisco",
@@ -2783,6 +4941,32 @@ module.exports = {
     "id": 1604316784
   },
   {
+    "city": "Itumbiara",
+    "city_ascii": "Itumbiara",
+    "lat": -18.3996,
+    "lng": -49.21,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Goi\u00e1s",
+    "capital": "",
+    "population": 79582,
+    "id": 1076693747
+  },
+  {
+    "city": "Abaetetuba",
+    "city_ascii": "Abaetetuba",
+    "lat": -1.7245,
+    "lng": -48.8849,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Par\u00e1",
+    "capital": "",
+    "population": 79420,
+    "id": 1076974632
+  },
+  {
     "city": "Paysand\u00fa",
     "city_ascii": "Paysandu",
     "lat": -32.33,
@@ -2796,6 +4980,45 @@ module.exports = {
     "id": 1858756515
   },
   {
+    "city": "Tr\u00eas Lagoas",
+    "city_ascii": "Tres Lagoas",
+    "lat": -20.79,
+    "lng": -51.72,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Mato Grosso do Sul",
+    "capital": "",
+    "population": 78712,
+    "id": 1076281782
+  },
+  {
+    "city": "S\u00e3o Jo\u00e3o del Rei",
+    "city_ascii": "Sao Joao del Rei",
+    "lat": -21.13,
+    "lng": -44.25,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 78592,
+    "id": 1076559413
+  },
+  {
+    "city": "Ita\u00fana",
+    "city_ascii": "Itauna",
+    "lat": -20.06,
+    "lng": -44.57,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 77400,
+    "id": 1076321811
+  },
+  {
     "city": "San Carlos",
     "city_ascii": "San Carlos",
     "lat": 9.658,
@@ -2807,6 +5030,19 @@ module.exports = {
     "capital": "admin",
     "population": 77192,
     "id": 1862109303
+  },
+  {
+    "city": "S\u00e3o Mateus",
+    "city_ascii": "Sao Mateus",
+    "lat": -18.7296,
+    "lng": -39.86,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Esp\u00edrito Santo",
+    "capital": "",
+    "population": 77117,
+    "id": 1076829621
   },
   {
     "city": "Caguas",
@@ -2835,6 +5071,45 @@ module.exports = {
     "id": 1862716082
   },
   {
+    "city": "Jata\u00ed",
+    "city_ascii": "Jatai",
+    "lat": -17.8796,
+    "lng": -51.75,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Goi\u00e1s",
+    "capital": "",
+    "population": 76547,
+    "id": 1076908960
+  },
+  {
+    "city": "S\u00e3o Jo\u00e3o da Boa Vista",
+    "city_ascii": "Sao Joao da Boa Vista",
+    "lat": -21.98,
+    "lng": -46.79,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 76540,
+    "id": 1076459561
+  },
+  {
+    "city": "Tucuru\u00ed",
+    "city_ascii": "Tucurui",
+    "lat": -3.68,
+    "lng": -49.72,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Par\u00e1",
+    "capital": "",
+    "population": 76337,
+    "id": 1076000076
+  },
+  {
     "city": "Babahoyo",
     "city_ascii": "Babahoyo",
     "lat": -1.7996,
@@ -2846,6 +5121,19 @@ module.exports = {
     "capital": "admin",
     "population": 76279,
     "id": 1218156392
+  },
+  {
+    "city": "Cachoeira do Sul",
+    "city_ascii": "Cachoeira do Sul",
+    "lat": -30.03,
+    "lng": -52.91,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "",
+    "population": 74694,
+    "id": 1076336795
   },
   {
     "city": "San Juan",
@@ -2861,6 +5149,71 @@ module.exports = {
     "id": 1214608846
   },
   {
+    "city": "Bacabal",
+    "city_ascii": "Bacabal",
+    "lat": -4.23,
+    "lng": -44.8,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Maranh\u00e3o",
+    "capital": "",
+    "population": 72372,
+    "id": 1076125117
+  },
+  {
+    "city": "P\u00f4rto Uni\u00e3o",
+    "city_ascii": "Porto Uniao",
+    "lat": -26.2396,
+    "lng": -51.08,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Santa Catarina",
+    "capital": "",
+    "population": 71578,
+    "id": 1076057988
+  },
+  {
+    "city": "Goiana",
+    "city_ascii": "Goiana",
+    "lat": -7.5596,
+    "lng": -35,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Pernambuco",
+    "capital": "",
+    "population": 71549,
+    "id": 1076692421
+  },
+  {
+    "city": "Iju\u00ed",
+    "city_ascii": "Ijui",
+    "lat": -28.3895,
+    "lng": -53.9199,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "",
+    "population": 71202,
+    "id": 1076683915
+  },
+  {
+    "city": "Altamira",
+    "city_ascii": "Altamira",
+    "lat": -3.1996,
+    "lng": -52.21,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Par\u00e1",
+    "capital": "",
+    "population": 70888,
+    "id": 1076710878
+  },
+  {
     "city": "Guaynabo",
     "city_ascii": "Guaynabo",
     "lat": 18.3839,
@@ -2872,6 +5225,45 @@ module.exports = {
     "capital": "",
     "population": 70797,
     "id": 1630023575
+  },
+  {
+    "city": "Paracatu",
+    "city_ascii": "Paracatu",
+    "lat": -17.1996,
+    "lng": -46.87,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 70753,
+    "id": 1076347421
+  },
+  {
+    "city": "Iguatu",
+    "city_ascii": "Iguatu",
+    "lat": -6.36,
+    "lng": -39.3,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Cear\u00e1",
+    "capital": "",
+    "population": 70380,
+    "id": 1076734026
+  },
+  {
+    "city": "Jabuticabal",
+    "city_ascii": "Jabuticabal",
+    "lat": -21.25,
+    "lng": -48.33,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 69394,
+    "id": 1076368201
   },
   {
     "city": "Arauca",
@@ -2900,6 +5292,32 @@ module.exports = {
     "id": 1218651012
   },
   {
+    "city": "Balsas",
+    "city_ascii": "Balsas",
+    "lat": -7.52,
+    "lng": -46.05,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Maranh\u00e3o",
+    "capital": "",
+    "population": 68056,
+    "id": 1076067021
+  },
+  {
+    "city": "Santa In\u00eas",
+    "city_ascii": "Santa Ines",
+    "lat": -3.66,
+    "lng": -45.39,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Maranh\u00e3o",
+    "capital": "",
+    "population": 67424,
+    "id": 1076053036
+  },
+  {
     "city": "Puerto Maldonado",
     "city_ascii": "Puerto Maldonado",
     "lat": -12.6,
@@ -2911,6 +5329,32 @@ module.exports = {
     "capital": "admin",
     "population": 67155,
     "id": 1604871130
+  },
+  {
+    "city": "Santo \u00c2ngelo",
+    "city_ascii": "Santo Angelo",
+    "lat": -28.3,
+    "lng": -54.28,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Rio Grande do Sul",
+    "capital": "",
+    "population": 65420,
+    "id": 1076113692
+  },
+  {
+    "city": "Gurupi",
+    "city_ascii": "Gurupi",
+    "lat": -11.7196,
+    "lng": -49.06,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Tocantins",
+    "capital": "",
+    "population": 64789,
+    "id": 1076649238
   },
   {
     "city": "Parintins",
@@ -2926,6 +5370,71 @@ module.exports = {
     "id": 1076090375
   },
   {
+    "city": "Curvelo",
+    "city_ascii": "Curvelo",
+    "lat": -18.7596,
+    "lng": -44.43,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Minas Gerais",
+    "capital": "",
+    "population": 63954,
+    "id": 1076253887
+  },
+  {
+    "city": "Ca\u00e7ador",
+    "city_ascii": "Cacador",
+    "lat": -26.77,
+    "lng": -51.02,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Santa Catarina",
+    "capital": "",
+    "population": 63726,
+    "id": 1076703793
+  },
+  {
+    "city": "Irec\u00ea",
+    "city_ascii": "Irece",
+    "lat": -11.3,
+    "lng": -41.87,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Bahia",
+    "capital": "",
+    "population": 63626,
+    "id": 1076348562
+  },
+  {
+    "city": "Catal\u00e3o",
+    "city_ascii": "Catalao",
+    "lat": -18.18,
+    "lng": -47.95,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Goi\u00e1s",
+    "capital": "",
+    "population": 63544,
+    "id": 1076169871
+  },
+  {
+    "city": "Valen\u00e7a",
+    "city_ascii": "Valenca",
+    "lat": -13.3596,
+    "lng": -39.08,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Bahia",
+    "capital": "",
+    "population": 63231,
+    "id": 1076455406
+  },
+  {
     "city": "Vilhena",
     "city_ascii": "Vilhena",
     "lat": -12.7166,
@@ -2939,6 +5448,45 @@ module.exports = {
     "id": 1076196581
   },
   {
+    "city": "Itapeva",
+    "city_ascii": "Itapeva",
+    "lat": -23.9796,
+    "lng": -48.88,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 62957,
+    "id": 1076767110
+  },
+  {
+    "city": "Tup\u00e3",
+    "city_ascii": "Tupa",
+    "lat": -21.93,
+    "lng": -50.52,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 62035,
+    "id": 1076738637
+  },
+  {
+    "city": "Cayenne",
+    "city_ascii": "Cayenne",
+    "lat": 4.933,
+    "lng": -52.33,
+    "country": "French Guiana",
+    "iso2": "GF",
+    "iso3": "GUF",
+    "admin_name": "",
+    "capital": "admin",
+    "population": 61550,
+    "id": 1254304969
+  },
+  {
     "city": "Yopal",
     "city_ascii": "Yopal",
     "lat": 5.347,
@@ -2950,201 +5498,6 @@ module.exports = {
     "capital": "admin",
     "population": 61029,
     "id": 1170295059
-  },
-  {
-    "city": "S\u00e3o Borja",
-    "city_ascii": "Sao Borja",
-    "lat": -28.6596,
-    "lng": -56.01,
-    "country": "Brazil",
-    "iso2": "BR",
-    "iso3": "BRA",
-    "admin_name": "Rio Grande do Sul",
-    "capital": "",
-    "population": 59613,
-    "id": 1076315333
-  },
-  {
-    "city": "Leticia",
-    "city_ascii": "Leticia",
-    "lat": -4.22,
-    "lng": -69.94,
-    "country": "Colombia",
-    "iso2": "CO",
-    "iso3": "COL",
-    "admin_name": "Amazonas",
-    "capital": "admin",
-    "population": 59575,
-    "id": 1170548641
-  },
-  {
-    "city": "Azua",
-    "city_ascii": "Azua",
-    "lat": 18.454,
-    "lng": -70.729,
-    "country": "Dominican Republic",
-    "iso2": "DO",
-    "iso3": "DOM",
-    "admin_name": "Valdesia",
-    "capital": "minor",
-    "population": 59139,
-    "id": 1214004418
-  },
-  {
-    "city": "Viedma",
-    "city_ascii": "Viedma",
-    "lat": -40.8,
-    "lng": -63,
-    "country": "Argentina",
-    "iso2": "AR",
-    "iso3": "ARG",
-    "admin_name": "R\u00edo Negro",
-    "capital": "admin",
-    "population": 59122,
-    "id": 1032613063
-  },
-  {
-    "city": "Concepci\u00f3n",
-    "city_ascii": "Concepcion",
-    "lat": -23.4064,
-    "lng": -57.4344,
-    "country": "Paraguay",
-    "iso2": "PY",
-    "iso3": "PRY",
-    "admin_name": "Concepci\u00f3n",
-    "capital": "admin",
-    "population": 59118,
-    "id": 1600557615
-  },
-  {
-    "city": "Manacapuru",
-    "city_ascii": "Manacapuru",
-    "lat": -3.2896,
-    "lng": -60.62,
-    "country": "Brazil",
-    "iso2": "BR",
-    "iso3": "BRA",
-    "admin_name": "Amazonas",
-    "capital": "",
-    "population": 59102,
-    "id": 1076484341
-  },
-  {
-    "city": "San Andr\u00e9s",
-    "city_ascii": "San Andres",
-    "lat": 12.5621,
-    "lng": -81.6903,
-    "country": "Colombia",
-    "iso2": "CO",
-    "iso3": "COL",
-    "admin_name": "San Andr\u00e9s y Providencia",
-    "capital": "admin",
-    "population": 58257,
-    "id": 1170563968
-  },
-  {
-    "city": "Ariquemes",
-    "city_ascii": "Ariquemes",
-    "lat": -9.9396,
-    "lng": -63.08,
-    "country": "Brazil",
-    "iso2": "BR",
-    "iso3": "BRA",
-    "admin_name": "Rond\u00f4nia",
-    "capital": "",
-    "population": 58096,
-    "id": 1076442639
-  },
-  {
-    "city": "Abancay",
-    "city_ascii": "Abancay",
-    "lat": -13.6396,
-    "lng": -72.89,
-    "country": "Peru",
-    "iso2": "PE",
-    "iso3": "PER",
-    "admin_name": "Apur\u00edmac",
-    "capital": "admin",
-    "population": 55111,
-    "id": 1604782074
-  },
-  {
-    "city": "Moquegua",
-    "city_ascii": "Moquegua",
-    "lat": -17.19,
-    "lng": -70.94,
-    "country": "Peru",
-    "iso2": "PE",
-    "iso3": "PER",
-    "admin_name": "Moquegua",
-    "capital": "admin",
-    "population": 54517,
-    "id": 1604230427
-  },
-  {
-    "city": "Coari",
-    "city_ascii": "Coari",
-    "lat": -4.08,
-    "lng": -63.13,
-    "country": "Brazil",
-    "iso2": "BR",
-    "iso3": "BRA",
-    "admin_name": "Amazonas",
-    "capital": "",
-    "population": 53305,
-    "id": 1076899406
-  },
-  {
-    "city": "Puerto Ayacucho",
-    "city_ascii": "Puerto Ayacucho",
-    "lat": 5.6639,
-    "lng": -67.6236,
-    "country": "Venezuela",
-    "iso2": "VE",
-    "iso3": "VEN",
-    "admin_name": "Amazonas",
-    "capital": "admin",
-    "population": 52526,
-    "id": 1862027409
-  },
-  {
-    "city": "Tucupita",
-    "city_ascii": "Tucupita",
-    "lat": 9.0605,
-    "lng": -62.06,
-    "country": "Venezuela",
-    "iso2": "VE",
-    "iso3": "VEN",
-    "admin_name": "Delta Amacuro",
-    "capital": "admin",
-    "population": 51534,
-    "id": 1862849758
-  },
-  {
-    "city": "Itacoatiara",
-    "city_ascii": "Itacoatiara",
-    "lat": -3.14,
-    "lng": -58.44,
-    "country": "Brazil",
-    "iso2": "BR",
-    "iso3": "BRA",
-    "admin_name": "Amazonas",
-    "capital": "",
-    "population": 51509,
-    "id": 1076759384
-  },
-  {
-    "city": "Trujillo",
-    "city_ascii": "Trujillo",
-    "lat": 9.3804,
-    "lng": -70.44,
-    "country": "Venezuela",
-    "iso2": "VE",
-    "iso3": "VEN",
-    "admin_name": "Trujillo",
-    "capital": "admin",
-    "population": 50353,
-    "id": 1862212549
   },
   {
     "city": "Talara",
@@ -3186,6 +5539,19 @@ module.exports = {
     "id": 1032111842
   },
   {
+    "city": "Ponta Por\u00e3",
+    "city_ascii": "Ponta Pora",
+    "lat": -22.53,
+    "lng": -55.73,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Mato Grosso do Sul",
+    "capital": "",
+    "population": 94331,
+    "id": 1076647935
+  },
+  {
     "city": "Trelew",
     "city_ascii": "Trelew",
     "lat": -43.25,
@@ -3223,6 +5589,19 @@ module.exports = {
     "capital": "minor",
     "population": 92453,
     "id": 1032987787
+  },
+  {
+    "city": "Itaituba",
+    "city_ascii": "Itaituba",
+    "lat": -4.2586,
+    "lng": -55.925,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Par\u00e1",
+    "capital": "",
+    "population": 92308,
+    "id": 1076849673
   },
   {
     "city": "Reconquista",
@@ -3472,6 +5851,19 @@ module.exports = {
     "id": 1152767334
   },
   {
+    "city": "Campo Mour\u00e3o",
+    "city_ascii": "Campo Mourao",
+    "lat": -24.0496,
+    "lng": -52.42,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Paran\u00e1",
+    "capital": "",
+    "population": 75401,
+    "id": 1076799533
+  },
+  {
     "city": "San Ram\u00f3n de la Nueva Or\u00e1n",
     "city_ascii": "San Ramon de la Nueva Oran",
     "lat": -23.14,
@@ -3548,6 +5940,19 @@ module.exports = {
     "capital": "minor",
     "population": 72304,
     "id": 1032251925
+  },
+  {
+    "city": "Paragominas",
+    "city_ascii": "Paragominas",
+    "lat": -2.9596,
+    "lng": -47.49,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Par\u00e1",
+    "capital": "",
+    "population": 69613,
+    "id": 1076092855
   },
   {
     "city": "Guajar\u00e1-Mirim",
@@ -3641,6 +6046,19 @@ module.exports = {
     "id": 1032781204
   },
   {
+    "city": "Rio Negro",
+    "city_ascii": "Rio Negro",
+    "lat": -26.1,
+    "lng": -49.79,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "Paran\u00e1",
+    "capital": "",
+    "population": 65597,
+    "id": 1076653242
+  },
+  {
     "city": "Ji-Paran\u00e1",
     "city_ascii": "Ji-Parana",
     "lat": -10.8333,
@@ -3693,6 +6111,19 @@ module.exports = {
     "id": 1862003182
   },
   {
+    "city": "Fernand\u00f3polis",
+    "city_ascii": "Fernandopolis",
+    "lat": -20.2696,
+    "lng": -50.26,
+    "country": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "admin_name": "S\u00e3o Paulo",
+    "capital": "",
+    "population": 61931,
+    "id": 1076205721
+  },
+  {
     "city": "Moca",
     "city_ascii": "Moca",
     "lat": 19.397,
@@ -3704,383 +6135,5 @@ module.exports = {
     "capital": "minor",
     "population": 61834,
     "id": 1214863528
-  },
-  {
-    "city": "El Carmen de Bol\u00edvar",
-    "city_ascii": "El Carmen de Bolivar",
-    "lat": 9.7204,
-    "lng": -75.13,
-    "country": "Colombia",
-    "iso2": "CO",
-    "iso3": "COL",
-    "admin_name": "Bol\u00edvar",
-    "capital": "minor",
-    "population": 60980,
-    "id": 1170394868
-  },
-  {
-    "city": "Tartagal",
-    "city_ascii": "Tartagal",
-    "lat": -22.55,
-    "lng": -63.81,
-    "country": "Argentina",
-    "iso2": "AR",
-    "iso3": "ARG",
-    "admin_name": "Salta",
-    "capital": "minor",
-    "population": 60819,
-    "id": 1032317391
-  },
-  {
-    "city": "San Fernando",
-    "city_ascii": "San Fernando",
-    "lat": -34.58,
-    "lng": -70.99,
-    "country": "Chile",
-    "iso2": "CL",
-    "iso3": "CHL",
-    "admin_name": "Libertador General Bernardo O\u2019Higgins",
-    "capital": "minor",
-    "population": 60746,
-    "id": 1152802349
-  },
-  {
-    "city": "San Felipe",
-    "city_ascii": "San Felipe",
-    "lat": -32.75,
-    "lng": -70.72,
-    "country": "Chile",
-    "iso2": "CL",
-    "iso3": "CHL",
-    "admin_name": "Valpara\u00edso",
-    "capital": "minor",
-    "population": 59294,
-    "id": 1152329463
-  },
-  {
-    "city": "San Francisco",
-    "city_ascii": "San Francisco",
-    "lat": -31.43,
-    "lng": -62.09,
-    "country": "Argentina",
-    "iso2": "AR",
-    "iso3": "ARG",
-    "admin_name": "C\u00f3rdoba",
-    "capital": "minor",
-    "population": 59062,
-    "id": 1032491643
-  },
-  {
-    "city": "San Pedro",
-    "city_ascii": "San Pedro",
-    "lat": -24.2196,
-    "lng": -64.87,
-    "country": "Argentina",
-    "iso2": "AR",
-    "iso3": "ARG",
-    "admin_name": "Jujuy",
-    "capital": "minor",
-    "population": 58430,
-    "id": 1032823743
-  },
-  {
-    "city": "Punta Alta",
-    "city_ascii": "Punta Alta",
-    "lat": -38.88,
-    "lng": -62.08,
-    "country": "Argentina",
-    "iso2": "AR",
-    "iso3": "ARG",
-    "admin_name": "Buenos Aires",
-    "capital": "minor",
-    "population": 57209,
-    "id": 1032629961
-  },
-  {
-    "city": "General Pico",
-    "city_ascii": "General Pico",
-    "lat": -35.6596,
-    "lng": -63.77,
-    "country": "Argentina",
-    "iso2": "AR",
-    "iso3": "ARG",
-    "admin_name": "La Pampa",
-    "capital": "minor",
-    "population": 57029,
-    "id": 1032081531
-  },
-  {
-    "city": "Cruzeiro do Sul",
-    "city_ascii": "Cruzeiro do Sul",
-    "lat": -7.63,
-    "lng": -72.67,
-    "country": "Brazil",
-    "iso2": "BR",
-    "iso3": "BRA",
-    "admin_name": "Acre",
-    "capital": "",
-    "population": 56862,
-    "id": 1076881427
-  },
-  {
-    "city": "Los Andes",
-    "city_ascii": "Los Andes",
-    "lat": -32.8296,
-    "lng": -70.6,
-    "country": "Chile",
-    "iso2": "CL",
-    "iso3": "CHL",
-    "admin_name": "Valpara\u00edso",
-    "capital": "minor",
-    "population": 56859,
-    "id": 1152833598
-  },
-  {
-    "city": "Garz\u00f3n",
-    "city_ascii": "Garzon",
-    "lat": 2.2104,
-    "lng": -75.65,
-    "country": "Colombia",
-    "iso2": "CO",
-    "iso3": "COL",
-    "admin_name": "Huila",
-    "capital": "minor",
-    "population": 56603,
-    "id": 1170149755
-  },
-  {
-    "city": "Paita",
-    "city_ascii": "Paita",
-    "lat": -5.09,
-    "lng": -81.12,
-    "country": "Peru",
-    "iso2": "PE",
-    "iso3": "PER",
-    "admin_name": "Piura",
-    "capital": "",
-    "population": 56151,
-    "id": 1604588759
-  },
-  {
-    "city": "El Banco",
-    "city_ascii": "El Banco",
-    "lat": 9.0003,
-    "lng": -73.98,
-    "country": "Colombia",
-    "iso2": "CO",
-    "iso3": "COL",
-    "admin_name": "Magdalena",
-    "capital": "minor",
-    "population": 54522,
-    "id": 1170111607
-  },
-  {
-    "city": "Chivilcoy",
-    "city_ascii": "Chivilcoy",
-    "lat": -34.9,
-    "lng": -60.04,
-    "country": "Argentina",
-    "iso2": "AR",
-    "iso3": "ARG",
-    "admin_name": "Buenos Aires",
-    "capital": "minor",
-    "population": 54514,
-    "id": 1032269915
-  },
-  {
-    "city": "Chiquinquir\u00e1",
-    "city_ascii": "Chiquinquira",
-    "lat": 5.6204,
-    "lng": -73.8199,
-    "country": "Colombia",
-    "iso2": "CO",
-    "iso3": "COL",
-    "admin_name": "Boyac\u00e1",
-    "capital": "minor",
-    "population": 53975,
-    "id": 1170668478
-  },
-  {
-    "city": "Azul",
-    "city_ascii": "Azul",
-    "lat": -36.7796,
-    "lng": -59.87,
-    "country": "Argentina",
-    "iso2": "AR",
-    "iso3": "ARG",
-    "admin_name": "Buenos Aires",
-    "capital": "minor",
-    "population": 53941,
-    "id": 1032652005
-  },
-  {
-    "city": "Upata",
-    "city_ascii": "Upata",
-    "lat": 8.0204,
-    "lng": -62.41,
-    "country": "Venezuela",
-    "iso2": "VE",
-    "iso3": "VEN",
-    "admin_name": "Bol\u00edvar",
-    "capital": "minor",
-    "population": 53685,
-    "id": 1862794619
-  },
-  {
-    "city": "Pamplona",
-    "city_ascii": "Pamplona",
-    "lat": 7.3904,
-    "lng": -72.66,
-    "country": "Colombia",
-    "iso2": "CO",
-    "iso3": "COL",
-    "admin_name": "Norte de Santander",
-    "capital": "minor",
-    "population": 53587,
-    "id": 1170275020
-  },
-  {
-    "city": "Ilo",
-    "city_ascii": "Ilo",
-    "lat": -17.64,
-    "lng": -71.34,
-    "country": "Peru",
-    "iso2": "PE",
-    "iso3": "PER",
-    "admin_name": "Moquegua",
-    "capital": "",
-    "population": 53476,
-    "id": 1604886582
-  },
-  {
-    "city": "R\u00edo Tercero",
-    "city_ascii": "Rio Tercero",
-    "lat": -32.1796,
-    "lng": -64.12,
-    "country": "Argentina",
-    "iso2": "AR",
-    "iso3": "ARG",
-    "admin_name": "C\u00f3rdoba",
-    "capital": "",
-    "population": 53389,
-    "id": 1032103221
-  },
-  {
-    "city": "Tingo Mar\u00eda",
-    "city_ascii": "Tingo Maria",
-    "lat": -9.2896,
-    "lng": -75.99,
-    "country": "Peru",
-    "iso2": "PE",
-    "iso3": "PER",
-    "admin_name": "Hu\u00e1nuco",
-    "capital": "",
-    "population": 53177,
-    "id": 1604736000
-  },
-  {
-    "city": "Mercedes",
-    "city_ascii": "Mercedes",
-    "lat": -34.66,
-    "lng": -59.44,
-    "country": "Argentina",
-    "iso2": "AR",
-    "iso3": "ARG",
-    "admin_name": "Buenos Aires",
-    "capital": "minor",
-    "population": 52949,
-    "id": 1032994289
-  },
-  {
-    "city": "Lorica",
-    "city_ascii": "Lorica",
-    "lat": 9.2419,
-    "lng": -75.816,
-    "country": "Colombia",
-    "iso2": "CO",
-    "iso3": "COL",
-    "admin_name": "C\u00f3rdoba",
-    "capital": "minor",
-    "population": 52771,
-    "id": 1170094504
-  },
-  {
-    "city": "Ja\u00e9n",
-    "city_ascii": "Jaen",
-    "lat": -5.7096,
-    "lng": -78.81,
-    "country": "Peru",
-    "iso2": "PE",
-    "iso3": "PER",
-    "admin_name": "Cajamarca",
-    "capital": "",
-    "population": 52493,
-    "id": 1604707495
-  },
-  {
-    "city": "Tef\u00e9",
-    "city_ascii": "Tefe",
-    "lat": -3.36,
-    "lng": -64.7,
-    "country": "Brazil",
-    "iso2": "BR",
-    "iso3": "BRA",
-    "admin_name": "Amazonas",
-    "capital": "",
-    "population": 51437,
-    "id": 1076049089
-  },
-  {
-    "city": "Tarma",
-    "city_ascii": "Tarma",
-    "lat": -11.41,
-    "lng": -75.73,
-    "country": "Peru",
-    "iso2": "PE",
-    "iso3": "PER",
-    "admin_name": "Jun\u00edn",
-    "capital": "",
-    "population": 51350,
-    "id": 1604810508
-  },
-  {
-    "city": "Turbo",
-    "city_ascii": "Turbo",
-    "lat": 8.1004,
-    "lng": -76.74,
-    "country": "Colombia",
-    "iso2": "CO",
-    "iso3": "COL",
-    "admin_name": "Antioquia",
-    "capital": "minor",
-    "population": 50508,
-    "id": 1170426476
-  },
-  {
-    "city": "Arjona",
-    "city_ascii": "Arjona",
-    "lat": 10.26,
-    "lng": -75.35,
-    "country": "Colombia",
-    "iso2": "CO",
-    "iso3": "COL",
-    "admin_name": "Bol\u00edvar",
-    "capital": "minor",
-    "population": 50405,
-    "id": 1170602407
-  },
-  {
-    "city": "Ferre\u00f1afe",
-    "city_ascii": "Ferrenafe",
-    "lat": -6.63,
-    "lng": -79.8,
-    "country": "Peru",
-    "iso2": "PE",
-    "iso3": "PER",
-    "admin_name": "Lambayeque",
-    "capital": "",
-    "population": 50184,
-    "id": 1604452796
   }
-  ]
-};
+]}

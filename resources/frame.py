@@ -31,8 +31,8 @@ file = 'cities.js'
 
 outfile = 'samericacities.js'
 latrng = [-54,20]
-pop = 50000
-lonrng = [-138, -56]
+pop = 61000
+lonrng = [-138, -30]
 blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe']
 whitelist = []
 
