@@ -1,5 +1,5 @@
 pushd geoscents
 git pull
 popd
-cp -r geoscents/* /var/www/html/
+mv geoscents/* /var/www/html/
 

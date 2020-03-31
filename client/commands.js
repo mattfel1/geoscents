@@ -136,20 +136,20 @@ class Commands {
         $('#commands').append($("<button class='room-btn' id='samerica_button'><b>S. America</b> <br><font size=2>" + samerica_string + "</font></button>  "))
 
         var room = this.myRoom;
-        $('#mute_button').bind("click", () => {socket.emit('mute'); $("#msg_text").focus();});
-        $('#classic_button').bind("click", () => {socket.emit('renderMap', 'classic'); $("#msg_text").focus();});
-        $('#terrain_button').bind("click", () => {socket.emit('renderMap', 'terrain'); $("#msg_text").focus();});
-        $('#satellite_button').bind("click", () => {socket.emit('renderMap', 'satellite'); $("#msg_text").focus();});
-        $('#lobby_button').bind("click", () => {if (room !== CONSTANTS.LOBBY) socket.emit('moveTo', CONSTANTS.LOBBY); $("#msg_text").focus();});
-        $('#world_button').bind("click", () => {if (room !== CONSTANTS.WORLD) socket.emit('moveTo', CONSTANTS.WORLD); $("#msg_text").focus();});
-        $('#misc_button').bind("click", () => {if (room !== CONSTANTS.MISC) socket.emit('moveTo', CONSTANTS.MISC); $("#msg_text").focus();});
-        $('#us_button').bind("click", () => {if (room !== CONSTANTS.US) socket.emit('moveTo', CONSTANTS.US); $("#msg_text").focus();});
-        $('#euro_button').bind("click", () => {if (room !== CONSTANTS.EURO) socket.emit('moveTo', CONSTANTS.EURO); $("#msg_text").focus();});
-        $('#africa_button').bind("click", () => {if (room !== CONSTANTS.AFRICA) socket.emit('moveTo', CONSTANTS.AFRICA); $("#msg_text").focus();});
-        $('#asia_button').bind("click", () => {if (room !== CONSTANTS.ASIA) socket.emit('moveTo', CONSTANTS.ASIA); $("#msg_text").focus();});
-        $('#oceania_button').bind("click", () => {if (room !== CONSTANTS.OCEANIA) socket.emit('moveTo', CONSTANTS.OCEANIA); $("#msg_text").focus();});
-        $('#samerica_button').bind("click", () => {if (room !== CONSTANTS.SAMERICA) socket.emit('moveTo', CONSTANTS.SAMERICA); $("#msg_text").focus();});
-
+        
+        $('#mute_button').bind("click", () => {socket.emit('mute'); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
+        $('#classic_button').bind("click", () => {socket.emit('renderMap', 'classic'); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
+        $('#terrain_button').bind("click", () => {socket.emit('renderMap', 'terrain'); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
+        $('#satellite_button').bind("click", () => {socket.emit('renderMap', 'satellite'); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
+        $('#lobby_button').bind("click", () => {if (room !== CONSTANTS.LOBBY) socket.emit('moveTo', CONSTANTS.LOBBY); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
+        $('#world_button').bind("click", () => {if (room !== CONSTANTS.WORLD) socket.emit('moveTo', CONSTANTS.WORLD); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
+        $('#misc_button').bind("click", () => {if (room !== CONSTANTS.MISC) socket.emit('moveTo', CONSTANTS.MISC); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
+        $('#us_button').bind("click", () => {if (room !== CONSTANTS.US) socket.emit('moveTo', CONSTANTS.US); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
+        $('#euro_button').bind("click", () => {if (room !== CONSTANTS.EURO) socket.emit('moveTo', CONSTANTS.EURO); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
+        $('#africa_button').bind("click", () => {if (room !== CONSTANTS.AFRICA) socket.emit('moveTo', CONSTANTS.AFRICA); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
+        $('#asia_button').bind("click", () => {if (room !== CONSTANTS.ASIA) socket.emit('moveTo', CONSTANTS.ASIA); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
+        $('#oceania_button').bind("click", () => {if (room !== CONSTANTS.OCEANIA) socket.emit('moveTo', CONSTANTS.OCEANIA); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
+        $('#samerica_button').bind("click", () => {if (room !== CONSTANTS.SAMERICA) socket.emit('moveTo', CONSTANTS.SAMERICA); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
     }
 
     setStyle(id, style) {

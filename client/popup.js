@@ -53,9 +53,8 @@ class Popup {
 
     // function to close our popups
     closePopup(){
-        // $('#msg_text').focus();
         $('.overlay-bg, .overlay-content').hide(); //hide the overlay
-        $("#msg_text").focus();
+        var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);
     }
 }
 
