@@ -91,8 +91,8 @@ var playerRooms = new Map();
 
 const ABOUT_MESSAGE = '[ <b>ABOUT</b> ] <a href="http://geoscents.net/resources/anomalies.html" target="_blank">Click here</a> for info about geopolitical anomalies and details about the game!<br>';
 const PRIVACY_POLICY = '[ <b>PRIVACY POLICY</b> ] We do not use cookies to track you after you leave this page.' +
-                       ' For educational purposes, we store your public IP address and your game history securely on our server. The IP addresses are replaced with country and region names, and then this data is published to <a href="http://geoscents.net/visualization/index.html">https://github.com/mattfel1/geoscents_stats</a>.    This is meant to be a fun and interesting' +
-                       ' dataset on how well people around the world know geography!  This data is not used for any commercial purposes.  If you would like to opt out, simply type "private" into the chat box.  If you would like to opt in, type "public" into the chat box.<br>'
+                       ' For educational purposes, we store your public IP address and your game history securely on our server. The IP addresses are replaced with country and region names, and then this data is published to <a href="http://geoscents.net/visualization/index.html">http://geoscents.net/visualization/index.html</a>.' +
+                       ' This data is not used for any commercial purposes.  If you would like to opt out, simply type "private" into the chat box.  If you would like to opt in, type "public" into the chat box.<br>'
 const WELCOME_MESSAGE1 = '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
                           'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
                           '<br>If you have feedback, simply shout it directly into this chat box, starting with the word "feedback".' +
