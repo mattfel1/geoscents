@@ -161,6 +161,7 @@ $(document).ready(function(){
             socket.emit('playerReady');
             commands.drawCommand(" seconds until new game auto-starts...", "", "", "", 0, true, true)
         }
+        $("#msg_text").focus();
     }, false);
 
     //Function to get the mouse position

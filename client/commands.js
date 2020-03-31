@@ -136,19 +136,19 @@ class Commands {
         $('#commands').append($("<button class='room-btn' id='samerica_button'><b>S. America</b> <br><font size=2>" + samerica_string + "</font></button>  "))
 
         var room = this.myRoom;
-        $('#mute_button').bind("click", () => {socket.emit('mute')});
-        $('#classic_button').bind("click", () => {socket.emit('renderMap', 'classic')});
-        $('#terrain_button').bind("click", () => {socket.emit('renderMap', 'terrain')});
-        $('#satellite_button').bind("click", () => {socket.emit('renderMap', 'satellite')});
-        $('#lobby_button').bind("click", () => {if (room !== CONSTANTS.LOBBY) socket.emit('moveTo', CONSTANTS.LOBBY)});
-        $('#world_button').bind("click", () => {if (room !== CONSTANTS.WORLD) socket.emit('moveTo', CONSTANTS.WORLD)});
-        $('#misc_button').bind("click", () => {if (room !== CONSTANTS.MISC) socket.emit('moveTo', CONSTANTS.MISC)});
-        $('#us_button').bind("click", () => {if (room !== CONSTANTS.US) socket.emit('moveTo', CONSTANTS.US)});
-        $('#euro_button').bind("click", () => {if (room !== CONSTANTS.EURO) socket.emit('moveTo', CONSTANTS.EURO)});
-        $('#africa_button').bind("click", () => {if (room !== CONSTANTS.AFRICA) socket.emit('moveTo', CONSTANTS.AFRICA)});
-        $('#asia_button').bind("click", () => {if (room !== CONSTANTS.ASIA) socket.emit('moveTo', CONSTANTS.ASIA)});
-        $('#oceania_button').bind("click", () => {if (room !== CONSTANTS.OCEANIA) socket.emit('moveTo', CONSTANTS.OCEANIA)});
-        $('#samerica_button').bind("click", () => {if (room !== CONSTANTS.SAMERICA) socket.emit('moveTo', CONSTANTS.SAMERICA)});
+        $('#mute_button').bind("click", () => {socket.emit('mute'); $("#msg_text").focus();});
+        $('#classic_button').bind("click", () => {socket.emit('renderMap', 'classic'); $("#msg_text").focus();});
+        $('#terrain_button').bind("click", () => {socket.emit('renderMap', 'terrain'); $("#msg_text").focus();});
+        $('#satellite_button').bind("click", () => {socket.emit('renderMap', 'satellite'); $("#msg_text").focus();});
+        $('#lobby_button').bind("click", () => {if (room !== CONSTANTS.LOBBY) socket.emit('moveTo', CONSTANTS.LOBBY); $("#msg_text").focus();});
+        $('#world_button').bind("click", () => {if (room !== CONSTANTS.WORLD) socket.emit('moveTo', CONSTANTS.WORLD); $("#msg_text").focus();});
+        $('#misc_button').bind("click", () => {if (room !== CONSTANTS.MISC) socket.emit('moveTo', CONSTANTS.MISC); $("#msg_text").focus();});
+        $('#us_button').bind("click", () => {if (room !== CONSTANTS.US) socket.emit('moveTo', CONSTANTS.US); $("#msg_text").focus();});
+        $('#euro_button').bind("click", () => {if (room !== CONSTANTS.EURO) socket.emit('moveTo', CONSTANTS.EURO); $("#msg_text").focus();});
+        $('#africa_button').bind("click", () => {if (room !== CONSTANTS.AFRICA) socket.emit('moveTo', CONSTANTS.AFRICA); $("#msg_text").focus();});
+        $('#asia_button').bind("click", () => {if (room !== CONSTANTS.ASIA) socket.emit('moveTo', CONSTANTS.ASIA); $("#msg_text").focus();});
+        $('#oceania_button').bind("click", () => {if (room !== CONSTANTS.OCEANIA) socket.emit('moveTo', CONSTANTS.OCEANIA); $("#msg_text").focus();});
+        $('#samerica_button').bind("click", () => {if (room !== CONSTANTS.SAMERICA) socket.emit('moveTo', CONSTANTS.SAMERICA); $("#msg_text").focus();});
 
     }
 

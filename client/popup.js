@@ -55,6 +55,7 @@ class Popup {
     closePopup(){
         // $('#msg_text').focus();
         $('.overlay-bg, .overlay-content').hide(); //hide the overlay
+        $("#msg_text").focus();
     }
 }
 
