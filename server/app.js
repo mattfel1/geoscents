@@ -314,6 +314,7 @@ io.on('connection', (socket) => {
                     }
                   }
                 }
+                room.whisperMessage(socket, "WARNING: CHALLENGES NOT YET IMPLEMENTED!<br>", cb);
               }
               else if (isUnknownCmd) {
                 room.whisperMessage(socket, "<i>Your command was not recognized!  Please check your spelling.  All valid commands can be found at <a href=\"http://geoscents.net/resources/anomalies.html\" target=\"_blank\">http://geoscents.net/resources/anomalies.html</a></i><br>", () => {});
@@ -321,7 +322,6 @@ io.on('connection', (socket) => {
               else {
                 room.distributeMessage(socket, new_sent_msg, cb);
               }
-              room.whisperMessage(socket, "WARNING: CHALLENGES NOT YET IMPLEMENTED!<br>", cb);
           }
       });
     });
