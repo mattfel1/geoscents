@@ -3259,7 +3259,7 @@ module.exports = {
     {
       "city": "Origin of 2002-2004 SARS Outbreak",
       "city_ascii": "",
-      "lat": 3.016667,
+      "lat": 23.016667,
       "lng": 113.116667,
       "iso2": "CN",
       "country": "",
