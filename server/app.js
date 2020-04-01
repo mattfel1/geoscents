@@ -277,7 +277,7 @@ io.on('connection', (socket) => {
                     if (!foundPlayer) {
                       dstSocket = dstroom.getPlayerByName(dstPlayer);
                       if (dstSocket != null) {
-                        room.whisperMessage(socket, "<i>[ " + playerRoom + " <b><font color='" + playerColor + "'>" + playerName + "</font></b> Whispers ]: " + replaceAll(replaceAll(new_sent_msg, "/whisper", ""), "\"" + dstPlayer + "\"","") + "</i><br>", cb);
+                        room.whisperMessage(socket, "<i>[ You whisper to " + dstPlayer + " ]: " + replaceAll(replaceAll(new_sent_msg, "/whisper", ""), "\"" + dstPlayer + "\"","") + "</i><br>", cb);
                         dstroom.whisperMessage(dstSocket, "<i>[ " + playerRoom + " <b><font color='" + playerColor + "'>" + playerName + "</font></b> Whispers ]: " + replaceAll(replaceAll(new_sent_msg, "/whisper", ""), "\"" + dstPlayer + "\"","") + "</i><br>", () => {});
                         foundPlayer = true;
                       }  
