@@ -58,9 +58,9 @@ class Map {
         this.canvas = window.document.getElementById('map');
         this.ctx = this.canvas.getContext('2d');
         this.command_window = {
-            x: this.canvas.width*1/4,
+            x: this.canvas.width*1/12,
             y: 0,
-            width: this.canvas.width*3/5,
+            width: this.canvas.width*10/12,
             height: 40
         };
     }

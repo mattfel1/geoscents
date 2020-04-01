@@ -20,21 +20,21 @@ class Commands {
         this.lastCommand = {'timeDescrip': '', 'citystring': '', 'capital': false, 'iso2': '', 'round': 0, 'button': false, 'clicked': false};
         this.lastTime = {'time': 10, 'color': 'white'};
         this.ready_button = {
-            x:this.canvas.width*5/9,
+            x:this.canvas.width*6/12,
             y:5,
             width:200,
             height:30
         };
         this.timer_window = {
-            x: this.canvas.width*1/4 - 40,
+            x: this.canvas.width*1/12 - 40,
             y: 0,
             width: 40,
             height: 40
         };
         this.command_window = {
-            x: this.canvas.width*1/4,
+            x: this.canvas.width*1/12,
             y: 0,
-            width: this.canvas.width*3/5,
+            width: this.canvas.width*10/12,
             height: 40
         };
         this.muted = false;
@@ -58,7 +58,7 @@ class Commands {
         this.ctx.fillText(timeDescrip, this.command_window['x'] + 5,this.command_window['y'] + 25);
         this.ctx.fillText(citystring, this.command_window['x']+timeDescrip.length*10 + 30,this.command_window['y'] + 25);
         this.ctx.fillText(capital, this.command_window['x']+citystring.length*10+timeDescrip.length*10 + 50,this.command_window['y'] + 25);
-        this.ctx.fillText('Round ' + (round + 1) + '/' + (CONSTANTS.GAME_ROUNDS + 1), this.command_window['x']+this.command_window['width']*0.85,this.command_window['y'] + 25);
+        this.ctx.fillText('Round ' + (round + 1) + '/' + (CONSTANTS.GAME_ROUNDS + 1), this.command_window['x']+this.command_window['width']*0.9,this.command_window['y'] + 25);
 
         if (iso2 !== "") {
             var flagImage = new Image();

@@ -1488,7 +1488,7 @@ module.exports = {
       "lat": 51.691, 
       "lng": -2.459,
       "country": "",
-      "iso2": "UK",
+      "iso2": "GB",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Smallpox_vaccine#Variolation"
@@ -1532,7 +1532,7 @@ module.exports = {
       "lat": 51.511944,
       "lng": -0.116111,
       "country": "",
-      "iso2": "UK",
+      "iso2": "GB",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Photo_51"
@@ -1726,6 +1726,7 @@ module.exports = {
       "lng": -70.6858,
       "country": "",
       "population": 0,
+      "iso2": "CL",
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Giant_Magellan_Telescope"
     },
@@ -2062,7 +2063,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 55.024167,
       "lng": -2.2925,
-      "iso2": "UK",
+      "iso2": "GB",
       "country": "",
       "population": 0,
       "capital": "",
@@ -2073,7 +2074,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 55.967,
       "lng": -4.067,
-      "iso2": "UK",
+      "iso2": "GB",
       "country": "",
       "population": 0,
       "capital": "",
@@ -2682,7 +2683,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 51.068578,
       "lng": -0.090209,
-      "iso2": "UK",
+      "iso2": "GB",
       "country": "",
       "population": 0,
       "capital": "",
@@ -3234,6 +3235,17 @@ module.exports = {
       "wiki": "https://www.mnn.com/earth-matters/climate-weather/photos/10-of-the-hottest-places-on-earth/el-azizia-libya"
     },
     {
+      "city": "'Coldest recorded temperature outside Antarctica' (−67.6 °C (−89.7 °F measured -89.7°F / -67.6°C in 1933)",
+      "city_ascii": "",
+      "lat": 63.460833,
+      "lng": 142.785833,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "iso2": "RU",
+      "wiki": "https://en.wikipedia.org/wiki/Lowest_temperature_recorded_on_Earth"
+    },
+    {
       "city": "Origin of COVID-19 (Coronavirus) Outbreak",
       "city_ascii": "",
       "lat": 30.587222,
@@ -3277,26 +3289,28 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/History_of_lysergic_acid_diethylamide"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Tassili n'Ajjer (طاسيلي ناجر) Prehistoric Cave Art",
+      "city_ascii": "",
+      "lat": 25.5,
+      "lng": 9,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "iso2": "DZ",
+      "wiki": "https://en.wikipedia.org/wiki/Tassili_n%27Ajjer"
+    },
+    {
+      "city": "Siwa Oasis (واحة سيوة)",
+      "city_ascii": "",
+      "lat": 29.205278,
+      "lng": 25.519444,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "iso2": "EG",
+      "wiki": "https://en.wikipedia.org/wiki/Siwa_Oasis"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",

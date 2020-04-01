@@ -84,6 +84,16 @@ class Room {
         return this.clients.has(socket.id) && this.players.has(socket.id)
     }
 
+    getPlayerByName(name) {
+      const candidates = Array.from(this.players).find(([, pn]) => pn.name === name);
+      if (candidates != null && candidates.length > 0) {
+        const socket = candidates[0];
+        if (this.clients.has(socket)) return this.clients.get(socket);
+        else return null;
+      }
+      else return null;
+    }
+
     renamePlayer(socket, name, color) {
         if (this.players.has(socket.id)) {
             if (name !== '') this.players.get(socket.id).name = name;
@@ -139,6 +149,11 @@ class Room {
         }
     }
 
+    gameActive() {
+      return this.state == CONSTANTS.BEGIN_GAME_STATE || 
+          this.state == CONSTANTS.GUESS_STATE || 
+          this.state == CONSTANTS.REVEAL_STATE;
+    }
     killPlayer(socket) {
       // console.log('user disconnected ' + socket.id);
       if (this.clients.has(socket.id)) {
@@ -175,7 +190,7 @@ class Room {
     }
 
     playerReady(socket) {
-      if (this.players.has(socket.id)) {
+      if (this.players.has(socket.id) && !this.gameActive()) {
           const player = this.players.get(socket.id);
           player.ready = '✔';
       }

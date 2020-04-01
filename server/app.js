@@ -228,6 +228,8 @@ io.on('connection', (socket) => {
       const isOptIn = (msg.toLowerCase().trim().startsWith('/public'));
       const isAnnounce = (msg.toLowerCase().trim().startsWith('/announce'));
       const isWhisper = (msg.toLowerCase().trim().startsWith('/whisper'));
+      const isChallenge = (msg.toLowerCase().trim().startsWith('/challenge'));
+      const isUnknownCmd = (msg.toLowerCase().trim().startsWith('/'));
       const cb = () => {callback()};
       Object.values(rooms).forEach(function(room) {
           if (room.hasPlayer(socket)) {
@@ -254,14 +256,72 @@ io.on('connection', (socket) => {
                   room.players.get(socket.id).optOut = false;
               }
               else if (isAnnounce) {
-                //tbd
+                const playerName = room.getPlayerName(socket);
+                const playerColor = room.getPlayerColor(socket);
+                const playerRoom = room.room;
+                announce("[ " + playerRoom + " <b><font color='" + playerColor + "'>" + playerName + "</font></b> Announces ]: " + replaceAll(new_sent_msg, "/announce", "") + "<br>")
+                cb();
               }
               else if (isWhisper) {
-                //tbd
+                const playerName = room.getPlayerName(socket);
+                const playerColor = room.getPlayerColor(socket);
+                const playerRoom = room.room;
+                let dst = msg.match(/"(.*?)"/g);
+                if (dst == null || dst.length != 1) {
+                  room.whisperMessage(socket, "<i>Please specify one player to whisper to, using quotes (\"\")</i><br>",() => {});
+                } else {
+                  let foundPlayer = false;
+                  let dstPlayer = dst[0].replace(/"/g,"");
+                  let dstSocket = null;
+                  Object.values(rooms).forEach(function(dstroom) {
+                    if (!foundPlayer) {
+                      dstSocket = dstroom.getPlayerByName(dstPlayer);
+                      if (dstSocket != null) {
+                        room.whisperMessage(socket, "<i>[ " + playerRoom + " <b><font color='" + playerColor + "'>" + playerName + "</font></b> Whispers ]: " + replaceAll(replaceAll(new_sent_msg, "/whisper", ""), "\"" + dstPlayer + "\"","") + "</i><br>", cb);
+                        dstroom.whisperMessage(dstSocket, "<i>[ " + playerRoom + " <b><font color='" + playerColor + "'>" + playerName + "</font></b> Whispers ]: " + replaceAll(replaceAll(new_sent_msg, "/whisper", ""), "\"" + dstPlayer + "\"","") + "</i><br>", () => {});
+                        foundPlayer = true;
+                      }  
+                    }
+                  });
+                  if (!foundPlayer) {
+                    room.whisperMessage(socket, "<i>Player " + dstPlayer + " not found in any room.</i><br>",() => {});
+                  }
+                }
+              }
+              else if (isChallenge) {
+                const playerName = room.getPlayerName(socket);
+                const playerColor = room.getPlayerColor(socket);
+                const playerRoom = room.room;
+                if (playerRoom != CONSTANTS.LOBBY) {
+                  room.whisperMessage(socket, "<i>Please go to the lobby to challenge a player</i><br>",() => {});
+                } else {
+                  let dst = msg.match(/"(.*?)"/g);  
+                  let map = msg.match(/\[(.*?)\]/g);
+                  if (dst == null || dst.length != 1) {
+                    room.whisperMessage(socket, "<i>Please specify one player to challenge, using quotes (\"\")</i><br>",() => {});
+                  } else if (map == null || map.length != 1) {
+                    room.whisperMessage(socket, "<i>Please specify map to play on, using square brackets.  Choose from [World], [Trivia], [Europe], [N. America], [S. America], [Oceania], [Africa], or [Asia].</i><br>",() => {});
+                  } else {
+                    let dstPlayer = dst[0].replace(/"/g,"");
+                    const mapName = map[0];
+                    let dstSocket = room.getPlayerByName(dstPlayer);
+                    if (dstSocket != null) {
+                      room.whisperMessage(socket, "[ " + playerRoom + " <b><font color='" + playerColor + "'>" + playerName + "</font></b> ]: You have challenged "+ dstPlayer + " to " + mapName + "!<br>", cb);
+                      room.whisperMessage(dstSocket, "[ " + playerRoom + " <b><font color='" + playerColor + "'>" + playerName + "</font></b> ]: I challenge you to " + mapName + "!<br>", () => {});
+                    } 
+                    else {
+                      room.whisperMessage(socket, "<i>Player " + dstPlayer + " not found. Is that player in this room?</i><br>",() => {});
+                    }
+                  }
+                }
+              }
+              else if (isUnknownCmd) {
+                room.whisperMessage(socket, "<i>Your command was not recognized!  Please check your spelling.  All valid commands can be found at <a href=\"http://geoscents.net/resources/anomalies.html\" target=\"_blank\">http://geoscents.net/resources/anomalies.html</a></i><br>", () => {});
               }
               else {
                 room.distributeMessage(socket, new_sent_msg, cb);
               }
+              room.whisperMessage(socket, "WARNING: CHALLENGES NOT YET IMPLEMENTED!<br>", cb);
           }
       });
     });
