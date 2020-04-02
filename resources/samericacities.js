@@ -5500,6 +5500,19 @@ module.exports = {
     "id": 1170295059
   },
   {
+    "city": "Puerto Baquerizo Moreno",
+    "city_ascii": "Puerto Baquerizo Moreno",
+    "lat": -0.9,
+    "lng": -89.6,
+    "country": "Ecuador",
+    "iso2": "EC",
+    "iso3": "ECU",
+    "admin_name": "Gal\u00e1pagos",
+    "capital": "admin",
+    "population": 6030,
+    "id": 1218093882
+  },
+  {
     "city": "Talara",
     "city_ascii": "Talara",
     "lat": -4.58,
@@ -6137,6 +6150,32 @@ module.exports = {
     "id": 1214863528
   },
   {
+    "city": "Santa Cruz",
+    "city_ascii": "Santa Cruz",
+    "lat": -0.5333,
+    "lng": -90.35,
+    "country": "Ecuador",
+    "iso2": "EC",
+    "iso3": "ECU",
+    "admin_name": "Gal\u00e1pagos",
+    "capital": "",
+    "population": 11262,
+    "id": 1218773967
+  },
+  {
+    "city": "Puerto Villamil",
+    "city_ascii": "Puerto Villamil",
+    "lat": -0.9333,
+    "lng": -91.0167,
+    "country": "Ecuador",
+    "iso2": "EC",
+    "iso3": "ECU",
+    "admin_name": "Gal\u00e1pagos",
+    "capital": "",
+    "population": 2200,
+    "id": 1218383536
+  },
+  {
     "city": "Stanley",
     "city_ascii": "Stanley",
     "lat": -51.7,
@@ -6148,5 +6187,18 @@ module.exports = {
     "capital": "",
     "population": 2213,
     "id": 1238780509
+  },
+  {
+    "city": "Grytviken",
+    "city_ascii": "Grytviken",
+    "lat": -54.2806,
+    "lng": -36.508,
+    "country": "South Georgia And South Sandwich Islands",
+    "iso2": "GS",
+    "iso3": "SGS",
+    "admin_name": "",
+    "capital": "",
+    "population": 99,
+    "id": 1239048837
   }
 ]}

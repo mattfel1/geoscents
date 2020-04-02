@@ -3311,7 +3311,33 @@ module.exports = {
       "iso2": "EG",
       "wiki": "https://en.wikipedia.org/wiki/Siwa_Oasis"
     },
-    // {
+    {
+      "city": "Sandwich",
+      "city_ascii": "Sandwich",
+      "lat": 41.7137,
+      "lng": -70.485,
+      "country": "United States",
+      "iso2": "US",
+      "iso3": "USA",
+      "admin_name": "Massachusetts",
+      "capital": "",
+      "population": 20416,
+      "id": 1840053505
+    },
+    {
+      "city": "Sandwich",
+      "city_ascii": "Sandwich",
+      "lat": 41.6496,
+      "lng": -88.6177,
+      "country": "United States",
+      "iso2": "US",
+      "iso3": "USA",
+      "admin_name": "Illinois",
+      "capital": "",
+      "population": 7387,
+      "id": 1840009188
+    },
+      // {
     //   "city": "",
     //   "city_ascii": "",
     //   "lat": ,
