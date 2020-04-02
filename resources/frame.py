@@ -34,7 +34,7 @@ latrng = [-54,20]
 pop = 61000
 lonrng = [-138, -30]
 blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe']
-whitelist = []
+whitelist = ['Falkland Islands (Islas Malvinas)']
 
 #outfile = 'eurocities.js'
 #latrng = [37,64]

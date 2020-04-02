@@ -6135,5 +6135,18 @@ module.exports = {
     "capital": "minor",
     "population": 61834,
     "id": 1214863528
+  },
+  {
+    "city": "Stanley",
+    "city_ascii": "Stanley",
+    "lat": -51.7,
+    "lng": -57.85,
+    "country": "Falkland Islands (Islas Malvinas)",
+    "iso2": "FK",
+    "iso3": "FLK",
+    "admin_name": "",
+    "capital": "",
+    "population": 2213,
+    "id": 1238780509
   }
 ]}
