@@ -161,9 +161,9 @@ $(document).ready(function(){
             socket.emit('playerReady');
             commands.drawCommand(" seconds until new game auto-starts...", "", "", "", 0, true, true)
         }
-        var x = window.scrollX, y = window.scrollY;
-        $("#msg_text").focus();
-        window.scrollTo(x, y);
+        if (!(typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
+            var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);
+        }
     }, false);
 
     //Function to get the mouse position

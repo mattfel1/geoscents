@@ -93,6 +93,12 @@ class Commands {
        this.samerica_count = s;
        this.misc_count = m;
     }
+
+    refocus() {
+        if (!(typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
+            var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);
+        }
+    }
     postButtons() {
         const socket = this.socket;
         $('#commands').empty();
@@ -137,19 +143,19 @@ class Commands {
 
         var room = this.myRoom;
         
-        $('#mute_button').bind("click", () => {socket.emit('mute'); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
-        $('#classic_button').bind("click", () => {socket.emit('renderMap', 'classic'); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
-        $('#terrain_button').bind("click", () => {socket.emit('renderMap', 'terrain'); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
-        $('#satellite_button').bind("click", () => {socket.emit('renderMap', 'satellite'); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
-        $('#lobby_button').bind("click", () => {if (room !== CONSTANTS.LOBBY) socket.emit('moveTo', CONSTANTS.LOBBY); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
-        $('#world_button').bind("click", () => {if (room !== CONSTANTS.WORLD) socket.emit('moveTo', CONSTANTS.WORLD); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
-        $('#misc_button').bind("click", () => {if (room !== CONSTANTS.MISC) socket.emit('moveTo', CONSTANTS.MISC); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
-        $('#us_button').bind("click", () => {if (room !== CONSTANTS.US) socket.emit('moveTo', CONSTANTS.US); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
-        $('#euro_button').bind("click", () => {if (room !== CONSTANTS.EURO) socket.emit('moveTo', CONSTANTS.EURO); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
-        $('#africa_button').bind("click", () => {if (room !== CONSTANTS.AFRICA) socket.emit('moveTo', CONSTANTS.AFRICA); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
-        $('#asia_button').bind("click", () => {if (room !== CONSTANTS.ASIA) socket.emit('moveTo', CONSTANTS.ASIA); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
-        $('#oceania_button').bind("click", () => {if (room !== CONSTANTS.OCEANIA) socket.emit('moveTo', CONSTANTS.OCEANIA); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
-        $('#samerica_button').bind("click", () => {if (room !== CONSTANTS.SAMERICA) socket.emit('moveTo', CONSTANTS.SAMERICA); var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);});
+        $('#mute_button').bind("click", () => {socket.emit('mute'); this.refocus()});
+        $('#classic_button').bind("click", () => {socket.emit('renderMap', 'classic'); this.refocus()});
+        $('#terrain_button').bind("click", () => {socket.emit('renderMap', 'terrain'); this.refocus()});
+        $('#satellite_button').bind("click", () => {socket.emit('renderMap', 'satellite'); this.refocus()});
+        $('#lobby_button').bind("click", () => {if (room !== CONSTANTS.LOBBY) socket.emit('moveTo', CONSTANTS.LOBBY); this.refocus()});
+        $('#world_button').bind("click", () => {if (room !== CONSTANTS.WORLD) socket.emit('moveTo', CONSTANTS.WORLD); this.refocus()});
+        $('#misc_button').bind("click", () => {if (room !== CONSTANTS.MISC) socket.emit('moveTo', CONSTANTS.MISC); this.refocus()});
+        $('#us_button').bind("click", () => {if (room !== CONSTANTS.US) socket.emit('moveTo', CONSTANTS.US); this.refocus()});
+        $('#euro_button').bind("click", () => {if (room !== CONSTANTS.EURO) socket.emit('moveTo', CONSTANTS.EURO); this.refocus()});
+        $('#africa_button').bind("click", () => {if (room !== CONSTANTS.AFRICA) socket.emit('moveTo', CONSTANTS.AFRICA); this.refocus()});
+        $('#asia_button').bind("click", () => {if (room !== CONSTANTS.ASIA) socket.emit('moveTo', CONSTANTS.ASIA); this.refocus()});
+        $('#oceania_button').bind("click", () => {if (room !== CONSTANTS.OCEANIA) socket.emit('moveTo', CONSTANTS.OCEANIA); this.refocus()});
+        $('#samerica_button').bind("click", () => {if (room !== CONSTANTS.SAMERICA) socket.emit('moveTo', CONSTANTS.SAMERICA); this.refocus()});
     }
 
     setStyle(id, style) {
