@@ -5,6 +5,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@tmkelly28/tk-css": "^2.0.2",
+    "babel-core": "^6.26.3",
     "body-parser": "^1.19.0",
     "connect": "^3.7.0",
     "datatables.net": "^1.10.20",
@@ -13,11 +14,9 @@
     "jquery": "^3.4.1",
     "line-reader": "^0.4.0",
     "morgan": "^1.10.0",
-    "npx": "^10.2.2",
     "papaparse": "^5.2.0",
     "pg": "^8.0.0",
     "pg-hstore": "^2.3.3",
-    "pm2": "^4.2.3",
     "proj4": "^2.6.1",
     "proj4js": "^10.0.0",
     "react": "^16.13.1",
@@ -27,22 +26,21 @@
     "sequelize": "^5.21.5",
     "socket.io": "^2.3.0",
     "svg-country-flags": "^1.2.7",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.6",
     "xmlhttprequest": "^1.8.0"
   },
   "scripts": {
     "start": "pm2 start server/app.js"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^7.1.5",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^3.4.2",
     "nodemon": "^2.0.2",
-    "style-loader": "^1.1.3",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "style-loader": "^1.1.3"
   }
 }

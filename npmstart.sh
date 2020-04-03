@@ -1,5 +1,8 @@
 #!/bin/bash
-
+  
+#sudo npm install n -g > /root/npm_log
+#sudo n stable >> /root/npm_log
+export PATH=/usr/local/bin/:$PATH
 touch /root/npm_log
 rm /root/npm_log
 cd /var/www/html
