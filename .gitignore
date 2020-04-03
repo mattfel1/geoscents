@@ -1,3 +1,4 @@
 .idea
 public
 connections.log
+node_modules/

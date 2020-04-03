@@ -2,6 +2,7 @@
 
 pkill -f npm
 pkill -f node
+pkill -f pm2
 bash /root/update.sh
 # cp /home/mattfel/visualization/*.js /var/www/html/visualization/
 # cp /home/mattfel/visualization/*.css /var/www/html/visualization/
