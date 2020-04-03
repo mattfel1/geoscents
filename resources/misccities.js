@@ -2695,6 +2695,7 @@ module.exports = {
       "lat": -36.716667,
       "lng": 142.2,
       "country": "",
+      "iso2": "AU",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Australian_Grains_Genebank"
@@ -2706,6 +2707,7 @@ module.exports = {
       "lng": -84.508,
       "country": "",
       "population": 0,
+      "iso2": "US",
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Passenger_pigeon"
     },
