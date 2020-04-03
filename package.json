@@ -28,17 +28,17 @@
     "svg-country-flags": "^1.2.7",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.6",
+    "babel-loader": "^7.1.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "xmlhttprequest": "^1.8.0"
   },
   "scripts": {
     "start": "pm2 start server/app.js"
   },
   "devDependencies": {
-    "babel-loader": "^7.1.5",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^3.4.2",
     "nodemon": "^2.0.2",
     "style-loader": "^1.1.3"
