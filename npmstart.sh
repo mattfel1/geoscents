@@ -6,4 +6,7 @@ export PATH=/usr/local/bin/:$PATH
 touch /root/npm_log
 rm /root/npm_log
 cd /var/www/html
-pm2 start --no-daemon 2>&1 | tee /root/npm_log
+npm update
+webpack
+pm2 start 2>&1 | tee /root/npm_log
+

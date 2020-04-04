@@ -36,7 +36,7 @@
     "xmlhttprequest": "^1.8.0"
   },
   "scripts": {
-    "start": "webpack -w & nodemon server/app.js --ignore public"
+    "start": "webpack -w & pm2 start server/app.js --ignore public"
   },
   "devDependencies": {
     "css-loader": "^3.4.2",
