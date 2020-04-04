@@ -43,10 +43,10 @@ module.exports = {
     SAMERICA_MIN_LON: -140, // Latitude of top edge of map
     SAMERICA_MAX_LON: 17, // Latitude of bottom edge of map
     SAMERICA_LAT_TS: 0,
-    OCEANIA_MIN_LAT: 10.5, // Latitude of top edge of map
-    OCEANIA_MAX_LAT: -48.0, // Latitude of bottom edge of map
+    OCEANIA_MIN_LAT: 28, // Latitude of top edge of map
+    OCEANIA_MAX_LAT: -51.2, // Latitude of bottom edge of map
     OCEANIA_MIN_LON: 69, // Latitude of top edge of map
-    OCEANIA_MAX_LON: 180, // Latitude of bottom edge of map
+    OCEANIA_MAX_LON: 220, // Latitude of bottom edge of map
     OCEANIA_LAT_TS: 0,
     VERT_WRITE_CELLS: 30,
     HORZ_WRITE_CELLS: 15,

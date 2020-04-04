@@ -3339,11 +3339,143 @@ module.exports = {
       "population": 7387,
       "id": 1840009188
     },
-      // {
+    {
+      "city": "Lake Chad",
+      "city_ascii": "",
+      "lat": 13,
+      "lng": 14.5,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Lake_Chad"
+    },
+    {
+      "city": "Maximum Security Prison, Robben Island",
+      "city_ascii": "",
+      "lat": -33.806734,
+      "lng": 18.366222,
+      "iso2": "ZA",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Maximum_Security_Prison,_Robben_Island"
+    },
+    {
+      "city": "Iwindi Impenetrable National Park",
+      "city_ascii": "",
+      "lat": -1.016667,
+      "lng": 29.683333,
+      "iso2": "UG",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Bwindi_Impenetrable_National_Park"
+    },
+    {
+      "city": "Wakaliwood Film Studio",
+      "city_ascii": "",
+      "lat": 0.313611,
+      "lng": 32.581111,
+      "iso2": "UG",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Wakaliwood"
+    },
+    {
+      "city": "Bollywood Film Studio",
+      "city_ascii": "",
+      "lat": 18.975,
+      "lng": 72.825833,
+      "iso2": "IN",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Bollywood"
+    },
+    {
+      "city": "Mount Nyiragongo Stratovolcano",
+      "city_ascii": "",
+      "lat": -1.516667,
+      "lng": 29.25,
+      "iso2": "CD",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Mount_Nyiragongo"
+    },
+    {
+      "city": "Lake Retba (Pink Lake)",
+      "city_ascii": "",
+      "lat": 14.838339,
+      "lng": -17.244822,
+      "iso2": "SN",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Lake_Retba"
+    },
+    {
+      "city": "Table Mountain (Huriǂoaxa)",
+      "city_ascii": "",
+      "lat": -33.957314,
+      "lng": 18.403108,
+      "iso2": "ZA",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Table_Mountain"
+    },
+    {
+      "city": "Nan Hua Temple (南華寺)",
+      "city_ascii": "",
+      "lat": -25.824722,
+      "lng": 28.733056,
+      "iso2": "ZA",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Nan_Hua_Temple"
+    },
+    {
+      "city": "Avenue of the Baobabs",
+      "city_ascii": "",
+      "lat": -20.250833,
+      "lng": 44.418333,
+      "iso2": "MG",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Avenue_of_the_Baobabs"
+    },
+    {
+      "city": "Chara Sands Siberian Desert",
+      "city_ascii": "",
+      "lat": 56.84,
+      "lng": 118.15,
+      "iso2": "RU",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Chara_Sands"
+    },
+    {
+      "city": "Carcross Desert (World's Smallest Desert)",
+      "city_ascii": "",
+      "lat": 60.187222,
+      "lng": -134.694722,
+      "iso2": "CA",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Carcross_Desert"
+    },
+    // {
     //   "city": "",
     //   "city_ascii": "",
     //   "lat": ,
     //   "lng": ,
+    //   "iso2": "",
     //   "country": "",
     //   "population": 0,
     //   "capital": "",
@@ -3354,6 +3486,7 @@ module.exports = {
     //   "city_ascii": "",
     //   "lat": ,
     //   "lng": ,
+    //   "iso2": "",
     //   "country": "",
     //   "population": 0,
     //   "capital": "",
@@ -3364,6 +3497,7 @@ module.exports = {
     //   "city_ascii": "",
     //   "lat": ,
     //   "lng": ,
+    //   "iso2": "",
     //   "country": "",
     //   "population": 0,
     //   "capital": "",
@@ -3374,72 +3508,12 @@ module.exports = {
     //   "city_ascii": "",
     //   "lat": ,
     //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
+    //   "iso2": "",
     //   "country": "",
     //   "population": 0,
     //   "capital": "",
     //   "wiki": ""
     // },
 
-    
   ]
 };

@@ -316,7 +316,8 @@ const geoToMerc = (room,lat, lon) => {
         lat_ts = CONSTANTS.SAMERICA_LAT_TS;
     }
     // get col value
-    const col = (parseFloat(lon) - min_lon) * (CONSTANTS.MAP_WIDTH / (max_lon - min_lon));
+    let col = (parseFloat(lon) - min_lon) * (CONSTANTS.MAP_WIDTH / (max_lon - min_lon));
+    if (parseFloat(lon) < min_lon) { col = (parseFloat(lon) + 360 - min_lon) * (CONSTANTS.MAP_WIDTH / (max_lon - min_lon)) }
     // convert from degrees to radians
     const latRad = (parseFloat(lat)) * Math.PI / 180;
 

@@ -14,6 +14,32 @@ module.exports = {
     "id": 1360771077
   },
   {
+    "city": "Guangzhou",
+    "city_ascii": "Guangzhou",
+    "lat": 23.145,
+    "lng": 113.325,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "admin",
+    "population": 8829000,
+    "id": 1156237133
+  },
+  {
+    "city": "Shenzhen",
+    "city_ascii": "Shenzhen",
+    "lat": 22.5524,
+    "lng": 114.1221,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 7581000,
+    "id": 1156158707
+  },
+  {
     "city": "Singapore",
     "city_ascii": "Singapore",
     "lat": 1.293,
@@ -40,6 +66,19 @@ module.exports = {
     "id": 1036074917
   },
   {
+    "city": "Dongguan",
+    "city_ascii": "Dongguan",
+    "lat": 23.0489,
+    "lng": 113.7447,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 4528000,
+    "id": 1156478242
+  },
+  {
     "city": "Melbourne",
     "city_ascii": "Melbourne",
     "lat": -37.82,
@@ -53,6 +92,58 @@ module.exports = {
     "id": 1036533631
   },
   {
+    "city": "Hechi",
+    "city_ascii": "Hechi",
+    "lat": 23.0965,
+    "lng": 109.6091,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangxi",
+    "capital": "",
+    "population": 3830000,
+    "id": 1156868701
+  },
+  {
+    "city": "Guiyang",
+    "city_ascii": "Guiyang",
+    "lat": 26.58,
+    "lng": 106.72,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guizhou",
+    "capital": "admin",
+    "population": 3662000,
+    "id": 1156932620
+  },
+  {
+    "city": "Zhangzhou",
+    "city_ascii": "Zhangzhou",
+    "lat": 24.5204,
+    "lng": 117.67,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Fujian",
+    "capital": "minor",
+    "population": 3531147,
+    "id": 1156241637
+  },
+  {
+    "city": "Kunming",
+    "city_ascii": "Kunming",
+    "lat": 25.07,
+    "lng": 102.68,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Yunnan",
+    "capital": "admin",
+    "population": 2931000,
+    "id": 1156477539
+  },
+  {
     "city": "Surabaya",
     "city_ascii": "Surabaya",
     "lat": -7.2492,
@@ -64,6 +155,45 @@ module.exports = {
     "capital": "admin",
     "population": 2845000,
     "id": 1360484663
+  },
+  {
+    "city": "Fuzhou",
+    "city_ascii": "Fuzhou",
+    "lat": 26.08,
+    "lng": 119.3,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Fujian",
+    "capital": "admin",
+    "population": 2606000,
+    "id": 1156188037
+  },
+  {
+    "city": "Xiangtan",
+    "city_ascii": "Xiangtan",
+    "lat": 27.8504,
+    "lng": 112.9,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Hunan",
+    "capital": "",
+    "population": 2586948,
+    "id": 1156195684
+  },
+  {
+    "city": "Xiamen",
+    "city_ascii": "Xiamen",
+    "lat": 24.45,
+    "lng": 118.08,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Fujian",
+    "capital": "minor",
+    "population": 2519000,
+    "id": 1156212809
   },
   {
     "city": "George Town",
@@ -105,6 +235,19 @@ module.exports = {
     "id": 1360006015
   },
   {
+    "city": "Nanning",
+    "city_ascii": "Nanning",
+    "lat": 22.82,
+    "lng": 108.32,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangxi",
+    "capital": "admin",
+    "population": 2167000,
+    "id": 1156605439
+  },
+  {
     "city": "Medan",
     "city_ascii": "Medan",
     "lat": 3.58,
@@ -116,6 +259,19 @@ module.exports = {
     "capital": "admin",
     "population": 2115000,
     "id": 1360543171
+  },
+  {
+    "city": "Haikou",
+    "city_ascii": "Haikou",
+    "lat": 20.05,
+    "lng": 110.32,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Hainan",
+    "capital": "admin",
+    "population": 2046189,
+    "id": 1156183327
   },
   {
     "city": "Brisbane",
@@ -144,6 +300,32 @@ module.exports = {
     "id": 1360902897
   },
   {
+    "city": "Shantou",
+    "city_ascii": "Shantou",
+    "lat": 23.37,
+    "lng": 116.67,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 1601000,
+    "id": 1156457499
+  },
+  {
+    "city": "Zhanjiang",
+    "city_ascii": "Zhanjiang",
+    "lat": 21.2,
+    "lng": 110.38,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 1590000,
+    "id": 1156502170
+  },
+  {
     "city": "Perth",
     "city_ascii": "Perth",
     "lat": -31.955,
@@ -155,6 +337,45 @@ module.exports = {
     "capital": "admin",
     "population": 1532000,
     "id": 1036178956
+  },
+  {
+    "city": "Ganzhou",
+    "city_ascii": "Ganzhou",
+    "lat": 25.92,
+    "lng": 114.95,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Jiangxi",
+    "capital": "minor",
+    "population": 1500000,
+    "id": 1156832475
+  },
+  {
+    "city": "Liuzhou",
+    "city_ascii": "Liuzhou",
+    "lat": 24.28,
+    "lng": 109.25,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangxi",
+    "capital": "minor",
+    "population": 1497000,
+    "id": 1156360785
+  },
+  {
+    "city": "Quanzhou",
+    "city_ascii": "Quanzhou",
+    "lat": 24.9,
+    "lng": 118.58,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Fujian",
+    "capital": "minor",
+    "population": 1463000,
+    "id": 1156829655
   },
   {
     "city": "Kuala Lumpur",
@@ -209,6 +430,32 @@ module.exports = {
     "id": 1360051337
   },
   {
+    "city": "Shuangshui",
+    "city_ascii": "Shuangshui",
+    "lat": 26.5944,
+    "lng": 104.8333,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guizhou",
+    "capital": "",
+    "population": 1221000,
+    "id": 1156070389
+  },
+  {
+    "city": "Gaozhou",
+    "city_ascii": "Gaozhou",
+    "lat": 21.9204,
+    "lng": 110.87,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "",
+    "population": 1217715,
+    "id": 1156785303
+  },
+  {
     "city": "Cilacap",
     "city_ascii": "Cilacap",
     "lat": -7.7188,
@@ -246,6 +493,58 @@ module.exports = {
     "capital": "",
     "population": 1134616,
     "id": 1036468001
+  },
+  {
+    "city": "Yulin",
+    "city_ascii": "Yulin",
+    "lat": 22.63,
+    "lng": 110.15,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangxi",
+    "capital": "",
+    "population": 1127000,
+    "id": 1156901312
+  },
+  {
+    "city": "Zhuzhou",
+    "city_ascii": "Zhuzhou",
+    "lat": 27.83,
+    "lng": 113.15,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Hunan",
+    "capital": "minor",
+    "population": 1080000,
+    "id": 1156041962
+  },
+  {
+    "city": "Zhuhai",
+    "city_ascii": "Zhuhai",
+    "lat": 22.2769,
+    "lng": 113.5678,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 1023000,
+    "id": 1156722242
+  },
+  {
+    "city": "Hengyang",
+    "city_ascii": "Hengyang",
+    "lat": 26.88,
+    "lng": 112.59,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Hunan",
+    "capital": "",
+    "population": 1016000,
+    "id": 1156696884
   },
   {
     "city": "Wellington",
@@ -352,6 +651,19 @@ module.exports = {
     "id": 1090737486
   },
   {
+    "city": "Apia",
+    "city_ascii": "Apia",
+    "lat": -13.8415,
+    "lng": -171.7386,
+    "country": "Samoa",
+    "iso2": "WS",
+    "iso3": "WSM",
+    "admin_name": "Tuamasaga",
+    "capital": "primary",
+    "population": 61916,
+    "id": 1882489296
+  },
+  {
     "city": "Port-Vila",
     "city_ascii": "Port-Vila",
     "lat": -17.7334,
@@ -363,6 +675,19 @@ module.exports = {
     "capital": "primary",
     "population": 44040,
     "id": 1548805075
+  },
+  {
+    "city": "Nuku\u2018alofa",
+    "city_ascii": "Nuku`alofa",
+    "lat": -21.1385,
+    "lng": -175.2206,
+    "country": "Tonga",
+    "iso2": "TO",
+    "iso3": "TON",
+    "admin_name": "Tongatapu",
+    "capital": "primary",
+    "population": 42620,
+    "id": 1776737461
   },
   {
     "city": "Tarawa",
@@ -391,6 +716,19 @@ module.exports = {
     "id": 1584000000
   },
   {
+    "city": "Pago Pago",
+    "city_ascii": "Pago Pago",
+    "lat": -14.274,
+    "lng": -170.7046,
+    "country": "American Samoa",
+    "iso2": "AS",
+    "iso3": "ASM",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 12576,
+    "id": 1016976740
+  },
+  {
     "city": "Funafuti",
     "city_ascii": "Funafuti",
     "lat": -8.5167,
@@ -417,6 +755,32 @@ module.exports = {
     "id": 1583008885
   },
   {
+    "city": "Capitol Hill",
+    "city_ascii": "Capitol Hill",
+    "lat": 15.2137,
+    "lng": 145.7546,
+    "country": "Northern Mariana Islands",
+    "iso2": "MP",
+    "iso3": "MNP",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 2500,
+    "id": 1580556972
+  },
+  {
+    "city": "Hag\u00e5t\u00f1a",
+    "city_ascii": "Hagta",
+    "lat": 13.4745,
+    "lng": 144.7504,
+    "country": "Guam",
+    "iso2": "GU",
+    "iso3": "GUM",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 1051,
+    "id": 1316937540
+  },
+  {
     "city": "Ngerulmud",
     "city_ascii": "Ngerulmud",
     "lat": 7.5,
@@ -428,6 +792,71 @@ module.exports = {
     "capital": "primary",
     "population": "",
     "id": 1585525081
+  },
+  {
+    "city": "Yongzhou",
+    "city_ascii": "Yongzhou",
+    "lat": 26.2304,
+    "lng": 111.62,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Hunan",
+    "capital": "",
+    "population": 1000000,
+    "id": 1156694479
+  },
+  {
+    "city": "Baoshan",
+    "city_ascii": "Baoshan",
+    "lat": 25.12,
+    "lng": 99.15,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Yunnan",
+    "capital": "",
+    "population": 1000000,
+    "id": 1156546994
+  },
+  {
+    "city": "Guilin",
+    "city_ascii": "Guilin",
+    "lat": 25.28,
+    "lng": 110.28,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangxi",
+    "capital": "minor",
+    "population": 987000,
+    "id": 1156235364
+  },
+  {
+    "city": "Yichun",
+    "city_ascii": "Yichun",
+    "lat": 27.8333,
+    "lng": 114.4,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Jiangxi",
+    "capital": "minor",
+    "population": 982000,
+    "id": 1156229590
+  },
+  {
+    "city": "Pingxiang",
+    "city_ascii": "Pingxiang",
+    "lat": 27.62,
+    "lng": 113.85,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Jiangxi",
+    "capital": "minor",
+    "population": 961000,
+    "id": 1156066465
   },
   {
     "city": "Klang",
@@ -443,6 +872,19 @@ module.exports = {
     "id": 1458509635
   },
   {
+    "city": "Foshan",
+    "city_ascii": "Foshan",
+    "lat": 23.0301,
+    "lng": 113.12,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 943000,
+    "id": 1156738403
+  },
+  {
     "city": "Bogor",
     "city_ascii": "Bogor",
     "lat": -6.57,
@@ -456,6 +898,19 @@ module.exports = {
     "id": 1360771925
   },
   {
+    "city": "Xinyu",
+    "city_ascii": "Xinyu",
+    "lat": 27.8,
+    "lng": 114.93,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Jiangxi",
+    "capital": "minor",
+    "population": 913000,
+    "id": 1156138735
+  },
+  {
     "city": "Johor Bahru",
     "city_ascii": "Johor Bahru",
     "lat": 1.48,
@@ -467,6 +922,19 @@ module.exports = {
     "capital": "admin",
     "population": 875000,
     "id": 1458747615
+  },
+  {
+    "city": "Yangjiang",
+    "city_ascii": "Yangjiang",
+    "lat": 21.8504,
+    "lng": 111.97,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 872363,
+    "id": 1156123172
   },
   {
     "city": "Bandar Lampung",
@@ -495,6 +963,45 @@ module.exports = {
     "id": 1360900986
   },
   {
+    "city": "Zunyi",
+    "city_ascii": "Zunyi",
+    "lat": 27.7,
+    "lng": 106.92,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guizhou",
+    "capital": "",
+    "population": 849000,
+    "id": 1156539782
+  },
+  {
+    "city": "Anshun",
+    "city_ascii": "Anshun",
+    "lat": 26.2504,
+    "lng": 105.93,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guizhou",
+    "capital": "",
+    "population": 849000,
+    "id": 1156415948
+  },
+  {
+    "city": "Honolulu",
+    "city_ascii": "Honolulu",
+    "lat": 21.3294,
+    "lng": -157.846,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "admin",
+    "population": 833671,
+    "id": 1840013305
+  },
+  {
     "city": "Butterworth",
     "city_ascii": "Butterworth",
     "lat": 5.4171,
@@ -506,6 +1013,32 @@ module.exports = {
     "capital": "",
     "population": 821652,
     "id": 1458469233
+  },
+  {
+    "city": "Xingyi",
+    "city_ascii": "Xingyi",
+    "lat": 25.0904,
+    "lng": 104.89,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guizhou",
+    "capital": "",
+    "population": 816000,
+    "id": 1156255316
+  },
+  {
+    "city": "Zhaotong",
+    "city_ascii": "Zhaotong",
+    "lat": 27.3204,
+    "lng": 103.72,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Yunnan",
+    "capital": "",
+    "population": 809000,
+    "id": 1156924687
   },
   {
     "city": "Malang",
@@ -560,6 +1093,45 @@ module.exports = {
     "id": 1360848527
   },
   {
+    "city": "Beihai",
+    "city_ascii": "Beihai",
+    "lat": 21.4804,
+    "lng": 109.1,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangxi",
+    "capital": "",
+    "population": 728978,
+    "id": 1156421449
+  },
+  {
+    "city": "Shaoguan",
+    "city_ascii": "Shaoguan",
+    "lat": 24.8,
+    "lng": 113.58,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 720266,
+    "id": 1156617066
+  },
+  {
+    "city": "Qingyuan",
+    "city_ascii": "Qingyuan",
+    "lat": 23.7004,
+    "lng": 113.0301,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 706717,
+    "id": 1156135890
+  },
+  {
     "city": "Ipoh",
     "city_ascii": "Ipoh",
     "lat": 4.6,
@@ -571,6 +1143,19 @@ module.exports = {
     "capital": "admin",
     "population": 673318,
     "id": 1458423505
+  },
+  {
+    "city": "Xiping",
+    "city_ascii": "Xiping",
+    "lat": 25.6005,
+    "lng": 103.8166,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Yunnan",
+    "capital": "minor",
+    "population": 652604,
+    "id": 1156207794
   },
   {
     "city": "Yogyakarta",
@@ -651,6 +1236,19 @@ module.exports = {
     "id": 1458462262
   },
   {
+    "city": "Macau",
+    "city_ascii": "Macau",
+    "lat": 22.203,
+    "lng": 113.545,
+    "country": "Macau",
+    "iso2": "MO",
+    "iso3": "MAC",
+    "admin_name": "",
+    "capital": "",
+    "population": 568700,
+    "id": 1446227359
+  },
+  {
     "city": "Binjai",
     "city_ascii": "Binjai",
     "lat": 3.6204,
@@ -677,6 +1275,19 @@ module.exports = {
     "id": 1360853933
   },
   {
+    "city": "Jiangmen",
+    "city_ascii": "Jiangmen",
+    "lat": 22.5804,
+    "lng": 113.08,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 532419,
+    "id": 1156105613
+  },
+  {
     "city": "Kota Kinabalu",
     "city_ascii": "Kota Kinabalu",
     "lat": 5.98,
@@ -701,6 +1312,19 @@ module.exports = {
     "capital": "",
     "population": 527660,
     "id": 1036153217
+  },
+  {
+    "city": "Ji\u2019an",
+    "city_ascii": "Ji'an",
+    "lat": 27.1304,
+    "lng": 115,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Jiangxi",
+    "capital": "minor",
+    "population": 520248,
+    "id": 1156278215
   },
   {
     "city": "Banda Aceh",
@@ -781,6 +1405,32 @@ module.exports = {
     "id": 1458194263
   },
   {
+    "city": "Zhaoqing",
+    "city_ascii": "Zhaoqing",
+    "lat": 23.0504,
+    "lng": 112.45,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 480000,
+    "id": 1156170144
+  },
+  {
+    "city": "Dadukou",
+    "city_ascii": "Dadukou",
+    "lat": 26.55,
+    "lng": 101.73,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Sichuan",
+    "capital": "minor",
+    "population": 461513,
+    "id": 1156901342
+  },
+  {
     "city": "Cranbourne",
     "city_ascii": "Cranbourne",
     "lat": -38.0996,
@@ -833,6 +1483,19 @@ module.exports = {
     "id": 1360500922
   },
   {
+    "city": "Wuzhou",
+    "city_ascii": "Wuzhou",
+    "lat": 23.48,
+    "lng": 111.32,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangxi",
+    "capital": "minor",
+    "population": 442315,
+    "id": 1156620133
+  },
+  {
     "city": "Bengkulu",
     "city_ascii": "Bengkulu",
     "lat": -3.8,
@@ -846,6 +1509,45 @@ module.exports = {
     "id": 1360191448
   },
   {
+    "city": "Chaozhou",
+    "city_ascii": "Chaozhou",
+    "lat": 23.68,
+    "lng": 116.63,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 424787,
+    "id": 1156549118
+  },
+  {
+    "city": "Meizhou",
+    "city_ascii": "Meizhou",
+    "lat": 24.3005,
+    "lng": 116.12,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 414930,
+    "id": 1156361028
+  },
+  {
+    "city": "Yuxi",
+    "city_ascii": "Yuxi",
+    "lat": 24.38,
+    "lng": 102.57,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Yunnan",
+    "capital": "minor",
+    "population": 396325,
+    "id": 1156682309
+  },
+  {
     "city": "Sandakan",
     "city_ascii": "Sandakan",
     "lat": 5.843,
@@ -857,6 +1559,32 @@ module.exports = {
     "capital": "",
     "population": 392288,
     "id": 1458405180
+  },
+  {
+    "city": "Xichang",
+    "city_ascii": "Xichang",
+    "lat": 27.88,
+    "lng": 102.3,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Sichuan",
+    "capital": "minor",
+    "population": 379993,
+    "id": 1156116456
+  },
+  {
+    "city": "Putian",
+    "city_ascii": "Putian",
+    "lat": 25.4303,
+    "lng": 119.02,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Fujian",
+    "capital": "minor",
+    "population": 376558,
+    "id": 1156811601
   },
   {
     "city": "Manukau City",
@@ -883,6 +1611,19 @@ module.exports = {
     "capital": "admin",
     "population": 372917,
     "id": 1458051507
+  },
+  {
+    "city": "Longyan",
+    "city_ascii": "Longyan",
+    "lat": 25.1804,
+    "lng": 117.03,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Fujian",
+    "capital": "minor",
+    "population": 367896,
+    "id": 1156012979
   },
   {
     "city": "Kuantan",
@@ -922,6 +1663,19 @@ module.exports = {
     "capital": "admin",
     "population": 363200,
     "id": 1554377228
+  },
+  {
+    "city": "Sanya",
+    "city_ascii": "Sanya",
+    "lat": 18.2591,
+    "lng": 109.504,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Hainan",
+    "capital": "minor",
+    "population": 362689,
+    "id": 1156373900
   },
   {
     "city": "Sungai Petani",
@@ -989,6 +1743,45 @@ module.exports = {
     "id": 1458273978
   },
   {
+    "city": "Heyuan",
+    "city_ascii": "Heyuan",
+    "lat": 23.7304,
+    "lng": 114.68,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 330961,
+    "id": 1156665165
+  },
+  {
+    "city": "Chenzhou",
+    "city_ascii": "Chenzhou",
+    "lat": 25.8004,
+    "lng": 113.0301,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Hunan",
+    "capital": "minor",
+    "population": 322997,
+    "id": 1156291915
+  },
+  {
+    "city": "Ningde",
+    "city_ascii": "Ningde",
+    "lat": 26.6804,
+    "lng": 119.5301,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Fujian",
+    "capital": "minor",
+    "population": 314077,
+    "id": 1156909802
+  },
+  {
     "city": "Tawau",
     "city_ascii": "Tawau",
     "lat": 4.271,
@@ -1002,6 +1795,19 @@ module.exports = {
     "id": 1458745722
   },
   {
+    "city": "Wenlan",
+    "city_ascii": "Wenlan",
+    "lat": 23.3619,
+    "lng": 103.4061,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Yunnan",
+    "capital": "minor",
+    "population": 303341,
+    "id": 1156385754
+  },
+  {
     "city": "Jember",
     "city_ascii": "Jember",
     "lat": -8.1727,
@@ -1013,6 +1819,19 @@ module.exports = {
     "capital": "minor",
     "population": 298585,
     "id": 1360316553
+  },
+  {
+    "city": "Huizhou",
+    "city_ascii": "Huizhou",
+    "lat": 23.08,
+    "lng": 114.4,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 289201,
+    "id": 1156203268
   },
   {
     "city": "Kupang",
@@ -1119,6 +1938,19 @@ module.exports = {
     "id": 1036502269
   },
   {
+    "city": "Chuxiong",
+    "city_ascii": "Chuxiong",
+    "lat": 25.0364,
+    "lng": 101.5456,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Yunnan",
+    "capital": "",
+    "population": 254370,
+    "id": 1156225985
+  },
+  {
     "city": "Cirebon",
     "city_ascii": "Cirebon",
     "lat": -6.7333,
@@ -1143,6 +1975,32 @@ module.exports = {
     "capital": "",
     "population": 248012,
     "id": 1360906363
+  },
+  {
+    "city": "Qinzhou",
+    "city_ascii": "Qinzhou",
+    "lat": 21.9504,
+    "lng": 108.62,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangxi",
+    "capital": "minor",
+    "population": 245376,
+    "id": 1156106602
+  },
+  {
+    "city": "Fuzhou",
+    "city_ascii": "Fuzhou",
+    "lat": 27.9703,
+    "lng": 116.36,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Jiangxi",
+    "capital": "",
+    "population": 241104,
+    "id": 1156915325
   },
   {
     "city": "Taiping",
@@ -1236,6 +2094,32 @@ module.exports = {
     "id": 1360021193
   },
   {
+    "city": "Nanping",
+    "city_ascii": "Nanping",
+    "lat": 26.6304,
+    "lng": 118.17,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Fujian",
+    "capital": "minor",
+    "population": 213054,
+    "id": 1156927445
+  },
+  {
+    "city": "Sanming",
+    "city_ascii": "Sanming",
+    "lat": 26.23,
+    "lng": 117.58,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Fujian",
+    "capital": "minor",
+    "population": 209444,
+    "id": 1156294429
+  },
+  {
     "city": "Waitakere",
     "city_ascii": "Waitakere",
     "lat": -36.8524,
@@ -1273,6 +2157,19 @@ module.exports = {
     "capital": "",
     "population": 203832,
     "id": 1458970454
+  },
+  {
+    "city": "Lianzhou",
+    "city_ascii": "Lianzhou",
+    "lat": 24.7815,
+    "lng": 112.3825,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangdong",
+    "capital": "minor",
+    "population": 203639,
+    "id": 1156020454
   },
   {
     "city": "Batu Pahat",
@@ -1392,6 +2289,19 @@ module.exports = {
     "id": 1360433768
   },
   {
+    "city": "Baicheng",
+    "city_ascii": "Baicheng",
+    "lat": 23.8997,
+    "lng": 106.6133,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangxi",
+    "capital": "minor",
+    "population": 175282,
+    "id": 1156981113
+  },
+  {
     "city": "Banyuwangi",
     "city_ascii": "Banyuwangi",
     "lat": -8.195,
@@ -1457,6 +2367,19 @@ module.exports = {
     "id": 1360329102
   },
   {
+    "city": "Simao",
+    "city_ascii": "Simao",
+    "lat": 22.7807,
+    "lng": 100.9782,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Yunnan",
+    "capital": "minor",
+    "population": 162725,
+    "id": 1156008347
+  },
+  {
     "city": "Geelong",
     "city_ascii": "Geelong",
     "lat": -38.1675,
@@ -1468,6 +2391,19 @@ module.exports = {
     "capital": "",
     "population": 160991,
     "id": 1036870987
+  },
+  {
+    "city": "Dali",
+    "city_ascii": "Dali",
+    "lat": 25.7,
+    "lng": 100.18,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Yunnan",
+    "capital": "",
+    "population": 156685,
+    "id": 1156840276
   },
   {
     "city": "Cairns",
@@ -1483,6 +2419,19 @@ module.exports = {
     "id": 1036016939
   },
   {
+    "city": "Kaihua",
+    "city_ascii": "Kaihua",
+    "lat": 23.3724,
+    "lng": 104.2497,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Yunnan",
+    "capital": "minor",
+    "population": 152388,
+    "id": 1156017759
+  },
+  {
     "city": "Bintulu",
     "city_ascii": "Bintulu",
     "lat": 3.1664,
@@ -1494,6 +2443,19 @@ module.exports = {
     "capital": "",
     "population": 151617,
     "id": 1458164361
+  },
+  {
+    "city": "Xicheng",
+    "city_ascii": "Xicheng",
+    "lat": 23.38,
+    "lng": 103.1501,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Yunnan",
+    "capital": "minor",
+    "population": 149105,
+    "id": 1156161838
   },
   {
     "city": "Palangkaraya",
@@ -1561,6 +2523,19 @@ module.exports = {
     "id": 1360011677
   },
   {
+    "city": "Papeete",
+    "city_ascii": "Papeete",
+    "lat": -17.5334,
+    "lng": -149.5667,
+    "country": "French Polynesia",
+    "iso2": "PF",
+    "iso3": "PYF",
+    "admin_name": "\u00celes du Vent",
+    "capital": "",
+    "population": 131695,
+    "id": 1258907380
+  },
+  {
     "city": "Lae",
     "city_ascii": "Lae",
     "lat": -6.733,
@@ -1572,6 +2547,19 @@ module.exports = {
     "capital": "admin",
     "population": 131052,
     "id": 1598466091
+  },
+  {
+    "city": "Tengyue",
+    "city_ascii": "Tengyue",
+    "lat": 25.0333,
+    "lng": 98.4666,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Yunnan",
+    "capital": "minor",
+    "population": 126058,
+    "id": 1156832866
   },
   {
     "city": "Pangkalpinang",
@@ -1626,6 +2614,19 @@ module.exports = {
     "id": 1360407556
   },
   {
+    "city": "Maina",
+    "city_ascii": "Maina",
+    "lat": 13.4692,
+    "lng": 144.7332,
+    "country": "Guam",
+    "iso2": "GU",
+    "iso3": "GUM",
+    "admin_name": "",
+    "capital": "",
+    "population": 122411,
+    "id": 1316874021
+  },
+  {
     "city": "Tauranga",
     "city_ascii": "Tauranga",
     "lat": -37.6964,
@@ -1637,6 +2638,19 @@ module.exports = {
     "capital": "",
     "population": 121500,
     "id": 1554759867
+  },
+  {
+    "city": "Tongren",
+    "city_ascii": "Tongren",
+    "lat": 27.6804,
+    "lng": 109.13,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guizhou",
+    "capital": "",
+    "population": 118290,
+    "id": 1156803442
   },
   {
     "city": "Dunedin",
@@ -1663,6 +2677,32 @@ module.exports = {
     "capital": "",
     "population": 117256,
     "id": 1360337304
+  },
+  {
+    "city": "Zhijiang",
+    "city_ascii": "Zhijiang",
+    "lat": 27.4409,
+    "lng": 109.678,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Hunan",
+    "capital": "minor",
+    "population": 113907,
+    "id": 1156128936
+  },
+  {
+    "city": "Shaowu",
+    "city_ascii": "Shaowu",
+    "lat": 27.3004,
+    "lng": 117.5,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Fujian",
+    "capital": "",
+    "population": 112585,
+    "id": 1156978131
   },
   {
     "city": "Mojokerto",
@@ -1990,6 +3030,32 @@ module.exports = {
     "id": 1554000636
   },
   {
+    "city": "Invercargill",
+    "city_ascii": "Invercargill",
+    "lat": -46.4094,
+    "lng": 168.365,
+    "country": "New Zealand",
+    "iso2": "NZ",
+    "iso3": "NZL",
+    "admin_name": "Southland",
+    "capital": "admin",
+    "population": 49200,
+    "id": 1554148942
+  },
+  {
+    "city": "Waipahu",
+    "city_ascii": "Waipahu",
+    "lat": 21.3858,
+    "lng": -158.0103,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "",
+    "population": 41715,
+    "id": 1840023258
+  },
+  {
     "city": "Goroka",
     "city_ascii": "Goroka",
     "lat": -6.0833,
@@ -2042,6 +3108,19 @@ module.exports = {
     "id": 1554359840
   },
   {
+    "city": "Kaneohe",
+    "city_ascii": "Kaneohe",
+    "lat": 21.4062,
+    "lng": -157.7904,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "",
+    "population": 34123,
+    "id": 1840029498
+  },
+  {
     "city": "Blenheim",
     "city_ascii": "Blenheim",
     "lat": -41.5135,
@@ -2053,6 +3132,19 @@ module.exports = {
     "capital": "admin",
     "population": 30300,
     "id": 1554001426
+  },
+  {
+    "city": "Mililani Town",
+    "city_ascii": "Mililani Town",
+    "lat": 21.4465,
+    "lng": -158.0147,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "",
+    "population": 28343,
+    "id": 1840023249
   },
   {
     "city": "Popondetta",
@@ -2094,108 +3186,30 @@ module.exports = {
     "id": 1598405100
   },
   {
-    "city": "Kavieng",
-    "city_ascii": "Kavieng",
-    "lat": -2.5813,
-    "lng": 150.813,
-    "country": "Papua New Guinea",
-    "iso2": "PG",
-    "iso3": "PNG",
-    "admin_name": "New Ireland",
-    "capital": "admin",
-    "population": 19728,
-    "id": 1598946326
+    "city": "Ewa Gentry",
+    "city_ascii": "Ewa Gentry",
+    "lat": 21.3344,
+    "lng": -158.0262,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "",
+    "population": 24181,
+    "id": 1840029577
   },
   {
-    "city": "Kimbe",
-    "city_ascii": "Kimbe",
-    "lat": -5.55,
-    "lng": 150.143,
-    "country": "Papua New Guinea",
-    "iso2": "PG",
-    "iso3": "PNG",
-    "admin_name": "West New Britain",
-    "capital": "admin",
-    "population": 18847,
-    "id": 1598372456
-  },
-  {
-    "city": "Whakatane",
-    "city_ascii": "Whakatane",
-    "lat": -37.9574,
-    "lng": 176.9828,
-    "country": "New Zealand",
-    "iso2": "NZ",
-    "iso3": "NZL",
-    "admin_name": "Bay of Plenty",
-    "capital": "admin",
-    "population": 18700,
-    "id": 1554253729
-  },
-  {
-    "city": "Daru",
-    "city_ascii": "Daru",
-    "lat": -9.1092,
-    "lng": 143.2337,
-    "country": "Papua New Guinea",
-    "iso2": "PG",
-    "iso3": "PNG",
-    "admin_name": "Western",
-    "capital": "admin",
-    "population": 15214,
-    "id": 1598923764
-  },
-  {
-    "city": "Luganville",
-    "city_ascii": "Luganville",
-    "lat": -15.5126,
-    "lng": 167.1766,
-    "country": "Vanuatu",
-    "iso2": "VU",
-    "iso3": "VUT",
-    "admin_name": "Sanma",
-    "capital": "admin",
-    "population": 13397,
-    "id": 1548569362
-  },
-  {
-    "city": "Alotau",
-    "city_ascii": "Alotau",
-    "lat": -10.3021,
-    "lng": 150.4591,
-    "country": "Papua New Guinea",
-    "iso2": "PG",
-    "iso3": "PNG",
-    "admin_name": "Milne Bay",
-    "capital": "admin",
-    "population": 11624,
-    "id": 1598284215
-  },
-  {
-    "city": "Vanimo",
-    "city_ascii": "Vanimo",
-    "lat": -2.69,
-    "lng": 141.304,
-    "country": "Papua New Guinea",
-    "iso2": "PG",
-    "iso3": "PNG",
-    "admin_name": "West Sepik",
-    "capital": "admin",
-    "population": 11204,
-    "id": 1598892363
-  },
-  {
-    "city": "Greymouth",
-    "city_ascii": "Greymouth",
-    "lat": -42.4716,
-    "lng": 171.2231,
-    "country": "New Zealand",
-    "iso2": "NZ",
-    "iso3": "NZL",
-    "admin_name": "West Coast",
-    "capital": "admin",
-    "population": 10100,
-    "id": 1554984303
+    "city": "Makakilo",
+    "city_ascii": "Makakilo",
+    "lat": 21.3591,
+    "lng": -158.0813,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "",
+    "population": 20615,
+    "id": 1840137080
   },
   {
     "city": "Sungai Penuh",
@@ -2250,6 +3264,19 @@ module.exports = {
     "id": 1360020231
   },
   {
+    "city": "Fu\u2019an",
+    "city_ascii": "Fu'an",
+    "lat": 27.0704,
+    "lng": 119.62,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Fujian",
+    "capital": "minor",
+    "population": 92470,
+    "id": 1156244234
+  },
+  {
     "city": "Parepare",
     "city_ascii": "Parepare",
     "lat": -4.0167,
@@ -2261,6 +3288,19 @@ module.exports = {
     "capital": "",
     "population": 87776,
     "id": 1360021476
+  },
+  {
+    "city": "Changxing",
+    "city_ascii": "Changxing",
+    "lat": 25.867,
+    "lng": 116.3167,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Fujian",
+    "capital": "",
+    "population": 87458,
+    "id": 1156238244
   },
   {
     "city": "Ballarat",
@@ -2562,6 +3602,19 @@ module.exports = {
     "id": 1036051032
   },
   {
+    "city": "East Honolulu",
+    "city_ascii": "East Honolulu",
+    "lat": 21.2975,
+    "lng": -157.7211,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "",
+    "population": 47868,
+    "id": 1840039181
+  },
+  {
     "city": "Mildura",
     "city_ascii": "Mildura",
     "lat": -34.185,
@@ -2612,6 +3665,58 @@ module.exports = {
     "capital": "minor",
     "population": 47110,
     "id": 1360727615
+  },
+  {
+    "city": "Qingyuan",
+    "city_ascii": "Qingyuan",
+    "lat": 24.5004,
+    "lng": 108.6667,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangxi",
+    "capital": "",
+    "population": 47062,
+    "id": 1156899793
+  },
+  {
+    "city": "Pearl City",
+    "city_ascii": "Pearl City",
+    "lat": 21.4031,
+    "lng": -157.9566,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "",
+    "population": 46259,
+    "id": 1840023251
+  },
+  {
+    "city": "Hilo",
+    "city_ascii": "Hilo",
+    "lat": 19.6886,
+    "lng": -155.0864,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "",
+    "population": 45703,
+    "id": 1840023193
+  },
+  {
+    "city": "Tangdukou",
+    "city_ascii": "Tangdukou",
+    "lat": 27,
+    "lng": 111.2001,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Hunan",
+    "capital": "minor",
+    "population": 45617,
+    "id": 1156473609
   },
   {
     "city": "Taree",
@@ -2742,6 +3847,19 @@ module.exports = {
     "capital": "",
     "population": 38551,
     "id": 1036233388
+  },
+  {
+    "city": "Kailua",
+    "city_ascii": "Kailua",
+    "lat": 21.392,
+    "lng": -157.7396,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "",
+    "population": 38088,
+    "id": 1840023244
   },
   {
     "city": "Kalgoorlie",
@@ -2898,6 +4016,32 @@ module.exports = {
     "capital": "",
     "population": 31430,
     "id": 1036024174
+  },
+  {
+    "city": "Pingxiang",
+    "city_ascii": "Pingxiang",
+    "lat": 22.0974,
+    "lng": 106.7567,
+    "country": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "admin_name": "Guangxi",
+    "capital": "",
+    "population": 31109,
+    "id": 1156519507
+  },
+  {
+    "city": "Kahului",
+    "city_ascii": "Kahului",
+    "lat": 20.8715,
+    "lng": -156.4603,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "",
+    "population": 30706,
+    "id": 1840023232
   },
   {
     "city": "Gladstone",
@@ -3160,6 +4304,19 @@ module.exports = {
     "id": 1036960753
   },
   {
+    "city": "Kihei",
+    "city_ascii": "Kihei",
+    "lat": 20.7653,
+    "lng": -156.4454,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "",
+    "population": 22220,
+    "id": 1840029507
+  },
+  {
     "city": "Katoomba",
     "city_ascii": "Katoomba",
     "lat": -33.7069,
@@ -3171,6 +4328,19 @@ module.exports = {
     "capital": "",
     "population": 22076,
     "id": 1036674004
+  },
+  {
+    "city": "Kapolei",
+    "city_ascii": "Kapolei",
+    "lat": 21.3403,
+    "lng": -158.0665,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "",
+    "population": 21086,
+    "id": 1840025211
   },
   {
     "city": "Goulburn",
@@ -3199,666 +4369,16 @@ module.exports = {
     "id": 1036205623
   },
   {
-    "city": "Masterton",
-    "city_ascii": "Masterton",
-    "lat": -40.9439,
-    "lng": 175.6456,
-    "country": "New Zealand",
-    "iso2": "NZ",
-    "iso3": "NZL",
-    "admin_name": "Wellington",
-    "capital": "",
-    "population": 20200,
-    "id": 1554641049
-  },
-  {
-    "city": "Kwinana",
-    "city_ascii": "Kwinana",
-    "lat": -32.2394,
-    "lng": 115.7702,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Western Australia",
-    "capital": "",
-    "population": 20086,
-    "id": 1036753478
-  },
-  {
-    "city": "Burnie",
-    "city_ascii": "Burnie",
-    "lat": -41.0666,
-    "lng": 145.9167,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Tasmania",
-    "capital": "",
-    "population": 19972,
-    "id": 1036394657
-  },
-  {
-    "city": "Levin",
-    "city_ascii": "Levin",
-    "lat": -40.6124,
-    "lng": 175.2772,
-    "country": "New Zealand",
-    "iso2": "NZ",
-    "iso3": "NZL",
-    "admin_name": "Manawatu-Wanganui",
-    "capital": "",
-    "population": 19550,
-    "id": 1554983635
-  },
-  {
-    "city": "Echuca",
-    "city_ascii": "Echuca",
-    "lat": -36.1296,
-    "lng": 144.75,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Victoria",
-    "capital": "",
-    "population": 19457,
-    "id": 1036292989
-  },
-  {
-    "city": "Devonport",
-    "city_ascii": "Devonport",
-    "lat": -41.1927,
-    "lng": 146.3311,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Tasmania",
-    "capital": "",
-    "population": 19317,
-    "id": 1036033175
-  },
-  {
-    "city": "Roebourne",
-    "city_ascii": "Roebourne",
-    "lat": -20.7829,
-    "lng": 117.1333,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Western Australia",
-    "capital": "",
-    "population": 19260,
-    "id": 1036752479
-  },
-  {
-    "city": "Maitland",
-    "city_ascii": "Maitland",
-    "lat": -32.721,
-    "lng": 151.555,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "New South Wales",
-    "capital": "",
-    "population": 18625,
-    "id": 1036034945
-  },
-  {
-    "city": "Traralgon",
-    "city_ascii": "Traralgon",
-    "lat": -38.1996,
-    "lng": 146.53,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Victoria",
-    "capital": "",
-    "population": 18226,
-    "id": 1036938861
-  },
-  {
-    "city": "Murray Bridge",
-    "city_ascii": "Murray Bridge",
-    "lat": -35.1296,
-    "lng": 139.26,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "South Australia",
-    "capital": "",
-    "population": 18194,
-    "id": 1036345943
-  },
-  {
-    "city": "Ashton",
-    "city_ascii": "Ashton",
-    "lat": -43.8983,
-    "lng": 171.7486,
-    "country": "New Zealand",
-    "iso2": "NZ",
-    "iso3": "NZL",
-    "admin_name": "Canterbury",
-    "capital": "",
-    "population": 17700,
-    "id": 1554784264
-  },
-  {
-    "city": "Tuncurry",
-    "city_ascii": "Tuncurry",
-    "lat": -32.1931,
-    "lng": 152.5266,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "New South Wales",
-    "capital": "",
-    "population": 17591,
-    "id": 1036846186
-  },
-  {
-    "city": "Broken Hill",
-    "city_ascii": "Broken Hill",
-    "lat": -31.95,
-    "lng": 141.4331,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "New South Wales",
-    "capital": "",
-    "population": 17395,
-    "id": 1036216956
-  },
-  {
-    "city": "Karratha",
-    "city_ascii": "Karratha",
-    "lat": -20.7304,
-    "lng": 116.87,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Western Australia",
-    "capital": "",
-    "population": 16796,
-    "id": 1036951388
-  },
-  {
-    "city": "Macetown",
-    "city_ascii": "Macetown",
-    "lat": -45.0227,
-    "lng": 168.7251,
-    "country": "New Zealand",
-    "iso2": "NZ",
-    "iso3": "NZL",
-    "admin_name": "Otago",
-    "capital": "",
-    "population": 16600,
-    "id": 1554582165
-  },
-  {
-    "city": "Gawler",
-    "city_ascii": "Gawler",
-    "lat": -34.6074,
-    "lng": 138.7264,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "South Australia",
-    "capital": "",
-    "population": 16362,
-    "id": 1036309493
-  },
-  {
-    "city": "Griffith",
-    "city_ascii": "Griffith",
-    "lat": -34.29,
-    "lng": 146.04,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "New South Wales",
-    "capital": "",
-    "population": 15455,
-    "id": 1036563313
-  },
-  {
-    "city": "Kuala Lipis",
-    "city_ascii": "Kuala Lipis",
-    "lat": 4.184,
-    "lng": 102.042,
-    "country": "Malaysia",
-    "iso2": "MY",
-    "iso3": "MYS",
-    "admin_name": "Pahang",
-    "capital": "",
-    "population": 15448,
-    "id": 1458124212
-  },
-  {
-    "city": "Cambridge",
-    "city_ascii": "Cambridge",
-    "lat": -37.8894,
-    "lng": 175.4703,
-    "country": "New Zealand",
-    "iso2": "NZ",
-    "iso3": "NZL",
-    "admin_name": "Waikato",
-    "capital": "",
-    "population": 15192,
-    "id": 1554000848
-  },
-  {
-    "city": "Kingston",
-    "city_ascii": "Kingston",
-    "lat": -42.9911,
-    "lng": 147.3084,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Tasmania",
-    "capital": "",
-    "population": 14371,
-    "id": 1036297213
-  },
-  {
-    "city": "Port Hedland",
-    "city_ascii": "Port Hedland",
-    "lat": -20.3104,
-    "lng": 118.606,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Western Australia",
-    "capital": "",
-    "population": 14288,
-    "id": 1036509606
-  },
-  {
-    "city": "Ballina",
-    "city_ascii": "Ballina",
-    "lat": -28.8614,
-    "lng": 153.568,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "New South Wales",
-    "capital": "",
-    "population": 14242,
-    "id": 1036040102
-  },
-  {
-    "city": "Wangaratta",
-    "city_ascii": "Wangaratta",
-    "lat": -36.36,
-    "lng": 146.3,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Victoria",
-    "capital": "",
-    "population": 14022,
-    "id": 1036395326
-  },
-  {
-    "city": "Port Augusta",
-    "city_ascii": "Port Augusta",
-    "lat": -32.49,
-    "lng": 137.77,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "South Australia",
-    "capital": "",
-    "population": 13897,
-    "id": 1036945368
-  },
-  {
-    "city": "Richmond",
-    "city_ascii": "Richmond",
-    "lat": -33.5995,
-    "lng": 150.74,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "New South Wales",
-    "capital": "",
-    "population": 13880,
-    "id": 1036934091
-  },
-  {
-    "city": "Singleton",
-    "city_ascii": "Singleton",
-    "lat": -32.5695,
-    "lng": 151.16,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "New South Wales",
-    "capital": "",
-    "population": 13813,
-    "id": 1036947514
-  },
-  {
-    "city": "Bongaree",
-    "city_ascii": "Bongaree",
-    "lat": -27.0787,
-    "lng": 153.1509,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Queensland",
-    "capital": "",
-    "population": 13649,
-    "id": 1036269345
-  },
-  {
-    "city": "Port Lincoln",
-    "city_ascii": "Port Lincoln",
-    "lat": -34.7332,
-    "lng": 135.8666,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "South Australia",
-    "capital": "",
-    "population": 13630,
-    "id": 1036558150
-  },
-  {
-    "city": "Tokoroa",
-    "city_ascii": "Tokoroa",
-    "lat": -38.2245,
-    "lng": 175.8705,
-    "country": "New Zealand",
-    "iso2": "NZ",
-    "iso3": "NZL",
-    "admin_name": "Waikato",
-    "capital": "",
-    "population": 13350,
-    "id": 1554951529
-  },
-  {
-    "city": "Broome",
-    "city_ascii": "Broome",
-    "lat": -17.9618,
-    "lng": 122.2308,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Western Australia",
-    "capital": "",
-    "population": 13218,
-    "id": 1036047905
-  },
-  {
-    "city": "Horsham",
-    "city_ascii": "Horsham",
-    "lat": -36.7096,
-    "lng": 142.19,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Victoria",
-    "capital": "",
-    "population": 12830,
-    "id": 1036654340
-  },
-  {
-    "city": "Port Pirie",
-    "city_ascii": "Port Pirie",
-    "lat": -33.1911,
-    "lng": 137.99,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "South Australia",
-    "capital": "",
-    "population": 12506,
-    "id": 1036571606
-  },
-  {
-    "city": "Warwick",
-    "city_ascii": "Warwick",
-    "lat": -28.2292,
-    "lng": 152.0203,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Queensland",
-    "capital": "",
-    "population": 12347,
-    "id": 1036412726
-  },
-  {
-    "city": "Kempsey",
-    "city_ascii": "Kempsey",
-    "lat": -31.0874,
-    "lng": 152.822,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "New South Wales",
-    "capital": "",
-    "population": 11840,
-    "id": 1036897003
-  },
-  {
-    "city": "Portland",
-    "city_ascii": "Portland",
-    "lat": -38.34,
-    "lng": 141.59,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Victoria",
-    "capital": "",
-    "population": 11808,
-    "id": 1036439594
-  },
-  {
-    "city": "Gympie",
-    "city_ascii": "Gympie",
-    "lat": -26.1886,
-    "lng": 152.6709,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Queensland",
-    "capital": "",
-    "population": 11649,
-    "id": 1036391013
-  },
-  {
-    "city": "Muswellbrook",
-    "city_ascii": "Muswellbrook",
-    "lat": -32.2696,
-    "lng": 150.89,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "New South Wales",
-    "capital": "",
-    "population": 11630,
-    "id": 1036253543
-  },
-  {
-    "city": "Koror",
-    "city_ascii": "Koror",
-    "lat": 7.3452,
-    "lng": 134.4695,
-    "country": "Palau",
-    "iso2": "PW",
-    "iso3": "PLW",
+    "city": "Avarua",
+    "city_ascii": "Avarua",
+    "lat": -21.25,
+    "lng": -159.75,
+    "country": "Cook Islands",
+    "iso2": "CK",
+    "iso3": "COK",
     "admin_name": "",
     "capital": "",
-    "population": 11200,
-    "id": 1585174728
-  },
-  {
-    "city": "Parkes",
-    "city_ascii": "Parkes",
-    "lat": -33.1296,
-    "lng": 148.17,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "New South Wales",
-    "capital": "",
-    "population": 11137,
-    "id": 1036977270
-  },
-  {
-    "city": "Lithgow",
-    "city_ascii": "Lithgow",
-    "lat": -33.4961,
-    "lng": 150.1528,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "New South Wales",
-    "capital": "",
-    "population": 11128,
-    "id": 1036591538
-  },
-  {
-    "city": "Hawera",
-    "city_ascii": "Hawera",
-    "lat": -39.5795,
-    "lng": 174.278,
-    "country": "New Zealand",
-    "iso2": "NZ",
-    "iso3": "NZL",
-    "admin_name": "Taranaki",
-    "capital": "",
-    "population": 11100,
-    "id": 1554872573
-  },
-  {
-    "city": "Bairnsdale",
-    "city_ascii": "Bairnsdale",
-    "lat": -37.8296,
-    "lng": 147.61,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Victoria",
-    "capital": "",
-    "population": 11005,
-    "id": 1036432237
-  },
-  {
-    "city": "Bowen",
-    "city_ascii": "Bowen",
-    "lat": -20.0013,
-    "lng": 148.2087,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Queensland",
-    "capital": "",
-    "population": 10983,
-    "id": 1036979225
-  },
-  {
-    "city": "Yeppoon",
-    "city_ascii": "Yeppoon",
-    "lat": -23.1329,
-    "lng": 150.7567,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Queensland",
-    "capital": "",
-    "population": 10769,
-    "id": 1036180170
-  },
-  {
-    "city": "Batemans Bay",
-    "city_ascii": "Batemans Bay",
-    "lat": -35.6896,
-    "lng": 150.2073,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "New South Wales",
-    "capital": "",
-    "population": 10557,
-    "id": 1036272805
-  },
-  {
-    "city": "Kiama",
-    "city_ascii": "Kiama",
-    "lat": -34.7096,
-    "lng": 150.84,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "New South Wales",
-    "capital": "",
-    "population": 10379,
-    "id": 1036754695
-  },
-  {
-    "city": "Busselton",
-    "city_ascii": "Busselton",
-    "lat": -33.6564,
-    "lng": 115.3487,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Western Australia",
-    "capital": "",
-    "population": 10214,
-    "id": 1036911902
-  },
-  {
-    "city": "Kairaki",
-    "city_ascii": "Kairaki",
-    "lat": -43.3813,
-    "lng": 172.651,
-    "country": "New Zealand",
-    "iso2": "NZ",
-    "iso3": "NZL",
-    "admin_name": "Canterbury",
-    "capital": "",
-    "population": 10200,
-    "id": 1554001309
-  },
-  {
-    "city": "Innisfail",
-    "city_ascii": "Innisfail",
-    "lat": -17.5313,
-    "lng": 146.0387,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Queensland",
-    "capital": "",
-    "population": 10143,
-    "id": 1036930229
-  },
-  {
-    "city": "Katherine",
-    "city_ascii": "Katherine",
-    "lat": -14.4666,
-    "lng": 132.2666,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Northern Territory",
-    "capital": "",
-    "population": 10141,
-    "id": 1036323110
-  },
-  {
-    "city": "Moranbah",
-    "city_ascii": "Moranbah",
-    "lat": -22.0016,
-    "lng": 148.038,
-    "country": "Australia",
-    "iso2": "AU",
-    "iso3": "AUS",
-    "admin_name": "Queensland",
-    "capital": "",
-    "population": 10000,
-    "id": 1036916453
+    "population": 5445,
+    "id": 1184217570
   }
-]};
+]}

@@ -15,12 +15,12 @@ file = 'cities.js'
 #blacklist = ['Barbados', 'Curaçao', 'Aruba', 'Saint Vincent And The Grenadines', 'Saint Lucia', 'Antigua And Barbuda', 'Grenada', 'Dominica', 'Saint Kitts And Nevis', 'Sint Maarten', 'Martinique', 'Guadeloupe']
 #whitelist = []
 
-#outfile = 'oceaniacities.js'
-#latrng = [-46,9]
-#pop = 10000
-#lonrng = [72,180]
-#blacklist =  ['Thailand', 'Sri Lanka', 'India', 'Philippines']
-#whitelist = []
+outfile = 'oceaniacities.js'
+latrng = [-51,28]
+pop = 20500
+lonrng = [71,220]
+blacklist =  ['Thailand', 'Sri Lanka', 'India', 'Philippines', 'Vietnam', 'Cambodia', 'Laos', 'Hong Kong', 'Taiwan', 'Bangladesh', 'Burma', 'Nepal', 'Bhutan', 'Japan']
+whitelist = ['Cook Islands', 'Wallis And Futuna']
 
 # outfile = 'asiacities.js'
 # latrng = [2,59]
@@ -29,12 +29,12 @@ file = 'cities.js'
 # blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', 'Cyprus', 'South Sudan', 'Northern Mariana Islands', 'Guam', 'Macau', 'Sudan', 'Belarus', 'Somalia']
 # whitelist = []
 
-outfile = 'samericacities.js'
-latrng = [-54,20]
-pop = 61000
-lonrng = [-138, -30]
-blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe']
-whitelist = ['Falkland Islands (Islas Malvinas)', 'Galápagos', 'South Georgia And South Sandwich Islands']
+# outfile = 'samericacities.js'
+# latrng = [-54,20]
+# pop = 61000
+# lonrng = [-138, -30]
+# blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe']
+# whitelist = ['Falkland Islands (Islas Malvinas)', 'Galápagos', 'South Georgia And South Sandwich Islands']
 
 #outfile = 'eurocities.js'
 #latrng = [37,64]
@@ -59,7 +59,9 @@ with open(file) as json_file:
         thisCap = ((entry['iso2'] == 'US' or entry['iso2'] == 'CN' or entry['iso2'] == 'CA') and  entry['capital'] == 'admin') or entry['capital'] == 'primary'
         wrongContinent = entry['country'] in blacklist
         mustKeep = entry['country'] in whitelist or entry['admin_name'] in whitelist
-        if (mustKeep or (not wrongContinent and entry['lat'] < latrng[1] and entry['lat'] > latrng[0] and entry['lng'] < lonrng[1] and entry['lng'] > lonrng[0] and (thisPop >= pop or thisCap))):
+        inLat = entry['lat'] < latrng[1] and entry['lat'] > latrng[0]
+        inLon = (entry['lng'] < lonrng[1] and entry['lng'] > lonrng[0]) or ((entry['lng'] + 360) < lonrng[1] and (entry['lng'] + 360) > lonrng[0])
+        if (mustKeep or (not wrongContinent and inLat and inLon and (thisPop >= pop or thisCap))):
             filtered.append(entry)
             if (entry['country'] not in countries):
                 countries.append(entry['country'])
