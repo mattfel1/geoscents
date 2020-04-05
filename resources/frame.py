@@ -8,6 +8,13 @@ import re
 
 file = 'cities.js'
 
+# outfile = 'worldcities.js'
+# latrng = [-65, 77]
+# pop = 580000
+# lonrng = [-180, 180]
+# blacklist = []
+# whitelist = ['Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar', 'New Caledonia']
+
 #outfile = 'uscities.js'
 #latrng = [12,54]
 #pop = 100000
@@ -18,9 +25,9 @@ file = 'cities.js'
 outfile = 'oceaniacities.js'
 latrng = [-51,28]
 pop = 10000
-lonrng = [71,220]
-blacklist =  ['Thailand', 'Sri Lanka', 'India', 'China', 'Philippines', 'Vietnam', 'Cambodia', 'Laos', 'Hong Kong', 'Taiwan', 'Bangladesh', 'Burma', 'Nepal', 'Bhutan', 'Japan']
-whitelist = ['Cook Islands', 'Wallis And Futuna']
+lonrng = [92,252]
+blacklist =  ['Thailand', 'Mexico', 'United States', 'Sri Lanka', 'India', 'China', 'Philippines', 'Vietnam', 'Cambodia', 'Laos', 'Hong Kong', 'Taiwan', 'Bangladesh', 'Burma', 'Nepal', 'Bhutan', 'Japan']
+whitelist = ['Cook Islands', 'Wallis And Futuna', 'Honolulu', 'Hilo', 'Wailuku', 'Lihue', 'Easter Island', 'Tokelau']
 
 # outfile = 'asiacities.js'
 # latrng = [2,59]
@@ -36,12 +43,12 @@ whitelist = ['Cook Islands', 'Wallis And Futuna']
 # blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe']
 # whitelist = ['Falkland Islands (Islas Malvinas)', 'Galápagos', 'South Georgia And South Sandwich Islands']
 
-#outfile = 'eurocities.js'
-#latrng = [37,64]
-#pop = 100000
-#lonrng = [-36, 52]
-#blacklist = ['Azerbaijan', 'Iran', 'Armenia', 'Georgia', 'Kazakhstan', 'Iraq', 'Syria', 'Tunisia']
-#whitelist = ['Isle Of Man', 'Gibraltar']
+# outfile = 'eurocities.js'
+# latrng = [37,66]
+# pop = 100000
+# lonrng = [-36, 52]
+# blacklist = ['Azerbaijan', 'Iran', 'Armenia', 'Georgia', 'Kazakhstan', 'Iraq', 'Syria', 'Tunisia']
+# whitelist = ['Isle Of Man', 'Gibraltar', 'Shetland Islands', 'Torshavn', 'Azores']
 
 # outfile = 'africacities.js'
 # latrng = [-34,39]
@@ -57,16 +64,19 @@ with open(file) as json_file:
     for entry in data:
         thisPop = 0 if (entry['population'] == '') else int(entry['population'])
         thisCap = ((entry['iso2'] == 'US' or entry['iso2'] == 'CN' or entry['iso2'] == 'CA') and  entry['capital'] == 'admin') or entry['capital'] == 'primary'
-        wrongContinent = entry['country'] in blacklist
-        mustKeep = entry['country'] in whitelist or entry['admin_name'] in whitelist
+        mustRemove = entry['country'] in blacklist
+        mustKeep = entry['country'] in whitelist or entry['admin_name'] in whitelist or entry['city_ascii'] in whitelist
         inLat = entry['lat'] < latrng[1] and entry['lat'] > latrng[0]
         inLon = (entry['lng'] < lonrng[1] and entry['lng'] > lonrng[0]) or ((entry['lng'] + 360) < lonrng[1] and (entry['lng'] + 360) > lonrng[0])
-        if (mustKeep or (not wrongContinent and inLat and inLon and (thisPop >= pop or thisCap))):
+        if (mustKeep or (not mustRemove and inLat and inLon and (thisPop >= pop or thisCap))):
             filtered.append(entry)
             if (entry['country'] not in countries):
                 countries.append(entry['country'])
-    print(len(filtered))
+    print('%d entries' % len(filtered))
+    print('%d countries' % len(countries))
     print(countries)
+
+
     with open(outfile, 'w') as data_file:
         json.dump(filtered, data_file, indent=2)
 

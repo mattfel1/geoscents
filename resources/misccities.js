@@ -1020,9 +1020,21 @@ module.exports = {
       "lat": 45.920278,
       "lng": 63.342222,
       "country": "",
+      "iso2": "SU",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Vostok_1"
+    },
+    {
+      "city": " Sputnik 1 Launch Site",
+      "city_ascii": "",
+      "lat": 45.965,
+      "lng": 63.305,
+      "country": "",
+      "iso2": "SU",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Sputnik_1#Launch_vehicle_preparation_and_launch_site_selection"
     },
     {
       "city": "Vostok 1 (Yuri Gagarin) Landing Site",
@@ -1030,6 +1042,7 @@ module.exports = {
       "lat": 51.270682,
       "lng": 45.99727,
       "country": "",
+      "iso2": "SU",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Vostok_1"
@@ -3470,6 +3483,107 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Carcross_Desert"
     },
+    {
+      "city": "Earliest Know Usage of Nutmeg circa 1500 BCE",
+      "city_ascii": "",
+      "lat": -4.530444,
+      "lng": 129.773839,
+      "iso2": "ID",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Nutmeg#History"
+    },
+    {
+      "city": "Mount Scenery (Highest Point in the Kingdom of the Netherlands)",
+      "city_ascii": "",
+      "lat": 17.635,
+      "lng": -63.239167,
+      "iso2": "NL",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Mount_Scenery"
+    },
+    {
+      "city": "Ilulissat Icefjord",
+      "city_ascii": "",
+      "lat": 69.133333,
+      "lng": -49.5,
+      "iso2": "GL",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Ilulissat_Icefjord"
+    },
+    {
+      "city": "Timbuktu",
+      "city_ascii": "Timbuktu",
+      "lat": 16.7666,
+      "lng": -3.0166,
+      "country": "Mali",
+      "iso2": "ML",
+      "iso3": "MLI",
+      "admin_name": "Tombouctou",
+      "capital": "admin",
+      "population": 68872,
+      "id": 1466595315
+    },
+    // {
+    //   "city": "Virgin Komi Forests",
+    //   "city_ascii": "",
+    //   "lat": 63.625833,
+    //   "lng": 58.9525,
+    //   "iso2": "RU",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": "https://en.wikipedia.org/wiki/Virgin_Komi_Forests"
+    // },
+    // {
+    //   "city": "Klyuchevskaya Sopka (Ключевская сопка) Active Stratovolcano",
+    //   "city_ascii": "",
+    //   "lat": 56.056044,
+    //   "lng": 160.644089,
+    //   "iso2": "RU",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": "https://en.wikipedia.org/wiki/Klyuchevskaya_Sopka"
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
     // {
     //   "city": "",
     //   "city_ascii": "",

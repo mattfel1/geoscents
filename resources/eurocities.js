@@ -989,6 +989,19 @@ module.exports = {
     "id": 1756374318
   },
   {
+    "city": "Reykjav\u00edk",
+    "city_ascii": "Reykjavik",
+    "lat": 64.15,
+    "lng": -21.95,
+    "country": "Iceland",
+    "iso2": "IS",
+    "iso3": "ISL",
+    "admin_name": "H\u00f6fu\u00f0borgarsv\u00e6\u00f0i",
+    "capital": "primary",
+    "population": 166212,
+    "id": 1352327190
+  },
+  {
     "city": "Podgorica",
     "city_ascii": "Podgorica",
     "lat": 42.466,
@@ -2729,6 +2742,19 @@ module.exports = {
     "capital": "minor",
     "population": 357468,
     "id": 1724910555
+  },
+  {
+    "city": "Arkhangel\u2019sk",
+    "city_ascii": "Arkhangel'sk",
+    "lat": 64.575,
+    "lng": 40.545,
+    "country": "Russia",
+    "iso2": "RU",
+    "iso3": "RUS",
+    "admin_name": "Arkhangel\u2019skaya Oblast\u2019",
+    "capital": "admin",
+    "population": 356051,
+    "id": 1643797198
   },
   {
     "city": "Vinnytsya",
@@ -4668,6 +4694,19 @@ module.exports = {
     "id": 1100365645
   },
   {
+    "city": "Severodvinsk",
+    "city_ascii": "Severodvinsk",
+    "lat": 64.57,
+    "lng": 39.83,
+    "country": "Russia",
+    "iso2": "RU",
+    "iso3": "RUS",
+    "admin_name": "Arkhangel\u2019skaya Oblast\u2019",
+    "capital": "",
+    "population": 194292,
+    "id": 1643427671
+  },
+  {
     "city": "Oxford",
     "city_ascii": "Oxford",
     "lat": 51.7704,
@@ -5953,6 +5992,19 @@ module.exports = {
     "capital": "minor",
     "population": 137751,
     "id": 1276991229
+  },
+  {
+    "city": "Oulu",
+    "city_ascii": "Oulu",
+    "lat": 65,
+    "lng": 25.47,
+    "country": "Finland",
+    "iso2": "FI",
+    "iso3": "FIN",
+    "admin_name": "Pohjois-Pohjanmaa",
+    "capital": "admin",
+    "population": 136752,
+    "id": 1246093273
   },
   {
     "city": "Baia Mare",
@@ -7294,6 +7346,32 @@ module.exports = {
     "id": 1688081964
   },
   {
+    "city": "Ponta Delgada",
+    "city_ascii": "Ponta Delgada",
+    "lat": 37.7483,
+    "lng": -25.6666,
+    "country": "Portugal",
+    "iso2": "PT",
+    "iso3": "PRT",
+    "admin_name": "Azores",
+    "capital": "admin",
+    "population": 61526,
+    "id": 1620456537
+  },
+  {
+    "city": "Lerwick",
+    "city_ascii": "Lerwick",
+    "lat": 60.15,
+    "lng": -1.15,
+    "country": "United Kingdom",
+    "iso2": "GB",
+    "iso3": "GBR",
+    "admin_name": "Shetland Islands",
+    "capital": "admin",
+    "population": 6594,
+    "id": 1826896340
+  },
+  {
     "city": "Douglas",
     "city_ascii": "Douglas",
     "lat": 54.1504,
@@ -7305,5 +7383,44 @@ module.exports = {
     "capital": "",
     "population": 35854,
     "id": 1833688345
+  },
+  {
+    "city": "T\u00f3rshavn",
+    "city_ascii": "Torshavn",
+    "lat": 62.03,
+    "lng": -6.82,
+    "country": "Faroe Islands",
+    "iso2": "FO",
+    "iso3": "FRO",
+    "admin_name": "",
+    "capital": "",
+    "population": 14398,
+    "id": 1234904517
+  },
+  {
+    "city": "Angra do Hero\u00edsmo",
+    "city_ascii": "Angra do Heroismo",
+    "lat": 38.6504,
+    "lng": -27.2167,
+    "country": "Portugal",
+    "iso2": "PT",
+    "iso3": "PRT",
+    "admin_name": "Azores",
+    "capital": "",
+    "population": 12045,
+    "id": 1620152939
+  },
+  {
+    "city": "Horta",
+    "city_ascii": "Horta",
+    "lat": 38.5347,
+    "lng": -28.6448,
+    "country": "Portugal",
+    "iso2": "PT",
+    "iso3": "PRT",
+    "admin_name": "Azores",
+    "capital": "",
+    "population": 6611,
+    "id": 1620589121
   }
-]};
+]}

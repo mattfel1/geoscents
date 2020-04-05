@@ -326,19 +326,6 @@ module.exports = {
     "id": 1242615095
   },
   {
-    "city": "Male",
-    "city_ascii": "Male",
-    "lat": 4.1667,
-    "lng": 73.4999,
-    "country": "Maldives",
-    "iso2": "MV",
-    "iso3": "MDV",
-    "admin_name": "Maale",
-    "capital": "primary",
-    "population": 112927,
-    "id": 1462441685
-  },
-  {
     "city": "Honiara",
     "city_ascii": "Honiara",
     "lat": -9.438,
@@ -2120,19 +2107,6 @@ module.exports = {
     "id": 1554148942
   },
   {
-    "city": "Waipahu",
-    "city_ascii": "Waipahu",
-    "lat": 21.3858,
-    "lng": -158.0103,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 41715,
-    "id": 1840023258
-  },
-  {
     "city": "Goroka",
     "city_ascii": "Goroka",
     "lat": -6.0833,
@@ -2185,19 +2159,6 @@ module.exports = {
     "id": 1554359840
   },
   {
-    "city": "Kaneohe",
-    "city_ascii": "Kaneohe",
-    "lat": 21.4062,
-    "lng": -157.7904,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 34123,
-    "id": 1840029498
-  },
-  {
     "city": "Blenheim",
     "city_ascii": "Blenheim",
     "lat": -41.5135,
@@ -2209,19 +2170,6 @@ module.exports = {
     "capital": "admin",
     "population": 30300,
     "id": 1554001426
-  },
-  {
-    "city": "Mililani Town",
-    "city_ascii": "Mililani Town",
-    "lat": 21.4465,
-    "lng": -158.0147,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 28343,
-    "id": 1840023249
   },
   {
     "city": "Popondetta",
@@ -2263,45 +2211,6 @@ module.exports = {
     "id": 1598405100
   },
   {
-    "city": "Ewa Gentry",
-    "city_ascii": "Ewa Gentry",
-    "lat": 21.3344,
-    "lng": -158.0262,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 24181,
-    "id": 1840029577
-  },
-  {
-    "city": "Makakilo",
-    "city_ascii": "Makakilo",
-    "lat": 21.3591,
-    "lng": -158.0813,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 20615,
-    "id": 1840137080
-  },
-  {
-    "city": "Schofield Barracks",
-    "city_ascii": "Schofield Barracks",
-    "lat": 21.4936,
-    "lng": -158.0617,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 20229,
-    "id": 1840075052
-  },
-  {
     "city": "Kavieng",
     "city_ascii": "Kavieng",
     "lat": -2.5813,
@@ -2341,19 +2250,6 @@ module.exports = {
     "id": 1554253729
   },
   {
-    "city": "Wahiawa",
-    "city_ascii": "Wahiawa",
-    "lat": 21.5004,
-    "lng": -158.0198,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 17555,
-    "id": 1840029550
-  },
-  {
     "city": "Daru",
     "city_ascii": "Daru",
     "lat": -9.1092,
@@ -2365,45 +2261,6 @@ module.exports = {
     "capital": "admin",
     "population": 15214,
     "id": 1598923764
-  },
-  {
-    "city": "Ewa Beach",
-    "city_ascii": "Ewa Beach",
-    "lat": 21.3181,
-    "lng": -158.0073,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 15047,
-    "id": 1840029470
-  },
-  {
-    "city": "Halawa",
-    "city_ascii": "Halawa",
-    "lat": 21.3754,
-    "lng": -157.9185,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 14335,
-    "id": 1840029579
-  },
-  {
-    "city": "Ocean Pointe",
-    "city_ascii": "Ocean Pointe",
-    "lat": 21.3145,
-    "lng": -158.0289,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 13579,
-    "id": 1840039242
   },
   {
     "city": "Luganville",
@@ -2419,19 +2276,6 @@ module.exports = {
     "id": 1548569362
   },
   {
-    "city": "Waimalu",
-    "city_ascii": "Waimalu",
-    "lat": 21.3913,
-    "lng": -157.9345,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 13158,
-    "id": 1840029588
-  },
-  {
     "city": "Alotau",
     "city_ascii": "Alotau",
     "lat": -10.3021,
@@ -2445,19 +2289,6 @@ module.exports = {
     "id": 1598284215
   },
   {
-    "city": "Waipio",
-    "city_ascii": "Waipio",
-    "lat": 21.4143,
-    "lng": -157.9966,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 11607,
-    "id": 1840029589
-  },
-  {
     "city": "Vanimo",
     "city_ascii": "Vanimo",
     "lat": -2.69,
@@ -2469,19 +2300,6 @@ module.exports = {
     "capital": "admin",
     "population": 11204,
     "id": 1598892363
-  },
-  {
-    "city": "Maili",
-    "city_ascii": "Maili",
-    "lat": 21.4134,
-    "lng": -158.1702,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 10190,
-    "id": 1840029522
   },
   {
     "city": "Greymouth",
@@ -2874,19 +2692,6 @@ module.exports = {
     "id": 1036051032
   },
   {
-    "city": "East Honolulu",
-    "city_ascii": "East Honolulu",
-    "lat": 21.2975,
-    "lng": -157.7211,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 47868,
-    "id": 1840039181
-  },
-  {
     "city": "Mildura",
     "city_ascii": "Mildura",
     "lat": -34.185,
@@ -2937,19 +2742,6 @@ module.exports = {
     "capital": "minor",
     "population": 47110,
     "id": 1360727615
-  },
-  {
-    "city": "Pearl City",
-    "city_ascii": "Pearl City",
-    "lat": 21.4031,
-    "lng": -157.9566,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 46259,
-    "id": 1840023251
   },
   {
     "city": "Hilo",
@@ -3093,19 +2885,6 @@ module.exports = {
     "capital": "",
     "population": 38551,
     "id": 1036233388
-  },
-  {
-    "city": "Kailua",
-    "city_ascii": "Kailua",
-    "lat": 21.392,
-    "lng": -157.7396,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 38088,
-    "id": 1840023244
   },
   {
     "city": "Kalgoorlie",
@@ -3262,19 +3041,6 @@ module.exports = {
     "capital": "",
     "population": 31430,
     "id": 1036024174
-  },
-  {
-    "city": "Kahului",
-    "city_ascii": "Kahului",
-    "lat": 20.8715,
-    "lng": -156.4603,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 30706,
-    "id": 1840023232
   },
   {
     "city": "Gladstone",
@@ -3537,19 +3303,6 @@ module.exports = {
     "id": 1036960753
   },
   {
-    "city": "Kihei",
-    "city_ascii": "Kihei",
-    "lat": 20.7653,
-    "lng": -156.4454,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 22220,
-    "id": 1840029507
-  },
-  {
     "city": "Katoomba",
     "city_ascii": "Katoomba",
     "lat": -33.7069,
@@ -3561,19 +3314,6 @@ module.exports = {
     "capital": "",
     "population": 22076,
     "id": 1036674004
-  },
-  {
-    "city": "Kapolei",
-    "city_ascii": "Kapolei",
-    "lat": 21.3403,
-    "lng": -158.0665,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 21086,
-    "id": 1840025211
   },
   {
     "city": "Goulburn",
@@ -3600,19 +3340,6 @@ module.exports = {
     "capital": "",
     "population": 20678,
     "id": 1036205623
-  },
-  {
-    "city": "Mililani Mauka",
-    "city_ascii": "Mililani Mauka",
-    "lat": 21.4756,
-    "lng": -157.9947,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 20393,
-    "id": 1840039224
   },
   {
     "city": "Masterton",
@@ -3875,19 +3602,6 @@ module.exports = {
     "id": 1554000848
   },
   {
-    "city": "Royal Kunia",
-    "city_ascii": "Royal Kunia",
-    "lat": 21.4053,
-    "lng": -158.0318,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 14396,
-    "id": 1840137108
-  },
-  {
     "city": "Kingston",
     "city_ascii": "Kingston",
     "lat": -42.9911,
@@ -3992,19 +3706,6 @@ module.exports = {
     "id": 1036269345
   },
   {
-    "city": "Waianae",
-    "city_ascii": "Waianae",
-    "lat": 21.4569,
-    "lng": -158.1759,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 13636,
-    "id": 1840029552
-  },
-  {
     "city": "Port Lincoln",
     "city_ascii": "Port Lincoln",
     "lat": -34.7332,
@@ -4029,19 +3730,6 @@ module.exports = {
     "capital": "",
     "population": 13350,
     "id": 1554951529
-  },
-  {
-    "city": "Lahaina",
-    "city_ascii": "Lahaina",
-    "lat": 20.8848,
-    "lng": -156.6618,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 13223,
-    "id": 1840023234
   },
   {
     "city": "Broome",
@@ -4096,19 +3784,6 @@ module.exports = {
     "id": 1036412726
   },
   {
-    "city": "Waimea",
-    "city_ascii": "Waimea",
-    "lat": 20.0124,
-    "lng": -155.6378,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 12064,
-    "id": 1840137122
-  },
-  {
     "city": "Kempsey",
     "city_ascii": "Kempsey",
     "lat": -31.0874,
@@ -4133,19 +3808,6 @@ module.exports = {
     "capital": "",
     "population": 11808,
     "id": 1036439594
-  },
-  {
-    "city": "Nanakuli",
-    "city_ascii": "Nanakuli",
-    "lat": 21.3892,
-    "lng": -158.1445,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 11757,
-    "id": 1840029531
   },
   {
     "city": "Gympie",
@@ -4174,19 +3836,6 @@ module.exports = {
     "id": 1036253543
   },
   {
-    "city": "Hawaiian Paradise Park",
-    "city_ascii": "Hawaiian Paradise Park",
-    "lat": 19.5828,
-    "lng": -154.9693,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 11564,
-    "id": 1840029582
-  },
-  {
     "city": "Koror",
     "city_ascii": "Koror",
     "lat": 7.3452,
@@ -4198,19 +3847,6 @@ module.exports = {
     "capital": "",
     "population": 11200,
     "id": 1585174728
-  },
-  {
-    "city": "Kaneohe Station",
-    "city_ascii": "Kaneohe Station",
-    "lat": 21.4451,
-    "lng": -157.7515,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 11198,
-    "id": 1840075025
   },
   {
     "city": "Parkes",
@@ -4237,19 +3873,6 @@ module.exports = {
     "capital": "",
     "population": 11128,
     "id": 1036591538
-  },
-  {
-    "city": "Kalaoa",
-    "city_ascii": "Kalaoa",
-    "lat": 19.7369,
-    "lng": -156.0122,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 11107,
-    "id": 1840029493
   },
   {
     "city": "Hawera",
@@ -4315,19 +3938,6 @@ module.exports = {
     "capital": "",
     "population": 10557,
     "id": 1036272805
-  },
-  {
-    "city": "Kapaa",
-    "city_ascii": "Kapaa",
-    "lat": 22.091,
-    "lng": -159.352,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "Hawaii",
-    "capital": "",
-    "population": 10505,
-    "id": 1840029499
   },
   {
     "city": "Kiama",
@@ -4408,6 +4018,19 @@ module.exports = {
     "id": 1036916453
   },
   {
+    "city": "Lihue",
+    "city_ascii": "Lihue",
+    "lat": 21.9728,
+    "lng": -159.3541,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "",
+    "population": 7064,
+    "id": 1840029519
+  },
+  {
     "city": "Avarua",
     "city_ascii": "Avarua",
     "lat": -21.25,
@@ -4419,5 +4042,90 @@ module.exports = {
     "capital": "",
     "population": 5445,
     "id": 1184217570
+  },
+  {
+    "city": "Hanga Roa",
+    "city_ascii": "Hanga Roa",
+    "lat": -27.133333,
+    "lng": -109.416667,
+    "country": "Chile",
+    "iso2": "CL",
+    "iso3": "CHL",
+    "admin_name": "Easter Island",
+    "capital": "admin",
+    "population": 3304,
+    "id": 9999999999
+  },
+  {
+    "city": "Adamstown",
+    "city_ascii": "Adamstown",
+    "lat": -25.066667,
+    "lng": -130.1,
+    "country": "Pitcairn Islands",
+    "iso2": "PN",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 50,
+    "id": 9999999998
+  },
+  {
+    "city": "Alofi",
+    "city_ascii": "Alofi",
+    "lat": -19.054,
+    "lng": -169.92,
+    "country": "Niue",
+    "iso2": "NU",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 50,
+    "id": 9999999997
+  },
+  {
+    "city": "Flying Fish Cove",
+    "city_ascii": "Flying Fish Cove",
+    "lat": -10.421667,
+    "lng": 105.678056,
+    "country": "Christmas Island",
+    "iso2": "CX",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 1600,
+    "id": 9999999996
+  },
+  {
+    "city": "Kingston",
+    "city_ascii": "Kingston",
+    "lat": -29.05,
+    "lng": 167.966667,
+    "country": "Norfold Island",
+    "iso2": "NF",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 1748,
+    "id": 9999999998
+  },
+  {
+    "city": "West Island",
+    "city_ascii": "West Island",
+    "lat": -12.186944,
+    "lng": 96.828333,
+    "country": "Cocos (Keeling) Islands",
+    "iso2": "CC",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 120,
+    "id": 9999999998
+  },
+  {
+    "city": "Atafu",
+    "city_ascii": "Atafu",
+    "lat": -8.551667,
+    "lng": -172.500833,
+    "country": "Tokelau",
+    "iso2": "TK",
+    "admin_name": "",
+    "capital": "",
+    "population": 541,
+    "id": 9999999998
   }
 ]}

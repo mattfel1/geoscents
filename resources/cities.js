@@ -139199,7 +139199,7 @@
     "iso2": "GL",
     "iso3": "GRL",
     "admin_name": "Sermersooq",
-    "capital": "",
+    "capital": "primary",
     "population": 14798,
     "id": 1304028354
   },
@@ -201407,5 +201407,90 @@
     "capital": "",
     "population": 0,
     "id": 1124019423
+  },
+  {
+    "city": "Hanga Roa",
+    "city_ascii": "Hanga Roa",
+    "lat": -27.133333,
+    "lng": -109.416667,
+    "country": "Chile",
+    "iso2": "CL",
+    "iso3": "CHL",
+    "admin_name": "Easter Island",
+    "capital": "admin",
+    "population": 3304,
+    "id": 9999999999
+  },
+  {
+    "city": "Adamstown",
+    "city_ascii": "Adamstown",
+    "lat": -25.066667,
+    "lng": -130.1,
+    "country": "Pitcairn Islands",
+    "iso2": "PN",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 50,
+    "id": 9999999998
+  },
+  {
+    "city": "Alofi",
+    "city_ascii": "Alofi",
+    "lat": -19.054,
+    "lng": -169.92,
+    "country": "Niue",
+    "iso2": "NU",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 50,
+    "id": 9999999997
+  },
+  {
+    "city": "Flying Fish Cove",
+    "city_ascii": "Flying Fish Cove",
+    "lat": -10.421667,
+    "lng": 105.678056,
+    "country": "Christmas Island",
+    "iso2": "CX",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 1600,
+    "id": 9999999996
+  },
+  {
+    "city": "Kingston",
+    "city_ascii": "Kingston",
+    "lat": -29.05,
+    "lng": 167.966667,
+    "country": "Norfold Island",
+    "iso2": "NF",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 1748,
+    "id": 9999999998
+  },
+  {
+    "city": "West Island",
+    "city_ascii": "West Island",
+    "lat": -12.186944,
+    "lng": 96.828333,
+    "country": "Cocos (Keeling) Islands",
+    "iso2": "CC",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 120,
+    "id": 9999999998
+  },
+  {
+    "city": "Atafu",
+    "city_ascii": "Atafu",
+    "lat": -8.551667,
+    "lng": -172.500833,
+    "country": "Tokelau",
+    "iso2": "TK",
+    "admin_name": "",
+    "capital": "",
+    "population": 541,
+    "id": 9999999998
   }
 ]
