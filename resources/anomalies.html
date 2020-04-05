@@ -62,8 +62,8 @@ Your score is based on your distance to the city and how quickly you clicked.
 The maximum score you can get per round is <b>600</b>, so the max score for an 11 round game is <b>6600</b>.  
 Because the game uses Mercator projections with the latitude of true scale set to the equator (even on the continent maps), this means that your distance in km is more forgiving as you move away from the equator.
 
-The equations used to calculate score are:<br><br>
-timeComponent = min(1, 1 - 0.07843 * (t - 1.5))<br>
+The equations used to calculate score are <a href="https://github.com/mattfel1/geoscents/blob/d66b57b7a429370c7af9725d32c7610894c7176e/server/geography.js#L194-L210">here</a>.  They are roughly:<br><br>
+timeComponent = min(1, 1 - 0.07843 * (t - 1.7))<br>
 distComponent = min(600, e^(-sf * (sf*dist)^2 / 600000)*605)<br>
 score = timeComponent * distComponent<br><br>
 

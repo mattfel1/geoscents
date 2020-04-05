@@ -197,7 +197,7 @@ const score = (room, geoDist, mercDist, timeBonus) => {
     // return distGaussian * timeLogistic;
     // Geo distance based score
     const minTimePortion = 1/3;
-    const timeCushion = 1.5;
+    const timeCushion = 1.7;
     const slope = (1 - minTimePortion) / (timeCushion - 10);
     const invTime = CONSTANTS.GUESS_DURATION - timeBonus;
     const timeLine = slope * (invTime - timeCushion) + 1;
