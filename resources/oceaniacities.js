@@ -716,19 +716,6 @@ module.exports = {
     "id": 1458462262
   },
   {
-    "city": "Macau",
-    "city_ascii": "Macau",
-    "lat": 22.203,
-    "lng": 113.545,
-    "country": "Macau",
-    "iso2": "MO",
-    "iso3": "MAC",
-    "admin_name": "",
-    "capital": "",
-    "population": 568700,
-    "id": 1446227359
-  },
-  {
     "city": "Binjai",
     "city_ascii": "Binjai",
     "lat": 3.6204,
