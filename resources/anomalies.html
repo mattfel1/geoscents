@@ -1,9 +1,25 @@
 <!DOCTYPE html>
 <html>
-<div id='toc'></div>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
 <body>
-<h1>Geopolitical Anomalies</h1>
-<p>This page discusses some of the political anomalies present in the game.  This discussion is the result of valuable player feedback!</p>
+
+<div class="container">
+  <h2>Geoscents Game Information</h2>
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Geopolitical Anomalies</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <div class="panel-body">
+          <p>This page discusses some of the political anomalies present in the game.  This discussion is the result of valuable player feedback!</p>
 
 <h3>Czechia v.s. Czech Republic</h3>
 In 2016, the United Nations officially recognized <a href="https://en.wikipedia.org/wiki/Name_of_the_Czech_Republic">Czechia</a> as the shortened version of the name for this country, and it has been published to UNTERM and UNGEGN databases.  This game uses the cities database found at <a href="https://simplemaps.com/data/world-cities">simplemaps</a>, which also uses the name Czechia.  
@@ -21,8 +37,17 @@ It is a space launch facility that was leased by the Kazakh government to Russia
 <a href="https://en.wikipedia.org/wiki/Kosovo">Kosovo</a> is shown as a regular country in this map.  
 According to the <a href="https://www.naturalearthdata.com/features/">Natural Earth Data features database</a>, Kosovo is a real country even though about 49% of UN nations recognize it.
 
-
-<h1>Game FAQ</h1>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Game FAQ</a>
+        </h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse">
+        <div class="panel-body">
 
 <h3>City Selection</h3>
 Cities are selected from the <a href="https://simplemaps.com/data/world-cities">simplemaps</a> database.  For the most part, each game of 11 rounds should only include one city per country.
@@ -47,7 +72,7 @@ dist is the distance you are to the city, in km.<br>
 t is how many seconds elapsed before you clicked (i.e. 10 minus time remaining in round).<br><br>
 
 These plots show how the two score components work for the World map (sf = 1).<br>
-
+<!-- 
 <table style="width:100%">
   <tr>
     <th>timeComponent</th>
@@ -57,7 +82,12 @@ These plots show how the two score components work for the World map (sf = 1).<b
     <td><img src="time.png" width="800"></td>
     <td><img src="dist.png" width="800"></td>
   </tr>
-</table>
+</table> -->
+Time score:
+<img src="time.png" width="800">
+<br>
+Dist score:
+<img src="dist.png" width="800">
 
 <h3>Record Keeping</h3>
 The game resets every day at midnight GMT.  Sorry if you are playing a game during the reboot!  You should see plenty of warnings in the minutes leading up to the game reset.<br>
@@ -69,8 +99,17 @@ Sometimes the Weekly records are better than the Monthly records.  This is becau
 59 0 1 1 * rm /scratch/*year*<br><br>
 
 Therefore, it is possible for the monthly records to get reset on the first of the month, but the weekly records will not get reset until the first day of the week.
-
-<h1>Chat Box Commands</h1>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Chat Box Commands</a>
+        </h4>
+      </div>
+      <div id="collapse3" class="panel-collapse collapse">
+        <div class="panel-body">
 <ul>
   <li>/feedback : Leave feedback about the game or really anything.  Your message goes directly to my email inbox :)</li>
   <li>/private : Prevent game from logging your IP address.  I use this IP address to help make the fun plots at http://geoscents.net/plots/index.html, but you may mask yourself if you really want.
@@ -79,17 +118,46 @@ Therefore, it is possible for the monthly records to get reset on the first of t
   <li>/whisper "[player name]" : Send message directly to player</li>
   <li>NOT YET IMPLEMENTED - /challenge "[player name]" "[map]" : Challenge player to a 1v1 on a particular map</li>
 </ul> 
+        </div>
+      </div>
+    </div>
 
-<h1>Privacy Policy</h1>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Privacy Policy</a>
+        </h4>
+      </div>
+      <div id="collapse4" class="panel-collapse collapse">
+        <div class="panel-body">
 We do not use cookies to track you after you leave this page.
-For educational purposes, we store your public IP address and your game history securely on our server. The IP addresses are replaced with country and region names, and then this data is published to <a href="http://geoscents.net/plots/index.html">http://geoscents.net/visualization/index.html</a>.
+For educational purposes, we store your public IP address and your game history securely on our server. The IP addresses are replaced with country and region names, and then this data is published to <a href="http://geoscents.net/plots/index.html">http://geoscents.net/plots/index.html</a>.
 This data is not used for any commercial purposes.
 You can turn off this behavior with the command /private, and can turn it back on with the command /public
 
-<h1>References</h1>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">References</a>
+        </h4>
+      </div>
+      <div id="collapse5" class="panel-collapse collapse">
+        <div class="panel-body">
 Terrain map rendering provided by by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>. Satellite map rendering provided by Google Tiles.  All maps generated using python cartopy 0.17.0.  <br><br>
 This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>. <br><br>
 The jingle at the start of the game was composed and recorded by Marc Ryan Feldman.
 
+        </div>
+      </div>
+    </div>
+  </div>
+  
 </body>
 </html>
+
+
+
+
