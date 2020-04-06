@@ -3250,7 +3250,7 @@ module.exports = {
       "wiki": "https://www.mnn.com/earth-matters/climate-weather/photos/10-of-the-hottest-places-on-earth/el-azizia-libya"
     },
     {
-      "city": "'Coldest recorded temperature outside Antarctica' (−67.6 °C (−89.7 °F measured -89.7°F / -67.6°C in 1933)",
+      "city": "'Coldest recorded temperature outside Antarctica' (measured -89.7°F / -67.6°C in 1933)",
       "city_ascii": "",
       "lat": 63.460833,
       "lng": 142.785833,
