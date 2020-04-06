@@ -138,9 +138,9 @@ const stringifyTargetAscii = (target) => {
 
 // Allow this country to be repeated if the state is unique
 const requireUniqueAdmin = (room, target) => {
-    if (room === CONSTANTS.US && (target['country'] === 'USA' || target['country'] === 'Canada')) {return true}
+    if (room === CONSTANTS.US && (target['country'] === 'United States' || target['country'] === 'Canada')) {return true}
     else if (room === CONSTANTS.ASIA && (target['country'] === 'China' || target['country'] === 'India')) {return true}
-    else if (room === CONSTANTS.OCEANIA && target['country'] === 'Australia') {return true}
+    // else if (room === CONSTANTS.OCEANIA && target['country'] === 'Australia') {return true}
     else return false
 };
 
