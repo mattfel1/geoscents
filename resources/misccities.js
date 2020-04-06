@@ -2652,7 +2652,7 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/Christopher_C._Kraft_Jr._Mission_Control_Center"
     },
     {
-      "city": "Battle of Cannae",
+      "city": "Hannibal Defeats the Romans at the Battle of Cannae",
       "city_ascii": "",
       "lat": 41.306389,
       "lng": 16.1325,
@@ -2662,7 +2662,7 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_Cannae"
     },
     {
-      "city": "Battle of the Teutoburg Forest",
+      "city": "Arminius Defeats the Romans at the Battle of the Teutoburg Forest",
       "city_ascii": "",
       "lat": 52.408056,
       "lng": 8.129444,
@@ -2672,7 +2672,28 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_the_Teutoburg_Forest"
     },
     {
-      "city": "Battle of the Trebia",
+      "city": "Scipio Africanus Defeats Hannibal at the Battle of Zama",
+      "city_ascii": "",
+      "lat": 36.298889,
+      "lng": 9.449167,
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Battle_of_Zama"
+    },
+    {
+      "city": "1961 Goldsboro B-52 Crash, Nuclear Bombs Accidentally Dropped on US Soil",
+      "city_ascii": "",
+      "lat": 35.493041,
+      "lng": -77.859262,
+      "country": "",
+      "iso2": "US",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/1961_Goldsboro_B-52_crash"
+    },
+    {
+      "city": "Hannibal Defeats the Romans at the Battle of the Trebia",
       "city_ascii": "",
       "lat": 45.05,
       "lng": 9.6,
@@ -2682,7 +2703,7 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_the_Trebia"
     },
     {
-      "city": "Battle of Lake Trasimene",
+      "city": "Hannibal Defeats the Romans at the Battle of Lake Trasimene",
       "city_ascii": "",
       "lat": 43.139444,
       "lng": 12.1075,
