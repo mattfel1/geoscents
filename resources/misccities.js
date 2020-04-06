@@ -3550,39 +3550,39 @@ module.exports = {
       "population": 68872,
       "id": 1466595315
     },
-    // {
-    //   "city": "Virgin Komi Forests",
-    //   "city_ascii": "",
-    //   "lat": 63.625833,
-    //   "lng": 58.9525,
-    //   "iso2": "RU",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": "https://en.wikipedia.org/wiki/Virgin_Komi_Forests"
-    // },
-    // {
-    //   "city": "Klyuchevskaya Sopka (Ключевская сопка) Active Stratovolcano",
-    //   "city_ascii": "",
-    //   "lat": 56.056044,
-    //   "lng": 160.644089,
-    //   "iso2": "RU",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": "https://en.wikipedia.org/wiki/Klyuchevskaya_Sopka"
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Virgin Komi Forests",
+      "city_ascii": "",
+      "lat": 63.625833,
+      "lng": 58.9525,
+      "iso2": "RU",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Virgin_Komi_Forests"
+    },
+    {
+      "city": "Klyuchevskaya Sopka (Ключевская сопка) Active Stratovolcano",
+      "city_ascii": "",
+      "lat": 56.056044,
+      "lng": 160.644089,
+      "iso2": "RU",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Klyuchevskaya_Sopka"
+    },
+    {
+      "city": "Discovery Site of Oldest Stone Tools Ever Found (Lomekwi 3 Dig Site)",
+      "city_ascii": "",
+      "lat": 3.910833,
+      "lng": 35.850278,
+      "iso2": "KE",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Lomekwi"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
