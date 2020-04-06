@@ -952,7 +952,7 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/Assassination_of_Yitzhak_Rabin"
     },
     {
-      "city": "Battle of Isandlwana",
+      "city": "Zulu Kingdom Defeats the British Empire at the Battle of Isandlwana",
       "city_ascii": "",
       "lat": -28.351944,
       "lng": 30.651667,
