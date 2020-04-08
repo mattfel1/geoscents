@@ -34,6 +34,18 @@ $(document).ready(function(){
     const popup = new Popup(socket);
     popup.showPopup();
 
+    /**** Challenge *****/
+    socket.on('challenge request', (src, dst, mapName, roomId) => {
+        if (socket.id == src) {
+            const challenge = new Challenge(src, dst, mapName, roomId);
+            challenge.showPopup("")
+        } else if (socket.id == dst) {
+            const challenge = new Challenge(src, dst, mapName, roomId);
+            challenge.showPopup("")
+        }
+    });
+
+
     /**** Scoreboard *****/
     const scoreboard = new Scoreboard(socket);
     socket.on('clear scores', () => {scoreboard.clearScores()});

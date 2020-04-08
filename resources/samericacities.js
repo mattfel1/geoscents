@@ -1,5 +1,4 @@
-module.exports = {
-  CITIES: [
+module.exports = { CITIES: [
   {
     "city": "S\u00e3o Paulo",
     "city_ascii": "Sao Paulo",
@@ -6200,5 +6199,30 @@ module.exports = {
     "capital": "",
     "population": 99,
     "id": 1239048837
+  },
+  {
+    "city": "Hanga Roa",
+    "city_ascii": "Hanga Roa",
+    "lat": -27.133333,
+    "lng": -109.416667,
+    "country": "Chile",
+    "iso2": "CL",
+    "iso3": "CHL",
+    "admin_name": "Easter Island",
+    "capital": "admin",
+    "population": 3304,
+    "id": 9999999999
+  },
+  {
+    "city": "Adamstown",
+    "city_ascii": "Adamstown",
+    "lat": -25.066667,
+    "lng": -130.1,
+    "country": "Pitcairn Islands",
+    "iso2": "PN",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 50,
+    "id": 9999999998
   }
 ]}

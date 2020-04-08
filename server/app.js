@@ -76,7 +76,7 @@ server.listen(PORT, () => {
 });
 
 // Game state info
-const rooms = {
+var rooms = {
     'World': new Room(CONSTANTS.WORLD),
     'N. America': new Room(CONSTANTS.US),
     'S. America': new Room(CONSTANTS.SAMERICA),
@@ -88,6 +88,7 @@ const rooms = {
     'Lobby': new Room(CONSTANTS.LOBBY)
 };
 var playerRooms = new Map();
+var privateRoomCount = 0;
 
 const ABOUT_MESSAGE = '[ <b>ABOUT</b> ] <a href="http://geoscents.net/resources/anomalies.html" target="_blank">Click here</a> for info about geopolitical anomalies, details about the game, the privacy policy, and other info!<br>';
 const WELCOME_MESSAGE1 = '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
@@ -182,7 +183,8 @@ io.on('connection', (socket) => {
         if (playerRooms.has(socket.id)) {
           const room = playerRooms.get(socket.id);
           helpers.log("Player " +  socket.handshake.address + " switched to map style " + style);
-          io.sockets.emit('render map', socket.id, style, room.room);          
+          io.sockets.emit('render map', socket.id, style, room.room);
+          room.redrawMap(socket);
         } else {
           helpers.log("Player " + socket.handshake.address + " tried to switch maps without being in a room!")
         }
@@ -301,6 +303,8 @@ io.on('connection', (socket) => {
                     room.whisperMessage(socket, "<i>Please specify one player to challenge, using quotes (\"\")</i><br>",() => {});
                   } else if (map == null || map.length != 1) {
                     room.whisperMessage(socket, "<i>Please specify map to play on, using square brackets.  Choose from [World], [Trivia], [Europe], [N. America], [S. America], [Oceania], [Africa], or [Asia].</i><br>",() => {});
+                  } else if (dst[0].replace(/"/g,"") == playerName) {
+                    room.whisperMessage(socket, "<i>You cannot challenge yourself!</i><br>",() => {});
                   } else {
                     let dstPlayer = dst[0].replace(/"/g,"");
                     const mapName = map[0];
@@ -308,13 +312,15 @@ io.on('connection', (socket) => {
                     if (dstSocket != null) {
                       room.whisperMessage(socket, "[ " + playerRoom + " <b><font color='" + playerColor + "'>" + playerName + "</font></b> ]: You have challenged "+ dstPlayer + " to " + mapName + "!<br>", cb);
                       room.whisperMessage(dstSocket, "[ " + playerRoom + " <b><font color='" + playerColor + "'>" + playerName + "</font></b> ]: I challenge you to " + mapName + "!<br>", () => {});
+                      io.sockets.emit('challenge request', socket.id, dstSocket.id, mapName, privateRoomCount);
+                      privateRoomCount = privateRoomCount + 1;                    
                     } 
                     else {
                       room.whisperMessage(socket, "<i>Player " + dstPlayer + " not found. Is that player in this room?</i><br>",() => {});
                     }
                   }
                 }
-                room.whisperMessage(socket, "WARNING: CHALLENGES NOT YET IMPLEMENTED!<br>", cb);
+                room.whisperMessage(socket, "WARNING: CHALLENGES NOT YET IMPLEMENTED!<br>", () => {});
               }
               else if (isUnknownCmd) {
                 room.whisperMessage(socket, "<i>Your command was not recognized!  Please check your spelling.  All valid commands can be found at <a href=\"http://geoscents.net/resources/anomalies.html\" target=\"_blank\">http://geoscents.net/resources/anomalies.html</a></i><br>", () => {});

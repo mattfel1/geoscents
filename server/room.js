@@ -80,6 +80,10 @@ class Room {
       this.drawCommand(socket);
     }
 
+    redrawMap(socket) {
+      this.drawCommand(socket);
+    }
+
     hasPlayer(socket) {
         return this.clients.has(socket.id) && this.players.has(socket.id)
     }
