@@ -219,7 +219,7 @@ class Room {
 
     insertRecord(position, category, olddict, room, player){
         function copy(x) {
-            return JSON.parse( JSON.stringify(x) );
+            return JSON.parse( JSON.stringify(x, null, 2) );
         }
 
         const dict = copy(olddict);
@@ -278,7 +278,7 @@ class Room {
 
     recordsBroken() {
         function copy(x) {
-            return JSON.parse( JSON.stringify(x) );
+            return JSON.parse( JSON.stringify(x, null, 2) );
         }
 
         let dayRecord = copy(this.dayRecord);
@@ -336,10 +336,10 @@ class Room {
                 helpers.prependRecentActivity(payload)
             }
         });
-        fs.writeFile("/scratch/" + room + "_day_record", JSON.stringify(copy(dayRecord)), function(err) {if(err){return console.log(err);}});
-        fs.writeFile("/scratch/" + room + "_week_record", JSON.stringify(copy(weekRecord)), function(err) {if(err){return console.log(err);}});
-        fs.writeFile("/scratch/" + room + "_month_record", JSON.stringify(copy(monthRecord)), function(err) {if(err){return console.log(err);}});
-        fs.writeFile("/scratch/" + room + "_all-time_record", JSON.stringify(copy(allRecord)), function(err) {if(err){return console.log(err);}});
+        fs.writeFile("/scratch/" + room + "_day_record", JSON.stringify(copy(dayRecord), null, 2), function(err) {if(err){return console.log(err);}});
+        fs.writeFile("/scratch/" + room + "_week_record", JSON.stringify(copy(weekRecord), null, 2), function(err) {if(err){return console.log(err);}});
+        fs.writeFile("/scratch/" + room + "_month_record", JSON.stringify(copy(monthRecord), null, 2), function(err) {if(err){return console.log(err);}});
+        fs.writeFile("/scratch/" + room + "_all-time_record", JSON.stringify(copy(allRecord), null, 2), function(err) {if(err){return console.log(err);}});
         this.dayRecord = copy(dayRecord);
         this.weekRecord = copy(weekRecord);
         this.monthRecord = copy(monthRecord);
@@ -385,7 +385,7 @@ class Room {
     }
     updateScores() {
         function copy(x) {
-            return JSON.parse( JSON.stringify(x) );
+            return JSON.parse( JSON.stringify(x, null, 2) );
         }
       const target = this.target;
       const room = this.room;
@@ -645,7 +645,7 @@ class Room {
     };
     printWinner(winner, score, color) {
         this.recordsBroken();
-        const playersHistory = JSON.stringify([...this.playersHistory.entries()]);
+        const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
         const room = this.room;
         this.clients.forEach((socket,id) => {
             socket.emit('draw chart', playersHistory, winner, color, room, score);

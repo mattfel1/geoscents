@@ -22,12 +22,12 @@ file = 'cities.js'
 #blacklist = ['Barbados', 'Curaçao', 'Aruba', 'Saint Vincent And The Grenadines', 'Saint Lucia', 'Antigua And Barbuda', 'Grenada', 'Dominica', 'Saint Kitts And Nevis', 'Sint Maarten', 'Martinique', 'Guadeloupe']
 #whitelist = []
 
-outfile = 'oceaniacities.js'
-latrng = [-51,28]
-pop = 10000
-lonrng = [92,252]
-blacklist =  ['Macau', 'Thailand', 'Mexico', 'United States', 'Sri Lanka', 'India', 'China', 'Philippines', 'Vietnam', 'Cambodia', 'Laos', 'Hong Kong', 'Taiwan', 'Bangladesh', 'Burma', 'Nepal', 'Bhutan', 'Japan']
-whitelist = ['Cook Islands', 'Wallis And Futuna', 'Honolulu', 'Hilo', 'Wailuku', 'Lihue', 'Easter Island', 'Tokelau']
+# outfile = 'oceaniacities.js'
+# latrng = [-51,28]
+# pop = 10000
+# lonrng = [92,252]
+# blacklist =  ['Macau', 'Thailand', 'Mexico', 'United States', 'Sri Lanka', 'India', 'China', 'Philippines', 'Vietnam', 'Cambodia', 'Laos', 'Hong Kong', 'Taiwan', 'Bangladesh', 'Burma', 'Nepal', 'Bhutan', 'Japan']
+# whitelist = ['Cook Islands', 'Wallis And Futuna', 'Honolulu', 'Hilo', 'Wailuku', 'Lihue', 'Easter Island', 'Tokelau']
 
 # outfile = 'asiacities.js'
 # latrng = [2,59]
@@ -36,12 +36,12 @@ whitelist = ['Cook Islands', 'Wallis And Futuna', 'Honolulu', 'Hilo', 'Wailuku',
 # blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', 'Cyprus', 'South Sudan', 'Northern Mariana Islands', 'Guam', 'Macau', 'Sudan', 'Belarus', 'Somalia']
 # whitelist = []
 
-# outfile = 'samericacities.js'
-# latrng = [-54,20]
-# pop = 61000
-# lonrng = [-138, -30]
-# blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe']
-# whitelist = ['Falkland Islands (Islas Malvinas)', 'Galápagos', 'South Georgia And South Sandwich Islands']
+outfile = 'samericacities.js'
+latrng = [-54,20]
+pop = 61000
+lonrng = [-138, -30]
+blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe', 'Pitcairn Islands']
+whitelist = ['Falkland Islands (Islas Malvinas)', 'Galápagos', 'South Georgia And South Sandwich Islands', 'Easter Island']
 
 # outfile = 'eurocities.js'
 # latrng = [37,66]
@@ -76,7 +76,9 @@ with open(file) as json_file:
     print('%d countries' % len(countries))
     print(countries)
 
-
+    string_data = json.dumps(filtered, indent=2)
     with open(outfile, 'w') as data_file:
-        json.dump(filtered, data_file, indent=2)
+        data_file.write("module.exports = { CITIES: ")
+        data_file.write(string_data)
+        data_file.write("}")
 

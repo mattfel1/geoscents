@@ -48,7 +48,7 @@ const makeLink = (room, thisTarget) => {
 }
 const recordGuesses = (room, citystring, city, admin, country, ips, dists, times, lats, lons, true_lat, true_lon, link) => {
     function copy(x) {
-        return JSON.parse( JSON.stringify(x) );
+        return JSON.parse( JSON.stringify(x,null,2) );
     }
     const file = '/scratch/' + room + '_guesses';
     if (!fs.existsSync(file)) {
@@ -119,7 +119,7 @@ const recordGuesses = (room, citystring, city, admin, country, ips, dists, times
             history[citystring]["country"] = country;
         } catch (err) {}
         // Commit back to file
-        fs.writeFile(file, JSON.stringify(copy(history)), function(err) {if(err){return console.log(err);}});
+        fs.writeFile(file, JSON.stringify(copy(history), null, 2), function(err) {if(err){return console.log(err);}});
     }
 };
 
