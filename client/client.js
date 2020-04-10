@@ -17,6 +17,7 @@ var myRoom = CONSTANTS.LOBBY;
 const canvas = window.document.getElementById('map');
 const panel = window.document.getElementById('panel');
 const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1; // hack for scaling
+var lastScale = 999; 
 
 const playerClick = {
   mouseDown: false,
@@ -141,11 +142,14 @@ $(document).ready(function(){
 
     setInterval(() => {
         // Set zoom for resolution
-        const scale = ((100 * Math.max(0.5, Math.min(1, window.innerWidth / 1920))) % 100) / 100;
-        document.documentElement.style.zoom = scale;
-        document.documentElement.style.MozTransform = "scale(" + scale + ")";
-        document.documentElement.style.MozTransformOrigin = "0 0";
-    }, 1000 / 2);
+        const scale = Math.floor(20*Math.max(0.6, Math.min(1, window.innerWidth / 1920)))/20;
+        if (scale != lastScale) {
+            lastScale = scale;
+            document.documentElement.style.zoom = scale;
+            document.documentElement.style.MozTransform = "scale(" + scale + ")";
+            document.documentElement.style.MozTransformOrigin = "0 0";
+        }
+    }, 1000 / 5);
 
     const mouseUpHandler = (e) => {
       playerClick.mouseDown = false
