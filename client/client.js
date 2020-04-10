@@ -16,6 +16,7 @@ const CONSTANTS = require('../resources/constants.js');
 var myRoom = CONSTANTS.LOBBY;
 const canvas = window.document.getElementById('map');
 const panel = window.document.getElementById('panel');
+const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1; // hack for scaling
 
 const playerClick = {
   mouseDown: false,
@@ -140,7 +141,7 @@ $(document).ready(function(){
 
     setInterval(() => {
         // Set zoom for resolution
-        const scale = Math.max(0.5, Math.min(1, window.innerWidth / 1920));
+        const scale = ((100 * Math.max(0.5, Math.min(1, window.innerWidth / 1920))) % 100) / 100;
         document.documentElement.style.zoom = scale;
         document.documentElement.style.MozTransform = "scale(" + scale + ")";
         document.documentElement.style.MozTransformOrigin = "0 0";
@@ -191,9 +192,18 @@ $(document).ready(function(){
     //Function to get the mouse position
     function getMousePosInPanel(canvas, event) {
         var rect = canvas.getBoundingClientRect();
+        let xPos;
+        let yPos;
+        if (isFirefox) {
+            xPos = 1 / document.documentElement.style.zoom * (event.clientX - rect.left);
+            yPos = 1 / document.documentElement.style.zoom * (event.clientY - rect.top);
+        } else {
+            xPos = (1 / document.documentElement.style.zoom * event.clientX) - rect.left;
+            yPos = (1 / document.documentElement.style.zoom * event.clientY) - rect.top;
+        }
         return {
-            x: ((1 / document.documentElement.style.zoom) * event.clientX - rect.left),
-            y: ((1 / document.documentElement.style.zoom) * event.clientY - rect.top)
+            x: xPos,
+            y: yPos
         };
     }
     //Function to check whether a point is inside a rectangle
