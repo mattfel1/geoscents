@@ -1,5 +1,4 @@
-module.exports = {
-  CITIES: [
+module.exports = { CITIES: [
   {
     "city": "Tokyo",
     "city_ascii": "Tokyo",
@@ -12676,6 +12675,19 @@ module.exports = {
     "id": 1840018713
   },
   {
+    "city": "Ponta Delgada",
+    "city_ascii": "Ponta Delgada",
+    "lat": 37.7483,
+    "lng": -25.6666,
+    "country": "Portugal",
+    "iso2": "PT",
+    "iso3": "PRT",
+    "admin_name": "Azores",
+    "capital": "admin",
+    "population": 61526,
+    "id": 1620456537
+  },
+  {
     "city": "Jefferson City",
     "city_ascii": "Jefferson City",
     "lat": 38.5676,
@@ -12936,6 +12948,32 @@ module.exports = {
     "id": 1304028354
   },
   {
+    "city": "Angra do Hero\u00edsmo",
+    "city_ascii": "Angra do Heroismo",
+    "lat": 38.6504,
+    "lng": -27.2167,
+    "country": "Portugal",
+    "iso2": "PT",
+    "iso3": "PRT",
+    "admin_name": "Azores",
+    "capital": "",
+    "population": 12045,
+    "id": 1620152939
+  },
+  {
+    "city": "Horta",
+    "city_ascii": "Horta",
+    "lat": 38.5347,
+    "lng": -28.6448,
+    "country": "Portugal",
+    "iso2": "PT",
+    "iso3": "PRT",
+    "admin_name": "Azores",
+    "capital": "",
+    "population": 6611,
+    "id": 1620589121
+  },
+  {
     "city": "Grand Turk",
     "city_ascii": "Grand Turk",
     "lat": 21.4664,
@@ -12973,5 +13011,65 @@ module.exports = {
     "capital": "",
     "population": 2213,
     "id": 1238780509
+  },
+  {
+    "city": "Adamstown",
+    "city_ascii": "Adamstown",
+    "lat": -25.066667,
+    "lng": -130.1,
+    "country": "Pitcairn Islands",
+    "iso2": "PN",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 50,
+    "id": 9999999998
+  },
+  {
+    "city": "Alofi",
+    "city_ascii": "Alofi",
+    "lat": -19.054,
+    "lng": -169.92,
+    "country": "Niue",
+    "iso2": "NU",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 50,
+    "id": 9999999997
+  },
+  {
+    "city": "Flying Fish Cove",
+    "city_ascii": "Flying Fish Cove",
+    "lat": -10.421667,
+    "lng": 105.678056,
+    "country": "Christmas Island",
+    "iso2": "CX",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 1600,
+    "id": 9999999996
+  },
+  {
+    "city": "Kingston",
+    "city_ascii": "Kingston",
+    "lat": -29.05,
+    "lng": 167.966667,
+    "country": "Norfold Island",
+    "iso2": "NF",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 1748,
+    "id": 9999999998
+  },
+  {
+    "city": "West Island",
+    "city_ascii": "West Island",
+    "lat": -12.186944,
+    "lng": 96.828333,
+    "country": "Cocos (Keeling) Islands",
+    "iso2": "CC",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 120,
+    "id": 9999999998
   }
 ]}

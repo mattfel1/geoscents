@@ -86,6 +86,7 @@ const includeAdmin = (target) => {
     target['country'] === 'USA' ||
     target['country'] === 'Canada' ||
     target['country'] === 'Mexico' ||
+    target['country'] === 'Portugal' ||
     target['country'] === 'India' ||
     target['country'] === 'China' ||
     target['country'] === 'Australia' ||

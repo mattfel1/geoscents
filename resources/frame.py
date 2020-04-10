@@ -8,12 +8,12 @@ import re
 
 file = 'cities.js'
 
-# outfile = 'worldcities.js'
-# latrng = [-65, 77]
-# pop = 580000
-# lonrng = [-180, 180]
-# blacklist = []
-# whitelist = ['Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar', 'New Caledonia']
+outfile = 'worldcities.js'
+latrng = [-65, 77]
+pop = 580000
+lonrng = [-180, 180]
+blacklist = []
+whitelist = ['Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar', 'New Caledonia', 'Azores']
 
 #outfile = 'uscities.js'
 #latrng = [12,54]
@@ -36,12 +36,12 @@ file = 'cities.js'
 # blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', 'Cyprus', 'South Sudan', 'Northern Mariana Islands', 'Guam', 'Macau', 'Sudan', 'Belarus', 'Somalia']
 # whitelist = []
 
-outfile = 'samericacities.js'
-latrng = [-54,20]
-pop = 61000
-lonrng = [-138, -30]
-blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe', 'Pitcairn Islands']
-whitelist = ['Falkland Islands (Islas Malvinas)', 'Galápagos', 'South Georgia And South Sandwich Islands', 'Easter Island']
+# outfile = 'samericacities.js'
+# latrng = [-54,20]
+# pop = 61000
+# lonrng = [-138, -30]
+# blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe', 'Pitcairn Islands']
+# whitelist = ['Falkland Islands (Islas Malvinas)', 'Galápagos', 'South Georgia And South Sandwich Islands', 'Easter Island']
 
 # outfile = 'eurocities.js'
 # latrng = [37,66]
