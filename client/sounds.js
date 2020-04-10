@@ -8,7 +8,7 @@ class Sounds {
         this.messagePop.volume = 0.5;
         // this.gameBeginSound = new Audio('/resources/gamestart.mp3');
         this.gameBeginSound = new Audio('/resources/jingle.mp3');
-        this.gameBeginSound.volume = 0.5;
+        this.gameBeginSound.volume = 0.25;
         this.roundBeginSound = new Audio('/resources/roundstart.mp3');
         this.roundBeginSound.volume = 0.5;
         this.roundEndSound = new Audio('/resources/roundstop.mp3');
