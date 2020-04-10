@@ -11,6 +11,54 @@
 <div class="container">
   <h2>Geoscents Game Information</h2>
   <div class="panel-group" id="accordion">
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse0">Data Visualizations</a>
+        </h4>
+      </div>
+      <div id="collapse0" class="panel-collapse collapse">
+        <div class="panel-body">
+          <p>One of the fun things that this game allows me to do is to collect how well people from around the world know where things are.  I use your public IP address to identify your country and collect your play history securely on the game server.  If you do not want your game to be tracked, see the "Chat Box Commands" section below to learn how to mask your activity.  Tracking this information allows me to build a database and visualizations of how people from around the world perform.  This is a fun dataset to browse, especially to answer questions such as "How do Germans compare to Americans at knowing European cities? American cities? Chinese cities?" or "How often do people mix up Paraguay and Uruguay?"</p>
+          <p>I have put together visualizations and data tables at <a href="http://geoscents.net/plots/index.html">http://geoscents.net/plots/index.html</a> that are automatically updated daily.  Feel free to explore that page and point out any interesting things you find.
+        </div>
+      </div>
+    </div>
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse99">Trivia Entries</a>
+        </h4>
+      </div>
+      <div id="collapse99" class="panel-collapse collapse">
+        <div class="panel-body">
+          <p>The trivia map contains hundreds of random events, places, and things that have well-defined latitude and longitude.  The database that it draws from was hand-made by myself continues to grow.  The original Geosense game did not have this game, but I thought it would be a fun addition, considering all the javascript machinery is in place to have players hunt down whatever things have a lat/lon definition.  Many of the entries have flags embedded in them, as well as the entry written in the native script of whatever country or culture they are part of, to help your ability to pinpoint them.  </p>
+          <p>The entries are mostly things that I found browsing wikipedia and <a href="www.atlasobscura.com">Atlas Obscura</a> and fall roughly into these categories:
+<ul>
+            <li> UNESCO World Heritage sites - Taj Mahal, Machu Picchu, Moai Statues at Easter Island, etc.</li>
+            <li>Funny names - Fucking, Austria, Sandwich, Illinois, Batman, Turkey, Hell, Norway, that town in New Zealand with a ridiculously long name, etc.</li>
+            <li>Ancient cities - Tyre, Phoenicia, Karakorum, Mongol Empire, Bagan, Pagan Kingdom, etc.</li>
+            <li>Major historical incidents - Hannibal defeats Rome at the Battle of Cannae, Tsar Bomba test site, Sinking of the RMS Lusitania, Chernobyl incident, etc.</li>
+            <li>Odd statues - Manneken Pis, Blucifer, Christ of the Abyss, etc.</li>
+            <li>National parks - Yosemite, Joshua Tree, Banff, Zhangjiajie, etc.</li>
+            <li>Notable Buildings - CN Tower, The Kremlin, The Whitehouse, etc.</li>
+            <li>Scientific sites - Neanderthal Valley, the Michelson-Morley experiment, Ivan Pavlov's dog study</li>
+            <li>Sporting Events - Various world cup and olymic games locations</li>
+            <li>Geological points of interest - locations of coldest/hottest recorded temperatures, tallest mountains of each continent, Marianas Trench, etc. </li>
+            <li>Other things that I'm not sure how to categorize - Where the US accidentally dropped a nuclear bomb on itself (Goldsboro, NC), Wakaliwood Film Studio, etc. 
+          </ul>
+        I hope that at least some of them spark your interest and get you to click the "Learn" link in the bottom right box of the game so you can read about it afterwards.  Some of these entries may be "famous" things that are worth knowing, but some of them are just silly so I hope you don't take it too seriously.</p>
+          <p>Please reach out by sending a message starting with the word /feedback if you want to suggest new trivia items!  I love hearing your feedback, and am especially interested in growing the database beyond the cultural bias of the few people who have contributed already.</p>
+        </div>
+      </div>
+    </div>
+
+
+
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -40,6 +88,8 @@ According to the <a href="https://www.naturalearthdata.com/features/">Natural Ea
         </div>
       </div>
     </div>
+
+
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -124,6 +174,9 @@ Therefore, it is possible for the monthly records to get reset on the first of t
       </div>
     </div>
 
+
+
+
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -140,13 +193,35 @@ You can turn off this behavior with the command /private, and can turn it back o
         </div>
       </div>
     </div>
+
+
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">References</a>
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Donate</a>
         </h4>
       </div>
       <div id="collapse5" class="panel-collapse collapse">
+        <div class="panel-body">
+First of all, thank you so much for playing the game!  It has been truly amazing to see people from around the world log on and compete against each other and engage in supportive dialogue as well as geography trash talk.  I spend most of my time programming in Verilog/VHDL, Scala, and C++ for my day job but really craved this game ever since I learned that geosense.net ceased to exist.  I learned just enough javascript and web development to throw this game together and approximate the experience I used to have playing the original game.  <br><br>I am renting a Microsoft Azure VM to host the game, which is not completely free.  I hope to keep the game online for as long as possible, but if you wanted to pitch in any amount to help keep it going, that would be truly appreciated.  
+                      <div style="display: inline-block" margin-top="0">
+                        Donate using
+                        <a href="https://paypal.me/mattfel1" style="background-color:#E6E6FA;color:#302F31;">Paypal</a>,
+                        <a href="bitcoin://3Jf4bbDU5NBWdDEjdr6aqUascCwTd9N5kx" style="background-color:#E6E6FA;color:#302F31;">Bitcoin</a>,
+                        <a href="litecoin://3Jf4bbDU5NBWdDEjdr6aqUascCwTd9N5kx" style="background-color:#E6E6FA;color:#302F31;">Litecoin</a>,
+                        <a href="ethereum://0xed6ca7d908f897d0b0d5f9b9e7aa470698e10b1b" style="background-color:#E6E6FA;color:#302F31;">Ethereum</a>
+                      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse56">References</a>
+        </h4>
+      </div>
+      <div id="collapse56" class="panel-collapse collapse">
         <div class="panel-body">
 Terrain map rendering provided by by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>. Satellite map rendering provided by Google Tiles.  All maps generated using python cartopy 0.17.0.  <br><br>
 This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>. <br><br>

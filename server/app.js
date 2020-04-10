@@ -90,12 +90,11 @@ var rooms = {
 var playerRooms = new Map();
 var privateRoomCount = 0;
 
-const ABOUT_MESSAGE = '[ <b>ABOUT</b> ] <a href="http://geoscents.net/resources/anomalies.html" target="_blank">Click here</a> for info about geopolitical anomalies, details about the game, the privacy policy, and other info!<br>';
 const WELCOME_MESSAGE1 = '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
                           'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
                           '<br>If you have feedback, simply shout it directly into this chat box, starting with the /feedback.' +
                           'If you are enjoying this game, please share it with a friend!  If you really love it, consider donating at the bottom of the page to help keep the server ' +
-                          'running!<br>';
+                          'running! <a href="http://geoscents.net/resources/anomalies.html" target="_blank">Click here</a> for info about geopolitical anomalies, details about the game, the privacy policy, and other info!<br>';
 
 //const WELCOME_MESSAGE2 = '[ <b>UPDATE 1/6/2019</b> ] The yearly records are supposed to reset on 1/1/2020, but because of a mistake with cron, they were erroneously reset again on 1/6/2020.  Sorry!<br>'
 
@@ -123,7 +122,7 @@ io.on('connection', (socket) => {
       // socket.emit("update custom messages", CONSTANTS.LOBBY, REFERENCE2, 10);
       // socket.emit("update custom messages", CONSTANTS.LOBBY, REFERENCE1, 10);
       // socket.emit("update custom messages", CONSTANTS.LOBBY, PRIVACY_POLICY, 10);
-	  socket.emit("update custom messages", CONSTANTS.LOBBY, ABOUT_MESSAGE, 10);
+	  // socket.emit("update custom messages", CONSTANTS.LOBBY, ABOUT_MESSAGE, 10);
 	  // socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE2);
 	  socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
 	  //socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE2);
