@@ -105,13 +105,15 @@ $(document).ready(function(){
         commands.muted = sounds.muted;
     });
     socket.on("jitter", function(id){
-        noScale = !commands.antiJitter;
-        commands.antiJitter = !commands.antiJitter;
-        commands.setJitter(id)
-        lastScale = 1;
-        document.documentElement.style.zoom = 1;
-        document.documentElement.style.MozTransform = "scale(1)";
-        document.documentElement.style.MozTransformOrigin = "0 0";
+        if (socket.id == id) {
+            noScale = !commands.antiJitter;
+            commands.antiJitter = !commands.antiJitter;
+            commands.setJitter(id)
+            lastScale = 1;
+            document.documentElement.style.zoom = 1;
+            document.documentElement.style.MozTransform = "scale(1)";
+            document.documentElement.style.MozTransformOrigin = "0 0";
+        }
     });
 
     /**** Map *****/
