@@ -152,7 +152,7 @@ $(document).ready(function(){
 
     setInterval(() => {
         // Set zoom for resolution
-        const scale = Math.floor(20*Math.max(0.65, Math.min(1, window.innerWidth / 1920)))/20;
+        const scale = Math.floor(20*Math.max(0.5, Math.min(1, window.innerWidth / 1920)))/20;
         if (scale != lastScale && !noScale) {
             lastScale = scale;
             document.documentElement.style.zoom = scale;
