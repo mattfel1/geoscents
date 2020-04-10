@@ -138,17 +138,26 @@ $(document).ready(function(){
       if (chat.hasNewMessage) document.title = "(*) GeoScents"
     }, 1000 / CONSTANTS.FPS);
 
+    setInterval(() => {
+        // Set zoom for resolution
+        const scale = Math.max(0.5, Math.min(1, window.innerWidth / 1920));
+        document.documentElement.style.zoom = scale;
+        document.documentElement.style.MozTransform = "scale(" + scale + ")";
+        document.documentElement.style.MozTransformOrigin = "0 0";
+    }, 1000 / 2);
+
     const mouseUpHandler = (e) => {
       playerClick.mouseDown = false
       playerClick.downCount = 0;
       playerClick.touchDown = false;
     };
-    const mouseDownHandler = (e) => {
+    const mouseDownHandler = (evt) => {
       playerClick.mouseDown = true
 
-      var rect = canvas.getBoundingClientRect();
-      playerClick.cursorX = e.clientX - rect.left
-      playerClick.cursorY = e.clientY - rect.top
+      const mousePos = getMousePosInPanel(canvas, evt);
+      // var rect = canvas.getBoundingClientRect();
+      playerClick.cursorX = mousePos.x //e.clientX - rect.left
+      playerClick.cursorY = mousePos.y //e.clientY - rect.top
     };
     const touchUpHandler = (e) => {
       socket.emit('playerClick', playerClick);
@@ -156,12 +165,13 @@ $(document).ready(function(){
       playerClick.mouseDown = false;
       playerClick.touchDown = false;
     };
-    const touchDownHandler = (e) => {
+    const touchDownHandler = (evt) => {
       playerClick.touchDown = true;
       playerClick.mouseDown = true;
-      var rect = canvas.getBoundingClientRect();
-      playerClick.cursorX = e.touches[0].clientX - rect.left
-      playerClick.cursorY = e.touches[0].clientY - rect.top
+      const mousePos = getMousePosInPanel(canvas, evt);
+      // var rect = canvas.getBoundingClientRect();
+      playerClick.cursorX = mousePos.x //e.touches[0].clientX - rect.left
+      playerClick.cursorY = mousePos.y //e.touches[0].clientY - rect.top
     };
     document.addEventListener('mousedown', mouseDownHandler, false);
     document.addEventListener('mouseup', mouseUpHandler, false);
@@ -182,8 +192,8 @@ $(document).ready(function(){
     function getMousePosInPanel(canvas, event) {
         var rect = canvas.getBoundingClientRect();
         return {
-            x: event.clientX - rect.left,
-            y: event.clientY - rect.top
+            x: ((1 / document.documentElement.style.zoom) * event.clientX - rect.left),
+            y: ((1 / document.documentElement.style.zoom) * event.clientY - rect.top)
         };
     }
     //Function to check whether a point is inside a rectangle
