@@ -38,6 +38,7 @@ class Commands {
             height: 40
         };
         this.muted = false;
+        this.antiJitter = false;
     }
 
     drawLastCommand(id) {
@@ -111,8 +112,11 @@ class Commands {
         let button3 = "<div id='satellite_button' class='map-style-btn-container'><button class='map-style-btn" + pressed3 + "'>Satellite</button></div>";
         $('#commands').append($("<div id='map-btns' style=\"display: inline-block\">" + button1 + button2 + button3 + "</div>"));
 
+        let pressedJitter = ''; if (this.antiJitter) pressedJitter = '-clicked';
+        let jitterButton = "<div style=\"display: inline-block\" id='jitter_button' class='map-style-btn-container'><button class='map-style-btn" + pressedJitter + "'>Anti-Jitter</button></div>";
         if (this.muted) $('#commands').append($("<button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔇 <font color=\"white\">(muted)</font></button><br>"));
-        else $('#commands').append($("<button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔊</button><br>"));
+        else $('#commands').append($("<button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔊</button>"));
+        $('#commands').append($(jitterButton + "<br>"))
         let lobby_string; 
         if (this.lobby_count > 0) {lobby_string = "<b>(" + this.lobby_count + " players)</b>"} else {lobby_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>To Lobby</b> <font size=2>" + lobby_string + "</font></button><br>"))
@@ -144,6 +148,7 @@ class Commands {
         var room = this.myRoom;
         
         $('#mute_button').bind("click", () => {socket.emit('mute'); this.refocus()});
+        $('#jitter_button').bind("click", () => {socket.emit('jitter'); this.refocus()});
         $('#classic_button').bind("click", () => {socket.emit('renderMap', 'classic'); this.refocus()});
         $('#terrain_button').bind("click", () => {socket.emit('renderMap', 'terrain'); this.refocus()});
         $('#satellite_button').bind("click", () => {socket.emit('renderMap', 'satellite'); this.refocus()});
@@ -171,6 +176,15 @@ class Commands {
             let pressed3 = ''; if (this.mapStyle === 'satellite') pressed3 = '-clicked';
             $('#satellite_button').append($("<button class='map-style-btn" + pressed3 + "'>Satellite</button>"));
             this.drawLastCommand(id);
+        }
+    }
+
+    setJitter(id) {
+        if (this.socket.id === id) {
+            $('#jitter_button').empty();
+            let pressedJitter = ''; if (this.antiJitter) pressedJitter = '-clicked';
+            let jitterButton = "<button class='map-style-btn" + pressedJitter + "'>Anti-Jitter</button>";
+            $('#jitter_button').append($(jitterButton + "<br>"))
         }
     }
 

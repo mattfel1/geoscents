@@ -178,6 +178,9 @@ io.on('connection', (socket) => {
     socket.on('mute', () => {
         io.sockets.emit('mute player', socket.id)
     });
+    socket.on('jitter', () => {
+        io.sockets.emit('jitter', socket.id)
+    });
     socket.on('renderMap', (style) => {
         if (playerRooms.has(socket.id)) {
           const room = playerRooms.get(socket.id);

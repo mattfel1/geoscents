@@ -18,6 +18,7 @@ const canvas = window.document.getElementById('map');
 const panel = window.document.getElementById('panel');
 const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1; // hack for scaling
 var lastScale = 999; 
+var noScale = false;
 
 const playerClick = {
   mouseDown: false,
@@ -103,6 +104,15 @@ $(document).ready(function(){
         sounds.muteMe(id);
         commands.muted = sounds.muted;
     });
+    socket.on("jitter", function(id){
+        noScale = !commands.antiJitter;
+        commands.antiJitter = !commands.antiJitter;
+        commands.setJitter(id)
+        lastScale = 1;
+        document.documentElement.style.zoom = 1;
+        document.documentElement.style.MozTransform = "scale(1)";
+        document.documentElement.style.MozTransformOrigin = "0 0";
+    });
 
     /**** Map *****/
     const map = new Map(socket);
@@ -143,7 +153,7 @@ $(document).ready(function(){
     setInterval(() => {
         // Set zoom for resolution
         const scale = Math.floor(20*Math.max(0.65, Math.min(1, window.innerWidth / 1920)))/20;
-        if (scale != lastScale) {
+        if (scale != lastScale && !noScale) {
             lastScale = scale;
             document.documentElement.style.zoom = scale;
             document.documentElement.style.MozTransform = "scale(" + scale + ")";
