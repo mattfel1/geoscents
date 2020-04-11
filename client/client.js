@@ -154,7 +154,7 @@ $(document).ready(function(){
 
     setInterval(() => {
         // Set zoom for resolution
-        const scale = Math.floor(20*Math.max(0.5, Math.min(1, window.innerWidth / 1920)))/20;
+        const scale = Math.floor(50*Math.max(0.5, Math.min(1, window.innerWidth / 1920)))/50;
         if (scale != lastScale && !noScale) {
             lastScale = scale;
             document.documentElement.style.zoom = scale;
@@ -185,7 +185,7 @@ $(document).ready(function(){
     const touchDownHandler = (evt) => {
       playerClick.touchDown = true;
       playerClick.mouseDown = true;
-      const mousePos = getMousePosInPanel(canvas, evt);
+      const mousePos = getTouchPosInPanel(canvas, evt);
       // var rect = canvas.getBoundingClientRect();
       playerClick.cursorX = mousePos.x //e.touches[0].clientX - rect.left
       playerClick.cursorY = mousePos.y //e.touches[0].clientY - rect.top
@@ -216,6 +216,22 @@ $(document).ready(function(){
         } else {
             xPos = (1 / document.documentElement.style.zoom * event.clientX) - rect.left;
             yPos = (1 / document.documentElement.style.zoom * event.clientY) - rect.top;
+        }
+        return {
+            x: xPos,
+            y: yPos
+        };
+    }
+    function getTouchPosInPanel(canvas, event) {
+        var rect = canvas.getBoundingClientRect();
+        let xPos;
+        let yPos;
+        if (isFirefox) {
+            xPos = 1 / document.documentElement.style.zoom * (event.touches[0].clientX - rect.left);
+            yPos = 1 / document.documentElement.style.zoom * (event.touches[0].clientY - rect.top);
+        } else {
+            xPos = (1 / document.documentElement.style.zoom * event.touches[0].clientX) - rect.left;
+            yPos = (1 / document.documentElement.style.zoom * event.touches[0].clientY) - rect.top;
         }
         return {
             x: xPos,
