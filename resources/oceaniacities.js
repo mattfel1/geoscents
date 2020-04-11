@@ -4084,7 +4084,7 @@ module.exports = {
     "city_ascii": "Kingston",
     "lat": -29.05,
     "lng": 167.966667,
-    "country": "Norfold Island",
+    "country": "Norfolk Island",
     "iso2": "NF",
     "admin_name": "",
     "capital": "primary",
