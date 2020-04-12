@@ -276,6 +276,14 @@ class Room {
         this.dayRecord['recordBroken3'] = false;
     }
 
+    getActiveEntry() {
+      try {
+        return Geography.stringifyTarget(this.target).string;
+      } catch (err) {
+        return "Unknown"
+      }
+    }
+
     appendActivity(update) {
         // TODO: update activity log json for display in lobby
     }
@@ -307,6 +315,7 @@ class Room {
               this.clients.get(player.id).emit("announce hall", room, player.name, player.score, player.color);
               const payload = "- " + month + day + ": <font color=" + player.color + ">" + player.name + "</font> scored <b>" + player.score + "</b> on " + room;
               helpers.prependHallOfFame(payload)
+              helpers.log("Hall of Fame achieved by " + player.name + " (" + player.ip + ")")
             }
             let allStr = "";
             let monStr = "";

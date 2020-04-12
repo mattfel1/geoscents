@@ -245,7 +245,7 @@ io.on('connection', (socket) => {
               };
               var new_sent_msg = msg;
               CONSTANTS.PROFANITY.forEach((word) => {new_sent_msg = replaceAll(new_sent_msg, word, "****")});
-              helpers.log("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + ": " + msg);
+              helpers.log("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + " " + room.getActiveEntry() + " : " + msg);
               if (isFeedback) {
                 room.distributeMessage(socket, new_sent_msg, cb);
 		            room.whisperMessage(socket, "<i>Your feedback has been noted!  Thank you for playing and commenting!</i><br>", cb);
