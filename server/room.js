@@ -670,11 +670,10 @@ class Room {
         let star = "";
         if (thisTarget['majorcapital']) star = "*";
         if (thisTarget['minorcapital']) star = "†";
-        const base = "<b>Round " + round + "</b>: " + star + thisTarget['string'] + " (pop: " + thisTarget['pop'].toLocaleString() + ")";
-        const link = " <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + helpers.makeLink(room, this.target) + "\">Learn!</a><br>";
+        const base = "<b>Round " + round + "</b>: <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + helpers.makeLink(room, this.target) + "\">" +  star + thisTarget['string'] + "</a> (pop: " + thisTarget['pop'].toLocaleString() + ")<br>";
 
         this.clients.forEach((socket,id) => {
-            socket.emit('add history',  room, base + link);
+            socket.emit('add history',  room, base);
             socket.emit('add history', room, "<br>");
         });
     }

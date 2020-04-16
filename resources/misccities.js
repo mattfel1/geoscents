@@ -3583,6 +3583,116 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Lomekwi"
     },
+    {
+      "city": "Capital of the African Union",
+      "city_ascii": "",
+      "lat": 9.03,
+      "lng": 38.74,
+      "iso2": "AA",
+      "country": "",
+      "population": 0,
+      "capital": "primary",
+      "wiki": "https://en.wikipedia.org/wiki/African_Union"
+    },
+    {
+      "city": "Hobbiton Movie Set (Lord of the Rings and The Hobbit)",
+      "city_ascii": "",
+      "lat": -37.8575,
+      "lng": 175.679722,
+      "iso2": "NZ",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Hobbiton_Movie_Set"
+    },
+    {
+      "city": "King's Landing Film Set (Game of Thrones, seasons 2-7)",
+      "city_ascii": "",
+      "lat": 42.640278,
+      "lng": 18.108333,
+      "iso2": "HR",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/World_of_A_Song_of_Ice_and_Fire#King's_Landing"
+    },
+    {
+      "city": "M'banza-Kongo",
+      "city_ascii": "",
+      "lat": -6.267778,
+      "lng": 14.248056,
+      "iso2": "AO",
+      "country": "Kingdom of Kongo (14-15th centuries)",
+      "population": 0,
+      "capital": "primary",
+      "wiki": "https://en.wikipedia.org/wiki/M%27banza-Kongo"
+    },
+    {
+      "city": "Royal Hill of Ambohimanga",
+      "city_ascii": "",
+      "lat": -18.759167,
+      "lng": 47.562778,
+      "iso2": "MG",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Ambohimanga"
+    },
+    {
+      "city": "Old Walled City of Shibam (شِـبَـام حَـضْـرَمَـوْت‎)",
+      "city_ascii": "",
+      "lat": 15.926944,
+      "lng": 48.626667,
+      "iso2": "YE",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Shibam_Hadramawt"
+    },
+    {
+      "city": "Thousand Buddha Grottoes / Magao Caves (莫高窟)",
+      "city_ascii": "",
+      "lat": 40.037222,
+      "lng": 94.804167,
+      "iso2": "CN",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Mogao_Caves"
+    },
+    {
+      "city": "Yungang Grottoes (云冈石窟)",
+      "city_ascii": "",
+      "lat": 40.1105,
+      "lng": 113.1259,
+      "iso2": "CN",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Yungang_Grottoes"
+    },
+    {
+      "city": "Taputapuatea Marae",
+      "city_ascii": "",
+      "lat": -16.8375,
+      "lng": -151.359,
+      "iso2": "PF",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Taputapuatea_marae"
+    },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
     // {
     //   "city": "",
     //   "city_ascii": "",
