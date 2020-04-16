@@ -57,69 +57,70 @@ const recordGuesses = (room, citystring, city, admin, country, ips, dists, times
         });
     }
     else {
-        let history;
-        try {
-            history = JSON.parse(fs.readFileSync(file, 'utf8'));
-        } catch (err) {
-            history = {};
-        }
-        try {
-            // // Patch for back-filling dummy ip addresses for the entries before I started tracked this
-            // Object.keys(history).forEach(function (key,_) {
-            //     history[key]["ips"] = [];
-            //     Object.values(history[key]["dists"]).forEach(function (_,_) {
-            //             history[key]["ips"] = history[key]["ips"].concat(["::ffff:127.0.0.1"])
-            //     });
-            // });
+        fs.readFile(file, 'utf8', (err, data) => {
+            let history;
+            if (err) history = {};
+            else history = JSON.parse(data);
+            try {
+                // // Patch for back-filling dummy ip addresses for the entries before I started tracked this
+                // Object.keys(history).forEach(function (key,_) {
+                //     history[key]["ips"] = [];
+                //     Object.values(history[key]["dists"]).forEach(function (_,_) {
+                //             history[key]["ips"] = history[key]["ips"].concat(["::ffff:127.0.0.1"])
+                //     });
+                // });
 
-            // // Patch for truncating decimals
-            // Object.keys(history).forEach(function (key,_) {
-            //     history[key]["dists"] = history[key]["dists"].map(x => trunc(x,1));
-            //     history[key]["times"] = history[key]["times"].map(x => trunc(x,1));
-            // });
+                // // Patch for truncating decimals
+                // Object.keys(history).forEach(function (key,_) {
+                //     history[key]["dists"] = history[key]["dists"].map(x => trunc(x,1));
+                //     history[key]["times"] = history[key]["times"].map(x => trunc(x,1));
+                // });
 
-            // // Patch for back-filling dummy coords for the entries before I started tracked this
-            // Object.keys(history).forEach(function (key,_) {
-            //     history[key]["lats"] = [];
-            //     history[key]["lons"] = [];
-            //     Object.values(history[key]["dists"]).forEach(function (_,_) {
-            //             history[key]["lats"] = history[key]["lats"].concat(["x"])
-            //             history[key]["lons"] = history[key]["lons"].concat(["x"])
-            //     });
-            //     history[key]["mean_lat"] = 0;
-            //     history[key]["mean_lon"] = 0;
-            // });
+                // // Patch for back-filling dummy coords for the entries before I started tracked this
+                // Object.keys(history).forEach(function (key,_) {
+                //     history[key]["lats"] = [];
+                //     history[key]["lons"] = [];
+                //     Object.values(history[key]["dists"]).forEach(function (_,_) {
+                //             history[key]["lats"] = history[key]["lats"].concat(["x"])
+                //             history[key]["lons"] = history[key]["lons"].concat(["x"])
+                //     });
+                //     history[key]["mean_lat"] = 0;
+                //     history[key]["mean_lon"] = 0;
+                // });
 
-            // Add raw data
-            if (Object.keys(history).indexOf(citystring) === -1) {
-                history[citystring] = {"dists": dists, "times": times, "ips": ips, "lats": lats, "lons": lons};
-            } else {
-                history[citystring]["dists"] = history[citystring]["dists"].concat(dists.map(x => trunc(x,1)));
-                history[citystring]["times"] = history[citystring]["times"].concat(times.map(x => trunc(x,1)));
-                history[citystring]["ips"] = history[citystring]["ips"].concat(ips);
-                history[citystring]["lats"] = history[citystring]["lats"].concat(lats.map(x => trunc(x,3)));
-                history[citystring]["lons"] = history[citystring]["lons"].concat(lons.map(x => trunc(x,3)));
-            }
-            // Compute new averages
-            history[citystring]["true_lat"] = true_lat;
-            history[citystring]["true_lon"] = true_lon;
-            history[citystring]["wiki"] = link;
-            history[citystring]["mean_dist"] = trunc(history[citystring]["dists"].reduce((a, b) => a + b) / history[citystring]["dists"].length, 1);
-            let trueLats = history[citystring]["lats"].filter(x => x != "x");
-            let trueLons = history[citystring]["lons"].filter(x => x != "x");
-            if (trueLats.length > 0 && trueLons.length > 0) {
-                history[citystring]["mean_lat"] = trunc(trueLats.reduce((a, b) => a + b) / trueLats.length,3);
-                history[citystring]["mean_lon"] = trunc(trueLons.reduce((a, b) => a + b) / trueLons.length,3);
-            }
-            history[citystring]["mean_time"] = trunc(history[citystring]["times"].reduce((a, b) => a + b) / history[citystring]["times"].length, 1);
-            history[citystring]["std_dist"] = trunc(Math.sqrt(history[citystring]["dists"].map(x => Math.pow(x - history[citystring]["mean_dist"], 2)).reduce((a, b) => a + b) / history[citystring]["dists"].length), 1);
-            history[citystring]["std_time"] = trunc(Math.sqrt(history[citystring]["times"].map(x => Math.pow(x - history[citystring]["mean_time"], 2)).reduce((a, b) => a + b) / history[citystring]["times"].length), 1);
-            history[citystring]["city"] = city;
-            history[citystring]["admin"] = admin;
-            history[citystring]["country"] = country;
-        } catch (err) {}
-        // Commit back to file
-        fs.writeFile(file, JSON.stringify(copy(history), null, 2), function(err) {if(err){return console.log(err);}});
+                // Add raw data
+                if (Object.keys(history).indexOf(citystring) === -1) {
+                    history[citystring] = {"dists": dists, "times": times, "ips": ips, "lats": lats, "lons": lons};
+                } else {
+                    history[citystring]["dists"] = history[citystring]["dists"].concat(dists.map(x => trunc(x,1)));
+                    history[citystring]["times"] = history[citystring]["times"].concat(times.map(x => trunc(x,1)));
+                    history[citystring]["ips"] = history[citystring]["ips"].concat(ips);
+                    history[citystring]["lats"] = history[citystring]["lats"].concat(lats.map(x => trunc(x,3)));
+                    history[citystring]["lons"] = history[citystring]["lons"].concat(lons.map(x => trunc(x,3)));
+                }
+                // Compute new averages
+                history[citystring]["true_lat"] = true_lat;
+                history[citystring]["true_lon"] = true_lon;
+                history[citystring]["wiki"] = link;
+                history[citystring]["mean_dist"] = trunc(history[citystring]["dists"].reduce((a, b) => a + b) / history[citystring]["dists"].length, 1);
+                let trueLats = history[citystring]["lats"].filter(x => x != "x");
+                let trueLons = history[citystring]["lons"].filter(x => x != "x");
+                if (trueLats.length > 0 && trueLons.length > 0) {
+                    history[citystring]["mean_lat"] = trunc(trueLats.reduce((a, b) => a + b) / trueLats.length,3);
+                    history[citystring]["mean_lon"] = trunc(trueLons.reduce((a, b) => a + b) / trueLons.length,3);
+                }
+                history[citystring]["mean_time"] = trunc(history[citystring]["times"].reduce((a, b) => a + b) / history[citystring]["times"].length, 1);
+                history[citystring]["std_dist"] = trunc(Math.sqrt(history[citystring]["dists"].map(x => Math.pow(x - history[citystring]["mean_dist"], 2)).reduce((a, b) => a + b) / history[citystring]["dists"].length), 1);
+                history[citystring]["std_time"] = trunc(Math.sqrt(history[citystring]["times"].map(x => Math.pow(x - history[citystring]["mean_time"], 2)).reduce((a, b) => a + b) / history[citystring]["times"].length), 1);
+                history[citystring]["city"] = city;
+                history[citystring]["admin"] = admin;
+                history[citystring]["country"] = country;
+            } catch (err) {}
+            // Commit back to file
+            fs.writeFile(file, JSON.stringify(copy(history), null, 2), function(err) {if(err){return console.log(err);}});
+
+        });
+    
     }
 };
 
