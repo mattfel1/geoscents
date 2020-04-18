@@ -3682,17 +3682,17 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Taputapuatea_marae"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Heddal Stave Church",
+      "city_ascii": "",
+      "lat": 59.579444,
+      "lng": 9.176389,
+      "iso2": "NO",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Heddal_Stave_Church"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
