@@ -201467,7 +201467,7 @@
     "admin_name": "",
     "capital": "primary",
     "population": 1748,
-    "id": 9999999998
+    "id": 9999999990
   },
   {
     "city": "West Island",
@@ -201479,7 +201479,7 @@
     "admin_name": "",
     "capital": "primary",
     "population": 120,
-    "id": 9999999998
+    "id": 9999999991
   },
   {
     "city": "Atafu",
@@ -201491,6 +201491,18 @@
     "admin_name": "",
     "capital": "",
     "population": 541,
-    "id": 9999999998
+    "id": 9999999992
+  },
+  {
+    "city": "Saint Peter Port",
+    "city_ascii": "Saint Peter Port",
+    "lat": 49.4555,
+    "lng":  -2.5368,
+    "country": "Guernsey",
+    "iso2": "GG",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 18958,
+    "id": 9999999993
   }
 ]

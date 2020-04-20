@@ -1,5 +1,4 @@
-module.exports = {
-  CITIES: [
+module.exports = { CITIES: [
   {
     "city": "Moscow",
     "city_ascii": "Moscow",
@@ -7422,5 +7421,17 @@ module.exports = {
     "capital": "",
     "population": 6611,
     "id": 1620589121
+  },
+  {
+    "city": "Saint Peter Port",
+    "city_ascii": "Saint Peter Port",
+    "lat": 49.4555,
+    "lng": -2.5368,
+    "country": "Guernsey",
+    "iso2": "GG",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 18958,
+    "id": 9999999993
   }
 ]}
