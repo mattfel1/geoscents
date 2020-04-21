@@ -3693,17 +3693,17 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Heddal_Stave_Church"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Göbekli Tepe ('Potbelly Hill') Archaeological Site",
+      "city_ascii": "",
+      "lat": 37.223056,
+      "lng": 38.9225,
+      "iso2": "TR",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Göbekli_Tepe"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
