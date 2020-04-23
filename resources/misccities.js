@@ -3704,28 +3704,28 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Göbekli_Tepe"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "'Humongous Fungus' (Largest Living Organism by Area)",
+      "city_ascii": "",
+      "lat": 44.283213,
+      "lng": -118.784389,
+      "iso2": "US",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Armillaria_ostoyae"
+    },
+    {
+      "city": "'Ötzi the Iceman' Prehistoric Mummy Discovery Site",
+      "city_ascii": "'Otzi the Iceman' Prehistoric Mummy Discovery Site",
+      "lat": 46.779389,
+      "lng": 10.840306,
+      "iso2": "IT",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Ötzi"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
