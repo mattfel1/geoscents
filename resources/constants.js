@@ -54,7 +54,7 @@ module.exports = {
 
     // FSM
     REVEAL_STATE: 'reveal',
-    REVEAL_DURATION: 6,
+    REVEAL_DURATION: 5,
     GUESS_STATE: 'guess',
     GUESS_DURATION: 10,
     SETUP_STATE: 'setup',
