@@ -1010,6 +1010,7 @@ module.exports = {
       "lat": 37.209167,
       "lng": -76.7775,
       "country": "",
+      "iso2": "US",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Jamestown,_Virginia"

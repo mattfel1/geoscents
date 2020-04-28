@@ -21,6 +21,7 @@ var lastScale = 999;
 var noScale = false;
 var betweenGames = true;
 var clickedReady = false;
+var booted = false;
 
 const playerClick = {
   mouseDown: false,
@@ -86,8 +87,11 @@ $(document).ready(function(){
         commands.drawCommand("            ", city, capital, iso2, round, false, false);
         sounds.playRoundEndSound();
     });
-    socket.on('draw booted', () => {commands.drawCommand("You have been booted due to inactivity!", "Please refresh to rejoin","", "",0, false, false)});
-    socket.on('draw idle', () => {commands.drawCommand("Waiting for players to join...t", "", "", "", 0, false, false)});
+    socket.on('draw booted', () => {
+        commands.drawCommand("You have been booted due to inactivity!", "Please refresh to rejoin","", "",0, false, false)
+        booted = true;
+    });
+    socket.on('draw idle', () => {commands.drawCommand("Waiting for players to join...", "", "", "", 0, false, false)});
 
     /**** Chat *****/
     const chat = new Chat(socket);
@@ -210,11 +214,11 @@ $(document).ready(function(){
             commands.drawCommand(" seconds until new game auto-starts...", "", "", "", 0, true, true);
             clickedReady = true;
         }
-        if (isInside(mousePos,map.visualize_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing) {
+        if (isInside(mousePos,map.visualize_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
             window.open('http://geoscents.net/plots/index.html', '_blank');
             socket.emit('view viz');
         }
-        if (isInside(mousePos,map.about_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing) {
+        if (isInside(mousePos,map.about_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
             window.open('http://geoscents.net/resources/about.html', '_blank');
             socket.emit('view about');
         }
@@ -225,10 +229,10 @@ $(document).ready(function(){
     canvas.addEventListener('mousemove', function(evt) {
         var mousePos = getMousePosInPanel(canvas, evt);
         if (myRoom === CONSTANTS.LOBBY && !popup.isShowing) {
-            if (isInside(mousePos,map.visualize_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing) {
+            if (isInside(mousePos,map.visualize_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
                 map.highlightVizButton();
             } else map.showVizButton();
-            if (isInside(mousePos,map.about_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing) {
+            if (isInside(mousePos,map.about_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
                 map.highlightAboutButton();
             } else map.showAboutButton();
         } else {
