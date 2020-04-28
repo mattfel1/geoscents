@@ -158,12 +158,15 @@ class Map {
         this.ctx.fillText('Toggle volume and map texture', 1070, 80);
         this.canvas_arrow(1430, 75, this.canvas.width-20, 35);
 
-        this.ctx.fillText('See player rankings', 1200, 305);
+        this.ctx.fillText('Records', 1320, 305);
         this.canvas_arrow(1430, 300, this.canvas.width-20, 300);
+
+        this.ctx.fillText('Current game scores', 1180, 655);
+        this.canvas_arrow(1430, 650, this.canvas.width-20, 650);
 
         this.ctx.fillText('Target city and time remaining will appear in this panel', 500, 25);
 
-        this.ctx.fillText('See game history and learn about cities', 1000, 780);
+        this.ctx.fillText('Game history and wikipedia links', 1100, 780);
         this.canvas_arrow(1300, 800, 1300, this.canvas.height - 20);
 
         this.ctx.fillText('Discuss', 160, 780);
