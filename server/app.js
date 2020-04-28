@@ -253,7 +253,7 @@ io.on('connection', (socket) => {
                 helpers.logFeedback("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + ": " + msg);
 	            }
               else if (isOptOut) {
-                  room.whisperMessage(socket, "<i>Your IP address has been masked.  Thank you for playing the game!</i><br>", cb);
+                  room.whisperMessage(socket, "<i>Your IP address has been masked.  Thank you for playing the game!  Type /public if you want to opt-in!</i><br>", cb);
                   room.players.get(socket.id).optOut = true;
               }
               else if (isOptIn) {
