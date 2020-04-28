@@ -2,6 +2,7 @@ class Popup {
     constructor(socket) {
         this.socket = socket;
         this.choseName = false;
+        this.isShowing = true;
     }
 
     join(info, cb) {
@@ -54,6 +55,7 @@ class Popup {
     // function to close our popups
     closePopup(){
         $('.overlay-bg, .overlay-content').hide(); //hide the overlay
+        this.isShowing = false;
         var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);
     }
 }

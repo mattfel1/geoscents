@@ -19,6 +19,8 @@ const panel = window.document.getElementById('panel');
 const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1; // hack for scaling
 var lastScale = 999; 
 var noScale = false;
+var betweenGames = true;
+var clickedReady = false;
 
 const playerClick = {
   mouseDown: false,
@@ -66,8 +68,13 @@ $(document).ready(function(){
     socket.on('update counts', (l,w,u,e,a,s,as,oc,m) => {commands.updateCounts(l,w,u,e,a,s,as,oc,m);commands.postButtons();})
     socket.on('draw buttons', () => {commands.postButtons()});
     socket.on('draw timer', (time,color) => {commands.postTime(time,color)});
-    socket.on('draw prepare', (round) => {commands.drawCommand(" seconds until new game auto-starts...", "", "", "", round, true, false)});
+    socket.on('draw prepare', (round) => {
+        betweenGames = true;
+        commands.drawCommand(" seconds until new game auto-starts...", "", "", "", round, true, false)
+    });
     socket.on('draw begin', (time, round) => {
+        betweenGames = false;
+        clickedReady = false;
         commands.drawCommand(" seconds until first round..  GET READY!", "", "", "", round, false, false);
         if (time === CONSTANTS.BEGIN_GAME_DURATION) sounds.playGameBeginSound();
     });
@@ -137,7 +144,7 @@ $(document).ready(function(){
 
     /***** Player interactions *****/
     socket.on('request boot', function(id){socket.emit('bootPlayer', id)});
-    socket.on('moved to', (room) => {
+    socket.on('moved to', (room, roomState) => {
         myRoom = room;
         map.myRoom = room;
         chat.myRoom = room;
@@ -145,6 +152,8 @@ $(document).ready(function(){
         commands.myRoom = room;
         history.myRoom = room;
         sounds.myRoom = room;
+        clickedReady = false;
+        betweenGames = roomState === CONSTANTS.PREPARE_GAME_STATE;
     });
     setInterval(() => {
       if (playerClick.touchDown) playerClick.downCount = playerClick.downCount + 1;
@@ -196,12 +205,34 @@ $(document).ready(function(){
     document.addEventListener("touchend", touchUpHandler, false);
     canvas.addEventListener('click', function(evt) {
         var mousePos = getMousePosInPanel(canvas, evt);
-        if (isInside(mousePos,commands.ready_button) && myRoom !== CONSTANTS.LOBBY) {
+        if (isInside(mousePos,commands.ready_button) && myRoom !== CONSTANTS.LOBBY && betweenGames) {
             socket.emit('playerReady');
-            commands.drawCommand(" seconds until new game auto-starts...", "", "", "", 0, true, true)
+            commands.drawCommand(" seconds until new game auto-starts...", "", "", "", 0, true, true);
+            clickedReady = true;
+        }
+        if (isInside(mousePos,map.visualize_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing) {
+            window.open('http://geoscents.net/plots/index.html', '_blank')
+        }
+        if (isInside(mousePos,map.about_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing) {
+            window.open('http://geoscents.net/resources/about.html', '_blank')
         }
         if (!(typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
             var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);
+        }
+    }, false);
+    canvas.addEventListener('mousemove', function(evt) {
+        var mousePos = getMousePosInPanel(canvas, evt);
+        if (myRoom === CONSTANTS.LOBBY && !popup.isShowing) {
+            if (isInside(mousePos,map.visualize_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing) {
+                map.highlightVizButton();
+            } else map.showVizButton();
+            if (isInside(mousePos,map.about_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing) {
+                map.highlightAboutButton();
+            } else map.showAboutButton();
+        } else {
+            if (betweenGames && !clickedReady && isInside(mousePos,commands.ready_button)) {
+                commands.highlightReadyButton();
+            } else if (betweenGames) commands.showReadyButton(clickedReady);
         }
     }, false);
 

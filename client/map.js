@@ -63,6 +63,18 @@ class Map {
             width: this.canvas.width*10/12,
             height: 40
         };
+        this.about_button = {
+            x: 400,
+            y: 600,
+            width: 280,
+            height: 60
+        };
+        this.visualize_button = {
+            x: 750,
+            y: 600,
+            width: 320,
+            height: 60
+        };
     }
 
     canvas_arrow(fromx, fromy, tox, toy){
@@ -157,6 +169,9 @@ class Map {
         this.ctx.fillText('Discuss', 160, 780);
         this.canvas_arrow(200, 800, 200, this.canvas.height-20);
 
+        this.showVizButton();
+        this.showAboutButton();
+
       }
       else if (room == CONSTANTS.WORLD){
             worldImg[this.mapStyle].onload = function () {
@@ -218,6 +233,36 @@ class Map {
         }
     }
 
+    highlightAboutButton() {
+        this.ctx.fillStyle = "green";
+        this.ctx.fillRect(this.about_button['x'], this.about_button['y'], this.about_button['width'], this.about_button['height']);
+        this.ctx.font = 40 + "px Arial";
+        this.ctx.fillStyle = 'black';
+        this.ctx.fillText('ABOUT GAME', this.about_button['x'] + 5, this.about_button['y'] + 42)
+    }
+
+    highlightVizButton() {
+        this.ctx.fillStyle = "green";
+        this.ctx.fillRect(this.visualize_button['x'], this.visualize_button['y'], this.visualize_button['width'], this.visualize_button['height']);
+        this.ctx.font = 40 + "px Arial";
+        this.ctx.fillStyle = 'black';
+        this.ctx.fillText('EXPLORE DATA!', this.visualize_button['x'] + 5, this.visualize_button['y'] + 42)
+    }
+    showAboutButton() {
+        this.ctx.fillStyle = "orange";
+        this.ctx.fillRect(this.about_button['x'], this.about_button['y'], this.about_button['width'], this.about_button['height']);
+        this.ctx.font = 40 + "px Arial";
+        this.ctx.fillStyle = 'black';
+        this.ctx.fillText('ABOUT GAME', this.about_button['x'] + 5, this.about_button['y'] + 42)
+    }
+
+    showVizButton() {
+        this.ctx.fillStyle = "orange";
+        this.ctx.fillRect(this.visualize_button['x'], this.visualize_button['y'], this.visualize_button['width'], this.visualize_button['height']);
+        this.ctx.font = 40 + "px Arial";
+        this.ctx.fillStyle = 'black';
+        this.ctx.fillText('EXPLORE DATA!', this.visualize_button['x'] + 5, this.visualize_button['y'] + 42)
+    }
     cellOf(coords) {
         const CELL_HEIGHT = CONSTANTS.MAP_HEIGHT / CONSTANTS.VERT_WRITE_CELLS;
         const CELL_WIDTH = CONSTANTS.MAP_WIDTH / CONSTANTS.HORZ_WRITE_CELLS;

@@ -22,7 +22,7 @@ class Commands {
         this.ready_button = {
             x:this.canvas.width*6/12,
             y:5,
-            width:200,
+            width:260,
             height:30
         };
         this.timer_window = {
@@ -72,13 +72,7 @@ class Commands {
         }
 
         if (button) {
-            if (clicked) this.ctx.fillStyle = "lightgrey";
-            else this.ctx.fillStyle = "orange";
-            this.ctx.fillRect(this.ready_button['x'], this.ready_button['y'], this.ready_button['width'], this.ready_button['height']);
-            this.ctx.font = CONSTANTS.BUTTONS_FONT + "px Arial";
-            this.ctx.fillStyle = 'black';
-            if (clicked) this.ctx.fillText('YOU ARE READY!', this.ready_button['x'] + 5, this.ready_button['y'] + 22)
-            else this.ctx.fillText('CLICK IF READY!', this.ready_button['x'] + 5, this.ready_button['y'] + 22)
+            this.showReadyButton(clicked);
         }
     }
 
@@ -93,6 +87,24 @@ class Commands {
        this.oceania_count = oc;
        this.samerica_count = s;
        this.misc_count = m;
+    }
+
+    showReadyButton(clicked) {
+        if (clicked) this.ctx.fillStyle = "lightgrey";
+        else this.ctx.fillStyle = "orange";
+        this.ctx.fillRect(this.ready_button['x'], this.ready_button['y'], this.ready_button['width'], this.ready_button['height']);
+        this.ctx.font = CONSTANTS.BUTTONS_FONT + "px Arial";
+        this.ctx.fillStyle = 'black';
+        if (clicked) this.ctx.fillText('YOU ARE READY!', this.ready_button['x'] + 5, this.ready_button['y'] + 22)
+        else this.ctx.fillText('CLICK HERE IF READY!', this.ready_button['x'] + 5, this.ready_button['y'] + 22)
+    }
+
+    highlightReadyButton() {
+        this.ctx.fillStyle = "green";
+        this.ctx.fillRect(this.ready_button['x'], this.ready_button['y'], this.ready_button['width'], this.ready_button['height']);
+        this.ctx.font = CONSTANTS.BUTTONS_FONT + "px Arial";
+        this.ctx.fillStyle = 'black';
+        this.ctx.fillText('CLICK HERE IF READY!', this.ready_button['x'] + 5, this.ready_button['y'] + 22)
     }
 
     refocus() {

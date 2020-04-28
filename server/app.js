@@ -95,7 +95,7 @@ const WELCOME_MESSAGE1 = '[ <b>GREETING</b> ] Welcome to Geoscents, an online mu
                           'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
                           '<br>If you have feedback, simply shout it directly into this chat box, starting with the /feedback.' +
                           'If you are enjoying this game, please share it with a friend!  If you really love it, consider donating at the bottom of the page to help keep the server ' +
-                          'running! <a href="http://geoscents.net/resources/anomalies.html" target="_blank">Click here</a> for info about geopolitical anomalies, details about the game, the privacy policy, and other info!<br>';
+                          'running! <br>';
 
 //const WELCOME_MESSAGE2 = '[ <b>UPDATE 1/6/2019</b> ] The yearly records are supposed to reset on 1/1/2020, but because of a mistake with cron, they were erroneously reset again on 1/6/2020.  Sorry!<br>'
 
@@ -210,7 +210,7 @@ io.on('connection', (socket) => {
           var leave_msg = "[ <font color='" + rooms[origin].getPlayerColor(socket) + "'><b>" + rooms[origin].getPlayerRawName(socket) + "</b> has left " + origin + " and joined " + dest + "!</font> ]<br>";
           io.sockets.emit("update messages", origin, leave_msg)
           rooms[origin].killPlayer(socket);
-          socket.emit('moved to', dest);
+          socket.emit('moved to', dest, rooms[dest].state);
           rooms[dest].addPlayer(socket, info);
           playerRooms.set(socket.id, rooms[dest]);
           var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'><b>" + rooms[dest].getPlayerRawName(socket) + "</b> has joined " + dest + "!</font> ]<br>";
@@ -326,7 +326,7 @@ io.on('connection', (socket) => {
                 room.whisperMessage(socket, "WARNING: CHALLENGES NOT YET IMPLEMENTED!<br>", () => {});
               }
               else if (isUnknownCmd) {
-                room.whisperMessage(socket, "<i>Your command was not recognized!  Please check your spelling.  All valid commands can be found at <a href=\"http://geoscents.net/resources/anomalies.html\" target=\"_blank\">http://geoscents.net/resources/anomalies.html</a></i><br>", () => {});
+                room.whisperMessage(socket, "<i>Your command was not recognized!  Please check your spelling.  All valid commands can be found at <a href=\"http://geoscents.net/resources/about.html\" target=\"_blank\">http://geoscents.net/resources/about.html</a></i><br>", () => {});
               }
               else {
                 room.distributeMessage(socket, new_sent_msg, cb);
