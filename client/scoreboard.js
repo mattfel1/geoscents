@@ -13,6 +13,7 @@ class Scoreboard {
     // Message reactions
     clearScores() {
         $('#scoreboard').empty();
+        $('#leaderboard').empty();
     }
 
     postGroup(category, dict) {
@@ -26,22 +27,20 @@ class Scoreboard {
        const string1 = $("<font color=" + dict['recordColor1'] + " style=\"font-size:16px;\" \>").html(pop1 +  "🥇 1st: " + dict['record1'] + " (" + dict['recordName1'] + ")" + pop1 + "<br>");
        const string2 = $("<font color=" + dict['recordColor2'] + " style=\"font-size:16px;\" \>").html(pop2 + "🥈 2nd: " + dict['record2'] + " (" + dict['recordName2'] + ")" + pop2 + "<br>");
        const string3 = $("<font color=" + dict['recordColor3'] + " style=\"font-size:16px;\" \>").html(pop3 + "🥉 3rd: " + dict['record3'] + " (" + dict['recordName3'] + ")" + pop3 + "<br>");
-       $('#scoreboard').append("<b>" + category + "</b><br>");
-       $('#scoreboard').append(string1);
-       $('#scoreboard').append(string2);
-       $('#scoreboard').append(string3);
-       $('#scoreboard').append("<br>")
+       $('#leaderboard').append("<b>" + category + "</b><br>");
+       $('#leaderboard').append(string1);
+       $('#leaderboard').append(string2);
+       $('#leaderboard').append(string3);
+       $('#leaderboard').append("<br>")
     }
     postSpace() {
-       $('#scoreboard').append("<br>-------------------------------------------<br><b>Scoreboard:</b><br>")
+       // $('#scoreboard').append("<br>-------------------------------------------<br><b>Scoreboard:</b><br>")
     }
     postLobby(recent, hall) {
-       $('#scoreboard').append("<b>" + CONSTANTS.FAMESCORE + "+ Hall of Fame (out of 6600 points)</b><br>");
-       $('#scoreboard').append(hall);
-       $('#scoreboard').append("-------------------------------------------<br>")
-       $('#scoreboard').append("<br><b>Recent Records:</b><br>");
-       $('#scoreboard').append("<font size=\"1\">" + recent + "</font>");
-       $('#scoreboard').append("-------------------------------------------<br>")
+       $('#leaderboard').append("<b>" + CONSTANTS.FAMESCORE + "+ Hall of Fame (out of 6600 points)</b><br>");
+       $('#leaderboard').append(hall);
+       $('#leaderboard').append("<b>Recent Records:</b><br>");
+       $('#leaderboard').append("<font size=\"1\">" + recent + "</font>");
        $('#scoreboard').append("<br><b>Players in Lobby:</b><br>");
     }
 }
