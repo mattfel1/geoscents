@@ -128,7 +128,21 @@ io.on('connection', (socket) => {
 	  socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
 	  //socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE2);
 	});
-	socket.on('disconnect', function() {
+  socket.on('view viz', function() {
+    let name = "";
+    if (rooms[CONSTANTS.LOBBY].hasPlayer(socket)) {
+      name = rooms[CONSTANTS.LOBBY].getPlayerName(socket);
+    }
+    helpers.log('User clicked viz ' + socket.handshake.address + " (" + name + ")");
+  });
+  socket.on('view about', function() {
+    let name = "";
+    if (rooms[CONSTANTS.LOBBY].hasPlayer(socket)) {
+      name = rooms[CONSTANTS.LOBBY].getPlayerName(socket);
+    }
+    helpers.log('User clicked about ' + socket.handshake.address + " (" + name + ")");
+  });
+  socket.on('disconnect', function() {
       if (playerRooms.has(socket.id)) {
           const room = playerRooms.get(socket.id);
           helpers.log("User disconnected " + socket.handshake.address);

@@ -211,10 +211,12 @@ $(document).ready(function(){
             clickedReady = true;
         }
         if (isInside(mousePos,map.visualize_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing) {
-            window.open('http://geoscents.net/plots/index.html', '_blank')
+            window.open('http://geoscents.net/plots/index.html', '_blank');
+            socket.emit('view viz');
         }
         if (isInside(mousePos,map.about_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing) {
-            window.open('http://geoscents.net/resources/about.html', '_blank')
+            window.open('http://geoscents.net/resources/about.html', '_blank');
+            socket.emit('view about');
         }
         if (!(typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
             var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);
