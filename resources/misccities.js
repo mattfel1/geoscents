@@ -3727,6 +3727,127 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Ötzi"
     },
+    {
+      "city": "Uncontacted People of North Sentinel Island",
+      "city_ascii": "",
+      "lat": 11.557,
+      "lng": 92.241,
+      "iso2": "IN",
+      "country": "",
+      "population": 50,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/North_Sentinel_Island"
+    },
+    {
+      "city": "Inaccessible Island",
+      "city_ascii": "",
+      "lat": -37.3,
+      "lng": -12.68,
+      "iso2": "TA",
+      "country": "Saint Helena, Ascension and Tristan da Cunha",
+      "population": 6,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Inaccessible_Island"
+    },
+    {
+      "city": "Saint James' Church ('Oldest Anglican Church in the Southern Hemisphere')",
+      "city_ascii": "",
+      "lat": -15.9253,
+      "lng": -5.7181,
+      "iso2": "TA",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Saint_James%27_Church,_Jamestown"
+    },
+    {
+      "city": "Socotra Island (سُقُطْرَى‎)",
+      "city_ascii": "",
+      "lat": 12.51,
+      "lng": 53.92,
+      "iso2": "YE",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Socotra#UNESCO_recognition"
+    },
+    {
+      "city": "Port-aux-Français",
+      "city_ascii": "",
+      "lat": -49.348653,
+      "lng": 70.219305,
+      "iso2": "TF",
+      "country": "Kerguelen Islands",
+      "population": 50,
+      "capital": "primary",
+      "wiki": "https://en.wikipedia.org/wiki/Port-aux-Français"
+    },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
     // {
     //   "city": "",
     //   "city_ascii": "",
