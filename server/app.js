@@ -145,7 +145,8 @@ io.on('connection', (socket) => {
   socket.on('disconnect', function() {
       if (playerRooms.has(socket.id)) {
           const room = playerRooms.get(socket.id);
-          helpers.log("User disconnected " + socket.handshake.address);
+          const name = room.getPlayerName(socket);
+          helpers.log("User disconnected " + socket.handshake.address + ": " + name);
           if (room.playerChoseName(socket)) {
               var leave_msg = "[ <font color='" + room.getPlayerColor(socket) + "'><b>" + room.getPlayerRawName(socket) + "</b> has exited GeoScents!</font> ]<br>";
               io.sockets.emit("update messages", room.room, leave_msg);
