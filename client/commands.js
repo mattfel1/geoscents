@@ -90,6 +90,10 @@ class Commands {
     }
 
     showReadyButton(clicked) {
+        this.ctx.fillStyle = "#000000";
+        this.ctx.fillRect(this.ready_button['x']-4, this.ready_button['y']-4, this.ready_button['width']+8, this.ready_button['height']+8);
+        this.ctx.fillStyle = "#808080";
+        this.ctx.fillRect(this.ready_button['x']-2, this.ready_button['y']-2, this.ready_button['width']+4, this.ready_button['height']+4);
         if (clicked) this.ctx.fillStyle = "lightgrey";
         else this.ctx.fillStyle = "orange";
         this.ctx.fillRect(this.ready_button['x'], this.ready_button['y'], this.ready_button['width'], this.ready_button['height']);
@@ -100,6 +104,10 @@ class Commands {
     }
 
     highlightReadyButton() {
+        this.ctx.fillStyle = "#000000";
+        this.ctx.fillRect(this.ready_button['x']-4, this.ready_button['y']-4, this.ready_button['width']+8, this.ready_button['height']+8);
+        this.ctx.fillStyle = "#808080";
+        this.ctx.fillRect(this.ready_button['x']-2, this.ready_button['y']-2, this.ready_button['width']+4, this.ready_button['height']+4);
         this.ctx.fillStyle = "green";
         this.ctx.fillRect(this.ready_button['x'], this.ready_button['y'], this.ready_button['width'], this.ready_button['height']);
         this.ctx.font = CONSTANTS.BUTTONS_FONT + "px Arial";

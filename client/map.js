@@ -237,6 +237,10 @@ class Map {
     }
 
     highlightAboutButton() {
+        this.ctx.fillStyle = "#000000";
+        this.ctx.fillRect(this.about_button['x']-4, this.about_button['y']-4, this.about_button['width']+8, this.about_button['height']+8);
+        this.ctx.fillStyle = "#808080";
+        this.ctx.fillRect(this.about_button['x']-2, this.about_button['y']-2, this.about_button['width']+4, this.about_button['height']+4);
         this.ctx.fillStyle = "green";
         this.ctx.fillRect(this.about_button['x'], this.about_button['y'], this.about_button['width'], this.about_button['height']);
         this.ctx.font = 40 + "px Arial";
@@ -245,6 +249,10 @@ class Map {
     }
 
     highlightVizButton() {
+        this.ctx.fillStyle = "#000000";
+        this.ctx.fillRect(this.visualize_button['x']-4, this.visualize_button['y']-4, this.visualize_button['width']+8, this.visualize_button['height']+8);
+        this.ctx.fillStyle = "#808080";
+        this.ctx.fillRect(this.visualize_button['x']-2, this.visualize_button['y']-2, this.visualize_button['width']+4, this.visualize_button['height']+4);
         this.ctx.fillStyle = "green";
         this.ctx.fillRect(this.visualize_button['x'], this.visualize_button['y'], this.visualize_button['width'], this.visualize_button['height']);
         this.ctx.font = 40 + "px Arial";
@@ -252,6 +260,10 @@ class Map {
         this.ctx.fillText('EXPLORE DATA!', this.visualize_button['x'] + 5, this.visualize_button['y'] + 42)
     }
     showAboutButton() {
+        this.ctx.fillStyle = "#000000";
+        this.ctx.fillRect(this.about_button['x']-4, this.about_button['y']-4, this.about_button['width']+8, this.about_button['height']+8);
+        this.ctx.fillStyle = "#808080";
+        this.ctx.fillRect(this.about_button['x']-2, this.about_button['y']-2, this.about_button['width']+4, this.about_button['height']+4);
         this.ctx.fillStyle = "orange";
         this.ctx.fillRect(this.about_button['x'], this.about_button['y'], this.about_button['width'], this.about_button['height']);
         this.ctx.font = 40 + "px Arial";
@@ -260,6 +272,10 @@ class Map {
     }
 
     showVizButton() {
+        this.ctx.fillStyle = "#000000";
+        this.ctx.fillRect(this.visualize_button['x']-4, this.visualize_button['y']-4, this.visualize_button['width']+8, this.visualize_button['height']+8);
+        this.ctx.fillStyle = "#808080";
+        this.ctx.fillRect(this.visualize_button['x']-2, this.visualize_button['y']-2, this.visualize_button['width']+4, this.visualize_button['height']+4);
         this.ctx.fillStyle = "orange";
         this.ctx.fillRect(this.visualize_button['x'], this.visualize_button['y'], this.visualize_button['width'], this.visualize_button['height']);
         this.ctx.font = 40 + "px Arial";
