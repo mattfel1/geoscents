@@ -3,16 +3,16 @@ const CONSTANTS = require('../resources/constants.js')
 class History {
     constructor(socket) {
         this.socket = socket;
-        this.myRoom = CONSTANTS.LOBBY;
+        this.myRoomName = CONSTANTS.LOBBY;
         this.histCount = 0;
     }
 
     breakHistory(room, winner, score, color, record) {
-        const myRoom = this.myRoom;
-        if (room === myRoom) {
+        const myRoomName = this.myRoomName;
+        if (room === myRoomName) {
             var newRecord = "";
             if (record) newRecord = " 🎉 NEW RECORD 🎉";
-            var assembled = "<br>******* " + myRoom + " WINNER: <font color=\"" + color + "\">" + winner + " (" + score + " points)</font>" + newRecord + " *******<br>"
+            var assembled = "<br>******* " + myRoomName + " WINNER: <font color=\"" + color + "\">" + winner + " (" + score + " points)</font>" + newRecord + " *******<br>"
             var final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
             $('#gamehist').prepend(" ");
             $('#gamehist').prepend(final_message);
@@ -89,7 +89,7 @@ class History {
         // }
     }
     addHistory(room, payload) {
-        if (room === this.myRoom) {
+        if (room === this.myRoomName) {
             const assembled = payload;
             const final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
             $('#gamehist').prepend(final_message);

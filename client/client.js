@@ -8,12 +8,14 @@ const Scoreboard = require('./scoreboard.js');
 const Commands = require('./commands.js');
 const Sounds = require('./sounds.js');
 const Popup = require('./popup.js');
+const PrivatePopup = require('./privatepopup.js');
 const Chat = require('./chat.js');
 const Map = require('./map.js');
 const History = require('./history.js');
 const CONSTANTS = require('../resources/constants.js');
 
-var myRoom = CONSTANTS.LOBBY;
+var myMap = CONSTANTS.LOBBY;
+var myRoomName = CONSTANTS.LOBBY;
 const canvas = window.document.getElementById('map');
 const panel = window.document.getElementById('panel');
 const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1; // hack for scaling
@@ -127,6 +129,14 @@ $(document).ready(function(){
         }
     });
 
+    /**** PRIVATE POPUP *****/
+    // Make player choose options
+    const privatepopup = new PrivatePopup(socket);
+    privatepopup.hide();
+    socket.on('request private popup', () => {
+        privatepopup.showPopup()
+    });
+
     /**** Map *****/
     const map = new Map(socket);
     socket.on('draw point', (coords, color, radius) => {map.drawPoint(coords, color, radius)});
@@ -148,15 +158,24 @@ $(document).ready(function(){
 
     /***** Player interactions *****/
     socket.on('request boot', function(id){socket.emit('bootPlayer', id)});
-    socket.on('moved to', (room, roomState) => {
-        myRoom = room;
-        map.myRoom = room;
-        chat.myRoom = room;
-        scoreboard.myRoom = room;
-        commands.myRoom = room;
-        history.myRoom = room;
-        sounds.myRoom = room;
+    socket.on('moved to', (mapName, roomName, roomState) => {
+        myMap = mapName;
+        map.myMap = mapName;
+        chat.myMap = mapName;
+        scoreboard.myMap = mapName;
+        commands.myMap = mapName;
+        history.myMap = mapName;
+        sounds.myMap = mapName;
+        myRoomName = roomName;
+        map.myRoomName = roomName;
+        chat.myRoomName = roomName;
+        scoreboard.myRoomName = roomName;
+        commands.myRoomName = roomName;
+        history.myRoomName = roomName;
+        sounds.myRoomName = roomName;
         clickedReady = false;
+        if (roomName.startsWith('private')) commands.labelPrivate(mapName, privatepopup.code);
+        else commands.clearPrivate()
         betweenGames = roomState === CONSTANTS.PREPARE_GAME_STATE;
     });
     setInterval(() => {
@@ -209,16 +228,16 @@ $(document).ready(function(){
     document.addEventListener("touchend", touchUpHandler, false);
     canvas.addEventListener('click', function(evt) {
         var mousePos = getMousePosInPanel(canvas, evt);
-        if (isInside(mousePos,commands.ready_button) && myRoom !== CONSTANTS.LOBBY && betweenGames) {
+        if (isInside(mousePos,commands.ready_button) && myMap !== CONSTANTS.LOBBY && betweenGames) {
             socket.emit('playerReady');
             commands.drawCommand(" seconds until new game auto-starts...", "", "", "", 0, true, true);
             clickedReady = true;
         }
-        if (isInside(mousePos,map.visualize_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
+        if (isInside(mousePos,map.visualize_button) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
             window.open('http://geoscents.net/plots/index.html', '_blank');
             socket.emit('view viz');
         }
-        if (isInside(mousePos,map.about_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
+        if (isInside(mousePos,map.about_button) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
             window.open('http://geoscents.net/resources/about.html', '_blank');
             socket.emit('view about');
         }
@@ -228,11 +247,11 @@ $(document).ready(function(){
     }, false);
     canvas.addEventListener('mousemove', function(evt) {
         var mousePos = getMousePosInPanel(canvas, evt);
-        if (myRoom === CONSTANTS.LOBBY && !popup.isShowing) {
-            if (isInside(mousePos,map.visualize_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
+        if (myMap === CONSTANTS.LOBBY && !popup.isShowing) {
+            if (isInside(mousePos,map.visualize_button) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
                 map.highlightVizButton();
             } else map.showVizButton();
-            if (isInside(mousePos,map.about_button) && myRoom === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
+            if (isInside(mousePos,map.about_button) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
                 map.highlightAboutButton();
             } else map.showAboutButton();
         } else {

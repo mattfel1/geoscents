@@ -18,7 +18,47 @@
 
 <div class="overlay-bg">
 </div>
-<div class="overlay-content popup">
+<div class="overlay-content-code privatepopup">
+    <p>Set up and join private room</p>
+                     <form id="code">
+                 <table>
+                     <td style="text-align:center;padding: 15px;">
+                      <label for="Code">Room code<br></label>
+                     <input type="text" id="selected_code" autofocus name="selected_code" style="width: 120px;" required minlength="1" maxlength="5" pattern="[a-z0-9]+" title="Name should only contain lowercase letters and numbers" />
+                     </td>
+                     <td style="text-align:center;padding: 15px;">
+                      <label for="Map">Choose a map<br></label>
+
+
+                      <select id="requestedMap">
+                        <option value="Random">Random</option>
+                        <option value="World">World</option>
+                        <option value="Trivia">Trivia</option>
+                        <option value="Europe">Europe</option>
+                        <option value="Africa">Africa</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Oceania">Oceania</option>
+                        <option value="NAmerica">N. America</option>
+                        <option value="SAmerica">S. America</option>
+                      </select>
+                      <script type="text/javascript">
+                        document.getElementById('requestedMap').value = "<?php echo $_GET['requestedMap'];?>";
+                        if (document.getElementById('requestedMap').value.length == 0) document.getElementById('requestedMap').value = "Random"
+                      </script>
+                     </td>
+                     <td style="text-align:center;padding: 15px;">
+                      <label for="Bot">Play against an average Joe?<br></label>
+                      <select id="bot">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                     </td>
+                 </table>
+                     <input type="submit" style="text-align:center" value="Create room!" />
+
+                     </form>
+</div>
+<div class="overlay-content-name popup">
     <p>Please choose a name and color (or leave blank for random)</p>
                      <form id="rename">
                  <table>
@@ -48,6 +88,7 @@
 
                      </form>
 </div>
+
 
   <div style="background:#E6E6FA;border:1px solid black;width:1900px;margin-left:0px;margin-top:0px;margin-bottom:0px;margin-right:0px">
       <div id='container'>

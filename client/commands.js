@@ -6,7 +6,10 @@ class Commands {
         this.panel = window.document.getElementById('panel');
         this.canvas = window.document.getElementById('map');
         this.ctx = this.canvas.getContext('2d');
-        this.myRoom = CONSTANTS.LOBBY;
+        this.myRoomName = CONSTANTS.LOBBY;
+        this.isPrivate = false;
+        this.privateMap;
+        this.privateCode;
         this.us_count = 0;
         this.world_count = 0;
         this.euro_count = 0;
@@ -42,7 +45,7 @@ class Commands {
     }
 
     drawLastCommand(id) {
-        if (this.myRoom !== CONSTANTS.LOBBY) {
+        if (this.myRoomName !== CONSTANTS.LOBBY) {
             this.drawCommand(this.lastCommand['timeDescrip'], this.lastCommand['citystring'], this.lastCommand['capital'], this.lastCommand['iso2'], this.lastCommand['round'], this.lastCommand['button'], this.lastCommand['clicked']);
             this.postTime(this.lastTime['time'], this.lastTime['color']);
         }
@@ -145,7 +148,9 @@ class Commands {
         $('#commands').append($("<button class='room-btn' id='world_button'><b>World</b> <br><font size=2>" + world_string + "</font></button>"))
         let misc_string; 
         if (this.misc_count > 0) {misc_string = "<b>(" + this.misc_count + " players)</b>"} else {misc_string = "<font color=\"white\">(0 players)</font>"}
-        $('#commands').append($("<button class='special-room-btn' id='misc_button'><b>Trivia</b> <br><font size=2>" + misc_string + "</font></button><br>  "))
+        $('#commands').append($("<button class='special-room-btn' id='misc_button'><b>Trivia</b> <br><font size=2>" + misc_string + "</font></button>  "))
+        if (this.isPrivate) $('#commands').append($("<button class='room-btn' id='private_button'><b>" + this.privateMap + "</b><br>code: " + this.privateCode + "</button><br>"));
+        else $('#commands').append($("<button class='room-btn' id='private_button'><b>Private</b></button><br>"));
         let euro_string; 
         if (this.euro_count > 0) {euro_string = "<b>(" + this.euro_count + " players)</b>"} else {euro_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='euro_button'><b>Europe</b> <br><font size=2>" + euro_string + "</font></button>  "))
@@ -165,7 +170,7 @@ class Commands {
         if (this.samerica_count > 0) {samerica_string = "<b>(" + this.samerica_count + " players)</b>"} else {samerica_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='samerica_button'><b>S. America</b> <br><font size=2>" + samerica_string + "</font></button>  "))
 
-        var room = this.myRoom;
+        var room = this.myRoomName;
         
         $('#mute_button').bind("click", () => {socket.emit('mute'); this.refocus()});
         $('#jitter_button').bind("click", () => {socket.emit('jitter'); this.refocus()});
@@ -175,6 +180,13 @@ class Commands {
         $('#lobby_button').bind("click", () => {if (room !== CONSTANTS.LOBBY) socket.emit('moveTo', CONSTANTS.LOBBY); this.refocus()});
         $('#world_button').bind("click", () => {if (room !== CONSTANTS.WORLD) socket.emit('moveTo', CONSTANTS.WORLD); this.refocus()});
         $('#misc_button').bind("click", () => {if (room !== CONSTANTS.MISC) socket.emit('moveTo', CONSTANTS.MISC); this.refocus()});
+        $('#private_button').bind("click", () => {
+            if (room !== CONSTANTS.PRIVATE) {
+                // Popup to ask for room name, map, bot
+                socket.emit('requestPrivatePopup');
+                // socket.emit('moveToPrivate', CONSTANTS.PRIVATE); this.refocus()
+            }
+        });
         $('#us_button').bind("click", () => {if (room !== CONSTANTS.US) socket.emit('moveTo', CONSTANTS.US); this.refocus()});
         $('#euro_button').bind("click", () => {if (room !== CONSTANTS.EURO) socket.emit('moveTo', CONSTANTS.EURO); this.refocus()});
         $('#africa_button').bind("click", () => {if (room !== CONSTANTS.AFRICA) socket.emit('moveTo', CONSTANTS.AFRICA); this.refocus()});
@@ -206,6 +218,15 @@ class Commands {
             let jitterButton = "<button class='map-style-btn" + pressedJitter + "'>Anti-Jitter</button>";
             $('#jitter_button').append($(jitterButton + "<br>"))
         }
+    }
+
+    labelPrivate(map, code) {
+        this.privateMap = map;
+        this.privateCode = code;
+        this.isPrivate = true;
+    }
+    clearPrivate() {
+        this.isPrivate = false;
     }
 
     postTime(time, color) {

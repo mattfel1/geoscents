@@ -4,7 +4,8 @@ class Chat {
     constructor(socket) {
         this.socket = socket;
         this.chatCount = 0;
-        this.myRoom = CONSTANTS.LOBBY;
+        this.myRoomName = CONSTANTS.LOBBY;
+        this.myMap = CONSTANTS.LOBBY;
         this.windowActive = true;
         this.hasNewMessage = false;
         this.muted = false;
@@ -20,7 +21,7 @@ class Chat {
     }
 
     addMessage(room, msg) {
-      if (room == this.myRoom) {
+      if (room == this.myRoomName) {
         var final_message = $("<font style=\"font-size:20px;\" />").html(msg);
         if (!this.windowActive) {
             this.hasNewMessage = true;
@@ -35,7 +36,7 @@ class Chat {
       }
     }
     addCustomMessage(room, msg, fontsize) {
-      if (room == this.myRoom) {
+      if (room == this.myRoomName) {
         var final_message = $("<font style=\"font-size:" + fontsize + "px;\" />").html(msg);
         if (!this.windowActive) {
             this.hasNewMessage = true;

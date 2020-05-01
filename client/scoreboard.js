@@ -3,7 +3,8 @@ const CONSTANTS = require('../resources/constants.js')
 class Scoreboard {
     constructor(socket) {
         this.socket = socket
-        this.myRoom = CONSTANTS.LOBBY;
+        this.myMap = CONSTANTS.LOBBY;
+        this.myRoomName = CONSTANTS.LOBBY;
     }
 
     postScore(rank, name, color, score, wins) {

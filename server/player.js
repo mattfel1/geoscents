@@ -4,7 +4,7 @@
 const CONSTANTS = require('../resources/constants.js');
 
 class Player {
-    constructor(socketid, rank, room, ip, ordinalid, name, info) {
+    constructor(socketid, rank, roomName, ip, ordinalid, name, info) {
         this.row = 0;
 		this.col = 0;
 		this.width = 5;
@@ -27,7 +27,7 @@ class Player {
         this.trophy = '';
         this.medal = '';
         this.record = '';
-        this.room = room;
+        this.roomName = roomName;
         this.choseName = false;
         this.name = name;
 		this.optOut = false;

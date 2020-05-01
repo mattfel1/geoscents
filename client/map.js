@@ -53,7 +53,8 @@ class Map {
     constructor(socket) {
         this.socket = socket;
         this.occupiedCells = []; // For keeping track of which "cells" we can write distance popups in
-        this.myRoom = CONSTANTS.LOBBY;
+        this.myRoomName = CONSTANTS.LOBBY;
+        this.myMap = CONSTANTS.LOBBY;
         this.mapStyle = 'terrain';
         this.canvas = window.document.getElementById('map');
         this.ctx = this.canvas.getContext('2d');
@@ -342,6 +343,7 @@ class Map {
         this.ctx.lineWidth = CONSTANTS.BUBBLE_WIDTH;
         this.ctx.strokeStyle = color;
         this.ctx.stroke();
+        console.log("drew at " + coords['col'] + " " + coords['row'] + " in " + color)
         this.ctx.closePath()
     }
     drawDist(coords, color, distance) {

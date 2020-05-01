@@ -11,7 +11,21 @@
 	background: #000; /* fallback */
 	background: rgba(0,0,0,0.75);
 }
-	.overlay-content {
+	.overlay-content-name {
+		display: none;
+		background: #fff;
+		padding: 1%;
+		width: 25%;
+		position: absolute;
+		top: 800px;
+		left: 800px;
+		margin: 0 0 0 -20%; /* add negative left margin for half the width to center the div */
+		cursor: default;
+		z-index: 10001;
+		border-radius: 4px;
+		box-shadow: 0 0 5px rgba(0,0,0,0.9);
+	}
+	.overlay-content-code {
 		display: none;
 		background: #fff;
 		padding: 1%;

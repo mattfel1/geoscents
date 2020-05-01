@@ -3,7 +3,8 @@ const CONSTANTS = require('../resources/constants.js')
 class Sounds {
     constructor(socket) {
         this.socket = socket;
-        this.myRoom = CONSTANTS.LOBBY;
+        this.myMap = CONSTANTS.LOBBY;
+        this.myRoomName = CONSTANTS.LOBBY;
         this.messagePop = new Audio('/resources/message.mp3');
         this.messagePop.volume = 0.5;
         // this.gameBeginSound = new Audio('/resources/gamestart.mp3');
@@ -45,7 +46,7 @@ class Sounds {
     }
 
     newMessage(room) {
-      if (room == this.myRoom) {
+      if (room == this.myRoomName) {
           this.messagePop.play();
       }
     }

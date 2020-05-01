@@ -10,8 +10,16 @@ const helpers = require('../resources/helpers.js');
 const fs = require('fs')
 
 class Room {
-    constructor(map) {
-      this.room = map;
+    constructor(map, name) {
+      this.roomName = name;
+      this.map = map;
+      this.isPrivate = name.startsWith('private');
+      this.hasJoe = false;
+      const avg_name = "Average " + CONSTANTS.AVERAGE_NAMES[Math.floor(Math.random() * CONSTANTS.AVERAGE_NAMES.length)];
+      this.joe = new Player(name + "_joe", 0, this.map, this.ordinalCounter, this.ordinalCounter, avg_name, {'moved': true, 'color': 'black', 'wins': 0, 'name': avg_name, 'optOut': true})
+      this.joeTime = 10;
+      this.joeLat = 0;
+      this.joeLon = 0;
       // Map from socketID -> socket object
       this.clients = new Map();
       // Map from socketID -> player
@@ -70,13 +78,13 @@ class Room {
     }
     // Player basic IO
     addPlayer(socket,info) {
-        const player = new Player(socket.id, this.players.size, this.room, socket.handshake.address, this.ordinalCounter, "Player " + this.ordinalCounter % 100, info);
+        const player = new Player(socket.id, this.players.size, this.map, socket.handshake.address, this.ordinalCounter, "Player " + this.ordinalCounter % 100, info);
         this.clients.set(socket.id, socket);
       this.players.set(socket.id, player);
       this.ordinalCounter = this.ordinalCounter + 1;
       this.sortPlayers();
       this.drawScorePanel(socket.id);
-      socket.emit('fresh map', this.room);
+      socket.emit('fresh map', this.map);
       this.drawCommand(socket);
     }
 
@@ -105,7 +113,7 @@ class Room {
             this.players.get(socket.id).choseName = true;
         }
       this.drawScorePanel(socket.id);
-      socket.emit('fresh map', this.room);
+      socket.emit('fresh map', this.map);
     }
 
     getPlayerRawName(socket) {
@@ -181,7 +189,7 @@ class Room {
           const player = this.players.get(socket.id);
           const color = player.color;
           const name = player.name;
-          const room = this.room;
+          const room = this.roomName;
           const boot_msg = "[ <font color='" + color + "'><b>" + name + "</b> has been booted due to inactivity!</font> ]<br>";
           this.players.delete(socket.id);
           this.clients.forEach(function(s,id) {
@@ -202,20 +210,22 @@ class Room {
     }
 
     playerClicked(socket, playerClick) {
-      if (this.players.has(socket.id)) {
-          const player = this.players.get(socket.id);
-          if (playerClick.downCount < CONSTANTS.SCROLL_THRESHOLD && playerClick.mouseDown && this.state === CONSTANTS.GUESS_STATE && !player.clicked) {
-              if (playerClick.cursorX < CONSTANTS.MAP_WIDTH && playerClick.cursorY < CONSTANTS.MAP_HEIGHT) {
+      if (this.players.has(socket.id) || socket == this.joe.id) {
+          let player;
+          if (socket == this.joe.id) player = this.joe;
+          else player = this.players.get(socket.id);
+          if (socket == this.joe.id || (playerClick.downCount < CONSTANTS.SCROLL_THRESHOLD && playerClick.mouseDown && this.state === CONSTANTS.GUESS_STATE && !player.clicked)) {
+              if (socket == this.joe.id || (playerClick.cursorX < CONSTANTS.MAP_WIDTH && playerClick.cursorY < CONSTANTS.MAP_HEIGHT)) {
                   player.clicked = true;
                   player.consecutiveRoundsInactive = 0;
                   player.row = playerClick.cursorY;
                   player.col = playerClick.cursorX;
                   player.clickedAt = this.timer;
-                  const geo = Geography.mercToGeo(player.room, player.row, player.col);
+                  const geo = Geography.mercToGeo(player.roomName, player.row, player.col);
                   player.lat = geo['lat'];
                   player.lon = geo['lng'];
                   // console.log('click at ' + player.row + ',' + player.col + ' (' + player.lat + ',' + player.lon + ')')
-                  socket.emit('draw point', {'row': player.row, 'col': player.col}, player.color, player.radius())
+                  if (socket != this.joe.id) socket.emit('draw point', {'row': player.row, 'col': player.col}, player.color, player.radius())
               }
           }
       }
@@ -300,8 +310,8 @@ class Room {
         const getPosition = (score, category) => {return this.getPosition(score, category)};
         const insertRecord = (p,c,d,r,pl) => {return this.insertRecord(p,c,d,r,pl)};
         const sufx = ["st", "nd", "rd"];
-        const room = this.room;
-        Array.from(this.sortPlayers()).forEach((player, id) => {
+        const room = this.map;
+        Array.from(this.sortPlayersNoJoe()).forEach((player, id) => {
             const monthNames = ["Jan", "Feb", "Mar","Apr", "May", "Jun","Jul", "Aug", "Sep","Oct", "Nov", "Dec"];
             const date = new Date();
             const utcDate = new Date(date.toUTCString());
@@ -361,7 +371,7 @@ class Room {
     }
 
     printScoresWithSelf(socket, socketId) {
-        if (this.room !== CONSTANTS.LOBBY) {
+        if (this.map !== CONSTANTS.LOBBY) {
             socket.emit('post group', 'Yearly Records:', this.allRecord);
             socket.emit('post group', 'Monthly Records:', this.monthRecord);
             socket.emit('post group', 'Weekly Records:', this.weekRecord);
@@ -401,19 +411,22 @@ class Room {
             return JSON.parse( JSON.stringify(x, null, 2) );
         }
       const target = this.target;
-      const room = this.room;
+      const map = this.map;
       const round = this.round;
       const updateHistory = (p,r,s) => this.updateHistory(p,r,s);
       const historyScore = (player, payload) => {this.historyScore(player, payload)};
-      Array.from(this.players.values()).forEach(function(player) {
-          const merc = Geography.geoToMerc(room,parseFloat(target['lat']), parseFloat(target['lng']));
-          player.geoError = Geography.geoDist(room, player.lat, player.lon, parseFloat(target['lat']), parseFloat(target['lng']));
-          player.mercError = Geography.mercDist(room, player.row, player.col, merc['row'], merc['col']);
+      let playersToScore = Array.from(this.players.values());
+      if (this.hasJoe)
+        playersToScore.push(this.joe);
+      Array.from(playersToScore).forEach(function(player) {
+          const merc = Geography.geoToMerc(map,parseFloat(target['lat']), parseFloat(target['lng']));
+          player.geoError = Geography.geoDist(map, player.lat, player.lon, parseFloat(target['lat']), parseFloat(target['lng']));
+          player.mercError = Geography.mercDist(map, player.row, player.col, merc['row'], merc['col']);
           if (!player.clicked || isNaN(player.mercError)) {
               player.mercError = 9999;
               player.geoError = 999999;
           }
-          const update = Geography.score(room, player.geoError, player.mercError, player.clickedAt);
+          const update = Geography.score(map, player.geoError, player.mercError, player.clickedAt);
           const newScore = Math.floor(player.score + update);
           let playerScoreLine = " + " + Math.floor(update) + " points (Distance: " + Math.floor(player.geoError) + " km, Time Bonus: " + (Math.floor(player.clickedAt * 10) / 10) + "s)";
           if (player.geoError === 999999) {
@@ -431,7 +444,7 @@ class Room {
       const lons = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.lon);
       const times = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.clickedAt);
       const ips = Array.from(this.players.values()).filter(player => player.clicked).map(x => respectOptOut(x))
-      helpers.recordGuesses(this.room, Geography.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], ips, dists, times, lats, lons, this.target['lat'], this.target['lng'], helpers.makeLink(room, this.target));
+      helpers.recordGuesses(this.map, Geography.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], ips, dists, times, lats, lons, this.target['lat'], this.target['lng'], helpers.makeLink(map, this.target));
     }
 
     static broadcastPoint(socket, row, col, color, radius, distance) {
@@ -439,6 +452,10 @@ class Room {
           socket.emit('draw point', {'row': row, 'col': col}, color, radius)
           socket.emit('draw dist', {'row': row, 'col': col}, color, distance)
       }
+    }
+    static broadcastJoe(socket, joe) {
+      socket.emit('draw point', {'row': joe.row, 'col': joe.col}, joe.color, joe.radius());
+      socket.emit('draw dist', {'row': joe.row, 'col': joe.col}, joe.color, joe.geoError);
     }
 
     static broadcastAnswer(socket, row, col) {
@@ -448,11 +465,12 @@ class Room {
     }
 
     revealAll(socket) {
-        const answer = Geography.geoToMerc(this.room, this.target['lat'], this.target['lng']);
+        const answer = Geography.geoToMerc(this.map, this.target['lat'], this.target['lng']);
         Room.broadcastAnswer(socket, answer['row'], answer['col']);
         this.players.forEach((player,id) => {
             Room.broadcastPoint(socket, player.row, player.col, player.color, player.radius(), player.geoError);
         });
+        if (this.hasJoe) Room.broadcastJoe(socket, this.joe)
     }
 
     incrementInactive() {
@@ -464,7 +482,7 @@ class Room {
     bootInactive() {
         const bootPlayer = (socket) => {this.bootPlayer(socket)};
         const clients = this.clients;
-        const room = this.room;
+        const room = this.roomName;
         this.players.forEach((player, id) => {
             if (player.consecutiveRoundsInactive > CONSTANTS.MAX_INACTIVE || player.consecutiveSecondsInactive > CONSTANTS.MAX_S_INACTIVE) {
                 if (clients.has(id)) {
@@ -480,7 +498,10 @@ class Room {
     }
 
     allPlayersClicked() {
-        return this.players.size > 0 && Array.from(this.players.values()).filter(player => !player.clicked).length === 0
+        const realPlayersClicked = this.players.size > 0 && Array.from(this.players.values()).filter(player => !player.clicked).length === 0;
+        let joeClicked = true
+        if (this.hasJoe) joeClicked = this.joe.clicked;
+        return joeClicked && realPlayersClicked;
     }
 
     numPlayers() {
@@ -499,14 +520,13 @@ class Room {
 
     drawCommand(socket) {
         let capital;
-        const room = this.room;
+        const map = this.map;
         const round = this.round;
         if (this.state === CONSTANTS.PREPARE_GAME_STATE) {
-            socket.emit('fresh map', room);
+            socket.emit('fresh map', map);
             socket.emit('draw prepare', round);
         } else if (this.state === CONSTANTS.BEGIN_GAME_STATE) {
-            socket.emit('fresh map', room);
-            socket.emit('play begin sound', room);
+            socket.emit('fresh map', map);
             socket.emit('draw begin', this.timer, round);
         } else if (this.state === CONSTANTS.GUESS_STATE) {
             const thisTarget = Geography.stringifyTarget(this.target);
@@ -515,7 +535,7 @@ class Room {
             capital = "";
             if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
             if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
-            socket.emit('fresh map', room);
+            socket.emit('fresh map', map);
             socket.emit('draw guess city', citystring, capital, iso2, round);
         } else if (this.state === CONSTANTS.REVEAL_STATE) {
             const thisTarget = Geography.stringifyTarget(this.target);
@@ -524,7 +544,7 @@ class Room {
             capital = "";
             if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
             if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
-            socket.emit('fresh map', room);
+            socket.emit('fresh map', map);
             socket.emit('draw reveal city', citystring, capital, iso2, round);
             this.revealAll(socket);
         }
@@ -544,8 +564,35 @@ class Room {
         });
     }
 
+    processJoe() {
+        if (!this.joe.clicked && this.timer <= this.joeTime) {
+            const joeGeo = Geography.geoToMerc(this.map, this.joeLat, this.joeLon);
+            const playerClick = {
+              mouseDown: false,
+              touchDown: false,
+              downCount: 0,
+              cursorX: joeGeo.col,
+              cursorY: joeGeo.row
+            };
+            this.playerClicked(this.joe.id, playerClick);
+        }
+    }
+
     sortPlayers() {
-        const sortedPlayers = Array.from(this.players.values()).filter((p) => p.choseName).sort((a, b) => {
+        let allPlayers = Array.from(this.players.values());
+        if (this.hasJoe)
+            allPlayers.push(this.joe);
+        const sortedPlayers = allPlayers.filter((p) => p.choseName).sort((a, b) => {
+            return b.score - a.score
+        });
+        Array.from(sortedPlayers.values()).forEach((p,i) => {p.rank = i});
+        this.winner = Array.from(sortedPlayers)[0];
+        return sortedPlayers;
+    }
+
+    sortPlayersNoJoe() {
+        let allPlayers = Array.from(this.players.values());
+        const sortedPlayers = allPlayers.filter((p) => p.choseName).sort((a, b) => {
             return b.score - a.score
         });
         Array.from(sortedPlayers.values()).forEach((p,i) => {p.rank = i});
@@ -556,7 +603,7 @@ class Room {
     fsm() {
       // Game flow state machine
       this.decrementTimer();
-      if (this.room === CONSTANTS.LOBBY) {
+      if (this.roomName === CONSTANTS.LOBBY) {
           this.timerColor = CONSTANTS.LOBBY_COLOR;
           this.state = CONSTANTS.LOBBY_STATE;
           this.clients.forEach(function (socket, id) {
@@ -567,7 +614,7 @@ class Room {
           this.bootInactive();
       }
       else {
-          if (this.numPlayers() === 0 && this.room !== CONSTANTS.LOBBY) {
+          if (this.numPlayers() === 0 && this.roomName !== CONSTANTS.LOBBY) {
               this.timerColor = CONSTANTS.LOBBY_COLOR;
               this.state = CONSTANTS.IDLE_STATE;
               this.removePoppers();
@@ -587,13 +634,16 @@ class Room {
                   this.playersHistory = new Map();
                   this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, CONSTANTS.BEGIN_GAME_DURATION);
                   Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
+                  if (this.hasJoe) this.joe.deepReset(this.players.values().size)
               }
           } else if (this.state === CONSTANTS.SETUP_STATE) {
-              [this.target, this.blacklist] = Geography.randomCity(this.room, this.blacklist);
+              [this.target, this.blacklist] = Geography.randomCity(this.map, this.blacklist);
+              if (this.hasJoe) [this.joeTime, this.joeLat, this.joeLon] = helpers.joeData(this.map, Geography.stringifyTarget(this.target).string);
               this.timerColor = CONSTANTS.GUESS_COLOR;
               Array.from(this.players.values()).forEach((p, id) => {
                   p.reset()
               });
+              if (this.hasJoe) this.joe.reset();
               this.playedCities[this.round] = this.target;
               this.stateTransition(CONSTANTS.GUESS_STATE, CONSTANTS.GUESS_DURATION);
           } else if (this.state === CONSTANTS.GUESS_STATE) {
@@ -607,6 +657,7 @@ class Room {
                   this.stateTransition(CONSTANTS.REVEAL_STATE, CONSTANTS.REVEAL_DURATION);
                   this.timerColor = CONSTANTS.REVEAL_COLOR;
               }
+              if (this.hasJoe) this.processJoe()
           } else if (this.state === CONSTANTS.REVEAL_STATE) {
               if (this.timer <= 0 && this.round >= CONSTANTS.GAME_ROUNDS) {
                   this.round = 0;
@@ -634,7 +685,7 @@ class Room {
     distributeMessage(senderSocket, new_sent_msg, cb) {
       const getname = (s) => this.getPlayerName(s);
       const senderColor = this.getPlayerColor(senderSocket);
-      const room = this.room;
+      const room = this.roomName;
       this.clients.forEach((socket,id) => {
           let senderName = getname(senderSocket);
           if (this.players.has(id)) {
@@ -647,7 +698,7 @@ class Room {
       });
     };
     whisperMessage(senderSocket, msg, cb) {
-      const room = this.room;
+      const room = this.roomName;
       this.clients.forEach((socket,id) => {
           if (this.players.has(id)) {
               const player = this.players.get(id);
@@ -659,14 +710,14 @@ class Room {
     printWinner(winner, score, color) {
         this.recordsBroken();
         const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
-        const room = this.room;
+        const room = this.roomName;
         this.clients.forEach((socket,id) => {
             socket.emit('draw chart', playersHistory, winner, color, room, score);
             // socket.emit('break history',  room, winner, score, color);
         });
     }
     historyRound(round, thisTarget) {
-        const room = this.room;
+        const room = this.roomName;
         let star = "";
         if (thisTarget['majorcapital']) star = "*";
         if (thisTarget['minorcapital']) star = "†";
@@ -678,7 +729,7 @@ class Room {
         });
     }
     historyScore(player, score) {
-        const room = this.room;
+        const room = this.roomName;
         this.clients.forEach((socket,id) => {
             let name = player.name;
             if (player.id === id) name = "*" + name;

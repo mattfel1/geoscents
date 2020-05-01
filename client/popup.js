@@ -54,7 +54,7 @@ class Popup {
 
     // function to close our popups
     closePopup(){
-        $('.overlay-bg, .overlay-content').hide(); //hide the overlay
+        $('.overlay-bg, .overlay-content-name').hide(); //hide the overlay
         this.isShowing = false;
         var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);
     }
