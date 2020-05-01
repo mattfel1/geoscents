@@ -277,8 +277,8 @@ io.on('connection', (socket) => {
 
           socket.emit('moved to', map, dest, rooms[dest].state);
           socket.emit('update messages', dest, PRIVATE_MESSAGE);
-          io.sockets.emit('update messages', dest, '[ ' + dest + ' ' + rooms[dest].joe.name +
-              ' ]: Hello!  I am just an ' + rooms[dest].joe.name + '!  I click at the average location at the average time across all players who have played this game!<br>');
+          io.sockets.emit('update messages', dest, '[ ' + dest + ' <b>' + rooms[dest].joe.name +
+              '</b> ]: Hello!  I am just an ' + rooms[dest].joe.name + '!  I click at the average location at the average time across all players who have played this game!<br>');
           rooms[dest].addPlayer(socket, info);
           playerRooms.set(socket.id, rooms[dest]);
           var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'><b>" + rooms[dest].getPlayerRawName(socket) + "</b> has joined " + dest + "!</font> ]<br>";

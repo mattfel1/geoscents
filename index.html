@@ -26,7 +26,7 @@
                       <label for="Code">Room code<br></label>
                      <input type="text" id="selected_code" autofocus name="selected_code" style="width: 120px;" required minlength="1" maxlength="5" pattern="[a-z0-9]+" title="Name should only contain lowercase letters and numbers" />
                      </td>
-                     <td style="text-align:center;padding: 15px;">
+                     <td style="text-align:center;padding: 15px;width:auto">
                       <label for="Map">Choose a map<br></label>
 
 
@@ -46,12 +46,16 @@
                         if (document.getElementById('requestedMap').value.length == 0) document.getElementById('requestedMap').value = "Random"
                       </script>
                      </td>
-                     <td style="text-align:center;padding: 15px;">
-                      <label for="Bot">Play against an average Joe?<br></label>
+                     <td style="text-align:center;padding: 15px;width:auto">
+                      <label for="Bot">Add bot to room?<br></label>
                       <select id="bot">
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                       </select>
+                      <script type="text/javascript">
+                        document.getElementById('bot').value = "<?php echo $_GET['bot'];?>";
+                        if (document.getElementById('bot').value.length == 0) document.getElementById('bot').value = "Yes"
+                      </script>
                      </td>
                  </table>
                      <input type="submit" style="text-align:center" value="Create room!" />
