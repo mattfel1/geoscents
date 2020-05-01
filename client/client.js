@@ -42,17 +42,6 @@ $(document).ready(function(){
     const popup = new Popup(socket);
     popup.showPopup();
 
-    /**** Challenge *****/
-    socket.on('challenge request', (src, dst, mapName, roomId) => {
-        if (socket.id == src) {
-            const challenge = new Challenge(src, dst, mapName, roomId);
-            challenge.showPopup("")
-        } else if (socket.id == dst) {
-            const challenge = new Challenge(src, dst, mapName, roomId);
-            challenge.showPopup("")
-        }
-    });
-
 
     /**** Scoreboard *****/
     const scoreboard = new Scoreboard(socket);
@@ -134,7 +123,10 @@ $(document).ready(function(){
     const privatepopup = new PrivatePopup(socket);
     privatepopup.hide();
     socket.on('request private popup', () => {
-        privatepopup.showPopup()
+        if (myRoomName.startsWith("private"))
+            privatepopup.showPopup("Change map")
+        else
+            privatepopup.showPopup("Choose a map<br>(Ignored if room already exists)<br>")
     });
 
     /**** Map *****/

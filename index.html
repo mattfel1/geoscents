@@ -27,7 +27,7 @@
                      <input type="text" id="selected_code" autofocus name="selected_code" style="width: 120px;" required minlength="1" maxlength="5" pattern="[a-z0-9]+" title="Name should only contain lowercase letters and numbers" />
                      </td>
                      <td style="text-align:center;padding: 8px;width:auto">
-                      <label for="Map">Choose a map<br>(Ignored if room already exists)<br></label>
+                      <div id="maptitle">Choose a map<br>(Ignored if room already exists)<br></div>
 
 
                       <select id="requestedMap">
@@ -38,8 +38,8 @@
                         <option value="Africa">Africa</option>
                         <option value="Asia">Asia</option>
                         <option value="Oceania">Oceania</option>
-                        <option value="NAmerica">N. America</option>
-                        <option value="SAmerica">S. America</option>
+                        <option value="N. America">N. America</option>
+                        <option value="S. America">S. America</option>
                       </select>
                       <script type="text/javascript">
                         document.getElementById('requestedMap').value = "<?php echo $_GET['requestedMap'];?>";
@@ -58,7 +58,7 @@
                       </script>
                      </td>
                  </table>
-                     <input type="submit" style="text-align:center" value="Create room!" />
+                     <input type="submit" style="text-align:center" value="Go!" />
 
                      </form>
 </div>

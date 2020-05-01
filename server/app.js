@@ -244,6 +244,7 @@ io.on('connection', (socket) => {
     });
     socket.on('moveToPrivate', (askmap, code, bot) => {
       if (playerRooms.has(socket.id)) {
+          let dest = "private_" + code;
           const room = playerRooms.get(socket.id);
           const origin = room.roomName;
           const oldColor = rooms[origin].getPlayerColor(socket);
@@ -257,35 +258,45 @@ io.on('connection', (socket) => {
               'wins': oldWins,
               'optOut': oldOptOut
           }
-          var leave_msg = "[ <font color='" + rooms[origin].getPlayerColor(socket) + "'><b>" + rooms[origin].getPlayerRawName(socket) + "</b> has left " + origin + " and joined a private room!</font> ]<br>";
-          io.sockets.emit("update messages", origin, leave_msg)
-          rooms[origin].killPlayer(socket);
-          Object.values(rooms).forEach(function(room) {
-            if (room.isPrivate && room.playerCount() == 0 && rooms.hasOwnProperty(room.roomName)) {
-              delete rooms[room.roomName];
-            }
-          });
-          let dest = "private_" + code;
-          let map = askmap;
-          if (!(dest in rooms)) {
-            rooms[dest] = new Room(map, dest);
+          if (origin == dest) {
+              var leave_msg = "[ <font color='" + rooms[origin].getPlayerColor(socket) + "'><b>" + rooms[origin].getPlayerRawName(socket) + "</b> has changed the map to " + askmap + "!</font> ]<br>";
+              io.sockets.emit("update messages", origin, leave_msg);
+              let map = askmap;
+              rooms[dest].map = map;
+              rooms[dest].hasJoe = rooms[dest].hasJoe || bot;
+              rooms[dest].reset();
+              helpers.log("Player " +  socket.handshake.address + " " + rooms[dest].getPlayerName(socket) + " changed map in " + dest + " with bot "  + rooms[dest].hasJoe);
+              helpers.logHistogram(rooms)
           } else {
-            map = rooms[dest].map
-          }
-          rooms[dest].hasJoe = rooms[dest].hasJoe || bot;
+              var leave_msg = "[ <font color='" + rooms[origin].getPlayerColor(socket) + "'><b>" + rooms[origin].getPlayerRawName(socket) + "</b> has left " + origin + " and joined a private room!</font> ]<br>";
+              io.sockets.emit("update messages", origin, leave_msg)
+              rooms[origin].killPlayer(socket);
+              Object.values(rooms).forEach(function(room) {
+                if (room.isPrivate && room.playerCount() == 0 && rooms.hasOwnProperty(room.roomName)) {
+                  delete rooms[room.roomName];
+                }
+              });
+              let map = askmap;
+              if (!(dest in rooms)) {
+                rooms[dest] = new Room(map, dest);
+              } else {
+                map = rooms[dest].map
+              }
+              rooms[dest].hasJoe = rooms[dest].hasJoe || bot;
 
-          socket.emit('moved to', map, dest, rooms[dest].state);
-          socket.emit('update messages', dest, PRIVATE_MESSAGE);
-          io.sockets.emit('update messages', dest, '[ ' + dest + ' <b>' + rooms[dest].joe.name +
-              '</b> ]: Hello!  I am just an ' + rooms[dest].joe.name + '!  I click at the average location at the average time across all players who have played this game!<br>');
-          rooms[dest].addPlayer(socket, info);
-          playerRooms.set(socket.id, rooms[dest]);
-          var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'><b>" + rooms[dest].getPlayerRawName(socket) + "</b> has joined " + dest + "!</font> ]<br>";
-          io.sockets.emit("update messages", dest, join_msg);
-          // if (dest == CONSTANTS.MISC) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
-          io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount(),rooms[CONSTANTS.MISC].playerCount());
-          helpers.log("Player " +  socket.handshake.address + " " + rooms[dest].getPlayerName(socket) + " moved to room " + dest + " with bot "  + rooms[dest].hasJoe);
-          helpers.logHistogram(rooms)
+              socket.emit('moved to', map, dest, rooms[dest].state);
+              socket.emit('update messages', dest, PRIVATE_MESSAGE);
+              io.sockets.emit('update messages', dest, '[ ' + dest + ' <b>' + rooms[dest].joe.name +
+                  '</b> ]: Hello!  I am just an ' + rooms[dest].joe.name + '!  I click at the average location at the average time across all players who have played this game!<br>');
+              rooms[dest].addPlayer(socket, info);
+              playerRooms.set(socket.id, rooms[dest]);
+              var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'><b>" + rooms[dest].getPlayerRawName(socket) + "</b> has joined " + dest + "!</font> ]<br>";
+              io.sockets.emit("update messages", dest, join_msg);
+              // if (dest == CONSTANTS.MISC) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
+              io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount(),rooms[CONSTANTS.MISC].playerCount());
+              helpers.log("Player " +  socket.handshake.address + " " + rooms[dest].getPlayerName(socket) + " moved to room " + dest + " with bot "  + rooms[dest].hasJoe);
+              helpers.logHistogram(rooms)
+          }
       }
     });
     socket.on('playerClick', (playerClick) => {

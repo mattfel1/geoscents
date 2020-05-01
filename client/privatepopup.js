@@ -22,10 +22,12 @@ class PrivatePopup {
     }
 
     // function to show our popups
-    showPopup() {
+    showPopup(msg) {
         this.isShowing = true;
         var docHeight = $(document).height(); //grab the height of the page
         var scrollTop = $(window).scrollTop(); //grab the px value from the top of the page to where you're scrolling
+        $('#maptitle').empty()
+        $('#maptitle').append(msg)
         $('.overlay-bg').show().css({'height' : docHeight}); //display your popup background and set height to the page height
         $('.privatepopup').show().css({'top': scrollTop+20+'px'}); //show the appropriate popup and set the content 20px from the window top
         $('#selected_code').focus();
