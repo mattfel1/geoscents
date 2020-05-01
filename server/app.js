@@ -89,7 +89,6 @@ var rooms = {
     'Lobby': new Room(CONSTANTS.LOBBY, 'Lobby'),
 };
 var playerRooms = new Map();
-var privateRoomCount = 0;
 
 const WELCOME_MESSAGE1 = '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
                           'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
@@ -285,6 +284,7 @@ io.on('connection', (socket) => {
           io.sockets.emit("update messages", dest, join_msg);
           // if (dest == CONSTANTS.MISC) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
           io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount(),rooms[CONSTANTS.MISC].playerCount());
+          helpers.log("Player " +  socket.handshake.address + " " + rooms[dest].getPlayerName(socket) + " moved to room " + dest + " with bot "  + rooms[dest].hasJoe);
           helpers.logHistogram(rooms)
       }
     });

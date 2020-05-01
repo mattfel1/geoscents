@@ -22,12 +22,12 @@
     <p>Set up and join private room</p>
                      <form id="code">
                  <table>
-                     <td style="text-align:center;padding: 15px;">
+                     <td style="text-align:center;padding: 8px;">
                       <label for="Code">Room code<br></label>
                      <input type="text" id="selected_code" autofocus name="selected_code" style="width: 120px;" required minlength="1" maxlength="5" pattern="[a-z0-9]+" title="Name should only contain lowercase letters and numbers" />
                      </td>
-                     <td style="text-align:center;padding: 15px;width:auto">
-                      <label for="Map">Choose a map<br></label>
+                     <td style="text-align:center;padding: 8px;width:auto">
+                      <label for="Map">Choose a map<br>(Ignored if room already exists)<br></label>
 
 
                       <select id="requestedMap">
@@ -46,7 +46,7 @@
                         if (document.getElementById('requestedMap').value.length == 0) document.getElementById('requestedMap').value = "Random"
                       </script>
                      </td>
-                     <td style="text-align:center;padding: 15px;width:auto">
+                     <td style="text-align:center;padding: 8px;width:auto">
                       <label for="Bot">Add bot to room?<br></label>
                       <select id="bot">
                         <option value="Yes">Yes</option>
