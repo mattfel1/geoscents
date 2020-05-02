@@ -4,6 +4,7 @@ const CONSTANTS = require('../resources/constants.js');
 class PrivatePopup {
     constructor(socket) {
         this.socket = socket;
+        this.configured = true;
         this.isShowing = false;
         this.map = '';
         this.code = '';
@@ -17,17 +18,17 @@ class PrivatePopup {
             map = options[Math.floor(Math.random() * options.length)];
         }
         this.map = map;
-        this.code = info['code'];
-        this.socket.emit('moveToPrivate', map, info['code'], info['bot'] == 'Yes', cb);
+        this.code = info['code'];this.socket.emit('moveToPrivate', map, info['code'], info['bot'] == 'Yes', cb);
     }
 
     // function to show our popups
     showPopup(msg) {
         this.isShowing = true;
+        this.configured = false;
         var docHeight = $(document).height(); //grab the height of the page
         var scrollTop = $(window).scrollTop(); //grab the px value from the top of the page to where you're scrolling
-        $('#maptitle').empty()
-        $('#maptitle').append(msg)
+        // $('#maptitle').empty()
+        // $('#maptitle').append(msg)
         $('.overlay-bg').show().css({'height' : docHeight}); //display your popup background and set height to the page height
         $('.privatepopup').show().css({'top': scrollTop+20+'px'}); //show the appropriate popup and set the content 20px from the window top
         $('#selected_code').focus();
@@ -51,15 +52,14 @@ class PrivatePopup {
                 nonConfiguredClose();
             }
         });
-
          // hide this.when user sends name
-        $("form#code").submit(function(e) {
+        $("form#code").off().submit(function(e) {
             e.preventDefault();
-
             var code = $(this).find("#selected_code").val();
             var requestedMap = $(this).find("#requestedMap").val();
             var bot = $(this).find("#bot").val();
-            goToRoom({'code':code, 'requestedMap':requestedMap, 'bot':bot}, configuredClose());           
+            goToRoom({'code': code, 'requestedMap': requestedMap, 'bot': bot}, configuredClose());
+
         });
     }
 

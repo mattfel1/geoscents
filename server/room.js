@@ -34,46 +34,55 @@ class Room {
       this.winner = null;
       this.blacklist = []; // List of countries or states to avoid drawing for this round
       this.timerColor = CONSTANTS.LOBBY_COLOR;
-      if (fs.existsSync('/scratch/' + map + '_day_record')) {
+      this.dayRecord;
+      this.weekRecord;
+      this.monthRecord;
+      this.allRecord;
+      this.loadRecords();
+}
+
+    loadRecords() {
+      if (fs.existsSync('/scratch/' + this.map + '_day_record')) {
           try {
-              this.dayRecord = JSON.parse(fs.readFileSync('/scratch/' + map + '_day_record', 'utf8'));
+              this.dayRecord = JSON.parse(fs.readFileSync('/scratch/' + this.map + '_day_record', 'utf8'));
           } catch (err) {
               this.dayRecord = CONSTANTS.INIT_RECORD;
           }
       } else {
           this.dayRecord = CONSTANTS.INIT_RECORD;
       }
-      if (fs.existsSync('/scratch/' + map + '_week_record')) {
+      if (fs.existsSync('/scratch/' + this.map + '_week_record')) {
           try {
-              this.weekRecord = JSON.parse(fs.readFileSync('/scratch/' + map + '_week_record', 'utf8'));
+              this.weekRecord = JSON.parse(fs.readFileSync('/scratch/' + this.map + '_week_record', 'utf8'));
           } catch (err) {
               this.weekRecord = CONSTANTS.INIT_RECORD;
           }
       } else {
           this.weekRecord = CONSTANTS.INIT_RECORD;
       }
-      if (fs.existsSync('/scratch/' + map + '_month_record')) {
+      if (fs.existsSync('/scratch/' + this.map + '_month_record')) {
           try {
-              this.monthRecord = JSON.parse(fs.readFileSync('/scratch/' + map + '_month_record', 'utf8'));
+              this.monthRecord = JSON.parse(fs.readFileSync('/scratch/' + this.map + '_month_record', 'utf8'));
           } catch (err) {
               this.monthRecord = CONSTANTS.INIT_RECORD;
           }
       } else {
           this.monthRecord = CONSTANTS.INIT_RECORD;
       }
-      if (fs.existsSync('/scratch/' + map + '_all-time_record')) {
+      if (fs.existsSync('/scratch/' + this.map + '_all-time_record')) {
           try {
-              this.allRecord = JSON.parse(fs.readFileSync('/scratch/' + map + '_all-time_record', 'utf8'));
+              this.allRecord = JSON.parse(fs.readFileSync('/scratch/' + this.map + '_all-time_record', 'utf8'));
           } catch (err) {
               this.allRecord = CONSTANTS.INIT_RECORD;
           }
       } else {
           this.allRecord = CONSTANTS.INIT_RECORD;
       }
-}
-
+    }
     reset() {
         this.state = CONSTANTS.IDLE_STATE;
+        this.loadRecords();
+        this.drawScorePanel();
     }
     // Player count
     playerCount() {

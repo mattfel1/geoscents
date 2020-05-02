@@ -168,6 +168,7 @@ $(document).ready(function(){
         clickedReady = false;
         if (roomName.startsWith('private')) commands.labelPrivate(mapName, privatepopup.code);
         else commands.clearPrivate()
+        commands.postButtons()
         betweenGames = roomState === CONSTANTS.PREPARE_GAME_STATE;
     });
     setInterval(() => {

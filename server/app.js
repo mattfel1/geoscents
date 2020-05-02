@@ -265,6 +265,7 @@ io.on('connection', (socket) => {
               rooms[dest].map = map;
               rooms[dest].hasJoe = rooms[dest].hasJoe || bot;
               rooms[dest].reset();
+              socket.emit('moved to', map, dest, rooms[dest].state);
               helpers.log("Player " +  socket.handshake.address + " " + rooms[dest].getPlayerName(socket) + " changed map in " + dest + " with bot "  + rooms[dest].hasJoe);
               helpers.logHistogram(rooms)
           } else {
@@ -283,7 +284,6 @@ io.on('connection', (socket) => {
                 map = rooms[dest].map
               }
               rooms[dest].hasJoe = rooms[dest].hasJoe || bot;
-
               socket.emit('moved to', map, dest, rooms[dest].state);
               socket.emit('update messages', dest, PRIVATE_MESSAGE);
               io.sockets.emit('update messages', dest, '[ ' + dest + ' <b>' + rooms[dest].joe.name +
