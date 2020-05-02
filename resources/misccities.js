@@ -3305,6 +3305,17 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/2002–04_SARS_outbreak"
     },
     {
+      "city": "Origin of 2012 MERS Outbreak",
+      "city_ascii": "",
+      "lat": 21.543333,
+      "lng": 39.172778,
+      "iso2": "SA",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Middle_East_respiratory_syndrome"
+    },
+    {
       "city": "Speyer Wine Bottle Discovered (oldest bottle of wine)",
       "city_ascii": "",
       "lat": 49.319444,
@@ -3782,17 +3793,17 @@ module.exports = {
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Port-aux-Français"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Somapura Mahavihara (সোমপুর মহাবিহার) ",
+      "city_ascii": "",
+      "lat": 25.0311,
+      "lng": 88.9773,
+      "iso2": "BD",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Somapura_Mahavihara"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
