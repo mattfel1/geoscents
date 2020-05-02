@@ -370,15 +370,18 @@ io.on('connection', (socket) => {
                 cb();
               }
               else if (isHidden) {
+                let numHidden = 0;
                 room.distributeMessage(socket, new_sent_msg, cb)
                 Object.values(rooms).forEach(function(r) {
                     if (r.isPrivate) {
                       Array.from(r.players.values()).forEach(function(player) {
                           room.distributeMessage(socket, "  - <font color='" + player.color + "'><b>" + player.name + "</b></font>", cb)
+                          numHidden = numHidden + 1;
                       })
                     }
                 })
-                room.distributeMessage(socket, "The following players are in private games: ", cb);
+                if (numHidden > 0) room.distributeMessage(socket, "The following players are in private games: ", cb);
+                else room.distributeMessage(socket, "No players are currently in private games", cb);
               }
               else if (isWhisper) {
                 const playerName = room.getPlayerName(socket);
