@@ -11,6 +11,12 @@
 	background: #000; /* fallback */
 	background: rgba(0,0,0,0.75);
 }
+.settings {
+	border-style: inset;
+	padding-bottom: 5px;
+	display:inline-block;
+	background:#C6C6DA;
+}
 	.overlay-content-name {
 		display: none;
 		background: #fff;
@@ -29,7 +35,7 @@
 		display: none;
 		background: #fff;
 		padding: 1%;
-		width: 35%;
+		width: 15%;
 		position: absolute;
 		top: 800px;
 		left: 800px;
@@ -95,7 +101,7 @@
 		border: 1px solid #333;
 		padding: 2px 2px;
 		margin: 3px 3px;
-		font-size: 16px;
+		font-size: 14px;
 		background: darkslategray; /* fallback */
 		border-radius: 2px;
 		box-shadow: 0 0 4px rgba(0,0,0,0.3);
@@ -103,7 +109,27 @@
 	.close-btn:hover {
 		background: #05abe0;
 	}
-	.map-style-btn {
+	.joe-btn {
+			cursor: pointer;
+			border: 1px solid #333;
+			padding: 1px 1px;
+			margin: 1px 1px;
+			font-size: 14px;
+			background: #dddddd; /* fallback */
+			background: -moz-linear-gradient(top,  #dddddd 0%, #bbbbbb 4%, #999999 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dddddd), color-stop(4%,#bbbbbb), color-stop(100%,#999999));
+			background: -webkit-linear-gradient(top,  #dddddd 0%,#bbbbbb 4%,#999999 100%);
+			background: -o-linear-gradient(top,  #dddddd 0%,#bbbbbb 4%,#999999 100%);
+			background: -ms-linear-gradient(top,  #dddddd 0%,#bbbbbb 4%,#999999 100%);
+			background: linear-gradient(to bottom,  #dddddd 0%,#bbbbbb 4%,#999999 100%);
+			border-radius: 1px;
+			box-shadow: 0 0 4px rgba(0,0,0,0.3);
+		}
+		.joe-btn-container {
+			padding: 0px 0px;
+			margin: -5px 0px;
+		}
+.map-style-btn {
 			cursor: pointer;
 			border: 1px solid #333;
 			padding: 1px 1px;
@@ -120,7 +146,7 @@
 			box-shadow: 0 0 4px rgba(0,0,0,0.3);
 		}
 		.map-style-btn-container {
-			padding: 0px 0px;
+			padding: 0px 5px;
 			margin: -5px 0px;
 		}
 	.map-style-btn-clicked {

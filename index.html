@@ -27,7 +27,7 @@
                      <input type="text" id="selected_code" autofocus name="selected_code" style="width: 120px;" required minlength="1" maxlength="5" pattern="[a-z0-9]+" title="Name should only contain lowercase letters and numbers" />
                      </td>
                      <td style="text-align:center;padding: 8px;width:auto">
-                      <div id="maptitle">Choose a map<br>(Ignored if room already exists)<br></div>
+                      <div id="maptitle">Choose a map<br>(if room is new)<br></div>
 
 
                       <select id="requestedMap">
@@ -44,17 +44,6 @@
                       <script type="text/javascript">
                         document.getElementById('requestedMap').value = "<?php echo $_GET['requestedMap'];?>";
                         if (document.getElementById('requestedMap').value.length == 0) document.getElementById('requestedMap').value = "Random"
-                      </script>
-                     </td>
-                     <td style="text-align:center;padding: 8px;width:auto">
-                      <label for="Bot">Add bot to room?<br></label>
-                      <select id="bot">
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                      </select>
-                      <script type="text/javascript">
-                        document.getElementById('bot').value = "<?php echo $_GET['bot'];?>";
-                        if (document.getElementById('bot').value.length == 0) document.getElementById('bot').value = "Yes"
                       </script>
                      </td>
                  </table>

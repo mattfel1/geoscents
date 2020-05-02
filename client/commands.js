@@ -3,6 +3,7 @@ const CONSTANTS = require('../resources/constants.js');
 class Commands {
     constructor(socket) {
         this.socket = socket
+        this.hasJoe = false;
         this.panel = window.document.getElementById('panel');
         this.canvas = window.document.getElementById('map');
         this.ctx = this.canvas.getContext('2d');
@@ -133,14 +134,18 @@ class Commands {
         let button1 = "<div id='classic_button' class='map-style-btn-container'><button class='map-style-btn" + pressed1 + "'>Classic</button></div>";
         let button2 = "<div id='terrain_button' class='map-style-btn-container'><button class='map-style-btn" + pressed2 + "'>Terrain</button></div>";
         let button3 = "<div id='satellite_button' class='map-style-btn-container'><button class='map-style-btn" + pressed3 + "'>Satellite</button></div>";
-        $('#commands').append($("<div id='map-btns' style=\"display: inline-block\">" + button1 + button2 + button3 + "</div>"));
+        $('#commands').append($("<div id='settings-box' class='settings'>"))
+        $('#settings-box').append($("<div id='map-btns' style=\"display: inline-block\">" + button1 + button2 + button3 + "</div>"));
 
+        let killJoe = 'Kill Bot'; if (!this.hasJoe) killJoe = 'Create Bot';
+        let joeButton = "<div style=\"display: inline-block\" id='joe_button' class='joe-btn-container'><button class='joe-btn'>" + killJoe + "</button></div><br>";
+        $('#settings-box').append($("<div id='map-btns' style=\"display:inline-block\">" + joeButton + "</div>"));
         let pressedJitter = ''; if (this.antiJitter) pressedJitter = '-clicked';
         let jitterButton = "<div style=\"display: inline-block\" id='jitter_button' class='map-style-btn-container'><button class='map-style-btn" + pressedJitter + "'>Anti-Jitter</button></div>";
-        if (this.muted) $('#commands').append($("<button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔇 <font color=\"white\">(muted)</font></button><br>"));
-        else $('#commands').append($("<button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔊</button>"));
-        $('#commands').append($(jitterButton + "<br>"))
-        let lobby_string; 
+        if (this.muted) $('#settings-box').append($("<div style='display: inline-block'><button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔇 <font color=\"white\">(muted)</font></button><br>" + jitterButton + "</div><br>"));
+        else $('#settings-box').append($("<div style='display: inline-block'><button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔊</button><br>" + jitterButton + "</div><br>"));
+        $('#commands').append($("</div><br>"))
+        let lobby_string;
         if (this.lobby_count > 0) {lobby_string = "<b>(" + this.lobby_count + " players)</b>"} else {lobby_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>To Lobby</b> <font size=2>" + lobby_string + "</font></button><br>"))
         let world_string; 
@@ -174,6 +179,7 @@ class Commands {
         
         $('#mute_button').bind("click", () => {socket.emit('mute'); this.refocus()});
         $('#jitter_button').bind("click", () => {socket.emit('jitter'); this.refocus()});
+        $('#joe_button').bind("click", () => {socket.emit('toggle joe'); this.refocus()});
         $('#classic_button').bind("click", () => {socket.emit('renderMap', 'classic'); this.refocus()});
         $('#terrain_button').bind("click", () => {socket.emit('renderMap', 'terrain'); this.refocus()});
         $('#satellite_button').bind("click", () => {socket.emit('renderMap', 'satellite'); this.refocus()});

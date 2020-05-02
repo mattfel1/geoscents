@@ -14,9 +14,6 @@ class Room {
       this.roomName = name;
       this.map = map;
       this.isPrivate = name.startsWith('private');
-      this.hasJoe = false;
-      const avg_name = "Average " + CONSTANTS.AVERAGE_NAMES[Math.floor(Math.random() * CONSTANTS.AVERAGE_NAMES.length)];
-      this.joe = new Player(name + "_joe", 0, this.map, this.ordinalCounter, this.ordinalCounter, avg_name, {'moved': true, 'color': 'black', 'wins': 0, 'name': avg_name, 'optOut': true})
       this.joeTime = 10;
       this.joeLat = 0;
       this.joeLon = 0;
@@ -39,8 +36,31 @@ class Room {
       this.monthRecord;
       this.allRecord;
       this.loadRecords();
+      this.createJoe();
+      this.hasJoe = name != CONSTANTS.LOBBY;
 }
 
+
+    createJoe() {
+      const avg_name = "Average " + CONSTANTS.AVERAGE_NAMES[Math.floor(Math.random() * CONSTANTS.AVERAGE_NAMES.length)];
+      this.joe = new Player(this.roomName + "_joe", 0, this.map, this.ordinalCounter, this.ordinalCounter, avg_name, {'moved': true, 'color': 'black', 'wins': 0, 'name': avg_name, 'optOut': true});
+      this.hasJoe = true;
+        this.sortPlayers();
+        this.drawScorePanel();
+        this.clients.forEach(function(socket, socketId) {socket.emit("update joe button", true)});
+          const roomName = this.roomName;
+          const joeName = this.joe.name;
+          this.clients.forEach(function (s, id) {
+              s.emit('update messages', roomName, '[ ' + roomName + ' <b>' + joeName +
+                  '</b> ]: Hello!  I am just an ' + joeName + '!  I click at the average location at the average time across all players who have played this game! You can turn me off by clicking the "Kill Bot" button on the top right.;<br>');
+          });
+    }
+    killJoe() {
+        this.hasJoe = false;
+        this.sortPlayers();
+        this.drawScorePanel();
+        this.clients.forEach(function(socket, socketId) {socket.emit("update joe button", false)});
+    }
     loadRecords() {
       if (fs.existsSync('/scratch/' + this.map + '_day_record')) {
           try {
@@ -97,7 +117,19 @@ class Room {
       this.sortPlayers();
       this.drawScorePanel(socket.id);
       socket.emit('fresh map', this.map);
+      socket.emit('update joe button', this.hasJoe);
       this.drawCommand(socket);
+    }
+
+    joeMessage() {
+      if (this.players.size === 1 && this.hasJoe) {
+          const roomName = this.roomName;
+          const joeName = this.joe.name;
+          this.clients.forEach(function (s, id) {
+              s.emit('update messages', roomName, '[ ' + roomName + ' <b>' + joeName +
+                  '</b> ]: Hello!  I am just an ' + joeName + '!  I click at the average location at the average time across all players who have played this game! You can turn me off by clicking the "Kill Bot" button on the top right.;<br>');
+          });
+      }
     }
 
     redrawMap(socket) {
@@ -650,7 +682,7 @@ class Room {
               }
           } else if (this.state === CONSTANTS.SETUP_STATE) {
               [this.target, this.blacklist] = Geography.randomCity(this.map, this.blacklist);
-              if (this.hasJoe) [this.joeTime, this.joeLat, this.joeLon] = helpers.joeData(this.map, Geography.stringifyTarget(this.target).string);
+              [this.joeTime, this.joeLat, this.joeLon] = helpers.joeData(this.map, Geography.stringifyTarget(this.target).string);
               this.timerColor = CONSTANTS.GUESS_COLOR;
               Array.from(this.players.values()).forEach((p, id) => {
                   p.reset()

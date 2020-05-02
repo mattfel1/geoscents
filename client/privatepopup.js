@@ -18,7 +18,7 @@ class PrivatePopup {
             map = options[Math.floor(Math.random() * options.length)];
         }
         this.map = map;
-        this.code = info['code'];this.socket.emit('moveToPrivate', map, info['code'], info['bot'] == 'Yes', cb);
+        this.code = info['code'];this.socket.emit('moveToPrivate', map, info['code'], cb);
     }
 
     // function to show our popups
@@ -57,8 +57,7 @@ class PrivatePopup {
             e.preventDefault();
             var code = $(this).find("#selected_code").val();
             var requestedMap = $(this).find("#requestedMap").val();
-            var bot = $(this).find("#bot").val();
-            goToRoom({'code': code, 'requestedMap': requestedMap, 'bot': bot}, configuredClose());
+            goToRoom({'code': code, 'requestedMap': requestedMap}, configuredClose());
 
         });
     }

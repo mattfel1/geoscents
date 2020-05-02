@@ -156,7 +156,7 @@ class Map {
         this.ctx.fillText('Join a game', 1250, 180);
         this.canvas_arrow(1400, 175, this.canvas.width-20, 175);
 
-        this.ctx.fillText('Toggle volume and map texture', 1070, 80);
+        this.ctx.fillText('Adjust game settings', 1180, 80);
         this.canvas_arrow(1430, 75, this.canvas.width-20, 35);
 
         this.ctx.fillText('Records', 1320, 305);
@@ -178,6 +178,8 @@ class Map {
 
       }
       else if (room == CONSTANTS.WORLD){
+            this.ctx.font = "20px Arial";
+            this.ctx.fillText('[ Map is loading... ]', 400, 400);
             worldImg[this.mapStyle].onload = function () {
                 ctx.drawImage(worldImg[mapStyle], 0, 0)
             };
@@ -185,6 +187,8 @@ class Map {
           worldImg[mapStyle].onload();
       }
       else if (room == CONSTANTS.MISC){
+            this.ctx.font = "20px Arial";
+            this.ctx.fillText('[ Map is loading... ]', 400, 400);
             miscImg[this.mapStyle].onload = function () {
                 ctx.drawImage(miscImg[mapStyle], 0, 0)
             };
@@ -192,36 +196,48 @@ class Map {
           miscImg[mapStyle].onload();
       }
       else if (room == CONSTANTS.US){
+            this.ctx.font = "20px Arial";
+            this.ctx.fillText('[ Map is loading... ]', 400, 400);
             usImg[mapStyle].onload = function () {
                 ctx.drawImage(usImg[mapStyle], 0, 0)
             };
           usImg[mapStyle].onload();
       }
       else if (room == CONSTANTS.EURO){
+            this.ctx.font = "20px Arial";
+            this.ctx.fillText('[ Map is loading... ]', 400, 400);
             euroImg[mapStyle].onload = function () {
                 ctx.drawImage(euroImg[mapStyle], 0, 0)
             };
           euroImg[mapStyle].onload();
       }
       else if (room == CONSTANTS.AFRICA){
+            this.ctx.font = "20px Arial";
+            this.ctx.fillText('[ Map is loading... ]', 400, 400);
             africaImg[mapStyle].onload = function () {
                 ctx.drawImage(africaImg[mapStyle], 0, 0)
             };
           africaImg[mapStyle].onload();
       }
       else if (room == CONSTANTS.ASIA){
+            this.ctx.font = "20px Arial";
+            this.ctx.fillText('[ Map is loading... ]', 400, 400);
             asiaImg[mapStyle].onload = function () {
                 ctx.drawImage(asiaImg[mapStyle], 0, 0)
             };
           asiaImg[mapStyle].onload();
       }
       else if (room == CONSTANTS.OCEANIA){
+            this.ctx.font = "20px Arial";
+            this.ctx.fillText('[ Map is loading... ]', 400, 400);
             oceaniaImg[mapStyle].onload = function () {
                 ctx.drawImage(oceaniaImg[mapStyle], 0, 0)
             };
           oceaniaImg[mapStyle].onload();
       }
       else if (room == CONSTANTS.SAMERICA){
+            this.ctx.font = "20px Arial";
+            this.ctx.fillText('[ Map is loading... ]', 400, 400);
             samericaImg[mapStyle].onload = function () {
                 ctx.drawImage(samericaImg[mapStyle], 0, 0)
             };

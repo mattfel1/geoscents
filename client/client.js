@@ -59,6 +59,7 @@ $(document).ready(function(){
     const commands = new Commands(socket);
     socket.on('update counts', (l,w,u,e,a,s,as,oc,m) => {commands.updateCounts(l,w,u,e,a,s,as,oc,m);commands.postButtons();})
     socket.on('draw buttons', () => {commands.postButtons()});
+    socket.on('update joe button', (hasJoe) => {commands.hasJoe = hasJoe; commands.postButtons()});
     socket.on('draw timer', (time,color) => {commands.postTime(time,color)});
     socket.on('draw prepare', (round) => {
         betweenGames = true;
