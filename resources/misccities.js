@@ -3804,17 +3804,17 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Somapura_Mahavihara"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "John F. Kennedy's 'We Choose to go to the Moon' Speech in 1962",
+      "city_ascii": "",
+      "lat": 29.716944,
+      "lng": -95.402778,
+      "iso2": "",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/We_choose_to_go_to_the_Moon"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
