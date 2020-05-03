@@ -728,9 +728,9 @@ class Room {
 
     distributeMessage(senderSocket, new_sent_msg, cb) {
       const getname = (s) => this.getPlayerName(s);
-      if (this.players.has(socket.id)) {
-         this.players.get(socket.id).consecutiveSecondsInactive = 0;
-      }
+      // if (this.players.has(socket.id)) {
+      //    this.players.get(socket.id).consecutiveSecondsInactive = 0;
+      // }
       const senderColor = this.getPlayerColor(senderSocket);
       const room = this.roomName;
       this.clients.forEach((socket,id) => {
