@@ -8,6 +8,7 @@ const Geography = require('./geography.js');
 const Player = require('./player.js');
 const helpers = require('../resources/helpers.js');
 const fs = require('fs')
+const app = require('./app.js')
 
 class Room {
     constructor(map, name) {
@@ -31,6 +32,8 @@ class Room {
       this.winner = null;
       this.blacklist = []; // List of countries or states to avoid drawing for this round
       this.timerColor = CONSTANTS.LOBBY_COLOR;
+      this.lastRecordUpdate = new Date().getTime();
+      this.serviceRecord = false;
       this.dayRecord;
       this.weekRecord;
       this.monthRecord;
@@ -41,6 +44,13 @@ class Room {
 }
 
 
+    syncRecords(timestamp, day, week, month, all) {
+        this.dayRecord = day;
+        this.weekRecord = week;
+        this.monthRecord = month;
+        this.allRecord = all;
+        this.lastRecordUpdate = timestamp;
+    }
     createJoe() {
       const avg_name = "Average " + CONSTANTS.AVERAGE_NAMES[Math.floor(Math.random() * CONSTANTS.AVERAGE_NAMES.length)];
       this.joe = new Player(this.roomName + "_joe", 0, this.map, this.ordinalCounter, this.ordinalCounter, avg_name, {'moved': true, 'color': 'black', 'wins': 0, 'name': avg_name, 'optOut': true});
@@ -347,10 +357,12 @@ class Room {
             return JSON.parse( JSON.stringify(x, null, 2) );
         }
 
+
         let dayRecord = copy(this.dayRecord);
         let weekRecord = copy(this.weekRecord);
         let monthRecord = copy(this.monthRecord);
         let allRecord = copy(this.allRecord);
+        const lastRecordUpdate = (t) => {this.lastRecordUpdate = t; this.serviceRecord = true};
         const getPosition = (score, category) => {return this.getPosition(score, category)};
         const insertRecord = (p,c,d,r,pl) => {return this.insertRecord(p,c,d,r,pl)};
         const sufx = ["st", "nd", "rd"];
@@ -392,7 +404,7 @@ class Room {
                 allRecord = copy(insertRecord(getPosition(player.score,allRecord), "all-time", copy(allRecord), room, player));
             }
             if (dayStr !== "" || wkStr !== "" || monStr !== "" || allStr !== "") {
-
+                lastRecordUpdate(new Date().getTime());
                 let c1 = "";
                 if (allStr !== "" && (monStr !== "" | (monStr === "" && wkStr !== "") || (monStr === "" && wkStr === "" && dayStr !== ""))) c1 = ", ";
                 let c2 = "";
@@ -754,6 +766,8 @@ class Room {
           cb();
       });
     };
+
+
     printWinner(winner, score, color) {
         this.recordsBroken();
         const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
