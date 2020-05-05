@@ -3809,23 +3809,23 @@ module.exports = {
       "city_ascii": "",
       "lat": 29.716944,
       "lng": -95.402778,
-      "iso2": "",
+      "iso2": "US",
       "country": "",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/We_choose_to_go_to_the_Moon"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Roman Emporer Diocletian's Retirement Cabbage Farm",
+      "city_ascii": "",
+      "lat": 43.51,
+      "lng": 16.45,
+      "iso2": "HR",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "http://www.motherlindas.com/of_cabbages_and_emperors.htm"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",

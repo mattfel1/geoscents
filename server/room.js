@@ -52,7 +52,7 @@ class Room {
           const joeName = this.joe.name;
           this.clients.forEach(function (s, id) {
               s.emit('update messages', roomName, '[ ' + roomName + ' <b>' + joeName +
-                  '</b> ]: Hello!  I am just an ' + joeName + '!  I click at the average location at the average time across all players who have played this game! You can turn me off by clicking the "Kill Bot" button on the top right.;<br>');
+                  '</b> ]: Hello!  I am just an ' + joeName + '!  I click at the average location at the average time across all players who have played this game! You can turn me off by clicking the "Kill Bot" button on the top right.<br>');
           });
     }
     killJoe() {
