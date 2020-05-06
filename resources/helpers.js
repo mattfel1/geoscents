@@ -54,6 +54,7 @@ const recordGuesses = (map, citystring, city, admin, country, ips, dists, times,
         }
 
         const file = '/scratch/' + map + '_guesses';
+        const joefile = '/scratch/' + map + '_joe';
         if (!fs.existsSync(file)) {
             fs.writeFile(file, "", {flag: 'wx'}, function (err) {
                 if (err) throw err;
@@ -67,6 +68,35 @@ const recordGuesses = (map, citystring, city, admin, country, ips, dists, times,
                     history = {}
                 }
                 try {
+                    // // Patch for populating initial joe files
+                    //     if (!fs.existsSync(joefile)) {
+                    //         fs.writeFile(joefile, "", {flag: 'wx'}, function (err) {
+                    //             if (err) throw err;
+                    //         });
+                    //     } else {
+                    //         fs.readFile(joefile, 'utf8', (err, joedata) => {
+                    //             let joehistory;
+                    //             try {
+                    //                 joehistory = JSON.parse(joedata);
+                    //             } catch {
+                    //                 joehistory = {}
+                    //             }
+                    //             Object.keys(history).forEach(function (key, _) {
+                    //                 joehistory[key] = {
+                    //                     "mean_time": history[key]["mean_time"],
+                    //                     "mean_lat": history[key]["mean_lat"],
+                    //                     "mean_lon": history[key]["mean_lon"]
+                    //                 };
+                    //             });
+                    //             // Commit back to file
+                    //             fs.writeFile(joefile, JSON.stringify(copy(joehistory), null, 2), function (err) {
+                    //                 if (err) {
+                    //                     return console.log(err);
+                    //                 }
+                    //             });
+                    //         });
+                    //     }
+
                     // // Patch for back-filling dummy ip addresses for the entries before I started tracked this
                     // Object.keys(history).forEach(function (key,_) {
                     //     history[key]["ips"] = [];
@@ -110,18 +140,48 @@ const recordGuesses = (map, citystring, city, admin, country, ips, dists, times,
                     history[citystring]["mean_dist"] = trunc(history[citystring]["dists"].reduce((a, b) => a + b) / history[citystring]["dists"].length, 1);
                     let trueLats = history[citystring]["lats"].filter(x => x != "x");
                     let trueLons = history[citystring]["lons"].filter(x => x != "x");
+                    let mean_lat = 0;
+                    let mean_lon = 0;
+                    let mean_time = trunc(history[citystring]["times"].reduce((a, b) => a + b) / history[citystring]["times"].length, 1);
                     if (trueLats.length > 0 && trueLons.length > 0) {
-                        history[citystring]["mean_lat"] = trunc(trueLats.reduce((a, b) => a + b) / trueLats.length, 3);
-                        history[citystring]["mean_lon"] = trunc(trueLons.reduce((a, b) => a + b) / trueLons.length, 3);
+                        mean_lat = trunc(trueLats.reduce((a, b) => a + b) / trueLats.length, 3);
+                        mean_lon = trunc(trueLons.reduce((a, b) => a + b) / trueLons.length, 3);
+                        history[citystring]["mean_lat"] = mean_lat;
+                        history[citystring]["mean_lon"] = mean_lon;
                     }
-                    history[citystring]["mean_time"] = trunc(history[citystring]["times"].reduce((a, b) => a + b) / history[citystring]["times"].length, 1);
+                    history[citystring]["mean_time"] = mean_time;
                     history[citystring]["std_dist"] = trunc(Math.sqrt(history[citystring]["dists"].map(x => Math.pow(x - history[citystring]["mean_dist"], 2)).reduce((a, b) => a + b) / history[citystring]["dists"].length), 1);
                     history[citystring]["std_time"] = trunc(Math.sqrt(history[citystring]["times"].map(x => Math.pow(x - history[citystring]["mean_time"], 2)).reduce((a, b) => a + b) / history[citystring]["times"].length), 1);
                     history[citystring]["city"] = city;
                     history[citystring]["admin"] = admin;
                     history[citystring]["country"] = country;
-                } catch (err) {
-                }
+                    // Update mini file for joe
+                    if (!fs.existsSync(joefile)) {
+                        fs.writeFile(joefile, "", {flag: 'wx'}, function (err) {
+                            if (err) throw err;
+                        });
+                    } else {
+                        let joehistory;
+                        fs.readFile(joefile, 'utf8', (err, joedata) => {
+                            try {
+                                joehistory = JSON.parse(joedata);
+                            } catch {
+                                joehistory = {}
+                            }
+                            joehistory[citystring] = {
+                                "mean_time": mean_time,
+                                "mean_lat": mean_lat,
+                                "mean_lon": mean_lon
+                            };
+                            // Commit back to file
+                            fs.writeFile(joefile, JSON.stringify(copy(joehistory), null, 2), function (err) {
+                                if (err) {
+                                    return console.log(err);
+                                }
+                            });
+                        });
+                    }
+                } catch (err) {}
                 // Commit back to file
                 fs.writeFile(file, JSON.stringify(copy(history), null, 2), function (err) {
                     if (err) {
@@ -139,8 +199,8 @@ const recordGuesses = (map, citystring, city, admin, country, ips, dists, times,
 
 const joeData = (map, citystring) => {
     try {
-        const file = '/scratch/' + map + '_guesses';
-        history = JSON.parse(fs.readFileSync(file, 'utf8'))
+        const file = '/scratch/' + map + '_joe';
+        history = JSON.parse(fs.readFileSync(file, 'utf8'));
         return [history[citystring]["mean_time"], history[citystring]["mean_lat"], history[citystring]["mean_lon"]];
     } catch {
         return [10,0,0];
