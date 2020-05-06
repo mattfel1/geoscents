@@ -338,6 +338,7 @@ io.on('connection', (socket) => {
       }
 	});
     socket.on("send message", function(sent_msg, callback) {
+      if (sent_msg == "") {callback(); return;}
       const msg = sent_msg;
       const isFeedback = (msg.toLowerCase().trim().startsWith('/feedback'));
       const isOptOut = (msg.toLowerCase().trim().startsWith('/private'));
@@ -349,18 +350,30 @@ io.on('connection', (socket) => {
       const cb = () => {callback()};
       Object.values(rooms).forEach(function(room) {
           if (room.hasPlayer(socket)) {
+              var new_sent_msg = msg;
               replaceAll = function(original, strReplace, strWith) {
                 // See http://stackoverflow.com/a/3561711/556609
                 var esc = strReplace.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
                 var reg = new RegExp(esc, 'ig');
                 return original.replace(reg, strWith);
               };
-              var new_sent_msg = msg;
               CONSTANTS.PROFANITY.forEach((word) => {new_sent_msg = replaceAll(new_sent_msg, word, "****")});
               helpers.log("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + " " + room.getActiveEntry() + " : " + msg);
+              if (room.hasJoe && new_sent_msg.toLowerCase().trim().includes("good bot")) {
+                room.distributeMessage(socket, new_sent_msg, cb);
+                room.joeGood(socket);
+                cb();
+                return;
+              }
+              if (room.hasJoe && new_sent_msg.toLowerCase().trim().includes("bad bot")) {
+                room.distributeMessage(socket, new_sent_msg, cb);
+                room.joeBad(socket);
+                cb();
+                return;
+              }
               if (isFeedback) {
                 room.distributeMessage(socket, new_sent_msg, cb);
-		            room.whisperMessage(socket, "<i>Your feedback has been noted!  Thank you for playing and commenting!</i><br>", cb);
+		        room.whisperMessage(socket, "<i>Your feedback has been noted!  Thank you for playing and commenting!</i><br>", cb);
                 helpers.logFeedback("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + ": " + msg);
 	            }
               else if (isOptOut) {

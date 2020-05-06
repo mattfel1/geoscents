@@ -65,6 +65,26 @@ class Room {
                   '</b> ]: Hello!  I am just an ' + joeName + '!  I click at the average location at the average time across all players who have played this game! You can turn me off by clicking the "Kill Bot" button on the top right.<br>');
           });
     }
+    joeGood(socket) {
+        const name = this.getPlayerName(socket);
+        const color = this.getPlayerColor(socket);
+        const roomName = this.roomName;
+        const joeName = this.joe.name;
+        this.clients.forEach(function (s, id) {
+            s.emit('update messages', roomName, '[ ' + roomName + ' <b>' + joeName +
+                '</b> ]: Aww, thanks, <b><font color="' + color + '">' + name + '</font></b>!  :D<br>');
+        });
+    }
+    joeBad(socket) {
+        const name = this.getPlayerName(socket);
+        const color = this.getPlayerColor(socket);
+        const roomName = this.roomName;
+        const joeName = this.joe.name;
+        this.clients.forEach(function (s, id) {
+            s.emit('update messages', roomName, '[ ' + roomName + ' <b>' + joeName +
+                '</b> ]: Oh no, sorry for being a bad bot, <b><font color="' + color + '">' + name + '</font></b>!  D:<br>');
+        });
+    }
     killJoe() {
         this.hasJoe = false;
         this.sortPlayers();
