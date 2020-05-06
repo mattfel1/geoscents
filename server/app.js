@@ -436,7 +436,7 @@ setInterval(() => {
             room1.serviceRecord = false;
         }
     });
-}, 1000 / 20);
+}, 1000);
 // Handle reboot message
 setInterval( () => {
     var d = new Date();
