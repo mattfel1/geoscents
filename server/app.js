@@ -163,6 +163,15 @@ io.on('connection', (socket) => {
 	        rooms[CONSTANTS.LOBBY].renamePlayer(socket, name, color);
             var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'><b>" + rooms[CONSTANTS.LOBBY].getPlayerRawName(socket) + "</b> has entered the lobby!</font> ] " + badname + "<br>";
             io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
+            // Send whispers to specific players
+            const specificGreeting = (socket, name, target, msg) => {
+                if (name == target) {
+                    helpers.logFeedback("Sent whisper to " + target + ": " + msg);
+                    rooms[CONSTANTS.LOBBY].whisperMessage(socket, msg, () => {});
+                }
+            };
+            specificGreeting(socket, name, "Doz", "<i>Thanks so much for the donation, Doz!</i><br>");
+            specificGreeting(socket, name, "ninjer tootle", "<i>U a bitch</i><br>");
       	    io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount(),rooms[CONSTANTS.MISC].playerCount());
 		    
             helpers.logHistogram(rooms)
