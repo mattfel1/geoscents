@@ -6,6 +6,7 @@ const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
+const fs = require('fs');
 const hostname = require("os").hostname();
 let PORT = 80;
 if (hostname === "mattfel-pc") {
@@ -165,8 +166,8 @@ io.on('connection', (socket) => {
             io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
             // Send whispers to specific players
             const specificGreeting = (socket, name, target, msg) => {
-                if (name == target) {
-                    helpers.logFeedback("Sent whisper to " + target + ": " + msg);
+                if (name == target && !fs.existsSync('/tmp/' + target)) {
+                    helpers.logFeedback("Sent whisper to " + target + ": " + msg + '. touch /tmp/' + target + ' to suppress this message');
                     rooms[CONSTANTS.LOBBY].whisperMessage(socket, msg, () => {});
                 }
             };
