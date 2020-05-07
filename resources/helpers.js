@@ -46,7 +46,7 @@ const makeLink = (room, thisTarget) => {
     if (thisTarget['wiki'] != null) wiki = thisTarget['wiki'];
     return wiki;
 }
-const recordGuesses = (map, citystring, city, admin, country, ips, dists, times, lats, lons, true_lat, true_lon, link) => {
+const recordGuesses = (map, citystring, city, admin, country, raw_ips, dists, times, lats, lons, true_lat, true_lon, link) => {
     try {
 
         function copy(x) {
@@ -124,6 +124,9 @@ const recordGuesses = (map, citystring, city, admin, country, ips, dists, times,
                     // });
 
                     // Add raw data
+                    let ips = [];
+                    Object.values(raw_ips).forEach((ip) => {ips.push(ip.replace("::ffff:",""))});
+
                     if (Object.keys(history).indexOf(citystring) === -1) {
                         history[citystring] = {"dists": dists, "times": times, "ips": ips, "lats": lats, "lons": lons};
                     } else {
