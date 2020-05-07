@@ -13083,5 +13083,17 @@ module.exports = { CITIES: [
     "capital": "primary",
     "population": 18958,
     "id": 9999999993
+  },
+  {
+    "city": "Saint Helier",
+    "city_ascii": "Saint Helier",
+    "lat": 49.19,
+    "lng": -2.11,
+    "country": "Jersey",
+    "iso2": "JE",
+    "admin_name": "",
+    "capital": "primary",
+    "population": 33500,
+    "id": 9999999994
   }
 ]}
