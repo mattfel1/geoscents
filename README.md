@@ -24,7 +24,7 @@ Or you can use nodemon, which will restart when you update a js file.  Make sure
 ```
 npm update
 webpack
-npm start 2>&1
+npm start
 ```
 
 
