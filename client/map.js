@@ -359,7 +359,6 @@ class Map {
         this.ctx.lineWidth = CONSTANTS.BUBBLE_WIDTH;
         this.ctx.strokeStyle = color;
         this.ctx.stroke();
-        console.log("drew at " + coords['col'] + " " + coords['row'] + " in " + color)
         this.ctx.closePath()
     }
     drawDist(coords, color, distance) {
