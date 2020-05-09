@@ -16,7 +16,7 @@ You can use pm2, which will restart when there is a crash.  Make sure package.js
 ```
 npm update
 webpack
-pm2 start 2>&1 | tee /root/npm_log
+pm2 start # --no-daemon #(for interactive)
 ```
 
 Or you can use nodemon, which will restart when you update a js file.  Make sure package.json script entry says: `"start": "webpack -w & nodemon  server/app.js --ignore public"`
@@ -24,7 +24,7 @@ Or you can use nodemon, which will restart when you update a js file.  Make sure
 ```
 npm update
 webpack
-npm start 2>&1 | tee /root/npm_log
+npm start 2>&1
 ```
 
 
