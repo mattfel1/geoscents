@@ -11,9 +11,20 @@ Feel free to contribute!
 
 This is a simple starting point for a HTML5 game using Canvas, Sockets.io and Express.
 
-To start using me, here's what you'll have to do:
+You can use pm2, which will restart when there is a crash.  Make sure package.json script entry says: `"start": "webpack -w & pm2 start server/app.js --ignore public"`
 
-* `npm install`
-* `npm start`
+```
+npm update
+webpack
+pm2 start 2>&1 | tee /root/npm_log
+```
 
-The start script runs webpack in watch mode, and nodemon, so any changes you make to the client or server directories should cause webpack to rebuild and the server to restart, respectively. Note that you may need to wait a moment for the webpack build to complete - if you refresh the page too soon, you may not see your changes.
+Or you can use nodemon, which will restart when you update a js file.  Make sure package.json script entry says: `"start": "webpack -w & nodemon  server/app.js --ignore public"`
+
+```
+npm update
+webpack
+npm start 2>&1 | tee /root/npm_log
+```
+
+
