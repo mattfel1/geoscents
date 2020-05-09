@@ -244,10 +244,10 @@ $(document).ready(function(){
         if (myMap === CONSTANTS.LOBBY && !popup.isShowing) {
             if (isInside(mousePos,map.visualize_button) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
                 map.highlightVizButton();
-            } else map.showVizButton();
+            } else if (!booted) map.showVizButton();
             if (isInside(mousePos,map.about_button) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
                 map.highlightAboutButton();
-            } else map.showAboutButton();
+            } else if (!booted) map.showAboutButton();
         } else {
             if (betweenGames && !clickedReady && isInside(mousePos,commands.ready_button)) {
                 commands.highlightReadyButton();
