@@ -8,7 +8,7 @@ class Scoreboard {
     }
 
     postScore(rank, name, color, score, wins) {
-        const string = $("<font color=" + color + " style=\"font-size:16px;\" \>").html(name + ": " + score + '  (' +  wins + ' 🏆)<br>');
+        const string = $("<font color=" + color + " style=\"font-size:16px;\" \>").html("<b>" + name + "</b>: " + score + '  (' +  wins + ' 🏆)<br>');
         $('#scoreboard').append(string)
     }
     // Message reactions
@@ -25,9 +25,9 @@ class Scoreboard {
        var pop3 = "";
        if (dict['recordBroken3']) pop3 = '🎉';
 
-       const string1 = $("<font color=" + dict['recordColor1'] + " style=\"font-size:16px;\" \>").html(pop1 +  "🥇 1st: " + dict['record1'] + " (" + dict['recordName1'] + ")" + pop1 + "<br>");
-       const string2 = $("<font color=" + dict['recordColor2'] + " style=\"font-size:16px;\" \>").html(pop2 + "🥈 2nd: " + dict['record2'] + " (" + dict['recordName2'] + ")" + pop2 + "<br>");
-       const string3 = $("<font color=" + dict['recordColor3'] + " style=\"font-size:16px;\" \>").html(pop3 + "🥉 3rd: " + dict['record3'] + " (" + dict['recordName3'] + ")" + pop3 + "<br>");
+       const string1 = $("<font color=" + dict['recordColor1'] + " style=\"font-size:16px;\" \>").html(pop1 +  "🥇 1st: " + dict['record1'] + " (<b>" + dict['recordName1'] + "</b>)" + pop1 + "<br>");
+       const string2 = $("<font color=" + dict['recordColor2'] + " style=\"font-size:16px;\" \>").html(pop2 + "🥈 2nd: " + dict['record2'] + " (<b>" + dict['recordName2'] + "</b>)" + pop2 + "<br>");
+       const string3 = $("<font color=" + dict['recordColor3'] + " style=\"font-size:16px;\" \>").html(pop3 + "🥉 3rd: " + dict['record3'] + " (<b>" + dict['recordName3'] + "</b>)" + pop3 + "<br>");
        $('#leaderboard').append("<b>" + category + "</b><br>");
        $('#leaderboard').append(string1);
        $('#leaderboard').append(string2);

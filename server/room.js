@@ -399,7 +399,7 @@ class Room {
             const minute = time.getMinutes();
               if (player.score > CONSTANTS.FAMESCORE) {
               this.clients.get(player.id).emit("announce hall", room, player.name, player.score, player.color);
-              const payload = "- " + month + day + ": <font color=" + player.color + ">" + player.name + "</font> scored <b>" + player.score + "</b> on " + room;
+              const payload = "- " + month + day + ": <font color=" + player.color + "><b>" + player.name + "</b></font> scored <b>" + player.score + "</b> on " + room;
               helpers.prependHallOfFame(payload)
               helpers.log("Hall of Fame achieved by " + player.name + " (" + player.ip + ")")
             }
@@ -431,7 +431,7 @@ class Room {
                 if (monStr !== "" && (wkStr !== "" | (wkStr === "" && dayStr !== ""))) c2 = ", ";
                 let c3 = "";
                 if (wkStr !== "" && (dayStr !== "")) c3 = ", ";
-                const payload = "- " + month + day + " (" + room + ") <font color=" + player.color + ">" + player.name + "</font>: " + allStr + c1 + monStr + c2 + wkStr + c3 + dayStr;
+                const payload = "- " + month + day + " (" + room + ") <font color=" + player.color + "><b>" + player.name + "</b></font>: " + allStr + c1 + monStr + c2 + wkStr + c3 + dayStr;
                 helpers.prependRecentActivity(payload)
             }
         });

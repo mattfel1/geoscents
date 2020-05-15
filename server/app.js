@@ -1,24 +1,47 @@
 /** Top level file for handling connections, messages, and dispatching the game FSM */
 
-const Room = require('./room.js')
+const crypto = require('crypto'),
+      fs = require("fs"),
+      http = require("http"),
+      https = require('https');
+const hostname = require("os").hostname();
+let keydir = '/root/';
+if (hostname === "mattfel-pc") {
+  keydir = '/home/mattfel/geoscents/'
+}
+var privateKey = fs.readFileSync(keydir + 'privatekey.pem').toString();
+var certificate = fs.readFileSync(keydir + 'certificate.pem').toString();
+var credentials = {key: privateKey, cert: certificate};
+
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
-const fs = require('fs');
-const hostname = require("os").hostname();
-let PORT = 80;
+let PORT = 8080;
+let SPORT = 8443
 if (hostname === "mattfel-pc") {
     PORT = 5000;
+    SPORT = 5443;
 }
-const http = require('http');
-const server = http.createServer(app);
-const io = require('socket.io')(server);
-const helpers = require('../resources/helpers.js');
+var httpServer = http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'].replace(PORT,SPORT) + req.url });
+    console.log("http request, will go to >> ");
+    console.log("https://" + req.headers['host'].replace(PORT,SPORT) + req.url );
+    res.end();
+  });
+var httpsServer = https.createServer(credentials, app);
+
+httpServer.listen(PORT)
+httpsServer.listen(SPORT, () => {
+  console.log('Magic is happening on port ' + SPORT);
+});
 
 // Game mechanics
+const io = require('socket.io')(httpsServer);
+const Room = require('./room.js')
 const CONSTANTS = require('../resources/constants.js');
+const helpers = require('../resources/helpers.js');
 
 app.use(morgan('dev'));
 
@@ -71,10 +94,6 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
 	res.status(err.status || 500);
 	res.send(err.message || 'Internal server error');
-});
-
-server.listen(PORT, () => {
-	console.log('Server is live on PORT:', PORT);
 });
 
 // Game state info
