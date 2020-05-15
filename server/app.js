@@ -2,8 +2,8 @@
 
 const crypto = require('crypto'),
       fs = require("fs"),
-      http = require("http"),
-      https = require('https');
+      http = require("http");
+// const https = require('https');
 const hostname = require("os").hostname();
 let keydir = '/root/';
 if (hostname === "mattfel-pc") {
@@ -71,6 +71,9 @@ app.get('/resources/*.png', (req, res, next) => {
     const wildcard = req.params['0'];
     res.setHeader('Access-Control-Allow-Origin', '*');
 	res.sendFile(path.join(__dirname, '..', 'resources/' + wildcard + '.png'));
+});
+app.get('/.well-known/pki-validation/*', (req, res, next) => {
+        res.sendFile(path.join(__dirname, '..', '.well-known/pki-validation/' + wildcard));
 });
 app.get('/overlaypopup.css', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '..', 'overlaypopup.css'));
