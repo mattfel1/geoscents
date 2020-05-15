@@ -18,27 +18,30 @@ const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
-let PORT = 8080;
-let SPORT = 8443
+let PORT = 80;
+let SPORT = 443
 if (hostname === "mattfel-pc") {
     PORT = 5000;
     SPORT = 5443;
 }
-var httpServer = http.createServer(function (req, res) {
-    res.writeHead(301, { "Location": "https://" + req.headers['host'].replace(PORT,SPORT) + req.url });
-    console.log("http request, will go to >> ");
-    console.log("https://" + req.headers['host'].replace(PORT,SPORT) + req.url );
-    res.end();
-  });
-var httpsServer = https.createServer(credentials, app);
+// var httpServer = http.createServer(function (req, res) {
+//     res.writeHead(301, { "Location": "https://" + req.headers['host'].replace(PORT,SPORT) + req.url });
+//     console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
+//     res.end();
+//   });
+// var httpsServer = https.createServer(credentials, app);
+var httpServer = http.createServer(app);
 
-httpServer.listen(PORT)
-httpsServer.listen(SPORT, () => {
-  console.log('Magic is happening on port ' + SPORT);
-});
+httpServer.listen(PORT, () => {
+  console.log('Magic is happening on port ' + PORT);  
+})
+// httpsServer.listen(SPORT, () => {
+//   console.log('Magic is happening on port ' + SPORT);
+// });
 
 // Game mechanics
-const io = require('socket.io')(httpsServer);
+// const io = require('socket.io')(httpsServer);
+const io = require('socket.io')(httpServer);
 const Room = require('./room.js')
 const CONSTANTS = require('../resources/constants.js');
 const helpers = require('../resources/helpers.js');
