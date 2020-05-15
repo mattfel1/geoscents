@@ -85,6 +85,16 @@ class Room {
                 '</b> ]: Oh no, sorry for being a bad bot, <b><font color="' + color + '">' + name + '</font></b>!  D:<br>');
         });
     }
+    joeGG(socket) {
+        const name = this.getPlayerName(socket);
+        const color = this.getPlayerColor(socket);
+        const roomName = this.roomName;
+        const joeName = this.joe.name;
+        this.clients.forEach(function (s, id) {
+            s.emit('update messages', roomName, '[ ' + roomName + ' <b>' + joeName +
+                '</b> ]: Good game, <b><font color="' + color + '">' + name + '</font></b>!  You did well!<br>');
+        });
+    }
     killJoe() {
         this.hasJoe = false;
         this.sortPlayers();
