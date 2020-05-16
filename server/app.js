@@ -9,9 +9,6 @@ let keydir = '/root/';
 if (hostname === "mattfel-pc") {
   keydir = '/home/mattfel/geoscents/'
 }
-var privateKey = fs.readFileSync(keydir + 'privatekey.pem').toString();
-var certificate = fs.readFileSync(keydir + 'geoscents_net.crt').toString();
-var credentials = {key: privateKey, cert: certificate};
 
 const express = require('express');
 const path = require('path');
@@ -19,30 +16,64 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
 let PORT = 80;
-let SPORT = 443
+let SPORT = 443;
+let httpServer;
+let httpsServer;
+let io;
+const useHttp = false;
+
 if (hostname === "mattfel-pc") {
-    PORT = 5000;
-    SPORT = 5443;
+  PORT = 5000;
+  SPORT = 5443;
+  if (useHttp) {
+    httpServer = http.createServer(app);
+    httpServer.listen(PORT, () => {
+      console.log('Magic is happening on port ' + PORT);  
+    })
+    io = require('socket.io')(httpServer);
+  } else {
+    var privateKey = fs.readFileSync('/home/mattfel/geoscents/key.pem').toString();
+    var certificate = fs.readFileSync('/home/mattfel/geoscents/cert.pem').toString();
+    var credentials = {key: privateKey, cert: certificate};
+    httpServer = http.createServer(function (req, res) {
+      res.writeHead(301, { "Location": "https://" + req.headers['host'].replace(PORT,SPORT) + req.url });
+      console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
+      res.end();
+    });
+    httpsServer = https.createServer(credentials, app);
+    httpsServer.listen(SPORT, () => {
+      console.log('Magic is happening on port ' + SPORT);
+    });
+    io = require('socket.io')(httpsServer);    
+  }
+} else {
+  if (useHttp) {
+    httpServer = http.createServer(app);
+    httpServer.listen(PORT, () => {
+      console.log('Magic is happening on port ' + PORT);  
+    })
+    io = require('socket.io')(httpServer);
+  } else {
+    var privateKey = fs.readFileSync('/root/privatekey.pem').toString();
+    var certificate = fs.readFileSync('/root/geoscents_net.crt').toString();
+    var credentials = {key: privateKey, cert: certificate};
+    httpServer = http.createServer(function (req, res) {
+        res.writeHead(301, { "Location": "https://" + req.headers['host'].replace(PORT,SPORT) + req.url });
+        console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
+        res.end();
+      });
+    httpsServer = https.createServer(credentials, app);
+    httpsServer.listen(SPORT, () => {
+      console.log('Magic is happening on port ' + SPORT);
+    });
+    io = require('socket.io')(httpsServer);
+  }
 }
-// var httpServer = http.createServer(function (req, res) {
-//     res.writeHead(301, { "Location": "https://" + req.headers['host'].replace(PORT,SPORT) + req.url });
-//     console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
-//     res.end();
-//   });
-// var httpsServer = https.createServer(credentials, app);
-// httpsServer.listen(SPORT, () => {
-//   console.log('Magic is happening on port ' + SPORT);
-// });
 
-var httpServer = http.createServer(app);
 
-httpServer.listen(PORT, () => {
-  console.log('Magic is happening on port ' + PORT);  
-})
 
 // Game mechanics
 // const io = require('socket.io')(httpsServer);
-const io = require('socket.io')(httpServer);
 const Room = require('./room.js')
 const CONSTANTS = require('../resources/constants.js');
 const helpers = require('../resources/helpers.js');
@@ -496,24 +527,27 @@ setInterval(() => {
 // Handle reboot message
 setInterval( () => {
     var d = new Date();
-    if (d.getHours() === 0 && d.getMinutes() === 0) {
-      const week = d.getDay() === 0;
-      const month = d.getDate() === 1;
-      const year = d.getDate() === 1 && d.getMonth() === 0;
-      Object.values(rooms).forEach(function(room) {
-          room.flushRecords(week, month, year);
-      });
-      let s = ""
-      if (week && !month && !year) s = " and weekly"
-      if (!week && month && !year) s = " and monthly"
-      if (week && month && !year) s = ", weekly, and monthly"
-      if (!week && !month && year) s = " and yearly"
-      if (week && !month && year) s = ", weekly, and yearly"
-      if (!week && month && year) s = ", monthly, and yearly"
-      if (week && month && year) s = ", weekly, monthly, and yearly"
-      announce("<font size=16 color=\"red\"><b>WARNING: Daily" + s + " records will refresh at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ")!</b></font><br>")
+    const week = d.getDay() === 0;
+    const month = d.getDate() === 1;
+    const year = d.getDate() === 1 && d.getMonth() === 0;
+    let s = ""
+    if (week && !month && !year) s = " and weekly"
+    if (!week && month && !year) s = " and monthly"
+    if (week && month && !year) s = ", weekly, and monthly"
+    if (!week && !month && year) s = " and yearly"
+    if (week && !month && year) s = ", weekly, and yearly"
+    if (!week && month && year) s = ", monthly, and yearly"
+    if (week && month && year) s = ", weekly, monthly, and yearly"
+    if (d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() <= 29) {
+      announce("<font size=10 color=\"red\"><b>WARNING: Daily" + s + " records will reset in 30 seconds!</b></font><br>")
     }
-}, 59000);
+    if (d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() > 29) {
+      Object.values(rooms).forEach(function(room) {
+        room.flushRecords(week, month, year);
+      });
+      announce("<font size=10 color=\"red\"><b>Daily" + s + " records have been reset!</b></font><br>")
+    }
+}, 30000);
 
 
 module.exports = {io};
