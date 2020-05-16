@@ -40,6 +40,7 @@ if (hostname === "mattfel-pc") {
       console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
       res.end();
     });
+    httpServer.listen(PORT);
     httpsServer = https.createServer(credentials, app);
     httpsServer.listen(SPORT, () => {
       console.log('Magic is happening on port ' + SPORT);
@@ -62,6 +63,7 @@ if (hostname === "mattfel-pc") {
         console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
         res.end();
       });
+    httpServer.listen(PORT);
     httpsServer = https.createServer(credentials, app);
     httpsServer.listen(SPORT, () => {
       console.log('Magic is happening on port ' + SPORT);
