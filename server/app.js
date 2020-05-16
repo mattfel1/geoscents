@@ -24,25 +24,25 @@ if (hostname === "mattfel-pc") {
     PORT = 5000;
     SPORT = 5443;
 }
-var httpServer = http.createServer(function (req, res) {
-    res.writeHead(301, { "Location": "https://" + req.headers['host'].replace(PORT,SPORT) + req.url });
-    console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
-    res.end();
-  });
-var httpsServer = https.createServer(credentials, app);
-httpsServer.listen(SPORT, () => {
-  console.log('Magic is happening on port ' + SPORT);
-});
+// var httpServer = http.createServer(function (req, res) {
+//     res.writeHead(301, { "Location": "https://" + req.headers['host'].replace(PORT,SPORT) + req.url });
+//     console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
+//     res.end();
+//   });
+// var httpsServer = https.createServer(credentials, app);
+// httpsServer.listen(SPORT, () => {
+//   console.log('Magic is happening on port ' + SPORT);
+// });
 
-// var httpServer = http.createServer(app);
+var httpServer = http.createServer(app);
 
-// httpServer.listen(PORT, () => {
-//   console.log('Magic is happening on port ' + PORT);  
-// })
+httpServer.listen(PORT, () => {
+  console.log('Magic is happening on port ' + PORT);  
+})
 
 // Game mechanics
 // const io = require('socket.io')(httpsServer);
-const io = require('socket.io')(httpsServer);
+const io = require('socket.io')(httpServer);
 const Room = require('./room.js')
 const CONSTANTS = require('../resources/constants.js');
 const helpers = require('../resources/helpers.js');
