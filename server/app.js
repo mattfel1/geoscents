@@ -30,18 +30,19 @@ var httpServer = http.createServer(function (req, res) {
     res.end();
   });
 var httpsServer = https.createServer(credentials, app);
+httpsServer.listen(SPORT, () => {
+  console.log('Magic is happening on port ' + SPORT);
+});
+
 // var httpServer = http.createServer(app);
 
 // httpServer.listen(PORT, () => {
 //   console.log('Magic is happening on port ' + PORT);  
 // })
-httpsServer.listen(SPORT, () => {
-  console.log('Magic is happening on port ' + SPORT);
-});
 
 // Game mechanics
 // const io = require('socket.io')(httpsServer);
-const io = require('socket.io')(httpServer);
+const io = require('socket.io')(httpsServer);
 const Room = require('./room.js')
 const CONSTANTS = require('../resources/constants.js');
 const helpers = require('../resources/helpers.js');
