@@ -101,6 +101,20 @@ class Room {
         this.drawScorePanel();
         this.clients.forEach(function(socket, socketId) {socket.emit("update joe button", false)});
     }
+    flushRecords() {
+      function copy(x) {
+          return JSON.parse( JSON.stringify(x, null, 2) );
+      }
+      var d = new Date(week, month, year);
+      this.dayRecord = CONSTANTS.INIT_RECORD;
+      if (week) this.weekRecord == CONSTANTS.INIT_RECORD;
+      if (month) this.monthRecord == CONSTANTS.INIT_RECORD;
+      if (year) this.allRecord == CONSTANTS.INIT_RECORD;
+      fs.writeFile("/scratch/" + room + "_day_record", JSON.stringify(copy(this.dayRecord), null, 2), function(err) {if(err){return console.log(err);}});
+      fs.writeFile("/scratch/" + room + "_week_record", JSON.stringify(copy(this.weekRecord), null, 2), function(err) {if(err){return console.log(err);}});
+      fs.writeFile("/scratch/" + room + "_month_record", JSON.stringify(copy(this.monthRecord), null, 2), function(err) {if(err){return console.log(err);}});
+      fs.writeFile("/scratch/" + room + "_all-time_record", JSON.stringify(copy(this.allRecord), null, 2), function(err) {if(err){return console.log(err);}});
+    }
     loadRecords() {
       if (fs.existsSync('/scratch/' + this.map + '_day_record')) {
           try {

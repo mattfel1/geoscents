@@ -3,14 +3,14 @@
 const crypto = require('crypto'),
       fs = require("fs"),
       http = require("http");
-// const https = require('https');
+const https = require('https');
 const hostname = require("os").hostname();
 let keydir = '/root/';
 if (hostname === "mattfel-pc") {
   keydir = '/home/mattfel/geoscents/'
 }
 var privateKey = fs.readFileSync(keydir + 'privatekey.pem').toString();
-var certificate = fs.readFileSync(keydir + 'certificate.pem').toString();
+var certificate = fs.readFileSync(keydir + 'geoscents_net.crt').toString();
 var credentials = {key: privateKey, cert: certificate};
 
 const express = require('express');
@@ -24,20 +24,20 @@ if (hostname === "mattfel-pc") {
     PORT = 5000;
     SPORT = 5443;
 }
-// var httpServer = http.createServer(function (req, res) {
-//     res.writeHead(301, { "Location": "https://" + req.headers['host'].replace(PORT,SPORT) + req.url });
-//     console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
-//     res.end();
-//   });
-// var httpsServer = https.createServer(credentials, app);
-var httpServer = http.createServer(app);
+var httpServer = http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'].replace(PORT,SPORT) + req.url });
+    console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
+    res.end();
+  });
+var httpsServer = https.createServer(credentials, app);
+// var httpServer = http.createServer(app);
 
-httpServer.listen(PORT, () => {
-  console.log('Magic is happening on port ' + PORT);  
-})
-// httpsServer.listen(SPORT, () => {
-//   console.log('Magic is happening on port ' + SPORT);
-// });
+// httpServer.listen(PORT, () => {
+//   console.log('Magic is happening on port ' + PORT);  
+// })
+httpsServer.listen(SPORT, () => {
+  console.log('Magic is happening on port ' + SPORT);
+});
 
 // Game mechanics
 // const io = require('socket.io')(httpsServer);
@@ -495,10 +495,24 @@ setInterval(() => {
 // Handle reboot message
 setInterval( () => {
     var d = new Date();
-    if (d.getHours() === 23 && d.getMinutes() > 57) {
-        announce("<font size=20 color=\"red\"><b>WARNING: Game will go down for a few minutes to refresh records at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ")!  Sorry for the inconvenience!</b></font><br>")
+    if (d.getHours() === 0 && d.getMinutes() === 0) {
+      const week = d.getDay() === 0;
+      const month = d.getDate() === 1;
+      const year = d.getDate() === 1 && d.getMonth() === 0;
+      Object.values(rooms).forEach(function(room) {
+          room.flushRecords(week, month, year);
+      });
+      let s = ""
+      if (week && !month && !year) s = " and weekly"
+      if (!week && month && !year) s = " and monthly"
+      if (week && month && !year) s = ", weekly, and monthly"
+      if (!week && !month && year) s = " and yearly"
+      if (week && !month && year) s = ", weekly, and yearly"
+      if (!week && month && year) s = ", monthly, and yearly"
+      if (week && month && year) s = ", weekly, monthly, and yearly"
+      announce("<font size=16 color=\"red\"><b>WARNING: Daily" + s + " records will refresh at 00:00 GMT (current time " + d.getHours() + ":" + d.getMinutes() + ")!</b></font><br>")
     }
-}, 20000);
+}, 59000);
 
 
 module.exports = {io};
