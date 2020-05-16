@@ -73,6 +73,7 @@ app.get('/resources/*.png', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '..', 'resources/' + wildcard + '.png'));
 });
 app.get('/.well-known/pki-validation/*', (req, res, next) => {
+        const wildcard = req.params['0'];
         res.sendFile(path.join(__dirname, '..', '.well-known/pki-validation/' + wildcard));
 });
 app.get('/overlaypopup.css', (req, res, next) => {
