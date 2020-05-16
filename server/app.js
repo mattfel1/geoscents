@@ -499,7 +499,7 @@ io.on('connection', (socket) => {
                 }
               }
               else if (isUnknownCmd) {
-                room.whisperMessage(socket, "<i>Your command was not recognized!  Please check your spelling.  All valid commands can be found at <a href=\"http://geoscents.net/resources/about.html\" target=\"_blank\">http://geoscents.net/resources/about.html</a></i><br>", () => {});
+                room.whisperMessage(socket, "<i>Your command was not recognized!  Please check your spelling.  All valid commands can be found at <a href=\"https://geoscents.net/resources/about.html\" target=\"_blank\">https://geoscents.net/resources/about.html</a></i><br>", () => {});
               }
               else {
                 room.distributeMessage(socket, new_sent_msg, cb);
