@@ -441,7 +441,7 @@ module.exports = {
       "wiki": "https://en.wikipedia.org/wiki/Louvre"
     },
     {
-      "city": "Darvaza Gas Crater",
+      "city": "Darvaza Gas Crater ('Gates of Hell')",
       "city_ascii": "",
       "lat": 40.25252,
       "lng": 58.4396,
@@ -3945,6 +3945,138 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Pico_Cão_Grande"
     },
+    {
+      "city": "Great Blue Sinkhole",
+      "city_ascii": "",
+      "lat": 17.315278,
+      "lng": -87.534444,
+      "iso2": "BZ",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Great_Blue_Hole"
+    },
+    {
+      "city": "Eye of the Sahara (قلب الريشات)",
+      "city_ascii": "",
+      "lat": 21.124,
+      "lng": -11.402,
+      "iso2": "MR",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Richat_Structure"
+    },
+    {
+      "city": "Ngorongoro Crater",
+      "city_ascii": "",
+      "lat": -3.21,
+      "lng": 35.46,
+      "iso2": "TZ",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Ngorongoro_Conservation_Area#Ngorongoro_Crater"
+    },
+    {
+      "city": "Oklo Natural Nuclear Fission Reactor",
+      "city_ascii": "",
+      "lat": -1.394444,
+      "lng": 13.160833,
+      "iso2": "GA",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Natural_nuclear_fission_reactor"
+    },
+    {
+      "city": "Giant's Causeway Basalt Columns",
+      "city_ascii": "",
+      "lat": 55.240833,
+      "lng": -6.511667,
+      "iso2": "GB",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Giant%27s_Causeway"
+    },
+    {
+      "city": "Blarney Castle",
+      "city_ascii": "",
+      "lat": 51.9289,
+      "lng": -8.5708,
+      "iso2": "IE",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Blarney_Castle"
+    },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
     // {
     //   "city": "",
     //   "city_ascii": "",
