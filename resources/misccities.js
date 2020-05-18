@@ -3934,17 +3934,17 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Zion_National_Park"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Pico Cão Grande needle-shaped volcanic plug",
+      "city_ascii": "",
+      "lat": 0.118056,
+      "lng": 6.566389,
+      "iso2": "ST",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Pico_Cão_Grande"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
