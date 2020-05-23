@@ -8,5 +8,5 @@ rm /root/npm_log
 cd /var/www/html
 npm update
 webpack
-pm2 start 2>&1 | tee /root/npm_log
+pm2 start --no-daemon 2>&1 | tee /root/npm_log
 
