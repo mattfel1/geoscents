@@ -20,7 +20,7 @@ let SPORT = 443;
 let httpServer;
 let httpsServer;
 let io;
-const useHttp = true; //false;
+const useHttp = false;
 
 if (hostname === "mattfel-pc") {
   PORT = 5000;
@@ -67,8 +67,10 @@ if (hostname === "mattfel-pc") {
     })
     io = require('socket.io')(httpServer);
   } else {
-    var privateKey = fs.readFileSync('/root/privatekey.pem').toString();
-    var certificate = fs.readFileSync('/root/geoscents_net.crt').toString();
+    // var privateKey = fs.readFileSync('/root/privatekey.pem').toString();
+    // var certificate = fs.readFileSync('/root/geoscents_net.crt').toString();
+    var privateKey = fs.readFileSync('/home/mattfel/certs/geoscents_net.pem').toString();
+    var certificate = fs.readFileSync('/home/mattfel/certs/geoscents_net.crt').toString();
     var credentials = {key: privateKey, cert: certificate};
     httpServer = http.createServer(function (req, res) {
         res.writeHead(301, { "Location": "https://" + req.headers['host'].replace(PORT,SPORT) + req.url });
