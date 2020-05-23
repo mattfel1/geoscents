@@ -31,6 +31,7 @@ if (hostname === "mattfel-pc") {
       // console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
       res.end();
     });
+    httpsServer.listen(SPORT);
     httpServer = http.createServer(app);
     httpServer.listen(PORT, () => {
       console.log('Magic is happening on port ' + PORT);  
@@ -56,9 +57,10 @@ if (hostname === "mattfel-pc") {
   if (useHttp) {
     httpsServer = https.createServer(function (req, res) {
       res.writeHead(301, { "Location": "http://" + req.headers['host'].replace(SPORT,PORT) + req.url });
-      // console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
+      console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
       res.end();
     });
+    httpsServer.listen(SPORT);
     httpServer = http.createServer(app);
     httpServer.listen(PORT, () => {
       console.log('Magic is happening on port ' + PORT);  
