@@ -20,12 +20,17 @@ let SPORT = 443;
 let httpServer;
 let httpsServer;
 let io;
-const useHttp = false;
+const useHttp = true; //false;
 
 if (hostname === "mattfel-pc") {
   PORT = 5000;
   SPORT = 5443;
   if (useHttp) {
+    httpsServer = https.createServer(function (req, res) {
+      res.writeHead(301, { "Location": "http://" + req.headers['host'].replace(SPORT,PORT) + req.url });
+      // console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
+      res.end();
+    });
     httpServer = http.createServer(app);
     httpServer.listen(PORT, () => {
       console.log('Magic is happening on port ' + PORT);  
@@ -49,6 +54,11 @@ if (hostname === "mattfel-pc") {
   }
 } else {
   if (useHttp) {
+    httpsServer = https.createServer(function (req, res) {
+      res.writeHead(301, { "Location": "http://" + req.headers['host'].replace(SPORT,PORT) + req.url });
+      // console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
+      res.end();
+    });
     httpServer = http.createServer(app);
     httpServer.listen(PORT, () => {
       console.log('Magic is happening on port ' + PORT);  
