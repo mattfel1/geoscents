@@ -479,7 +479,7 @@ class Room {
             socket.emit('post space');
         }
         else {
-            socket.emit('post lobby', helpers.readRecentActivity(8), helpers.readHallOfFame(20));
+            socket.emit('post lobby', helpers.readRecentActivity(8), helpers.readHallOfFame(100));
         }
         const sortedPlayers = this.sortPlayers();
         Array.from(sortedPlayers.values()).forEach(function(player, index) {
