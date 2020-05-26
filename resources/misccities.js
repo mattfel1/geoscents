@@ -4011,17 +4011,17 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Blarney_Castle"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Vatican Advanced Technology Telescope (VATT)",
+      "city_ascii": "",
+      "lat": 32.7013,
+      "lng": -109.892,
+      "iso2": "US",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Vatican_Advanced_Technology_Telescope"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
