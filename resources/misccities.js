@@ -3004,6 +3004,7 @@ module.exports = {
       "lat": 50.911944,
       "lng": 0.4875,
       "country": "",
+      "iso2": "GB",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_Hastings"
@@ -3027,6 +3028,7 @@ module.exports = {
       "country": "",
       "population": 0,
       "capital": "",
+      "iso2": "IR",
       "wiki": "en.wikipedia.org/wiki/Naqsh-e_Rostam"
     },
     {

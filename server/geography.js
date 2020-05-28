@@ -112,7 +112,8 @@ const stringifyTarget = (target) => {
         'string': target['city'] + state + comma + target['country'],
         'pop': pop,
         'majorcapital': target['capital'] === "primary",
-        'minorcapital': target['capital'] === 'admin' || target['capital'] === 'minor'
+        'minorcapital': target['capital'] === 'admin' || target['capital'] === 'minor',
+        'iso2': target['iso2']
     }
 };
 

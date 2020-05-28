@@ -46,7 +46,7 @@ const makeLink = (room, thisTarget) => {
     if (thisTarget['wiki'] != null) wiki = thisTarget['wiki'];
     return wiki;
 }
-const recordGuesses = (map, citystring, city, admin, country, raw_ips, dists, times, lats, lons, true_lat, true_lon, link) => {
+const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dists, times, lats, lons, true_lat, true_lon, link) => {
     try {
 
         function copy(x) {
@@ -160,6 +160,7 @@ const recordGuesses = (map, citystring, city, admin, country, raw_ips, dists, ti
                     history[citystring]["city"] = city;
                     history[citystring]["admin"] = admin;
                     history[citystring]["country"] = country;
+                    history[citystring]["iso2"] = iso2;
                     // Update mini file for joe
                     if (!fs.existsSync(joefile)) {
                         fs.writeFile(joefile, "", {flag: 'wx'}, function (err) {
