@@ -69,14 +69,14 @@ class Map {
             x_font_ofs: 5, y_font_ofs: 42,
             border_color1: "#000000", border_color2: "#808080",
             normal_color: "orange", highlight_color: "green",
-            font_size: 40, link: 'http://geoscents.net/plots/index.html', label: 'ABOUT GAME'
+            font_size: 40, link: 'http://geoscents.net/resources/about.html', label: 'ABOUT GAME'
         };
         this.visualize_button = {
             x: 750, y: 700, width: 320, height: 60,
             x_font_ofs: 5, y_font_ofs: 42,
             border_color1: "#000000", border_color2: "#808080",
             normal_color: "orange", highlight_color: "green",
-            font_size: 40, link: 'http://geoscents.net/resources/about.html', label: 'EXPLORE DATA!'
+            font_size: 40, link: 'http://geoscents.net/plots/index.html', label: 'EXPLORE DATA!'
         };
         this.donate1_button = {
             x: 500, y: 200, width: 80, height: 40,
