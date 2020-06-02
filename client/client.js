@@ -227,14 +227,13 @@ $(document).ready(function(){
             commands.drawCommand(" seconds until new game auto-starts...", "", "", "", 0, true, true);
             clickedReady = true;
         }
-        if (isInside(mousePos,map.visualize_button) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
-            window.open('http://geoscents.net/plots/index.html', '_blank');
-            socket.emit('view viz');
-        }
-        if (isInside(mousePos,map.about_button) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
-            window.open('http://geoscents.net/resources/about.html', '_blank');
-            socket.emit('view about');
-        }
+        Object.values(map.clickable_buttons).forEach(function(btn) {
+            if (isInside(mousePos,btn) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
+                window.open(btn.link, '_blank');
+                socket.emit('button clicked', btn.label);
+            }
+        })
+
         if (!(typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
             var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);
         }
@@ -242,12 +241,11 @@ $(document).ready(function(){
     canvas.addEventListener('mousemove', function(evt) {
         var mousePos = getMousePosInPanel(canvas, evt);
         if (myMap === CONSTANTS.LOBBY && !popup.isShowing) {
-            if (isInside(mousePos,map.visualize_button) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
-                map.highlightVizButton();
-            } else if (!booted) map.showVizButton();
-            if (isInside(mousePos,map.about_button) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
-                map.highlightAboutButton();
-            } else if (!booted) map.showAboutButton();
+            Object.values(map.clickable_buttons).forEach(function(btn) {
+                if (isInside(mousePos,btn) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
+                    map.highlightButton(btn);
+                } else if (!booted) map.showButton(btn);
+            })
         } else {
             if (betweenGames && !clickedReady && isInside(mousePos,commands.ready_button)) {
                 commands.highlightReadyButton();

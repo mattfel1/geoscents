@@ -65,17 +65,79 @@ class Map {
             height: 40
         };
         this.about_button = {
-            x: 400,
-            y: 600,
-            width: 280,
-            height: 60
+            x: 400, y: 700, width: 280, height: 60,
+            x_font_ofs: 5, y_font_ofs: 42,
+            border_color1: "#000000", border_color2: "#808080",
+            normal_color: "orange", highlight_color: "green",
+            font_size: 40, link: 'http://geoscents.net/plots/index.html', label: 'ABOUT GAME'
         };
         this.visualize_button = {
-            x: 750,
-            y: 600,
-            width: 320,
-            height: 60
+            x: 750, y: 700, width: 320, height: 60,
+            x_font_ofs: 5, y_font_ofs: 42,
+            border_color1: "#000000", border_color2: "#808080",
+            normal_color: "orange", highlight_color: "green",
+            font_size: 40, link: 'http://geoscents.net/resources/about.html', label: 'EXPLORE DATA!'
         };
+        this.donate1_button = {
+            x: 500, y: 200, width: 80, height: 40,
+            x_font_ofs: 5, y_font_ofs: 30,
+            border_color1: "#000000", border_color2: "#808080",
+            normal_color: "grey", highlight_color: "purple",
+            font_size: 25, link: 'https://action.aclu.org/give/now', label: 'ACLU'
+        };
+        this.donate2_button = {
+            x: 600, y: 200, width: 340, height: 40,
+            x_font_ofs: 5, y_font_ofs: 30,
+            border_color1: "#000000", border_color2: "#808080",
+            normal_color: "grey", highlight_color: "purple",
+            font_size: 25, link: 'https://org2.salsalabs.com/o/6857/p/salsa/donation/common/public/?donate_page_KEY=15780', label: 'NAACP Legal Defense Fund'
+        };
+        this.donate3_button = {
+            x: 960, y: 200, width: 120, height: 40,
+            x_font_ofs: 5, y_font_ofs: 30,
+            border_color1: "#000000", border_color2: "#808080",
+            normal_color: "grey", highlight_color: "purple",
+            font_size: 25, link: 'https://secure.actblue.com/donate/fair-fight-1', label: 'Fair Fight'
+        };
+        this.donate4_button = {
+            x: 480, y: 260, width: 230, height: 40,
+            x_font_ofs: 5, y_font_ofs: 30,
+            border_color1: "#000000", border_color2: "#808080",
+            normal_color: "grey", highlight_color: "purple",
+            font_size: 25, link: 'https://secure3.convio.net/thp/site/Donation2?df_id=2600&mfc_pref=T&2600.donation=form1', label: 'The Hunger Project'
+        };
+        this.donate5_button = {
+            x: 730, y: 260, width: 220, height: 40,
+            x_font_ofs: 5, y_font_ofs: 30,
+            border_color1: "#000000", border_color2: "#808080",
+            normal_color: "grey", highlight_color: "purple",
+            font_size: 25, link: 'https://secure.actblue.com/donate/ms_blm_homepage_2019', label: 'Black Lives Matter'
+        };
+        this.donate6_button = {
+            x: 970, y: 260, width: 190, height: 40,
+            x_font_ofs: 5, y_font_ofs: 30,
+            border_color1: "#000000", border_color2: "#808080",
+            normal_color: "grey", highlight_color: "purple",
+            font_size: 25, link: 'https://secure.givelively.org/donate/the-bail-project', label: 'The Bail Project'
+        };
+        this.donate7_button = {
+            x: 600, y: 320, width: 240, height: 40,
+            x_font_ofs: 5, y_font_ofs: 30,
+            border_color1: "#000000", border_color2: "#808080",
+            normal_color: "grey", highlight_color: "purple",
+            font_size: 25, link: 'https://www.weareplannedparenthood.org/onlineactions/2U7UN1iNhESWUfDs4gDPNg2?sourceid=1000063', label: 'Planned Parenthood'
+        };
+        this.donate8_button = {
+            x: 860, y: 320, width: 280, height: 40,
+            x_font_ofs: 5, y_font_ofs: 30,
+            border_color1: "#000000", border_color2: "#808080",
+            normal_color: "grey", highlight_color: "purple",
+            font_size: 25, link: 'https://donate.doctorswithoutborders.org/onetime.cfm', label: 'Doctors Without Borders'
+        };
+        this.clickable_buttons = [this.about_button, this.visualize_button, 
+            this.donate1_button, this.donate2_button, this.donate3_button,
+            this.donate4_button, this.donate5_button, this.donate6_button,
+            this.donate7_button, this.donate8_button]
     }
 
     canvas_arrow(fromx, fromy, tox, toy){
@@ -140,8 +202,8 @@ class Map {
         this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
         this.ctx.font = "55px Arial bold";
         this.ctx.fillStyle = 'black';
-        this.ctx.fillText('Welcome to GeoScents!', 480, 490);
-        this.ctx.fillText('Locate cities as quickly and accurately as possible!',90,550);
+        this.ctx.fillText('Welcome to GeoScents!', 400, 590);
+        this.ctx.fillText('Locate cities as quickly and accurately as possible!',20,650);
 
         this.ctx.font = "20px Arial";
         this.ctx.fillText('[ Spinning globe is loading... ]', 90, 220);
@@ -173,9 +235,18 @@ class Map {
         this.ctx.fillText('Discuss', 160, 780);
         this.canvas_arrow(200, 800, 200, this.canvas.height-20);
 
-        this.showVizButton();
-        this.showAboutButton();
+        // Donate
+        this.ctx.globalAlpha = 1;
+        this.ctx.fillStyle = 'black';
+        this.ctx.fillRect(450, 120, 750, 300);
+        this.ctx.font = "30px Arial";
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText('Please consider donating to an important cause:',480,170);
 
+        const showButton = (btn) => this.showButton(btn)
+        Object.values(this.clickable_buttons).forEach(function(btn) {
+            showButton(btn)
+        })
       }
       else if (room == CONSTANTS.WORLD){
             this.ctx.font = "20px Arial";
@@ -253,52 +324,29 @@ class Map {
         }
     }
 
-    highlightAboutButton() {
-        this.ctx.fillStyle = "#000000";
-        this.ctx.fillRect(this.about_button['x']-4, this.about_button['y']-4, this.about_button['width']+8, this.about_button['height']+8);
-        this.ctx.fillStyle = "#808080";
-        this.ctx.fillRect(this.about_button['x']-2, this.about_button['y']-2, this.about_button['width']+4, this.about_button['height']+4);
-        this.ctx.fillStyle = "green";
-        this.ctx.fillRect(this.about_button['x'], this.about_button['y'], this.about_button['width'], this.about_button['height']);
-        this.ctx.font = 40 + "px Arial";
+    highlightButton(properties) {
+        this.ctx.fillStyle = properties['border_color1'];
+        this.ctx.fillRect(properties['x']-4, properties['y']-4, properties['width']+8, properties['height']+8);
+        this.ctx.fillStyle = properties['border_color2'];
+        this.ctx.fillRect(properties['x']-2, properties['y']-2, properties['width']+4, properties['height']+4);
+        this.ctx.fillStyle = properties['highlight_color'];
+        this.ctx.fillRect(properties['x'], properties['y'], properties['width'], properties['height']);
+        this.ctx.font = properties['font_size'] + "px Arial";
         this.ctx.fillStyle = 'black';
-        this.ctx.fillText('ABOUT GAME', this.about_button['x'] + 5, this.about_button['y'] + 42)
+        this.ctx.fillText(properties['label'], properties['x'] + properties['x_font_ofs'], properties['y'] + properties['y_font_ofs'])
     }
-
-    highlightVizButton() {
-        this.ctx.fillStyle = "#000000";
-        this.ctx.fillRect(this.visualize_button['x']-4, this.visualize_button['y']-4, this.visualize_button['width']+8, this.visualize_button['height']+8);
-        this.ctx.fillStyle = "#808080";
-        this.ctx.fillRect(this.visualize_button['x']-2, this.visualize_button['y']-2, this.visualize_button['width']+4, this.visualize_button['height']+4);
-        this.ctx.fillStyle = "green";
-        this.ctx.fillRect(this.visualize_button['x'], this.visualize_button['y'], this.visualize_button['width'], this.visualize_button['height']);
-        this.ctx.font = 40 + "px Arial";
+    showButton(properties) {
+        this.ctx.fillStyle = properties['border_color1'];
+        this.ctx.fillRect(properties['x']-4, properties['y']-4, properties['width']+8, properties['height']+8);
+        this.ctx.fillStyle = properties['border_color2'];
+        this.ctx.fillRect(properties['x']-2, properties['y']-2, properties['width']+4, properties['height']+4);
+        this.ctx.fillStyle = properties['normal_color'];
+        this.ctx.fillRect(properties['x'], properties['y'], properties['width'], properties['height']);
+        this.ctx.font = properties['font_size'] + "px Arial";
         this.ctx.fillStyle = 'black';
-        this.ctx.fillText('EXPLORE DATA!', this.visualize_button['x'] + 5, this.visualize_button['y'] + 42)
+        this.ctx.fillText(properties['label'], properties['x'] + properties['x_font_ofs'], properties['y'] + properties['y_font_ofs'])
     }
-    showAboutButton() {
-        this.ctx.fillStyle = "#000000";
-        this.ctx.fillRect(this.about_button['x']-4, this.about_button['y']-4, this.about_button['width']+8, this.about_button['height']+8);
-        this.ctx.fillStyle = "#808080";
-        this.ctx.fillRect(this.about_button['x']-2, this.about_button['y']-2, this.about_button['width']+4, this.about_button['height']+4);
-        this.ctx.fillStyle = "orange";
-        this.ctx.fillRect(this.about_button['x'], this.about_button['y'], this.about_button['width'], this.about_button['height']);
-        this.ctx.font = 40 + "px Arial";
-        this.ctx.fillStyle = 'black';
-        this.ctx.fillText('ABOUT GAME', this.about_button['x'] + 5, this.about_button['y'] + 42)
-    }
-
-    showVizButton() {
-        this.ctx.fillStyle = "#000000";
-        this.ctx.fillRect(this.visualize_button['x']-4, this.visualize_button['y']-4, this.visualize_button['width']+8, this.visualize_button['height']+8);
-        this.ctx.fillStyle = "#808080";
-        this.ctx.fillRect(this.visualize_button['x']-2, this.visualize_button['y']-2, this.visualize_button['width']+4, this.visualize_button['height']+4);
-        this.ctx.fillStyle = "orange";
-        this.ctx.fillRect(this.visualize_button['x'], this.visualize_button['y'], this.visualize_button['width'], this.visualize_button['height']);
-        this.ctx.font = 40 + "px Arial";
-        this.ctx.fillStyle = 'black';
-        this.ctx.fillText('EXPLORE DATA!', this.visualize_button['x'] + 5, this.visualize_button['y'] + 42)
-    }
+    
     cellOf(coords) {
         const CELL_HEIGHT = CONSTANTS.MAP_HEIGHT / CONSTANTS.VERT_WRITE_CELLS;
         const CELL_WIDTH = CONSTANTS.MAP_WIDTH / CONSTANTS.HORZ_WRITE_CELLS;

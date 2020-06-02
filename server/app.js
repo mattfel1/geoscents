@@ -191,19 +191,12 @@ io.on('connection', (socket) => {
       helpers.log("User connected    " + socket.handshake.address);
 	  socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
 	});
-  socket.on('view viz', function() {
+  socket.on('button clicked', function(btn) {
     let name = "";
     if (rooms[CONSTANTS.LOBBY].hasPlayer(socket)) {
       name = rooms[CONSTANTS.LOBBY].getPlayerName(socket);
     }
-    helpers.log('User clicked viz ' + socket.handshake.address + " (" + name + ")");
-  });
-  socket.on('view about', function() {
-    let name = "";
-    if (rooms[CONSTANTS.LOBBY].hasPlayer(socket)) {
-      name = rooms[CONSTANTS.LOBBY].getPlayerName(socket);
-    }
-    helpers.log('User clicked about ' + socket.handshake.address + " (" + name + ")");
+    helpers.log('User clicked ' + btn + ' ' + socket.handshake.address + " (" + name + ")");
   });
   socket.on('disconnect', function() {
       if (playerRooms.has(socket.id)) {
