@@ -191,6 +191,23 @@ class Map {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
+    roundRect(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = 'black';
+      ctx.fill()
+
+    }
     drawMap(room) {
       var ctx = this.ctx;
       this.occupiedCells = [];
@@ -236,12 +253,12 @@ class Map {
         this.canvas_arrow(200, 800, 200, this.canvas.height-20);
 
         // Donate
-        this.ctx.globalAlpha = 1;
-        this.ctx.fillStyle = 'black';
-        this.ctx.fillRect(450, 120, 750, 300);
-        this.ctx.font = "30px Arial";
+        // this.ctx.fillRect(450, 120, 750, 300);
+        // Different radii for each corner, others default to 0
+        this.roundRect(this.ctx, 450, 120, 750, 300, 15);
+        this.ctx.font = "25px Arial";
         this.ctx.fillStyle = 'white';
-        this.ctx.fillText('Please consider donating to an important cause:',480,170);
+        this.ctx.fillText('Every voice counts in enacting change and fighting injustice:',480,170);
 
         const showButton = (btn) => this.showButton(btn)
         Object.values(this.clickable_buttons).forEach(function(btn) {
