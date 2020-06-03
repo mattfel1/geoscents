@@ -105,6 +105,7 @@ class Room {
       function copy(x) {
           return JSON.parse( JSON.stringify(x, null, 2) );
       }
+      if (!this.hasJoe) this.createJoe()
       this.dayRecord = CONSTANTS.INIT_RECORD;
       if (week) this.weekRecord == CONSTANTS.INIT_RECORD;
       if (month) this.monthRecord == CONSTANTS.INIT_RECORD;
