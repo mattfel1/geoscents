@@ -73,9 +73,13 @@ if (hostname === "mattfel-pc") {
     var certificate = fs.readFileSync('/home/mattfel/certs/geoscents_net.crt').toString();
     var credentials = {key: privateKey, cert: certificate};
     httpServer = http.createServer(function (req, res) {
-        res.writeHead(301, { "Location": "https://" + req.headers['host'].replace(PORT,SPORT) + req.url });
-        // console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
-        res.end();
+        try {
+          res.writeHead(301, { "Location": "https://" + req.headers['host'].replace(PORT,SPORT) + req.url });
+          console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
+          res.end();
+        } catch {
+          console.log("failed to redirect " + req)
+        }
       });
     httpServer.listen(PORT);
     httpsServer = https.createServer(credentials, app);
