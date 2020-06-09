@@ -1,4 +1,5 @@
-module.exports = {
+
+ module.exports = {
   CITIES: [
     // 7 Ancient Wonders
     {
@@ -487,6 +488,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 43.0799,
       "lng": -79.0747,
+      "iso2": "USCA",
       "country": "",
       "population": 0,
       "capital": "",
@@ -594,6 +596,7 @@ module.exports = {
       "city_ascii": "",
       "lat": -17.924444,
       "lng": 25.856667,
+      "iso2": "ZWZM",
       "country": "",
       "population": 0,
       "capital": "",
@@ -605,6 +608,7 @@ module.exports = {
       "lat": -25.686667,
       "lng": -54.444722,
       "country": "",
+      "iso2": "BRAR",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Iguazu_Falls"
@@ -2492,6 +2496,7 @@ module.exports = {
       "lat": 32.190556,
       "lng": 48.257778,
       "country": "",
+      "iso2": "IR",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Code_of_Hammurabi"
@@ -2502,6 +2507,7 @@ module.exports = {
       "lat": 32.190556,
       "lng": 48.257778,
       "country": "Parthian / Sasanian Empire",
+      "iso2": "IR",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Susa"
@@ -2512,6 +2518,7 @@ module.exports = {
       "lat": 29.980833,
       "lng": 52.909444,
       "country": "Sasanian Empire",
+      "iso2": "IR",
       "population": 0,
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Istakhr"
@@ -2522,6 +2529,7 @@ module.exports = {
       "lat": 47.210278,
       "lng": 102.847778,
       "country": "Mongol Empire",
+      "iso2": "MN",
       "population": 0,
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Karakorum"
@@ -2533,6 +2541,7 @@ module.exports = {
       "lng": 6.611944,
       "country": "Berber Kingdom of Numidia",
       "population": 0,
+      "iso2": "DZ",
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Cirta"
     },    
@@ -2542,6 +2551,7 @@ module.exports = {
       "lat": 19.600803,
       "lng": 30.409731,
       "country": "Kerma Kingdom of Nubia",
+      "iso2": "SD",
       "population": 0,
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Kerma"
@@ -2552,6 +2562,7 @@ module.exports = {
       "lat": 30.628889,
       "lng": 72.863889,
       "country": "Indus Valley Civilization",
+      "iso2": "PK",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Harappa"
@@ -2562,6 +2573,7 @@ module.exports = {
       "lat": 34.455278,
       "lng": 113.025278,
       "country": "Xia Dynasty, China",
+      "iso2": "CN",
       "population": 0,
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Yangcheng_(historical_city)"
@@ -2571,6 +2583,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 34.266667,
       "lng": 108.9,
+      "iso2": "CN",
       "country": "Han Dynasty, China",
       "population": 0,
       "capital": "primary",
@@ -2658,6 +2671,7 @@ module.exports = {
       "lat": 41.306389,
       "lng": 16.1325,
       "country": "",
+      "iso2": "IT",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_Cannae"
@@ -2668,6 +2682,7 @@ module.exports = {
       "lat": 52.408056,
       "lng": 8.129444,
       "country": "",
+      "iso2": "DE",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_the_Teutoburg_Forest"
@@ -2678,6 +2693,7 @@ module.exports = {
       "lat": 36.298889,
       "lng": 9.449167,
       "country": "",
+      "iso2": "TN",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_Zama"
@@ -2700,6 +2716,7 @@ module.exports = {
       "lng": 9.6,
       "country": "",
       "population": 0,
+      "iso2": "IT",
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_the_Trebia"
     },
@@ -2709,6 +2726,7 @@ module.exports = {
       "lat": 43.139444,
       "lng": 12.1075,
       "country": "",
+      "iso2": "IT",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_Lake_Trasimene"
@@ -2898,6 +2916,7 @@ module.exports = {
       "lat": -24.073056,
       "lng": -54.283611,
       "country": "",
+      "iso2": "BRPY",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Guaíra_Falls"
@@ -2973,6 +2992,7 @@ module.exports = {
       "city_ascii": "",
       "lat": 35.172581,
       "lng": -4.300803,
+      "iso2": "ESMA",      
       "country": "",
       "population": 0,
       "capital": "",
@@ -2984,6 +3004,7 @@ module.exports = {
       "lat": 34.123611,
       "lng": 35.651111,
       "country": "Phoenicia",
+      "iso2": "LB",            
       "population": 0,
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Byblos"
@@ -2994,6 +3015,7 @@ module.exports = {
       "lat": 33.270833,
       "lng": 35.196111,
       "country": "Phoenicia",
+      "iso2": "LB",      
       "population": 0,
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Tyre,_Lebanon"
@@ -4024,6 +4046,160 @@ module.exports = {
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Vatican_Advanced_Technology_Telescope"
     },
+    {
+      "city": "Alexander Fleming Discovers Penicillin",
+      "city_ascii": "",
+      "lat": 51.498356,
+      "lng": -0.176894,
+      "iso2": "GB",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Penicillin"
+    },
+    {
+      "city": "Dmitri Mendeleev begins building the periodic table of elements",
+      "city_ascii": "",
+      "lat": 59.942,
+      "lng": 30.299,
+      "iso2": "RU",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Dmitri_Mendeleev#Periodic_table"
+    },
+    {
+      "city": "Pythagoras establishes commune for mathematics, art, astronomy, philosophy, and vegetarianism",
+      "city_ascii": "",
+      "lat": 39.083333,
+      "lng": 17.116667,
+      "iso2": "IT",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Pythagoras"
+    },
+    {
+      "city": "Zhong Zhong (中中) and Hua Hua (华华) the macaques are cloned",
+      "city_ascii": "",
+      "lat": 31.228611,
+      "lng": 121.474722,
+      "iso2": "",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Zhong_Zhong_and_Hua_Hua"
+    },
+    {
+      "city": "Dolly the Sheep is cloned (1996)",
+      "city_ascii": "",
+      "lat": 55.947389,
+      "lng": -3.187194,
+      "iso2": "GB",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Dolly_(sheep)"
+    },
+    {
+      "city": "Christiaan Barnard performs first successful heart transplant",
+      "city_ascii": "",
+      "lat": -33.925278,
+      "lng": 18.423889,
+      "iso2": "ZA",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Christiaan_Barnard"
+    },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
     // {
     //   "city": "",
     //   "city_ascii": "",
