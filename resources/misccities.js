@@ -1507,7 +1507,7 @@
       "city_ascii": "",
       "lat": 32.639167, 
       "lng": 14.290556,
-      "iso2": "LY"
+      "iso2": "LY",
       "country": "Carthaginian Empire",
       "population": 0,
       "capital": "",
