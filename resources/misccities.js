@@ -383,6 +383,7 @@
       "lng": 30.933333,
       "country": "Kingdom of Zimbabwe",
       "population": 0,
+      "iso2": "GZ",
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Great_Zimbabwe"
     },
@@ -479,6 +480,7 @@
       "lat": 46.233324,
       "lng": 6.0499998,
       "country": "",
+      "iso2": "FRCH",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Large_Hadron_Collider"
@@ -544,6 +546,7 @@
       "lat": 27.988056,
       "lng": 86.925278,
       "country": "",
+      "iso2": "CNNP",      
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Mount_Everest"
@@ -640,6 +643,7 @@
       "lat": 35.8825,
       "lng": 76.513333,
       "country": "",
+      "iso2": "CNPK",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/K2"
@@ -705,6 +709,7 @@
       "lat": 45.832778,
       "lng": 6.865,
       "country": "",
+      "iso2": "ITFR",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Mont_Blanc"
@@ -758,6 +763,7 @@
       "city_ascii": "",
       "lat": 36.8528,
       "lng": 10.3233,
+      "iso2": "TN"
       "country": "Carthaginian Civilization",
       "population": 0,
       "capital": "primary",
@@ -769,6 +775,7 @@
       "lat": 36.359444,
       "lng": 43.152778,
       "country": "Assyrian Empire",
+      "iso2": "IQ"
       "population": 0,
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Nineveh"
@@ -778,6 +785,7 @@
       "city_ascii": "",
       "lat": 32.536389,
       "lng": 44.420833,
+      "iso2": "IQ"
       "country": "Babylonian Empire",
       "population": 0,
       "capital": "primary",
@@ -972,6 +980,7 @@
       "lat": 45.976389,
       "lng": 7.658611,
       "country": "",
+      "iso2": "ITCH",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Matterhorn"
@@ -1004,6 +1013,7 @@
       "lat": 31.404444,
       "lng": 30.416389,
       "country": "",
+      "iso2": "EG",      
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Rosetta_Stone"
@@ -1123,6 +1133,7 @@
       "city_ascii": "",
       "lat": 66.5,
       "lng": -169,
+      "iso2": "RUUS",
       "country": "",
       "population": 0,
       "capital": "",
@@ -1486,6 +1497,7 @@
       "lat": 17.221944,
       "lng": -89.623611,
       "country": "Maya Civilization",
+      "iso2": "GT",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Tikal"
@@ -1495,6 +1507,7 @@
       "city_ascii": "",
       "lat": 32.639167, 
       "lng": 14.290556,
+      "iso2": "LY"
       "country": "Carthaginian Empire",
       "population": 0,
       "capital": "",
@@ -1561,6 +1574,7 @@
       "lat": 19.433333,
       "lng": -99.133333,
       "country": "Aztec Empire",
+      "iso2": "MX",
       "population": 0,
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Tenochtitlan"
@@ -1570,6 +1584,7 @@
       "city_ascii": "",
       "lat": -16.554722, 
       "lng": -68.673333,
+      "iso2": "BO",
       "country": "Tiwanaku Empire",
       "population": 0,
       "capital": "primary",
@@ -1580,6 +1595,7 @@
       "city_ascii": "",
       "lat": 17.393561,
       "lng": -89.634533,
+      "iso2": "GT",
       "country": "Mayan Civilization",
       "population": 0,
       "capital": "",
@@ -1591,7 +1607,7 @@
       "lat": -15.75,
       "lng": -69.416667,
       "country": "",
-      "iso2": "PE",
+      "iso2": "PEBO",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Lake_Titicaca"
@@ -1602,6 +1618,7 @@
       "lat": -13.525,
       "lng": -71.972222,
       "country": "Incan Empire",
+      "iso2": "PE",
       "population": 0,
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Cusco"
@@ -1754,6 +1771,7 @@
       "lat": 44.314038,
       "lng": 9.174979,
       "country": "",
+      "iso2": "IT",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Christ_of_the_Abyss"
@@ -1764,6 +1782,7 @@
       "lat": 22.254106,
       "lng": 113.905144,
       "country": "",
+      "iso2": "CN",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Tian_Tan_Buddha"
@@ -1774,6 +1793,7 @@
       "lat": 55.692861,
       "lng": 12.599278,
       "country": "",
+      "iso2": "DK",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/The_Little_Mermaid_(statue)"
@@ -2062,6 +2082,7 @@
       "lat": 30.129333,
       "lng": 31.307528,
       "country": "Ancient Egypt",
+      "iso2": "EG",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Heliopolis_(ancient_Egypt)"
@@ -2073,6 +2094,7 @@
       "lng": 20.020556,
       "country": "Ancient Greece / Rome",
       "population": 0,
+      "iso2": "AL",
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Butrint"
     },
@@ -2136,6 +2158,7 @@
       "lat": 42.782711,
       "lng": 10.286335,
       "country": "",
+      "iso2": "IT",
       "population": 0,
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Napoleon#Exile_to_Elba"
