@@ -763,7 +763,7 @@
       "city_ascii": "",
       "lat": 36.8528,
       "lng": 10.3233,
-      "iso2": "TN"
+      "iso2": "TN",
       "country": "Carthaginian Civilization",
       "population": 0,
       "capital": "primary",
@@ -775,7 +775,7 @@
       "lat": 36.359444,
       "lng": 43.152778,
       "country": "Assyrian Empire",
-      "iso2": "IQ"
+      "iso2": "IQ",
       "population": 0,
       "capital": "primary",
       "wiki": "https://en.wikipedia.org/wiki/Nineveh"
@@ -785,7 +785,7 @@
       "city_ascii": "",
       "lat": 32.536389,
       "lng": 44.420833,
-      "iso2": "IQ"
+      "iso2": "IQ",
       "country": "Babylonian Empire",
       "population": 0,
       "capital": "primary",
