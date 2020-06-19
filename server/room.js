@@ -308,6 +308,14 @@ class Room {
       this.drawScorePanel();
     }
 
+    playerReboot(socket) {
+      if (this.players.has(socket.id) && this.gameActive()) {
+          const player = this.players.get(socket.id);
+          player.reboot = '⏻';
+      }
+      this.drawScorePanel();
+    }
+
     playerClicked(socket, playerClick) {
       if (this.players.has(socket.id) || socket == this.joe.id) {
           let player;
@@ -612,6 +620,10 @@ class Room {
     allReady() {
       return this.players.size > 0 && Array.from(this.players.values()).filter(player => !player.ready).length === 0
     }
+    
+    allReboot() {
+      return this.players.size > 0 && Array.from(this.players.values()).filter(player => !player.reboot).length === 0
+    }
 
     onSecond(fcn) {
         if ( Math.abs(Math.floor((this.timer*1000) % 1000)) < 40 ) {
@@ -741,13 +753,17 @@ class Room {
               [this.target, this.blacklist] = Geography.randomCity(this.map, this.blacklist);
               [this.joeTime, this.joeLat, this.joeLon] = helpers.joeData(this.map, Geography.stringifyTarget(this.target).string);
               this.timerColor = CONSTANTS.GUESS_COLOR;
-              Array.from(this.players.values()).forEach((p, id) => {
-                  p.reset()
-              });
+              Array.from(this.players.values()).forEach((p, id) => {p.reset()});
               if (this.hasJoe) this.joe.reset();
               this.playedCities[this.round] = this.target;
               this.stateTransition(CONSTANTS.GUESS_STATE, CONSTANTS.GUESS_DURATION);
           } else if (this.state === CONSTANTS.GUESS_STATE) {
+              if (this.allReboot()) {
+                if (this.hasJoe) this.joe.deepReset(this.players.values().size);
+                this.timerColor = CONSTANTS.BEGIN_COLOR;                
+                Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
+                this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, CONSTANTS.BEGIN_GAME_DURATION);                
+              }
               if (this.timer <= 0 || this.allPlayersClicked()) {
                   this.updateScores();
                   this.sortPlayers();
@@ -760,6 +776,12 @@ class Room {
               }
               if (this.hasJoe) this.processJoe()
           } else if (this.state === CONSTANTS.REVEAL_STATE) {
+              if (this.allReboot()) {
+                if (this.hasJoe) this.joe.deepReset(this.players.values().size);
+                this.timerColor = CONSTANTS.BEGIN_COLOR;                
+                Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
+                this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, CONSTANTS.BEGIN_GAME_DURATION);                
+              }
               if (this.timer <= 0 && this.round >= CONSTANTS.GAME_ROUNDS) {
                   this.round = 0;
                   this.stateTransition(CONSTANTS.PREPARE_GAME_DURATION, CONSTANTS.PREPARE_GAME_DURATION);
@@ -787,6 +809,7 @@ class Room {
       const getname = (s) => this.getPlayerName(s);
       if (this.players.has(senderSocket)) {
          this.players.get(senderSocket).consecutiveSecondsInactive = 0;
+         this.players.get(senderSocket).consecutiveRoundsInactive = 0;
       }
       const senderColor = this.getPlayerColor(senderSocket);
       const room = this.roomName;

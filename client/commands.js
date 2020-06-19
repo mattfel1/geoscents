@@ -137,9 +137,11 @@ class Commands {
         $('#commands').append($("<div id='settings-box' class='settings'>"))
         $('#settings-box').append($("<div id='map-btns' style=\"display: inline-block\">" + button1 + button2 + button3 + "</div>"));
 
+
+        let rebootButton = "<div id='reboot_button' class='joe-btn-container'><button class='joe-btn'>Restart Game</button></div><br>";
         let killJoe = 'Kill Bot'; if (!this.hasJoe) killJoe = 'Create Bot';
-        let joeButton = "<div style=\"display: inline-block\" id='joe_button' class='joe-btn-container'><button class='joe-btn'>" + killJoe + "</button></div><br>";
-        $('#settings-box').append($("<div id='map-btns' style=\"display:inline-block\">" + joeButton + "</div>"));
+        let joeButton = "<div id='joe_button' class='joe-btn-container'><button class='joe-btn'>" + killJoe + "</button></div>";
+        $('#settings-box').append($("<div id='map-btns' style=\"display:inline-block\">" + rebootButton + joeButton + "</div>"));
         let pressedJitter = ''; if (this.antiJitter) pressedJitter = '-clicked';
         let jitterButton = "<div style=\"display: inline-block\" id='jitter_button' class='map-style-btn-container'><button class='map-style-btn" + pressedJitter + "'>Anti-Jitter</button></div>";
         if (this.muted) $('#settings-box').append($("<div style='display: inline-block'><button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔇 <font color=\"white\">(muted)</font></button><br>" + jitterButton + "</div><br>"));
@@ -179,6 +181,7 @@ class Commands {
         
         $('#mute_button').bind("click", () => {socket.emit('mute'); this.refocus()});
         $('#jitter_button').bind("click", () => {socket.emit('jitter'); this.refocus()});
+        $('#reboot_button').bind("click", () => {socket.emit('playerReboot'); this.refocus()});
         $('#joe_button').bind("click", () => {socket.emit('toggle joe'); this.refocus()});
         $('#classic_button').bind("click", () => {socket.emit('renderMap', 'classic'); this.refocus()});
         $('#terrain_button').bind("click", () => {socket.emit('renderMap', 'terrain'); this.refocus()});

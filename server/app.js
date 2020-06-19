@@ -259,6 +259,12 @@ io.on('connection', (socket) => {
           room.playerReady(socket);
       }
     });
+    socket.on('playerReboot', () => {
+      if (playerRooms.has(socket.id)) {
+          const room = playerRooms.get(socket.id);
+          room.playerReboot(socket);
+      }
+    });
     socket.on('bootPlayer', (socketid) => {
        if (playerRooms.has(socketid)) {
            playerRooms.delete(socketid);

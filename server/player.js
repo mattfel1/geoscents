@@ -24,6 +24,7 @@ class Player {
         this.consecutiveRoundsInactive = 0;
         this.consecutiveSecondsInactive = 0;
         this.ready = '';
+        this.reboot = '';
         this.trophy = '';
         this.medal = '';
         this.record = '';
@@ -59,6 +60,7 @@ class Player {
 
 	deepReset(rank) {
     	this.score = 0;
+		this.reboot = '';
     	this.rank = rank;
     	this.reset();
 	}
@@ -90,7 +92,7 @@ class Player {
         this.trophy = '🏆';
 	}
 	getName() {
-		const fullname = this.ready + this.record + this.medal + this.trophy + this.name;
+		const fullname = this.ready + this.reboot + this.record + this.medal + this.trophy + this.name;
     	return fullname;
 	}
 };
