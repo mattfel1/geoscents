@@ -4107,7 +4107,7 @@
       "city_ascii": "",
       "lat": 31.228611,
       "lng": 121.474722,
-      "iso2": "",
+      "iso2": "CN",
       "country": "",
       "population": 0,
       "capital": "",
@@ -4135,17 +4135,17 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Christiaan_Barnard"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Battle of Midway (1942)",
+      "city_ascii": "",
+      "lat": 28.2,
+      "lng": -177.35,
+      "iso2": "",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Battle_of_Midway"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
