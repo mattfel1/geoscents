@@ -4146,28 +4146,28 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Battle_of_Midway"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Caverna da Pedra Pintada Prehistoric Settlement",
+      "city_ascii": "",
+      "lat": -2.002267,
+      "lng": -54.071742,
+      "iso2": "BR",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Caverna_da_Pedra_Pintada"
+    },
+    {
+      "city": "Monte Fitz Roy (Cerro Chaltén)",
+      "city_ascii": "",
+      "lat": -49.271278,
+      "lng": -73.043222,
+      "iso2": "ARCL",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Fitz_Roy"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",

@@ -1,5 +1,10 @@
 #!/bin/bash
- 
+
+# example usage
+#   bash combo.sh ar.png cl.png
+#   mv new.png arcl.png
+#   rm *.png.new
+
 #This script will merge two jpg images into one using imageMagick.
 #The final result will be a picture that is split diagonally.
 #The diagonal line will start from the bottom left of the image.
