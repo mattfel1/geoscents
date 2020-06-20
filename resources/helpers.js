@@ -56,7 +56,7 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
         const file = '/scratch/' + map + '_guesses';
         const joefile = '/scratch/' + map + '_joe';
         if (!fs.existsSync(file)) {
-            console.log('File ' + file + ' doesnt exist!!')
+            logFeedback('File ' + file + ' doesnt exist!!')
             fs.writeFile(file, "", {flag: 'wx'}, function (err) {
                 if (err) throw err;
             });
@@ -67,7 +67,10 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
                     history = JSON.parse(data);
                 } catch {
                     history = {}
-                    console.log('File ' + file + ' is corrupted!')
+                    logFeedback("File " + file + " seems corrupted!!  Writing it to /scratch/corrupted")
+                    fs.writeFile("/scratch/corrupted", data, {flag: 'wx'}, function (err) {
+                        if (err) throw err;
+                    });
                 }
                 try {
                     // // Patch for populating initial joe files
