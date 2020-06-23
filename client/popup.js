@@ -29,6 +29,19 @@ class Popup {
                    // $("form#rename #selected_name").val("");
                    closePopup()
                }
+
+        var name = localStorage.getItem("selected_name");
+        if (name !== null) $('#selected_name').val(name);
+        var color = localStorage.getItem("selected_color");
+        if (color !== null) {
+            var radios = document.getElementsByName("selected_color");
+            for(var i=0;i<radios.length;i++){
+                // console.log(radios[i].value)
+                if (radios[i].value == color) radios[i].checked = true
+                else radios[i].checked = false
+            }
+        }
+
         // hide popup when user clicks on close button or if user clicks anywhere outside the container
         $('.close-btn, .overlay-bg').click(function(){
             join({'name':'', 'color':$("input[name='selected_color']:checked").val()}, () => {closePopup()});
@@ -47,6 +60,8 @@ class Popup {
            if (!choseName()) {
                var name = $(this).find("#selected_name").val();
                var color = $("input[name='selected_color']:checked").val();
+               localStorage.setItem("selected_name", $('#selected_name').val());
+               localStorage.setItem("selected_color", $("input[name='selected_color']:checked").val());
                join({'name':name, 'color':color}, callback);
            }
          });
