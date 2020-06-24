@@ -318,13 +318,13 @@ const logHistogram = (rooms) => {
 
 
 const logPlayerHistory = (name, color, score, room) => {
-    const filebase = '/scratch/histories/' + name.replace(' ','_') + '_history';
+    const filebase = '/scratch/histories/' + name.replaceAll(' ','_') + '_history';
 
     // Set html
-    fs.writeFile(filebase + ".html", playerHistHtml(name.replace(' ','_')), {flag: 'w'}, function (err) { if (err) throw err;});
+    fs.writeFile(filebase + ".html", playerHistHtml(name.replaceAll(' ','_')), {flag: 'w'}, function (err) { if (err) throw err;});
 
     // Set js
-    fs.writeFile(filebase + ".js", playerHistJs(name.replace(' ','_')), {flag: 'w'}, function (err) { if (err) throw err;});
+    fs.writeFile(filebase + ".js", playerHistJs(name.replaceAll(' ','_')), {flag: 'w'}, function (err) { if (err) throw err;});
 
     if (!fs.existsSync(filebase + ".csv")) {
         logFeedback('Creating history for ' + name)
