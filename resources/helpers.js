@@ -337,7 +337,7 @@ const logPlayerHistory = (name, color, score, room) => {
         + (currentdate.getMonth() + 1) + "/"
         + currentdate.getDate() + " @ "
         + currentdate.getHours() + ":"
-        + currentdate.getMinutes();
+        + currentdate.getMinutes() + " GMT";
     fs.appendFile(filebase + ".csv", "\"" + timestamp + "\",\"" + room + "\",\"" + score + "\",\"<font color=" + color + ">" + name + "</font>\",,,,,,,,,,,,,,,,,,,,,\n", function (err) {
             if (err) throw err;
         });
