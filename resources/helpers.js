@@ -54,7 +54,7 @@ const playerHistJs = (name) => {
     return `
 
 $(document).ready(function() {
-      Papa.parse("Player_0_history.csv", {
+      Papa.parse("` + name + `_history.csv", {
           download: true,
           skipEmptyLines: true,
           complete: function(example) {
