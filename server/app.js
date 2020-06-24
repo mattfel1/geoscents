@@ -251,7 +251,7 @@ io.on('connection', (socket) => {
                 }
             };
 
-            if (rooms[CONSTANTS.LOBBY].getPlayerLogger(socket)) socket.emit("update messages", CONSTANTS.LOBBY, "Your player history data is available <a href='https://geoscents.net/resources/histories/" + rooms[CONSTANTS.LOBBY].getPlayerRawName(socket).replace(' ','_') + "_history.html'>here</a><br>");
+            if (rooms[CONSTANTS.LOBBY].getPlayerLogger(socket)) socket.emit("update messages", CONSTANTS.LOBBY, "Your player history data is available <a href='https://geoscents.net/resources/histories/" + rooms[CONSTANTS.LOBBY].getPlayerRawName(socket).name.replace(/ /g,'_') + "_history.html'>here</a><br>");
 
             // Specific greetings for players
             specificGreeting(socket, name, "Doz", "<i>Thanks so much for the donation, Doz!</i><br>");
