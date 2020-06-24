@@ -205,10 +205,11 @@ class Room {
       else return null;
     }
 
-    renamePlayer(socket, name, color) {
+    renamePlayer(socket, name, color, logger) {
         if (this.players.has(socket.id)) {
             if (name !== '') this.players.get(socket.id).name = name;
             if (color !== 'random') this.players.get(socket.id).color = color;
+            if (logger === 'No') this.players.get(socket.id).logger = false
             this.players.get(socket.id).choseName = true;
         }
       this.drawScorePanel(socket.id);
@@ -230,6 +231,14 @@ class Room {
         }
         else {
             return socket.id.substring(5,0);
+        }
+    }
+    getPlayerLogger(socket) {
+        if (this.players.has(socket.id)) {
+            return this.players.get(socket.id).logger;
+        }
+        else {
+            return false;
         }
     }
     playerChoseName(socket) {
@@ -769,6 +778,7 @@ class Room {
                   this.sortPlayers();
                   if (this.round >= CONSTANTS.GAME_ROUNDS) {
                       this.winner.won();
+                      this.recordPersonalHistory();
                       this.printWinner(this.winner.getName(), this.winner.score, this.winner.color);
                   }
                   this.stateTransition(CONSTANTS.REVEAL_STATE, CONSTANTS.REVEAL_DURATION);
@@ -836,6 +846,15 @@ class Room {
     };
 
 
+    recordPersonalHistory() {
+      let room = this.map;
+      Array.from(this.players.values()).forEach((player, id) => {
+        if (player.logger) {
+          helpers.logPlayerHistory(player.name, player.color, player.score, room)
+        }
+      })
+    }
+    
     printWinner(winner, score, color) {
         this.recordsBroken();
         const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);

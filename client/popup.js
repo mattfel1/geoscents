@@ -7,7 +7,7 @@ class Popup {
 
     join(info, cb) {
         this.choseName = true;
-        this.socket.emit('playerJoin', info['name'], info['color'], cb);
+        this.socket.emit('playerJoin', info['name'], info['color'], info['logger'], cb);
     }
     getChoseName() {
         return this.choseName;
@@ -36,8 +36,16 @@ class Popup {
         if (color !== null) {
             var radios = document.getElementsByName("selected_color");
             for(var i=0;i<radios.length;i++){
-                // console.log(radios[i].value)
                 if (radios[i].value == color) radios[i].checked = true
+                else radios[i].checked = false
+            }
+        }
+        var logger = localStorage.getItem("selected_log");
+        if (logger !== null) {
+            var radios = document.getElementsByName("selected_log");
+            for(var i=0;i<radios.length;i++){
+                // console.log("radio button " + radios[i].value)
+                if (radios[i].value == logger) radios[i].checked = true
                 else radios[i].checked = false
             }
         }
@@ -60,9 +68,11 @@ class Popup {
            if (!choseName()) {
                var name = $(this).find("#selected_name").val();
                var color = $("input[name='selected_color']:checked").val();
+               var logger = $("input[name='selected_log']:checked").val();
                localStorage.setItem("selected_name", $('#selected_name').val());
                localStorage.setItem("selected_color", $("input[name='selected_color']:checked").val());
-               join({'name':name, 'color':color}, callback);
+               localStorage.setItem("selected_log", $("input[name='selected_log']:checked").val());
+               join({'name':name, 'color':color, 'logger':logger}, callback);
            }
          });
     }

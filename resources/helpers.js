@@ -4,6 +4,81 @@ const logfile = '/scratch/connections.log';
 const histfile = '/scratch/histograms.log';
 const feedbackfile = '/scratch/feedback.log';
 
+
+const playerHistHtml = (name) => {
+    return `
+
+<!DOCTYPE html>
+<head prefix="og: http://ogp.me/ns#">
+    <meta charset="UTF-8">
+    <meta name="description" content="Plots for Geoscents. An online multiplayer world geography game!  Test your knowledge of city locations." />
+    <title>` + name + ` Play History</title>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <link rel="icon" type="image/png" href="https://geoscents.net/resources/favicon.png" sizes="48x48">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.6.3/papaparse.min.js"></script>
+    <meta name="GeoScents Plots" content="Plots for Geoscents.  An online multiplayer world geography game!  Test your knowledge of city locations. This is a recreation of the game Geosense from geosense.net.">
+    <meta property="og:image" content="https://geoscents.net/resources/ogimage.png" />
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<style>
+table, td, th {
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th {
+  height: 50px;
+}
+</style>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
+<h3>` + name + ` Play History</h3>
+<table id="` + name + `_history" class="display" width="75%" align="left"></table>
+<br><br>
+
+<script  type="text/javascript" src="` + name + `_history.js"></script>
+
+</body>
+</html>
+
+`}
+
+const playerHistJs = (name) => {
+    return `
+
+$(document).ready(function() {
+      Papa.parse("Player_0_history.csv", {
+          download: true,
+          skipEmptyLines: true,
+          complete: function(example) {
+          $(document).ready(function () {
+              $('#Player_0_history').DataTable({
+                  data: example.data,
+                  dataSrc:"",
+                  columns: [
+            { title: "Timestamp", "width": "5%"},
+            { title: "Map", "width": "5%"},
+            { title: "Score", "width": "5%" },
+            { title: "Color", "width": "5%"}
+                  ]
+              });
+          });
+          }
+      });
+} );
+
+
+
+`}
+
+
 const log = (payload) => {
     const currentdate = new Date();
     const timestamp = currentdate.getDate() + "/"
@@ -241,6 +316,33 @@ const logHistogram = (rooms) => {
     }
 };
 
+
+const logPlayerHistory = (name, color, score, room) => {
+    const filebase = '/scratch/histories/' + name.replace(' ','_') + '_history';
+
+    // Set html
+    fs.writeFile(filebase + ".html", playerHistHtml(name.replace(' ','_')), {flag: 'w'}, function (err) { if (err) throw err;});
+
+    // Set js
+    fs.writeFile(filebase + ".js", playerHistJs(name.replace(' ','_')), {flag: 'w'}, function (err) { if (err) throw err;});
+
+    if (!fs.existsSync(filebase + ".csv")) {
+        logFeedback('Creating history for ' + name)
+        fs.writeFile(filebase + ".csv", "", {flag: 'wx'}, function (err) {
+            if (err) throw err;
+        });
+    } 
+    const currentdate = new Date();
+    const timestamp = currentdate.getDate() + "/"
+        + (currentdate.getMonth() + 1) + "/"
+        + currentdate.getFullYear() + " @ "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":";
+    fs.appendFile(filebase + ".csv", "\"" + timestamp + "\",\"" + room + "\",\"" + score + "\",\"<font color=" + color + ">" + name + "</font>\"\n", function (err) {
+            if (err) throw err;
+        });
+};
+
 const readRecentActivity = (numel) => {
     var result = "";
     if (!fs.existsSync('/scratch/recent_activity')) {
@@ -297,4 +399,4 @@ const prependHallOfFame = (payload) => {
     });
 };
 
-module.exports = {log, logFeedback, logHistogram, readRecentActivity, prependRecentActivity, recordGuesses, readHallOfFame, prependHallOfFame, makeLink, joeData};
+module.exports = {log, logFeedback, logHistogram, readRecentActivity, logPlayerHistory, prependRecentActivity, recordGuesses, readHallOfFame, prependHallOfFame, makeLink, joeData};

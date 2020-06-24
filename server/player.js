@@ -28,6 +28,7 @@ class Player {
         this.trophy = '';
         this.medal = '';
         this.record = '';
+        this.logger = true;
         this.roomName = roomName;
         this.choseName = false;
         this.name = name;

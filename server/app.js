@@ -141,6 +141,10 @@ app.get('/resources/flags/*.png', (req, res, next) => {
     const wildcard = req.params['0'];
 	res.sendFile(path.join(__dirname, '..', 'resources/flags/' + wildcard + '.png'));
 });
+app.get('/resources/histories/*', (req, res, next) => {
+    const wildcard = req.params['0'];
+  res.sendFile(path.join(__dirname, '..', 'resources/histories/' + wildcard));
+});
 app.get('/plots/*', (req, res, next) => {
     const wildcard = req.params['0'];
 	res.sendFile(path.join(__dirname, '..', 'plots/' + wildcard));
@@ -222,19 +226,21 @@ io.on('connection', (socket) => {
         }
       });
   });
-	socket.on('playerJoin', (newname, newcolor, callback) => {
+	socket.on('playerJoin', (newname, newcolor, newlogger, callback) => {
 	    var name = '';
-        if (newname !== null) name = newname;
-        var color = '';
-        if (newcolor !== null) color = newcolor;
-        helpers.log("User " + socket.handshake.address + " named themself    " + newname);
+      if (newname !== null) name = newname;
+      var color = '';
+      if (newcolor !== null) color = newcolor;
+      var logger = '';
+      if (newlogger !== null) logger = newlogger;
+      helpers.log("User " + socket.handshake.address + " named themself    " + newname);
 	    if (rooms[CONSTANTS.LOBBY].hasPlayer(socket)) {
 	        var badname = "";
 	        CONSTANTS.PROFANITY.forEach((word) => {if (name.toUpperCase().includes(word.toUpperCase())) badname = "I used a bad word in my name :(";});
 	        if (badname != "") {
                 name = 'Naughty'
             }
-	        rooms[CONSTANTS.LOBBY].renamePlayer(socket, name, color);
+	        rooms[CONSTANTS.LOBBY].renamePlayer(socket, name, color, logger);
             var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'><b>" + rooms[CONSTANTS.LOBBY].getPlayerRawName(socket) + "</b> has entered the lobby!</font> ] " + badname + "<br>";
             io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
             // Send whispers to specific players
@@ -244,6 +250,10 @@ io.on('connection', (socket) => {
                     rooms[CONSTANTS.LOBBY].whisperMessage(socket, msg, () => {});
                 }
             };
+
+            if (rooms[CONSTANTS.LOBBY].getPlayerLogger(socket)) socket.emit("update messages", CONSTANTS.LOBBY, "Your player history data is available <a href='https://geoscents.net/resources/histories/" + rooms[CONSTANTS.LOBBY].getPlayerRawName(socket).replace(' ','_') + ".html'>here</a><br>");
+
+            // Specific greetings for players
             specificGreeting(socket, name, "Doz", "<i>Thanks so much for the donation, Doz!</i><br>");
             specificGreeting(socket, name, "ninjer tootle", "<i>U a bitch</i><br>");
       	    io.sockets.emit('update counts', rooms[CONSTANTS.LOBBY].playerCount(),rooms[CONSTANTS.WORLD].playerCount(),rooms[CONSTANTS.US].playerCount(),rooms[CONSTANTS.EURO].playerCount(),rooms[CONSTANTS.AFRICA].playerCount(),rooms[CONSTANTS.SAMERICA].playerCount(),rooms[CONSTANTS.ASIA].playerCount(),rooms[CONSTANTS.OCEANIA].playerCount(),rooms[CONSTANTS.MISC].playerCount());

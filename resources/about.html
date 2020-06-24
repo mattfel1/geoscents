@@ -6,37 +6,90 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link rel="icon" type="image/png" href="favicon.png" sizes="48x48">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<script>
+
+$(function() {
+
+  $("#accordion").accordion({
+    heightStyle:"content",
+    collapsible:true,
+    active:false,
+    icons:{"header": "ui-icon-plus", "activeHeader": "ui-icon-minus"}
+  });
+  
+  // Begin script to open accordion panels via an external link with hash
+  // Position the script here
+  var hash = window.location.hash;
+  var anchor = $('a[href$="'+hash+'"]');
+  if (anchor.length > 0){
+    anchor.click();
+  }
+  // End
+
+});
+</script>
+
+<style>
+body {
+  font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+#container {
+  margin:20px auto;
+  padding:40px;
+  max-width:728px;
+  -moz-box-shadow:3px 3px 4px 4px #555;  
+  -webkit-box-shadow:3px 3px 4px 4px #555;
+  box-shadow:3px 3px 4px 4px #555;
+}
+#adds {
+  padding:20px 0;
+}
+h1 {
+  font-size:21px;
+  line-height:25px;
+  margin-bottom:5px;
+}
+h2 {
+  font-size:18px;
+  line-height:22px;
+  margin-bottom:0;
+}
+h3 {
+  font-size:14px;
+}
+p {
+  margin-top:0;
+  font-size:16px;
+  line-height:23px;
+}
+code {
+  font-size:17px;
+  line-height:25px;
+}
+</style>
+
+
+
 </head>
 <body>
 
-<div class="container">
-  <h2>Geoscents Game Information</h2>
-  <div class="panel-group" id="accordion">
 
 
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse0">Data Visualizations</a>
-        </h4>
-      </div>
-      <div id="collapse0" class="panel-collapse collapse">
-        <div class="panel-body">
+<div id="container">
+  <h1>Geoscents Game Information</h1><br>
+  <div id="content">
+    <div id="accordion">
+      <h3><a href="#1" id="1">Data Visualizations</a></h3>
+      <div>
           <p>One of the fun things that this game allows me to do is to collect how well people from around the world know where things are.  I use your public IP address to identify your country and collect your play history securely on the game server.  If you do not want your game to be tracked, see the "Chat Box Commands" section below to learn how to mask your activity.  Tracking this information allows me to build a database and visualizations of how people from around the world perform.  This is a fun dataset to browse, especially to answer questions such as "How do Germans compare to Americans at knowing European cities? American cities? Chinese cities?" or "How often do people mix up Paraguay and Uruguay?"</p>
           <p>I have put together visualizations and data tables at <a href="https://geoscents.net/plots/index.html">https://geoscents.net/plots/index.html</a> that are automatically updated daily.  Feel free to explore that page and point out any interesting things you find.
-        </div>
       </div>
-    </div>
-
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse99">Trivia Entries</a>
-        </h4>
-      </div>
-      <div id="collapse99" class="panel-collapse collapse">
-        <div class="panel-body">
+      <h3><a href="#2" id="2">Trivia Entries</a></h3>
+      <div>
           <p>The trivia map contains hundreds of random events, places, and things that have well-defined latitude and longitude.  The database that it draws from was hand-made by myself continues to grow.  The original Geosense game did not have this game, but I thought it would be a fun addition, considering all the javascript machinery is in place to have players hunt down whatever things have a lat/lon definition.  Many of the entries have flags embedded in them, as well as the entry written in the native script of whatever country or culture they are part of, to help your ability to pinpoint them.  </p>
           <p>The entries are mostly things that I found browsing wikipedia and <a href="www.atlasobscura.com">Atlas Obscura</a> and fall roughly into these categories:
 <ul>
@@ -54,20 +107,9 @@
           </ul>
         I hope that at least some of them spark your interest and get you to click the "Learn" link in the bottom right box of the game so you can read about it afterwards.  Some of these entries may be "famous" things that are worth knowing, but some of them are just silly so I hope you don't take it too seriously.</p>
           <p>Please reach out by sending a message starting with the word /feedback if you want to suggest new trivia items!  I love hearing your feedback, and am especially interested in growing the database beyond the cultural bias of the few people who have contributed already.</p>
-        </div>
       </div>
-    </div>
-
-
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Geopolitical Anomalies</a>
-        </h4>
-      </div>
-      <div id="collapse1" class="panel-collapse collapse">
-        <div class="panel-body">
+      <h3><a href="#3" id="3">Geopolitical Anomalies</a></h3>
+      <div>
           <p>This page discusses some of the political anomalies present in the game.  This discussion is the result of valuable player feedback!</p>
 
 <h3>Czechia v.s. Czech Republic</h3>
@@ -85,20 +127,9 @@ It is a space launch facility that was leased by the Kazakh government to Russia
 <h3>Kosovo</h3>
 <a href="https://en.wikipedia.org/wiki/Kosovo">Kosovo</a> is shown as a regular country in this map.  
 According to the <a href="https://www.naturalearthdata.com/features/">Natural Earth Data features database</a>, Kosovo is a real country even though about 49% of UN nations recognize it.
-
-        </div>
       </div>
-    </div>
-
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Game FAQ</a>
-        </h4>
-      </div>
-      <div id="collapse2" class="panel-collapse collapse">
-        <div class="panel-body">
+      <h3><a href="#4" id="4">Game FAQ</a></h3>
+      <div>
 
 <h3>City Selection</h3>
 Cities are selected from the <a href="https://simplemaps.com/data/world-cities">simplemaps</a> database.  For the most part, each game of 11 rounds should only include one city per country.
@@ -135,10 +166,10 @@ These plots show how the two score components work for the World map (sf = 1).<b
   </tr>
 </table> -->
 Time score:
-<img src="time.png" width="800">
+<img src="time.png" width="600">
 <br>
 Dist score:
-<img src="dist.png" width="800">
+<img src="dist.png" width="600">
 
 <h3>Record Keeping</h3>
 The game resets every day at midnight GMT.  Sorry if you are playing a game during the reboot!  You should see plenty of warnings in the minutes leading up to the game reset.<br>
@@ -152,17 +183,19 @@ Sometimes the Weekly records are better than the Monthly records.  This is becau
 
 
 Therefore, it is possible for the monthly records to get reset on the first of the month, but the weekly records will not get reset until the first day of the week.
-        </div>
       </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Chat Box Commands</a>
-        </h4>
+
+      <h3><a href="#5" id="5">Privacy Policy</a></h3>
+      <div>
+We do not use cookies to track you after you leave this page.
+For educational purposes, we store your public IP address and your game history securely on our server. The IP addresses are replaced with country and region names, and then this data is published to <a href="https://geoscents.net/plots/index.html">https://geoscents.net/plots/index.html</a>.
+This data is not used for any commercial purposes.
+You can turn off this behavior with the command /private, and can turn it back on with the command /public
+
       </div>
-      <div id="collapse3" class="panel-collapse collapse">
-        <div class="panel-body">
+
+      <h3><a href="#6" id="6">Chat Box Commands</a></h3>
+      <div>
 <ul>
   <li>/feedback : Leave feedback about the game or really anything.  Your message goes directly to my email inbox :)</li>
   <li>/private : Prevent game from logging your IP address.  I use this IP address to help make the fun plots at https://geoscents.net/plots/index.html, but you may mask yourself if you really want.
@@ -172,39 +205,11 @@ Therefore, it is possible for the monthly records to get reset on the first of t
   <li>good bot : Praise the bot</li>
   <li>bad bot : Admonish the bot</li>
 </ul> 
-        </div>
       </div>
-    </div>
 
 
-
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Privacy Policy</a>
-        </h4>
-      </div>
-      <div id="collapse4" class="panel-collapse collapse">
-        <div class="panel-body">
-We do not use cookies to track you after you leave this page.
-For educational purposes, we store your public IP address and your game history securely on our server. The IP addresses are replaced with country and region names, and then this data is published to <a href="https://geoscents.net/plots/index.html">https://geoscents.net/plots/index.html</a>.
-This data is not used for any commercial purposes.
-You can turn off this behavior with the command /private, and can turn it back on with the command /public
-
-        </div>
-      </div>
-    </div>
-
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Donate</a>
-        </h4>
-      </div>
-      <div id="collapse5" class="panel-collapse collapse">
-        <div class="panel-body">
+      <h3><a href="#7" id="7">Donate</a></h3>
+      <div>
 Thank you so much for playing the game!  It has been amazing to see people from around the world log on and compete against each other and engage in supportive dialogue as well as geography trash talk.  I spend most of my time programming in Verilog/VHDL, Scala, and C++ for my day job but really craved this game ever since I learned that geosense.net ceased to exist.  I learned just enough javascript and web development to throw this game together and approximate the experience I used to have playing the original game.  <br><br>I have a year of credits on Google Cloud so I will be able to host the game until around May 2021 before it will start costing. If you insist on donating, please consider donating to one of the causes in the lobby instead.  They are doing much more important work than hosting a geography game!
         <!--               <div style="display: inline-block" margin-top="0">
                         Donate using
@@ -214,38 +219,30 @@ Thank you so much for playing the game!  It has been amazing to see people from 
                         <a href="ethereum://0x4efeDb0459E697DEF945039F207Eb89598aD7fbC" style="background-color:#E6E6FA;color:#302F31;">Ethereum</a>
                       </div> -->
         </div>
-      </div>
-    </div>
 
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse56">References</a>
-        </h4>
-      </div>
-      <div id="collapse56" class="panel-collapse collapse">
-        <div class="panel-body">
+        <h3><a href="#8" id="8">References</a></h3>
+        <div>
 Terrain map rendering provided by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>. Satellite map rendering provided by Google Tiles.  All maps generated using python cartopy 0.17.0.  <br><br>
 This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>. <br><br>
 The jingle at the start of the game was composed and recorded by Marc Ryan Feldman.
-
         </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse57">Contact</a>
-        </h4>
-      </div>
-      <div id="collapse57" class="panel-collapse collapse">
-        <div class="panel-body">
+
+        <h3><a href="#9" id="9">Player History Logging</a></h3>
+        <div>
+There is now a player history logger that you can opt-in to.  I am very opposed to implementing accounts on this website for two reasons.  I do not trust myself to implement password handling securely, so I don't want to be the source of any hacks if people try to use the same password on this website as they do on others.  I also do not want people to feel "inferior" if they visit the website and choose to play as a guest.  Therefore, the only information I ask for is a user name and a color.
+<br><br>
+Some people are repeat users and I think they would be interested to see how they progress over time.  For this reason, I implemented pseudo account-history that is simply tied to your user name.  If you opt-in for logging, a link to your history page will appear in the chat box as soon as you join the lobby.  There is technically nothing stopping you from "logging in" as a different user, other than that there doesn't seem to be much point to it.  If this kind of fraud happens a lot and people start complaining with /feedback, then I will make this more secure.  For now, happy playing!
+        </div>
+
+        <h3><a href="#10" id="10">Contact</a></h3>
+        <div>
 Feel free to contact me by sending a chat message starting with the command /feedback, or email me directly at <a href = "mailto: mattfel@pm.me">mattfel@pm.me</a>!  Tell me if you like the game, if you have comments, suggestions, or criticisms.  Tell me what you had for breakfast, what your opinion is on dogs, or whatever you feel like sharing!
         </div>
-      </div>
+
     </div>
-      </div>
-  
+  </div>
+</div>
+
 </body>
 </html>
 

@@ -55,11 +55,11 @@
     <p>Please choose a name and color (or leave blank for random)</p>
                      <form id="rename" method="post">
                  <table style="height:0px">
-                     <td style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey;width:45%;height:100%">
+                     <td style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey;width:28%;height:100%">
                       <b>Name:</b><br>
                      <input type="text" id="selected_name" autofocus name="selected_name" style="width: 120px;" maxlength="14" pattern="[a-zA-Z0-9][a-zA-Z0-9 ?!]+[a-zA-Z0-9]" title="Name should only contain letters, numbers, and spaces" >
                      </td>
-                     <td style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey;width:45%;height:100%"><b>Color:</b><br>
+                     <td style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey;width:28%;height:100%"><b>Color:</b><br>
                      <input type="radio" name="selected_color" value="random" checked> random
                      <input type="radio" name="selected_color" value="red"> <font color="red"><b>█</b></font>
                      <input type="radio" name="selected_color" value="blue"> <font color="blue"><b>█</b></font>
@@ -76,6 +76,10 @@
                      <input type="radio" name="selected_color" value="#e377c2"> <font color="#e377c2"><b>█</b></font>
                      <input type="radio" name="selected_color" value="#adad1f"> <font color="#adad1f"><b>█</b></font>
                      <input type="radio" name="selected_color" value="#17becf"> <font color="#17becf"><b>█</b></font>
+                     </td>
+                     <td style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey;width:28%;height:100%"><b><a href="https://geoscents.net/resources/about.html#9">Log history</a>:</b><br>
+                     <input type="radio" name="selected_log" value="Yes" checked> Yes
+                     <input type="radio" name="selected_log" value="No"> No
                      </td>
                      <tr>
                  </table>
