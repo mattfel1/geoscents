@@ -57,7 +57,7 @@ if (hostname === "mattfel-pc") {
   if (useHttp) {
     httpsServer = https.createServer(function (req, res) {
       res.writeHead(301, { "Location": "http://" + req.headers['host'].replace(SPORT,PORT) + req.url });
-      console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
+      console.log("http request detected from " + req.connection.remoteAddress + ", sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
       res.end();
     });
     httpsServer.listen(SPORT);
@@ -75,7 +75,7 @@ if (hostname === "mattfel-pc") {
     httpServer = http.createServer(function (req, res) {
         try {
           res.writeHead(301, { "Location": "https://" + req.headers['host'].replace(PORT,SPORT) + req.url });
-          console.log("http request detected, sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
+          console.log("http request detected from " + req.connection.remoteAddress + ", sending to >> https://" + req.headers['host'].replace(PORT,SPORT) + req.url);
           res.end();
         } catch {
           console.log("failed to redirect " + req)
