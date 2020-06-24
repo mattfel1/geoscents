@@ -39,6 +39,7 @@ class Player {
 		if (info['moved']) {
 			this.choseName = true;
 			this.color = info['color'];
+			this.logger = info['logger'];
 			this.wins = info['wins'];
 			this.name = info['name'];
 			this.optOut = info['optOut']

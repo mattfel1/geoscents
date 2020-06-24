@@ -209,7 +209,7 @@ class Room {
         if (this.players.has(socket.id)) {
             if (name !== '') this.players.get(socket.id).name = name;
             if (color !== 'random') this.players.get(socket.id).color = color;
-            if (logger === 'No') this.players.get(socket.id).logger = false
+            if (logger == 'No') this.players.get(socket.id).logger = false
             this.players.get(socket.id).choseName = true;
         }
       this.drawScorePanel(socket.id);

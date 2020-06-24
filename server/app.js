@@ -335,6 +335,7 @@ io.on('connection', (socket) => {
           const room = playerRooms.get(socket.id);
           const origin = room.roomName;
           const oldColor = rooms[origin].getPlayerColor(socket);
+          const oldLogger = rooms[origin].getPlayerLogger(socket);
           const oldName = rooms[origin].getPlayerRawName(socket);
           const oldWins = rooms[origin].getPlayerWins(socket);
           const oldOptOut = rooms[origin].getPlayerOptOut(socket);
@@ -343,6 +344,7 @@ io.on('connection', (socket) => {
               'color': oldColor,
               'name': oldName,
               'wins': oldWins,
+              'logger': oldLogger,
               'optOut': oldOptOut
           }
           var leave_msg = "[ <font color='" + rooms[origin].getPlayerColor(socket) + "'><b>" + rooms[origin].getPlayerRawName(socket) + "</b> has left " + origin + " and joined " + dest + "!</font> ]<br>";
