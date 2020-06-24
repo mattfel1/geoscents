@@ -333,11 +333,11 @@ const logPlayerHistory = (name, color, score, room) => {
         });
     } 
     const currentdate = new Date();
-    const timestamp = currentdate.getDate() + "/"
+    const timestamp = currentdate.getFullYear() + "/"
         + (currentdate.getMonth() + 1) + "/"
-        + currentdate.getFullYear() + " @ "
+        + currentdate.getDate() + " @ "
         + currentdate.getHours() + ":"
-        + currentdate.getMinutes() + ":";
+        + currentdate.getMinutes();
     fs.appendFile(filebase + ".csv", "\"" + timestamp + "\",\"" + room + "\",\"" + score + "\",\"<font color=" + color + ">" + name + "</font>\",,,,,,,,,,,,,,,,,,,,,\n", function (err) {
             if (err) throw err;
         });
