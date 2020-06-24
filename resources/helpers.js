@@ -327,7 +327,7 @@ const logPlayerHistory = (name, color, score, room) => {
     fs.writeFile(filebase + ".js", playerHistJs(name.replace(/ /g,'_')), {flag: 'w'}, function (err) { if (err) throw err;});
 
     if (!fs.existsSync(filebase + ".csv")) {
-        logFeedback('Creating history for ' + name)
+        // logFeedback('Creating history for ' + name)
         fs.writeFile(filebase + ".csv", "", {flag: 'wx'}, function (err) {
             if (err) throw err;
         });
