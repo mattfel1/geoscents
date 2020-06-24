@@ -59,7 +59,7 @@ $(document).ready(function() {
           skipEmptyLines: true,
           complete: function(example) {
           $(document).ready(function () {
-              $('#Player_0_history').DataTable({
+              $('#` + name + `_history').DataTable({
                   data: example.data,
                   dataSrc:"",
                   columns: [
