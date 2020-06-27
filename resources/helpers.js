@@ -57,6 +57,7 @@ $(document).ready(function() {
       Papa.parse("` + name + `_history.csv", {
           download: true,
           skipEmptyLines: true,
+          "pageLength": 400,
           complete: function(example) {
           $(document).ready(function () {
               $('#` + name + `_history').DataTable({
@@ -338,7 +339,7 @@ const logPlayerHistory = (name, color, score, room) => {
         + currentdate.getDate() + " @ "
         + currentdate.getHours() + ":"
         + currentdate.getMinutes() + " GMT";
-    fs.appendFile(filebase + ".csv", "\"" + timestamp + "\",\"" + room + "\",\"" + score + "\",\"<font color=" + color + ">" + name + "</font>\",,,,,,,,,,,,,,,,,,,,,\n", function (err) {
+    fs.appendFile(filebase + ".csv", "\"" + timestamp + "\",\"" + room + "\",\"" + score + "\",\"<font color=" + color + ">" + name + "</font>\",,,,,,,,,,,,,,,,,,,,,,,,,,,,\n", function (err) {
             if (err) throw err;
         });
 };

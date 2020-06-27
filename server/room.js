@@ -769,9 +769,10 @@ class Room {
           } else if (this.state === CONSTANTS.GUESS_STATE) {
               if (this.allReboot()) {
                 if (this.hasJoe) this.joe.deepReset(this.players.values().size);
+                this.round = 0;
                 this.timerColor = CONSTANTS.BEGIN_COLOR;                
                 Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
-                this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, CONSTANTS.BEGIN_GAME_DURATION);                
+                this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, CONSTANTS.BEGIN_GAME_DURATION - 2);                
               }
               if (this.timer <= 0 || this.allPlayersClicked()) {
                   this.updateScores();
@@ -788,9 +789,10 @@ class Room {
           } else if (this.state === CONSTANTS.REVEAL_STATE) {
               if (this.allReboot()) {
                 if (this.hasJoe) this.joe.deepReset(this.players.values().size);
+                this.round = 0;
                 this.timerColor = CONSTANTS.BEGIN_COLOR;                
                 Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
-                this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, CONSTANTS.BEGIN_GAME_DURATION);                
+                this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, CONSTANTS.BEGIN_GAME_DURATION - 2);                
               }
               if (this.timer <= 0 && this.round >= CONSTANTS.GAME_ROUNDS) {
                   this.round = 0;
