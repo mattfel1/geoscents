@@ -143,8 +143,10 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
                     history = JSON.parse(data);
                 } catch {
                     history = {}
-                    logFeedback("File " + file + " seems corrupted!!  Writing it to /scratch/corrupted")
-                    fs.writeFile("/scratch/corrupted", data, {flag: 'w'}, function (err) {
+                    const currentdate = new Date();
+                    const timestamp = currentdate.getHours() + "-" + currentdate.getMinutes();
+                    logFeedback("File " + file + " seems corrupted!!  Writing it to /scratch/corrupted" + timestamp)
+                    fs.writeFile("/scratch/corrupted" + timestamp, data, {flag: 'w'}, function (err) {
                         if (err) throw err;
                     });
                 }
