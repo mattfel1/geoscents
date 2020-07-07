@@ -144,7 +144,7 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
                 } catch {
                     history = {}
                     logFeedback("File " + file + " seems corrupted!!  Writing it to /scratch/corrupted")
-                    fs.writeFile("/scratch/corrupted", data, {flag: 'wx'}, function (err) {
+                    fs.writeFile("/scratch/corrupted", data, {flag: 'w'}, function (err) {
                         if (err) throw err;
                     });
                 }
