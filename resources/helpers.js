@@ -3,7 +3,7 @@ const CONSTANTS = require('../resources/constants.js');
 const logfile = '/scratch/connections.log';
 const histfile = '/scratch/histograms.log';
 const feedbackfile = '/scratch/feedback.log';
-var lastUpdates;
+var lastUpdates = {};
 
 
 const playerHistHtml = (name) => {
@@ -135,7 +135,7 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
 
         // Ignore updates to same file if it happened less than 1 second ago, hack to prevent file corruption
         const currentdate = new Date();
-        if (lastUpdates.contains(map) && (currentdate.getTime() - lastUpdates[map] < 2000)) { 
+        if ((map in lastUpdates) && (currentdate.getTime() - lastUpdates[map] < 2000)) {
             logFeedback("Skipping update to " + map + " because we updated less than 1s ago!")
         } else if (!fs.existsSync(file)) {
             logFeedback('File ' + file + ' doesnt exist!!')
