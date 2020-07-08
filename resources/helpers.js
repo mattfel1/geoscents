@@ -3,6 +3,7 @@ const CONSTANTS = require('../resources/constants.js');
 const logfile = '/scratch/connections.log';
 const histfile = '/scratch/histograms.log';
 const feedbackfile = '/scratch/feedback.log';
+var lastUpdates;
 
 
 const playerHistHtml = (name) => {
@@ -131,12 +132,18 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
 
         const file = '/scratch/' + map + '_guesses';
         const joefile = '/scratch/' + map + '_joe';
-        if (!fs.existsSync(file)) {
+
+        // Ignore updates to same file if it happened less than 1 second ago, hack to prevent file corruption
+        const currentdate = new Date();
+        if (lastUpdates.contains(map) && (currentdate.getTime() - lastUpdates[map] < 2000)) { 
+            logFeedback("Skipping update to " + map + " because we updated less than 1s ago!")
+        } else if (!fs.existsSync(file)) {
             logFeedback('File ' + file + ' doesnt exist!!')
             fs.writeFile(file, "", {flag: 'wx'}, function (err) {
                 if (err) throw err;
             });
         } else {
+            lastUpdates[map] = currentdate.getTime();
             fs.readFile(file, 'utf8', (err, data) => {
                 let history;
                 try {
@@ -144,7 +151,7 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
                 } catch {
                     history = {}
                     const currentdate = new Date();
-                    const timestamp = currentdate.getHours() + "-" + currentdate.getMinutes();
+                    const timestamp = currentdate.getHours() + "-" + currentdate.getMinutes() + currentdate.getSeconds();
                     logFeedback("File " + file + " seems corrupted!!  Writing it to /scratch/corrupted" + timestamp)
                     fs.writeFile("/scratch/corrupted" + timestamp, data, {flag: 'w'}, function (err) {
                         if (err) throw err;
@@ -272,6 +279,7 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
                 // Commit back to file
                 fs.writeFile(file, JSON.stringify(copy(history), null, 2), function (err) {
                     if (err) {
+                        logFeedback("Error commiting new data back to file!")
                         return console.log(err);
                     }
                 });
