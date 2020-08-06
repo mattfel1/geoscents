@@ -107,9 +107,9 @@ class Room {
       }
       if (!this.hasJoe && this.map !== CONSTANTS.LOBBY) this.createJoe()
       this.dayRecord = CONSTANTS.INIT_RECORD;
-      if (week) this.weekRecord == CONSTANTS.INIT_RECORD;
-      if (month) this.monthRecord == CONSTANTS.INIT_RECORD;
-      if (year) this.allRecord == CONSTANTS.INIT_RECORD;
+      if (week) this.weekRecord = CONSTANTS.INIT_RECORD;
+      if (month) this.monthRecord = CONSTANTS.INIT_RECORD;
+      if (year) this.allRecord = CONSTANTS.INIT_RECORD;
       fs.writeFile("/scratch/" + this.map + "_day_record", JSON.stringify(copy(this.dayRecord), null, 2), function(err) {if(err){return console.log(err);}});
       fs.writeFile("/scratch/" + this.map + "_week_record", JSON.stringify(copy(this.weekRecord), null, 2), function(err) {if(err){return console.log(err);}});
       fs.writeFile("/scratch/" + this.map + "_month_record", JSON.stringify(copy(this.monthRecord), null, 2), function(err) {if(err){return console.log(err);}});
