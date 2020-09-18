@@ -443,7 +443,7 @@ class Room {
         const getPosition = (score, category) => {return this.getPosition(score, category)};
         const insertRecord = (p,c,d,r,pl) => {return this.insertRecord(p,c,d,r,pl)};
         const sufx = ["st", "nd", "rd"];
-        const room = this.map;
+        const citysrc = this.citysrc;
         Array.from(this.sortPlayersNoJoe()).forEach((player, id) => {
             const monthNames = ["Jan", "Feb", "Mar","Apr", "May", "Jun","Jul", "Aug", "Sep","Oct", "Nov", "Dec"];
             const date = new Date();
@@ -455,8 +455,8 @@ class Room {
             const hour = time.getHours();
             const minute = time.getMinutes();
               if (player.score > CONSTANTS.FAMESCORE) {
-              this.clients.get(player.id).emit("announce hall", room, player.name, player.score, player.color);
-              const payload = "- " + month + day + ": <font color=" + player.color + "><b>" + player.name + "</b></font> scored <b>" + player.score + "</b> on " + room;
+              this.clients.get(player.id).emit("announce hall", citysrc, player.name, player.score, player.color);
+              const payload = "- " + month + day + ": <font color=" + player.color + "><b>" + player.name + "</b></font> scored <b>" + player.score + "</b> on " + citysrc;
               helpers.prependHallOfFame(payload)
               helpers.log("Hall of Fame achieved by " + player.name + " (" + player.ip + ")")
             }
@@ -467,19 +467,19 @@ class Room {
             let dayStr = "";
             if (getPosition(player.score,dayRecord) <= num_records) {
                 dayStr = "<b>" + (getPosition(player.score,dayRecord)) + sufx[(getPosition(player.score,dayRecord)-1)] + "</b>" + " daily"
-                dayRecord = copy(insertRecord(getPosition(player.score,dayRecord), "day", copy(dayRecord), room, player));
+                dayRecord = copy(insertRecord(getPosition(player.score,dayRecord), "day", copy(dayRecord), citysrc, player));
             }
             if (getPosition(player.score,weekRecord) <= num_records) {
                 wkStr = "<b>" + (getPosition(player.score,weekRecord)) + sufx[(getPosition(player.score,weekRecord)-1)] + "</b>" + " weekly"
-                weekRecord = copy(insertRecord(getPosition(player.score,weekRecord), "week", copy(weekRecord), room, player));
+                weekRecord = copy(insertRecord(getPosition(player.score,weekRecord), "week", copy(weekRecord), citysrc, player));
             }
             if (getPosition(player.score,monthRecord) <= num_records) {
                 monStr = "<b>" + (getPosition(player.score,monthRecord)) + sufx[(getPosition(player.score,monthRecord)-1)] + "</b>" + " monthly"
-                monthRecord = copy(insertRecord(getPosition(player.score,monthRecord), "month", copy(monthRecord), room, player));
+                monthRecord = copy(insertRecord(getPosition(player.score,monthRecord), "month", copy(monthRecord), citysrc, player));
             }
             if (getPosition(player.score,allRecord) <= num_records) {
                 allStr = "<b>" + (getPosition(player.score,allRecord)) + sufx[(getPosition(player.score,allRecord)-1)] + "</b>" + " yearly"
-                allRecord = copy(insertRecord(getPosition(player.score,allRecord), "all-time", copy(allRecord), room, player));
+                allRecord = copy(insertRecord(getPosition(player.score,allRecord), "all-time", copy(allRecord), citysrc, player));
             }
             if (dayStr !== "" || wkStr !== "" || monStr !== "" || allStr !== "") {
                 lastRecordUpdate(new Date().getTime());
@@ -489,14 +489,14 @@ class Room {
                 if (monStr !== "" && (wkStr !== "" | (wkStr === "" && dayStr !== ""))) c2 = ", ";
                 let c3 = "";
                 if (wkStr !== "" && (dayStr !== "")) c3 = ", ";
-                const payload = "- " + month + day + " (" + room + ") <font color=" + player.color + "><b>" + player.name + "</b></font>: " + allStr + c1 + monStr + c2 + wkStr + c3 + dayStr;
+                const payload = "- " + month + day + " (" + citysrc + ") <font color=" + player.color + "><b>" + player.name + "</b></font>: " + allStr + c1 + monStr + c2 + wkStr + c3 + dayStr;
                 helpers.prependRecentActivity(payload)
             }
         });
-        fs.writeFile("/scratch/" + room + "_day_record", JSON.stringify(copy(dayRecord), null, 2), function(err) {if(err){return console.log(err);}});
-        fs.writeFile("/scratch/" + room + "_week_record", JSON.stringify(copy(weekRecord), null, 2), function(err) {if(err){return console.log(err);}});
-        fs.writeFile("/scratch/" + room + "_month_record", JSON.stringify(copy(monthRecord), null, 2), function(err) {if(err){return console.log(err);}});
-        fs.writeFile("/scratch/" + room + "_all-time_record", JSON.stringify(copy(allRecord), null, 2), function(err) {if(err){return console.log(err);}});
+        fs.writeFile("/scratch/" + citysrc + "_day_record", JSON.stringify(copy(dayRecord), null, 2), function(err) {if(err){return console.log(err);}});
+        fs.writeFile("/scratch/" + citysrc + "_week_record", JSON.stringify(copy(weekRecord), null, 2), function(err) {if(err){return console.log(err);}});
+        fs.writeFile("/scratch/" + citysrc + "_month_record", JSON.stringify(copy(monthRecord), null, 2), function(err) {if(err){return console.log(err);}});
+        fs.writeFile("/scratch/" + citysrc + "_all-time_record", JSON.stringify(copy(allRecord), null, 2), function(err) {if(err){return console.log(err);}});
         this.dayRecord = copy(dayRecord);
         this.weekRecord = copy(weekRecord);
         this.monthRecord = copy(monthRecord);
