@@ -306,7 +306,7 @@ const logHistogram = (rooms) => {
     const totalPlayers = rooms[CONSTANTS.LOBBY].playerCount() + rooms[CONSTANTS.WORLD].playerCount() + rooms[CONSTANTS.WORLD_EASY].playerCount() + rooms[CONSTANTS.US].playerCount() + rooms[CONSTANTS.EURO].playerCount() + rooms[CONSTANTS.AFRICA].playerCount() + rooms[CONSTANTS.SAMERICA].playerCount() + rooms[CONSTANTS.ASIA].playerCount() + rooms[CONSTANTS.OCEANIA].playerCount() + rooms[CONSTANTS.MISC].playerCount();
     const payload = "There are " + totalPlayers + " players: Lobby (" + rooms[CONSTANTS.LOBBY].playerCount() +
         "), World (" + rooms[CONSTANTS.WORLD].playerCount() +
-        "), World (easy) (" + rooms[CONSTANTS.WORLD_EASY].playerCount() +
+        "), World Capitals (" + rooms[CONSTANTS.WORLD_EASY].playerCount() +
         "), US (" + rooms[CONSTANTS.US].playerCount() +
         "), Europe (" + rooms[CONSTANTS.EURO].playerCount() +
         "), Africa (" + rooms[CONSTANTS.AFRICA].playerCount() +

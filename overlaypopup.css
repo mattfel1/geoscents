@@ -52,7 +52,25 @@
 		width: 110px;
 		padding: 2px 2px;
 		margin: 3px 3px;
-		font-size: 16px;
+		font-size: 14px;
+		background: #a9e7f9; /* fallback */
+		background: -moz-linear-gradient(top,  #a9e7f9 0%, #77d3ef 4%, #05abe0 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9e7f9), color-stop(4%,#77d3ef), color-stop(100%,#05abe0));
+		background: -webkit-linear-gradient(top,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
+		background: -o-linear-gradient(top,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
+		background: -ms-linear-gradient(top,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
+		background: linear-gradient(to bottom,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
+		border-radius: 2px;
+		box-shadow: 0 0 4px rgba(0,0,0,0.3);
+	}
+
+	.private-room-btn {
+		cursor: pointer;
+		border: 1px solid #333;
+		width: 140px;
+		padding: 2px 2px;
+		margin: 3px 3px;
+		font-size: 14px;
 		background: #a9e7f9; /* fallback */
 		background: -moz-linear-gradient(top,  #a9e7f9 0%, #77d3ef 4%, #05abe0 100%);
 		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9e7f9), color-stop(4%,#77d3ef), color-stop(100%,#05abe0));
@@ -69,7 +87,7 @@
 		width: 110px;
 		padding: 2px 2px;
 		margin: 3px 3px;
-		font-size: 16px;
+		font-size: 14px;
 		background: #ffe200; /* fallback */
 		background: -moz-linear-gradient(top,  #ffe200 0%, #dbc300 4%, #bda800 100%);
 		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffe200), color-stop(4%,#dbc300), color-stop(100%,#bda800));

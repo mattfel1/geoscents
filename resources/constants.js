@@ -136,7 +136,7 @@ module.exports = {
     RECORD_INIT_BASE: 480,
     RECORD_DELTA_RANGE: 200,
     WORLD: 'World',
-    WORLD_EASY: 'World (easy)',
+    WORLD_EASY: 'World Capitals',
     PRIVATE: 'Private',
     LOBBY: 'Lobby',
     US: 'N. America',

@@ -164,8 +164,8 @@ app.use((err, req, res, next) => {
 // Game state info
 // map, roomName, citysrc
 var rooms = {
-    'World': new Room(CONSTANTS.WORLD, CONSTANTS.WORLD, CONSTANTS.WORLD),
-    'World (easy)': new Room(CONSTANTS.WORLD, CONSTANTS.WORLD_EASY, CONSTANTS.WORLD_EASY),
+    'World': new Room(CONSTANTS.WORLD, 'World', CONSTANTS.WORLD),
+    'World Capitals': new Room(CONSTANTS.WORLD, CONSTANTS.WORLD_EASY, CONSTANTS.WORLD_EASY),
     'N. America': new Room(CONSTANTS.US, 'N. America', CONSTANTS.US),
     'S. America': new Room(CONSTANTS.SAMERICA, 'S. America', CONSTANTS.SAMERICA),
     'Europe': new Room(CONSTANTS.EURO, 'Europe', CONSTANTS.EURO),

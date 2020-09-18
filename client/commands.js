@@ -134,14 +134,14 @@ class Commands {
         let lobby_string;
         if (this.counts[CONSTANTS.LOBBY] > 0) {lobby_string = "<b>(" + this.counts[CONSTANTS.LOBBY] + " players)</b>"} else {lobby_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>To Lobby</b> <font size=2>" + lobby_string + "</font></button>"))
-        if (this.isPrivate) $('#commands').append($("<button class='room-btn' id='private_button'><b>" + this.privateCitysrc + "</b><br>code: " + this.privateCode + "</button><br>"));
-        else $('#commands').append($("<button class='room-btn' id='private_button'><b>Private Room</b></button><br>"));
+        if (this.isPrivate) $('#commands').append($("<button class='private-room-btn' id='private_button'><b>" + this.privateCitysrc + "</b><br>code: " + this.privateCode + "</button><br>"));
+        else $('#commands').append($("<button class='private-room-btn' id='private_button'><b>To Private Room</b></button><br>"));
         let world_string; 
         if (this.counts[CONSTANTS.WORLD] > 0) {world_string = "<b>(" + this.counts[CONSTANTS.WORLD] + " players)</b>"} else {world_string = "<font color=\"white\">(0 players)</font>"}
-        $('#commands').append($("<button class='room-btn' id='world_button'><b>World (hard)</b> <br><font size=2>" + world_string + "</font></button>"))
+        $('#commands').append($("<button class='room-btn' id='world_button'><b>World</b> <br><font size=2>" + world_string + "</font></button>"))
         let world_easy_string; 
         if (this.counts[CONSTANTS.WORLD_EASY] > 0) {world_easy_string = "<b>(" + this.counts[CONSTANTS.WORLD_EASY] + " players)</b>"} else {world_easy_string = "<font color=\"white\">(0 players)</font>"}
-        $('#commands').append($("<button class='room-btn' id='world_easy_button'><b>World (easy)</b> <br><font size=2>" + world_easy_string + "</font></button>"))
+        $('#commands').append($("<button class='room-btn' id='world_easy_button'><b>World Capitals</b> <br><font size=2>" + world_easy_string + "</font></button>"))
         let misc_string; 
         if (this.counts[CONSTANTS.MISC] > 0) {misc_string = "<b>(" + this.counts[CONSTANTS.MISC] + " players)</b>"} else {misc_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='special-room-btn' id='misc_button'><b>Trivia</b> <br><font size=2>" + misc_string + "</font></button>  "))
