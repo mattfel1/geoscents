@@ -26,9 +26,9 @@ class Scoreboard {
        var pop3 = "";
        if (dict['recordBroken3']) pop3 = '🎉';
        var pop4 = "";
-       if (dict['recordBroken4']) pop4 = '🎉';
+       if (dict['recordBroken4']) pop4 = '🏅';
        var pop5 = "";
-       if (dict['recordBroken5']) pop5 = '🎉';
+       if (dict['recordBroken5']) pop5 = '🏅';
 
        const string1 = $("<font color=" + dict['recordColor1'] + " style=\"font-size:16px;\" \>").html(pop1 + "🥇 1st: " + dict['record1'] + " (<b>" + dict['recordName1'] + "</b>)" + pop1 + "<br>");
        const string2 = $("<font color=" + dict['recordColor2'] + " style=\"font-size:16px;\" \>").html(pop2 + "🥈 2nd: " + dict['record2'] + " (<b>" + dict['recordName2'] + "</b>)" + pop2 + "<br>");

@@ -337,6 +337,7 @@ class Room {
                   player.consecutiveRoundsInactive = 0;
                   player.row = playerClick.cursorY;
                   player.col = playerClick.cursorX;
+                  console.log("player clicked at time " + this.timer)
                   player.clickedAt = this.timer;
                   const geo = Geography.mercToGeo(player.roomName, player.row, player.col);
                   player.lat = geo['lat'];
@@ -372,8 +373,8 @@ class Room {
         if (position === 1) medal = '🥇';
         else if (position === 2) medal = '🥈';
         else if (position === 3) medal = '🥉';
-        else if (position === 4) medal = '🥉';
-        else if (position === 5) medal = '🥉';
+        else if (position === 4) medal = '🏅';
+        else if (position === 5) medal = '🏅';
         if (this.clients.has(player.id)) {
             this.clients.get(player.id).emit("announce record", category, room, medal, player.name, player.score, player.color);
         }

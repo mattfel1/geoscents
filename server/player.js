@@ -71,6 +71,8 @@ class Player {
 		if (position == 1) this.medal = this.medal + '🥇';
 		else if (position == 2) this.medal = this.medal + '🥈';
 		else if (position == 3) this.medal = this.medal + '🥉';
+		else if (position == 4) this.medal = this.medal + '🏅';
+		else if (position == 5) this.medal = this.medal + '🏅';
 	}
 
 	radius() {
