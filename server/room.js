@@ -709,6 +709,7 @@ class Room {
             const playerClick = {
               mouseDown: false,
               touchDown: false,
+              clickEvent: false,
               downCount: 0,
               cursorX: joeGeo.col,
               cursorY: joeGeo.row

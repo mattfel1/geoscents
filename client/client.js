@@ -27,6 +27,7 @@ var clickedReady = false;
 var booted = false;
 
 const playerClick = {
+  clickEvent: false,
   mouseDown: false,
   touchDown: false,
   downCount: 0,
@@ -182,7 +183,10 @@ $(document).ready(function(){
     });
     setInterval(() => {
       if (playerClick.touchDown) playerClick.downCount = playerClick.downCount + 1;
-      if (!playerClick.touchDown) socket.emit('playerClick', playerClick);
+      if (playerClick.clickEvent) {
+        socket.emit('playerClick', playerClick);
+        playerClick.clickEvent = false; 
+      }
       if (chat.hasNewMessage) document.title = "(*) GeoScents"
     }, 1000 / CONSTANTS.FPS);
 
@@ -200,10 +204,12 @@ $(document).ready(function(){
     const mouseUpHandler = (e) => {
       playerClick.mouseDown = false
       playerClick.downCount = 0;
-      playerClick.touchDown = false;
+      playerClick.touchDown = false; 
+      playerClick.clickEvent = false;
     };
     const mouseDownHandler = (evt) => {
       playerClick.mouseDown = true
+      playerClick.clickEvent = true;
 
       const mousePos = getMousePosInPanel(canvas, evt);
       // var rect = canvas.getBoundingClientRect();
@@ -215,6 +221,7 @@ $(document).ready(function(){
       playerClick.downCount = 0;
       playerClick.mouseDown = false;
       playerClick.touchDown = false;
+      playerClick.clickEvent = true;
     };
     const touchDownHandler = (evt) => {
       playerClick.touchDown = true;

@@ -439,8 +439,8 @@ io.on('connection', (socket) => {
       }
     });
     socket.on('playerClick', (playerClick) => {
-      console.log("detected click!")
-      if (playerRooms.has(socket.id)) {
+      if (playerClick.clickEvent && playerRooms.has(socket.id)) {
+          console.log('processing player click')      
           const room = playerRooms.get(socket.id);
           room.playerClicked(socket, playerClick)
       }
