@@ -217,11 +217,11 @@ $(document).ready(function(){
       playerClick.cursorY = mousePos.y //e.clientY - rect.top
     };
     const touchUpHandler = (e) => {
+      playerClick.clickEvent = true;
       socket.emit('playerClick', playerClick);
       playerClick.downCount = 0;
       playerClick.mouseDown = false;
       playerClick.touchDown = false;
-      playerClick.clickEvent = true;
     };
     const touchDownHandler = (evt) => {
       playerClick.touchDown = true;
