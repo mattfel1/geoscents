@@ -111,43 +111,43 @@ class Room {
       if (week) this.weekRecord = CONSTANTS.INIT_RECORD;
       if (month) this.monthRecord = CONSTANTS.INIT_RECORD;
       if (year) this.allRecord = CONSTANTS.INIT_RECORD;
-      fs.writeFile("/scratch/" + this.map + "_day_record", JSON.stringify(copy(this.dayRecord), null, 2), function(err) {if(err){return console.log(err);}});
-      fs.writeFile("/scratch/" + this.map + "_week_record", JSON.stringify(copy(this.weekRecord), null, 2), function(err) {if(err){return console.log(err);}});
-      fs.writeFile("/scratch/" + this.map + "_month_record", JSON.stringify(copy(this.monthRecord), null, 2), function(err) {if(err){return console.log(err);}});
-      fs.writeFile("/scratch/" + this.map + "_all-time_record", JSON.stringify(copy(this.allRecord), null, 2), function(err) {if(err){return console.log(err);}});
+      fs.writeFile("/scratch/" + this.citysrc + "_day_record", JSON.stringify(copy(this.dayRecord), null, 2), function(err) {if(err){return console.log(err);}});
+      fs.writeFile("/scratch/" + this.citysrc + "_week_record", JSON.stringify(copy(this.weekRecord), null, 2), function(err) {if(err){return console.log(err);}});
+      fs.writeFile("/scratch/" + this.citysrc + "_month_record", JSON.stringify(copy(this.monthRecord), null, 2), function(err) {if(err){return console.log(err);}});
+      fs.writeFile("/scratch/" + this.citysrc + "_all-time_record", JSON.stringify(copy(this.allRecord), null, 2), function(err) {if(err){return console.log(err);}});
       this.drawScorePanel();
     }
     loadRecords() {
-      if (fs.existsSync('/scratch/' + this.map + '_day_record')) {
+      if (fs.existsSync('/scratch/' + this.citysrc + '_day_record')) {
           try {
-              this.dayRecord = JSON.parse(fs.readFileSync('/scratch/' + this.map + '_day_record', 'utf8'));
+              this.dayRecord = JSON.parse(fs.readFileSync('/scratch/' + this.citysrc + '_day_record', 'utf8'));
           } catch (err) {
               this.dayRecord = CONSTANTS.INIT_RECORD;
           }
       } else {
           this.dayRecord = CONSTANTS.INIT_RECORD;
       }
-      if (fs.existsSync('/scratch/' + this.map + '_week_record')) {
+      if (fs.existsSync('/scratch/' + this.citysrc + '_week_record')) {
           try {
-              this.weekRecord = JSON.parse(fs.readFileSync('/scratch/' + this.map + '_week_record', 'utf8'));
+              this.weekRecord = JSON.parse(fs.readFileSync('/scratch/' + this.citysrc + '_week_record', 'utf8'));
           } catch (err) {
               this.weekRecord = CONSTANTS.INIT_RECORD;
           }
       } else {
           this.weekRecord = CONSTANTS.INIT_RECORD;
       }
-      if (fs.existsSync('/scratch/' + this.map + '_month_record')) {
+      if (fs.existsSync('/scratch/' + this.citysrc + '_month_record')) {
           try {
-              this.monthRecord = JSON.parse(fs.readFileSync('/scratch/' + this.map + '_month_record', 'utf8'));
+              this.monthRecord = JSON.parse(fs.readFileSync('/scratch/' + this.citysrc + '_month_record', 'utf8'));
           } catch (err) {
               this.monthRecord = CONSTANTS.INIT_RECORD;
           }
       } else {
           this.monthRecord = CONSTANTS.INIT_RECORD;
       }
-      if (fs.existsSync('/scratch/' + this.map + '_all-time_record')) {
+      if (fs.existsSync('/scratch/' + this.citysrc + '_all-time_record')) {
           try {
-              this.allRecord = JSON.parse(fs.readFileSync('/scratch/' + this.map + '_all-time_record', 'utf8'));
+              this.allRecord = JSON.parse(fs.readFileSync('/scratch/' + this.citysrc + '_all-time_record', 'utf8'));
           } catch (err) {
               this.allRecord = CONSTANTS.INIT_RECORD;
           }
