@@ -9,17 +9,9 @@ class Commands {
         this.ctx = this.canvas.getContext('2d');
         this.myRoomName = CONSTANTS.LOBBY;
         this.isPrivate = false;
-        this.privateMap;
+        this.privateCitysrc;
         this.privateCode;
-        this.us_count = 0;
-        this.world_count = 0;
-        this.euro_count = 0;
-        this.africa_count = 0;
-        this.asia_count = 0;
-        this.oceania_count = 0;
-        this.samerica_count = 0;
-        this.misc_count = 0;
-        this.lobby_count = 0;
+        this.counts = {[CONSTANTS.LOBBY]: 0, [CONSTANTS.WORLD]: 0, [CONSTANTS.WORLD_EASY]: 0, [CONSTANTS.EURO]: 0, [CONSTANTS.US]: 0, [CONSTANTS.AFRICA]: 0, [CONSTANTS.ASIA]: 0, [CONSTANTS.OCEANIA]: 0, [CONSTANTS.SAMERICA]: 0, [CONSTANTS.MISC]: 0}
         this.mapStyle = 'terrain';
         this.lastCommand = {'timeDescrip': '', 'citystring': '', 'capital': false, 'iso2': '', 'round': 0, 'button': false, 'clicked': false};
         this.lastTime = {'time': 10, 'color': 'white'};
@@ -81,16 +73,8 @@ class Commands {
     }
 
 
-    updateCounts(l,w,u,e,a,s,as,oc,m) {
-       this.lobby_count = l;
-       this.world_count = w;
-       this.us_count = u;
-       this.euro_count = e;
-       this.africa_count = a;
-       this.asia_count = as;
-       this.oceania_count = oc;
-       this.samerica_count = s;
-       this.misc_count = m;
+    updateCounts(newdict) {
+        this.counts = newdict;
     }
 
     showReadyButton(clicked) {
@@ -148,33 +132,36 @@ class Commands {
         else $('#settings-box').append($("<div style='display: inline-block'><button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔊</button><br>" + jitterButton + "</div><br>"));
         $('#commands').append($("</div><br>"))
         let lobby_string;
-        if (this.lobby_count > 0) {lobby_string = "<b>(" + this.lobby_count + " players)</b>"} else {lobby_string = "<font color=\"white\">(0 players)</font>"}
-        $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>To Lobby</b> <font size=2>" + lobby_string + "</font></button><br>"))
+        if (this.counts[CONSTANTS.LOBBY] > 0) {lobby_string = "<b>(" + this.counts[CONSTANTS.LOBBY] + " players)</b>"} else {lobby_string = "<font color=\"white\">(0 players)</font>"}
+        $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>To Lobby</b> <font size=2>" + lobby_string + "</font></button>"))
+        if (this.isPrivate) $('#commands').append($("<button class='room-btn' id='private_button'><b>" + this.privateCitysrc + "</b><br>code: " + this.privateCode + "</button><br>"));
+        else $('#commands').append($("<button class='room-btn' id='private_button'><b>Private Room</b></button><br>"));
         let world_string; 
-        if (this.world_count > 0) {world_string = "<b>(" + this.world_count + " players)</b>"} else {world_string = "<font color=\"white\">(0 players)</font>"}
-        $('#commands').append($("<button class='room-btn' id='world_button'><b>World</b> <br><font size=2>" + world_string + "</font></button>"))
+        if (this.counts[CONSTANTS.WORLD] > 0) {world_string = "<b>(" + this.counts[CONSTANTS.WORLD] + " players)</b>"} else {world_string = "<font color=\"white\">(0 players)</font>"}
+        $('#commands').append($("<button class='room-btn' id='world_button'><b>World (hard)</b> <br><font size=2>" + world_string + "</font></button>"))
+        let world_easy_string; 
+        if (this.counts[CONSTANTS.WORLD_EASY] > 0) {world_easy_string = "<b>(" + this.counts[CONSTANTS.WORLD_EASY] + " players)</b>"} else {world_easy_string = "<font color=\"white\">(0 players)</font>"}
+        $('#commands').append($("<button class='room-btn' id='world_easy_button'><b>World (easy)</b> <br><font size=2>" + world_easy_string + "</font></button>"))
         let misc_string; 
-        if (this.misc_count > 0) {misc_string = "<b>(" + this.misc_count + " players)</b>"} else {misc_string = "<font color=\"white\">(0 players)</font>"}
+        if (this.counts[CONSTANTS.MISC] > 0) {misc_string = "<b>(" + this.counts[CONSTANTS.MISC] + " players)</b>"} else {misc_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='special-room-btn' id='misc_button'><b>Trivia</b> <br><font size=2>" + misc_string + "</font></button>  "))
-        if (this.isPrivate) $('#commands').append($("<button class='room-btn' id='private_button'><b>" + this.privateMap + "</b><br>code: " + this.privateCode + "</button><br>"));
-        else $('#commands').append($("<button class='room-btn' id='private_button'><b>Private</b></button><br>"));
         let euro_string; 
-        if (this.euro_count > 0) {euro_string = "<b>(" + this.euro_count + " players)</b>"} else {euro_string = "<font color=\"white\">(0 players)</font>"}
+        if (this.counts[CONSTANTS.EURO] > 0) {euro_string = "<b>(" + this.counts[CONSTANTS.EURO] + " players)</b>"} else {euro_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='euro_button'><b>Europe</b> <br><font size=2>" + euro_string + "</font></button>  "))
         let africa_string; 
-        if (this.africa_count > 0) {africa_string = "<b>(" + this.africa_count + " players)</b>"} else {africa_string = "<font color=\"white\">(0 players)</font>"}
+        if (this.counts[CONSTANTS.AFRICA] > 0) {africa_string = "<b>(" + this.counts[CONSTANTS.AFRICA] + " players)</b>"} else {africa_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='africa_button'><b>Africa</b> <br><font size=2>" + africa_string + "</font></button>  "))
         let asia_string; 
-        if (this.asia_count > 0) {asia_string = "<b>(" + this.asia_count + " players)</b>"} else {asia_string = "<font color=\"white\">(0 players)</font>"}
+        if (this.counts[CONSTANTS.ASIA] > 0) {asia_string = "<b>(" + this.counts[CONSTANTS.ASIA] + " players)</b>"} else {asia_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='asia_button'><b>Asia</b> <br><font size=2>" + asia_string + "</font></button>  "))
         let oceania_string; 
-        if (this.oceania_count > 0) {oceania_string = "<b>(" + this.oceania_count + " players)</b>"} else {oceania_string = "<font color=\"white\">(0 players)</font>"}
+        if (this.counts[CONSTANTS.OCEANIA] > 0) {oceania_string = "<b>(" + this.counts[CONSTANTS.OCEANIA] + " players)</b>"} else {oceania_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='oceania_button'><b>Oceania</b> <br><font size=2>" + oceania_string + "</font></button>  "))
         let us_string; 
-        if (this.us_count > 0) {us_string = "<b>(" + this.us_count + " players)</b>"} else {us_string = "<font color=\"white\">(0 players)</font>"}
+        if (this.counts[CONSTANTS.US] > 0) {us_string = "<b>(" + this.counts[CONSTANTS.US] + " players)</b>"} else {us_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='us_button'><b>N. America</b> <br><font size=2>" + us_string + "</font></button>  "))
         let samerica_string; 
-        if (this.samerica_count > 0) {samerica_string = "<b>(" + this.samerica_count + " players)</b>"} else {samerica_string = "<font color=\"white\">(0 players)</font>"}
+        if (this.counts[CONSTANTS.SAMERICA] > 0) {samerica_string = "<b>(" + this.counts[CONSTANTS.SAMERICA] + " players)</b>"} else {samerica_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='samerica_button'><b>S. America</b> <br><font size=2>" + samerica_string + "</font></button>  "))
 
         var room = this.myRoomName;
@@ -188,6 +175,7 @@ class Commands {
         $('#satellite_button').bind("click", () => {socket.emit('renderMap', 'satellite'); this.refocus()});
         $('#lobby_button').bind("click", () => {if (room !== CONSTANTS.LOBBY) socket.emit('moveTo', CONSTANTS.LOBBY); this.refocus()});
         $('#world_button').bind("click", () => {if (room !== CONSTANTS.WORLD) socket.emit('moveTo', CONSTANTS.WORLD); this.refocus()});
+        $('#world_easy_button').bind("click", () => {if (room !== CONSTANTS.WORLD_EASY) socket.emit('moveTo', CONSTANTS.WORLD_EASY); this.refocus()});
         $('#misc_button').bind("click", () => {if (room !== CONSTANTS.MISC) socket.emit('moveTo', CONSTANTS.MISC); this.refocus()});
         $('#private_button').bind("click", () => {
             if (room !== CONSTANTS.PRIVATE) {
@@ -229,8 +217,8 @@ class Commands {
         }
     }
 
-    labelPrivate(map, code) {
-        this.privateMap = map;
+    labelPrivate(citysrc, code) {
+        this.privateCitysrc = citysrc;
         this.privateCode = code;
         this.isPrivate = true;
     }

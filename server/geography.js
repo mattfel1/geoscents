@@ -2,6 +2,7 @@
  * Class for storing all geography methods
  */
 const WORLDCITIES = require('../resources/worldcities.js').CITIES;
+const WORLDEASYCITIES = require('../resources/worldeasycities.js').CITIES;
 const MISCCITIES = require('../resources/misccities.js').CITIES;
 const USCITIES = require('../resources/uscities.js').CITIES;
 const EUROCITIES = require('../resources/eurocities.js').CITIES;
@@ -12,70 +13,70 @@ const SAMERICACITIES = require('../resources/samericacities.js').CITIES;
 const CONSTANTS = require('../resources/constants.js');
 // var idx = 0;
 
-const randomCity = (room, blacklist) => {
+const randomCity = (citysrc, blacklist) => {
     let acceptable = false;
     let i = 0;
     let proposal = null;
     let timeout = 20;
-    if (room === CONSTANTS.WORLD) {
+    if (citysrc === CONSTANTS.WORLD) {
         while (!acceptable) {
             proposal = WORLDCITIES[Math.floor(Math.random() * WORLDCITIES.length)];
-            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
+            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
-    } else if (room === CONSTANTS.MISC) {
+    } else if (citysrc === CONSTANTS.WORLD_EASY) {
+        while (!acceptable) {
+            proposal = WORLDEASYCITIES[Math.floor(Math.random() * WORLDEASYCITIES.length)];
+            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
+            else i = i + 1;
+        }
+    } else if (citysrc === CONSTANTS.MISC) {
         while (!acceptable) {
             proposal = MISCCITIES[Math.floor(Math.random() * MISCCITIES.length)];
             // proposal = MISCCITIES[idx];
             // idx = idx + 1
-            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
+            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
-    } else if (room === CONSTANTS.US) {
+    } else if (citysrc === CONSTANTS.US) {
         while (!acceptable) {
             proposal = USCITIES[Math.floor(Math.random() * USCITIES.length)];
-            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
+            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
-    } else if (room === CONSTANTS.EURO) {
+    } else if (citysrc === CONSTANTS.EURO) {
         while (!acceptable) {
             proposal = EUROCITIES[Math.floor(Math.random() * EUROCITIES.length)];
-            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
+            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
-    } else if (room === CONSTANTS.AFRICA) {
+    } else if (citysrc === CONSTANTS.AFRICA) {
         while (!acceptable) {
             proposal = AFRICACITIES[Math.floor(Math.random() * AFRICACITIES.length)];
-            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
+            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
-    } else if (room === CONSTANTS.ASIA) {
+    } else if (citysrc === CONSTANTS.ASIA) {
         while (!acceptable) {
             proposal = ASIACITIES[Math.floor(Math.random() * ASIACITIES.length)];
-            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
+            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
-    } else if (room === CONSTANTS.OCEANIA) {
+    } else if (citysrc === CONSTANTS.OCEANIA) {
         while (!acceptable) {
             proposal = OCEANIACITIES[Math.floor(Math.random() * OCEANIACITIES.length)];
-            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
+            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
-    } else if (room === CONSTANTS.SAMERICA) {
+    } else if (citysrc === CONSTANTS.SAMERICA) {
         while (!acceptable) {
             proposal = SAMERICACITIES[Math.floor(Math.random() * SAMERICACITIES.length)];
-            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
-            else i = i + 1;
-        }
-    } else {
-        while (!acceptable) {
-            proposal = WORLDCITIES[Math.floor(Math.random() * WORLDCITIES.length)];
-            if (uniqueInBlacklist(room, proposal, blacklist) || i >= timeout) acceptable = true;
+            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
     }
-    if (requireUniqueAdmin(room, proposal)) {blacklist.push(proposal['admin_name'])}
-    else if (room == CONSTANTS.MISC) blacklist.push(stringifyTarget(proposal)['string'])
+    if (requireUniqueAdmin(citysrc, proposal)) {blacklist.push(proposal['admin_name'])}
+    else if (citysrc == CONSTANTS.MISC) blacklist.push(stringifyTarget(proposal)['string'])
     else blacklist.push(proposal['country']);
     return [proposal, blacklist];
 };
@@ -139,33 +140,33 @@ const stringifyTargetAscii = (target) => {
 };
 
 // Allow this country to be repeated if the state is unique
-const requireUniqueAdmin = (room, target) => {
-    if (room === CONSTANTS.US && (target['country'] === 'United States' || target['country'] === 'Canada')) {return true}
-    else if (room === CONSTANTS.ASIA && (target['country'] === 'China' || target['country'] === 'India')) {return true}
-    // else if (room === CONSTANTS.OCEANIA && target['country'] === 'Australia') {return true}
+const requireUniqueAdmin = (citysrc, target) => {
+    if (citysrc === CONSTANTS.US && (target['country'] === 'United States' || target['country'] === 'Canada')) {return true}
+    else if (citysrc === CONSTANTS.ASIA && (target['country'] === 'China' || target['country'] === 'India')) {return true}
+    // else if (citysrc === CONSTANTS.OCEANIA && target['country'] === 'Australia') {return true}
     else return false
 };
 
-const uniqueInBlacklist = (room, target, blacklist) => {
-    if (room == CONSTANTS.MISC) return !blacklist.includes(stringifyTarget(target)['string'])
-    else if (requireUniqueAdmin(room, target)) return !blacklist.includes(target['admin_name']);
+const uniqueInBlacklist = (citysrc, target, blacklist) => {
+    if (citysrc == CONSTANTS.MISC) return !blacklist.includes(stringifyTarget(target)['string'])
+    else if (requireUniqueAdmin(citysrc, target)) return !blacklist.includes(target['admin_name']);
     else return !blacklist.includes(target['country']);
 };
 
-const mercDist = (room,row1,col1,row2,col2) => {
+const mercDist = (map,row1,col1,row2,col2) => {
     const row_err = Math.pow(row1 - row2, 2);
     let col_err = Math.min(Math.pow(col1 - col2, 2), Math.pow(col1 - col2 + CONSTANTS.MAP_WIDTH, 2), Math.pow(col1 - col2 - CONSTANTS.MAP_WIDTH, 2));
-    if (room === CONSTANTS.US || room === CONSTANTS.EURO || room === CONSTANTS.AFRICA || room === CONSTANTS.SAMERICA || room === CONSTANTS.ASIA || room === CONSTANTS.OCEANIA) { // No wrap
+    if (map === CONSTANTS.US || map === CONSTANTS.EURO || map === CONSTANTS.AFRICA || map === CONSTANTS.SAMERICA || map === CONSTANTS.ASIA || map === CONSTANTS.OCEANIA) { // No wrap
         col_err = Math.pow(col1 - col2, 2);
     }
     return Math.sqrt(row_err + col_err);
 };
 
-const geoDist = (room,lat1,lon1,lat2,lon2) => {
+const geoDist = (map,lat1,lon1,lat2,lon2) => {
     const lon_diff = Math.min(Math.abs(Math.max(lon1, lon2) - (Math.min(lon1, lon2) + 360), Math.abs(lon1 - lon2))); // in degrees
     const lon_err = Math.pow(Math.sin(Math.PI / 180 * Math.abs(lon_diff) / 2), 2, 2);
     // Not really necessary since the +2PI correction will always be larger in the tinier maps
-    // if (room == CONSTANTS.US || room == CONSTANTS.EURO || room == CONSTANTS.AFRICA || room == CONSTANTS.SAMERICA) { // No wrap
+    // if (map == CONSTANTS.US || map == CONSTANTS.EURO || map == CONSTANTS.AFRICA || map == CONSTANTS.SAMERICA) { // No wrap
     //     lon_err = Math.pow(col1-col2,2);
     // }
     const a = Math.pow(Math.sin(Math.PI / 180 * Math.abs(lat1 - lat2) / 2), 2) + Math.cos(Math.PI / 180 * lat1) * Math.cos(Math.PI / 180 * lat2) * lon_err;
@@ -183,15 +184,15 @@ const oceaniaDiag = geoDist(CONSTANTS.OCEANIA, CONSTANTS.OCEANIA_MAX_LAT, CONSTA
 const usDiag = geoDist(CONSTANTS.US, CONSTANTS.US_MAX_LAT, CONSTANTS.US_MAX_LON, CONSTANTS.US_MIN_LAT, CONSTANTS.US_MIN_LON);
 const samericaDiag = geoDist(CONSTANTS.SAMERICA, CONSTANTS.SAMERICA_MAX_LAT, CONSTANTS.SAMERICA_MAX_LON, CONSTANTS.SAMERICA_MIN_LAT, CONSTANTS.SAMERICA_MIN_LON);
 
-const score = (room, geoDist, mercDist, timeBonus) => {
+const score = (map, geoDist, mercDist, timeBonus) => {
     // Scale geoDist based on the length of the map's diagonal
     let scalingFactor = 1;
-    if (room === CONSTANTS.EURO) scalingFactor = fullDiag / euroDiag;
-    else if (room === CONSTANTS.AFRICA) scalingFactor = fullDiag / africaDiag;
-    else if (room === CONSTANTS.ASIA) scalingFactor = fullDiag / asiaDiag;
-    else if (room === CONSTANTS.OCEANIA) scalingFactor = fullDiag / oceaniaDiag;
-    else if (room === CONSTANTS.US) scalingFactor = fullDiag / usDiag;
-    else if (room === CONSTANTS.SAMERICA) scalingFactor = fullDiag / samericaDiag;
+    if (map === CONSTANTS.EURO) scalingFactor = fullDiag / euroDiag;
+    else if (map === CONSTANTS.AFRICA) scalingFactor = fullDiag / africaDiag;
+    else if (map === CONSTANTS.ASIA) scalingFactor = fullDiag / asiaDiag;
+    else if (map === CONSTANTS.OCEANIA) scalingFactor = fullDiag / oceaniaDiag;
+    else if (map === CONSTANTS.US) scalingFactor = fullDiag / usDiag;
+    else if (map === CONSTANTS.SAMERICA) scalingFactor = fullDiag / samericaDiag;
 
     // // Pixel-distance based score (old)
     // const timeLogistic = CONSTANTS.LOGISTIC_C3/(2+Math.exp(CONSTANTS.LOGISTIC_C1*(-timeBonus+CONSTANTS.LOGISTIC_C2)))+CONSTANTS.LOGISTIC_C4;
@@ -212,49 +213,49 @@ const score = (room, geoDist, mercDist, timeBonus) => {
     return distPortion * timePortion
 };
 
-const mercToGeo = (room,row,col) => {
+const mercToGeo = (map,row,col) => {
     let zero_lat = CONSTANTS.WORLD_MIN_LAT;
     let max_lat = CONSTANTS.WORLD_MAX_LAT;
     let min_lon = CONSTANTS.WORLD_MIN_LON;
     let max_lon = CONSTANTS.WORLD_MAX_LON;
     let lat_ts = CONSTANTS.WORLD_LAT_TS;
-    if (room === CONSTANTS.US) {
+    if (map === CONSTANTS.US) {
         zero_lat = CONSTANTS.US_MIN_LAT;
         max_lat = CONSTANTS.US_MAX_LAT;
         min_lon = CONSTANTS.US_MIN_LON;
         max_lon = CONSTANTS.US_MAX_LON;
         lat_ts = CONSTANTS.US_LAT_TS;
-    } else if (room === CONSTANTS.EURO) {
+    } else if (map === CONSTANTS.EURO) {
         zero_lat = CONSTANTS.EURO_MIN_LAT;
         max_lat = CONSTANTS.EURO_MAX_LAT;
         min_lon = CONSTANTS.EURO_MIN_LON;
         max_lon = CONSTANTS.EURO_MAX_LON;
         lat_ts = CONSTANTS.EURO_LAT_TS;
-    } else if (room === CONSTANTS.MISC) {
+    } else if (map === CONSTANTS.MISC) {
         zero_lat = CONSTANTS.MISC_MIN_LAT;
         max_lat = CONSTANTS.MISC_MAX_LAT;
         min_lon = CONSTANTS.MISC_MIN_LON;
         max_lon = CONSTANTS.MISC_MAX_LON;
         lat_ts = CONSTANTS.MISC_LAT_TS;
-    } else if (room === CONSTANTS.AFRICA) {
+    } else if (map === CONSTANTS.AFRICA) {
         zero_lat = CONSTANTS.AFRICA_MIN_LAT;
         max_lat = CONSTANTS.AFRICA_MAX_LAT;
         min_lon = CONSTANTS.AFRICA_MIN_LON;
         max_lon = CONSTANTS.AFRICA_MAX_LON;
         lat_ts = CONSTANTS.AFRICA_LAT_TS;
-    } else if (room === CONSTANTS.ASIA) {
+    } else if (map === CONSTANTS.ASIA) {
         zero_lat = CONSTANTS.ASIA_MIN_LAT;
         max_lat = CONSTANTS.ASIA_MAX_LAT;
         min_lon = CONSTANTS.ASIA_MIN_LON;
         max_lon = CONSTANTS.ASIA_MAX_LON;
         lat_ts = CONSTANTS.ASIA_LAT_TS;
-    } else if (room === CONSTANTS.OCEANIA) {
+    } else if (map === CONSTANTS.OCEANIA) {
         zero_lat = CONSTANTS.OCEANIA_MIN_LAT;
         max_lat = CONSTANTS.OCEANIA_MAX_LAT;
         min_lon = CONSTANTS.OCEANIA_MIN_LON;
         max_lon = CONSTANTS.OCEANIA_MAX_LON;
         lat_ts = CONSTANTS.OCEANIA_LAT_TS;
-    } else if (room === CONSTANTS.SAMERICA) {
+    } else if (map === CONSTANTS.SAMERICA) {
         zero_lat = CONSTANTS.SAMERICA_MIN_LAT;
         max_lat = CONSTANTS.SAMERICA_MAX_LAT;
         min_lon = CONSTANTS.SAMERICA_MIN_LON;
@@ -268,49 +269,49 @@ const mercToGeo = (room,row,col) => {
     return {'lat': lat, 'lng': lon}
 };
 
-const geoToMerc = (room,lat, lon) => {
+const geoToMerc = (map,lat, lon) => {
     let zero_lat = CONSTANTS.WORLD_MIN_LAT;
     let max_lat = CONSTANTS.WORLD_MAX_LAT;
     let min_lon = CONSTANTS.WORLD_MIN_LON;
     let max_lon = CONSTANTS.WORLD_MAX_LON;
     let lat_ts = CONSTANTS.WORLD_LAT_TS;
-    if (room === CONSTANTS.US) {
+    if (map === CONSTANTS.US) {
         zero_lat = CONSTANTS.US_MIN_LAT;
         max_lat = CONSTANTS.US_MAX_LAT;
         min_lon = CONSTANTS.US_MIN_LON;
         max_lon = CONSTANTS.US_MAX_LON;
         lat_ts = CONSTANTS.US_LAT_TS;
-    } else if (room === CONSTANTS.EURO) {
+    } else if (map === CONSTANTS.EURO) {
         zero_lat = CONSTANTS.EURO_MIN_LAT;
         max_lat = CONSTANTS.EURO_MAX_LAT;
         min_lon = CONSTANTS.EURO_MIN_LON;
         max_lon = CONSTANTS.EURO_MAX_LON;
         lat_ts = CONSTANTS.EURO_LAT_TS;
-    } else if (room === CONSTANTS.MISC) {
+    } else if (map === CONSTANTS.MISC) {
         zero_lat = CONSTANTS.MISC_MIN_LAT;
         max_lat = CONSTANTS.MISC_MAX_LAT;
         min_lon = CONSTANTS.MISC_MIN_LON;
         max_lon = CONSTANTS.MISC_MAX_LON;
         lat_ts = CONSTANTS.MISC_LAT_TS;
-    } else if (room === CONSTANTS.AFRICA) {
+    } else if (map === CONSTANTS.AFRICA) {
         zero_lat = CONSTANTS.AFRICA_MIN_LAT;
         max_lat = CONSTANTS.AFRICA_MAX_LAT;
         min_lon = CONSTANTS.AFRICA_MIN_LON;
         max_lon = CONSTANTS.AFRICA_MAX_LON;
         lat_ts = CONSTANTS.AFRICA_LAT_TS;
-    } else if (room === CONSTANTS.ASIA) {
+    } else if (map === CONSTANTS.ASIA) {
         zero_lat = CONSTANTS.ASIA_MIN_LAT;
         max_lat = CONSTANTS.ASIA_MAX_LAT;
         min_lon = CONSTANTS.ASIA_MIN_LON;
         max_lon = CONSTANTS.ASIA_MAX_LON;
         lat_ts = CONSTANTS.ASIA_LAT_TS;
-    } else if (room === CONSTANTS.OCEANIA) {
+    } else if (map === CONSTANTS.OCEANIA) {
         zero_lat = CONSTANTS.OCEANIA_MIN_LAT;
         max_lat = CONSTANTS.OCEANIA_MAX_LAT;
         min_lon = CONSTANTS.OCEANIA_MIN_LON;
         max_lon = CONSTANTS.OCEANIA_MAX_LON;
         lat_ts = CONSTANTS.OCEANIA_LAT_TS;
-    } else if (room === CONSTANTS.SAMERICA) {
+    } else if (map === CONSTANTS.SAMERICA) {
         zero_lat = CONSTANTS.SAMERICA_MIN_LAT;
         max_lat = CONSTANTS.SAMERICA_MAX_LAT;
         min_lon = CONSTANTS.SAMERICA_MIN_LON;

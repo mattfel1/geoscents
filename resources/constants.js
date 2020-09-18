@@ -32,6 +32,11 @@ module.exports = {
     WORLD_MIN_LON: -180, // Latitude of top edge of map
     WORLD_MAX_LON: 180, // Latitude of bottom edge of map
     WORLD_LAT_TS: 0,
+    WORLD_EASY_MIN_LAT: 77.0, // Latitude of top edge of map
+    WORLD_EASY_MAX_LAT: -65.5, // Latitude of bottom edge of map
+    WORLD_EASY_MIN_LON: -180, // Latitude of top edge of map
+    WORLD_EASY_MAX_LON: 180, // Latitude of bottom edge of map
+    WORLD_EASY_LAT_TS: 0,
     MISC_MIN_LAT: 81.0, // Latitude of top edge of map
     MISC_MAX_LAT: -56.0, // Latitude of bottom edge of map
     MISC_MIN_LON: -180, // Latitude of top edge of map
@@ -73,7 +78,7 @@ module.exports = {
 
     // FSM
     REVEAL_STATE: 'reveal',
-    REVEAL_DURATION: 5,
+    REVEAL_DURATION: 0,
     GUESS_STATE: 'guess',
     GUESS_DURATION: 10,
     SETUP_STATE: 'setup',
@@ -81,7 +86,7 @@ module.exports = {
     PREPARE_GAME_STATE: 'prepare',
     PREPARE_GAME_DURATION: 45,
     BEGIN_GAME_STATE: 'begingame',
-    BEGIN_GAME_DURATION: 5,
+    BEGIN_GAME_DURATION: 0,
     ASK_READY_STATE: 'askready',
     LOBBY_STATE: 'lobby',
     SCROLL_THRESHOLD: 25, // Number of frames mobile user can press for that distinguishes a "click" from a "scroll"
@@ -131,6 +136,7 @@ module.exports = {
     RECORD_INIT_BASE: 480,
     RECORD_DELTA_RANGE: 200,
     WORLD: 'World',
+    WORLD_EASY: 'World (easy)',
     PRIVATE: 'Private',
     LOBBY: 'Lobby',
     US: 'N. America',
@@ -142,7 +148,7 @@ module.exports = {
     SAMERICA: "S. America",
     MAX_INACTIVE: 10, // Rounds of no click before you get booted
     MAX_S_INACTIVE: 2400, // seconds * fps spent in lobby before you get booted
-    INIT_RECORD: {'record1': 0, 'recordName1': '-', 'recordColor1': 'black', 'recordBroken1': false, 'record2': 0, 'recordName2': '-', 'recordColor2': 'black', 'recordBroken2': false, 'record3': 0, 'recordName3': '-', 'recordColor3': 'black', 'recordBroken3': false},
+    INIT_RECORD: {'record1': 0, 'recordName1': '-', 'recordColor1': 'black', 'recordBroken1': false, 'record2': 0, 'recordName2': '-', 'recordColor2': 'black', 'recordBroken2': false, 'record3': 0, 'recordName3': '-', 'recordColor3': 'black', 'recordBroken3': false, 'record4': 0, 'recordName4': '-', 'recordColor4': 'black', 'recordBroken4': false, 'record5': 0, 'recordName5': '-', 'recordColor5': 'black', 'recordBroken5': false},
 
     // Chat
     MAX_GAME_HIST: 100,

@@ -15,6 +15,7 @@ const History = require('./history.js');
 const CONSTANTS = require('../resources/constants.js');
 
 var myMap = CONSTANTS.LOBBY;
+var myCitysrc = CONSTANTS.LOBBY;
 var myRoomName = CONSTANTS.LOBBY;
 const canvas = window.document.getElementById('map');
 const panel = window.document.getElementById('panel');
@@ -57,7 +58,7 @@ $(document).ready(function(){
     const sounds = new Sounds(socket);
 
     const commands = new Commands(socket);
-    socket.on('update counts', (l,w,u,e,a,s,as,oc,m) => {commands.updateCounts(l,w,u,e,a,s,as,oc,m);commands.postButtons();})
+    socket.on('update counts', (newdict) => {commands.updateCounts(newdict);commands.postButtons();})
     socket.on('draw buttons', () => {commands.postButtons()});
     socket.on('update joe button', (hasJoe) => {commands.hasJoe = hasJoe; commands.postButtons()});
     socket.on('draw timer', (time,color) => {commands.postTime(time,color)});
@@ -151,7 +152,7 @@ $(document).ready(function(){
 
     /***** Player interactions *****/
     socket.on('request boot', function(id){socket.emit('bootPlayer', id)});
-    socket.on('moved to', (mapName, roomName, roomState) => {
+    socket.on('moved to', (mapName, roomName, roomCitysrc, roomState) => {
         myMap = mapName;
         map.myMap = mapName;
         chat.myMap = mapName;
@@ -166,8 +167,15 @@ $(document).ready(function(){
         commands.myRoomName = roomName;
         history.myRoomName = roomName;
         sounds.myRoomName = roomName;
+        myCitysrc = roomCitysrc
+        map.myCitysrc = myCitysrc;
+        chat.myCitysrc = myCitysrc;
+        scoreboard.myCitysrc = myCitysrc;
+        commands.myCitysrc = myCitysrc;
+        history.myCitysrc = myCitysrc;
+        sounds.myCitysrc = myCitysrc;
         clickedReady = false;
-        if (roomName.startsWith('private')) commands.labelPrivate(mapName, privatepopup.code);
+        if (roomName.startsWith('private')) commands.labelPrivate(myCitysrc, privatepopup.code);
         else commands.clearPrivate()
         commands.postButtons()
         betweenGames = roomState === CONSTANTS.PREPARE_GAME_STATE;

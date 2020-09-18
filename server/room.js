@@ -11,10 +11,11 @@ const fs = require('fs')
 const app = require('./app.js')
 
 class Room {
-    constructor(map, name) {
-      this.roomName = name;
-      this.map = map;
-      this.isPrivate = name.startsWith('private');
+    constructor(map, roomName, citysrc) {
+      this.map = map;  // Underlying map
+      this.roomName = roomName;  // User-friendly room name
+      this.citysrc = citysrc;  // source for random city selection
+      this.isPrivate = roomName.startsWith('private');
       this.joeTime = 10;
       this.joeLat = 0;
       this.joeLon = 0;
@@ -40,7 +41,7 @@ class Room {
       this.allRecord;
       this.loadRecords();
       this.createJoe();
-      this.hasJoe = name != CONSTANTS.LOBBY;
+      this.hasJoe = roomName != CONSTANTS.LOBBY;
 }
 
 
@@ -351,14 +352,16 @@ class Room {
         function copy(x) {
             return JSON.parse( JSON.stringify(x, null, 2) );
         }
-
+        const num_records = 5
         const dict = copy(olddict);
         let i;
-        for (i = 3; i > position; i--) {
-          dict['record' + i] = copy(dict['record' + (i-1)]);
-          dict['recordColor' + i] = copy(dict['recordColor' + (i-1)]);
-          dict['recordName' + i] = copy(dict['recordName' + (i-1)]);
-          dict['recordBroken' + i] = false;
+        for (i = num_records; i > position; i--) {
+          if (('record' + (i-1)) in dict) {
+            dict['record' + i] = copy(dict['record' + (i-1)]);
+            dict['recordColor' + i] = copy(dict['recordColor' + (i-1)]);
+            dict['recordName' + i] = copy(dict['recordName' + (i-1)]);
+            dict['recordBroken' + i] = false;
+          }
         }
         dict['record' + position] = copy(player.score);
         dict['recordColor' + position] = copy(player.color);
@@ -369,6 +372,8 @@ class Room {
         if (position === 1) medal = '🥇';
         else if (position === 2) medal = '🥈';
         else if (position === 3) medal = '🥉';
+        else if (position === 4) medal = '🥉';
+        else if (position === 5) medal = '🥉';
         if (this.clients.has(player.id)) {
             this.clients.get(player.id).emit("announce record", category, room, medal, player.name, player.score, player.color);
         }
@@ -384,22 +389,32 @@ class Room {
         if (score > category['record1']) return 1;
         else if (score > category['record2']) return 2;
         else if (score > category['record3']) return 3;
-        else return 4;
+        else if (score > category['record4'] || !('record4' in category)) return 4;
+        else if (score > category['record5'] || !('record5' in category)) return 5;
+        else return 6;
     }
 
     removePoppers() {
         this.allRecord['recordBroken1'] = false;
         this.allRecord['recordBroken2'] = false;
         this.allRecord['recordBroken3'] = false;
+        this.allRecord['recordBroken4'] = false;
+        this.allRecord['recordBroken5'] = false;
         this.monthRecord['recordBroken1'] = false;
         this.monthRecord['recordBroken2'] = false;
         this.monthRecord['recordBroken3'] = false;
+        this.monthRecord['recordBroken4'] = false;
+        this.monthRecord['recordBroken5'] = false;
         this.weekRecord['recordBroken1'] = false;
         this.weekRecord['recordBroken2'] = false;
         this.weekRecord['recordBroken3'] = false;
+        this.weekRecord['recordBroken4'] = false;
+        this.weekRecord['recordBroken5'] = false;
         this.dayRecord['recordBroken1'] = false;
         this.dayRecord['recordBroken2'] = false;
         this.dayRecord['recordBroken3'] = false;
+        this.dayRecord['recordBroken4'] = false;
+        this.dayRecord['recordBroken5'] = false;
     }
 
     getActiveEntry() {
@@ -445,23 +460,24 @@ class Room {
               helpers.prependHallOfFame(payload)
               helpers.log("Hall of Fame achieved by " + player.name + " (" + player.ip + ")")
             }
+            const num_records = 5
             let allStr = "";
             let monStr = "";
             let wkStr = "";
             let dayStr = "";
-            if (getPosition(player.score,dayRecord) < 4) {
+            if (getPosition(player.score,dayRecord) <= num_records) {
                 dayStr = "<b>" + (getPosition(player.score,dayRecord)) + sufx[(getPosition(player.score,dayRecord)-1)] + "</b>" + " daily"
                 dayRecord = copy(insertRecord(getPosition(player.score,dayRecord), "day", copy(dayRecord), room, player));
             }
-            if (getPosition(player.score,weekRecord) < 4) {
+            if (getPosition(player.score,weekRecord) <= num_records) {
                 wkStr = "<b>" + (getPosition(player.score,weekRecord)) + sufx[(getPosition(player.score,weekRecord)-1)] + "</b>" + " weekly"
                 weekRecord = copy(insertRecord(getPosition(player.score,weekRecord), "week", copy(weekRecord), room, player));
             }
-            if (getPosition(player.score,monthRecord) < 4) {
+            if (getPosition(player.score,monthRecord) <= num_records) {
                 monStr = "<b>" + (getPosition(player.score,monthRecord)) + sufx[(getPosition(player.score,monthRecord)-1)] + "</b>" + " monthly"
                 monthRecord = copy(insertRecord(getPosition(player.score,monthRecord), "month", copy(monthRecord), room, player));
             }
-            if (getPosition(player.score,allRecord) < 4) {
+            if (getPosition(player.score,allRecord) <= num_records) {
                 allStr = "<b>" + (getPosition(player.score,allRecord)) + sufx[(getPosition(player.score,allRecord)-1)] + "</b>" + " yearly"
                 allRecord = copy(insertRecord(getPosition(player.score,allRecord), "all-time", copy(allRecord), room, player));
             }
@@ -759,7 +775,8 @@ class Room {
                   if (this.hasJoe) this.joe.deepReset(this.players.values().size)
               }
           } else if (this.state === CONSTANTS.SETUP_STATE) {
-              [this.target, this.blacklist] = Geography.randomCity(this.map, this.blacklist);
+              let mapname;
+              [this.target, this.blacklist] = Geography.randomCity(this.citysrc, this.blacklist);
               [this.joeTime, this.joeLat, this.joeLon] = helpers.joeData(this.map, Geography.stringifyTarget(this.target).string);
               this.timerColor = CONSTANTS.GUESS_COLOR;
               Array.from(this.players.values()).forEach((p, id) => {p.reset()});
@@ -849,10 +866,10 @@ class Room {
 
 
     recordPersonalHistory() {
-      let room = this.map;
+      let citysrc = this.citysrc;
       Array.from(this.players.values()).forEach((player, id) => {
         if (player.logger) {
-          helpers.logPlayerHistory(player.name, player.color, player.score, room)
+          helpers.logPlayerHistory(player.name, player.color, player.score, citysrc)
         }
       })
     }

@@ -274,7 +274,15 @@ class Map {
 
           worldImg[mapStyle].onload();
       }
-      else if (room == CONSTANTS.MISC){
+      else if (room == CONSTANTS.WORLD_EASY){
+            this.ctx.font = "20px Arial";
+            this.ctx.fillText('[ Map is loading... ]', 400, 400);
+            worldImg[this.mapStyle].onload = function () {
+                ctx.drawImage(worldImg[mapStyle], 0, 0)
+            };
+
+          worldImg[mapStyle].onload();
+      } else if (room == CONSTANTS.MISC){
             this.ctx.font = "20px Arial";
             this.ctx.fillText('[ Map is loading... ]', 400, 400);
             miscImg[this.mapStyle].onload = function () {

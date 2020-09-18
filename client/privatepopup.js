@@ -7,18 +7,19 @@ class PrivatePopup {
         this.configured = true;
         this.isShowing = false;
         this.map = '';
+        this.citysrc = '';
         this.code = '';
         this.configured = false;
     }
 
     goToRoom(info, cb) {
-        let map = info['requestedMap'];
-        if (map == 'Random') {
-            let options = [CONSTANTS.WORLD,CONSTANTS.US,CONSTANTS.EURO,CONSTANTS.AFRICA,CONSTANTS.ASIA,CONSTANTS.OCEANIA,CONSTANTS.MISC,CONSTANTS.SAMERICA];
-            map = options[Math.floor(Math.random() * options.length)];
+        let citysrc = info['requestedCitysrc'];
+        if (citysrc == 'Random') {
+            let options = [CONSTANTS.WORLD,CONSTANTS.WORLD_EASY,CONSTANTS.US,CONSTANTS.EURO,CONSTANTS.AFRICA,CONSTANTS.ASIA,CONSTANTS.OCEANIA,CONSTANTS.MISC,CONSTANTS.SAMERICA];
+            citysrc = options[Math.floor(Math.random() * options.length)];
         }
-        this.map = map;
-        this.code = info['code'];this.socket.emit('moveToPrivate', map, info['code'], cb);
+        this.citysrc = citysrc;
+        this.code = info['code'];this.socket.emit('moveToPrivate', citysrc, info['code'], cb);
     }
 
     // function to show our popups
@@ -56,8 +57,9 @@ class PrivatePopup {
         $("form#code").off().submit(function(e) {
             e.preventDefault();
             var code = $(this).find("#selected_code").val();
-            var requestedMap = $(this).find("#requestedMap").val();
-            goToRoom({'code': code, 'requestedMap': requestedMap}, configuredClose());
+            var requestedCitysrc = $(this).find("#requestedCitysrc").val();
+            console.log('Requesting private room ' + code + ' with citysrc ' + requestedCitysrc)
+            goToRoom({'code': code, 'requestedCitysrc': requestedCitysrc}, configuredClose());
 
         });
     }

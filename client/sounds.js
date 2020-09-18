@@ -4,6 +4,7 @@ class Sounds {
     constructor(socket) {
         this.socket = socket;
         this.myMap = CONSTANTS.LOBBY;
+        this.myCitysrc = CONSTANTS.LOBBY;
         this.myRoomName = CONSTANTS.LOBBY;
         this.messagePop = new Audio('/resources/message.mp3');
         this.messagePop.volume = 0.5;

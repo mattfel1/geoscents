@@ -6,6 +6,7 @@ class Chat {
         this.chatCount = 0;
         this.myRoomName = CONSTANTS.LOBBY;
         this.myMap = CONSTANTS.LOBBY;
+        this.myCitysrc = CONSTANTS.LOBBY;
         this.windowActive = true;
         this.hasNewMessage = false;
         this.muted = false;

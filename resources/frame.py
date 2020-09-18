@@ -8,9 +8,16 @@ import re
 
 file = 'cities.js'
 
-outfile = 'worldcities.js'
+#outfile = 'worldcities.js'
+#latrng = [-65, 77]
+#pop = 580000
+#lonrng = [-180, 180]
+#blacklist = []
+#whitelist = ['Jersey', 'Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar', 'New Caledonia', 'Azores']
+
+outfile = 'worldeasycities.js'
 latrng = [-65, 77]
-pop = 580000
+pop = 9999999999999 # capital cities only
 lonrng = [-180, 180]
 blacklist = []
 whitelist = ['Jersey', 'Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar', 'New Caledonia', 'Azores']

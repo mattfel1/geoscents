@@ -4,6 +4,7 @@ class History {
     constructor(socket) {
         this.socket = socket;
         this.myRoomName = CONSTANTS.LOBBY;
+        this.myCitysrc = CONSTANTS.LOBBY;
         this.histCount = 0;
     }
 
