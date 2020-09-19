@@ -498,6 +498,7 @@ class Room {
         fs.writeFile("/scratch/" + citysrc + "_week_record", JSON.stringify(copy(weekRecord), null, 2), function(err) {if(err){return console.log(err);}});
         fs.writeFile("/scratch/" + citysrc + "_month_record", JSON.stringify(copy(monthRecord), null, 2), function(err) {if(err){return console.log(err);}});
         fs.writeFile("/scratch/" + citysrc + "_all-time_record", JSON.stringify(copy(allRecord), null, 2), function(err) {if(err){return console.log(err);}});
+        console.log("writing record to " + "/scratch/" + citysrc + "_day_record")
         this.dayRecord = copy(dayRecord);
         this.weekRecord = copy(weekRecord);
         this.monthRecord = copy(monthRecord);
@@ -511,7 +512,7 @@ class Room {
             socket.emit('post group', 'Monthly Records:', this.monthRecord);
             socket.emit('post group', 'Weekly Records:', this.weekRecord);
             socket.emit('post group', 'Daily Records:', this.dayRecord);
-            socket.emit('post space');
+            socket.emit('post score title', this.citysrc);
         }
         else {
             socket.emit('post lobby', helpers.readRecentActivity(8), helpers.readHallOfFame(100));

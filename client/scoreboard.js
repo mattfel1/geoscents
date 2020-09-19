@@ -9,7 +9,7 @@ class Scoreboard {
     }
 
     postScore(rank, name, color, score, wins) {
-        const string = $("<font color=" + color + " style=\"font-size:16px;\" \>").html("<b>" + name + "</b>: " + score + '  (' +  wins + ' 🏆)<br>');
+        const string = $("<font color=" + color + " style=\"font-size:16px;\" \>").html("<b>" + name + "</b>: " + score + '  (' +  wins + ' <font size=1>🏆</font>)<br>');
         $('#scoreboard').append(string)
     }
     // Message reactions
@@ -35,23 +35,26 @@ class Scoreboard {
        const string3 = $("<font color=" + dict['recordColor3'] + " style=\"font-size:16px;\" \>").html(pop3 + "🥉 3rd: " + dict['record3'] + " (<b>" + dict['recordName3'] + "</b>)" + pop3 + "<br>");
        const string4 = $("<font color=" + dict['recordColor4'] + " style=\"font-size:16px;\" \>").html(pop4 + "🥉 4th: " + dict['record4'] + " (<b>" + dict['recordName4'] + "</b>)" + pop4 + "<br>");
        const string5 = $("<font color=" + dict['recordColor5'] + " style=\"font-size:16px;\" \>").html(pop5 + "🥉 5th: " + dict['record5'] + " (<b>" + dict['recordName5'] + "</b>)" + pop5 + "<br>");
-       $('#leaderboard').append("<b>" + category + "</b><br>");
+       $('#leaderboard').append("<b>----- " + category + " -----</b><br>");
        $('#leaderboard').append(string1);
        $('#leaderboard').append(string2);
        $('#leaderboard').append(string3);
        $('#leaderboard').append(string4);
        $('#leaderboard').append(string5);
-       $('#leaderboard').append("<br>")
+       // $('#leaderboard').append("<br>")
     }
     postSpace() {
        // $('#scoreboard').append("<br>-------------------------------------------<br><b>Scoreboard:</b><br>")
+    }
+    postScoreTitle(citysrc) {
+       $('#scoreboard').append("<b>----- Players in " + citysrc + " -----</b><br>");      
     }
     postLobby(recent, hall) {
        $('#leaderboard').append("<b>" + CONSTANTS.FAMESCORE + "+ Hall of Fame (out of 6600 points)</b><br>");
        $('#leaderboard').append(hall);
        $('#leaderboard').append("<b>Recent Records:</b><br>");
        $('#leaderboard').append("<font size=\"1\">" + recent + "</font>");
-       $('#scoreboard').append("<br><b>Players in Lobby:</b><br>");
+       $('#scoreboard').append("<b>----- Players in Lobby -----</b><br>");
     }
 }
 

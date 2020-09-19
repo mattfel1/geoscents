@@ -565,7 +565,7 @@ setInterval(() => {
     Object.values(rooms).forEach((room1) => {
         if (room1.serviceRecord == true) {
             Object.values(rooms).forEach((room2) => {
-                if (room1.map == room2.map && room1.roomName != room2.roomName && room1.lastRecordUpdate > room2.lastRecordUpdate) {
+                if (room1.citysrc == room2.citysrc && room1.roomName != room2.roomName && room1.lastRecordUpdate > room2.lastRecordUpdate) {
                     room2.syncRecords(room1.lastRecordUpdate, room1.dayRecord, room1.weekRecord, room1.monthRecord, room1.allRecord);
                 }
             });

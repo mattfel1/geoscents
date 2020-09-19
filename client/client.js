@@ -50,6 +50,7 @@ $(document).ready(function(){
     socket.on('clear scores', () => {scoreboard.clearScores()});
     socket.on('post score', (rank, name, color, score, wins) => {scoreboard.postScore(rank,name,color,score,wins)});
     socket.on('post group', (category, dict) => {scoreboard.postGroup(category, dict)});
+    socket.on('post score title', (citysrc) => {scoreboard.postScoreTitle(citysrc)});
     socket.on('post space', () => {scoreboard.postSpace()});
     socket.on('post lobby', (recent, hall) => {scoreboard.postLobby(recent, hall)});
     socket.on('announce record', (category, room, medal, name, score, color) => {socket.emit("announcement", '[New ' + category + ' record set by <font color="' + color + '">' + medal + name + ' (' + score + ')</font> in ' + room + ']<br>')});
