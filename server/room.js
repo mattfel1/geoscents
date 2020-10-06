@@ -880,7 +880,7 @@ class Room {
     printWinner(winner, score, color) {
         this.recordsBroken();
         const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
-        const room = this.map;
+        const room = this.citysrc;
         this.clients.forEach((socket,id) => {
             socket.emit('draw chart', playersHistory, winner, color, room, score);
             // socket.emit('break history',  room, winner, score, color);
