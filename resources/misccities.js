@@ -4168,39 +4168,39 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Fitz_Roy"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Saint Hilarion Castle",
+      "city_ascii": "",
+      "lat": 35.3123,
+      "lng": 33.2808,
+      "iso2": "CY",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Saint_Hilarion_Castle"
+    },
+    {
+      "city": "Inkallaqta",
+      "city_ascii": "",
+      "lat": -17.605,
+      "lng": -65.415833,
+      "iso2": "BO",
+      "country": "Incan Empire",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Inkallaqta"
+    },
+    {
+      "city": "Chogha Zanbil (چغازنبيل) Ancient Elamite Ziggurat",
+      "city_ascii": "",
+      "lat": 32.008333,
+      "lng": 48.520833,
+      "iso2": "IR",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Chogha_Zanbil"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
