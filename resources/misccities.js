@@ -4201,39 +4201,39 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Chogha_Zanbil"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Yoshizumi Ishino First Describes CRISPR (1987)",
+      "city_ascii": "",
+      "lat": 34.818163394,
+      "lng": 135.522664576,
+      "iso2": "JP",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/CRISPR#Repeated_sequences"
+    },
+    {
+      "city": "William T. G. Morton First Demonstrates Successful Anesthesia Using Diethyl Ether",
+      "city_ascii": "",
+      "lat": 42.362806,
+      "lng": -71.068631,
+      "iso2": "US",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/William_T._G._Morton#Career"
+    },
+    {
+      "city": "John Snow Analyzes The 1854 Broad Street Cholera Outbreak Using Geography",
+      "city_ascii": "",
+      "lat": 51.5043,
+      "lng": -0.1232,
+      "iso2": "GB",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Germ_theory_of_disease#John_Snow"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
