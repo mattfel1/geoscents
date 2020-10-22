@@ -136,7 +136,7 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
         // Ignore updates to same file if it happened less than 1 second ago, hack to prevent file corruption
         const currentdate = new Date();
         if ((map in lastUpdates) && (currentdate.getTime() - lastUpdates[map] < 2000)) {
-            logFeedback("Skipping update to " + map + " because we updated less than 1s ago!")
+            // logFeedback("Skipping update to " + map + " because we updated less than 1s ago!")
         } else if (!fs.existsSync(file)) {
             logFeedback('File ' + file + ' doesnt exist!!')
             fs.writeFile(file, "", {flag: 'wx'}, function (err) {
