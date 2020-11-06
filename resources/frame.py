@@ -70,7 +70,7 @@ with open(file) as json_file:
     filtered = []
     for entry in data:
         thisPop = 0 if (entry['population'] == '') else int(entry['population'])
-        thisCap = ((entry['iso2'] == 'US' or entry['iso2'] == 'CN' or entry['iso2'] == 'CA') and  entry['capital'] == 'admin') or entry['capital'] == 'primary'
+        thisCap = ((entry['iso2'] == 'US' or entry['iso2'] == 'CN' or entry['iso2'] == 'CA' or entry['iso2'] == 'AU' or entry['iso2'] == 'IN') and  entry['capital'] == 'admin') or entry['capital'] == 'primary'
         mustRemove = entry['country'] in blacklist
         mustKeep = entry['country'] in whitelist or entry['admin_name'] in whitelist or entry['city_ascii'] in whitelist
         inLat = entry['lat'] < latrng[1] and entry['lat'] > latrng[0]
