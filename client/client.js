@@ -87,6 +87,15 @@ $(document).ready(function(){
         booted = true;
     });
     socket.on('draw idle', () => {commands.drawCommand("Waiting for players to join...", "", "", "", 0, false, false)});
+    setInterval(() => {
+        // Keep track of bot toggle rate.  No more than 6 toggles every 5s
+        // Handled on the client side, even though technically someone can get around this
+        const currentdate = new Date();
+        const unix = currentdate.getTime();
+        const droptime = unix - 1000 * CONSTANTS.SPAMPERIOD;
+        var filtered = commands.bottracker.filter(function(value, index, arr){ return value > droptime;})
+        commands.bottracker = filtered
+    }, 1000 / 5);
 
     /**** Chat *****/
     const chat = new Chat(socket);
@@ -121,6 +130,19 @@ $(document).ready(function(){
             document.documentElement.style.MozTransformOrigin = "0 0";
         }
     });
+    setInterval(() => {
+        // Keep track of message rate.  No more than 3000 chars or 8 messages, every 5s
+        // Handle spam on the client side, even though technically someone can get around this
+        const currentdate = new Date();
+        const unix = currentdate.getTime();
+        const droptime = unix - 1000 * CONSTANTS.SPAMPERIOD;
+        // prune
+        for (let [time, chars] of chat.spamtracker) {
+            if (time < droptime)
+                chat.spamtracker.delete(time);
+        }
+    }, 1000 / 5);
+
 
     /**** PRIVATE POPUP *****/
     // Make player choose options

@@ -35,6 +35,8 @@ class Commands {
         };
         this.muted = false;
         this.antiJitter = false;
+        this.bottracker = [];
+        this.isBotSpamming();
     }
 
     drawLastCommand(id) {
@@ -108,6 +110,11 @@ class Commands {
             var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);
         }
     }
+    isBotSpamming() {
+        if (this.bottracker.length > CONSTANTS.MAX_BOT_TOGGLE_PER_SPAMPERIOD)
+            return true
+        return false
+    }
     postButtons() {
         const socket = this.socket;
         $('#commands').empty();
@@ -169,7 +176,18 @@ class Commands {
         $('#mute_button').bind("click", () => {socket.emit('mute'); this.refocus()});
         $('#jitter_button').bind("click", () => {socket.emit('jitter'); this.refocus()});
         $('#reboot_button').bind("click", () => {socket.emit('playerReboot'); this.refocus()});
-        $('#joe_button').bind("click", () => {socket.emit('toggle joe'); this.refocus()});
+        $('#joe_button').bind("click", () => {
+            if (this.isBotSpamming()) 
+                socket.emit('block joe toggle');
+            else  {
+                 // Add to spamtracker map
+                const currentdate = new Date();
+                const unix = currentdate.getTime();
+                this.bottracker.push(unix)
+                socket.emit('toggle joe');
+            }
+            this.refocus()
+        });
         $('#classic_button').bind("click", () => {socket.emit('renderMap', 'classic'); this.refocus()});
         $('#terrain_button').bind("click", () => {socket.emit('renderMap', 'terrain'); this.refocus()});
         $('#satellite_button').bind("click", () => {socket.emit('renderMap', 'satellite'); this.refocus()});

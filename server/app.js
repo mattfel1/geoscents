@@ -446,6 +446,22 @@ io.on('connection', (socket) => {
           room.playerClicked(socket, playerClick)
       }
 	});
+    socket.on("block spam", function() {
+      Object.values(rooms).forEach(function(room) {
+          if (room.hasPlayer(socket)) {
+            helpers.log("Blocked spammer " +  socket.handshake.address + " " + room.getPlayerName(socket));
+            room.whisperMessage(socket, "<i>You are talking too fast!  Please calm down</i><br>", () => {});
+          }
+       });
+    });
+    socket.on("block joe toggle", function() {
+      Object.values(rooms).forEach(function(room) {
+          if (room.hasPlayer(socket)) {
+            helpers.log("Blocked joe toggler " +  socket.handshake.address + " " + room.getPlayerName(socket));
+            room.whisperMessage(socket, "<i>Please calm down and stop taking your anger out on the poor bot!</i><br>", () => {});
+          }
+       });
+    });
     socket.on("send message", function(sent_msg, callback) {
       if (sent_msg == "") {callback(); return;}
       const msg = sent_msg;

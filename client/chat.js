@@ -10,6 +10,8 @@ class Chat {
         this.windowActive = true;
         this.hasNewMessage = false;
         this.muted = false;
+        this.spamtracker = new Map();
+        this.isSpamming();
     }
 
     isActive(document) {
@@ -51,14 +53,41 @@ class Chat {
         }
       }
     }
+    isSpamming() {
+        if (this.spamtracker.size > CONSTANTS.MAX_MSG_PER_SPAMPERIOD) {
+            return true
+        }
+        var charcount = 0;
+        for (let [time, len] of this.spamtracker) {
+            charcount = charcount + len;
+        }
+        if (charcount > CONSTANTS.MAX_CHAR_PER_SPAMPERIOD)
+            return true
+        return false
+    }
     listen() {
         const socket = this.socket;
+        const self = this;
+        const spamtracker = this.spamtracker;
          $("form#chat").submit(function(e) {
            e.preventDefault();
-           socket.emit("send message", $(this).find("#msg_text").val(), function() {
-             $("form#chat #msg_text").val("");
-           });
+            const msg = $(this).find("#msg_text").val();
+           if (msg.length > 0) {
+               if (self.isSpamming()) {
+                  socket.emit("block spam");
+               } else {
+                   socket.emit("send message", msg, function() {
+                     $("form#chat #msg_text").val("");
+
+                     // Add to spamtracker map
+                    const currentdate = new Date();
+                    const unix = currentdate.getTime();
+                    spamtracker.set(unix, msg.length)
+                   });
+                }
+            }
          });
+         this.spamtracker = spamtracker
     }
 }
 
