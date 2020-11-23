@@ -4234,17 +4234,17 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Germ_theory_of_disease#John_Snow"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Dozens of People Drown in Liquid Excrement in 1184 at the Erfurt Latrine Disaster",
+      "city_ascii": "",
+      "lat": 50.983333,
+      "lng": 11.033333,
+      "iso2": "DE",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Erfurt_latrine_disaster"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",

@@ -134,10 +134,11 @@ class Map {
             normal_color: "grey", highlight_color: "purple",
             font_size: 25, link: 'https://donate.doctorswithoutborders.org/onetime.cfm', label: 'Doctors Without Borders'
         };
-        this.clickable_buttons = [this.about_button, this.visualize_button, 
-            this.donate1_button, this.donate2_button, this.donate3_button,
-            this.donate4_button, this.donate5_button, this.donate6_button,
-            this.donate7_button, this.donate8_button]
+        this.clickable_buttons = [this.about_button, this.visualize_button]
+        // this.clickable_buttons = [this.about_button, this.visualize_button,
+        //     this.donate1_button, this.donate2_button, this.donate3_button,
+        //     this.donate4_button, this.donate5_button, this.donate6_button,
+        //     this.donate7_button, this.donate8_button]
     }
 
     canvas_arrow(fromx, fromy, tox, toy){
@@ -217,10 +218,13 @@ class Map {
         // Banner message
         this.ctx.fillStyle = CONSTANTS.BGCOLOR;
         this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
-        this.ctx.font = "55px Arial bold";
+        this.ctx.font = "85px Arial bold";
         this.ctx.fillStyle = 'black';
-        this.ctx.fillText('Welcome to GeoScents!', 400, 590);
-        this.ctx.fillText('Locate cities as quickly and accurately as possible!',20,650);
+        // this.ctx.fillText('Welcome to GeoScents!', 400, 590);
+        // this.ctx.fillText('Locate cities as quickly and accurately as possible!',20,650);
+        this.ctx.fillText('Welcome to GeoScents!', 460, 410);
+        this.ctx.font = "65px Arial bold";
+        this.ctx.fillText('Locate cities as quickly and accurately as possible!',100,550);
 
         this.ctx.font = "20px Arial";
         this.ctx.fillText('[ Spinning globe is loading... ]', 90, 220);
@@ -252,18 +256,16 @@ class Map {
         this.ctx.fillText('Discuss', 160, 780);
         this.canvas_arrow(200, 800, 200, this.canvas.height-20);
 
-        // Donate
-        // this.ctx.fillRect(450, 120, 750, 300);
-        // Different radii for each corner, others default to 0
-        this.roundRect(this.ctx, 450, 120, 750, 300, 15);
-        this.ctx.font = "25px Arial";
-        this.ctx.fillStyle = 'white';
-        this.ctx.fillText('Every voice counts in enacting change and fighting injustice:',480,170);
+        // // Donate
+        // this.roundRect(this.ctx, 450, 120, 750, 300, 15);
+        // this.ctx.font = "25px Arial";
+        // this.ctx.fillStyle = 'white';
+        // this.ctx.fillText('Every voice counts in enacting change and fighting injustice:',480,170);
 
-        const showButton = (btn) => this.showButton(btn)
-        Object.values(this.clickable_buttons).forEach(function(btn) {
-            showButton(btn)
-        })
+        // const showButton = (btn) => this.showButton(btn)
+        // Object.values(this.clickable_buttons).forEach(function(btn) {
+        //     showButton(btn)
+        // })
       }
       else if (room == CONSTANTS.WORLD){
             this.ctx.font = "20px Arial";
