@@ -455,7 +455,7 @@ class Room {
             const day = time.getDate();
             const hour = time.getHours();
             const minute = time.getMinutes();
-              if (player.score > CONSTANTS.FAMESCORE) {
+              if (player.score >= CONSTANTS.FAMESCORE) {
               this.clients.get(player.id).emit("announce hall", citysrc, player.name, player.score, player.color);
               const payload = "- " + month + day + ": <font color=" + player.color + "><b>" + player.name + "</b></font> scored <b>" + player.score + "</b> on " + citysrc;
               helpers.prependHallOfFame(payload)
