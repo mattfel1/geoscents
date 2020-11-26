@@ -149,8 +149,9 @@ timeComponent = min(1, 1 - 0.07843 * (t - 1.6))<br>
 distComponent = min(600, e^(-sf * (sf*dist)^2 / 600000)*605)<br>
 score = timeComponent * distComponent<br><br>
 
-sf is a scaling factor, which is computed by the diagonal of the world map, in km, divided by the diagonal of the map you are playing on.<br>
-dist is the distance you are to the city, in km.<br>  For reference, the scaling factors for each of the maps are shown below.  This means that Europe, Oceania, and S. America are the "hardest" map, because each pixel represents far fewer km than on other maps.<br>
+<i>dist</i> is the distance you are to the city, in km.<br>
+<i>t</i> is how many seconds elapsed before you clicked (i.e. 10 minus time remaining in round).<br>
+<i>sf</i> is a scaling factor, which is computed by the diagonal of the world map, in km, divided by the diagonal of the map you are playing on. For reference, the scaling factors for each of the maps are shown below.  This means that Europe is the "hardest" map, because each pixel represents far fewer km than on other maps.<br>
 <ul>
 <li> World = 1 </li>
 <li> Europe = 3.38 </li>
@@ -160,7 +161,7 @@ dist is the distance you are to the city, in km.<br>  For reference, the scaling
 <li> N. America = 2.26 </li>
 <li> S. America = 1.35 </li>
 </ul>
-t is how many seconds elapsed before you clicked (i.e. 10 minus time remaining in round).<br><br>
+<br><br>
 
 These plots show how the two score components work for the World map (sf = 1).<br>
 <!-- 
