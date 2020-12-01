@@ -154,6 +154,10 @@ const flushGuesses = (map) => {
             }
             for (var entry in history) {
                 console.log("process " + entry)
+
+                // var h1 = JSON.parse(fs.readFileSync(file, 'utf8'));
+                // console.log("Before" + h1[entry]["lats"])
+
                 try {
                     recordGuesses(map, entry, history[entry]["city"], history[entry]["admin"], history[entry]["country"], history[entry]["iso2"], 
                         history[entry]["ips"], history[entry]["dists"], history[entry]["times"], history[entry]["lats"], history[entry]["lons"], history[entry]["true_lat"], 
@@ -161,6 +165,9 @@ const flushGuesses = (map) => {
                 } catch {
                     console.log("Error copying " + entry)
                 }
+
+                // var h1 = JSON.parse(fs.readFileSync(file, 'utf8'));
+                // console.log("Before" + h1[entry]["lats"])
             }
 
             console.log("Clearing the staging file for " + map)

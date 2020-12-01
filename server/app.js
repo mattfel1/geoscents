@@ -615,37 +615,37 @@ setInterval( () => {
     }
 }, 30000);
 
-// Handle *_guesses_staging -> *_guesses merge every so often
-var flushed_guesses = false
-setInterval( () => {
-    var d = new Date();
-    var every_n_hours = 1
-    var every_n_minutes = 5
-    if (d.getHours() % every_n_hours == 0 && d.getMinutes() % every_n_minutes === 0 && d.getSeconds() <= 29) {
-      const timestamp = d.getDate() + "/"
-        + (d.getMonth() + 1) + "/"
-        + d.getFullYear() + " @ "
-        + d.getHours() + ":"
-        + d.getMinutes() + ":"
-        + d.getSeconds() + ":";
-      console.log(timestamp + ": Preparing to flush staged guesses")
-      flushed_guesses = false
-    }
-    if (flushed_guesses == false && d.getHours() % every_n_hours === 0 && d.getMinutes() % every_n_minutes === 0 && d.getSeconds() > 29) {
-      const timestamp = d.getDate() + "/"
-        + (d.getMonth() + 1) + "/"
-        + d.getFullYear() + " @ "
-        + d.getHours() + ":"
-        + d.getMinutes() + ":"
-        + d.getSeconds() + ":";
-      console.log(timestamp + ": Flushing guesses!")
-      flushed_guesses = true
-      Object.values(rooms).forEach(function(room) {
-          room.flushGuesses();
-      });
-    }
-// }, 30000);
-}, 5000);
+// // Handle *_guesses_staging -> *_guesses merge every so often
+// var flushed_guesses = false
+// setInterval( () => {
+//     var d = new Date();
+//     var every_n_hours = 1
+//     var every_n_minutes = 1
+//     if (d.getHours() % every_n_hours == 0 && d.getMinutes() % every_n_minutes === 0 && d.getSeconds() <= 29) {
+//       const timestamp = d.getDate() + "/"
+//         + (d.getMonth() + 1) + "/"
+//         + d.getFullYear() + " @ "
+//         + d.getHours() + ":"
+//         + d.getMinutes() + ":"
+//         + d.getSeconds() + ":";
+//       console.log(timestamp + ": Preparing to flush staged guesses")
+//       flushed_guesses = false
+//     }
+//     if (flushed_guesses == false && d.getHours() % every_n_hours === 0 && d.getMinutes() % every_n_minutes === 0 && d.getSeconds() > 29) {
+//       const timestamp = d.getDate() + "/"
+//         + (d.getMonth() + 1) + "/"
+//         + d.getFullYear() + " @ "
+//         + d.getHours() + ":"
+//         + d.getMinutes() + ":"
+//         + d.getSeconds() + ":";
+//       console.log(timestamp + ": Flushing guesses!")
+//       flushed_guesses = true
+//       Object.values(rooms).forEach(function(room) {
+//           room.flushGuesses();
+//       });
+//     }
+// // }, 30000);
+// }, 5000);
 
 
 module.exports = {io};
