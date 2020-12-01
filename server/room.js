@@ -42,6 +42,7 @@ class Room {
       this.loadRecords();
       this.createJoe();
       this.hasJoe = roomName != CONSTANTS.LOBBY;
+      this.recorded = false; // Toggle for making sure we only record once per reveal_state
 }
 
 
@@ -573,14 +574,21 @@ class Room {
           updateHistory(player, round, newScore);
         });
       this.historyRound(this.round + 1, Geography.stringifyTarget(this.target));
+    }
 
+    recordGuesses() {
       const respectOptOut = (x) => {if (x.optOut) return 'optOut' + x.ip; else return x.ip;};
+      const map = this.map;
       const dists = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.geoError);
       const lats = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.lat);
       const lons = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.lon);
       const times = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.clickedAt);
       const ips = Array.from(this.players.values()).filter(player => player.clicked).map(x => respectOptOut(x))
-      helpers.recordGuesses(this.map, Geography.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], this.target['iso2'], ips, dists, times, lats, lons, this.target['lat'], this.target['lng'], helpers.makeLink(map, this.target));
+      helpers.recordGuesses(this.map, Geography.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], this.target['iso2'], ips, dists, times, lats, lons, this.target['lat'], this.target['lng'], helpers.makeLink(map, this.target), true);
+    }
+    
+    flushGuesses() {
+      helpers.flushGuesses(this.map)
     }
 
     static broadcastPoint(socket, row, col, color, radius, distance) {
@@ -803,6 +811,7 @@ class Room {
                       this.printWinner(this.winner.getName(), this.winner.score, this.winner.color);
                   }
                   this.stateTransition(CONSTANTS.REVEAL_STATE, CONSTANTS.REVEAL_DURATION);
+                  this.recorded = false
                   this.timerColor = CONSTANTS.REVEAL_COLOR;
               }
               if (this.hasJoe) this.processJoe()
@@ -813,6 +822,11 @@ class Room {
                 this.timerColor = CONSTANTS.BEGIN_COLOR;                
                 Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
                 this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, CONSTANTS.BEGIN_GAME_DURATION - 2);                
+              }
+              // Record in the middle of the reveal_state
+              if (this.recorded == false && this.timer <= 3 && this.timer >= 2) {
+                this.recorded = true
+                this.recordGuesses()
               }
               if (this.timer <= 0 && this.round >= CONSTANTS.GAME_ROUNDS) {
                   this.round = 0;

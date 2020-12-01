@@ -123,14 +123,67 @@ const makeLink = (room, thisTarget) => {
     if (thisTarget['wiki'] != null) wiki = thisTarget['wiki'];
     return wiki;
 }
-const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dists, times, lats, lons, true_lat, true_lon, link) => {
+
+const flushGuesses = (map) => {
     try {
 
         function copy(x) {
             return JSON.parse(JSON.stringify(x, null, 2));
         }
 
+        const tmpfile = '/scratch/' + map + '_guesses_staging';
         const file = '/scratch/' + map + '_guesses';
+        if (!fs.existsSync(tmpfile))  {
+            logFeedback('Staging file ' + tmpfile + ' doesnt exist!!')
+            fs.writeFile(tmpfile, "", {flag: 'wx'}, function (err) {
+                if (err) throw err;
+            });
+            return
+        } else {
+            let history;
+            try {
+                history = JSON.parse(fs.readFileSync(tmpfile, 'utf8'));
+            } catch {
+                history = {}
+                const currentdate = new Date();
+                const timestamp = currentdate.getHours() + "-" + currentdate.getMinutes() + currentdate.getSeconds();
+                logFeedback("Staging file " + file + " seems corrupted!!  Writing it to /scratch/corrupted" + timestamp)
+                fs.writeFile("/scratch/corrupted" + timestamp, data, {flag: 'w'}, function (err) {
+                    if (err) throw err;
+                });
+            }
+            for (var entry in history) {
+                console.log("process " + entry)
+                try {
+                    recordGuesses(map, entry, history[entry]["city"], history[entry]["admin"], history[entry]["country"], history[entry]["iso2"], 
+                        history[entry]["ips"], history[entry]["dists"], history[entry]["times"], history[entry]["lats"], history[entry]["lons"], history[entry]["true_lat"], 
+                        history[entry]["true_lon"], history[entry]["wiki"], false)
+                } catch {
+                    console.log("Error copying " + entry)
+                }
+            }
+
+            console.log("Clearing the staging file for " + map)
+            fs.writeFileSync(tmpfile, "", {flag: 'w'})
+        }
+    }
+    catch (err) {
+        logFeedback("Something seems messed up with moving staged guesses to full guesses!!!!")
+    }
+}
+
+const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dists, times, lats, lons, true_lat, true_lon, link, staged) => {
+    try {
+
+        function copy(x) {
+            return JSON.parse(JSON.stringify(x, null, 2));
+        }
+
+        let file;
+        if (staged)
+            file = '/scratch/' + map + '_guesses_staging';
+        else            
+            file = '/scratch/' + map + '_guesses';
         const joefile = '/scratch/' + map + '_joe';
 
         // Ignore updates to same file if it happened less than 1 second ago, hack to prevent file corruption
@@ -139,7 +192,7 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
             // logFeedback("Skipping update to " + map + " because we updated less than 1s ago!")
         } else if (!fs.existsSync(file)) {
             logFeedback('File ' + file + ' doesnt exist!!')
-            fs.writeFile(file, "", {flag: 'wx'}, function (err) {
+            fs.writeFile(file, "", {flag: 'w'}, function (err) {
                 if (err) throw err;
             });
         } else {
@@ -411,4 +464,4 @@ const prependHallOfFame = (payload) => {
     });
 };
 
-module.exports = {log, logFeedback, logHistogram, readRecentActivity, logPlayerHistory, prependRecentActivity, recordGuesses, readHallOfFame, prependHallOfFame, makeLink, joeData};
+module.exports = {log, logFeedback, logHistogram, readRecentActivity, logPlayerHistory, prependRecentActivity, recordGuesses, flushGuesses, readHallOfFame, prependHallOfFame, makeLink, joeData};

@@ -441,7 +441,7 @@ io.on('connection', (socket) => {
     });
     socket.on('playerClick', (playerClick) => {
       if (playerClick.clickEvent && playerRooms.has(socket.id)) {
-          console.log('processing player click')      
+          // console.log('processing player click')      
           const room = playerRooms.get(socket.id);
           room.playerClicked(socket, playerClick)
       }
@@ -614,6 +614,38 @@ setInterval( () => {
       announce("<font size=10 color=\"red\"><b>Daily" + s + " records have been reset!</b></font><br>")
     }
 }, 30000);
+
+// Handle *_guesses_staging -> *_guesses merge every so often
+var flushed_guesses = false
+setInterval( () => {
+    var d = new Date();
+    var every_n_hours = 1
+    var every_n_minutes = 5
+    if (d.getHours() % every_n_hours == 0 && d.getMinutes() % every_n_minutes === 0 && d.getSeconds() <= 29) {
+      const timestamp = d.getDate() + "/"
+        + (d.getMonth() + 1) + "/"
+        + d.getFullYear() + " @ "
+        + d.getHours() + ":"
+        + d.getMinutes() + ":"
+        + d.getSeconds() + ":";
+      console.log(timestamp + ": Preparing to flush staged guesses")
+      flushed_guesses = false
+    }
+    if (flushed_guesses == false && d.getHours() % every_n_hours === 0 && d.getMinutes() % every_n_minutes === 0 && d.getSeconds() > 29) {
+      const timestamp = d.getDate() + "/"
+        + (d.getMonth() + 1) + "/"
+        + d.getFullYear() + " @ "
+        + d.getHours() + ":"
+        + d.getMinutes() + ":"
+        + d.getSeconds() + ":";
+      console.log(timestamp + ": Flushing guesses!")
+      flushed_guesses = true
+      Object.values(rooms).forEach(function(room) {
+          room.flushGuesses();
+      });
+    }
+// }, 30000);
+}, 5000);
 
 
 module.exports = {io};
