@@ -936,8 +936,8 @@
     "id": 1156421555
   },
   {
-    "city": "Rangoon",
-    "city_ascii": "Rangoon",
+    "city": "Yangon",
+    "city_ascii": "Yangon",
     "lat": 16.7834,
     "lng": 96.1667,
     "country": "Myanmar",
