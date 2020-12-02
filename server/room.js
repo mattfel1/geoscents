@@ -825,7 +825,7 @@ class Room {
                 this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, CONSTANTS.BEGIN_GAME_DURATION - 2);                
               }
               // Record in the middle of the reveal_state
-              if (this.recorded == false && this.timer <= 3 && this.timer >= 2) {
+              if (this.recorded == false && this.timer <= 4) {
                 this.recorded = true
                 this.recordGuesses()
               }

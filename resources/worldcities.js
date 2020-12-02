@@ -940,7 +940,7 @@ module.exports = { CITIES: [
     "city_ascii": "Rangoon",
     "lat": 16.7834,
     "lng": 96.1667,
-    "country": "Burma",
+    "country": "Myanmar",
     "iso2": "MM",
     "iso3": "MMR",
     "admin_name": "Yangon",
@@ -1607,7 +1607,7 @@ module.exports = { CITIES: [
     "iso2": "TZ",
     "iso3": "TZA",
     "admin_name": "Dar es Salaam",
-    "capital": "primary",
+    "capital": "admin",
     "population": 2930000,
     "id": 1834843853
   },
@@ -4775,7 +4775,7 @@ module.exports = { CITIES: [
     "city_ascii": "Mandalay",
     "lat": 21.97,
     "lng": 96.085,
-    "country": "Burma",
+    "country": "Myanmar",
     "iso2": "MM",
     "iso3": "MMR",
     "admin_name": "Mandalay",
@@ -6517,7 +6517,7 @@ module.exports = { CITIES: [
     "city_ascii": "Nay Pyi Taw",
     "lat": 19.7666,
     "lng": 96.1186,
-    "country": "Burma",
+    "country": "Myanmar",
     "iso2": "MM",
     "iso3": "MMR",
     "admin_name": "Nay Pyi Taw",
@@ -7440,7 +7440,7 @@ module.exports = { CITIES: [
     "city_ascii": "Mbabane",
     "lat": -26.3167,
     "lng": 31.1333,
-    "country": "Swaziland",
+    "country": "eSwatini",
     "iso2": "SZ",
     "iso3": "SWZ",
     "admin_name": "Hhohho",
@@ -7739,7 +7739,7 @@ module.exports = { CITIES: [
     "city_ascii": "Lobamba",
     "lat": -26.4667,
     "lng": 31.2,
-    "country": "Swaziland",
+    "country": "eSwatini",
     "iso2": "SZ",
     "iso3": "SWZ",
     "admin_name": "Hhohho",
@@ -12376,6 +12376,19 @@ module.exports = { CITIES: [
     "id": 1840027142
   },
   {
+    "city": "Shillong",
+    "city_ascii": "Shillong",
+    "lat": 25.5705,
+    "lng": 91.88,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "Megh\u0101laya",
+    "capital": "admin",
+    "population": 375527,
+    "id": 1356533936
+  },
+  {
     "city": "Halifax",
     "city_ascii": "Halifax",
     "lat": 44.65,
@@ -12467,6 +12480,32 @@ module.exports = { CITIES: [
     "id": 1840009357
   },
   {
+    "city": "Aizawl",
+    "city_ascii": "Aizawl",
+    "lat": 23.7104,
+    "lng": 92.72,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "Mizoram",
+    "capital": "admin",
+    "population": 283021,
+    "id": 1356342768
+  },
+  {
+    "city": "Imphal",
+    "city_ascii": "Imphal",
+    "lat": 24.8,
+    "lng": 93.95,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "Manipur",
+    "capital": "admin",
+    "population": 264986,
+    "id": 1356107172
+  },
+  {
     "city": "Salem",
     "city_ascii": "Salem",
     "lat": 44.9232,
@@ -12506,6 +12545,19 @@ module.exports = { CITIES: [
     "id": 1840015913
   },
   {
+    "city": "Puducherry",
+    "city_ascii": "Puducherry",
+    "lat": 11.935,
+    "lng": 79.83,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "Puducherry",
+    "capital": "admin",
+    "population": 227411,
+    "id": 1356368903
+  },
+  {
     "city": "Lhasa",
     "city_ascii": "Lhasa",
     "lat": 29.645,
@@ -12519,6 +12571,19 @@ module.exports = { CITIES: [
     "id": 1156369972
   },
   {
+    "city": "Agartala",
+    "city_ascii": "Agartala",
+    "lat": 23.8354,
+    "lng": 91.28,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "Tripura",
+    "capital": "admin",
+    "population": 203264,
+    "id": 1356148992
+  },
+  {
     "city": "Olympia",
     "city_ascii": "Olympia",
     "lat": 47.0417,
@@ -12530,6 +12595,19 @@ module.exports = { CITIES: [
     "capital": "admin",
     "population": 196078,
     "id": 1840019865
+  },
+  {
+    "city": "Ghandinagar",
+    "city_ascii": "Ghandinagar",
+    "lat": 23.3004,
+    "lng": 72.6399,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "Gujar\u0101t",
+    "capital": "admin",
+    "population": 195891,
+    "id": 1356140914
   },
   {
     "city": "Gibraltar",
@@ -12556,6 +12634,19 @@ module.exports = { CITIES: [
     "capital": "admin",
     "population": 176183,
     "id": 1124342541
+  },
+  {
+    "city": "Shimla",
+    "city_ascii": "Shimla",
+    "lat": 31.1,
+    "lng": 77.1666,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "Him\u0101chal Pradesh",
+    "capital": "admin",
+    "population": 173503,
+    "id": 1356962932
   },
   {
     "city": "Springfield",
@@ -12623,6 +12714,19 @@ module.exports = { CITIES: [
     "id": 1124741456
   },
   {
+    "city": "Port Blair",
+    "city_ascii": "Port Blair",
+    "lat": 11.667,
+    "lng": 92.736,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "Andaman and Nicobar Islands",
+    "capital": "admin",
+    "population": 127562,
+    "id": 1356161713
+  },
+  {
     "city": "Santa Fe",
     "city_ascii": "Santa Fe",
     "lat": 35.6619,
@@ -12649,6 +12753,19 @@ module.exports = { CITIES: [
     "id": 1840001926
   },
   {
+    "city": "Darwin",
+    "city_ascii": "Darwin",
+    "lat": -12.4254,
+    "lng": 130.85,
+    "country": "Australia",
+    "iso2": "AU",
+    "iso3": "AUS",
+    "admin_name": "Northern Territory",
+    "capital": "admin",
+    "population": 93080,
+    "id": 1036497565
+  },
+  {
     "city": "Noum\u00e9a",
     "city_ascii": "Noumea",
     "lat": -22.2625,
@@ -12662,6 +12779,32 @@ module.exports = { CITIES: [
     "id": 1540958092
   },
   {
+    "city": "Kohima",
+    "city_ascii": "Kohima",
+    "lat": 25.667,
+    "lng": 94.1166,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "N\u0101g\u0101land",
+    "capital": "admin",
+    "population": 92113,
+    "id": 1356332206
+  },
+  {
+    "city": "Hobart",
+    "city_ascii": "Hobart",
+    "lat": -42.85,
+    "lng": 147.295,
+    "country": "Australia",
+    "iso2": "AU",
+    "iso3": "AUS",
+    "admin_name": "Tasmania",
+    "capital": "admin",
+    "population": 80870,
+    "id": 1036679838
+  },
+  {
     "city": "Cheyenne",
     "city_ascii": "Cheyenne",
     "lat": 41.1405,
@@ -12673,6 +12816,32 @@ module.exports = { CITIES: [
     "capital": "admin",
     "population": 78728,
     "id": 1840018713
+  },
+  {
+    "city": "Gangtok",
+    "city_ascii": "Gangtok",
+    "lat": 27.3333,
+    "lng": 88.6166,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "Sikkim",
+    "capital": "admin",
+    "population": 77900,
+    "id": 1356689564
+  },
+  {
+    "city": "Panaji",
+    "city_ascii": "Panaji",
+    "lat": 15.492,
+    "lng": 73.818,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "Goa",
+    "capital": "admin",
+    "population": 65586,
+    "id": 1356909212
   },
   {
     "city": "Ponta Delgada",
@@ -12740,6 +12909,19 @@ module.exports = { CITIES: [
     "id": 1840019820
   },
   {
+    "city": "Itanagar",
+    "city_ascii": "Itanagar",
+    "lat": 27.1004,
+    "lng": 93.6166,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "Arun\u0101chal Pradesh",
+    "capital": "admin",
+    "population": 44971,
+    "id": 1356023817
+  },
+  {
     "city": "Concord",
     "city_ascii": "Concord",
     "lat": 43.2305,
@@ -12766,6 +12948,19 @@ module.exports = { CITIES: [
     "id": 1124897699
   },
   {
+    "city": "Daman",
+    "city_ascii": "Daman",
+    "lat": 20.417,
+    "lng": 72.85,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "Dam\u0101n and Diu",
+    "capital": "admin",
+    "population": 39737,
+    "id": 1356008028
+  },
+  {
     "city": "Annapolis",
     "city_ascii": "Annapolis",
     "lat": 38.9706,
@@ -12790,6 +12985,19 @@ module.exports = { CITIES: [
     "capital": "admin",
     "population": 38664,
     "id": 1840013210
+  },
+  {
+    "city": "Silvassa",
+    "city_ascii": "Silvassa",
+    "lat": 20.2666,
+    "lng": 73.0166,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "D\u0101dra and Nagar Haveli",
+    "capital": "admin",
+    "population": 27359,
+    "id": 1356217846
   },
   {
     "city": "Juneau",
@@ -12831,6 +13039,19 @@ module.exports = { CITIES: [
     "id": 1124208917
   },
   {
+    "city": "Dispur",
+    "city_ascii": "Dispur",
+    "lat": 26.144,
+    "lng": 91.7666,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "Assam",
+    "capital": "admin",
+    "population": 16140,
+    "id": 1356960169
+  },
+  {
     "city": "Pierre",
     "city_ascii": "Pierre",
     "lat": 44.3748,
@@ -12842,6 +13063,19 @@ module.exports = { CITIES: [
     "capital": "admin",
     "population": 14803,
     "id": 1840000313
+  },
+  {
+    "city": "Kavaratti",
+    "city_ascii": "Kavaratti",
+    "lat": 10.5626,
+    "lng": 72.6369,
+    "country": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "admin_name": "Lakshadweep",
+    "capital": "admin",
+    "population": 10688,
+    "id": 1356089869
   },
   {
     "city": "Montpelier",

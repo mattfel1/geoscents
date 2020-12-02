@@ -1,5 +1,4 @@
-module.exports = {
-  CITIES: [
+module.exports = { CITIES: [
   {
     "city": "Cairo",
     "city_ascii": "Cairo",
@@ -204,7 +203,7 @@ module.exports = {
     "iso2": "TZ",
     "iso3": "TZA",
     "admin_name": "Dar es Salaam",
-    "capital": "primary",
+    "capital": "admin",
     "population": 2930000,
     "id": 1834843853
   },
@@ -1019,7 +1018,7 @@ module.exports = {
     "city_ascii": "Mbabane",
     "lat": -26.3167,
     "lng": 31.1333,
-    "country": "Swaziland",
+    "country": "eSwatini",
     "iso2": "SZ",
     "iso3": "SWZ",
     "admin_name": "Hhohho",
@@ -1071,7 +1070,7 @@ module.exports = {
     "city_ascii": "Lobamba",
     "lat": -26.4667,
     "lng": 31.2,
-    "country": "Swaziland",
+    "country": "eSwatini",
     "iso2": "SZ",
     "iso3": "SWZ",
     "admin_name": "Hhohho",
@@ -5400,7 +5399,7 @@ module.exports = {
     "city_ascii": "Manzini",
     "lat": -26.495,
     "lng": 31.388,
-    "country": "Swaziland",
+    "country": "eSwatini",
     "iso2": "SZ",
     "iso3": "SWZ",
     "admin_name": "Manzini",
@@ -5798,4 +5797,4 @@ module.exports = {
     "population": 100000,
     "id": 1562695011
   }
-]};
+]}
