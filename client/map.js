@@ -381,6 +381,33 @@ class Map {
         var dest_row = Math.floor(coords['row'] / CELL_HEIGHT) % CONSTANTS.VERT_WRITE_CELLS;
         return {'col': dest_col, 'row': dest_row}
     }
+    drawPhoto(coords, link) {
+        var img = new Image;
+        let ctx = this.ctx;
+        let canvas = this.canvas
+        img.onload = function(){
+            ctx.save()
+            ctx.shadowBlur = 20;
+            ctx.globalAlpha = 0.7;
+            ctx.shadowColor = "black";
+            if (this.width > 300) {
+                let row = canvas.height - this.height * 300 / img.width - 15
+                let col = 15
+                if (coords['col'] < canvas.width / 2)
+                    col = canvas.width - 300 - 15
+                ctx.drawImage(img,col,row,300, img.height * 300 / img.width);                 
+            } else {
+                let row = canvas.height - this.height - 15
+                let col = 15
+                if (coords['col'] < canvas.width / 2)
+                    col = canvas.width - this.width - 15
+                ctx.drawImage(img,col,row); 
+            }
+            ctx.restore()
+        };
+        img.src = link;
+
+    }
     cellPxCoords(cell) {
         const CELL_HEIGHT = CONSTANTS.MAP_HEIGHT / CONSTANTS.VERT_WRITE_CELLS;
         const CELL_WIDTH = CONSTANTS.MAP_WIDTH / CONSTANTS.HORZ_WRITE_CELLS;

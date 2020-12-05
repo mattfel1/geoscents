@@ -120,6 +120,7 @@ const makeLink = (room, thisTarget) => {
     let part2 = "%2C+" + thisTarget['country'];
     if (thisTarget['country'] === "USA") part2 = "%2C+" + thisTarget['admin_name'];
     let wiki = "https://en.wikipedia.org/wiki/Special:Search?search=" + thisTarget['city'] + part2 + "&go=Go&ns0=1";
+    http://en.wikipedia.org/w/api.php?action=query&titles=Denver%2C+Colorado&prop=pageimages&format=json&pithumbsize=100
     if (thisTarget['wiki'] != null) wiki = thisTarget['wiki'];
     return wiki;
 }

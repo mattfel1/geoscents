@@ -855,7 +855,7 @@
       "iso2": "US",
       "population": 0,
       "capital": "",
-      "wiki": "https://en.wikipedia.org/wiki/Three_Mile_Island_Accident"
+      "wiki": "https://en.wikipedia.org/wiki/Three_Mile_Island_accident"
     },
     {
       "city": "Vela Incident",
@@ -3272,6 +3272,7 @@
       "population": 0,
       "capital": "",
       "iso2": "RU",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Moscow%2C_Schepkina_42_-_Roscosmos_building.jpg/800px-Moscow%2C_Schepkina_42_-_Roscosmos_building.jpg",
       "wiki": "https://en.wikipedia.org/wiki/Roscosmos"
     },
     {
@@ -4245,17 +4246,17 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Erfurt_latrine_disaster"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Arecibo Observatory",
+      "city_ascii": "",
+      "lat": 18.34661,
+      "lng": -66.75278,
+      "iso2": "PR",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Arecibo_Observatory"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",

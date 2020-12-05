@@ -8,6 +8,7 @@ const Geography = require('./geography.js');
 const Player = require('./player.js');
 const helpers = require('../resources/helpers.js');
 const fs = require('fs')
+const fetch = require("node-fetch");
 const app = require('./app.js')
 
 class Room {
@@ -618,6 +619,88 @@ class Room {
         if (this.hasJoe) Room.broadcastJoe(socket, this.joe)
     }
 
+    drawPhoto(socket) {
+      const answer = Geography.geoToMerc(this.map, this.target['lat'], this.target['lng']);
+      if ('img_link' in this.target) {
+        socket.emit('draw photo', {'row': answer['row'], 'col': answer['col']}, this.target['img_link'])
+        return
+      }
+
+
+      // Try once with country
+      let part2 = "%2C+" + this.target['country'];
+      if (this.target['country'] === "USA" || this.target['country'] === "United States") part2 = "%2C+" + this.target['admin_name'];
+      var url = "https://en.wikipedia.org/w/api.php?"; 
+      var title = (this.target['city_ascii'] + part2).split(' ').join('_');
+      if ('wiki' in this.target && this.target['wiki'] != "") {
+        let link = this.target['wiki']
+        let parts = link.split('/')
+        title = parts[parts.length - 1].split('#')[0]
+      }
+      title = title.replace('’','')
+      // TODO: THIS QUERY DOESN'T ALWAYS GET INFOBOX IMAGE.. SO ANNOYING
+      var params = {
+          action: "query",
+          prop: "pageimages",
+          // pageids: id,
+          titles: title,
+          format: "json",
+          pithumbsize: 600,
+          redirects: ""
+      };
+      Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+      console.log(url)
+      fetch(url)
+          .then(function(response){return response.json();})
+          .then(function(response) {
+              var pages = response.query.pages;
+              Object.keys(pages).forEach(function (key, _) {
+                  if (pages[key].hasOwnProperty('thumbnail')) {
+                      if (pages[key]['thumbnail'].hasOwnProperty('source')) {
+                          socket.emit('draw photo', {'row': answer['row'], 'col': answer['col']}, pages[key]['thumbnail']['source'])
+                      }
+                  }
+              })
+          })
+          .catch(function(error){
+            console.log("failed to fetch 1" + url)
+            console.log(error);
+
+            // Try again without country
+            let part2 = "";
+            if (this.target['country'] === "USA" || this.target['country'] === "United States") part2 = "%2C+" + this.target['admin_name'];
+            let url = "https://en.wikipedia.org/w/api.php?"; 
+            let params = {
+                action: "query",
+                prop: "pageimages",
+                // pageids: id,
+                titles: (this.target['city_ascii'] + part2).split(' ').join('_'),
+                format: "json",
+                pithumbsize: 600,
+                redirects: ""
+            };
+            Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+            fetch(url)
+                .then(function(response){return response.json();})
+                .then(function(response) {
+                    var pages = response.query.pages;
+                    Object.keys(pages).forEach(function (key, _) {
+                        if (pages[key].hasOwnProperty('thumbnail')) {
+                            if (pages[key]['thumbnail'].hasOwnProperty('source')) {
+                                socket.emit('draw photo', {'row': answer['row'], 'col': answer['col']}, pages[key]['thumbnail']['source'])
+                            }
+                        }
+                    })
+                })
+                .catch(function(error){
+                  console.log("failed to fetch 2" + url)
+                  console.log(error);
+                });
+      });
+
+
+    }
+
     incrementInactive() {
         this.players.forEach((player, id) => {
             player.consecutiveRoundsInactive = player.consecutiveRoundsInactive + 1;
@@ -696,6 +779,7 @@ class Room {
             socket.emit('fresh map', map);
             socket.emit('draw reveal city', citystring, capital, iso2, round);
             this.revealAll(socket);
+            this.drawPhoto(socket);
         }
     }
     stateTransition(toState, toDuration) {
