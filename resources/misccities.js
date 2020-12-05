@@ -451,6 +451,7 @@
       "iso2": "TM",
       "population": 0,
       "capital": "",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Darvasa_gas_crater_panorama.jpg/1920px-Darvasa_gas_crater_panorama.jpg",
       "wiki": "https://en.wikipedia.org/wiki/Darvaza_Gas_Crater"
     },
     {
@@ -3129,6 +3130,7 @@
       "population": 0,
       "iso2": "MX",
       "capital": "",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/1968_Mexico_emblem.svg/1920px-1968_Mexico_emblem.svg.png",
       "wiki": "https://en.wikipedia.org/wiki/1968_Summer_Olympics"
     },
     {
@@ -3151,6 +3153,7 @@
       "iso2": "CN",
       "population": 0,
       "capital": "",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/thumb/8/87/2008_Summer_Olympics_logo.svg/800px-2008_Summer_Olympics_logo.svg.png",
       "wiki": "https://en.wikipedia.org/wiki/2008_Summer_Olympics"
     },
     {
@@ -3217,6 +3220,7 @@
       "iso2": "JP",
       "population": 0,
       "capital": "",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/thumb/1/1d/2020_Summer_Olympics_logo_new.svg/800px-2020_Summer_Olympics_logo_new.svg.png",
       "wiki": "https://en.wikipedia.org/wiki/2020_Summer_Olympics"
     },
     {
