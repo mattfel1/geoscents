@@ -649,7 +649,7 @@ class Room {
           redirects: ""
       };
       Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
-      console.log(url)
+      let target = this.target
       fetch(url)
           .then(function(response){return response.json();})
           .then(function(response) {
@@ -658,23 +658,56 @@ class Room {
                   if (pages[key].hasOwnProperty('thumbnail')) {
                       if (pages[key]['thumbnail'].hasOwnProperty('source')) {
                           socket.emit('draw photo', {'row': answer['row'], 'col': answer['col']}, pages[key]['thumbnail']['source'])
-                      }
+                          return
+                      } 
                   }
-              })
+                })
+
+
+              // Try again without country
+              let part2 = "";
+              if (target['country'] === "USA" || target['country'] === "United States") part2 = "%2C+" + target['admin_name'];
+              let url = "https://en.wikipedia.org/w/api.php?"; 
+              let params = {
+                  action: "query",
+                  prop: "pageimages",
+                  // pageids: id,
+                  titles: (target['city_ascii'] + part2).split(' ').join('_'),
+                  format: "json",
+                  pithumbsize: 800,
+                  redirects: ""
+              };
+              Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+              fetch(url)
+                  .then(function(response){return response.json();})
+                  .then(function(response) {
+                      var pages = response.query.pages;
+                      Object.keys(pages).forEach(function (key, _) {
+                          if (pages[key].hasOwnProperty('thumbnail')) {
+                              if (pages[key]['thumbnail'].hasOwnProperty('source')) {
+                                  socket.emit('draw photo', {'row': answer['row'], 'col': answer['col']}, pages[key]['thumbnail']['source'])
+                              }
+                          }
+                      })
+                  })
+                  .catch(function(error){
+                    console.log("failed to fetch 2" + url)
+                    console.log(error);
+                  });
+
           })
           .catch(function(error){
-            console.log("failed to fetch 1" + url)
             console.log(error);
 
             // Try again without country
             let part2 = "";
-            if (this.target['country'] === "USA" || this.target['country'] === "United States") part2 = "%2C+" + this.target['admin_name'];
+            if (target['country'] === "USA" || target['country'] === "United States") part2 = "%2C+" + target['admin_name'];
             let url = "https://en.wikipedia.org/w/api.php?"; 
             let params = {
                 action: "query",
                 prop: "pageimages",
                 // pageids: id,
-                titles: (this.target['city_ascii'] + part2).split(' ').join('_'),
+                titles: (target['city_ascii'] + part2).split(' ').join('_'),
                 format: "json",
                 pithumbsize: 800,
                 redirects: ""

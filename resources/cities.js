@@ -9974,6 +9974,7 @@
   },
   {
     "city": "Melaka",
+    "img_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Malacca_Sultanate_Palace.JPG/1280px-Malacca_Sultanate_Palace.JPG",
     "city_ascii": "Melaka",
     "lat": 2.2064,
     "lng": 102.2465,
