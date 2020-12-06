@@ -418,6 +418,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Tarawa",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Line5304_-_Flickr_-_NOAA_Photo_Library.jpg/1280px-Line5304_-_Flickr_-_NOAA_Photo_Library.jpg",
     "city_ascii": "Tarawa",
     "lat": 1.3382,
     "lng": 173.0176,
@@ -1342,6 +1343,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Singaraja",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Panoramakampungbugis.JPG/1920px-Panoramakampungbugis.JPG",
     "city_ascii": "Singaraja",
     "lat": -8.1152,
     "lng": 115.0944,
@@ -1446,6 +1448,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Batu Pahat",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/8/81/Bp_view_10.jpg",
     "city_ascii": "Batu Pahat",
     "lat": 1.8504,
     "lng": 102.9333,
@@ -1771,6 +1774,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Dawei",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Dawei_13.jpg/250px-Dawei_13.jpg",
     "city_ascii": "Dawei",
     "lat": 14.098,
     "lng": 98.195,
@@ -1836,6 +1840,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Blitar",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/c/c6/RA_3420014.JPG",
     "city_ascii": "Blitar",
     "lat": -8.0696,
     "lng": 112.15,
@@ -1862,6 +1867,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Lae",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Welcome_signs_at_Bugandi_on_the_approach_from_Nadzab_airport.jpg/1920px-Welcome_signs_at_Bugandi_on_the_approach_from_Nadzab_airport.jpg",
     "city_ascii": "Lae",
     "lat": -6.733,
     "lng": 146.99,

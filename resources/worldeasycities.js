@@ -3317,6 +3317,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Tarawa",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Line5304_-_Flickr_-_NOAA_Photo_Library.jpg/1280px-Line5304_-_Flickr_-_NOAA_Photo_Library.jpg",
     "city_ascii": "Tarawa",
     "lat": 1.3382,
     "lng": 173.0176,

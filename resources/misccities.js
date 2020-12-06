@@ -2064,6 +2064,7 @@
     },
     {
       "city": "Centers for Disease Control and Prevention (CDC)",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/CDC_HDR_I.jpg/1280px-CDC_HDR_I.jpg",
       "city_ascii": "",
       "lat": 33.799444,
       "lng": -84.328333,
