@@ -6212,17 +6212,5 @@ module.exports = { CITIES: [
     "capital": "admin",
     "population": 3304,
     "id": 9999999999
-  },
-  {
-    "city": "Adamstown",
-    "city_ascii": "Adamstown",
-    "lat": -25.066667,
-    "lng": -130.1,
-    "country": "Pitcairn Islands",
-    "iso2": "PN",
-    "admin_name": "",
-    "capital": "primary",
-    "population": 50,
-    "id": 9999999998
   }
 ]}

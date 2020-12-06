@@ -7554,6 +7554,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Nuku\u2018alofa",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Nukualofa_Tonga_2.jpg/250px-Nukualofa_Tonga_2.jpg",
     "city_ascii": "Nuku`alofa",
     "lat": -21.1385,
     "lng": -175.2206,

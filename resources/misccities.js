@@ -93,6 +93,7 @@
     },
     {
       "city": "Citadelle Laferri\u00e8re",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Citadelle_Laferri%C3%A8re.jpg/1280px-Citadelle_Laferri%C3%A8re.jpg",
       "city_ascii": "Citadelle Laferriere",
       "lat": 19.573611,
       "lng": -72.243889,
@@ -658,6 +659,7 @@
       "iso2": "TZ",
       "population": 0,
       "capital": "",
+      "img_link": "https://en.wikipedia.org/wiki/Mount_Kilimanjaro#/media/File:Mount_Kilimanjaro.jpg",
       "wiki": "https://en.wikipedia.org/wiki/Mount_Kilimanjaro"
     },
     {
@@ -988,6 +990,7 @@
     },
     {
       "city": "Eyjafjallajökull Volcano",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Iceland_volcano_april_4_2010.JPG/1920px-Iceland_volcano_april_4_2010.JPG",
       "city_ascii": ">yjafjallajokull Volcano",
       "lat": 63.62,
       "lng": -19.613333,
@@ -1825,6 +1828,7 @@
     },
     {
       "city": "Channel Islands",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/BeachSantaCruzIsland.JPG/1920px-BeachSantaCruzIsland.JPG",
       "city_ascii": "",
       "lat": 33.998028,
       "lng": -119.772949,
@@ -1873,6 +1877,7 @@
       "admin_name": "Nat’l Preserve",
       "capital": "",
       "population": "",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Calico_basin_red_rock_cumulus_mediocris.jpg",
       "id": ""
     },
     {
@@ -1955,6 +1960,7 @@
     },
     {
       "city": "Anahuac ",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/AnahuacNationalWildlifeRefuge.JPG/1280px-AnahuacNationalWildlifeRefuge.JPG",
       "city_ascii": "",
       "lat": 29.6103,
       "lng": -94.449081,
@@ -1990,6 +1996,7 @@
       "admin_name": "Nat’l Forest",
       "capital": "",
       "population": "",
+      "img_link": "https://en.wikipedia.org/wiki/Chattahoochee–Oconee_National_Forest#/media/File:Cool_Springs_Overlook,_Fort_Mountain,_Georgia_April_2016.jpg",
       "id": ""
     },
     {
@@ -2155,6 +2162,7 @@
     },
     {
       "city": "Elba (Napoleon Bonaparte's Island of Exile)",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/3/35/Portoferraio_aerea.jpg",
       "city_ascii": "",
       "lat": 42.782711,
       "lng": 10.286335,
@@ -3013,6 +3021,7 @@
     },
     {
       "city": "Peñón de Vélez de la Gomera (Shortest International Border)",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/7/73/Velez_de_la_Gomera.jpg",
       "city_ascii": "",
       "lat": 35.172581,
       "lng": -4.300803,
@@ -3671,6 +3680,7 @@
     },
     {
       "city": "King's Landing Film Set (Game of Thrones, seasons 2-7)",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Old_City_of_Dubrovnik_-_Croatia_-_8_June_2013.jpg/1920px-Old_City_of_Dubrovnik_-_Croatia_-_8_June_2013.jpg",
       "city_ascii": "",
       "lat": 42.640278,
       "lng": 18.108333,
@@ -3876,6 +3886,7 @@
       "country": "",
       "population": 0,
       "capital": "",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/a/af/Istanbul_-_Museo_archeol._-_Diocleziano_%28284-305_d.C.%29_-_Foto_G._Dall%27Orto_28-5-2006.jpg",
       "wiki": "http://www.motherlindas.com/of_cabbages_and_emperors.htm"
     },
     {
@@ -4142,6 +4153,7 @@
     },
     {
       "city": "Battle of Midway (1942)",
+      "img_link": "https://en.wikipedia.org/wiki/Battle_of_Midway#/media/File:SBD-3_Dauntless_bombers_of_VS-8_over_the_burning_Japanese_cruiser_Mikuma_on_6_June_1942.jpg",
       "city_ascii": "",
       "lat": 28.2,
       "lng": -177.35,

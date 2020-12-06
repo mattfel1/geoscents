@@ -676,7 +676,7 @@ class Room {
                 // pageids: id,
                 titles: (this.target['city_ascii'] + part2).split(' ').join('_'),
                 format: "json",
-                pithumbsize: 600,
+                pithumbsize: 800,
                 redirects: ""
             };
             Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});

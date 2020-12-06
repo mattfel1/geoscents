@@ -1,5 +1,4 @@
-module.exports = {
-  CITIES: [
+module.exports = { CITIES: [
   {
     "city": "Jakarta",
     "city_ascii": "Jakarta",
@@ -51,6 +50,19 @@ module.exports = {
     "capital": "admin",
     "population": 4170000,
     "id": 1036533631
+  },
+  {
+    "city": "Yangon",
+    "city_ascii": "Yangon",
+    "lat": 16.7834,
+    "lng": 96.1667,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Yangon",
+    "capital": "primary",
+    "population": 4088000,
+    "id": 1104616656
   },
   {
     "city": "Surabaya",
@@ -196,6 +208,19 @@ module.exports = {
     "id": 1554435911
   },
   {
+    "city": "Mandalay",
+    "city_ascii": "Mandalay",
+    "lat": 21.97,
+    "lng": 96.085,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Mandalay",
+    "capital": "admin",
+    "population": 1300000,
+    "id": 1104468217
+  },
+  {
     "city": "Makassar",
     "city_ascii": "Makassar",
     "lat": -5.14,
@@ -246,6 +271,19 @@ module.exports = {
     "capital": "",
     "population": 1134616,
     "id": 1036468001
+  },
+  {
+    "city": "Nay Pyi Taw",
+    "city_ascii": "Nay Pyi Taw",
+    "lat": 19.7666,
+    "lng": 96.1186,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Nay Pyi Taw",
+    "capital": "primary",
+    "population": 930000,
+    "id": 1104838105
   },
   {
     "city": "Wellington",
@@ -366,6 +404,7 @@ module.exports = {
   },
   {
     "city": "Nuku\u2018alofa",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Nukualofa_Tonga_2.jpg/250px-Nukualofa_Tonga_2.jpg",
     "city_ascii": "Nuku`alofa",
     "lat": -21.1385,
     "lng": -175.2206,
@@ -868,6 +907,7 @@ module.exports = {
     "iso3": "IDN",
     "admin_name": "Jambi",
     "capital": "admin",
+    "img_link": "https://en.wikipedia.org/wiki/Jambi_(city)#/media/File:Gentala_arasy_saat_senja.jpg",
     "population": 457090,
     "id": 1360645580
   },
@@ -896,6 +936,19 @@ module.exports = {
     "capital": "",
     "population": 445905,
     "id": 1360500922
+  },
+  {
+    "city": "Mawlamyine",
+    "city_ascii": "Mawlamyine",
+    "lat": 16.5004,
+    "lng": 97.67,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Mon State",
+    "capital": "admin",
+    "population": 438861,
+    "id": 1104530702
   },
   {
     "city": "Bengkulu",
@@ -1080,6 +1133,19 @@ module.exports = {
     "id": 1360316553
   },
   {
+    "city": "Bago",
+    "city_ascii": "Bago",
+    "lat": 17.32,
+    "lng": 96.515,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Bago",
+    "capital": "admin",
+    "population": 284318,
+    "id": 1104027443
+  },
+  {
     "city": "Kupang",
     "city_ascii": "Kupang",
     "lat": -10.1787,
@@ -1171,6 +1237,19 @@ module.exports = {
     "id": 1360506609
   },
   {
+    "city": "Myeik",
+    "city_ascii": "Myeik",
+    "lat": 12.4541,
+    "lng": 98.6115,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Taninthayi",
+    "capital": "",
+    "population": 266720,
+    "id": 1104715655
+  },
+  {
     "city": "Wollongong",
     "city_ascii": "Wollongong",
     "lat": -34.4154,
@@ -1221,6 +1300,19 @@ module.exports = {
     "capital": "",
     "population": 237095,
     "id": 1458446120
+  },
+  {
+    "city": "Pathein",
+    "city_ascii": "Pathein",
+    "lat": 16.7704,
+    "lng": 94.75,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Ayeyawady",
+    "capital": "admin",
+    "population": 237089,
+    "id": 1104832430
   },
   {
     "city": "Tegal",
@@ -1286,6 +1378,19 @@ module.exports = {
     "capital": "admin",
     "population": 226666,
     "id": 1360990589
+  },
+  {
+    "city": "Monywa",
+    "city_ascii": "Monywa",
+    "lat": 22.105,
+    "lng": 95.15,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Sagaing",
+    "capital": "",
+    "population": 226222,
+    "id": 1104777345
   },
   {
     "city": "Sibolga",
@@ -1444,6 +1549,45 @@ module.exports = {
     "id": 1360138476
   },
   {
+    "city": "Hinthada",
+    "city_ascii": "Hinthada",
+    "lat": 17.6483,
+    "lng": 95.4679,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Ayeyawady",
+    "capital": "",
+    "population": 180728,
+    "id": 1104524588
+  },
+  {
+    "city": "Sittwe",
+    "city_ascii": "Sittwe",
+    "lat": 20.14,
+    "lng": 92.88,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Rakhine State",
+    "capital": "admin",
+    "population": 179032,
+    "id": 1104269305
+  },
+  {
+    "city": "Letpandan",
+    "city_ascii": "Letpandan",
+    "lat": 17.7819,
+    "lng": 95.7415,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Bago",
+    "capital": "",
+    "population": 176571,
+    "id": 1104882792
+  },
+  {
     "city": "Salatiga",
     "city_ascii": "Salatiga",
     "lat": -7.3095,
@@ -1522,6 +1666,19 @@ module.exports = {
     "id": 1360329102
   },
   {
+    "city": "Myingyan",
+    "city_ascii": "Myingyan",
+    "lat": 21.4618,
+    "lng": 95.3914,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Mandalay",
+    "capital": "",
+    "population": 163812,
+    "id": 1104162015
+  },
+  {
     "city": "Geelong",
     "city_ascii": "Geelong",
     "lat": -38.1675,
@@ -1535,6 +1692,19 @@ module.exports = {
     "id": 1036870987
   },
   {
+    "city": "Taunggyi",
+    "city_ascii": "Taunggyi",
+    "lat": 20.782,
+    "lng": 97.038,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Shan State",
+    "capital": "admin",
+    "population": 160115,
+    "id": 1104364374
+  },
+  {
     "city": "Cairns",
     "city_ascii": "Cairns",
     "lat": -16.8878,
@@ -1546,6 +1716,19 @@ module.exports = {
     "capital": "",
     "population": 154225,
     "id": 1036016939
+  },
+  {
+    "city": "Mudon",
+    "city_ascii": "Mudon",
+    "lat": 16.2618,
+    "lng": 97.7215,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Mon State",
+    "capital": "",
+    "population": 152300,
+    "id": 1104174785
   },
   {
     "city": "Bintulu",
@@ -1587,6 +1770,19 @@ module.exports = {
     "id": 1554873040
   },
   {
+    "city": "Dawei",
+    "city_ascii": "Dawei",
+    "lat": 14.098,
+    "lng": 98.195,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Taninthayi",
+    "capital": "admin",
+    "population": 146212,
+    "id": 1104373474
+  },
+  {
     "city": "Lhokseumawe",
     "city_ascii": "Lhokseumawe",
     "lat": 5.1914,
@@ -1600,6 +1796,19 @@ module.exports = {
     "id": 1360418625
   },
   {
+    "city": "Myitkyina",
+    "city_ascii": "Myitkyina",
+    "lat": 25.3596,
+    "lng": 97.3928,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Kachin State",
+    "capital": "admin",
+    "population": 139100,
+    "id": 1104327329
+  },
+  {
     "city": "Townsville",
     "city_ascii": "Townsville",
     "lat": -19.25,
@@ -1611,6 +1820,19 @@ module.exports = {
     "capital": "",
     "population": 138954,
     "id": 1036500020
+  },
+  {
+    "city": "Pyay",
+    "city_ascii": "Pyay",
+    "lat": 18.8165,
+    "lng": 95.2114,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Bago",
+    "capital": "",
+    "population": 135308,
+    "id": 1104978348
   },
   {
     "city": "Blitar",
@@ -1650,6 +1872,32 @@ module.exports = {
     "capital": "admin",
     "population": 131052,
     "id": 1598466091
+  },
+  {
+    "city": "Pakokku",
+    "city_ascii": "Pakokku",
+    "lat": 21.332,
+    "lng": 95.0866,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Magway",
+    "capital": "",
+    "population": 126938,
+    "id": 1104161315
+  },
+  {
+    "city": "Magway",
+    "city_ascii": "Magway",
+    "lat": 20.1445,
+    "lng": 94.9196,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Magway",
+    "capital": "admin",
+    "population": 125973,
+    "id": 1104246517
   },
   {
     "city": "Pangkalpinang",
@@ -1780,6 +2028,32 @@ module.exports = {
     "capital": "",
     "population": 111461,
     "id": 1360065728
+  },
+  {
+    "city": "Yenangyaung",
+    "city_ascii": "Yenangyaung",
+    "lat": 20.4615,
+    "lng": 94.881,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Magway",
+    "capital": "",
+    "population": 110553,
+    "id": 1104118838
+  },
+  {
+    "city": "Taungoo",
+    "city_ascii": "Taungoo",
+    "lat": 18.9483,
+    "lng": 96.4179,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Bago",
+    "capital": "",
+    "population": 106945,
+    "id": 1104269989
   },
   {
     "city": "Raba",
@@ -1964,6 +2238,19 @@ module.exports = {
     "id": 1036679838
   },
   {
+    "city": "Sagaing",
+    "city_ascii": "Sagaing",
+    "lat": 21.88,
+    "lng": 95.962,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Sagaing",
+    "capital": "admin",
+    "population": 78739,
+    "id": 1104151403
+  },
+  {
     "city": "Manokwari",
     "city_ascii": "Manokwari",
     "lat": -0.8711,
@@ -2079,6 +2366,19 @@ module.exports = {
     "capital": "admin",
     "population": 52200,
     "id": 1554000636
+  },
+  {
+    "city": "Hpa-An",
+    "city_ascii": "Hpa-An",
+    "lat": 16.85,
+    "lng": 97.6167,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Kayin State",
+    "capital": "admin",
+    "population": 50000,
+    "id": 1104494124
   },
   {
     "city": "Invercargill",
@@ -2198,6 +2498,19 @@ module.exports = {
     "id": 1598405100
   },
   {
+    "city": "Hakha",
+    "city_ascii": "Hakha",
+    "lat": 22.65,
+    "lng": 93.6167,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Chin State",
+    "capital": "admin",
+    "population": 20000,
+    "id": 1104739581
+  },
+  {
     "city": "Kavieng",
     "city_ascii": "Kavieng",
     "lat": -2.5813,
@@ -2237,6 +2550,19 @@ module.exports = {
     "id": 1554253729
   },
   {
+    "city": "Loikaw",
+    "city_ascii": "Loikaw",
+    "lat": 19.665,
+    "lng": 97.206,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Kayah State",
+    "capital": "admin",
+    "population": 17293,
+    "id": 1104542517
+  },
+  {
     "city": "Daru",
     "city_ascii": "Daru",
     "lat": -9.1092,
@@ -2251,6 +2577,7 @@ module.exports = {
   },
   {
     "city": "Luganville",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Luganville_main_street.jpg/1280px-Luganville_main_street.jpg",
     "city_ascii": "Luganville",
     "lat": -15.5126,
     "lng": 167.1766,
@@ -2365,6 +2692,32 @@ module.exports = {
     "capital": "minor",
     "population": 92710,
     "id": 1360020231
+  },
+  {
+    "city": "Chauk",
+    "city_ascii": "Chauk",
+    "lat": 20.9085,
+    "lng": 94.823,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Magway",
+    "capital": "",
+    "population": 90870,
+    "id": 1104898616
+  },
+  {
+    "city": "Shwebo",
+    "city_ascii": "Shwebo",
+    "lat": 22.5783,
+    "lng": 95.6929,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Sagaing",
+    "capital": "",
+    "population": 88914,
+    "id": 1104118052
   },
   {
     "city": "Parepare",
@@ -2523,6 +2876,19 @@ module.exports = {
     "id": 1036768986
   },
   {
+    "city": "Pyapon",
+    "city_ascii": "Pyapon",
+    "lat": 16.2933,
+    "lng": 95.6829,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Ayeyawady",
+    "capital": "",
+    "population": 65601,
+    "id": 1104170402
+  },
+  {
     "city": "Coffs Harbour",
     "city_ascii": "Coffs Harbour",
     "lat": -30.3071,
@@ -2560,6 +2926,19 @@ module.exports = {
     "capital": "",
     "population": 60611,
     "id": 1360827216
+  },
+  {
+    "city": "Allanmyo",
+    "city_ascii": "Allanmyo",
+    "lat": 19.3783,
+    "lng": 95.2279,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Magway",
+    "capital": "",
+    "population": 57897,
+    "id": 1104582279
   },
   {
     "city": "Rotorua",
@@ -2627,6 +3006,19 @@ module.exports = {
     "id": 1554561880
   },
   {
+    "city": "Thongwa",
+    "city_ascii": "Thongwa",
+    "lat": 16.7547,
+    "lng": 96.5193,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Yangon",
+    "capital": "",
+    "population": 52496,
+    "id": 1104339441
+  },
+  {
     "city": "Bundaberg",
     "city_ascii": "Bundaberg",
     "lat": -24.8791,
@@ -2638,6 +3030,19 @@ module.exports = {
     "capital": "",
     "population": 52472,
     "id": 1036377333
+  },
+  {
+    "city": "Ye",
+    "city_ascii": "Ye",
+    "lat": 15.2533,
+    "lng": 97.8679,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Mon State",
+    "capital": "",
+    "population": 50798,
+    "id": 1104513802
   },
   {
     "city": "Sawahlunto",
@@ -2666,6 +3071,19 @@ module.exports = {
     "id": 1360882365
   },
   {
+    "city": "Namtu",
+    "city_ascii": "Namtu",
+    "lat": 23.0837,
+    "lng": 97.4,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Shan State",
+    "capital": "",
+    "population": 48591,
+    "id": 1104043404
+  },
+  {
     "city": "Port Macquarie",
     "city_ascii": "Port Macquarie",
     "lat": -31.445,
@@ -2677,6 +3095,19 @@ module.exports = {
     "capital": "",
     "population": 48547,
     "id": 1036051032
+  },
+  {
+    "city": "Wakema",
+    "city_ascii": "Wakema",
+    "lat": 16.6133,
+    "lng": 95.1829,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Ayeyawady",
+    "capital": "",
+    "population": 48405,
+    "id": 1104266529
   },
   {
     "city": "Mildura",
@@ -2822,6 +3253,19 @@ module.exports = {
     "id": 1242357822
   },
   {
+    "city": "Pyu",
+    "city_ascii": "Pyu",
+    "lat": 18.4779,
+    "lng": 96.4379,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Bago",
+    "capital": "",
+    "population": 40386,
+    "id": 1104518645
+  },
+  {
     "city": "Arawa",
     "city_ascii": "Arawa",
     "lat": -6.228,
@@ -2885,6 +3329,19 @@ module.exports = {
     "capital": "",
     "population": 36852,
     "id": 1036087904
+  },
+  {
+    "city": "Nyaungdon",
+    "city_ascii": "Nyaungdon",
+    "lat": 17.0433,
+    "lng": 95.6429,
+    "country": "Myanmar",
+    "iso2": "MM",
+    "iso3": "MMR",
+    "admin_name": "Ayeyawady",
+    "capital": "",
+    "population": 36172,
+    "id": 1104318813
   },
   {
     "city": "Kuala Kapuas",
@@ -4089,7 +4546,7 @@ module.exports = {
     "admin_name": "",
     "capital": "primary",
     "population": 1748,
-    "id": 9999999998
+    "id": 9999999990
   },
   {
     "city": "West Island",
@@ -4101,7 +4558,7 @@ module.exports = {
     "admin_name": "",
     "capital": "primary",
     "population": 120,
-    "id": 9999999998
+    "id": 9999999991
   },
   {
     "city": "Atafu",
@@ -4112,7 +4569,8 @@ module.exports = {
     "iso2": "TK",
     "admin_name": "",
     "capital": "",
+    "img_link": "https://en.wikipedia.org/wiki/Atafu#/media/File:Atafu_street_dawn_20070715.jpg",
     "population": 541,
-    "id": 9999999998
+    "id": 9999999992
   }
 ]}

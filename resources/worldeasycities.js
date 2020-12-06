@@ -585,8 +585,8 @@ module.exports = { CITIES: [
     "id": 1156421555
   },
   {
-    "city": "Rangoon",
-    "city_ascii": "Rangoon",
+    "city": "Yangon",
+    "city_ascii": "Yangon",
     "lat": 16.7834,
     "lng": 96.1667,
     "country": "Myanmar",
@@ -3212,6 +3212,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Nuku\u2018alofa",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Nukualofa_Tonga_2.jpg/250px-Nukualofa_Tonga_2.jpg",
     "city_ascii": "Nuku`alofa",
     "lat": -21.1385,
     "lng": -175.2206,

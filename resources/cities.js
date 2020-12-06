@@ -7554,6 +7554,7 @@
   },
   {
     "city": "Nuku‘alofa",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Nukualofa_Tonga_2.jpg/250px-Nukualofa_Tonga_2.jpg",
     "city_ascii": "Nuku`alofa",
     "lat": -21.1385,
     "lng": -175.2206,
@@ -14634,6 +14635,7 @@
     "iso3": "IDN",
     "admin_name": "Jambi",
     "capital": "admin",
+    "img_link": "https://en.wikipedia.org/wiki/Jambi_(city)#/media/File:Gentala_arasy_saat_senja.jpg",
     "population": 457090,
     "id": 1360645580
   },
@@ -63376,6 +63378,7 @@
   },
   {
     "city": "Luganville",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Luganville_main_street.jpg/1280px-Luganville_main_street.jpg",
     "city_ascii": "Luganville",
     "lat": -15.5126,
     "lng": 167.1766,
@@ -201490,6 +201493,7 @@
     "iso2": "TK",
     "admin_name": "",
     "capital": "",
+    "img_link": "https://en.wikipedia.org/wiki/Atafu#/media/File:Atafu_street_dawn_20070715.jpg",
     "population": 541,
     "id": 9999999992
   },
