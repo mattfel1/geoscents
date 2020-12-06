@@ -445,6 +445,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Pago Pago",
+    "img_link": "https://en.wikipedia.org/wiki/Pago_Pago#/media/File:Pagopago_amerika_s\u0101moa.jpg",
     "city_ascii": "Pago Pago",
     "lat": -14.274,
     "lng": -170.7046,
@@ -640,6 +641,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Melaka",
+    "img_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Malacca_Sultanate_Palace.JPG/1280px-Malacca_Sultanate_Palace.JPG",
     "city_ascii": "Melaka",
     "lat": 2.2064,
     "lng": 102.2465,
@@ -4430,6 +4432,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Innisfail",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Innisfail_outlay.JPG/270px-Innisfail_outlay.JPG",
     "city_ascii": "Innisfail",
     "lat": -17.5313,
     "lng": 146.0387,
@@ -4495,6 +4498,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Hanga Roa",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Moais%2C_Isla_de_Pascua._-_panoramio.jpg/1280px-Moais%2C_Isla_de_Pascua._-_panoramio.jpg",
     "city_ascii": "Hanga Roa",
     "lat": -27.133333,
     "lng": -109.416667,

@@ -650,6 +650,7 @@ class Room {
       };
       Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
       let target = this.target
+      console.log(url)
       fetch(url)
           .then(function(response){return response.json();})
           .then(function(response) {
@@ -678,6 +679,7 @@ class Room {
                   redirects: ""
               };
               Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+              console.log(url)
               fetch(url)
                   .then(function(response){return response.json();})
                   .then(function(response) {
@@ -713,6 +715,7 @@ class Room {
                 redirects: ""
             };
             Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+            console.log(url)
             fetch(url)
                 .then(function(response){return response.json();})
                 .then(function(response) {

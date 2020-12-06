@@ -3693,6 +3693,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "York",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Wm_Goodridge_House.JPG/1280px-Wm_Goodridge_House.JPG",
     "city_ascii": "York",
     "lat": 39.9651,
     "lng": -76.7315,

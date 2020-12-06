@@ -235,6 +235,7 @@
   },
   {
     "city": "Istanbul",
+    "img_link": "https://en.wikipedia.org/wiki/Istanbul#/media/File:Istanbul_collage_5j.jpg",
     "city_ascii": "Istanbul",
     "lat": 41.105,
     "lng": 29.01,
@@ -7725,6 +7726,7 @@
   },
   {
     "city": "Pago Pago",
+    "img_link": "https://en.wikipedia.org/wiki/Pago_Pago#/media/File:Pagopago_amerika_sāmoa.jpg",
     "city_ascii": "Pago Pago",
     "lat": -14.274,
     "lng": -170.7046,
@@ -13316,6 +13318,7 @@
   },
   {
     "city": "Ujjain",
+    "img_link": "https://en.wikipedia.org/wiki/Ujjain#/media/File:Ram_chat.JPG",
     "city_ascii": "Ujjain",
     "lat": 23.1904,
     "lng": 75.79,
@@ -24511,6 +24514,7 @@
   },
   {
     "city": "York",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Wm_Goodridge_House.JPG/1280px-Wm_Goodridge_House.JPG",
     "city_ascii": "York",
     "lat": 39.9651,
     "lng": -76.7315,
@@ -31091,6 +31095,7 @@
   {
     "city": "San Fernando",
     "city_ascii": "San Fernando",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/STAPP_008_San_Fernando_Independence_Avenue_%28cropped%29.jpg/800px-STAPP_008_San_Fernando_Independence_Avenue_%28cropped%29.jpg",
     "lat": 10.2805,
     "lng": -61.4594,
     "country": "Trinidad And Tobago",
@@ -42741,6 +42746,7 @@
   },
   {
     "city": "Ubá",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Vista_noturna_de_Ub%C3%A1.jpg/1280px-Vista_noturna_de_Ub%C3%A1.jpg",
     "city_ascii": "Uba",
     "lat": -21.1196,
     "lng": -42.95,
@@ -94105,6 +94111,7 @@
   },
   {
     "city": "Campana",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Municipalidad_de_Campana.jpg/1920px-Municipalidad_de_Campana.jpg",
     "city_ascii": "Campana",
     "lat": -34.16,
     "lng": -58.96,
@@ -155517,6 +155524,7 @@
   },
   {
     "city": "Innisfail",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Innisfail_outlay.JPG/270px-Innisfail_outlay.JPG",
     "city_ascii": "Innisfail",
     "lat": -17.5313,
     "lng": 146.0387,
@@ -201420,6 +201428,7 @@
   },
   {
     "city": "Hanga Roa",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Moais%2C_Isla_de_Pascua._-_panoramio.jpg/1280px-Moais%2C_Isla_de_Pascua._-_panoramio.jpg",
     "city_ascii": "Hanga Roa",
     "lat": -27.133333,
     "lng": -109.416667,

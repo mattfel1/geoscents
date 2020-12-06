@@ -144,6 +144,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Istanbul",
+    "img_link": "https://en.wikipedia.org/wiki/Istanbul#/media/File:Istanbul_collage_5j.jpg",
     "city_ascii": "Istanbul",
     "lat": 41.105,
     "lng": 29.01,
@@ -4811,6 +4812,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Melaka",
+    "img_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Malacca_Sultanate_Palace.JPG/1280px-Malacca_Sultanate_Palace.JPG",
     "city_ascii": "Melaka",
     "lat": 2.2064,
     "lng": 102.2465,
@@ -6553,6 +6555,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Ujjain",
+    "img_link": "https://en.wikipedia.org/wiki/Ujjain#/media/File:Ram_chat.JPG",
     "city_ascii": "Ujjain",
     "lat": 23.1904,
     "lng": 75.79,

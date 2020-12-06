@@ -3383,6 +3383,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Pago Pago",
+    "img_link": "https://en.wikipedia.org/wiki/Pago_Pago#/media/File:Pagopago_amerika_s\u0101moa.jpg",
     "city_ascii": "Pago Pago",
     "lat": -14.274,
     "lng": -170.7046,

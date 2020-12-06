@@ -434,6 +434,7 @@
     },
     {
       "city": "Louvre",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Louvre_Museum_Wikimedia_Commons.jpg/1920px-Louvre_Museum_Wikimedia_Commons.jpg",
       "city_ascii": "",
       "lat": 48.858222,
       "lng": 2.2945,
@@ -829,6 +830,7 @@
     },
     {
       "city": "Chernobyl Nuclear Disaster",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/1/1b/Chernobyl_Disaster.jpg",
       "city_ascii": "",
       "lat": 51.404722,
       "lng": 30.056944,
@@ -2001,6 +2003,7 @@
     },
     {
       "city": "Great Smoky Mountains",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Clifftops4-7-07.jpg/1920px-Clifftops4-7-07.jpg",
       "city_ascii": "",
       "lat": 35.611763,
       "lng": -83.489548,
@@ -2501,6 +2504,7 @@
     },
     {
       "city": "Pacific Rim",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/West_coast_trail_tsusiat_falls1.jpg/1920px-West_coast_trail_tsusiat_falls1.jpg",
       "city_ascii": "",
       "lat": 48.636111,
       "lng": -124.769167,
