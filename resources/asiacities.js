@@ -2563,6 +2563,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Huaiyin",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/%E9%95%87%E6%B7%AE%E6%A5%BC.JPG/1280px-%E9%95%87%E6%B7%AE%E6%A5%BC.JPG",
     "city_ascii": "Huaiyin",
     "lat": 33.58,
     "lng": 119.03,
@@ -5853,6 +5854,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Nagano",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Nagano_montages.JPG/340px-Nagano_montages.JPG",
     "city_ascii": "Nagano",
     "lat": 36.65,
     "lng": 138.17,

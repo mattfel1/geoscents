@@ -352,6 +352,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Suva",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Suva%2C_Fiji_52.jpg/1920px-Suva%2C_Fiji_52.jpg",
     "city_ascii": "Suva",
     "lat": -18.133,
     "lng": 178.4417,

@@ -387,20 +387,27 @@ class Map {
         let canvas = this.canvas
         img.onload = function(){
             ctx.save()
-            ctx.shadowBlur = 20;
-            ctx.globalAlpha = 0.7;
+            // ctx.shadowBlur = 20;
             ctx.shadowColor = "black";
             if (this.width > 300) {
                 let row = canvas.height - this.height * 300 / img.width - 15
                 let col = 15
                 if (coords['col'] < canvas.width / 2)
                     col = canvas.width - 300 - 15
+                ctx.strokeStyle = '#000000';  // some color/style
+                ctx.lineWidth = 4;         // thickness
+                ctx.strokeRect(col,row, 300, img.height * 300 / img.width)
+                ctx.globalAlpha = 0.7;
                 ctx.drawImage(img,col,row,300, img.height * 300 / img.width);                 
             } else {
                 let row = canvas.height - this.height - 15
                 let col = 15
                 if (coords['col'] < canvas.width / 2)
                     col = canvas.width - this.width - 15
+                ctx.strokeStyle = '#000000';  // some color/style
+                ctx.lineWidth = 4;         // thickness
+                ctx.strokeRect(col,row, img.width, img.height)
+                ctx.globalAlpha = 0.7;
                 ctx.drawImage(img,col,row); 
             }
             ctx.restore()

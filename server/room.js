@@ -654,17 +654,20 @@ class Room {
       fetch(url)
           .then(function(response){return response.json();})
           .then(function(response) {
+              var done = false
               var pages = response.query.pages;
               Object.keys(pages).forEach(function (key, _) {
                   if (pages[key].hasOwnProperty('thumbnail')) {
                       if (pages[key]['thumbnail'].hasOwnProperty('source')) {
                           socket.emit('draw photo', {'row': answer['row'], 'col': answer['col']}, pages[key]['thumbnail']['source'])
-                          return
+                          done = true
                       } 
                   }
                 })
 
-
+              if (done == true)
+                return
+              
               // Try again without country
               let part2 = "";
               if (target['country'] === "USA" || target['country'] === "United States") part2 = "%2C+" + target['admin_name'];
