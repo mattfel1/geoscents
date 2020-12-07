@@ -397,7 +397,7 @@ class Map {
                 ctx.strokeStyle = '#000000';  // some color/style
                 ctx.lineWidth = 4;         // thickness
                 ctx.strokeRect(col,row, 300, img.height * 300 / img.width)
-                ctx.globalAlpha = 0.7;
+                ctx.globalAlpha = 0.9;
                 ctx.drawImage(img,col,row,300, img.height * 300 / img.width);                 
             } else {
                 let row = canvas.height - this.height - 15
@@ -407,7 +407,7 @@ class Map {
                 ctx.strokeStyle = '#000000';  // some color/style
                 ctx.lineWidth = 4;         // thickness
                 ctx.strokeRect(col,row, img.width, img.height)
-                ctx.globalAlpha = 0.7;
+                ctx.globalAlpha = 0.9;
                 ctx.drawImage(img,col,row); 
             }
             ctx.restore()

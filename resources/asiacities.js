@@ -2707,6 +2707,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Warangal",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/6/6e/WarangalMontage.jpg",
     "city_ascii": "Warangal",
     "lat": 18.01,
     "lng": 79.58,
@@ -5373,6 +5374,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Gorakhpur",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/HUDA_City_Center_station.jpg/600px-HUDA_City_Center_station.jpg",
     "city_ascii": "Gorakhpur",
     "lat": 26.7504,
     "lng": 83.38,
@@ -5452,6 +5454,7 @@ module.exports = { CITIES: [
   {
     "city": "A\u0163 \u0162\u0101\u2019if",
     "city_ascii": "At Ta'if",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/%D8%A7%D9%84%D8%B7%D8%A7%D8%A6%D9%81_%D9%85%D9%86_%D8%AC%D8%A8%D9%84_%D8%A7%D9%84%D9%87%D8%AF%D9%891.jpg/400px-%D8%A7%D9%84%D8%B7%D8%A7%D8%A6%D9%81_%D9%85%D9%86_%D8%AC%D8%A8%D9%84_%D8%A7%D9%84%D9%87%D8%AF%D9%891.jpg",
     "lat": 21.2622,
     "lng": 40.3823,
     "country": "Saudi Arabia",

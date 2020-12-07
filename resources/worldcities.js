@@ -691,6 +691,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Singapore",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Marina_Bay_Sands_from_Gardens_By_The_Bay.jpg",
     "city_ascii": "Singapore",
     "lat": 1.293,
     "lng": 103.8558,
@@ -5190,6 +5191,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Warangal",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/6/6e/WarangalMontage.jpg",
     "city_ascii": "Warangal",
     "lat": 18.01,
     "lng": 79.58,
@@ -7689,6 +7691,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Roseau",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/RoseauWide..jpg/300px-RoseauWide..jpg",
     "city_ascii": "Roseau",
     "lat": 15.301,
     "lng": -61.387,
@@ -7797,6 +7800,7 @@ module.exports = { CITIES: [
     "city_ascii": "Hagta",
     "lat": 13.4745,
     "lng": 144.7504,
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Hagatna_from_Fort_Santa_Agueda.JPG/250px-Hagatna_from_Fort_Santa_Agueda.JPG",
     "country": "Guam",
     "iso2": "GU",
     "iso3": "GUM",
@@ -11097,6 +11101,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Gorakhpur",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/HUDA_City_Center_station.jpg/600px-HUDA_City_Center_station.jpg",
     "city_ascii": "Gorakhpur",
     "lat": 26.7504,
     "lng": 83.38,
@@ -11241,6 +11246,7 @@ module.exports = { CITIES: [
   {
     "city": "A\u0163 \u0162\u0101\u2019if",
     "city_ascii": "At Ta'if",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/%D8%A7%D9%84%D8%B7%D8%A7%D8%A6%D9%81_%D9%85%D9%86_%D8%AC%D8%A8%D9%84_%D8%A7%D9%84%D9%87%D8%AF%D9%891.jpg/400px-%D8%A7%D9%84%D8%B7%D8%A7%D8%A6%D9%81_%D9%85%D9%86_%D8%AC%D8%A8%D9%84_%D8%A7%D9%84%D9%87%D8%AF%D9%891.jpg",
     "lat": 21.2622,
     "lng": 40.3823,
     "country": "Saudi Arabia",

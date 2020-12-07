@@ -729,6 +729,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Roseau",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/RoseauWide..jpg/300px-RoseauWide..jpg",
     "city_ascii": "Roseau",
     "lat": 15.301,
     "lng": -61.387,

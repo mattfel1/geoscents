@@ -443,6 +443,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Singapore",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Marina_Bay_Sands_from_Gardens_By_The_Bay.jpg",
     "city_ascii": "Singapore",
     "lat": 1.293,
     "lng": 103.8558,
@@ -3345,6 +3346,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Roseau",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/RoseauWide..jpg/300px-RoseauWide..jpg",
     "city_ascii": "Roseau",
     "lat": 15.301,
     "lng": -61.387,
@@ -3453,6 +3455,7 @@ module.exports = { CITIES: [
     "city_ascii": "Hagta",
     "lat": 13.4745,
     "lng": 144.7504,
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Hagatna_from_Fort_Santa_Agueda.JPG/250px-Hagatna_from_Fort_Santa_Agueda.JPG",
     "country": "Guam",
     "iso2": "GU",
     "iso3": "GUM",
