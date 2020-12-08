@@ -11598,6 +11598,7 @@
   {
     "city": "Québec",
     "city_ascii": "Quebec",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Quebec_City_Montage_2016.jpg/800px-Quebec_City_Montage_2016.jpg",
     "lat": 46.84,
     "lng": -71.2456,
     "country": "Canada",
@@ -18114,6 +18115,7 @@
   {
     "city": "Kūstī",
     "city_ascii": "Kusti",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/b/be/Kosti_residential.jpg",
     "lat": 13.17,
     "lng": 32.66,
     "country": "Sudan",
@@ -28946,6 +28948,7 @@
   {
     "city": "Desē",
     "city_ascii": "Dese",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Dessie_TosssaView.JPG/250px-Dessie_TosssaView.JPG",
     "lat": 11.13,
     "lng": 39.63,
     "country": "Ethiopia",
@@ -29582,6 +29585,7 @@
   },
   {
     "city": "Boma",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/1/10/Boma_city_centre.jpg",
     "city_ascii": "Boma",
     "lat": -5.83,
     "lng": 13.05,
@@ -91313,6 +91317,7 @@
   {
     "city": "Isnā",
     "city_ascii": "Isna",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Images_by_the_Nile_No_329..JPG/1920px-Images_by_the_Nile_No_329..JPG",
     "lat": 25.2904,
     "lng": 32.5499,
     "country": "Egypt",

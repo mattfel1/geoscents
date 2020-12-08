@@ -2121,6 +2121,7 @@ module.exports = { CITIES: [
   {
     "city": "K\u016bst\u012b",
     "city_ascii": "Kusti",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/b/be/Kosti_residential.jpg",
     "lat": 13.17,
     "lng": 32.66,
     "country": "Sudan",
@@ -3538,6 +3539,7 @@ module.exports = { CITIES: [
   {
     "city": "Des\u0113",
     "city_ascii": "Dese",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Dessie_TosssaView.JPG/250px-Dessie_TosssaView.JPG",
     "lat": 11.13,
     "lng": 39.63,
     "country": "Ethiopia",
@@ -3667,6 +3669,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Boma",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/1/10/Boma_city_centre.jpg",
     "city_ascii": "Boma",
     "lat": -5.83,
     "lng": 13.05,
@@ -5774,6 +5777,7 @@ module.exports = { CITIES: [
   {
     "city": "Isn\u0101",
     "city_ascii": "Isna",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Images_by_the_Nile_No_329..JPG/1920px-Images_by_the_Nile_No_329..JPG",
     "lat": 25.2904,
     "lng": 32.5499,
     "country": "Egypt",

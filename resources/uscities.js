@@ -1458,6 +1458,7 @@ module.exports = { CITIES: [
   {
     "city": "Qu\u00e9bec",
     "city_ascii": "Quebec",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Quebec_City_Montage_2016.jpg/800px-Quebec_City_Montage_2016.jpg",
     "lat": 46.84,
     "lng": -71.2456,
     "country": "Canada",

@@ -237,6 +237,7 @@
     },
     {
       "city": "Statue of Liberty",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Lady_Liberty_under_a_blue_sky_%28cropped%29.jpg",
       "city_ascii": "",
       "lat": 40.689167,
       "lng": -74.044444,
@@ -1136,6 +1137,7 @@
     },
     {
       "city": "Bering Strait",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Diomede_Islands_Bering_Sea_Jul_2006.jpg",
       "city_ascii": "",
       "lat": 66.5,
       "lng": -169,
@@ -1844,6 +1846,7 @@
     },
     {
       "city": "Yosemite",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Tunnel_View%2C_Yosemite_Valley%2C_Yosemite_NP_-_Diliff.jpg/1920px-Tunnel_View%2C_Yosemite_Valley%2C_Yosemite_NP_-_Diliff.jpg",
       "city_ascii": "",
       "lat": 37.865101,
       "lng": -119.53833,
@@ -2030,6 +2033,7 @@
     },
     {
       "city": "Acadia",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Bass_Harbor_Lighthouse_b.jpg/1920px-Bass_Harbor_Lighthouse_b.jpg",
       "city_ascii": "",
       "lat": 44.338974,
       "lng": -68.27343,
@@ -2233,6 +2237,7 @@
     },
     {
       "city": "Blue Mustang Statue (Blucifer)",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/9/90/Blucifer_Sculpture.png",
       "city_ascii": "",
       "lat": 39.83414,
       "lng": -104.67638,
@@ -2639,6 +2644,7 @@
     },
     {
       "city": "Rössing Uranium Mine",
+      "img_link": "https://en.wikipedia.org/wiki/Rössing_uranium_mine#/media/File:Arandis_Mine_quer.jpg",
       "city_ascii": "",
       "lat": -22.484167,
       "lng": 15.048889,
@@ -3184,6 +3190,7 @@
     {
       "city": "2016 Summer Olympics (XXXI Olympiad)",
       "city_ascii": "",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/thumb/d/df/2016_Summer_Olympics_logo.svg/800px-2016_Summer_Olympics_logo.svg.png",
       "lat": -22.908333,
       "lng": -43.196389,
       "country": "",
