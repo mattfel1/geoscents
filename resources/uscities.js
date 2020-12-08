@@ -976,6 +976,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Nassau",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Nassau%2C_Bahamas_welcome_gateway.JPG/1280px-Nassau%2C_Bahamas_welcome_gateway.JPG",
     "city_ascii": "Nassau",
     "lat": 25.0834,
     "lng": -77.35,

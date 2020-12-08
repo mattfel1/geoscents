@@ -590,6 +590,7 @@
     },
     {
       "city": "Great Barrier Reef",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Coral_Outcrop_Flynn_Reef.jpg/1280px-Coral_Outcrop_Flynn_Reef.jpg",
       "city_ascii": "",
       "lat": -18.283333,
       "lng": 147.7,
@@ -1567,6 +1568,7 @@
     },
     {
       "city": "Rosalind Franklin takes first diffraction photo of DNA",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/b/b2/Photo_51_x-ray_diffraction_image.jpg",
       "city_ascii": "",
       "lat": 51.511944,
       "lng": -0.116111,
@@ -1926,6 +1928,7 @@
     },
     {
       "city": "Arches",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Delicate_arch_sunset.jpg/284px-Delicate_arch_sunset.jpg",
       "city_ascii": "",
       "lat": 38.733082,
       "lng": -109.592514,
@@ -2612,6 +2615,7 @@
     {
       "city": "Yangcheng (陽城)",
       "city_ascii": "",
+      "img_link": "https://www.ancient.eu/img/r/p/500x600/4375.jpg.webp?v=1600805702",
       "lat": 34.455278,
       "lng": 113.025278,
       "country": "Xia Dynasty, China",
@@ -3178,6 +3182,7 @@
     },
     {
       "city": "2012 Summer Olympics (XXX Olympiad)",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/thumb/d/de/2012_Summer_Olympics_logo.svg/800px-2012_Summer_Olympics_logo.svg.png",
       "city_ascii": "",
       "lat": 51.507222,
       "lng": -0.1275,
@@ -3201,6 +3206,7 @@
     },
     {
       "city": "2010 Winter Olympics (XXI Olympiad)",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a7/2010_Winter_Olympics_logo.svg/800px-2010_Winter_Olympics_logo.svg.png",
       "city_ascii": "",
       "lat": 49.25,
       "lng": -123.1,
@@ -3858,6 +3864,7 @@
     },
     {
       "city": "Port-aux-Français",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Port_aux_Fran%C3%A7ais.JPG/300px-Port_aux_Fran%C3%A7ais.JPG",
       "city_ascii": "",
       "lat": -49.348653,
       "lng": 70.219305,
