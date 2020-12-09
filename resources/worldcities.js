@@ -235,7 +235,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Istanbul",
-    "img_link": "https://en.wikipedia.org/wiki/Istanbul#/media/File:Istanbul_collage_5j.jpg",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Istanbul_collage_5j.jpg",
     "city_ascii": "Istanbul",
     "lat": 41.105,
     "lng": 29.01,
@@ -7733,7 +7733,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Pago Pago",
-    "img_link": "https://en.wikipedia.org/wiki/Pago_Pago#/media/File:Pagopago_amerika_s\u0101moa.jpg",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Pagopago_amerika_s\u0101moa.jpg",
     "city_ascii": "Pago Pago",
     "lat": -14.274,
     "lng": -170.7046,

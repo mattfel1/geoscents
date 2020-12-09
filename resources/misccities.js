@@ -662,7 +662,7 @@
       "iso2": "TZ",
       "population": 0,
       "capital": "",
-      "img_link": "https://en.wikipedia.org/wiki/Mount_Kilimanjaro#/media/File:Mount_Kilimanjaro.jpg",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/9/91/Mount_Kilimanjaro.jpg",
       "wiki": "https://en.wikipedia.org/wiki/Mount_Kilimanjaro"
     },
     {
@@ -1150,6 +1150,7 @@
     },
     {
       "city": "Pearl Harbor",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/USS_Arizona_sinking_2a.jpg/1920px-USS_Arizona_sinking_2a.jpg",
       "city_ascii": "",
       "lat": 21.34927,
       "lng": -157.94397,
@@ -1161,6 +1162,7 @@
     },
     {
       "city": "Forbidden City (故宫)",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Forbidden_City_Beijing_Shenwumen_Gate.JPG/1280px-Forbidden_City_Beijing_Shenwumen_Gate.JPG",
       "city_ascii": "",
       "lat": 39.915987,
       "lng": 116.397925,
@@ -1863,7 +1865,7 @@
     },
     {
       "city": "Joshua Tree",
-      "img_link": "https://en.wikipedia.org/wiki/Joshua_Tree_National_Park#/media/File:Joshua_Tree_-_Cyclops_+_Potato_Head_-_Sunrise.jpg",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Joshua_Tree_-_Cyclops_%2B_Potato_Head_-_Sunrise.jpg",
       "city_ascii": "",
       "lat": 33.881866,
       "lng": -115.90065,
@@ -2006,7 +2008,7 @@
       "admin_name": "Nat’l Forest",
       "capital": "",
       "population": "",
-      "img_link": "https://en.wikipedia.org/wiki/Chattahoochee–Oconee_National_Forest#/media/File:Cool_Springs_Overlook,_Fort_Mountain,_Georgia_April_2016.jpg",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/5/55/Cool_Springs_Overlook%2C_Fort_Mountain%2C_Georgia_April_2016.jpg",
       "id": ""
     },
     {
@@ -2300,7 +2302,7 @@
     },
     {
       "city": "Ivan Pavlov's Dog Study",
-      "img_link": "https://en.wikipedia.org/wiki/Classical_conditioning#/media/File:Ivan_Pavlov_research_on_dog's_reflex_setup.jpg",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Ivan_Pavlov_research_on_dog%27s_reflex_setup.jpg",
       "city_ascii": "",
       "lat": 59.942,
       "lng": 30.299,
@@ -2378,7 +2380,7 @@
     },
     {
       "city": "Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu",
-      "img_link": "https://en.wikipedia.org/wiki/Taumatawhakatangi%C2%ADhangakoauauotamatea%C2%ADturipukakapikimaunga%C2%ADhoronukupokaiwhen%C2%ADuakitanatahu#/media/File:New_Zealand_0577.jpg",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/5/5b/New_Zealand_0577.jpg",
       "city_ascii": "",
       "lat": -40.346,
       "lng": 176.5402,
@@ -2654,7 +2656,7 @@
     },
     {
       "city": "Rössing Uranium Mine",
-      "img_link": "https://en.wikipedia.org/wiki/Rössing_uranium_mine#/media/File:Arandis_Mine_quer.jpg",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/5/51/Arandis_Mine_quer.jpg",
       "city_ascii": "",
       "lat": -22.484167,
       "lng": 15.048889,
@@ -2688,7 +2690,7 @@
     },
     {
       "city": "Apollo 11 Splashdown (First Moon Landing)",
-      "img_link": "https://en.wikipedia.org/wiki/Apollo_11#/media/File:Splashdown_3.jpg",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/2/28/Splashdown_3.jpg",
       "city_ascii": "",
       "lat": 10.6, 
       "lng": 172.4,
@@ -4025,7 +4027,7 @@
     },
     {
       "city": "Pico Cão Grande needle-shaped volcanic plug",
-      "img_link": "https://en.wikipedia.org/wiki/Pico_Cão_Grande#/media/File:Pico_Cão_Grande.jpg",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Pico_C%C3%A3o_Grande.jpg",
       "city_ascii": "",
       "lat": 0.118056,
       "lng": 6.566389,
@@ -4180,7 +4182,7 @@
     },
     {
       "city": "Battle of Midway (1942)",
-      "img_link": "https://en.wikipedia.org/wiki/Battle_of_Midway#/media/File:SBD-3_Dauntless_bombers_of_VS-8_over_the_burning_Japanese_cruiser_Mikuma_on_6_June_1942.jpg",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/b/b3/SBD-3_Dauntless_bombers_of_VS-8_over_the_burning_Japanese_cruiser_Mikuma_on_6_June_1942.jpg",
       "city_ascii": "",
       "lat": 28.2,
       "lng": -177.35,
@@ -4280,6 +4282,7 @@
     },
     {
       "city": "Dozens of People Drown in Liquid Excrement in 1184 at the Erfurt Latrine Disaster",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Zitadelle_Petersberg_Erfurt_Eingang.jpg/300px-Zitadelle_Petersberg_Erfurt_Eingang.jpg",
       "city_ascii": "",
       "lat": 50.983333,
       "lng": 11.033333,

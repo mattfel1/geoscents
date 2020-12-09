@@ -447,7 +447,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Pago Pago",
-    "img_link": "https://en.wikipedia.org/wiki/Pago_Pago#/media/File:Pagopago_amerika_s\u0101moa.jpg",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Pagopago_amerika_s\u0101moa.jpg",
     "city_ascii": "Pago Pago",
     "lat": -14.274,
     "lng": -170.7046,
@@ -913,7 +913,7 @@ module.exports = { CITIES: [
     "iso3": "IDN",
     "admin_name": "Jambi",
     "capital": "admin",
-    "img_link": "https://en.wikipedia.org/wiki/Jambi_(city)#/media/File:Gentala_arasy_saat_senja.jpg",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/9/95/Gentala_arasy_saat_senja.jpg",
     "population": 457090,
     "id": 1360645580
   },
@@ -4583,7 +4583,7 @@ module.exports = { CITIES: [
     "iso2": "TK",
     "admin_name": "",
     "capital": "",
-    "img_link": "https://en.wikipedia.org/wiki/Atafu#/media/File:Atafu_street_dawn_20070715.jpg",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/4/40/Atafu_street_dawn_20070715.jpg",
     "population": 541,
     "id": 9999999992
   }

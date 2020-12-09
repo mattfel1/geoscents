@@ -144,7 +144,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Istanbul",
-    "img_link": "https://en.wikipedia.org/wiki/Istanbul#/media/File:Istanbul_collage_5j.jpg",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Istanbul_collage_5j.jpg",
     "city_ascii": "Istanbul",
     "lat": 41.105,
     "lng": 29.01,
@@ -6560,7 +6560,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Ujjain",
-    "img_link": "https://en.wikipedia.org/wiki/Ujjain#/media/File:Ram_chat.JPG",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Ram_chat.JPG",
     "city_ascii": "Ujjain",
     "lat": 23.1904,
     "lng": 75.79,

@@ -235,7 +235,7 @@
   },
   {
     "city": "Istanbul",
-    "img_link": "https://en.wikipedia.org/wiki/Istanbul#/media/File:Istanbul_collage_5j.jpg",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Istanbul_collage_5j.jpg",
     "city_ascii": "Istanbul",
     "lat": 41.105,
     "lng": 29.01,
@@ -7733,7 +7733,7 @@
   },
   {
     "city": "Pago Pago",
-    "img_link": "https://en.wikipedia.org/wiki/Pago_Pago#/media/File:Pagopago_amerika_sāmoa.jpg",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Pagopago_amerika_sāmoa.jpg",
     "city_ascii": "Pago Pago",
     "lat": -14.274,
     "lng": -170.7046,
@@ -13330,7 +13330,7 @@
   },
   {
     "city": "Ujjain",
-    "img_link": "https://en.wikipedia.org/wiki/Ujjain#/media/File:Ram_chat.JPG",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Ram_chat.JPG",
     "city_ascii": "Ujjain",
     "lat": 23.1904,
     "lng": 75.79,
@@ -14652,7 +14652,7 @@
     "iso3": "IDN",
     "admin_name": "Jambi",
     "capital": "admin",
-    "img_link": "https://en.wikipedia.org/wiki/Jambi_(city)#/media/File:Gentala_arasy_saat_senja.jpg",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/9/95/Gentala_arasy_saat_senja.jpg",
     "population": 457090,
     "id": 1360645580
   },
@@ -201526,7 +201526,7 @@
     "iso2": "TK",
     "admin_name": "",
     "capital": "",
-    "img_link": "https://en.wikipedia.org/wiki/Atafu#/media/File:Atafu_street_dawn_20070715.jpg",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/4/40/Atafu_street_dawn_20070715.jpg",
     "population": 541,
     "id": 9999999992
   },

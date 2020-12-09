@@ -14,7 +14,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Istanbul",
-    "img_link": "https://en.wikipedia.org/wiki/Istanbul#/media/File:Istanbul_collage_5j.jpg",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Istanbul_collage_5j.jpg",
     "city_ascii": "Istanbul",
     "lat": 41.105,
     "lng": 29.01,
