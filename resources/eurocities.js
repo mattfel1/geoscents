@@ -1407,6 +1407,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Saarbr\u00fccken",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/5/57/SB-Rathaus.jpg",
     "city_ascii": "Saarbrucken",
     "lat": 49.2504,
     "lng": 6.97,

@@ -1986,6 +1986,7 @@
     },
     {
       "city": "Hot Springs",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Steamy_Entrance_Springs_on_Cold_Night_in_Hot_Springs_National_Park.jpg",
       "city_ascii": "",
       "lat": 34.52153,
       "lng": -93.042267,
@@ -4303,6 +4304,120 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Arecibo_Observatory"
     },
+    {
+      "city": "Rundāle Palace",
+      "city_ascii": "Rundale Palace",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/0/07/Rundale_palace%2C_still_the_most_beautiful_in_the_world._Latvia_%2810759228303%29.jpg",
+      "lat": 56.42,
+      "lng": 24.009722,
+      "iso2": "LV",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Rundāle_Palace"
+    },
+    {
+      "city": "Žmuidzinavičius Museum",
+      "city_ascii": "Zmuidzinavicius Museum",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/3/37/005_devil_representation.jpg",
+      "lat": 54.900833,
+      "lng": 23.910556,
+      "iso2": "LT",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Žmuidzinavičius_Museum"
+    },
+    {
+      "city": "Hohenzollern Castle",
+      "city_ascii": "",
+      "lat": 48.323194,
+      "lng": 8.967722,
+      "iso2": "DE",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/6/61/Burg_Hohenzollern.JPG",
+      "wiki": "https://en.wikipedia.org/wiki/Hohenzollern_Castle"
+    },
+    {
+      "city": "Königsberg Castle",
+      "city_ascii": "Konigsberg Castle",
+      "lat": 54.710217,
+      "lng": 20.510789,
+      "iso2": "RU",
+      "country": "",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/b/ba/K%C3%B6nigsberg_Castle.jpg",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Königsberg_Castle"
+    },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
+    // {
+    //   "city": "",
+    //   "city_ascii": "",
+    //   "lat": ,
+    //   "lng": ,
+    //   "iso2": "",
+    //   "country": "",
+    //   "population": 0,
+    //   "capital": "",
+    //   "wiki": ""
+    // },
     // {
     //   "city": "",
     //   "city_ascii": "",

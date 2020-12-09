@@ -1810,6 +1810,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Aleppo",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Aleppo_new_mix.jpg",
     "city_ascii": "Aleppo",
     "lat": 36.23,
     "lng": 37.17,
@@ -2018,6 +2019,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Incheon",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/8/86/%EC%9D%B8%EC%B2%9C%EB%8F%84%ED%98%B8%EB%B6%80%EC%B2%AD%EC%82%AC_%EC%95%84%EB%AC%B8.jpg",
     "city_ascii": "Incheon",
     "lat": 37.4761,
     "lng": 126.6422,
@@ -8840,6 +8842,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Mysore",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/5/56/Mysuru_Montage.jpg",
     "city_ascii": "Mysore",
     "lat": 12.31,
     "lng": 76.66,
@@ -10180,6 +10183,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Saarbr\u00fccken",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/5/57/SB-Rathaus.jpg",
     "city_ascii": "Saarbrucken",
     "lat": 49.2504,
     "lng": 6.97,
