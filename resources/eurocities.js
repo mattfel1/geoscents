@@ -1042,6 +1042,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Monaco",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Panorama_von_Monaco-La_Turbie.jpg/1920px-Panorama_von_Monaco-La_Turbie.jpg",
     "city_ascii": "Monaco",
     "lat": 43.7396,
     "lng": 7.4069,

@@ -1414,6 +1414,7 @@
     },
     {
       "city": "Discovery of Neanderthals (Neandertal Valley)",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Neanderthalensis.jpg/282px-Neanderthalensis.jpg",
       "city_ascii": "",
       "lat": 51.226129,
       "lng": 6.951058,
@@ -1862,6 +1863,7 @@
     },
     {
       "city": "Joshua Tree",
+      "img_link": "https://en.wikipedia.org/wiki/Joshua_Tree_National_Park#/media/File:Joshua_Tree_-_Cyclops_+_Potato_Head_-_Sunrise.jpg",
       "city_ascii": "",
       "lat": 33.881866,
       "lng": -115.90065,
@@ -2023,6 +2025,7 @@
     },
     {
       "city": "Okefenokee",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/OkefenokeeNWR1.jpg/800px-OkefenokeeNWR1.jpg",
       "city_ascii": "",
       "lat": 30.77323,
       "lng": -82.292732,
@@ -2086,6 +2089,7 @@
     },
     {
       "city": "de facto Capital of the European Union",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Quartier_europ%C3%A9en_Bruxelles_2011-06_CROP.jpg/1024px-Quartier_europ%C3%A9en_Bruxelles_2011-06_CROP.jpg",
       "city_ascii": "",
       "lat": 50.84,
       "lng": 4.38,
@@ -2296,6 +2300,7 @@
     },
     {
       "city": "Ivan Pavlov's Dog Study",
+      "img_link": "https://en.wikipedia.org/wiki/Classical_conditioning#/media/File:Ivan_Pavlov_research_on_dog's_reflex_setup.jpg",
       "city_ascii": "",
       "lat": 59.942,
       "lng": 30.299,
@@ -2373,6 +2378,7 @@
     },
     {
       "city": "Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu",
+      "img_link": "https://en.wikipedia.org/wiki/Taumatawhakatangi%C2%ADhangakoauauotamatea%C2%ADturipukakapikimaunga%C2%ADhoronukupokaiwhen%C2%ADuakitanatahu#/media/File:New_Zealand_0577.jpg",
       "city_ascii": "",
       "lat": -40.346,
       "lng": 176.5402,
@@ -2682,6 +2688,7 @@
     },
     {
       "city": "Apollo 11 Splashdown (First Moon Landing)",
+      "img_link": "https://en.wikipedia.org/wiki/Apollo_11#/media/File:Splashdown_3.jpg",
       "city_ascii": "",
       "lat": 10.6, 
       "lng": 172.4,
@@ -4018,6 +4025,7 @@
     },
     {
       "city": "Pico Cão Grande needle-shaped volcanic plug",
+      "img_link": "https://en.wikipedia.org/wiki/Pico_Cão_Grande#/media/File:Pico_Cão_Grande.jpg",
       "city_ascii": "",
       "lat": 0.118056,
       "lng": 6.566389,

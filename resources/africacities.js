@@ -774,8 +774,8 @@ module.exports = { CITIES: [
     "country": "Benin",
     "iso2": "BJ",
     "iso3": "BEN",
+    "capital": "",
     "admin_name": "Littoral",
-    "capital": "primary",
     "population": 762000,
     "id": 1204955174
   },

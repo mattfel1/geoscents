@@ -2341,19 +2341,6 @@ module.exports = { CITIES: [
     "id": 1586306717
   },
   {
-    "city": "Cotonou",
-    "city_ascii": "Cotonou",
-    "lat": 6.4,
-    "lng": 2.52,
-    "country": "Benin",
-    "iso2": "BJ",
-    "iso3": "BEN",
-    "admin_name": "Littoral",
-    "capital": "primary",
-    "population": 762000,
-    "id": 1204955174
-  },
-  {
     "city": "Vientiane",
     "city_ascii": "Vientiane",
     "lat": 17.9667,
@@ -3242,6 +3229,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Monaco",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Panorama_von_Monaco-La_Turbie.jpg/1920px-Panorama_von_Monaco-La_Turbie.jpg",
     "city_ascii": "Monaco",
     "lat": 43.7396,
     "lng": 7.4069,

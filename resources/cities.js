@@ -6693,8 +6693,8 @@
     "country": "Benin",
     "iso2": "BJ",
     "iso3": "BEN",
+    "capital": "",
     "admin_name": "Littoral",
-    "capital": "primary",
     "population": 762000,
     "id": 1204955174
   },
@@ -7587,6 +7587,7 @@
   },
   {
     "city": "Monaco",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Panorama_von_Monaco-La_Turbie.jpg/1920px-Panorama_von_Monaco-La_Turbie.jpg",
     "city_ascii": "Monaco",
     "lat": 43.7396,
     "lng": 7.4069,
