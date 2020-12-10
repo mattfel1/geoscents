@@ -821,6 +821,7 @@
     },
     {
       "city": "Alexander Graham Bell makes First Phone Call",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/1/10/Alexander_Graham_Bell.jpg",
       "city_ascii": "",
       "lat": 48.358056,
       "lng": -71.063611,
@@ -1824,6 +1825,7 @@
     },
     {
       "city": "Mount Rainier",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/3/32/Mount_Rainier_from_above_Myrtle_Falls_in_August.JPG", 
       "city_ascii": "",
       "lat": 46.879967,
       "lng": -121.726906,
@@ -2326,7 +2328,8 @@
       "wiki": "https://en.wikipedia.org/wiki/Eratosthenes#Measurement_of_the_Earth's_circumference"
     },
     {
-      "city": "Michelson-Morley Experiment",
+      "city": "Michelson-Morley Experiment disproves luminiferous aether theory",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Michelson_morley_experiment_1887.jpg",
       "city_ascii": "",
       "lat": 41.504,
       "lng": -81.608,
@@ -2703,6 +2706,7 @@
     },
     {
       "city": "1969 Woodstock Music Festival",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/b/b7/Woodstock_poster.jpg",
       "city_ascii": "",
       "lat": 41.701,
       "lng": -74.88,
@@ -2725,6 +2729,7 @@
     },
     {
       "city": "Hannibal Defeats the Romans at the Battle of Cannae",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/1/1a/The_Death_of_Paulus_Aemilius_at_the_Battle_of_Cannae_%28Yale_University_Art_Gallery_scan%29.jpg",
       "city_ascii": "",
       "lat": 41.306389,
       "lng": 16.1325,
@@ -2872,6 +2877,7 @@
     },
     {
       "city": "Niccolò Machiavelli Writes 'The Prince' (Political Treatise)",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Portrait_of_Niccol%C3%B2_Machiavelli_by_Santi_di_Tito.jpg",
       "city_ascii": "",
       "lat": 43.682778,
       "lng": 11.197222,
@@ -2890,7 +2896,7 @@
       "iso2": "FR",
       "population": 0,
       "capital": "",
-      "wiki": "https://en.wikipedia.org/wiki/Adma_Smith#The_Wealth_of_Nations"
+      "wiki": "https://en.wikipedia.org/wiki/Adam_Smith#The_Wealth_of_Nations"
     },
     {
       "city": "Vincent van Gogh Paints 'The Starry Night'",
@@ -2927,6 +2933,7 @@
     },
     {
       "city": "Hacienda Nápoles (Pablo Escobar's estate)",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/4/4a/P%C3%B3rtico_Hacienda_N%C3%A1poles.JPG",
       "city_ascii": "",
       "lat": 5.926,
       "lng": -74.721825,
@@ -3171,6 +3178,7 @@
     },
     {
       "city": "1972 Summer Olympics",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/d/d1/1972_Summer_Olympics_logo.svg",
       "city_ascii": "",
       "lat": 48.133333,
       "lng": 11.566667,
@@ -3293,6 +3301,7 @@
       "iso2": "ZA",
       "population": 0,
       "capital": "",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/0/0d/2010_FIFA_World_Cup.svg",
       "wiki": "https://en.wikipedia.org/wiki/2010_FIFA_World_Cup_Final"
     },
     {
@@ -3822,6 +3831,7 @@
     {
       "city": "'Ötzi the Iceman' Prehistoric Mummy Discovery Site",
       "city_ascii": "'Otzi the Iceman' Prehistoric Mummy Discovery Site",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/1/1d/OetzitheIceman02.jpg",
       "lat": 46.779389,
       "lng": 10.840306,
       "iso2": "IT",
@@ -3971,6 +3981,7 @@
     {
       "city": "Pinnacles",
       "city_ascii": "",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/4/44/Rock_formations_at_Pinnacles_National_Park.jpg",
       "lat": 36.486944,
       "lng": -121.166944,
       "iso2": "US",
@@ -4119,6 +4130,7 @@
     },
     {
       "city": "Alexander Fleming Discovers Penicillin",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Synthetic_Production_of_Penicillin_TR1468.jpg",
       "city_ascii": "",
       "lat": 51.498356,
       "lng": -0.176894,
@@ -4319,7 +4331,7 @@
       "wiki": "https://en.wikipedia.org/wiki/Rundāle_Palace"
     },
     {
-      "city": "Žmuidzinavičius Museum",
+      "city": "Žmuidzinavičius (Devils') Museum",
       "city_ascii": "Zmuidzinavicius Museum",
       "img_link": "https://upload.wikimedia.org/wikipedia/commons/3/37/005_devil_representation.jpg",
       "lat": 54.900833,
@@ -4481,7 +4493,7 @@
       "wiki": "https://en.wikipedia.org/wiki/Alexander_the_Great"
     },
     {
-      "city": "Birth place of Frederick the Great",
+      "city": "Frederick the Great Birthplace",
       "city_ascii": "",
       "lat": 52.52,
       "lng": 13.405,

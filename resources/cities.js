@@ -39970,6 +39970,7 @@
   },
   {
     "city": "Manzini",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/8/85/Ex_Tum%27s_George_Hotel_Manzini_Swaziland.jpg",
     "city_ascii": "Manzini",
     "lat": -26.495,
     "lng": 31.388,
