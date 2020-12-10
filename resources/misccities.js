@@ -4439,7 +4439,7 @@
       "lng": 20.453056,
       "iso2": "RU",
       "country": "",
-      "admin_name": "Kaliningrad Oblast"
+      "admin_name": "Kaliningrad Oblast",
       "population": 0,
       "capital": "",
       "img_link": "https://upload.wikimedia.org/wikipedia/commons/1/12/Kaliningrad_05-2017_img10_aerial_view.jpg",
