@@ -4458,7 +4458,7 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Vorkutlag"
     },
-    // {
+    {
       "city": "Burial place of Suleiman the Magnificent's (سليمان اول‎) heart and liver",
       "city_ascii": "",
       "lat": 46.0714,
