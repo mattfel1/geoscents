@@ -4361,7 +4361,7 @@
       "country": "",
       "population": 0,
       "capital": "",
-      "img_link": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Panamax_ship_exiting_the_Miraflores_locks.jpg"
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Panamax_ship_exiting_the_Miraflores_locks.jpg",
       "wiki": "https://en.wikipedia.org/wiki/Panama_Canal"
     },
     {
