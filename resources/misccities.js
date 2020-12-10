@@ -4352,94 +4352,99 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Königsberg_Castle"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Panama Canal Artificial Waterway",
+      "city_ascii": "",
+      "lat": 9.08,
+      "lng": -79.68,
+      "iso2": "PA",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Panamax_ship_exiting_the_Miraflores_locks.jpg"
+      "wiki": "https://en.wikipedia.org/wiki/Panama_Canal"
+    },
+    {
+      "city": "Palm Islands",
+      "city_ascii": "",
+      "lat": 25.116944,
+      "lng": 55.131944,
+      "iso2": "AE",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Palm_Islands"
+    },
+    {
+      "city": "World's largest tidal range (16.3 meters)",
+      "city_ascii": "",
+      "lat": 45,
+      "lng": -65.75,
+      "iso2": "CA",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Sandstone_in_Canada_-_IMG_0791_%2811385934064%29.jpg",
+      "wiki": "https://en.wikipedia.org/wiki/Tidal_range#:~:text=The%20world%27s%20largest%20tidal%20range,Wales%20in%20the%20Severn%20Estuary."
+    },
+    {
+      "city": "TauTona Mine (World's deepest gold mine)",
+      "city_ascii": "",
+      "lat": -26.416111, 
+      "lng": 27.4275,
+      "iso2": "ZA",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "img_link": "http://lh5.ggpht.com/-7FgafN9JXvQ/VFXdgN3zVCI/AAAAAAAAElA/joGT9-rsQKI/s1600/TauTona%25255B3%25255D.jpg",
+      "wiki": "https://en.wikipedia.org/wiki/TauTona_Mine"
+    },
+    {
+      "city": "Matsushima (松島) Pine Islands",
+      "city_ascii": "Matsushima",
+      "lat": 38.366667,
+      "lng": 141.083333,
+      "iso2": "JP",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Matsushima"
+    },
+    {
+      "city": "Amanohashidate (天橋立) Isthmus",
+      "city_ascii": "Amanohashidate",
+      "lat": 35.569358,
+      "lng": 135.191517,
+      "iso2": "JP",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Amanohashidate"
+    },
+    {
+      "city": "Akashi Kaikyō Bridge (明石海峡大橋, World's longest suspension bridge span)",
+      "city_ascii": "Akashi Kaikyo Bridge",
+      "lat": 34.6162,
+      "lng": 135.0205,
+      "iso2": "JP",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Akashi_Kaikyō_Bridge"
+    },
+    {
+      "city": "Kant Island",
+      "city_ascii": "",
+      "lat": 54.700278,
+      "lng": 20.453056,
+      "iso2": "RU",
+      "country": "",
+      "admin_name": "Kaliningrad Oblast"
+      "population": 0,
+      "capital": "",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/1/12/Kaliningrad_05-2017_img10_aerial_view.jpg",
+      "wiki": "https://en.wikipedia.org/wiki/Kneiphof"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
