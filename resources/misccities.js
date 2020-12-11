@@ -4503,17 +4503,18 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Frederick_the_Great"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Nubian Pyramids of Meroë",
+      "city_ascii": "Nubian Pyramids of Meroe",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/e/e6/NubianMeroePyramids30sep2005%282%29.jpg",
+      "lat": 16.938333,
+      "lng": 33.749167,
+      "iso2": "SD",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Pyramids_of_Meroë"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
