@@ -1351,6 +1351,7 @@
     },
     {
       "city": "Abuna Yemata Guh Church",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/7/71/AbumaYemata_Entrance.jpg",
       "city_ascii": "",
       "lat": 13.91526,
       "lng": 39.343071,

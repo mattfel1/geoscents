@@ -2956,6 +2956,7 @@
   },
   {
     "city": "Saidu Sharif",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/8/80/Shuhadah_Square_Saidu_Sharif.JPG",
     "city_ascii": "Saidu Sharif",
     "lat": 34.75,
     "lng": 72.35,
@@ -11305,6 +11306,7 @@
   {
     "city": "Biên Hòa",
     "city_ascii": "Bien Hoa",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/8/85/Nh%C3%A0_th%E1%BB%9D_ch%C3%ADnh_V%C4%83n_mi%E1%BA%BFu_Tr%E1%BA%A5n_Bi%C3%AAn.jpg",
     "lat": 10.97,
     "lng": 106.8301,
     "country": "Vietnam",
@@ -43495,6 +43497,7 @@
   },
   {
     "city": "Darwin",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/8/84/City_landscape_of_Darwin%2C_Northern_Territory.jpg",
     "city_ascii": "Darwin",
     "lat": -12.4254,
     "lng": 130.85,

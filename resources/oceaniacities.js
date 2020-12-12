@@ -2185,6 +2185,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Darwin",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/8/84/City_landscape_of_Darwin%2C_Northern_Territory.jpg",
     "city_ascii": "Darwin",
     "lat": -12.4254,
     "lng": 130.85,
