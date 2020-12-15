@@ -7014,19 +7014,6 @@ module.exports = { CITIES: [
     "id": 1398516045
   },
   {
-    "city": "Bujumbura",
-    "city_ascii": "Bujumbura",
-    "lat": -3.3761,
-    "lng": 29.36,
-    "country": "Burundi",
-    "iso2": "BI",
-    "iso3": "BDI",
-    "admin_name": "Bujumbura Mairie",
-    "capital": "primary",
-    "population": 331700,
-    "id": 1108101689
-  },
-  {
     "city": "Canberra",
     "city_ascii": "Canberra",
     "lat": -35.283,
@@ -8596,6 +8583,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Hartford",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Hartford_Skyline_from_Great_River_Park_%28Cropped%29.jpg",
     "city_ascii": "Hartford",
     "lat": 41.7661,
     "lng": -72.6834,
@@ -8603,7 +8591,7 @@ module.exports = { CITIES: [
     "iso2": "US",
     "iso3": "USA",
     "admin_name": "Connecticut",
-    "capital": "",
+    "capital": "admin",
     "population": 914751,
     "id": 1840004773
   },
@@ -12660,6 +12648,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Shimla",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/1/15/Shimla_Montage.jpg",
     "city_ascii": "Shimla",
     "lat": 31.1,
     "lng": 77.1666,
@@ -13128,19 +13117,6 @@ module.exports = { CITIES: [
     "id": 1124379539
   },
   {
-    "city": "Hartford",
-    "city_ascii": "Hartford",
-    "lat": 43.621,
-    "lng": -96.9424,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "South Dakota",
-    "capital": "admin",
-    "population": 3237,
-    "id": 1840002653
-  },
-  {
     "city": "Dover",
     "city_ascii": "Dover",
     "lat": 40.0033,
@@ -13296,6 +13272,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Flying Fish Cove",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Flying_Fish_Cove.jpg",
     "city_ascii": "Flying Fish Cove",
     "lat": -10.421667,
     "lng": 105.678056,

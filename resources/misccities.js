@@ -1396,6 +1396,7 @@
     },
     {
       "city": "That Wanaka Tree",
+      "img_link": "https://resources.stuff.co.nz/content/dam/images/1/m/g/3/b/m/image.related.StuffLandscapeSixteenByNine.1240x700.1mg3eg.png/1603242813135.jpg",
       "city_ascii": "",
       "lat": -45.0311,
       "lng": 168.6644,
@@ -1950,6 +1951,7 @@
     },
     {
       "city": "Mesa Verde",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Mesa_verde_north_2007.jpg",
       "city_ascii": "",
       "lat": 37.230873,
       "lng": -108.461838,
@@ -3001,7 +3003,8 @@
     },
     {
       "city": "Pará Falls",
-      "city_ascii": "",
+      "city_ascii": "Para Falls",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/4/47/Salto_Para.jpg",
       "lat": 6.311111,
       "lng": -64.523889,
       "country": "",
@@ -3440,6 +3443,7 @@
     },
     {
       "city": "Tassili n'Ajjer (طاسيلي ناجر) Prehistoric Cave Art",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/0/07/Algerien_Desert.jpg",
       "city_ascii": "",
       "lat": 25.5,
       "lng": 9,
@@ -3520,6 +3524,7 @@
     },
     {
       "city": "Wakaliwood Film Studio",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/9/97/Wakaliwood_logo.png",
       "city_ascii": "",
       "lat": 0.313611,
       "lng": 32.581111,
@@ -4516,17 +4521,17 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Pyramids_of_Meroë"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Helmcken Falls",
+      "city_ascii": "",
+      "lat": 51.954092,
+      "lng": -120.176911,
+      "iso2": "CA",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Helmcken_Falls"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",

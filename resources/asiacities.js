@@ -7840,6 +7840,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Shimla",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/1/15/Shimla_Montage.jpg",
     "city_ascii": "Shimla",
     "lat": 31.1,
     "lng": 77.1666,

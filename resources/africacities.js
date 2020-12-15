@@ -892,7 +892,7 @@ module.exports = { CITIES: [
     "iso2": "BI",
     "iso3": "BDI",
     "admin_name": "Bujumbura Mairie",
-    "capital": "primary",
+    "capital": "",
     "population": 331700,
     "id": 1108101689
   },

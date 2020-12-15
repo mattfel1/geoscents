@@ -4541,6 +4541,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Flying Fish Cove",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Flying_Fish_Cove.jpg",
     "city_ascii": "Flying Fish Cove",
     "lat": -10.421667,
     "lng": 105.678056,

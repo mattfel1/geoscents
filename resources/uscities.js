@@ -1081,6 +1081,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Hartford",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Hartford_Skyline_from_Great_River_Park_%28Cropped%29.jpg",
     "city_ascii": "Hartford",
     "lat": 41.7661,
     "lng": -72.6834,
@@ -1088,7 +1089,7 @@ module.exports = { CITIES: [
     "iso2": "US",
     "iso3": "USA",
     "admin_name": "Connecticut",
-    "capital": "",
+    "capital": "admin",
     "population": 914751,
     "id": 1840004773
   },
@@ -2122,6 +2123,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Durham",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Durham-montage-05-08.jpg",
     "city_ascii": "Durham",
     "lat": 35.9795,
     "lng": -78.9032,
@@ -5373,6 +5375,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Pasadena",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/8/88/Pasadena_TX_Chem_Skyline.jpg",
     "city_ascii": "Pasadena",
     "lat": 29.6584,
     "lng": -95.1499,
@@ -8217,19 +8220,6 @@ module.exports = { CITIES: [
     "capital": "admin",
     "population": 7484,
     "id": 1840002187
-  },
-  {
-    "city": "Hartford",
-    "city_ascii": "Hartford",
-    "lat": 43.621,
-    "lng": -96.9424,
-    "country": "United States",
-    "iso2": "US",
-    "iso3": "USA",
-    "admin_name": "South Dakota",
-    "capital": "admin",
-    "population": 3237,
-    "id": 1840002653
   },
   {
     "city": "Dover",
