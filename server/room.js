@@ -445,7 +445,7 @@ class Room {
         const lastRecordUpdate = (t) => {this.lastRecordUpdate = t; this.serviceRecord = true};
         const getPosition = (score, category) => {return this.getPosition(score, category)};
         const insertRecord = (p,c,d,r,pl) => {return this.insertRecord(p,c,d,r,pl)};
-        const sufx = ["st", "nd", "rd"];
+        const sufx = ["st", "nd", "rd", "th", "th"];
         const citysrc = this.citysrc;
         Array.from(this.sortPlayersNoJoe()).forEach((player, id) => {
             const monthNames = ["Jan", "Feb", "Mar","Apr", "May", "Jun","Jul", "Aug", "Sep","Oct", "Nov", "Dec"];
@@ -667,7 +667,7 @@ class Room {
 
               if (done == true)
                 return
-              
+
               // Try again without country
               let part2 = "";
               if (target['country'] === "USA" || target['country'] === "United States") part2 = "%2C+" + target['admin_name'];
