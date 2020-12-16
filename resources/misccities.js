@@ -4597,7 +4597,7 @@
       "city_ascii": "L'Anse aux Meadows (Possibly Leifsbuoir) Norse Archeological Site",
       "img_link": "https://upload.wikimedia.org/wikipedia/commons/6/68/Authentic_Viking_recreation.jpg",
       "lat": 51.596389,
-      "lng": -55.533333,,
+      "lng": -55.533333,
       "iso2": "CA",
       "country": "",
       "population": 0,
