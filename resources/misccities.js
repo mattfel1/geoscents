@@ -1186,6 +1186,7 @@
     },
     {
       "city": "Nikkō Tōshō-gū (日光東照宮)",
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/f/f9/NikkoYomeimon5005.jpg",
       "city_ascii": "",
       "lat": 36.758064,
       "lng": 139.598958,
@@ -4626,28 +4627,28 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Pi-Chacán"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Rasputin Stabbed in Stomach and Survives (First Murder Attempt)",
+      "city_ascii": "",
+      "lat": 57.2425,
+      "lng": 66.790556,
+      "iso2": "RU",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Grigori_Rasputin#Assassination_attempt"
+    },
+    {
+      "city": "Rasputin Shot and Poisoned At Moika Palace (Дворец Юсуповых на Мойке)",
+      "city_ascii": "",
+      "lat": 59.9295,
+      "lng": 30.2987,
+      "iso2": "RU",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Grigori_Rasputin#Death"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",

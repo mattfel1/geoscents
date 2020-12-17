@@ -259,6 +259,7 @@ io.on('connection', (socket) => {
             specificGreeting(socket, name, "Doz", "<i>Thanks so much for the donation, Doz!</i><br>");
             specificGreeting(socket, name, "ninjer tootle", "<i>U a bitch</i><br>");
             specificGreeting(socket, name, "adam", "<i>I was very concerned when you said the Male, Maldives image was \"crazy\".  I thought it was grabbing a random image from the wikipedia page for \"male\".  Did you just mean <a href=https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Male-total.jpg/600px-Male-total.jpg>this image</a> looks crazy?</i><br>");
+            specificGreeting(socket, name, "ecanpecan", "<i>Got any ideas for new locations?</i><br>");
             io.sockets.emit('update counts', {[CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),[CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),[CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),[CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),[CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),[CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),[CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),[CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),[CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),[CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount()});
 		    
             helpers.logHistogram(rooms)

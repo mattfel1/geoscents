@@ -4788,6 +4788,7 @@ module.exports = { CITIES: [
   },
   {
     "city": "Cork",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/1/15/Cork_City_Montage_Quick_Collage_of_CC_Commons_Cork_Images.jpg",
     "city_ascii": "Cork",
     "lat": 51.8986,
     "lng": -8.4958,

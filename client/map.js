@@ -246,7 +246,7 @@ class Map {
         this.canvas_arrow(1430, 300, this.canvas.width-20, 300);
 
         this.ctx.fillText('Current game scores', 1180, 655);
-        this.canvas_arrow(1430, 650, this.canvas.width-20, 650);
+        this.canvas_arrow(1430, 650, this.canvas.width-20, 705);
 
         this.ctx.fillText('Target city and time remaining will appear in this panel', 500, 25);
 
