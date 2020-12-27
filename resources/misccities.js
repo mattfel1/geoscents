@@ -4460,7 +4460,7 @@
       "lat": 54.700278,
       "lng": 20.453056,
       "iso2": "RU",
-      "country": "",
+      "country": "Russia",
       "admin_name": "Kaliningrad Oblast",
       "population": 0,
       "capital": "",
