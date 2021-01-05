@@ -279,7 +279,7 @@ $(document).ready(function(){
     }, false);
     canvas.addEventListener('mousemove', function(evt) {
         var mousePos = getMousePosInPanel(canvas, evt);
-        if (myMap === CONSTANTS.LOBBY && !popup.isShowing) {
+        if (myMap === CONSTANTS.LOBBY) {
             Object.values(map.clickable_buttons).forEach(function(btn) {
                 if (isInside(mousePos,btn) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
                     map.highlightButton(btn);

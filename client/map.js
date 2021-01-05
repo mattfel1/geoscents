@@ -262,10 +262,10 @@ class Map {
         // this.ctx.fillStyle = 'white';
         // this.ctx.fillText('Every voice counts in enacting change and fighting injustice:',480,170);
 
-        // const showButton = (btn) => this.showButton(btn)
-        // Object.values(this.clickable_buttons).forEach(function(btn) {
-        //     showButton(btn)
-        // })
+        const showButton = (btn) => this.showButton(btn)
+        Object.values(this.clickable_buttons).forEach(function(btn) {
+            showButton(btn)
+        })
       }
       else if (room == CONSTANTS.WORLD){
             this.ctx.font = "20px Arial";

@@ -717,6 +717,7 @@ module.exports = { CITIES: [
   {
     "city": "Niamey",
     "city_ascii": "Niamey",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Niamey_harobanda.jpg",
     "lat": 13.5167,
     "lng": 2.1167,
     "country": "Niger",
