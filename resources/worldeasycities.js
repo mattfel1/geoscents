@@ -4252,19 +4252,6 @@ module.exports = { CITIES: [
     "id": 1356909212
   },
   {
-    "city": "Ponta Delgada",
-    "city_ascii": "Ponta Delgada",
-    "lat": 37.7483,
-    "lng": -25.6666,
-    "country": "Portugal",
-    "iso2": "PT",
-    "iso3": "PRT",
-    "admin_name": "Azores",
-    "capital": "admin",
-    "population": 61526,
-    "id": 1620456537
-  },
-  {
     "city": "Jefferson City",
     "city_ascii": "Jefferson City",
     "lat": 38.5676,
@@ -4575,32 +4562,6 @@ module.exports = { CITIES: [
     "capital": "primary",
     "population": 14798,
     "id": 1304028354
-  },
-  {
-    "city": "Angra do Hero\u00edsmo",
-    "city_ascii": "Angra do Heroismo",
-    "lat": 38.6504,
-    "lng": -27.2167,
-    "country": "Portugal",
-    "iso2": "PT",
-    "iso3": "PRT",
-    "admin_name": "Azores",
-    "capital": "",
-    "population": 12045,
-    "id": 1620152939
-  },
-  {
-    "city": "Horta",
-    "city_ascii": "Horta",
-    "lat": 38.5347,
-    "lng": -28.6448,
-    "country": "Portugal",
-    "iso2": "PT",
-    "iso3": "PRT",
-    "admin_name": "Azores",
-    "capital": "",
-    "population": 6611,
-    "id": 1620589121
   },
   {
     "city": "Grand Turk",
