@@ -4649,17 +4649,18 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Grigori_Rasputin#Death"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Sørvágsvatn (Largest Lake in the Faroe Islands)",
+      "city_ascii": "Sorvagsvatn (Largest Lake in the Faroe Islands)",
+      "lat": 62.05,
+      "lng": -7.233333,
+      "img_link": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Sørvágsvatn_4.jpg",
+      "iso2": "FO",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Sørvágsvatn"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",

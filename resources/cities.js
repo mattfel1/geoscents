@@ -28,6 +28,7 @@
   {
     "city": "Mexico City",
     "city_ascii": "Mexico City",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/1/15/Montaje.Ciudad_de_M%C3%A9xico.jpg",
     "lat": 19.4424,
     "lng": -99.131,
     "country": "Mexico",
