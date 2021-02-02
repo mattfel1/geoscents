@@ -2458,7 +2458,7 @@
       "wiki": "https://en.wikipedia.org/wiki/Batman,_Turkey"
     },
     {
-      "city": "The Biggest Ball of Twine",
+      "city": "The Biggest Ball of Twine Built by a Single Person",
       "city_ascii": "",
       "lat": 45.096389,
       "lng": -94.410833,
@@ -4661,17 +4661,17 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Sørvágsvatn"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Auyuittuq National Park (ᐊᐅᔪᐃᑦᑐᖅ)",
+      "city_ascii": "",
+      "lat": 67.883333,
+      "lng": -65.016667,
+      "iso2": "CA",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Auyuittuq_National_Park"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
