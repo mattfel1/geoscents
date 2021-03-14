@@ -612,11 +612,11 @@ class Room {
 
     revealAll(socket) {
         const answer = Geography.geoToMerc(this.map, this.target['lat'], this.target['lng']);
-        Room.broadcastAnswer(socket, answer['row'], answer['col']);
         this.players.forEach((player,id) => {
             Room.broadcastPoint(socket, player.row, player.col, player.color, player.radius(), player.geoError);
         });
         if (this.hasJoe) Room.broadcastJoe(socket, this.joe)
+        Room.broadcastAnswer(socket, answer['row'], answer['col']);
     }
 
     drawPhoto(socket) {

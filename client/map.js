@@ -421,16 +421,24 @@ class Map {
         return {'col': cell['col'] * CELL_WIDTH, 'row': cell['row'] * CELL_HEIGHT, 'height': CELL_HEIGHT, 'width': CELL_WIDTH}
     }
     drawStar(coords) {
+        // bubble
+        var cx = coords['col'];
+        var cy = coords['row'];
+        var x = cx;
+        var y = cy;
+        this.ctx.beginPath();
+        this.ctx.arc(x, y, CONSTANTS.BUBBLE_RADIUS * 2, 0, 2 * Math.PI, false);
+        this.ctx.lineWidth = CONSTANTS.BUBBLE_WIDTH;
+        this.ctx.strokeStyle = 'white';
+        this.ctx.stroke();
+        this.ctx.closePath()
+
         var cell = this.cellOf(coords);
         this.occupiedCells += (cell['col'], cell['row']);
         var rot = Math.PI / 2 * 3;
         const spikes = CONSTANTS.STAR_POINTS;
         const outerRadius = CONSTANTS.STAR_OUTER_RADIUS;
         const innerRadius = CONSTANTS.STAR_INNER_RADIUS;
-        var cx = coords['col'];
-        var cy = coords['row'];
-        var x = cx;
-        var y = cy;
         var step = Math.PI / spikes;
 
         this.ctx.beginPath();
@@ -454,6 +462,7 @@ class Map {
         this.ctx.stroke();
         this.ctx.fillStyle = 'white';
         this.ctx.fill();
+
     }
     drawPoint(coords, color, radius) {
         var cell = this.cellOf(coords);

@@ -159,8 +159,8 @@ $(document).ready(function(){
     const map = new Map(socket);
     socket.on('draw point', (coords, color, radius) => {map.drawPoint(coords, color, radius)});
     socket.on('draw dist', (coords, color, distance) => {map.drawDist(coords, color, distance)});
-    // socket.on('draw answer', (coords) => {map.drawStar(coords)});
-    socket.on('draw answer', (coords) => {map.drawPoint(coords, "white", CONSTANTS.BUBBLE_RADIUS*2)});
+    socket.on('draw answer', (coords) => {map.drawStar(coords)});
+    // socket.on('draw answer', (coords) => {map.drawPoint(coords, "white", CONSTANTS.BUBBLE_RADIUS*2)});
     socket.on('draw photo', (coords, link) => {map.drawPhoto(coords, link)});
     socket.on('fresh map', (room) => map.drawMap(room));
     socket.on('blank map', (room) => map.drawBlank(room));
