@@ -818,7 +818,11 @@ class Room {
             socket.emit('fresh map', map);
             socket.emit('draw reveal city', citystring, capital, iso2, round);
             this.revealAll(socket);
-            this.drawPhoto(socket);
+            try {
+              this.drawPhoto(socket);
+            } catch (err) {
+              helpers.logFeedback("ERROR DRAWING " + Geography.stringifyTarget(this.target)['string'])
+            }
         }
     }
     stateTransition(toState, toDuration) {
