@@ -391,29 +391,35 @@ const logHistogram = (rooms) => {
 
 
 const logPlayerHistory = (name, color, score, room) => {
-    const filebase = '/scratch/histories/' + name.replace(/ /g,'_') + '_history';
+    try {
+        const filebase = '/scratch/histories/' + name.replace(/ /g,'_') + '_history';
 
-    // Set html
-    fs.writeFile(filebase + ".html", playerHistHtml(name.replace(/ /g,'_')), {flag: 'w'}, function (err) { if (err) throw err;});
+        // Set html
+        fs.writeFile(filebase + ".html", playerHistHtml(name.replace(/ /g,'_')), {flag: 'w'}, function (err) { if (err) throw err;});
 
-    // Set js
-    fs.writeFile(filebase + ".js", playerHistJs(name.replace(/ /g,'_')), {flag: 'w'}, function (err) { if (err) throw err;});
+        // Set js
+        fs.writeFile(filebase + ".js", playerHistJs(name.replace(/ /g,'_')), {flag: 'w'}, function (err) { if (err) throw err;});
 
-    if (!fs.existsSync(filebase + ".csv")) {
-        // logFeedback('Creating history for ' + name)
-        fs.writeFile(filebase + ".csv", "", {flag: 'wx'}, function (err) {
-            if (err) throw err;
-        });
-    } 
-    const currentdate = new Date();
-    const timestamp = currentdate.getFullYear() + "/"
-        + (currentdate.getMonth() + 1) + "/"
-        + currentdate.getDate() + " @ "
-        + currentdate.getHours() + ":"
-        + currentdate.getMinutes() + " GMT";
-    fs.appendFile(filebase + ".csv", "\"" + timestamp + "\",\"" + room + "\",\"" + score + "\",\"<font color=" + color + ">" + name + "</font>\",,,,,,,,,,,,,,,,,,,,,,,,,,,,\n", function (err) {
-            if (err) throw err;
-        });
+        if (!fs.existsSync(filebase + ".csv")) {
+            // logFeedback('Creating history for ' + name)
+            fs.writeFile(filebase + ".csv", "", {flag: 'wx'}, function (err) {
+                if (err) throw err;
+            });
+        } 
+        const currentdate = new Date();
+        const timestamp = currentdate.getFullYear() + "/"
+            + (currentdate.getMonth() + 1) + "/"
+            + currentdate.getDate() + " @ "
+            + currentdate.getHours() + ":"
+            + currentdate.getMinutes() + " GMT";
+        fs.appendFile(filebase + ".csv", "\"" + timestamp + "\",\"" + room + "\",\"" + score + "\",\"<font color=" + color + ">" + name + "</font>\",,,,,,,,,,,,,,,,,,,,,,,,,,,,\n", function (err) {
+                if (err) throw err;
+            });
+    }
+    catch (err) {
+        console.log("Something messed up trying to write history for " + name)
+    }
+
 };
 
 const readRecentActivity = (numel) => {
