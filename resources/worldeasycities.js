@@ -366,19 +366,6 @@ module.exports = { CITIES: [
     "id": 1104616656
   },
   {
-    "city": "Abidjan",
-    "city_ascii": "Abidjan",
-    "lat": 5.32,
-    "lng": -4.04,
-    "country": "C\u00f4te D\u2019Ivoire",
-    "iso2": "CI",
-    "iso3": "CIV",
-    "admin_name": "Abidjan",
-    "capital": "primary",
-    "population": 3802000,
-    "id": 1384207980
-  },
-  {
     "city": "Bras\u00edlia",
     "city_ascii": "Brasilia",
     "lat": -15.7833,
@@ -1040,19 +1027,6 @@ module.exports = { CITIES: [
     "capital": "primary",
     "population": 1420000,
     "id": 1800406299
-  },
-  {
-    "city": "The Hague",
-    "city_ascii": "The Hague",
-    "lat": 52.08,
-    "lng": 4.27,
-    "country": "Netherlands",
-    "iso2": "NL",
-    "iso3": "NLD",
-    "admin_name": "Zuid-Holland",
-    "capital": "primary",
-    "population": 1406000,
-    "id": 1528799905
   },
   {
     "city": "Brazzaville",

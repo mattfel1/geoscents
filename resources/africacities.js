@@ -86,7 +86,7 @@ module.exports = { CITIES: [
     "iso2": "CI",
     "iso3": "CIV",
     "admin_name": "Abidjan",
-    "capital": "primary",
+    "capital": "",
     "population": 3802000,
     "id": 1384207980
   },

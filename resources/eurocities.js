@@ -477,7 +477,7 @@ module.exports = { CITIES: [
     "iso2": "NL",
     "iso3": "NLD",
     "admin_name": "Zuid-Holland",
-    "capital": "primary",
+    "capital": "",
     "population": 1406000,
     "id": 1528799905
   },
