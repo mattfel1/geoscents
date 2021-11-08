@@ -157,5 +157,5 @@ module.exports = {
     MAX_MSG_PER_SPAMPERIOD: 6,
     MAX_CHAR_PER_SPAMPERIOD: 4000,
     MAX_BOT_TOGGLE_PER_SPAMPERIOD: 5,
-    PROFANITY: ['shit', 'damn', 'fuck', 'bitch', 'cunt', ' ass ', 'asshole', 'penis', 'vagina', 'fuuck', 'fuuuck', 'shiit','nigger'] // TODO: Use regex
+    PROFANITY: ['shit', 'damn', 'fuck', 'bitch', 'cunt', ' ass ', 'asshole', 'penis', 'vagina', 'fuuck', 'fuuuck', 'shiit','nigger', 'rape'] // TODO: Use regex
 }
