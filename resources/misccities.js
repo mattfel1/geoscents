@@ -4694,17 +4694,19 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Rungrado_1st_of_May_Stadium"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    // David Stanek
+    {
+      "city": "Location of Frédéric Chopin's Pickled Heart, Holy Cross Church",
+      "city_ascii": "",
+      "img_link": "https://cdn.mos.cms.futurecdn.net/Q53baKbxdqdiGVex9Ma3tF-970-80.jpg",
+      "lat": 52.238611,
+      "lng": 21.016667,
+      "iso2": "PL",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://www.livescience.com/60953-chopin-pickled-heart-reveals-cause-of-death.html"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
