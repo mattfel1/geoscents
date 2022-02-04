@@ -1,6 +1,7 @@
 const fs = require('fs');
 const CONSTANTS = require('../resources/constants.js');
 const logfile = '/scratch/connections.log';
+const messagefile = '/scratch/messages.log';
 const histfile = '/scratch/histograms.log';
 const feedbackfile = '/scratch/feedback.log';
 var lastUpdates = {};
@@ -90,6 +91,21 @@ const log = (payload) => {
         + currentdate.getMinutes() + ":";
     if (fs.existsSync(logfile)) {
         fs.appendFile(logfile, "[" + timestamp + "] " + payload + "\n", function (err) {
+            if (err) throw err;
+            // console.log('Saved!');
+        });
+    }
+};
+
+const logMessage = (payload) => {
+    const currentdate = new Date();
+    const timestamp = currentdate.getDate() + "/"
+        + (currentdate.getMonth() + 1) + "/"
+        + currentdate.getFullYear() + " @ "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":";
+    if (fs.existsSync(messagefile)) {
+        fs.appendFile(messagefile, "[" + timestamp + "] " + payload + "\n", function (err) {
             if (err) throw err;
             // console.log('Saved!');
         });

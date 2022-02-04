@@ -487,7 +487,7 @@ io.on('connection', (socket) => {
                 return original.replace(reg, strWith);
               };
               CONSTANTS.PROFANITY.forEach((word) => {new_sent_msg = replaceAll(new_sent_msg, word, "****")});
-              helpers.log("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + " " + room.getActiveEntry() + " : " + msg);
+              helpers.logMessage("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + " " + room.getActiveEntry() + " : " + msg);
               if (room.hasJoe && new_sent_msg.toLowerCase().trim().includes("good bot")) {
                 room.distributeMessage(socket, new_sent_msg, cb);
                 room.joeGood(socket);
