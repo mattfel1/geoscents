@@ -20,11 +20,12 @@ let SPORT = 443;
 let httpServer;
 let httpsServer;
 let io;
-const useHttp = false;
+let useHttp = false;
 
-if (hostname === "mattfel-pc") {
+if (hostname === "matt-machwx9") {
   PORT = 5000;
   SPORT = 5443;
+  useHttp = true; // I forgot how to get https working locally after reformatting computer with local hacks... 
   if (useHttp) {
     httpsServer = https.createServer(function (req, res) {
       res.writeHead(301, { "Location": "http://" + req.headers['host'].replace(SPORT,PORT) + req.url });
