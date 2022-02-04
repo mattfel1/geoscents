@@ -494,4 +494,4 @@ const prependHallOfFame = (payload) => {
     });
 };
 
-module.exports = {log, logFeedback, logHistogram, readRecentActivity, logPlayerHistory, prependRecentActivity, recordGuesses, flushGuesses, readHallOfFame, prependHallOfFame, makeLink, joeData};
+module.exports = {log, logFeedback, logMessage, logHistogram, readRecentActivity, logPlayerHistory, prependRecentActivity, recordGuesses, flushGuesses, readHallOfFame, prependHallOfFame, makeLink, joeData};
