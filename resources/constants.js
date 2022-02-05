@@ -157,5 +157,17 @@ module.exports = {
     MAX_MSG_PER_SPAMPERIOD: 6,
     MAX_CHAR_PER_SPAMPERIOD: 4000,
     MAX_BOT_TOGGLE_PER_SPAMPERIOD: 5,
-    PROFANITY: ['shit', 'damn', 'fuck', 'bitch', 'cunt', ' ass ', 'asshole', 'penis', 'vagina', 'fuuck', 'fuuuck', 'shiit','nigger', 'niggger', 'nigggger', 'nig ger', 'rape'] // TODO: Use regex
+    PROFANITY_REGEX: ['\\bs+[\ \_.-]*h+[\ \_.-]*[1i]+[\ \_.-]*t+\\b', 
+     '\\bdamn\\b', 
+     '\\bdamnit\\b', 
+     '\\bdam+it\\b', 
+     '\\bf+[\ \_.-]*u+[\ \_.-]*c+[\ \_.-]*k+\\b',
+     '\\bb+[\ \_.-]*i+[\ \_.-]*t+[\ \_.-]*c+[\ \_.-]*h+\\b',
+     '\\bc+[\ \_.-]*u+[\ \_.-]*n+[\ \_.-]*t+\\b',
+     '\\bass\\b',
+     '\\basshole\\b',
+     '\\bp+[\ \_.-]*e+[\ \_.-]*n+[\ \_.-]*i+[\ \_.-]*s+\\b',
+     '\\bv+[\ \_.-]*a+[\ \_.-]*g+[\ \_.-]*i+[\ \_.-]*n+[\ \_.-]*a+\\b',
+     '\\bn+[\ \_.-]*[i1y!]+[\ \_.-]*g+[\ \_.-]*g+[\ \_.-]*[3e]+[\ \_.-]*r+\\b',
+     '\\br+[\ \_.-]*a+[\ \_.-]*p+[\ \_.-]*e+\\b'] 
 }

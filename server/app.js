@@ -239,7 +239,10 @@ io.on('connection', (socket) => {
       helpers.log("User " + socket.handshake.address + " named themself    " + newname);
 	    if (rooms[CONSTANTS.LOBBY].hasPlayer(socket)) {
 	        var badname = "";
-	        CONSTANTS.PROFANITY.forEach((word) => {if (name.toUpperCase().includes(word.toUpperCase())) badname = "I used a bad word in my name :(";});
+	        CONSTANTS.PROFANITY_REGEX.forEach((word) => {
+            var re = new RegExp(word, "i");
+            if (re.test(name)) badname = "I used a bad word in my name :(";
+          });
 	        if (badname != "") {
                 name = 'Naughty'
             }
@@ -486,7 +489,10 @@ io.on('connection', (socket) => {
                 var reg = new RegExp(esc, 'ig');
                 return original.replace(reg, strWith);
               };
-              CONSTANTS.PROFANITY.forEach((word) => {new_sent_msg = replaceAll(new_sent_msg, word, "****")});
+              CONSTANTS.PROFANITY_REGEX.forEach((word) => {
+                var re = new RegExp(word, "i");
+                new_sent_msg = new_sent_msg.replace(re, " **** ")
+              });
               helpers.logMessage("Message passed by " +  socket.handshake.address + " " + room.getPlayerName(socket) + " " + room.getActiveEntry() + " : " + msg);
               if (room.hasJoe && new_sent_msg.toLowerCase().trim().includes("good bot")) {
                 room.distributeMessage(socket, new_sent_msg, cb);
