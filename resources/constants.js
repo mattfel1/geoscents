@@ -158,7 +158,7 @@ module.exports = {
     MAX_CHAR_PER_SPAMPERIOD: 4000,
     MAX_BOT_TOGGLE_PER_SPAMPERIOD: 5,
     PROFANITY_REGEX: ['\\bs+[\ \_.-]*h+[\ \_.-]*[1i]+[\ \_.-]*t+\\b',
-     '\\bb+[\ \_.-]*u+[\ \_.-]*l+[\ \_.-]*s+[\ \_.-]*h+[\ \_.-]*[1i]+[\ \_.-]*t+\\b' 
+     '\\bb+[\ \_.-]*u+[\ \_.-]*l+[\ \_.-]*s+[\ \_.-]*h+[\ \_.-]*[1i]+[\ \_.-]*t+\\b',
      '\\bdamn\\b', 
      '\\bdamnit\\b', 
      '\\bdam+it\\b', 
