@@ -17,7 +17,7 @@
     "datatables.net": "^1.10.20",
     "datatables.net-dt": "^1.10.20",
     "express": "^4.17.1",
-    "jquery": "^3.5.1",
+    "jquery": "^3.5.0",
     "line-reader": "^0.4.0",
     "morgan": "^1.10.0",
     "naughty-words": "^1.2.0",
