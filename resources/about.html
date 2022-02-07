@@ -108,7 +108,7 @@ code {
         I hope that at least some of them spark your interest and get you to click the "Learn" link in the bottom right box of the game so you can read about it afterwards.  Some of these entries may be "famous" things that are worth knowing, but some of them are just silly so I hope you don't take it too seriously.</p>
           <p>Please reach out by sending a message starting with the word /feedback if you want to suggest new trivia items!  I love hearing your feedback, and am especially interested in growing the database beyond the cultural bias of the few people who have contributed already.</p>
       </div>
-      <h3><a href="#3" id="3">Geopolitical Anomalies</a></h3>
+  <h3><a href="#3" id="3">Geopolitical Anomalies</a></h3>
       <div>
           <p>This page discusses some of the political anomalies present in the game.  This discussion is the result of valuable player feedback!</p>
 
@@ -128,6 +128,97 @@ It is a space launch facility that was leased by the Kazakh government to Russia
 <a href="https://en.wikipedia.org/wiki/Kosovo">Kosovo</a> is shown as a regular country in this map.  
 According to the <a href="https://www.naturalearthdata.com/features/">Natural Earth Data features database</a>, Kosovo is a real country even though about 49% of UN nations recognize it.
       </div>
+
+
+<h3><a href="#11" id="11">Repeating Cities Between Games</a></h3>
+      <div>
+          <p>Do you keep getting repeat cities between games?  This is surprisingly likely because it is a case of the birthday paradox.  The random number generator in the game is not broken.  Depending on the map you are playing, the probability of a city being repeated between consecutive games is between 10% and 41%.</p>
+
+          <p>There are 11 unique cities in each game.  They are chosen from a uniform random distribution of possible cities for that map*.  If you play two games, the probability that a city from the first game will show up in the second game is one minus the probability that ALL of the cities in the second game are unique.  The equation below shows how to calculate this value as a function of the number of cities on a given map.  This equation only approximates the probability because it does not take into account the heuristics*.  The probability of seeing a repeat city as you play more than 2 games increases significantly.</p>
+<br>
+P<sub>repeat_in_next_game</sub> = 1 - (P<sub>unique</sub>)<sup>11</sup> = 1 - (1 - <sup>11</sup>&frasl;<sub>n_cities</sub>)<sup>11</sup>
+<br><br>
+          <p>The table below shows rough probabilities of repeat cities as of the time of this writing. </p>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-2b7s{text-align:right;vertical-align:bottom}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg" style="undefined;table-layout: fixed; width: 365px">
+<colgroup>
+<col style="width: 102px">
+<col style="width: 115px">
+<col style="width: 148px">
+</colgroup>
+<thead>
+  <tr>
+    <th class="tg-0lax">Map</th>
+    <th class="tg-0lax">Number of Cities</th>
+    <th class="tg-0lax">Probability of Game 2 Replaying City From Game 1</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">Africa</td>
+    <td class="tg-2b7s">446</td>
+    <td class="tg-2b7s">24.0%</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Asia</td>
+    <td class="tg-2b7s">632</td>
+    <td class="tg-2b7s">17.6%</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Europe</td>
+    <td class="tg-2b7s">576</td>
+    <td class="tg-2b7s">19.1%</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">North America</td>
+    <td class="tg-2b7s">671</td>
+    <td class="tg-2b7s">16.6%</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Oceania</td>
+    <td class="tg-2b7s">352</td>
+    <td class="tg-2b7s">29.5%</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">South America</td>
+    <td class="tg-2b7s">478</td>
+    <td class="tg-2b7s">22.6%</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Trivia</td>
+    <td class="tg-2b7s">416</td>
+    <td class="tg-2b7s">25.5%</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">World</td>
+    <td class="tg-2b7s">1058</td>
+    <td class="tg-2b7s">10.9%</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">World Capitals</td>
+    <td class="tg-2b7s">234</td>
+    <td class="tg-2b7s">41.1%</td>
+  </tr>
+</tbody>
+</table>
+<br>
+
+
+          <p>* There are certain heuristics built in to city selection for most maps, such as only selecting cities from countries, states, or provinces that have not yet been played in that particular game. This heuristic is slightly different depending on the map, e.g. World map does not allow repeat cities from the entire US, while North America does not allow repeat cities from a US state.</p>
+      </div>
+
+
+
+
+
       <h3><a href="#4" id="4">Game FAQ</a></h3>
       <div>
 
