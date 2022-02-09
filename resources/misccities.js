@@ -4684,7 +4684,7 @@
       "wiki": "https://en.wikipedia.org/wiki/Narendra_Modi_Stadium"
     },
     {
-      "city": "Rungrado 1st of May Stadium (World's Second Largest Stadium",
+      "city": "Rungrado 1st of May Stadium (World's Second Largest Stadium)",
       "city_ascii": "",
       "lat": 39.044444,
       "lng": 125.769444,
