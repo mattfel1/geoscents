@@ -9,7 +9,7 @@ class Scoreboard {
     }
 
     postScore(rank, name, color, score, wins) {
-        const string = $("<font color=" + color + " style=\"font-size:16px;\" \>").html("<b>" + name + "</b>: " + score + '  (' +  wins + ' <font size=1>🏆</font>)<br>');
+        const string = $("<font color=" + color + " style=\"font-size:15px;font-family:monospace\" \>").html(("<b>" + name + "</b>: ").padEnd(24).replace(/\s/g, "&nbsp;") + score.toString().padEnd(4).replace(/\s/g, "&nbsp;") + '  (' +  wins + ' <font size=1>🏆</font>)<br>');
         $('#scoreboard').append(string)
     }
     // Message reactions
@@ -47,7 +47,7 @@ class Scoreboard {
        // $('#scoreboard').append("<br>-------------------------------------------<br><b>Scoreboard:</b><br>")
     }
     postScoreTitle(citysrc) {
-       $('#scoreboard').append("<b>----- Players in " + citysrc + " -----</b><br>");      
+       $('#scoreboard').append("<b>----- Player Scores in " + citysrc + " -----</b><br>");      
     }
     postLobby(recent, hall) {
        $('#leaderboard').append("<b>" + CONSTANTS.FAMESCORE + "+ Hall of Fame (out of 6600 points)</b><br>");

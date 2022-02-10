@@ -566,10 +566,14 @@ class Room {
           }
           const update = Geography.score(map, player.geoError, player.mercError, player.clickedAt);
           const newScore = Math.floor(player.score + update);
-          let playerScoreLine = " + " + Math.floor(update) + " points (Distance: " + Math.floor(player.geoError) + " km, Time Bonus: " + (Math.floor(player.clickedAt * 10) / 10) + "s)";
+          let points_str = ("Points: <b>" + Math.floor(update).toString() + "</b>").padEnd(19).replace(/\s/g, "&nbsp;");
+          let dist_str = ("Error (km): <b>" + Math.floor(player.geoError).toString() + "</b>").padEnd(26).replace(/\s/g, "&nbsp;");
+          let time_str = ("Seconds Remaining: <b>" + (Math.floor(player.clickedAt * 10) / 10).toString() + "</b>").padEnd(34).replace(/\s/g, "&nbsp;");
+          let playerScoreLine = points_str + dist_str + time_str
           if (player.geoError === 999999) {
               playerScoreLine = " (Did not guess)";
           }
+          playerScoreLine = playerScoreLine
           historyScore(player, playerScoreLine);
           player.score = newScore;
           updateHistory(player, round, newScore);
@@ -1045,7 +1049,8 @@ class Room {
         this.clients.forEach((socket,id) => {
             let name = player.name;
             if (player.id === id) name = "*" + name;
-            socket.emit('add history', room, "<font color=\"" + player.color +"\"><b>  " + name + "</b>: " + score + "</font><br>")
+            name = name.padEnd(16).replace(/\s/g, "&nbsp;");;
+            socket.emit('add history', room, "<tt><font color=\"" + player.color +"\"><b>  " + name + "</b>: " + score + "</font></tt><br>")
         });
     }
 

@@ -182,7 +182,7 @@ const WELCOME_MESSAGE1 = '[ <b>GREETING</b> ] Welcome to Geoscents, an online mu
                           'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
                           '<br>If you have feedback, simply shout it directly into this chat box, starting with the word /feedback. ' +
                           'If you are enjoying this game, please share it with a friend!  If you really love it, consider donating at the bottom of the page to help keep the server ' +
-                          'running! <br>';
+                          'running! <br>Have you done today\'s worldle? (yes, worldle, not wordle)<br>;';
 const PRIVATE_MESSAGE = '<i>Welcome to a private room!  You can whisper your secret code to a friend by typing the command /whisper "username" in the chat box. ' +
                         'You can use the command /hidden to see if your friend is hiding in another private game.</i><br>';
 

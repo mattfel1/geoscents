@@ -92,7 +92,7 @@ class History {
     addHistory(room, payload) {
         if (room === this.myRoomName) {
             const assembled = payload;
-            const final_message = $("<font style=\"font-size:20px;\" />").html(assembled);
+            const final_message = $("<font style=\"font-size:17px;\" />").html(assembled);
             $('#gamehist').prepend(final_message);
             this.histcount = this.histcount + 1;
             // if (this.histcount > CONSTANTS.MAX_GAME_HIST) {
