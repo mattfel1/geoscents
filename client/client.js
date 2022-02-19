@@ -9,6 +9,7 @@ const Commands = require('./commands.js');
 const Sounds = require('./sounds.js');
 const Popup = require('./popup.js');
 const PrivatePopup = require('./privatepopup.js');
+const HelpPopup = require('./helppopup.js');
 const Chat = require('./chat.js');
 const Map = require('./map.js');
 const History = require('./history.js');
@@ -144,6 +145,14 @@ $(document).ready(function(){
     }, 1000 / 5);
 
 
+    /**** HELP POPUP *****/
+    // Make player choose options
+    const helppopup = new HelpPopup(socket);
+    helppopup.hide();
+    socket.on('request help popup', () => {
+        helppopup.showPopup()
+    });
+
     /**** PRIVATE POPUP *****/
     // Make player choose options
     const privatepopup = new PrivatePopup(socket);
@@ -269,8 +278,12 @@ $(document).ready(function(){
         }
         Object.values(map.clickable_buttons).forEach(function(btn) {
             if (isInside(mousePos,btn) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
-                window.open(btn.link, '_blank');
-                socket.emit('button clicked', btn.label);
+                if (btn.label != "?") {
+                    window.open(btn.link, '_blank');
+                } else {
+                    socket.emit('requestHelpPopup');
+                }
+                    socket.emit('button clicked', btn.label);
             }
         })
 

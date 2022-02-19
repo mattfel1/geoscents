@@ -8,9 +8,49 @@
 	width: 1920px;
 	cursor: pointer;
 	z-index: 1000; /* high z-index */
-	background: #000; /* fallback */
 	background: rgba(0,0,0,0.75);
 }
+
+
+.hole {
+	display: none;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 500px;
+  height: 500px;
+    border: 5px solid red;
+  border-radius: 25px;
+	z-index: 1001; /* high z-index */
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.75);
+}
+
+.screen {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height:100%;
+	width: 1920px;
+	cursor: pointer;
+	z-index: 1002; /* high z-index */
+	background: rgba(0,0,0,0);	
+}
+
+.instruction {
+	display: none;
+	position:absolute;
+	top: 400px;
+	margin: 0 auto;
+	width: 1500px;
+	left: 100px;
+	z-index: 1002; /* high z-index */
+		font-size: 80px;
+		font-weight: bold;
+		color: white;
+		text-align: center;
+}
+
 .settings {
 	border-style: inset;
 	padding-bottom: 5px;

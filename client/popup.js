@@ -51,7 +51,7 @@ class Popup {
         }
 
         // hide popup when user clicks on close button or if user clicks anywhere outside the container
-        $('.close-btn, .overlay-bg').click(function(){
+        $('.close-btn, .overlay-bg').unbind().click(function(){
             join({'name':'', 'color':$("input[name='selected_color']:checked").val()}, () => {closePopup()});
         });
         // hide the this.when user presses the esc key

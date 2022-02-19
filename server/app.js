@@ -388,6 +388,9 @@ io.on('connection', (socket) => {
     socket.on('requestPrivatePopup', () => {
       socket.emit('request private popup');
     });
+    socket.on('requestHelpPopup', () => {
+      socket.emit('request help popup');
+    });
     socket.on('moveToPrivate', (askcitysrc, code) => {
       console.log('move to private with citysrc ' + askcitysrc + ' and code ' + code)
         // Convert citysrc to the map that it is played on

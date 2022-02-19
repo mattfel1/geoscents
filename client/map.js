@@ -65,18 +65,25 @@ class Map {
             height: 40
         };
         this.about_button = {
-            x: 400, y: 700, width: 280, height: 60,
+            x: 400, y: 190, width: 280, height: 60,
             x_font_ofs: 5, y_font_ofs: 42,
             border_color1: "#000000", border_color2: "#808080",
             normal_color: "orange", highlight_color: "green",
             font_size: 40, link: 'http://geoscents.net/resources/about.html', label: 'ABOUT GAME'
         };
         this.visualize_button = {
-            x: 750, y: 700, width: 320, height: 60,
+            x: 710, y: 190, width: 315, height: 60,
             x_font_ofs: 5, y_font_ofs: 42,
             border_color1: "#000000", border_color2: "#808080",
             normal_color: "orange", highlight_color: "green",
-            font_size: 40, link: 'http://geoscents.net/plots/index.html', label: 'EXPLORE DATA!'
+            font_size: 40, link: 'http://geoscents.net/plots/index.html', label: 'EXPLORE DATA'
+        };
+        this.help_button = {
+            x: 1055, y: 190, width: 35, height: 60,
+            x_font_ofs: 5, y_font_ofs: 42,
+            border_color1: "#000000", border_color2: "#808080",
+            normal_color: "orange", highlight_color: "green",
+            font_size: 40, link: '', label: '?'
         };
         this.donate1_button = {
             x: 500, y: 200, width: 80, height: 40,
@@ -134,7 +141,7 @@ class Map {
             normal_color: "grey", highlight_color: "purple",
             font_size: 25, link: 'https://donate.doctorswithoutborders.org/onetime.cfm', label: 'Doctors Without Borders'
         };
-        this.clickable_buttons = [this.about_button, this.visualize_button]
+        this.clickable_buttons = [this.about_button, this.visualize_button, this.help_button]
         // this.clickable_buttons = [this.about_button, this.visualize_button,
         //     this.donate1_button, this.donate2_button, this.donate3_button,
         //     this.donate4_button, this.donate5_button, this.donate6_button,
@@ -181,7 +188,7 @@ class Map {
         const sx = Math.floor(frame_cnt/rate) * 450;
         var ctx = this.ctx;
         globeImage[mapStyle].onload = function (sx) {
-          return ctx.drawImage(globeImage[mapStyle], sx,0,450,450,20, 20,450,450);
+          return ctx.drawImage(globeImage[mapStyle], sx,0,450,450,350, 200,780,780);
         };
         globeImage[mapStyle].onload(sx);
     };
@@ -215,46 +222,19 @@ class Map {
       const mapStyle = this.mapStyle;
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       if (room == CONSTANTS.LOBBY){
-        // Banner message
-        this.ctx.fillStyle = CONSTANTS.BGCOLOR;
-        this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
-        this.ctx.font = "85px Arial bold";
-        this.ctx.fillStyle = 'black';
         // this.ctx.fillText('Welcome to GeoScents!', 400, 590);
         // this.ctx.fillText('Locate cities as quickly and accurately as possible!',20,650);
-        this.ctx.fillText('Welcome to GeoScents!', 460, 410);
-        this.ctx.font = "65px Arial bold";
-        this.ctx.fillText('Locate cities as quickly and accurately as possible!',100,550);
+        this.ctx.font = "120px Arial bold";
+        this.ctx.fillText('Welcome to GeoScents!', 210, 150);
 
         this.ctx.font = "20px Arial";
-        this.ctx.fillText('[ Spinning globe is loading... ]', 90, 220);
-        // Instructions
+        this.ctx.fillText('[ Spinning globe is loading... ]', 500, 500);
+  
         this.ctx.globalAlpha = 0.5;
         this.ctx.fillStyle = 'grey';
         this.ctx.fillRect(this.command_window['x'], this.command_window['y'], this.command_window['width'], this.command_window['height']);
         this.ctx.globalAlpha = 1;
-        this.ctx.font = "25px Arial";
-        this.ctx.fillStyle = 'red';
-        this.ctx.strokeStyle = 'red';
-        this.ctx.fillText('Join a game', 1250, 180);
-        this.canvas_arrow(1400, 175, this.canvas.width-20, 175);
-
-        this.ctx.fillText('Adjust game settings', 1180, 80);
-        this.canvas_arrow(1430, 75, this.canvas.width-20, 35);
-
-        this.ctx.fillText('Records', 1320, 305);
-        this.canvas_arrow(1430, 300, this.canvas.width-20, 300);
-
-        this.ctx.fillText('Current game scores', 1180, 655);
-        this.canvas_arrow(1430, 650, this.canvas.width-20, 705);
-
-        this.ctx.fillText('Target city and time remaining will appear in this panel', 500, 25);
-
-        this.ctx.fillText('Game history and wikipedia links', 1100, 780);
-        this.canvas_arrow(1300, 800, 1300, this.canvas.height - 20);
-
-        this.ctx.fillText('Discuss', 160, 780);
-        this.canvas_arrow(200, 800, 200, this.canvas.height-20);
+        this.ctx.fillStyle = 'black';
 
         // // Donate
         // this.roundRect(this.ctx, 450, 120, 750, 300, 15);
@@ -265,7 +245,9 @@ class Map {
         const showButton = (btn) => this.showButton(btn)
         Object.values(this.clickable_buttons).forEach(function(btn) {
             showButton(btn)
-        })
+        })  
+
+
       }
       else if (room == CONSTANTS.WORLD){
             this.ctx.font = "20px Arial";

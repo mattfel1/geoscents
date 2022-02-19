@@ -44,7 +44,7 @@ class PrivatePopup {
             closePopup()
         }
         // hide popup when user clicks on close button or if user clicks anywhere outside the container
-        $('.close-btn, .overlay-bg').click(function(){
+        $('.close-btn, .overlay-bg').unbind().click(function(){
             nonConfiguredClose();
         });
         // hide the this.when user presses the esc key
