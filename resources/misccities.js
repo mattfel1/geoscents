@@ -4707,28 +4707,29 @@
       "capital": "",
       "wiki": "https://www.livescience.com/60953-chopin-pickled-heart-reveals-cause-of-death.html"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Museum of Bad Art",
+      "city_ascii": "",
+      "img_link": "https://cbsnews3.cbsistatic.com/hub/i/r/2014/03/06/13ea72e8-2f6b-47fc-b1cc-80681b901622/thumbnail/640x480/2ed9438c76c24dee45bce11f603c1c57/museum-of-bad-art-charlie-and-sheba.jpg",
+      "lat": 42.248026,
+      "lng": -71.172969,
+      "iso2": "US",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Museum_of_Bad_Art"
+    },
+    {
+      "city": "Dutch Citizens Lynch and Eat Their Prime Minister (Johan de Witt) in 1672",
+      "city_ascii": "",
+      "lat": 52.08,
+      "lng": 4.31,
+      "iso2": "NL",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "wiki": "https://en.wikipedia.org/wiki/Johan_de_Witt"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",
