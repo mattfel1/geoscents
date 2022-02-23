@@ -4476,6 +4476,7 @@
       "country": "",
       "population": 0,
       "capital": "",
+      "img_link": "https://upload.wikimedia.org/wikipedia/en/0/01/Vorkuta_Gulag.jpg",
       "wiki": "https://en.wikipedia.org/wiki/Vorkutlag"
     },
     {
@@ -4730,17 +4731,18 @@
       "capital": "",
       "wiki": "https://en.wikipedia.org/wiki/Johan_de_Witt"
     },
-    // {
-    //   "city": "",
-    //   "city_ascii": "",
-    //   "lat": ,
-    //   "lng": ,
-    //   "iso2": "",
-    //   "country": "",
-    //   "population": 0,
-    //   "capital": "",
-    //   "wiki": ""
-    // },
+    {
+      "city": "Nusantara (Future Capital of Indonesia Starting 2024)",
+      "city_ascii": "",
+      "lat": -1.061111,
+      "lng": 116.680556,
+      "iso2": "ID",
+      "country": "",
+      "population": 0,
+      "capital": "",
+      "img_link": "https://gumlet.assettype.com/swarajya%2F2022-01%2F10d51e40-582e-4958-8a46-e2afbeb0c355%2Fnew_capital.jpg?q=75&auto=format%2Ccompress&w=1200",
+      "wiki": "https://en.wikipedia.org/wiki/Nusantara_(city)"
+    },
     // {
     //   "city": "",
     //   "city_ascii": "",

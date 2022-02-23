@@ -520,6 +520,12 @@ io.on('connection', (socket) => {
                 cb();
                 return;
               }
+              if (room.hasJoe && new_sent_msg.toLowerCase().trim().startsWith("yeet")) {
+                room.distributeMessage(socket, new_sent_msg, cb);
+                room.joeYeet(socket);
+                cb();
+                return;
+              }
               if (isFeedback) {
                 room.distributeMessage(socket, new_sent_msg, cb);
 		        room.whisperMessage(socket, "<i>Your feedback has been noted!  Thank you for playing and commenting!</i><br>", cb);
