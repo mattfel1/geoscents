@@ -42,6 +42,11 @@ module.exports = {
     MISC_MIN_LON: -180, // Latitude of top edge of map
     MISC_MAX_LON: 180, // Latitude of bottom edge of map
     MISC_LAT_TS: 0,
+    UKRAINE_MIN_LAT: 54, 
+    UKRAINE_MAX_LAT: 43.2,
+    UKRAINE_MIN_LON: 17.7,
+    UKRAINE_MAX_LON: 45.0,
+    UKRAINE_LAT_TS: 0,
     US_MIN_LAT: 56.0, // Latitude of top edge of map
     US_MAX_LAT: 10.0, // Latitude of bottom edge of map
     US_MIN_LON: -141.0, // Latitude of top edge of map
@@ -144,8 +149,10 @@ module.exports = {
     ASIA: 'Asia',
     OCEANIA: 'Oceania',
     MISC: 'Trivia',
+    UKRAINE: 'Ukraine',
     AFRICA: 'Africa',
     SAMERICA: "S. America",
+    UKRAINE: "Ukraine",
     MAX_INACTIVE: 10, // Rounds of no click before you get booted
     MAX_S_INACTIVE: 2400, // seconds * fps spent in lobby before you get booted
     INIT_RECORD: {'record1': 0, 'recordName1': '-', 'recordColor1': 'black', 'recordBroken1': false, 'record2': 0, 'recordName2': '-', 'recordColor2': 'black', 'recordBroken2': false, 'record3': 0, 'recordName3': '-', 'recordColor3': 'black', 'recordBroken3': false, 'record4': 0, 'recordName4': '-', 'recordColor4': 'black', 'recordBroken4': false, 'record5': 0, 'recordName5': '-', 'recordColor5': 'black', 'recordBroken5': false},

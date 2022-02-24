@@ -432,7 +432,7 @@ class Room {
 
     getActiveEntry() {
       try {
-        return Geography.stringifyTarget(this.target).string;
+        return Geography.stringifyTarget(this.target, this.citysrc).string;
       } catch (err) {
         return "Unknown"
       }
@@ -588,19 +588,22 @@ class Room {
           player.score = newScore;
           updateHistory(player, round, newScore);
         });
-      this.historyRound(this.round + 1, Geography.stringifyTarget(this.target));
+      this.historyRound(this.round + 1, Geography.stringifyTarget(this.target, this.citysrc));
     }
 
     recordGuesses() {
       const respectOptOut = (x) => {if (x.optOut) return 'optOut' + x.ip; else return x.ip;};
-      const map = this.map;
+      let map = this.map;
+      // Stick ukraine, or any special maps, into world data
+      if (map == CONSTANTS.UKRAINE)
+        map = CONSTANTS.WORLD
       const dists = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.geoError);
       const lats = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.lat);
       const lons = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.lon);
       const times = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.clickedAt);
       const ips = Array.from(this.players.values()).filter(player => player.clicked).map(x => respectOptOut(x))
       // helpers.recordGuesses(this.map, Geography.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], this.target['iso2'], ips, dists, times, lats, lons, this.target['lat'], this.target['lng'], helpers.makeLink(map, this.target), true);
-      helpers.recordGuesses(this.map, Geography.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], this.target['iso2'], ips, dists, times, lats, lons, this.target['lat'], this.target['lng'], helpers.makeLink(map, this.target), false);
+      helpers.recordGuesses(this.map, Geography.stringifyTarget(this.target, this.citysrc).string, this.target['city'], this.target['admin_name'], this.target['country'], this.target['iso2'], ips, dists, times, lats, lons, this.target['lat'], this.target['lng'], helpers.makeLink(map, this.target), false);
     }
     
     flushGuesses() {
@@ -814,7 +817,7 @@ class Room {
             socket.emit('fresh map', map);
             socket.emit('draw begin', this.timer, round);
         } else if (this.state === CONSTANTS.GUESS_STATE) {
-            const thisTarget = Geography.stringifyTarget(this.target);
+            const thisTarget = Geography.stringifyTarget(this.target, this.citysrc);
             const citystring = thisTarget['string'];
             const iso2 = this.target['iso2']
             capital = "";
@@ -823,7 +826,7 @@ class Room {
             socket.emit('fresh map', map);
             socket.emit('draw guess city', citystring, capital, iso2, round);
         } else if (this.state === CONSTANTS.REVEAL_STATE) {
-            const thisTarget = Geography.stringifyTarget(this.target);
+            const thisTarget = Geography.stringifyTarget(this.target, this.citysrc);
             const citystring = thisTarget['string'];
             const iso2 = this.target['iso2']
             capital = "";
@@ -835,7 +838,7 @@ class Room {
             try {
               this.drawPhoto(socket);
             } catch (err) {
-              helpers.logFeedback("ERROR DRAWING " + Geography.stringifyTarget(this.target)['string'])
+              helpers.logFeedback("ERROR DRAWING " + Geography.stringifyTarget(this.target, this.citysrc)['string'])
             }
         }
     }
@@ -930,7 +933,7 @@ class Room {
           } else if (this.state === CONSTANTS.SETUP_STATE) {
               let mapname;
               [this.target, this.blacklist] = Geography.randomCity(this.citysrc, this.blacklist);
-              [this.joeTime, this.joeLat, this.joeLon] = helpers.joeData(this.map, Geography.stringifyTarget(this.target).string);
+              [this.joeTime, this.joeLat, this.joeLon] = helpers.joeData(this.map, Geography.stringifyTarget(this.target, this.citysrc).string);
               this.timerColor = CONSTANTS.GUESS_COLOR;
               Array.from(this.players.values()).forEach((p, id) => {p.reset()});
               if (this.hasJoe) this.joe.reset();

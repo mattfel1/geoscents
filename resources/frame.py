@@ -98,4 +98,11 @@ blacklist = ['India', 'Brazil', 'Pakistan', 'Iran', 'Iraq', 'Saudi Arabia', 'Afg
 whitelist = ['Gibraltar']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
+outfile = 'ukrainecities.js'
+latrng = [43.2, 54]
+pop = 0
+lonrng = [17.7, 45]
+blacklist = ['Moldova', 'Belarus', 'Russia', 'Poland', 'Romania', 'Hungary', 'Serbia', 'Bosnia And Herzegovina', 'Czechia', 'Bulgaria', 'Slovakia', 'Gibraltar', 'Croatia', 'Montenegro']
+whitelist = []
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 

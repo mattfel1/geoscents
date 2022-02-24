@@ -174,6 +174,7 @@ var rooms = {
     'Asia': new Room(CONSTANTS.ASIA, 'Asia', CONSTANTS.ASIA),
     'Oceania': new Room(CONSTANTS.OCEANIA, 'Oceania', CONSTANTS.OCEANIA),
     'Trivia': new Room(CONSTANTS.MISC, 'Trivia', CONSTANTS.MISC),
+    'Ukraine': new Room(CONSTANTS.UKRAINE, 'Ukraine', CONSTANTS.UKRAINE),
     'Lobby': new Room(CONSTANTS.LOBBY, 'Lobby', CONSTANTS.LOBBY),
 };
 var playerRooms = new Map();
@@ -374,6 +375,7 @@ io.on('connection', (socket) => {
           var join_msg = "[ <font color='" + rooms[roomName].getPlayerColor(socket) + "'><b>" + rooms[roomName].getPlayerRawName(socket) + "</b> has joined " + roomName + "!</font> ]<br>";
           io.sockets.emit("update messages", roomName, join_msg);
           if (roomName == CONSTANTS.MISC) rooms[roomName].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items or complain about current items by typing a message starting with /feedback!</i><br>", function() {});
+          if (roomName == CONSTANTS.UKRAINE) rooms[roomName].whisperMessage(socket, "<i>Learn Ukrainian geography!</i><br>", function() {});
           if (roomName == CONSTANTS.WORLD_EASY) rooms[roomName].whisperMessage(socket, "<i>Welcome to the World Capitals map!  This map no longer includes province and state capitals of the largest countries (i.e. Canada, USA, China, India, and Australia).  Let me know if you think this is better or worse by leaving /feedback!</i><br>", function() {});
           io.sockets.emit('update counts', {[CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),[CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),[CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),[CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),[CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),[CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),[CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),[CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),[CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),[CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount()});
           rooms[roomName].joeMessage();

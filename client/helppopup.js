@@ -32,28 +32,28 @@ class HelpPopup {
             console.log(getPhase())
             if (getPhase() == 0) {
                 $('.overlay-bg').hide()
-                $('.hole').show().css({  'top': '70px', 'left': '1540px',  'width': '350px', 'height': '170px'})
+                $('.hole').show().css({  'top': '70px', 'left': '1540px',  'width': '350px', 'height': '210px'})
                 $(".instruction").show().html("Choose a map/room here<br><font size=5>(click to continue)</font>");
                 incPhase()
             }
             else if (getPhase() == 1) {
-                $('.hole').show().css({  'top': '10px', 'left': '150px',  'width': '1250px', 'height': '40px'})
+                $('.hole').show().css({  'top': '15px', 'left': '150px',  'width': '1250px', 'height': '40px'})
                 $(".instruction").show().html("Cities/targets and time remaining will appear here<br><font size=5>(click to continue)</font>");
                 incPhase()
             } else if (getPhase() == 2) {
-                $('.hole').show().css({  'top': '690px', 'left': '1540px',  'width': '345px', 'height': '215px'})
+                $('.hole').show().css({  'top': '700px', 'left': '1540px',  'width': '345px', 'height': '215px'})
                 $(".instruction").show().html("Current game scores posted here<br><font size=5>(click to continue)</font>");
                 incPhase()
             } else if (getPhase() == 3) {
-                $('.hole').show().css({  'top': '240px', 'left': '1540px',  'width': '345px', 'height': '450px'})
+                $('.hole').show().css({  'top': '280px', 'left': '1540px',  'width': '345px', 'height': '410px'})
                 $(".instruction").show().html("Records for current map shown here<br><font size=5>(click to continue)</font>");
                 incPhase()
             } else if (getPhase() == 4) {
-                $('.hole').show().css({  'top': '920px', 'left': '0px',  'width': '1050px', 'height': '300px'})
+                $('.hole').show().css({  'top': '930px', 'left': '0px',  'width': '1050px', 'height': '300px'})
                 $(".instruction").show().html("Chat here<br><font size=5>(click to continue)</font>");
                 incPhase()
             } else if (getPhase() == 5) {
-                $('.hole').show().css({  'top': '930px', 'left': '1060px',  'width': '810px', 'height': '310px'})
+                $('.hole').show().css({  'top': '940px', 'left': '1060px',  'width': '810px', 'height': '310px'})
                 $(".instruction").show().html("See game history here<br><font size=5>(click to continue)</font>");
                 incPhase()
             } else if (getPhase() == 6) {
