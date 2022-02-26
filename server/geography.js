@@ -75,7 +75,7 @@ const randomCity = (citysrc, blacklist) => {
             if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
-    } else if (citysrc === CONSTANTS.UKRAINE) {
+    } else if (citysrc === CONSTANTS.SPECIAL) {
         while (!acceptable) {
             proposal = UKRAINECITIES[Math.floor(Math.random() * UKRAINECITIES.length)];
             if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
@@ -101,7 +101,7 @@ const includeAdmin = (target, citysrc) => {
     target['country'] === 'Russia' ||
     target['country'] === 'Indonesia' ||
     target['country'] === 'Brazil' ||
-    citysrc === 'Ukraine'
+    citysrc === CONSTANTS.SPECIAL
 };
 
 const stringifyTarget = (target, citysrc) => {
@@ -151,7 +151,7 @@ const stringifyTargetAscii = (target, citysrc) => {
 const requireUniqueAdmin = (citysrc, target) => {
     if (citysrc === CONSTANTS.US && (target['country'] === 'United States' || target['country'] === 'Canada')) {return true}
     else if (citysrc === CONSTANTS.ASIA && (target['country'] === 'China' || target['country'] === 'India')) {return true}
-    else if (citysrc === CONSTANTS.UKRAINE) {return true}
+    else if (citysrc === CONSTANTS.SPECIAL) {return true}
     // else if (citysrc === CONSTANTS.OCEANIA && target['country'] === 'Australia') {return true}
     else return false
 };
@@ -165,7 +165,7 @@ const uniqueInBlacklist = (citysrc, target, blacklist) => {
 const mercDist = (map,row1,col1,row2,col2) => {
     const row_err = Math.pow(row1 - row2, 2);
     let col_err = Math.min(Math.pow(col1 - col2, 2), Math.pow(col1 - col2 + CONSTANTS.MAP_WIDTH, 2), Math.pow(col1 - col2 - CONSTANTS.MAP_WIDTH, 2));
-    if (map === CONSTANTS.US || map === CONSTANTS.EURO || map === CONSTANTS.AFRICA || map === CONSTANTS.SAMERICA || map === CONSTANTS.ASIA || map === CONSTANTS.OCEANIA || map === CONSTANTS.UKRAINE) { // No wrap
+    if (map === CONSTANTS.US || map === CONSTANTS.EURO || map === CONSTANTS.AFRICA || map === CONSTANTS.SAMERICA || map === CONSTANTS.ASIA || map === CONSTANTS.OCEANIA || map === CONSTANTS.SPECIAL) { // No wrap
         col_err = Math.pow(col1 - col2, 2);
     }
     return Math.sqrt(row_err + col_err);
@@ -192,7 +192,7 @@ const asiaDiag = geoDist(CONSTANTS.ASIA, CONSTANTS.ASIA_MAX_LAT, CONSTANTS.ASIA_
 const oceaniaDiag = geoDist(CONSTANTS.OCEANIA, CONSTANTS.OCEANIA_MAX_LAT, CONSTANTS.OCEANIA_MAX_LON, CONSTANTS.OCEANIA_MIN_LAT, CONSTANTS.OCEANIA_MIN_LON);
 const usDiag = geoDist(CONSTANTS.US, CONSTANTS.US_MAX_LAT, CONSTANTS.US_MAX_LON, CONSTANTS.US_MIN_LAT, CONSTANTS.US_MIN_LON);
 const samericaDiag = geoDist(CONSTANTS.SAMERICA, CONSTANTS.SAMERICA_MAX_LAT, CONSTANTS.SAMERICA_MAX_LON, CONSTANTS.SAMERICA_MIN_LAT, CONSTANTS.SAMERICA_MIN_LON);
-const ukraineDiag = geoDist(CONSTANTS.UKRAINE, CONSTANTS.UKRAINE_MAX_LAT, CONSTANTS.UKRAINE_MAX_LON, CONSTANTS.UKRAINE_MIN_LAT, CONSTANTS.UKRAINE_MIN_LON);
+const ukraineDiag = geoDist(CONSTANTS.SPECIAL, CONSTANTS.UKRAINE_MAX_LAT, CONSTANTS.UKRAINE_MAX_LON, CONSTANTS.UKRAINE_MIN_LAT, CONSTANTS.UKRAINE_MIN_LON);
 
 const score = (map, geoDist, mercDist, timeBonus) => {
     // Scale geoDist based on the length of the map's diagonal
@@ -203,7 +203,7 @@ const score = (map, geoDist, mercDist, timeBonus) => {
     else if (map === CONSTANTS.OCEANIA) scalingFactor = fullDiag / oceaniaDiag;
     else if (map === CONSTANTS.US) scalingFactor = fullDiag / usDiag;
     else if (map === CONSTANTS.SAMERICA) scalingFactor = fullDiag / samericaDiag;
-    else if (map === CONSTANTS.UKRAINE) scalingFactor = fullDiag / (2.5 * ukraineDiag);
+    else if (map === CONSTANTS.SPECIAL) scalingFactor = fullDiag / (2.5 * ukraineDiag);
 
     // // Pixel-distance based score (old)
     // const timeLogistic = CONSTANTS.LOGISTIC_C3/(2+Math.exp(CONSTANTS.LOGISTIC_C1*(-timeBonus+CONSTANTS.LOGISTIC_C2)))+CONSTANTS.LOGISTIC_C4;
@@ -272,7 +272,7 @@ const mercToGeo = (map,row,col) => {
         min_lon = CONSTANTS.SAMERICA_MIN_LON;
         max_lon = CONSTANTS.SAMERICA_MAX_LON;
         lat_ts = CONSTANTS.SAMERICA_LAT_TS;
-    } else if (map === CONSTANTS.UKRAINE) {
+    } else if (map === CONSTANTS.SPECIAL) {
         zero_lat = CONSTANTS.UKRAINE_MIN_LAT;
         max_lat = CONSTANTS.UKRAINE_MAX_LAT;
         min_lon = CONSTANTS.UKRAINE_MIN_LON;
@@ -334,7 +334,7 @@ const geoToMerc = (map,lat, lon) => {
         min_lon = CONSTANTS.SAMERICA_MIN_LON;
         max_lon = CONSTANTS.SAMERICA_MAX_LON;
         lat_ts = CONSTANTS.SAMERICA_LAT_TS;
-    } else if (map === CONSTANTS.UKRAINE) {
+    } else if (map === CONSTANTS.SPECIAL) {
         zero_lat = CONSTANTS.UKRAINE_MIN_LAT;
         max_lat = CONSTANTS.UKRAINE_MAX_LAT;
         min_lon = CONSTANTS.UKRAINE_MIN_LON;

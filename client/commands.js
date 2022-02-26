@@ -11,7 +11,7 @@ class Commands {
         this.isPrivate = false;
         this.privateCitysrc;
         this.privateCode;
-        this.counts = {[CONSTANTS.LOBBY]: 0, [CONSTANTS.WORLD]: 0, [CONSTANTS.WORLD_EASY]: 0, [CONSTANTS.EURO]: 0, [CONSTANTS.US]: 0, [CONSTANTS.AFRICA]: 0, [CONSTANTS.ASIA]: 0, [CONSTANTS.OCEANIA]: 0, [CONSTANTS.SAMERICA]: 0, [CONSTANTS.MISC]: 0}
+        this.counts = {[CONSTANTS.LOBBY]: 0, [CONSTANTS.WORLD]: 0, [CONSTANTS.WORLD_EASY]: 0, [CONSTANTS.EURO]: 0, [CONSTANTS.US]: 0, [CONSTANTS.AFRICA]: 0, [CONSTANTS.ASIA]: 0, [CONSTANTS.OCEANIA]: 0, [CONSTANTS.SAMERICA]: 0, [CONSTANTS.MISC]: 0, [CONSTANTS.SPECIAL]: 0}
         this.mapStyle = 'terrain';
         this.lastCommand = {'timeDescrip': '', 'citystring': '', 'capital': false, 'iso2': '', 'round': 0, 'button': false, 'clicked': false};
         this.lastTime = {'time': 10, 'color': 'white'};
@@ -170,9 +170,9 @@ class Commands {
         let samerica_string; 
         if (this.counts[CONSTANTS.SAMERICA] > 0) {samerica_string = "<b>(" + this.counts[CONSTANTS.SAMERICA] + " players)</b>"} else {samerica_string = "<font color=\"white\">(0 players)</font>"}
         $('#commands').append($("<button class='room-btn' id='samerica_button'><b>S. America</b> <br><font size=2>" + samerica_string + "</font></button>  "))
-        let ukraine_string; 
-        if (this.counts[CONSTANTS.UKRAINE] > 0) {ukraine_string = "<b>(" + this.counts[CONSTANTS.UKRAINE] + " players)</b>"} else {ukraine_string = "<font color=\"white\">(0 players)</font>"}
-        $('#commands').append($("<button class='special-room-btn' id='ukraine_button'><b>Ukraine</b> <br><font size=2>" + ukraine_string + "</font></button>  "))
+        let special_string; 
+        if (this.counts[CONSTANTS.SPECIAL] > 0) {special_string = "<b>(" + this.counts[CONSTANTS.SPECIAL] + " players)</b>"} else {special_string = "<font color=\"white\">(0 players)</font>"}
+        $('#commands').append($("<button class='special-room-btn' id='special_button'><b>Ukraine</b> <br><font size=2>" + special_string + "</font></button>  "))
 
         var room = this.myRoomName;
         
@@ -211,7 +211,7 @@ class Commands {
         $('#asia_button').bind("click", () => {if (room !== CONSTANTS.ASIA) socket.emit('moveTo', CONSTANTS.ASIA); this.refocus()});
         $('#oceania_button').bind("click", () => {if (room !== CONSTANTS.OCEANIA) socket.emit('moveTo', CONSTANTS.OCEANIA); this.refocus()});
         $('#samerica_button').bind("click", () => {if (room !== CONSTANTS.SAMERICA) socket.emit('moveTo', CONSTANTS.SAMERICA); this.refocus()});
-        $('#ukraine_button').bind("click", () => {if (room !== CONSTANTS.UKRAINE) socket.emit('moveTo', CONSTANTS.UKRAINE); this.refocus()});
+        $('#special_button').bind("click", () => {if (room !== CONSTANTS.SPECIAL) socket.emit('moveTo', CONSTANTS.SPECIAL); this.refocus()});
     }
 
     setStyle(id, style) {

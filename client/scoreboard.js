@@ -9,7 +9,7 @@ class Scoreboard {
     }
 
     postScore(rank, name, color, score, wins) {
-        const string = $("<font color=" + color + " style=\"font-size:15px;font-family:monospace\" \>").html(("<b>" + name + "</b>: ").padEnd(24).replace(/\s/g, "&nbsp;") + score.toString().padEnd(4).replace(/\s/g, "&nbsp;") + '  (' +  wins + ' <font size=1>🏆</font>)<br>');
+        const string = $("<font color=" + color + " style=\"font-size:15px;font-family:monospace\" \>").html(("<b>" + name + "</b>: ").padEnd(26).replace(/\s/g, "&nbsp;") + score.toString().padEnd(4).replace(/\s/g, "&nbsp;") + '  (' +  wins + ' <font size=1>🏆</font>)<br>');
         $('#scoreboard').append(string)
     }
     // Message reactions

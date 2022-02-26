@@ -55,7 +55,10 @@ class Room {
         this.lastRecordUpdate = timestamp;
     }
     createJoe() {
-      const avg_name = "Average " + CONSTANTS.AVERAGE_NAMES[Math.floor(Math.random() * CONSTANTS.AVERAGE_NAMES.length)];
+      let name = CONSTANTS.AVERAGE_NAMES[Math.floor(Math.random() * CONSTANTS.AVERAGE_NAMES.length)]
+      if (this.citysrc == CONSTANTS.SPECIAL)
+        name = "Volodymyr"
+      const avg_name = "Average " + name;
       this.joe = new Player(this.roomName + "_joe", 0, this.map, this.ordinalCounter, this.ordinalCounter, avg_name, {'moved': true, 'color': 'black', 'wins': 0, 'name': avg_name, 'optOut': true});
       this.hasJoe = true;
         this.sortPlayers();
@@ -595,7 +598,7 @@ class Room {
       const respectOptOut = (x) => {if (x.optOut) return 'optOut' + x.ip; else return x.ip;};
       let map = this.map;
       // Stick ukraine, or any special maps, into world data
-      if (map == CONSTANTS.UKRAINE)
+      if (map == CONSTANTS.SPECIAL)
         map = CONSTANTS.WORLD
       const dists = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.geoError);
       const lats = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.lat);

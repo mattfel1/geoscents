@@ -174,7 +174,7 @@ var rooms = {
     'Asia': new Room(CONSTANTS.ASIA, 'Asia', CONSTANTS.ASIA),
     'Oceania': new Room(CONSTANTS.OCEANIA, 'Oceania', CONSTANTS.OCEANIA),
     'Trivia': new Room(CONSTANTS.MISC, 'Trivia', CONSTANTS.MISC),
-    'Ukraine': new Room(CONSTANTS.UKRAINE, 'Ukraine', CONSTANTS.UKRAINE),
+    'Ukraine': new Room(CONSTANTS.SPECIAL, 'Ukraine', CONSTANTS.SPECIAL),
     'Lobby': new Room(CONSTANTS.LOBBY, 'Lobby', CONSTANTS.LOBBY),
 };
 var playerRooms = new Map();
@@ -201,7 +201,7 @@ io.on('connection', (socket) => {
 	socket.on('newPlayer', () => {
 	  rooms[CONSTANTS.LOBBY].addPlayer(socket, {'moved': false});
       playerRooms.set(socket.id, rooms[CONSTANTS.LOBBY]);
-      io.sockets.emit('update counts', {[CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),[CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),[CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),[CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),[CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),[CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),[CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),[CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),[CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),[CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount()});
+      io.sockets.emit('update counts', {[CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),[CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),[CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),[CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),[CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),[CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),[CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),[CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),[CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),[CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount(), [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()});
       helpers.logHistogram(rooms);
       helpers.log("User connected    " + socket.handshake.address);
 	  socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
@@ -223,7 +223,7 @@ io.on('connection', (socket) => {
               io.sockets.emit("update messages", room.roomName, leave_msg);
           }
           room.killPlayer(socket);
-        io.sockets.emit('update counts', {[CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),[CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),[CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),[CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),[CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),[CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),[CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),[CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),[CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),[CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount()});
+        io.sockets.emit('update counts', {[CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),[CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),[CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),[CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),[CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),[CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),[CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),[CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),[CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),[CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount(), [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()});
       }
       Object.values(rooms).forEach(function(room) {
         if (room.isPrivate && room.playerCount() == 0) {
@@ -271,7 +271,7 @@ io.on('connection', (socket) => {
             specificGreeting(socket, name, "Walter", "<i>Thanks for the feedback!  If you have any ideas for spreading the word besides a post on r/WebGames every 3 months, let me know!  <br>The twine question is surprisingly controversial, but I will add the words 'built by a single person' so that it is accurate and also matches the Weird Al song.</i><br>");
             specificGreeting(socket, name, "adam", "<i>I was very concerned when you said the Male, Maldives image was \"crazy\".  I thought it was grabbing a random image from the wikipedia page for \"male\".  Did you just mean <a href=https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Male-total.jpg/600px-Male-total.jpg>this image</a> looks crazy?</i><br>");
             specificGreeting(socket, name, "ecanpecan", "<i>Thanks for pointing that out...</i><br>");
-            io.sockets.emit('update counts', {[CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),[CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),[CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),[CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),[CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),[CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),[CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),[CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),[CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),[CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount()});
+            io.sockets.emit('update counts', {[CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),[CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),[CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),[CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),[CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),[CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),[CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),[CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),[CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),[CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount(), [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()});
 		    
             helpers.logHistogram(rooms)
 	    }
@@ -302,7 +302,7 @@ io.on('connection', (socket) => {
           }
         });
 
-       io.sockets.emit('update counts', {[CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),[CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),[CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),[CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),[CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),[CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),[CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),[CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),[CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),[CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount()});
+       io.sockets.emit('update counts', {[CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),[CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),[CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),[CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),[CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),[CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),[CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),[CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),[CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),[CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount(), [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()});
     });
     socket.on('mute', () => {
         io.sockets.emit('mute player', socket.id)
@@ -375,9 +375,9 @@ io.on('connection', (socket) => {
           var join_msg = "[ <font color='" + rooms[roomName].getPlayerColor(socket) + "'><b>" + rooms[roomName].getPlayerRawName(socket) + "</b> has joined " + roomName + "!</font> ]<br>";
           io.sockets.emit("update messages", roomName, join_msg);
           if (roomName == CONSTANTS.MISC) rooms[roomName].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items or complain about current items by typing a message starting with /feedback!</i><br>", function() {});
-          if (roomName == CONSTANTS.UKRAINE) rooms[roomName].whisperMessage(socket, "<i>Learn Ukrainian geography!</i><br>", function() {});
+          if (roomName == CONSTANTS.SPECIAL) rooms[roomName].whisperMessage(socket, "<i>Learn Ukrainian geography!</i><br>", function() {});
           if (roomName == CONSTANTS.WORLD_EASY) rooms[roomName].whisperMessage(socket, "<i>Welcome to the World Capitals map!  This map no longer includes province and state capitals of the largest countries (i.e. Canada, USA, China, India, and Australia).  Let me know if you think this is better or worse by leaving /feedback!</i><br>", function() {});
-          io.sockets.emit('update counts', {[CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),[CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),[CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),[CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),[CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),[CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),[CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),[CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),[CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),[CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount()});
+          io.sockets.emit('update counts', {[CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),[CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),[CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),[CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),[CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),[CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),[CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),[CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),[CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),[CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount(), [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()});
           rooms[roomName].joeMessage();
           helpers.logHistogram(rooms)
       }
@@ -449,7 +449,7 @@ io.on('connection', (socket) => {
               var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'><b>" + rooms[dest].getPlayerRawName(socket) + "</b> has joined " + dest + "!</font> ]<br>";
               io.sockets.emit("update messages", dest, join_msg);
               // if (dest == CONSTANTS.MISC) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
-              io.sockets.emit('update counts', {[CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),[CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),[CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),[CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),[CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),[CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),[CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),[CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),[CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),[CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount()});
+              io.sockets.emit('update counts', {[CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),[CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),[CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),[CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),[CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),[CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),[CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),[CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),[CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),[CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount(), [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()});
               helpers.log("Player " +  socket.handshake.address + " " + rooms[dest].getPlayerName(socket) + " moved to room " + dest);
               rooms[dest].joeMessage();
               helpers.logHistogram(rooms)

@@ -5,7 +5,7 @@ module.exports = {
     TRUTH_COLOR: 'white',
     AVERAGE_NAMES: ["Joe", "Jane", "Chump", "Dog", "Cat", "Matt", "Elyse", "Avery", "Erica", "Jimbo", "Todd", "Sammy", "Jose", "Errol", "Timmy",
                     "Bojack", "Avon", "Tyrion", "Bob", "Marie", "Mohammed", "Fatima", "Pierre", "Helen", "Sebastian", "Benny", "Dwayne", "Darius", "Hugo",
-                    "Emma", "Chuck", "Mama", "Papa", "Uncle", "Aunt", "Gramps", "Granny", "Ronald", "Clown", "Goober", "Daisy", "GZA", "Omar"],
+                    "Emma", "Chuck", "Mama", "Papa", "Uncle", "Aunt", "Gramps", "Granny", "Ronald", "Clown", "Goober", "Daisy", "GZA", "Omar", "Volodymyr", "Kiwi"],
     KILL_MSGS: ["PLAYER has killed BOT!", "PLAYER killed BOT in the study using a candlestick!", "PLAYER unplugged BOT!",
         "PLAYER murdered BOT in cold blood!", "PLAYER devoured BOT for dinner!", "PLAYER annihilated BOT!",
         "PLAYER locked BOT in the basement and threw away the key!", "PLAYER made BOT swim with the fishes!", "PLAYER ripped BOT to shreds!",
@@ -149,10 +149,9 @@ module.exports = {
     ASIA: 'Asia',
     OCEANIA: 'Oceania',
     MISC: 'Trivia',
-    UKRAINE: 'Ukraine',
+    SPECIAL: 'Ukraine',
     AFRICA: 'Africa',
     SAMERICA: "S. America",
-    UKRAINE: "Ukraine",
     MAX_INACTIVE: 10, // Rounds of no click before you get booted
     MAX_S_INACTIVE: 2400, // seconds * fps spent in lobby before you get booted
     INIT_RECORD: {'record1': 0, 'recordName1': '-', 'recordColor1': 'black', 'recordBroken1': false, 'record2': 0, 'recordName2': '-', 'recordColor2': 'black', 'recordBroken2': false, 'record3': 0, 'recordName3': '-', 'recordColor3': 'black', 'recordBroken3': false, 'record4': 0, 'recordName4': '-', 'recordColor4': 'black', 'recordBroken4': false, 'record5': 0, 'recordName5': '-', 'recordColor5': 'black', 'recordBroken5': false},

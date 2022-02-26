@@ -45,10 +45,10 @@ samericaImg['classic'].src = "/resources/samerica_classic.png";
 samericaImg['terrain'].src = "/resources/samerica_terrain.png";
 samericaImg['satellite'].src = "/resources/samerica_satellite.png";
 
-var ukraineImg = {'classic': new Image(), 'terrain': new Image(), 'satellite': new Image()};
-ukraineImg['classic'].src = "/resources/ukraine_classic.png";
-ukraineImg['terrain'].src = "/resources/ukraine_terrain.png";
-ukraineImg['satellite'].src = "/resources/ukraine_satellite.png";
+var specialImg = {'classic': new Image(), 'terrain': new Image(), 'satellite': new Image()};
+specialImg['classic'].src = "/resources/ukraine_classic.png";
+specialImg['terrain'].src = "/resources/ukraine_terrain.png";
+specialImg['satellite'].src = "/resources/ukraine_satellite.png";
 
 var frame_cnt = 0;
 var frames = 120;
@@ -328,13 +328,13 @@ class Map {
             };
           samericaImg[mapStyle].onload();
       }
-      else if (room == CONSTANTS.UKRAINE){
+      else if (room == CONSTANTS.SPECIAL){
             this.ctx.font = "20px Arial";
             this.ctx.fillText('[ Map is loading... ]', 400, 400);
-            ukraineImg[mapStyle].onload = function () {
-                ctx.drawImage(ukraineImg[mapStyle], 0, 0)
+            specialImg[mapStyle].onload = function () {
+                ctx.drawImage(specialImg[mapStyle], 0, 0)
             };
-          ukraineImg[mapStyle].onload();
+          specialImg[mapStyle].onload();
       }
 
     }
