@@ -351,20 +351,7 @@ module.exports = { CITIES: [
     "capital": "primary",
     "population": 4378000,
     "id": 1704413791
-  },
-  {
-    "city": "Yangon",
-    "city_ascii": "Yangon",
-    "lat": 16.7834,
-    "lng": 96.1667,
-    "country": "Myanmar",
-    "iso2": "MM",
-    "iso3": "MMR",
-    "admin_name": "Yangon",
-    "capital": "primary",
-    "population": 4088000,
-    "id": 1104616656
-  },
+  }
   {
     "city": "Bras\u00edlia",
     "city_ascii": "Brasilia",
