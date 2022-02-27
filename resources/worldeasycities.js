@@ -351,7 +351,7 @@ module.exports = { CITIES: [
     "capital": "primary",
     "population": 4378000,
     "id": 1704413791
-  }
+  },
   {
     "city": "Bras\u00edlia",
     "city_ascii": "Brasilia",
