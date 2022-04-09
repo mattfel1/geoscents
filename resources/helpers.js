@@ -50,7 +50,8 @@ th {
 </body>
 </html>
 
-`}
+`
+}
 
 const playerHistJs = (name) => {
     return `
@@ -79,18 +80,19 @@ $(document).ready(function() {
 
 
 
-`}
+`
+}
 
 
 const log = (payload) => {
     const currentdate = new Date();
-    const timestamp = currentdate.getDate() + "/"
-        + (currentdate.getMonth() + 1) + "/"
-        + currentdate.getFullYear() + " @ "
-        + currentdate.getHours() + ":"
-        + currentdate.getMinutes() + ":";
+    const timestamp = currentdate.getDate() + "/" +
+        (currentdate.getMonth() + 1) + "/" +
+        currentdate.getFullYear() + " @ " +
+        currentdate.getHours() + ":" +
+        currentdate.getMinutes() + ":";
     if (fs.existsSync(logfile)) {
-        fs.appendFile(logfile, "[" + timestamp + "] " + payload + "\n", function (err) {
+        fs.appendFile(logfile, "[" + timestamp + "] " + payload + "\n", function(err) {
             if (err) throw err;
             // console.log('Saved!');
         });
@@ -99,33 +101,33 @@ const log = (payload) => {
 
 const logMessage = (payload) => {
     const currentdate = new Date();
-    const timestamp = currentdate.getDate() + "/"
-        + (currentdate.getMonth() + 1) + "/"
-        + currentdate.getFullYear() + " @ "
-        + currentdate.getHours() + ":"
-        + currentdate.getMinutes() + ":";
+    const timestamp = currentdate.getDate() + "/" +
+        (currentdate.getMonth() + 1) + "/" +
+        currentdate.getFullYear() + " @ " +
+        currentdate.getHours() + ":" +
+        currentdate.getMinutes() + ":";
     if (fs.existsSync(messagefile)) {
-        fs.appendFile(messagefile, "[" + timestamp + "] " + payload + "\n", function (err) {
+        fs.appendFile(messagefile, "[" + timestamp + "] " + payload + "\n", function(err) {
             if (err) throw err;
             // console.log('Saved!');
         });
     }
 };
 
-const trunc = (decimal,n=2) => {
-  let x = decimal + ''; // string 
-  return x.lastIndexOf('.')>=0?parseFloat(x.substr(0,x.lastIndexOf('.')+(n+1))):decimal; // You can use indexOf() instead of lastIndexOf()
+const trunc = (decimal, n = 2) => {
+    let x = decimal + ''; // string 
+    return x.lastIndexOf('.') >= 0 ? parseFloat(x.substr(0, x.lastIndexOf('.') + (n + 1))) : decimal; // You can use indexOf() instead of lastIndexOf()
 }
 
 const logFeedback = (payload) => {
     const currentdate = new Date();
-    const timestamp = currentdate.getDate() + "/"
-        + (currentdate.getMonth() + 1) + "/"
-        + currentdate.getFullYear() + " @ "
-        + currentdate.getHours() + ":"
-        + currentdate.getMinutes() + ":";
+    const timestamp = currentdate.getDate() + "/" +
+        (currentdate.getMonth() + 1) + "/" +
+        currentdate.getFullYear() + " @ " +
+        currentdate.getHours() + ":" +
+        currentdate.getMinutes() + ":";
     if (fs.existsSync(feedbackfile)) {
-        fs.appendFile(feedbackfile, "[" + timestamp + "] " + payload + "\n", function (err) {
+        fs.appendFile(feedbackfile, "[" + timestamp + "] " + payload + "\n", function(err) {
             if (err) throw err;
             // console.log('Saved!');
         });
@@ -136,8 +138,8 @@ const makeLink = (room, thisTarget) => {
     let part2 = "%2C+" + thisTarget['country'];
     if (thisTarget['country'] === "USA") part2 = "%2C+" + thisTarget['admin_name'];
     let wiki = "https://en.wikipedia.org/wiki/Special:Search?search=" + thisTarget['city'] + part2 + "&go=Go&ns0=1";
-    http://en.wikipedia.org/w/api.php?action=query&titles=Denver%2C+Colorado&prop=pageimages&format=json&pithumbsize=100
-    if (thisTarget['wiki'] != null) wiki = thisTarget['wiki'];
+    http: //en.wikipedia.org/w/api.php?action=query&titles=Denver%2C+Colorado&prop=pageimages&format=json&pithumbsize=100
+        if (thisTarget['wiki'] != null) wiki = thisTarget['wiki'];
     return wiki;
 }
 
@@ -150,9 +152,11 @@ const flushGuesses = (map) => {
 
         const tmpfile = '/scratch/' + map + '_guesses_staging';
         const file = '/scratch/' + map + '_guesses';
-        if (!fs.existsSync(tmpfile))  {
+        if (!fs.existsSync(tmpfile)) {
             logFeedback('Staging file ' + tmpfile + ' doesnt exist!!')
-            fs.writeFile(tmpfile, "", {flag: 'wx'}, function (err) {
+            fs.writeFile(tmpfile, "", {
+                flag: 'wx'
+            }, function(err) {
                 if (err) throw err;
             });
             return
@@ -165,7 +169,9 @@ const flushGuesses = (map) => {
                 const currentdate = new Date();
                 const timestamp = currentdate.getHours() + "-" + currentdate.getMinutes() + currentdate.getSeconds();
                 logFeedback("Staging file " + file + " seems corrupted!!  Writing it to /scratch/corrupted" + timestamp)
-                fs.writeFile("/scratch/corrupted" + timestamp, data, {flag: 'w'}, function (err) {
+                fs.writeFile("/scratch/corrupted" + timestamp, data, {
+                    flag: 'w'
+                }, function(err) {
                     if (err) throw err;
                 });
             }
@@ -176,8 +182,8 @@ const flushGuesses = (map) => {
                 // console.log("Before" + h1[entry]["lats"])
 
                 try {
-                    recordGuesses(map, entry, history[entry]["city"], history[entry]["admin"], history[entry]["country"], history[entry]["iso2"], 
-                        history[entry]["ips"], history[entry]["dists"], history[entry]["times"], history[entry]["lats"], history[entry]["lons"], history[entry]["true_lat"], 
+                    recordGuesses(map, entry, history[entry]["city"], history[entry]["admin"], history[entry]["country"], history[entry]["iso2"],
+                        history[entry]["ips"], history[entry]["dists"], history[entry]["times"], history[entry]["lats"], history[entry]["lons"], history[entry]["true_lat"],
                         history[entry]["true_lon"], history[entry]["wiki"], false)
                 } catch {
                     console.log("Error copying " + entry)
@@ -188,10 +194,11 @@ const flushGuesses = (map) => {
             }
 
             console.log("Clearing the staging file for " + map)
-            fs.writeFileSync(tmpfile, "", {flag: 'w'})
+            fs.writeFileSync(tmpfile, "", {
+                flag: 'w'
+            })
         }
-    }
-    catch (err) {
+    } catch (err) {
         logFeedback("Something seems messed up with moving staged guesses to full guesses!!!!")
     }
 }
@@ -206,7 +213,7 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
         let file;
         if (staged)
             file = '/scratch/' + map + '_guesses_staging';
-        else            
+        else
             file = '/scratch/' + map + '_guesses';
         const joefile = '/scratch/' + map + '_joe';
 
@@ -216,7 +223,9 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
             // logFeedback("Skipping update to " + map + " because we updated less than 1s ago!")
         } else if (!fs.existsSync(file)) {
             logFeedback('File ' + file + ' doesnt exist!!')
-            fs.writeFile(file, "", {flag: 'w'}, function (err) {
+            fs.writeFile(file, "", {
+                flag: 'w'
+            }, function(err) {
                 if (err) throw err;
             });
         } else {
@@ -230,7 +239,9 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
                     const currentdate = new Date();
                     const timestamp = currentdate.getHours() + "-" + currentdate.getMinutes() + currentdate.getSeconds();
                     logFeedback("File " + file + " seems corrupted!!  Writing it to /scratch/corrupted" + timestamp)
-                    fs.writeFile("/scratch/corrupted" + timestamp, data, {flag: 'w'}, function (err) {
+                    fs.writeFile("/scratch/corrupted" + timestamp, data, {
+                        flag: 'w'
+                    }, function(err) {
                         if (err) throw err;
                     });
                 }
@@ -292,10 +303,18 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
 
                     // Add raw data
                     let ips = [];
-                    Object.values(raw_ips).forEach((ip) => {ips.push(ip.replace("::ffff:",""))});
+                    Object.values(raw_ips).forEach((ip) => {
+                        ips.push(ip.replace("::ffff:", ""))
+                    });
 
                     if (Object.keys(history).indexOf(citystring) === -1) {
-                        history[citystring] = {"dists": dists, "times": times, "ips": ips, "lats": lats, "lons": lons};
+                        history[citystring] = {
+                            "dists": dists,
+                            "times": times,
+                            "ips": ips,
+                            "lats": lats,
+                            "lons": lons
+                        };
                     } else {
                         history[citystring]["dists"] = history[citystring]["dists"].concat(dists.map(x => trunc(x, 1)));
                         history[citystring]["times"] = history[citystring]["times"].concat(times.map(x => trunc(x, 1)));
@@ -328,7 +347,9 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
                     history[citystring]["iso2"] = iso2;
                     // Update mini file for joe
                     if (!fs.existsSync(joefile)) {
-                        fs.writeFile(joefile, "", {flag: 'wx'}, function (err) {
+                        fs.writeFile(joefile, "", {
+                            flag: 'wx'
+                        }, function(err) {
                             if (err) throw err;
                         });
                     } else {
@@ -345,7 +366,7 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
                                 "mean_lon": mean_lon
                             };
                             // Commit back to file
-                            fs.writeFile(joefile, JSON.stringify(copy(joehistory), null, 2), function (err) {
+                            fs.writeFile(joefile, JSON.stringify(copy(joehistory), null, 2), function(err) {
                                 if (err) {
                                     return console.log(err);
                                 }
@@ -354,7 +375,7 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
                     }
                 } catch (err) {}
                 // Commit back to file
-                fs.writeFile(file, JSON.stringify(copy(history), null, 2), function (err) {
+                fs.writeFile(file, JSON.stringify(copy(history), null, 2), function(err) {
                     if (err) {
                         logFeedback("Error commiting new data back to file!")
                         return console.log(err);
@@ -363,8 +384,7 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
 
             });
         }
-    }
-    catch (err) {
+    } catch (err) {
         logFeedback("Something seems messed up with guess logging!!!!")
     }
 };
@@ -375,7 +395,7 @@ const joeData = (map, citystring) => {
         history = JSON.parse(fs.readFileSync(file, 'utf8'));
         return [history[citystring]["mean_time"], history[citystring]["mean_lat"], history[citystring]["mean_lon"]];
     } catch {
-        return [10,0,0];
+        return [10, 0, 0];
     }
 };
 
@@ -392,13 +412,13 @@ const logHistogram = (rooms) => {
         "), Oceania (" + rooms[CONSTANTS.OCEANIA].playerCount() +
         "), Trivia (" + rooms[CONSTANTS.MISC].playerCount() + ")"
     const currentdate = new Date();
-    const timestamp = currentdate.getDate() + "/"
-        + (currentdate.getMonth() + 1) + "/"
-        + currentdate.getFullYear() + " @ "
-        + currentdate.getHours() + ":"
-        + currentdate.getMinutes() + ":";
+    const timestamp = currentdate.getDate() + "/" +
+        (currentdate.getMonth() + 1) + "/" +
+        currentdate.getFullYear() + " @ " +
+        currentdate.getHours() + ":" +
+        currentdate.getMinutes() + ":";
     if (fs.existsSync(histfile)) {
-        fs.appendFile(histfile, "[" + timestamp + "] " + payload + "\n", function (err) {
+        fs.appendFile(histfile, "[" + timestamp + "] " + payload + "\n", function(err) {
             if (err) throw err;
             // console.log('Saved!');
         });
@@ -408,31 +428,40 @@ const logHistogram = (rooms) => {
 
 const logPlayerHistory = (name, color, score, room) => {
     try {
-        const filebase = '/scratch/histories/' + name.replace(/ /g,'_') + '_history';
+        const filebase = '/scratch/histories/' + name.replace(/ /g, '_') + '_history';
 
         // Set html
-        fs.writeFile(filebase + ".html", playerHistHtml(name.replace(/ /g,'_')), {flag: 'w'}, function (err) { if (err) throw err;});
+        fs.writeFile(filebase + ".html", playerHistHtml(name.replace(/ /g, '_')), {
+            flag: 'w'
+        }, function(err) {
+            if (err) throw err;
+        });
 
         // Set js
-        fs.writeFile(filebase + ".js", playerHistJs(name.replace(/ /g,'_')), {flag: 'w'}, function (err) { if (err) throw err;});
+        fs.writeFile(filebase + ".js", playerHistJs(name.replace(/ /g, '_')), {
+            flag: 'w'
+        }, function(err) {
+            if (err) throw err;
+        });
 
         if (!fs.existsSync(filebase + ".csv")) {
             // logFeedback('Creating history for ' + name)
-            fs.writeFile(filebase + ".csv", "", {flag: 'wx'}, function (err) {
+            fs.writeFile(filebase + ".csv", "", {
+                flag: 'wx'
+            }, function(err) {
                 if (err) throw err;
             });
-        } 
+        }
         const currentdate = new Date();
-        const timestamp = currentdate.getFullYear() + "/"
-            + (currentdate.getMonth() + 1) + "/"
-            + currentdate.getDate() + " @ "
-            + currentdate.getHours() + ":"
-            + currentdate.getMinutes() + " GMT";
-        fs.appendFile(filebase + ".csv", "\"" + timestamp + "\",\"" + room + "\",\"" + score + "\",\"<font color=" + color + ">" + name + "</font>\",,,,,,,,,,,,,,,,,,,,,,,,,,,,\n", function (err) {
-                if (err) throw err;
-            });
-    }
-    catch (err) {
+        const timestamp = currentdate.getFullYear() + "/" +
+            (currentdate.getMonth() + 1) + "/" +
+            currentdate.getDate() + " @ " +
+            currentdate.getHours() + ":" +
+            currentdate.getMinutes() + " GMT";
+        fs.appendFile(filebase + ".csv", "\"" + timestamp + "\",\"" + room + "\",\"" + score + "\",\"<font color=" + color + ">" + name + "</font>\",,,,,,,,,,,,,,,,,,,,,,,,,,,,\n", function(err) {
+            if (err) throw err;
+        });
+    } catch (err) {
         console.log("Something messed up trying to write history for " + name)
     }
 
@@ -441,18 +470,24 @@ const logPlayerHistory = (name, color, score, room) => {
 const readRecentActivity = (numel) => {
     var result = "";
     if (!fs.existsSync('/scratch/recent_activity')) {
-        fs.writeFile('/scratch/recent_activity', "", { flag: 'wx' }, function (err) {
+        fs.writeFile('/scratch/recent_activity', "", {
+            flag: 'wx'
+        }, function(err) {
             if (err) throw err;
         });
     }
     fs.readFileSync('/scratch/recent_activity', 'utf-8')
-        .split('\n').map( (line, i) => {if (i < numel) result = result + line + "<br>"});
+        .split('\n').map((line, i) => {
+            if (i < numel) result = result + line + "<br>"
+        });
     return result;
 };
 
 const prependRecentActivity = (payload) => {
     if (!fs.existsSync('/scratch/recent_activity')) {
-        fs.writeFile('/scratch/recent_activity', "", { flag: 'wx' }, function (err) {
+        fs.writeFile('/scratch/recent_activity', "", {
+            flag: 'wx'
+        }, function(err) {
             if (err) throw err;
         });
     }
@@ -462,25 +497,31 @@ const prependRecentActivity = (payload) => {
     fs.writeSync(fd, insert, 0, insert.length, 0);
     fs.writeSync(fd, data, 0, data.length, insert.length);
     fs.close(fd, (err) => {
-      if (err) throw err;
+        if (err) throw err;
     });
 };
 
 const readHallOfFame = (numel) => {
     var result = "";
     if (!fs.existsSync('/scratch/hall_of_fame')) {
-        fs.writeFile('/scratch/hall_of_fame', "", { flag: 'wx' }, function (err) {
+        fs.writeFile('/scratch/hall_of_fame', "", {
+            flag: 'wx'
+        }, function(err) {
             if (err) throw err;
         });
     }
     fs.readFileSync('/scratch/hall_of_fame', 'utf-8')
-        .split('\n').map( (line, i) => {if (i < numel) result = result + line + "<br>"});
+        .split('\n').map((line, i) => {
+            if (i < numel) result = result + line + "<br>"
+        });
     return result;
 };
 
 const prependHallOfFame = (payload) => {
     if (!fs.existsSync('/scratch/hall_of_fame')) {
-        fs.writeFile('/scratch/hall_of_fame', "", { flag: 'wx' }, function (err) {
+        fs.writeFile('/scratch/hall_of_fame', "", {
+            flag: 'wx'
+        }, function(err) {
             if (err) throw err;
         });
     }
@@ -490,8 +531,22 @@ const prependHallOfFame = (payload) => {
     fs.writeSync(fd, insert, 0, insert.length, 0);
     fs.writeSync(fd, data, 0, data.length, insert.length);
     fs.close(fd, (err) => {
-      if (err) throw err;
+        if (err) throw err;
     });
 };
 
-module.exports = {log, logFeedback, logMessage, logHistogram, readRecentActivity, logPlayerHistory, prependRecentActivity, recordGuesses, flushGuesses, readHallOfFame, prependHallOfFame, makeLink, joeData};
+module.exports = {
+    log,
+    logFeedback,
+    logMessage,
+    logHistogram,
+    readRecentActivity,
+    logPlayerHistory,
+    prependRecentActivity,
+    recordGuesses,
+    flushGuesses,
+    readHallOfFame,
+    prependHallOfFame,
+    makeLink,
+    joeData
+};
