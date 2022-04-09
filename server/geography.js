@@ -82,8 +82,9 @@ const randomCity = (citysrc, blacklist) => {
             else i = i + 1;
         }
     }
-    if (requireUniqueAdmin(citysrc, proposal)) {blacklist.push(proposal['admin_name'])}
-    else if (citysrc == CONSTANTS.MISC) blacklist.push(stringifyTarget(proposal, citysrc)['string'])
+    if (requireUniqueAdmin(citysrc, proposal)) {
+        blacklist.push(proposal['admin_name'])
+    } else if (citysrc == CONSTANTS.MISC) blacklist.push(stringifyTarget(proposal, citysrc)['string'])
     else blacklist.push(proposal['country']);
     return [proposal, blacklist];
 };
@@ -91,17 +92,17 @@ const randomCity = (citysrc, blacklist) => {
 // Include the admin field when displaying city/country string to player
 const includeAdmin = (target, citysrc) => {
     return target['country'] === 'United States' ||
-    target['country'] === 'USA' ||
-    target['country'] === 'Canada' ||
-    target['country'] === 'Mexico' ||
-    target['country'] === 'Portugal' ||
-    target['country'] === 'India' ||
-    target['country'] === 'China' ||
-    target['country'] === 'Australia' ||
-    target['country'] === 'Russia' ||
-    target['country'] === 'Indonesia' ||
-    target['country'] === 'Brazil' ||
-    citysrc === CONSTANTS.SPECIAL
+        target['country'] === 'USA' ||
+        target['country'] === 'Canada' ||
+        target['country'] === 'Mexico' ||
+        target['country'] === 'Portugal' ||
+        target['country'] === 'India' ||
+        target['country'] === 'China' ||
+        target['country'] === 'Australia' ||
+        target['country'] === 'Russia' ||
+        target['country'] === 'Indonesia' ||
+        target['country'] === 'Brazil' ||
+        citysrc === CONSTANTS.SPECIAL
 };
 
 const stringifyTarget = (target, citysrc) => {
@@ -149,9 +150,13 @@ const stringifyTargetAscii = (target, citysrc) => {
 
 // Allow this country to be repeated if the state is unique
 const requireUniqueAdmin = (citysrc, target) => {
-    if (citysrc === CONSTANTS.US && (target['country'] === 'United States' || target['country'] === 'Canada')) {return true}
-    else if (citysrc === CONSTANTS.ASIA && (target['country'] === 'China' || target['country'] === 'India')) {return true}
-    else if (citysrc === CONSTANTS.SPECIAL) {return true}
+    if (citysrc === CONSTANTS.US && (target['country'] === 'United States' || target['country'] === 'Canada')) {
+        return true
+    } else if (citysrc === CONSTANTS.ASIA && (target['country'] === 'China' || target['country'] === 'India')) {
+        return true
+    } else if (citysrc === CONSTANTS.SPECIAL) {
+        return true
+    }
     // else if (citysrc === CONSTANTS.OCEANIA && target['country'] === 'Australia') {return true}
     else return false
 };
@@ -162,7 +167,7 @@ const uniqueInBlacklist = (citysrc, target, blacklist) => {
     else return !blacklist.includes(target['country']);
 };
 
-const mercDist = (map,row1,col1,row2,col2) => {
+const mercDist = (map, row1, col1, row2, col2) => {
     const row_err = Math.pow(row1 - row2, 2);
     let col_err = Math.min(Math.pow(col1 - col2, 2), Math.pow(col1 - col2 + CONSTANTS.MAP_WIDTH, 2), Math.pow(col1 - col2 - CONSTANTS.MAP_WIDTH, 2));
     if (map === CONSTANTS.US || map === CONSTANTS.EURO || map === CONSTANTS.AFRICA || map === CONSTANTS.SAMERICA || map === CONSTANTS.ASIA || map === CONSTANTS.OCEANIA || map === CONSTANTS.SPECIAL) { // No wrap
@@ -171,7 +176,7 @@ const mercDist = (map,row1,col1,row2,col2) => {
     return Math.sqrt(row_err + col_err);
 };
 
-const geoDist = (map,lat1,lon1,lat2,lon2) => {
+const geoDist = (map, lat1, lon1, lat2, lon2) => {
     const lon_diff = Math.min(Math.abs(Math.max(lon1, lon2) - (Math.min(lon1, lon2) + 360), Math.abs(lon1 - lon2))); // in degrees
     const lon_err = Math.pow(Math.sin(Math.PI / 180 * Math.abs(lon_diff) / 2), 2, 2);
     // Not really necessary since the +2PI correction will always be larger in the tinier maps
@@ -181,7 +186,7 @@ const geoDist = (map,lat1,lon1,lat2,lon2) => {
     const a = Math.pow(Math.sin(Math.PI / 180 * Math.abs(lat1 - lat2) / 2), 2) + Math.cos(Math.PI / 180 * lat1) * Math.cos(Math.PI / 180 * lat2) * lon_err;
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     // console.log("dist for " + lat1 + ", " + lon1 + " to " + lat2 + ", " + lon2 + " = " + (CONSTANTS.EARTH_RADIUS * c));
-	return CONSTANTS.EARTH_RADIUS * c
+    return CONSTANTS.EARTH_RADIUS * c
 };
 
 const fullDiag = 2 * geoDist(CONSTANTS.WORLD, (CONSTANTS.WORLD_MAX_LAT + CONSTANTS.WORLD_MIN_LAT) / 2, (CONSTANTS.WORLD_MAX_LON + CONSTANTS.WORLD_MIN_LON) / 2, CONSTANTS.WORLD_MIN_LAT, CONSTANTS.WORLD_MIN_LON);
@@ -210,7 +215,7 @@ const score = (map, geoDist, mercDist, timeBonus) => {
     // const distGaussian = Math.exp(-Math.pow(mercDist, 2) / CONSTANTS.GAUSS_C1) * CONSTANTS.MULTIPLIER;
     // return distGaussian * timeLogistic;
     // Geo distance based score
-    const minTimePortion = 1/3;
+    const minTimePortion = 1 / 3;
     const timeCushion = 1.55;
     const slope = (1 - minTimePortion) / (timeCushion - 10);
     const invTime = CONSTANTS.GUESS_DURATION - timeBonus;
@@ -224,7 +229,7 @@ const score = (map, geoDist, mercDist, timeBonus) => {
     return distPortion * timePortion
 };
 
-const mercToGeo = (map,row,col) => {
+const mercToGeo = (map, row, col) => {
     let zero_lat = CONSTANTS.WORLD_MIN_LAT;
     let max_lat = CONSTANTS.WORLD_MAX_LAT;
     let min_lon = CONSTANTS.WORLD_MIN_LON;
@@ -279,14 +284,17 @@ const mercToGeo = (map,row,col) => {
         max_lon = CONSTANTS.UKRAINE_MAX_LON;
         lat_ts = CONSTANTS.UKRAINE_LAT_TS;
     }
-    const eqMin = Math.atanh(Math.sin(zero_lat * Math.PI/180));
-    const eqRange = Math.atanh(Math.sin(max_lat * Math.PI/180)) - eqMin;
+    const eqMin = Math.atanh(Math.sin(zero_lat * Math.PI / 180));
+    const eqRange = Math.atanh(Math.sin(max_lat * Math.PI / 180)) - eqMin;
     const lon = ((col) * (max_lon - min_lon) / CONSTANTS.MAP_WIDTH) + min_lon;
     const lat = Math.asin(Math.tanh(((row) * eqRange / CONSTANTS.MAP_HEIGHT) + eqMin)) * 180 / Math.PI;
-    return {'lat': lat, 'lng': lon}
+    return {
+        'lat': lat,
+        'lng': lon
+    }
 };
 
-const geoToMerc = (map,lat, lon) => {
+const geoToMerc = (map, lat, lon) => {
     let zero_lat = CONSTANTS.WORLD_MIN_LAT;
     let max_lat = CONSTANTS.WORLD_MAX_LAT;
     let min_lon = CONSTANTS.WORLD_MIN_LON;
@@ -343,17 +351,22 @@ const geoToMerc = (map,lat, lon) => {
     }
     // get col value
     let col = (parseFloat(lon) - min_lon) * (CONSTANTS.MAP_WIDTH / (max_lon - min_lon));
-    if (parseFloat(lon) < min_lon) { col = (parseFloat(lon) + 360 - min_lon) * (CONSTANTS.MAP_WIDTH / (max_lon - min_lon)) }
+    if (parseFloat(lon) < min_lon) {
+        col = (parseFloat(lon) + 360 - min_lon) * (CONSTANTS.MAP_WIDTH / (max_lon - min_lon))
+    }
     // convert from degrees to radians
     const latRad = (parseFloat(lat)) * Math.PI / 180;
 
-    const eqMin = Math.atanh(Math.sin(zero_lat * Math.PI/180));
-    const eqRange = Math.atanh(Math.sin(max_lat * Math.PI/180)) - eqMin;
+    const eqMin = Math.atanh(Math.sin(zero_lat * Math.PI / 180));
+    const eqRange = Math.atanh(Math.sin(max_lat * Math.PI / 180)) - eqMin;
 
     // get row value
     const row = (CONSTANTS.MAP_HEIGHT / eqRange) * (Math.atanh(Math.sin(latRad)) - eqMin);
 
-    return {'row': row, 'col': col}
+    return {
+        'row': row,
+        'col': col
+    }
 };
 
 module.exports = {
