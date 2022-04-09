@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#">
-  <head>
+
+<head>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width initial-scale=1.0'>
     <meta name="description" content="An online multiplayer world geography game!  Test your knowledge of city locations." />
@@ -13,29 +14,29 @@
     <link type="text/css" rel="stylesheet" href="overlaypopup.css" />
     <meta name="GeoScents" content="An online multiplayer world geography game!  Test your knowledge of city locations. This is a recreation of the game Geosense from geosense.net.">
     <meta property="og:image" content="http://geoscents.net/resources/ogimage.png" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6780905379201491"
-     crossorigin="anonymous"></script>
-  </head>
-  <body>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6780905379201491" crossorigin="anonymous"></script>
+</head>
 
-<div class="overlay-bg"></div>
-<div class="hole"> </div>
-<div class="instruction"></div> 
-<div class="screen"></div> 
+<body>
 
-<div class="overlay-content-code privatepopup">
-    <p>Set up / join private room</p>
-                     <form id="code">
-                 <table>
-                     <td style="text-align:center;padding: 8px;">
-                      <label for="Code">Room code<br></label>
-                     <input type="text" id="selected_code" autofocus name="selected_code" style="width: 120px;" required minlength="1" maxlength="5" pattern="[a-z0-9]+" title="Name should only contain lowercase letters and numbers" />
-                     </td>
-                     <td style="text-align:center;padding: 8px;width:auto">
-                      <div id="maptitle">Choose / change map</div>
+    <div class="overlay-bg"></div>
+    <div class="hole"> </div>
+    <div class="instruction"></div>
+    <div class="screen"></div>
+
+    <div class="overlay-content-code privatepopup">
+        <p>Set up / join private room</p>
+        <form id="code">
+            <table>
+                <td style="text-align:center;padding: 8px;">
+                    <label for="Code">Room code<br></label>
+                    <input type="text" id="selected_code" autofocus name="selected_code" style="width: 120px;" required minlength="1" maxlength="5" pattern="[a-z0-9]+" title="Name should only contain lowercase letters and numbers" />
+                </td>
+                <td style="text-align:center;padding: 8px;width:auto">
+                    <div id="maptitle">Choose / change map</div>
 
 
-                      <select id="requestedCitysrc">
+                    <select id="requestedCitysrc">
                         <option value="Random">Random</option>
                         <option value="World">World</option>
                         <option value="World Capitals">World Capitals</option>
@@ -46,126 +47,144 @@
                         <option value="Oceania">Oceania</option>
                         <option value="N. America">N. America</option>
                         <option value="S. America">S. America</option>
-                      </select>
-                      <script type="text/javascript">
+                    </select>
+                    <script type="text/javascript">
                         document.getElementById('requestedCitysrc').value = "<?php echo $_GET['requestedCitysrc'];?>";
                         if (document.getElementById('requestedCitysrc').value.length == 0) document.getElementById('requestedCitysrc').value = "Random"
-                      </script>
-                     </td>
-                 </table>
-                     <input type="submit" style="text-align:center" value="Go!" />
+                    </script>
+                </td>
+            </table>
+            <input type="submit" style="text-align:center" value="Go!" />
 
-                     </form>
-</div>
+        </form>
+    </div>
 
-<div class="overlay-content-code helppopup">
-    <p>Score points by locating cities (or points of interest) as quickly and accurately as possible!</p>
-                     
-</div>
-<div class="overlay-content-name popup">
-    <p>Please choose a name and color (or leave blank for random)</p>
-                     <form id="rename" method="post">
-                 <table style="height:0px">
-                     <td style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey;width:28%;height:100%">
-                      <b>Name:</b><br>
-                     <input type="text" id="selected_name" autofocus name="selected_name" style="width: 120px;" maxlength="14" pattern="[a-zA-Z0-9][a-zA-Z0-9 ?!]+[a-zA-Z0-9]" title="Name should only contain letters, numbers, and spaces" >
-                     </td>
-                     <td style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey;width:28%;height:100%"><b>Color:</b><br>
-                     <input type="radio" name="selected_color" value="random" checked> random
-                     <input type="radio" name="selected_color" value="red"> <font color="red"><b>█</b></font>
-                     <input type="radio" name="selected_color" value="blue"> <font color="blue"><b>█</b></font>
-                     <input type="radio" name="selected_color" value="purple"> <font color="purple"><b>█</b></font>
-                     <input type="radio" name="selected_color" value="magenta"> <font color="magenta"><b>█</b></font>
-                     <input type="radio" name="selected_color" value="grey"> <font color="grey"><b>█</b></font>
-                     <input type="radio" name="selected_color" value="orange"> <font color="orange"><b>█</b></font>
-                     <input type="radio" name="selected_color" value="green"> <font color="green"><b>█</b></font>
-                     <input type="radio" name="selected_color" value="#1f77b4"> <font color="#1f77b4"><b>█</b></font>
-                     <input type="radio" name="selected_color" value="#2ca02c"> <font color="#2ca02c"><b>█</b></font>
-                     <input type="radio" name="selected_color" value="#995c00"> <font color="#995c00"><b>█</b></font>
-                     <input type="radio" name="selected_color" value="#9467bd"> <font color="#9467bd"><b>█</b></font>
-                     <input type="radio" name="selected_color" value="#8c564b"> <font color="#8c564b"><b>█</b></font>
-                     <input type="radio" name="selected_color" value="#e377c2"> <font color="#e377c2"><b>█</b></font>
-                     <input type="radio" name="selected_color" value="#adad1f"> <font color="#adad1f"><b>█</b></font>
-                     <input type="radio" name="selected_color" value="#17becf"> <font color="#17becf"><b>█</b></font>
-                     </td>
-                     <td style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey;width:28%;height:100%"><b><a target="_blank" href="https://geoscents.net/resources/about.html#9">Log history</a>:</b><br>
-                     <input type="radio" name="selected_log" value="Yes" checked> Yes
-                     <input type="radio" name="selected_log" value="No"> No
-                     </td>
-                     <tr>
-                 </table>
-                 <br>
-                 <div style="text-align: center;vertical-align: middle;"><input type="submit" value="Join!" /></div>
-                     </form>
-</div>
+    <div class="overlay-content-code helppopup">
+        <p>Score points by locating cities (or points of interest) as quickly and accurately as possible!</p>
 
-
-  <div style="background:#E6E6FA;border:1px solid black;width:1900px;margin-left:0px;margin-top:0px;margin-bottom:0px;margin-right:0px">
-      <div id='container'>
-          <table>
-              <tr>
-                  <td padding="0">
-                      <div>
-                          <canvas id="map" width="1530" height="900"></canvas>
-                       </div>
-                  </td>
-                  <td padding="0">
-                                              <div id="commands" > </div>
-
-                       <div>
-                           <div id="leaderboard" style="overflow:auto;width:340px;height:420px;background:#e3e4e6;border:1px dotted black;text-align:left;"></div>
-                           <div id="scoreboard" style="overflow:auto;width:340px;height:225px;background:#e3e4e6;border:1px dotted black;text-align:left;"></div>
-<!--                          <canvas id="panel" width="550" height="794"></canvas>-->
-                       </div>
-                  </td>
-              </tr>
-          </table>
-          <table>
-              <tr>
-                  <td padding="0">
-<!--                      https://itnext.io/creating-a-chat-with-node-js-from-the-scratch-707896d64593-->
-                     <form id="chat">
-                     <input type="text" id="msg_text" name="msg_text" maxlength="1000" autocomplete="off" style="width: 800px;" />
-                     <input type="submit" value="Send!" />
-                     </form>
-                                         <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-                     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-
-                     <div id="history" style="overflow:auto;width:1050px;height:275px;background:#ffffff;border:1px dotted black;text-align:left;"></div>
-                      <div style="display: inline-block">
-                    <a class="github-button" href="https://github.com/mattfel1/geoscents" data-size="large" aria-label="Fork mattfel1/geoscents on GitHub">View on Github</a>
-                                          <script async defer src="https://buttons.github.io/buttons.js"></script>
-                      </div>
-                      <div style="display: inline-block" margin-top="0">
-                        <!-- If you wanted to donate to support the game, please consider donating to one of the important causes in the lobby instead. -->
-                        If you want to help to keep this server running, please donate!
-                        <a target="_blank" href="https://paypal.me/mattfel1" style="background-color:#E6E6FA;color:#302F31;">Paypal</a>,
-                        <a target="_blank" href="bitcoin://3LG3GwsUyR53ua7MB6Nsc6QyeSoLGAFR5r" style="background-color:#E6E6FA;color:#302F31;">Bitcoin</a>,
-                        <a target="_blank" href="litecoin://MVLq81CLq3VuZQjyarWsks2Y4TiQroypat" style="background-color:#E6E6FA;color:#302F31;">Litecoin</a>,
-                        <a target="_blank" href="ethereum://0x9fE2DA7f30D4CcEC879b5E69379603A18E65fc4E" style="background-color:#E6E6FA;color:#302F31;">Ethereum</a>
-                      </div>
-                  </td>
-                  <td padding="0">
-                      <div id="gamehist" style="overflow:auto;width:800px;height:300px;background:#f4fce0;border:1px dotted black;text-align:left">
-                      </div>
-                  </td>
-              </tr>
-          </table>
+    </div>
+    <div class="overlay-content-name popup">
+        <p>Please choose a name and color (or leave blank for random)</p>
+        <form id="rename" method="post">
+            <table style="height:0px">
+                <td style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey;width:28%;height:100%">
+                    <b>Name:</b><br>
+                    <input type="text" id="selected_name" autofocus name="selected_name" style="width: 120px;" maxlength="14" pattern="[a-zA-Z0-9][a-zA-Z0-9 ?!]+[a-zA-Z0-9]" title="Name should only contain letters, numbers, and spaces">
+                </td>
+                <td style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey;width:28%;height:100%"><b>Color:</b><br>
+                    <input type="radio" name="selected_color" value="random" checked> random
+                    <input type="radio" name="selected_color" value="red">
+                    <font color="red"><b>█</b></font>
+                    <input type="radio" name="selected_color" value="blue">
+                    <font color="blue"><b>█</b></font>
+                    <input type="radio" name="selected_color" value="purple">
+                    <font color="purple"><b>█</b></font>
+                    <input type="radio" name="selected_color" value="magenta">
+                    <font color="magenta"><b>█</b></font>
+                    <input type="radio" name="selected_color" value="grey">
+                    <font color="grey"><b>█</b></font>
+                    <input type="radio" name="selected_color" value="orange">
+                    <font color="orange"><b>█</b></font>
+                    <input type="radio" name="selected_color" value="green">
+                    <font color="green"><b>█</b></font>
+                    <input type="radio" name="selected_color" value="#1f77b4">
+                    <font color="#1f77b4"><b>█</b></font>
+                    <input type="radio" name="selected_color" value="#2ca02c">
+                    <font color="#2ca02c"><b>█</b></font>
+                    <input type="radio" name="selected_color" value="#995c00">
+                    <font color="#995c00"><b>█</b></font>
+                    <input type="radio" name="selected_color" value="#9467bd">
+                    <font color="#9467bd"><b>█</b></font>
+                    <input type="radio" name="selected_color" value="#8c564b">
+                    <font color="#8c564b"><b>█</b></font>
+                    <input type="radio" name="selected_color" value="#e377c2">
+                    <font color="#e377c2"><b>█</b></font>
+                    <input type="radio" name="selected_color" value="#adad1f">
+                    <font color="#adad1f"><b>█</b></font>
+                    <input type="radio" name="selected_color" value="#17becf">
+                    <font color="#17becf"><b>█</b></font>
+                </td>
+                <td style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey;width:28%;height:100%"><b><a target="_blank" href="https://geoscents.net/resources/about.html#9">Log history</a>:</b><br>
+                    <input type="radio" name="selected_log" value="Yes" checked> Yes
+                    <input type="radio" name="selected_log" value="No"> No
+                </td>
+                <tr>
+            </table>
+            <br>
+            <div style="text-align: center;vertical-align: middle;"><input type="submit" value="Join!" /></div>
+        </form>
+    </div>
 
 
+    <div style="background:#E6E6FA;border:1px solid black;width:1900px;margin-left:0px;margin-top:0px;margin-bottom:0px;margin-right:0px">
+        <div id='container'>
+            <table>
+                <tr>
+                    <td padding="0">
+                        <div>
+                            <canvas id="map" width="1530" height="900"></canvas>
+                        </div>
+                    </td>
+                    <td padding="0">
+                        <div id="commands"> </div>
 
-                  <br>
+                        <div>
+                            <div id="leaderboard" style="overflow:auto;width:340px;height:420px;background:#e3e4e6;border:1px dotted black;text-align:left;"></div>
+                            <div id="scoreboard" style="overflow:auto;width:340px;height:225px;background:#e3e4e6;border:1px dotted black;text-align:left;"></div>
+                            <!--                          <canvas id="panel" width="550" height="794"></canvas>-->
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td padding="0">
+                        <!--                      https://itnext.io/creating-a-chat-with-node-js-from-the-scratch-707896d64593-->
+                        <form id="chat">
+                            <input type="text" id="msg_text" name="msg_text" maxlength="1000" autocomplete="off" style="width: 800px;" />
+                            <input type="submit" value="Send!" />
+                        </form>
+                        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
-              </tr>
+                        <div id="history" style="overflow:auto;width:1050px;height:275px;background:#ffffff;border:1px dotted black;text-align:left;"></div>
+                        <div style="display: inline-block">
+                            <a class="github-button" href="https://github.com/mattfel1/geoscents" data-size="large" aria-label="Fork mattfel1/geoscents on GitHub">View on Github</a>
+                            <script async defer src="https://buttons.github.io/buttons.js"></script>
+                        </div>
+                        <div style="display: inline-block" margin-top="0">
+                            <!-- If you wanted to donate to support the game, please consider donating to one of the important causes in the lobby instead. -->
+                            If you want to help to keep this server running, please donate!
+                            <a target="_blank" href="https://paypal.me/mattfel1" style="background-color:#E6E6FA;color:#302F31;">Paypal</a>,
+                            <a target="_blank" href="bitcoin://3LG3GwsUyR53ua7MB6Nsc6QyeSoLGAFR5r" style="background-color:#E6E6FA;color:#302F31;">Bitcoin</a>,
+                            <a target="_blank" href="litecoin://MVLq81CLq3VuZQjyarWsks2Y4TiQroypat" style="background-color:#E6E6FA;color:#302F31;">Litecoin</a>,
+                            <a target="_blank" href="ethereum://0x9fE2DA7f30D4CcEC879b5E69379603A18E65fc4E" style="background-color:#E6E6FA;color:#302F31;">Ethereum</a>
+                        </div>
+                    </td>
+                    <td padding="0">
+                        <div id="gamehist" style="overflow:auto;width:800px;height:300px;background:#f4fce0;border:1px dotted black;text-align:left">
+                        </div>
+                    </td>
+                </tr>
+            </table>
 
-      </div>
-      </div>
-      <script type="text/javascript"> //<![CDATA[
-  var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.trust-provider.com/" : "http://www.trustlogo.com/");
-  document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
-//]]></script>
-<script language="JavaScript" type="text/javascript">
-  TrustLogo("https://www.positivessl.com/images/seals/positivessl_trust_seal_sm_124x32.png", "POSDV", "none");
-</script>
-  </body>
+
+
+            <br>
+
+            </tr>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        //<![CDATA[
+        var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.trust-provider.com/" : "http://www.trustlogo.com/");
+        document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+        //]]>
+    </script>
+    <script language="JavaScript" type="text/javascript">
+        TrustLogo("https://www.positivessl.com/images/seals/positivessl_trust_seal_sm_124x32.png", "POSDV", "none");
+    </script>
+</body>
+
 </html>

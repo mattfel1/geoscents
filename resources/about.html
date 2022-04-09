@@ -1,262 +1,302 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <link rel="icon" type="image/png" href="favicon.png" sizes="48x48">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="icon" type="image/png" href="favicon.png" sizes="48x48">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 
-<script>
+    <script>
+        $(function() {
 
-$(function() {
+            $("#accordion").accordion({
+                heightStyle: "content",
+                collapsible: true,
+                active: false,
+                icons: {
+                    "header": "ui-icon-plus",
+                    "activeHeader": "ui-icon-minus"
+                }
+            });
 
-  $("#accordion").accordion({
-    heightStyle:"content",
-    collapsible:true,
-    active:false,
-    icons:{"header": "ui-icon-plus", "activeHeader": "ui-icon-minus"}
-  });
-  
-  // Begin script to open accordion panels via an external link with hash
-  // Position the script here
-  var hash = window.location.hash;
-  var anchor = $('a[href$="'+hash+'"]');
-  if (anchor.length > 0){
-    anchor.click();
-  }
-  // End
+            // Begin script to open accordion panels via an external link with hash
+            // Position the script here
+            var hash = window.location.hash;
+            var anchor = $('a[href$="' + hash + '"]');
+            if (anchor.length > 0) {
+                anchor.click();
+            }
+            // End
 
-});
-</script>
+        });
+    </script>
 
-<style>
-body {
-  font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
-}
-#container {
-  margin:20px auto;
-  padding:40px;
-  max-width:728px;
-  -moz-box-shadow:3px 3px 4px 4px #555;  
-  -webkit-box-shadow:3px 3px 4px 4px #555;
-  box-shadow:3px 3px 4px 4px #555;
-}
-#adds {
-  padding:20px 0;
-}
-h1 {
-  font-size:21px;
-  line-height:25px;
-  margin-bottom:5px;
-}
-h2 {
-  font-size:18px;
-  line-height:22px;
-  margin-bottom:0;
-}
-h3 {
-  font-size:14px;
-}
-p {
-  margin-top:0;
-  font-size:16px;
-  line-height:23px;
-}
-code {
-  font-size:17px;
-  line-height:25px;
-}
-</style>
+    <style>
+        body {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        }
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6780905379201491"
-     crossorigin="anonymous"></script>
+        #container {
+            margin: 20px auto;
+            padding: 40px;
+            max-width: 728px;
+            -moz-box-shadow: 3px 3px 4px 4px #555;
+            -webkit-box-shadow: 3px 3px 4px 4px #555;
+            box-shadow: 3px 3px 4px 4px #555;
+        }
+
+        #adds {
+            padding: 20px 0;
+        }
+
+        h1 {
+            font-size: 21px;
+            line-height: 25px;
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            font-size: 18px;
+            line-height: 22px;
+            margin-bottom: 0;
+        }
+
+        h3 {
+            font-size: 14px;
+        }
+
+        p {
+            margin-top: 0;
+            font-size: 16px;
+            line-height: 23px;
+        }
+
+        code {
+            font-size: 17px;
+            line-height: 25px;
+        }
+    </style>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6780905379201491" crossorigin="anonymous"></script>
 
 </head>
+
 <body>
 
 
 
-<div id="container">
-  <h1>Geoscents Game Information</h1><br>
-  <div id="content">
-    <div id="accordion">
-      <h3><a href="#1" id="1">Data Visualizations</a></h3>
-      <div>
-          <p>One of the fun things that this game allows me to do is to collect how well people from around the world know where things are.  I use your public IP address to identify your country and collect your play history securely on the game server.  If you do not want your game to be tracked, see the "Chat Box Commands" section below to learn how to mask your activity.  Tracking this information allows me to build a database and visualizations of how people from around the world perform.  This is a fun dataset to browse, especially to answer questions such as "How do Germans compare to Americans at knowing European cities? American cities? Chinese cities?" or "How often do people mix up Paraguay and Uruguay?"</p>
-          <p>I have put together visualizations and data tables at <a href="https://geoscents.net/plots/index.html">https://geoscents.net/plots/index.html</a> that are automatically updated daily.  Feel free to explore that page and point out any interesting things you find.
-      </div>
-      <h3><a href="#2" id="2">Trivia Entries</a></h3>
-      <div>
-          <p>The trivia map contains hundreds of random events, places, and things that have well-defined latitude and longitude.  The database that it draws from was hand-made by myself continues to grow.  The original Geosense game did not have this game, but I thought it would be a fun addition, considering all the javascript machinery is in place to have players hunt down whatever things have a lat/lon definition.  Many of the entries have flags embedded in them, as well as the entry written in the native script of whatever country or culture they are part of, to help your ability to pinpoint them.  </p>
-          <p>The entries are mostly things that I found browsing wikipedia and <a href="www.atlasobscura.com">Atlas Obscura</a> and fall roughly into these categories:
-<ul>
-            <li> UNESCO World Heritage sites - Taj Mahal, Machu Picchu, Moai Statues at Easter Island, etc.</li>
-            <li>Funny names - Fucking, Austria, Sandwich, Illinois, Batman, Turkey, Hell, Norway, that town in New Zealand with a ridiculously long name, etc.</li>
-            <li>Ancient cities - Tyre, Phoenicia, Karakorum, Mongol Empire, Bagan, Pagan Kingdom, etc.</li>
-            <li>Major historical incidents - Hannibal defeats Rome at the Battle of Cannae, Tsar Bomba test site, Sinking of the RMS Lusitania, Chernobyl incident, etc.</li>
-            <li>Odd statues - Manneken Pis, Blucifer, Christ of the Abyss, etc.</li>
-            <li>National parks - Yosemite, Joshua Tree, Banff, Zhangjiajie, etc.</li>
-            <li>Notable Buildings - CN Tower, The Kremlin, The Whitehouse, etc.</li>
-            <li>Scientific sites - Neanderthal Valley, the Michelson-Morley experiment, Ivan Pavlov's dog study</li>
-            <li>Sporting Events - Various world cup and olymic games locations</li>
-            <li>Geological points of interest - locations of coldest/hottest recorded temperatures, tallest mountains of each continent, Marianas Trench, etc. </li>
-            <li>Other things that I'm not sure how to categorize - Where the US accidentally dropped a nuclear bomb on itself (Goldsboro, NC), Wakaliwood Film Studio, etc. 
-          </ul>
-        I hope that at least some of them spark your interest and get you to click the "Learn" link in the bottom right box of the game so you can read about it afterwards.  Some of these entries may be "famous" things that are worth knowing, but some of them are just silly so I hope you don't take it too seriously.</p>
-          <p>Please reach out by sending a message starting with the word /feedback if you want to suggest new trivia items!  I love hearing your feedback, and am especially interested in growing the database beyond the cultural bias of the few people who have contributed already.</p>
-      </div>
-  <h3><a href="#3" id="3">Geopolitical Anomalies</a></h3>
-      <div>
-          <p>This page discusses some of the political anomalies present in the game.  This discussion is the result of valuable player feedback!</p>
+    <div id="container">
+        <h1>Geoscents Game Information</h1><br>
+        <div id="content">
+            <div id="accordion">
+                <h3><a href="#1" id="1">Data Visualizations</a></h3>
+                <div>
+                    <p>One of the fun things that this game allows me to do is to collect how well people from around the world know where things are. I use your public IP address to identify your country and collect your play history securely on the game server. If you do not want your game to be tracked, see the "Chat Box Commands" section below to learn how to mask your activity. Tracking this information allows me to build a database and visualizations of how people from around the world perform. This is a fun dataset to browse, especially to answer questions such as "How do Germans compare to Americans at knowing European cities? American cities? Chinese cities?" or "How often do people mix up Paraguay and Uruguay?"</p>
+                    <p>I have put together visualizations and data tables at <a href="https://geoscents.net/plots/index.html">https://geoscents.net/plots/index.html</a> that are automatically updated daily. Feel free to explore that page and point out any interesting things you find.
+                </div>
+                <h3><a href="#2" id="2">Trivia Entries</a></h3>
+                <div>
+                    <p>The trivia map contains hundreds of random events, places, and things that have well-defined latitude and longitude. The database that it draws from was hand-made by myself continues to grow. The original Geosense game did not have this game, but I thought it would be a fun addition, considering all the javascript machinery is in place to have players hunt down whatever things have a lat/lon definition. Many of the entries have flags embedded in them, as well as the entry written in the native script of whatever country or culture they are part of, to help your ability to pinpoint them. </p>
+                    <p>The entries are mostly things that I found browsing wikipedia and <a href="www.atlasobscura.com">Atlas Obscura</a> and fall roughly into these categories:
+                    <ul>
+                        <li> UNESCO World Heritage sites - Taj Mahal, Machu Picchu, Moai Statues at Easter Island, etc.</li>
+                        <li>Funny names - Fucking, Austria, Sandwich, Illinois, Batman, Turkey, Hell, Norway, that town in New Zealand with a ridiculously long name, etc.</li>
+                        <li>Ancient cities - Tyre, Phoenicia, Karakorum, Mongol Empire, Bagan, Pagan Kingdom, etc.</li>
+                        <li>Major historical incidents - Hannibal defeats Rome at the Battle of Cannae, Tsar Bomba test site, Sinking of the RMS Lusitania, Chernobyl incident, etc.</li>
+                        <li>Odd statues - Manneken Pis, Blucifer, Christ of the Abyss, etc.</li>
+                        <li>National parks - Yosemite, Joshua Tree, Banff, Zhangjiajie, etc.</li>
+                        <li>Notable Buildings - CN Tower, The Kremlin, The Whitehouse, etc.</li>
+                        <li>Scientific sites - Neanderthal Valley, the Michelson-Morley experiment, Ivan Pavlov's dog study</li>
+                        <li>Sporting Events - Various world cup and olymic games locations</li>
+                        <li>Geological points of interest - locations of coldest/hottest recorded temperatures, tallest mountains of each continent, Marianas Trench, etc. </li>
+                        <li>Other things that I'm not sure how to categorize - Where the US accidentally dropped a nuclear bomb on itself (Goldsboro, NC), Wakaliwood Film Studio, etc.
+                    </ul>
+                    I hope that at least some of them spark your interest and get you to click the "Learn" link in the bottom right box of the game so you can read about it afterwards. Some of these entries may be "famous" things that are worth knowing, but some of them are just silly so I hope you don't take it too seriously.</p>
+                    <p>Please reach out by sending a message starting with the word /feedback if you want to suggest new trivia items! I love hearing your feedback, and am especially interested in growing the database beyond the cultural bias of the few people who have contributed already.</p>
+                </div>
+                <h3><a href="#3" id="3">Geopolitical Anomalies</a></h3>
+                <div>
+                    <p>This page discusses some of the political anomalies present in the game. This discussion is the result of valuable player feedback!</p>
 
-<h3>Czechia v.s. Czech Republic</h3>
-In 2016, the United Nations officially recognized <a href="https://en.wikipedia.org/wiki/Name_of_the_Czech_Republic">Czechia</a> as the shortened version of the name for this country, and it has been published to UNTERM and UNGEGN databases.  This game uses the cities database found at <a href="https://simplemaps.com/data/world-cities">simplemaps</a>, which also uses the name Czechia.  
+                    <h3>Czechia v.s. Czech Republic</h3>
+                    In 2016, the United Nations officially recognized <a href="https://en.wikipedia.org/wiki/Name_of_the_Czech_Republic">Czechia</a> as the shortened version of the name for this country, and it has been published to UNTERM and UNGEGN databases. This game uses the cities database found at <a href="https://simplemaps.com/data/world-cities">simplemaps</a>, which also uses the name Czechia.
 
-<h3>Red borders</h3>
-This game uses python's cartopy library to generate maps.  It fetches data from the <a href="https://www.naturalearthdata.com/features/">Natural Earth Data features database</a>.  
-The red borders, such as the lines around <a href="https://en.wikipedia.org/wiki/Western_Sahara">Western Sahara</a>, <a href="https://en.wikipedia.org/wiki/Northern_Cyprus">Northern Cyprus</a>, <a href="https://en.wikipedia.org/wiki/Ilemi_Triangle">the Ilemi Triangle</a>, <a href="https://en.wikipedia.org/wiki/Palestine_(region)">Palestine</a>, and <a href="https://en.wikipedia.org/wiki/Line_of_Control">Jammu and Kashmir</a>, mark disputed territories and breakaway regions.
-A list of disputed territories can be found <a href="https://en.wikipedia.org/wiki/List_of_territorial_disputes">here</a>.
+                    <h3>Red borders</h3>
+                    This game uses python's cartopy library to generate maps. It fetches data from the <a href="https://www.naturalearthdata.com/features/">Natural Earth Data features database</a>.
+                    The red borders, such as the lines around <a href="https://en.wikipedia.org/wiki/Western_Sahara">Western Sahara</a>, <a href="https://en.wikipedia.org/wiki/Northern_Cyprus">Northern Cyprus</a>, <a href="https://en.wikipedia.org/wiki/Ilemi_Triangle">the Ilemi Triangle</a>, <a href="https://en.wikipedia.org/wiki/Palestine_(region)">Palestine</a>, and <a href="https://en.wikipedia.org/wiki/Line_of_Control">Jammu and Kashmir</a>, mark disputed territories and breakaway regions.
+                    A list of disputed territories can be found <a href="https://en.wikipedia.org/wiki/List_of_territorial_disputes">here</a>.
 
-<h3>The Bubble in Kazakhstan</h3>
-The strange circle in Kazakhstan is the <a href="https://en.wikipedia.org/wiki/Baikonur_Cosmodrome">Baikonur Cosmodrome</a>. 
-It is a space launch facility that was leased by the Kazakh government to Russia until 2050.
+                    <h3>The Bubble in Kazakhstan</h3>
+                    The strange circle in Kazakhstan is the <a href="https://en.wikipedia.org/wiki/Baikonur_Cosmodrome">Baikonur Cosmodrome</a>.
+                    It is a space launch facility that was leased by the Kazakh government to Russia until 2050.
 
-<h3>Kosovo</h3>
-<a href="https://en.wikipedia.org/wiki/Kosovo">Kosovo</a> is shown as a regular country in this map.  
-According to the <a href="https://www.naturalearthdata.com/features/">Natural Earth Data features database</a>, Kosovo is a real country even though about 49% of UN nations recognize it.
-      </div>
-
-
-<h3><a href="#11" id="11">Repeating Cities Between Games</a></h3>
-      <div>
-          <p>Do you keep getting repeat cities between games?  This is surprisingly likely because it is a case of the birthday paradox.  The random number generator in the game is not broken.  Depending on the map you are playing, the probability of a city being repeated between consecutive games is between 10% and 41%.</p>
-
-          <p>There are 11 unique cities in each game.  They are chosen from a uniform random distribution of possible cities for that map*.  If you play two games, the probability that a city from the first game will show up in the second game is one minus the probability that ALL of the cities in the second game are unique.  The equation below shows how to calculate this value as a function of the number of cities on a given map.  This equation only approximates the probability because it does not take into account the heuristics*.  The probability of seeing a repeat city as you play more than 2 games increases significantly.</p>
-<br>
-P<sub>repeat_in_next_game</sub> = 1 - (P<sub>unique</sub>)<sup>11</sup> = 1 - (1 - <sup>11</sup>&frasl;<sub>n_cities</sub>)<sup>11</sup>
-<br><br>
-          <p>The table below shows rough probabilities of repeat cities as of the time of this writing. </p>
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-2b7s{text-align:right;vertical-align:bottom}
-.tg .tg-0lax{text-align:left;vertical-align:top}
-</style>
-<table class="tg" style="undefined;table-layout: fixed; width: 365px">
-<colgroup>
-<col style="width: 102px">
-<col style="width: 115px">
-<col style="width: 148px">
-</colgroup>
-<thead>
-  <tr>
-    <th class="tg-0lax">Map</th>
-    <th class="tg-0lax">Number of Cities</th>
-    <th class="tg-0lax">Probability of Game 2 Replaying City From Game 1</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td class="tg-0lax">Africa</td>
-    <td class="tg-2b7s">446</td>
-    <td class="tg-2b7s">24.0%</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax">Asia</td>
-    <td class="tg-2b7s">632</td>
-    <td class="tg-2b7s">17.6%</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax">Europe</td>
-    <td class="tg-2b7s">576</td>
-    <td class="tg-2b7s">19.1%</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax">North America</td>
-    <td class="tg-2b7s">671</td>
-    <td class="tg-2b7s">16.6%</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax">Oceania</td>
-    <td class="tg-2b7s">352</td>
-    <td class="tg-2b7s">29.5%</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax">South America</td>
-    <td class="tg-2b7s">478</td>
-    <td class="tg-2b7s">22.6%</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax">Trivia</td>
-    <td class="tg-2b7s">416</td>
-    <td class="tg-2b7s">25.5%</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax">World</td>
-    <td class="tg-2b7s">1058</td>
-    <td class="tg-2b7s">10.9%</td>
-  </tr>
-  <tr>
-    <td class="tg-0lax">World Capitals</td>
-    <td class="tg-2b7s">234</td>
-    <td class="tg-2b7s">41.1%</td>
-  </tr>
-</tbody>
-</table>
-<br>
+                    <h3>Kosovo</h3>
+                    <a href="https://en.wikipedia.org/wiki/Kosovo">Kosovo</a> is shown as a regular country in this map.
+                    According to the <a href="https://www.naturalearthdata.com/features/">Natural Earth Data features database</a>, Kosovo is a real country even though about 49% of UN nations recognize it.
+                </div>
 
 
-          <p>* There are certain heuristics built in to city selection for most maps, such as only selecting cities from countries, states, or provinces that have not yet been played in that particular game. This heuristic is slightly different depending on the map, e.g. World map does not allow repeat cities from the entire US, while North America does not allow repeat cities from a US state.</p>
-      </div>
+                <h3><a href="#11" id="11">Repeating Cities Between Games</a></h3>
+                <div>
+                    <p>Do you keep getting repeat cities between games? This is surprisingly likely because it is a case of the birthday paradox. The random number generator in the game is not broken. Depending on the map you are playing, the probability of a city being repeated between consecutive games is between 10% and 41%.</p>
+
+                    <p>There are 11 unique cities in each game. They are chosen from a uniform random distribution of possible cities for that map*. If you play two games, the probability that a city from the first game will show up in the second game is one minus the probability that ALL of the cities in the second game are unique. The equation below shows how to calculate this value as a function of the number of cities on a given map. This equation only approximates the probability because it does not take into account the heuristics*. The probability of seeing a repeat city as you play more than 2 games increases significantly.</p>
+                    <br>
+                    P<sub>repeat_in_next_game</sub> = 1 - (P<sub>unique</sub>)<sup>11</sup> = 1 - (1 - <sup>11</sup>&frasl;<sub>n_cities</sub>)<sup>11</sup>
+                    <br><br>
+                    <p>The table below shows rough probabilities of repeat cities as of the time of this writing. </p>
+                    <style type="text/css">
+                        .tg {
+                            border-collapse: collapse;
+                            border-spacing: 0;
+                        }
+
+                        .tg td {
+                            border-color: black;
+                            border-style: solid;
+                            border-width: 1px;
+                            font-family: Arial, sans-serif;
+                            font-size: 14px;
+                            overflow: hidden;
+                            padding: 10px 5px;
+                            word-break: normal;
+                        }
+
+                        .tg th {
+                            border-color: black;
+                            border-style: solid;
+                            border-width: 1px;
+                            font-family: Arial, sans-serif;
+                            font-size: 14px;
+                            font-weight: normal;
+                            overflow: hidden;
+                            padding: 10px 5px;
+                            word-break: normal;
+                        }
+
+                        .tg .tg-2b7s {
+                            text-align: right;
+                            vertical-align: bottom
+                        }
+
+                        .tg .tg-0lax {
+                            text-align: left;
+                            vertical-align: top
+                        }
+                    </style>
+                    <table class="tg" style="undefined;table-layout: fixed; width: 365px">
+                        <colgroup>
+                            <col style="width: 102px">
+                            <col style="width: 115px">
+                            <col style="width: 148px">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th class="tg-0lax">Map</th>
+                                <th class="tg-0lax">Number of Cities</th>
+                                <th class="tg-0lax">Probability of Game 2 Replaying City From Game 1</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="tg-0lax">Africa</td>
+                                <td class="tg-2b7s">446</td>
+                                <td class="tg-2b7s">24.0%</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax">Asia</td>
+                                <td class="tg-2b7s">632</td>
+                                <td class="tg-2b7s">17.6%</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax">Europe</td>
+                                <td class="tg-2b7s">576</td>
+                                <td class="tg-2b7s">19.1%</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax">North America</td>
+                                <td class="tg-2b7s">671</td>
+                                <td class="tg-2b7s">16.6%</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax">Oceania</td>
+                                <td class="tg-2b7s">352</td>
+                                <td class="tg-2b7s">29.5%</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax">South America</td>
+                                <td class="tg-2b7s">478</td>
+                                <td class="tg-2b7s">22.6%</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax">Trivia</td>
+                                <td class="tg-2b7s">416</td>
+                                <td class="tg-2b7s">25.5%</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax">World</td>
+                                <td class="tg-2b7s">1058</td>
+                                <td class="tg-2b7s">10.9%</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-0lax">World Capitals</td>
+                                <td class="tg-2b7s">234</td>
+                                <td class="tg-2b7s">41.1%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+
+
+                    <p>* There are certain heuristics built in to city selection for most maps, such as only selecting cities from countries, states, or provinces that have not yet been played in that particular game. This heuristic is slightly different depending on the map, e.g. World map does not allow repeat cities from the entire US, while North America does not allow repeat cities from a US state.</p>
+                </div>
 
 
 
 
 
-      <h3><a href="#4" id="4">Game FAQ</a></h3>
-      <div>
+                <h3><a href="#4" id="4">Game FAQ</a></h3>
+                <div>
 
-<h3>City Selection</h3>
-Cities are selected from the <a href="https://simplemaps.com/data/world-cities">simplemaps</a> database.  For the most part, each game of 11 rounds should only include one city per country.
-The exceptions are:
-<ul>
-  <li>For the Asia, N. America, and Oceania maps, China, India, U.S., Canada, and Mexico can be repeated as long as the administrative name (province, state, or territory) is different.</li>
-  <li>The game make 20 attempts to find a random city whose country and/or administrative name has not already been used.  If it has still failed, it will just give whatever city.  This happens most often in Oceania and S. America maps.</li>
-</ul>
+                    <h3>City Selection</h3>
+                    Cities are selected from the <a href="https://simplemaps.com/data/world-cities">simplemaps</a> database. For the most part, each game of 11 rounds should only include one city per country.
+                    The exceptions are:
+                    <ul>
+                        <li>For the Asia, N. America, and Oceania maps, China, India, U.S., Canada, and Mexico can be repeated as long as the administrative name (province, state, or territory) is different.</li>
+                        <li>The game make 20 attempts to find a random city whose country and/or administrative name has not already been used. If it has still failed, it will just give whatever city. This happens most often in Oceania and S. America maps.</li>
+                    </ul>
 
-<h3>Scoring</h3>
-Your score is based on your distance to the city and how quickly you clicked.
-The maximum score you can get per round is <b>600</b>, so the max score for an 11 round game is <b>6600</b>.  
-Because the game uses Mercator projections with the latitude of true scale set to the equator (even on the continent maps), this means that your distance in km is more forgiving as you move away from the equator.
+                    <h3>Scoring</h3>
+                    Your score is based on your distance to the city and how quickly you clicked.
+                    The maximum score you can get per round is <b>600</b>, so the max score for an 11 round game is <b>6600</b>.
+                    Because the game uses Mercator projections with the latitude of true scale set to the equator (even on the continent maps), this means that your distance in km is more forgiving as you move away from the equator.
 
-The equations used to calculate score are <a href="https://github.com/mattfel1/geoscents/blob/d66b57b7a429370c7af9725d32c7610894c7176e/server/geography.js#L194-L210">here</a>.  They are roughly:<br><br>
-timeComponent = min(1, 1 - 0.07843 * (t - 1.6))<br>
-distComponent = min(600, e^(-sf * (sf*dist)^2 / 600000)*605)<br>
-score = timeComponent * distComponent<br><br>
+                    The equations used to calculate score are <a href="https://github.com/mattfel1/geoscents/blob/d66b57b7a429370c7af9725d32c7610894c7176e/server/geography.js#L194-L210">here</a>. They are roughly:<br><br>
+                    timeComponent = min(1, 1 - 0.07843 * (t - 1.6))<br>
+                    distComponent = min(600, e^(-sf * (sf*dist)^2 / 600000)*605)<br>
+                    score = timeComponent * distComponent<br><br>
 
-<i>dist</i> is the distance you are to the city, in km.<br>
-<i>t</i> is how many seconds elapsed before you clicked (i.e. 10 minus time remaining in round).<br>
-<i>sf</i> is a scaling factor, which is computed by the diagonal of the world map, in km, divided by the diagonal of the map you are playing on. For reference, the scaling factors for each of the maps are shown below.  This means that Europe is the "hardest" map, because each pixel represents far fewer km than on other maps.<br>
-<ul>
-<li> World = 1 </li>
-<li> Europe = 3.38 </li>
-<li> Africa = 1.30 </li>
-<li> Asia = 1.77 </li>
-<li> Oceania = 1.30 </li>
-<li> N. America = 2.26 </li>
-<li> S. America = 1.35 </li>
-</ul>
-<br><br>
+                    <i>dist</i> is the distance you are to the city, in km.<br>
+                    <i>t</i> is how many seconds elapsed before you clicked (i.e. 10 minus time remaining in round).<br>
+                    <i>sf</i> is a scaling factor, which is computed by the diagonal of the world map, in km, divided by the diagonal of the map you are playing on. For reference, the scaling factors for each of the maps are shown below. This means that Europe is the "hardest" map, because each pixel represents far fewer km than on other maps.<br>
+                    <ul>
+                        <li> World = 1 </li>
+                        <li> Europe = 3.38 </li>
+                        <li> Africa = 1.30 </li>
+                        <li> Asia = 1.77 </li>
+                        <li> Oceania = 1.30 </li>
+                        <li> N. America = 2.26 </li>
+                        <li> S. America = 1.35 </li>
+                    </ul>
+                    <br><br>
 
-These plots show how the two score components work for the World map (sf = 1).<br>
-<!-- 
+                    These plots show how the two score components work for the World map (sf = 1).<br>
+                    <!-- 
 <table style="width:100%">
   <tr>
     <th>timeComponent</th>
@@ -267,87 +307,84 @@ These plots show how the two score components work for the World map (sf = 1).<b
     <td><img src="dist.png" width="800"></td>
   </tr>
 </table> -->
-Time score:
-<img src="time.png" width="600">
-<br>
-Dist score:
-<img src="dist.png" width="600">
+                    Time score:
+                    <img src="time.png" width="600">
+                    <br>
+                    Dist score:
+                    <img src="dist.png" width="600">
 
-<h3>Record Keeping</h3>
-The game resets every day at midnight GMT.  Sorry if you are playing a game during the reboot!  You should see plenty of warnings in the minutes leading up to the game reset.<br>
-Sometimes the Weekly records are better than the Monthly records.  This is because these are the cronjobs that run the game:<br><br>
+                    <h3>Record Keeping</h3>
+                    The game resets every day at midnight GMT. Sorry if you are playing a game during the reboot! You should see plenty of warnings in the minutes leading up to the game reset.<br>
+                    Sometimes the Weekly records are better than the Monthly records. This is because these are the cronjobs that run the game:<br><br>
 
-0 0 * * * bash /root/startdaily.sh <br>
-0 0 * * * rm /scratch/*day* <br>
-0 0 * * 1 rm /scratch/*week* <br>
-0 0 1 * * rm /scratch/*month* <br>
-0 0 1 1 * rm /scratch/*all-time* <br><br>
-
-
-Therefore, it is possible for the monthly records to get reset on the first of the month, but the weekly records will not get reset until the first day of the week.
-      </div>
-
-      <h3><a href="#5" id="5">Privacy Policy</a></h3>
-      <div>
-We do not use cookies to track you after you leave this page.
-For educational purposes, we store your public IP address and your game history securely on our server. The IP addresses are replaced with country and region names, and then this data is published to <a href="https://geoscents.net/plots/index.html">https://geoscents.net/plots/index.html</a>.
-This data is not used for any commercial purposes.
-You can turn off this behavior with the command /private, and can turn it back on with the command /public
-
-      </div>
-
-      <h3><a href="#6" id="6">Chat Box Commands</a></h3>
-      <div>
-<ul>
-  <li>/feedback : Leave feedback about the game or really anything.  I will see your message immediately :)</li>
-  <li>/private : Prevent game from logging your IP address.  I use this IP address to help make the fun plots at https://geoscents.net/plots/index.html, but you may mask yourself if you really want.
-  <li>/public : Undo the /private command if you changed your mind.  By default, /public is turned on</li>
-  <li>/announce : Send message to everyone in all maps</li>
-  <li>/whisper "[player name]" : Send message directly to player</li>
-  <li>good bot : Praise the bot</li>
-  <li>bad bot : Admonish the bot</li>
-</ul> 
-      </div>
+                    0 0 * * * bash /root/startdaily.sh <br>
+                    0 0 * * * rm /scratch/*day* <br>
+                    0 0 * * 1 rm /scratch/*week* <br>
+                    0 0 1 * * rm /scratch/*month* <br>
+                    0 0 1 1 * rm /scratch/*all-time* <br><br>
 
 
-      <h3><a href="#7" id="7">Donate</a></h3>
-      <div>
-<!-- Thank you so much for playing the game!  It has been amazing to see people from around the world log on and compete against each other and engage in supportive dialogue as well as geography trash talk.  I spend most of my time programming in Verilog/VHDL, Chisel, Spatial, Scala, and C++ for real work but really craved this game ever since I learned that geosense.net ceased to exist.  I learned just enough javascript and web development to throw this game together and approximate the experience I used to have playing the original game.  <br><br>I have a year of credits on Google Cloud so I will be able to host the game until around May 2021 before it will start costing. If you insist on donating, please consider donating to one of the causes in the lobby instead.  They are doing much more important work than hosting a geography game! -->
-                      <div style="display: inline-block" margin-top="0">
+                    Therefore, it is possible for the monthly records to get reset on the first of the month, but the weekly records will not get reset until the first day of the week.
+                </div>
+
+                <h3><a href="#5" id="5">Privacy Policy</a></h3>
+                <div>
+                    We do not use cookies to track you after you leave this page.
+                    For educational purposes, we store your public IP address and your game history securely on our server. The IP addresses are replaced with country and region names, and then this data is published to <a href="https://geoscents.net/plots/index.html">https://geoscents.net/plots/index.html</a>.
+                    This data is not used for any commercial purposes.
+                    You can turn off this behavior with the command /private, and can turn it back on with the command /public
+
+                </div>
+
+                <h3><a href="#6" id="6">Chat Box Commands</a></h3>
+                <div>
+                    <ul>
+                        <li>/feedback : Leave feedback about the game or really anything. I will see your message immediately :)</li>
+                        <li>/private : Prevent game from logging your IP address. I use this IP address to help make the fun plots at https://geoscents.net/plots/index.html, but you may mask yourself if you really want.
+                        <li>/public : Undo the /private command if you changed your mind. By default, /public is turned on</li>
+                        <li>/announce : Send message to everyone in all maps</li>
+                        <li>/whisper "[player name]" : Send message directly to player</li>
+                        <li>good bot : Praise the bot</li>
+                        <li>bad bot : Admonish the bot</li>
+                    </ul>
+                </div>
+
+
+                <h3><a href="#7" id="7">Donate</a></h3>
+                <div>
+                    <!-- Thank you so much for playing the game!  It has been amazing to see people from around the world log on and compete against each other and engage in supportive dialogue as well as geography trash talk.  I spend most of my time programming in Verilog/VHDL, Chisel, Spatial, Scala, and C++ for real work but really craved this game ever since I learned that geosense.net ceased to exist.  I learned just enough javascript and web development to throw this game together and approximate the experience I used to have playing the original game.  <br><br>I have a year of credits on Google Cloud so I will be able to host the game until around May 2021 before it will start costing. If you insist on donating, please consider donating to one of the causes in the lobby instead.  They are doing much more important work than hosting a geography game! -->
+                    <div style="display: inline-block" margin-top="0">
                         Donate using
                         <a href="https://paypal.me/mattfel1" style="background-color:#E6E6FA;color:#302F31;">Paypal</a>,
                         <a href="bitcoin://3LG3GwsUyR53ua7MB6Nsc6QyeSoLGAFR5r" style="background-color:#E6E6FA;color:#302F31;">Bitcoin</a>,
                         <a href="litecoin://MVLq81CLq3VuZQjyarWsks2Y4TiQroypat" style="background-color:#E6E6FA;color:#302F31;">Litecoin</a>,
                         <a href="ethereum://0x9fE2DA7f30D4CcEC879b5E69379603A18E65fc4E" style="background-color:#E6E6FA;color:#302F31;">Ethereum</a>
-                      </div>
-        </div>
+                    </div>
+                </div>
 
-        <h3><a href="#8" id="8">References</a></h3>
-        <div>
-Terrain map rendering provided by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>. Satellite map rendering provided by Google Tiles.  All maps generated using python cartopy 0.17.0.  <br><br>
-This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>. <br><br>
-The jingle at the start of the game was composed and recorded by Marc Ryan Feldman.  If anyone can get me in touch with Barbs from Geography Now, I would love to get permission to incorporate that awesome jingle somehow.
-        </div>
+                <h3><a href="#8" id="8">References</a></h3>
+                <div>
+                    Terrain map rendering provided by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>. Satellite map rendering provided by Google Tiles. All maps generated using python cartopy 0.17.0. <br><br>
+                    This game uses the most populous and important cities from the database at <a href="https://simplemaps.com/data/world-cities">https://simplemaps.com/data/world-cities</a>. <br><br>
+                    The jingle at the start of the game was composed and recorded by Marc Ryan Feldman. If anyone can get me in touch with Barbs from Geography Now, I would love to get permission to incorporate that awesome jingle somehow.
+                </div>
 
-        <h3><a href="#9" id="9">Player History Logging</a></h3>
-        <div>
-There is now a player history logger that you can opt-in to.  This is the plan for now to provide pseudo-accounts.  I am against implementing true accounts on this website for two reasons.  First, I do not trust myself to implement password handling securely (and neither should you).  Second, I do not want there to be both a guest mode and account mode because this inherently makes some players feel "inferior" to others.  This game will remain as simple as possible, where you just enter a username and color.
-<br><br>
-Some people are repeat users and I think they would be interested to see how they progress over time.  For this reason, I implemented pseudo account-history that is simply tied to your user name.  If you opt-in for logging, a link to your history page will appear in the chat box as soon as you join the lobby.  There is technically nothing stopping you from "logging in" as a different user, other than that there doesn't seem to be much point to it.  If this kind of fraud happens a lot and people start complaining with /feedback, then I will make this more secure.  For now, happy playing!
-        </div>
+                <h3><a href="#9" id="9">Player History Logging</a></h3>
+                <div>
+                    There is now a player history logger that you can opt-in to. This is the plan for now to provide pseudo-accounts. I am against implementing true accounts on this website for two reasons. First, I do not trust myself to implement password handling securely (and neither should you). Second, I do not want there to be both a guest mode and account mode because this inherently makes some players feel "inferior" to others. This game will remain as simple as possible, where you just enter a username and color.
+                    <br><br>
+                    Some people are repeat users and I think they would be interested to see how they progress over time. For this reason, I implemented pseudo account-history that is simply tied to your user name. If you opt-in for logging, a link to your history page will appear in the chat box as soon as you join the lobby. There is technically nothing stopping you from "logging in" as a different user, other than that there doesn't seem to be much point to it. If this kind of fraud happens a lot and people start complaining with /feedback, then I will make this more secure. For now, happy playing!
+                </div>
 
-        <h3><a href="#10" id="10">Contact</a></h3>
-        <div>
-Feel free to contact me by sending a chat message starting with the command /feedback, or email me directly at <a href = "mailto: mattfel@pm.me">mattfel@pm.me</a>!  Tell me if you like the game, if you have comments, suggestions, or criticisms.  Tell me what you had for breakfast, if you like cats or dogs more, or whatever!  Shelter-in-place is so lonely!
-        </div>
+                <h3><a href="#10" id="10">Contact</a></h3>
+                <div>
+                    Feel free to contact me by sending a chat message starting with the command /feedback, or email me directly at <a href="mailto: mattfel@pm.me">mattfel@pm.me</a>! Tell me if you like the game, if you have comments, suggestions, or criticisms. Tell me what you had for breakfast, if you like cats or dogs more, or whatever! Shelter-in-place is so lonely!
+                </div>
 
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 </body>
+
 </html>
-
-
-
-
