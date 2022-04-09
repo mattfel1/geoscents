@@ -9,7 +9,7 @@ class Scoreboard {
     }
 
     postScore(rank, name, color, score, wins) {
-        const string = $("<font color=" + color + " style=\"font-size:15px;font-family:monospace\" \>").html(("<b>" + name + "</b>: ").padEnd(26).replace(/\s/g, "&nbsp;") + score.toString().padEnd(4).replace(/\s/g, "&nbsp;") + '  (' +  wins + ' <font size=1>🏆</font>)<br>');
+        const string = $("<font color=" + color + " style=\"font-size:15px;font-family:monospace\" \>").html(("<b>" + name + "</b>: ").padEnd(26).replace(/\s/g, "&nbsp;") + score.toString().padEnd(4).replace(/\s/g, "&nbsp;") + '  (' + wins + ' <font size=1>🏆</font>)<br>');
         $('#scoreboard').append(string)
     }
     // Message reactions
@@ -19,42 +19,42 @@ class Scoreboard {
     }
 
     postGroup(category, dict) {
-       var pop1 = "";
-       if (dict['recordBroken1']) pop1 = '🎉';
-       var pop2 = "";
-       if (dict['recordBroken2']) pop2 = '🎉';
-       var pop3 = "";
-       if (dict['recordBroken3']) pop3 = '🎉';
-       var pop4 = "";
-       if (dict['recordBroken4']) pop4 = '🏅';
-       var pop5 = "";
-       if (dict['recordBroken5']) pop5 = '🏅';
+        var pop1 = "";
+        if (dict['recordBroken1']) pop1 = '🎉';
+        var pop2 = "";
+        if (dict['recordBroken2']) pop2 = '🎉';
+        var pop3 = "";
+        if (dict['recordBroken3']) pop3 = '🎉';
+        var pop4 = "";
+        if (dict['recordBroken4']) pop4 = '🏅';
+        var pop5 = "";
+        if (dict['recordBroken5']) pop5 = '🏅';
 
-       const string1 = $("<font color=" + dict['recordColor1'] + " style=\"font-size:16px;\" \>").html(pop1 + "🥇 1st: " + dict['record1'] + " (<b>" + dict['recordName1'] + "</b>)" + pop1 + "<br>");
-       const string2 = $("<font color=" + dict['recordColor2'] + " style=\"font-size:16px;\" \>").html(pop2 + "🥈 2nd: " + dict['record2'] + " (<b>" + dict['recordName2'] + "</b>)" + pop2 + "<br>");
-       const string3 = $("<font color=" + dict['recordColor3'] + " style=\"font-size:16px;\" \>").html(pop3 + "🥉 3rd: " + dict['record3'] + " (<b>" + dict['recordName3'] + "</b>)" + pop3 + "<br>");
-       const string4 = $("<font color=" + dict['recordColor4'] + " style=\"font-size:16px;\" \>").html(pop4 + "🥉 4th: " + dict['record4'] + " (<b>" + dict['recordName4'] + "</b>)" + pop4 + "<br>");
-       const string5 = $("<font color=" + dict['recordColor5'] + " style=\"font-size:16px;\" \>").html(pop5 + "🥉 5th: " + dict['record5'] + " (<b>" + dict['recordName5'] + "</b>)" + pop5 + "<br>");
-       $('#leaderboard').append("<b>----- " + category + " -----</b><br>");
-       $('#leaderboard').append(string1);
-       $('#leaderboard').append(string2);
-       $('#leaderboard').append(string3);
-       $('#leaderboard').append(string4);
-       $('#leaderboard').append(string5);
-       // $('#leaderboard').append("<br>")
+        const string1 = $("<font color=" + dict['recordColor1'] + " style=\"font-size:16px;\" \>").html(pop1 + "🥇 1st: " + dict['record1'] + " (<b>" + dict['recordName1'] + "</b>)" + pop1 + "<br>");
+        const string2 = $("<font color=" + dict['recordColor2'] + " style=\"font-size:16px;\" \>").html(pop2 + "🥈 2nd: " + dict['record2'] + " (<b>" + dict['recordName2'] + "</b>)" + pop2 + "<br>");
+        const string3 = $("<font color=" + dict['recordColor3'] + " style=\"font-size:16px;\" \>").html(pop3 + "🥉 3rd: " + dict['record3'] + " (<b>" + dict['recordName3'] + "</b>)" + pop3 + "<br>");
+        const string4 = $("<font color=" + dict['recordColor4'] + " style=\"font-size:16px;\" \>").html(pop4 + "🥉 4th: " + dict['record4'] + " (<b>" + dict['recordName4'] + "</b>)" + pop4 + "<br>");
+        const string5 = $("<font color=" + dict['recordColor5'] + " style=\"font-size:16px;\" \>").html(pop5 + "🥉 5th: " + dict['record5'] + " (<b>" + dict['recordName5'] + "</b>)" + pop5 + "<br>");
+        $('#leaderboard').append("<b>----- " + category + " -----</b><br>");
+        $('#leaderboard').append(string1);
+        $('#leaderboard').append(string2);
+        $('#leaderboard').append(string3);
+        $('#leaderboard').append(string4);
+        $('#leaderboard').append(string5);
+        // $('#leaderboard').append("<br>")
     }
     postSpace() {
-       // $('#scoreboard').append("<br>-------------------------------------------<br><b>Scoreboard:</b><br>")
+        // $('#scoreboard').append("<br>-------------------------------------------<br><b>Scoreboard:</b><br>")
     }
     postScoreTitle(citysrc) {
-       $('#scoreboard').append("<b>----- Player Scores in " + citysrc + " -----</b><br>");      
+        $('#scoreboard').append("<b>----- Player Scores in " + citysrc + " -----</b><br>");
     }
     postLobby(recent, hall) {
-       $('#leaderboard').append("<b>" + CONSTANTS.FAMESCORE + "+ Hall of Fame (out of 6600 points)</b><br>");
-       $('#leaderboard').append(hall);
-       $('#leaderboard').append("<b>Recent Records:</b><br>");
-       $('#leaderboard').append("<font size=\"1\">" + recent + "</font>");
-       $('#scoreboard').append("<b>----- Players in Lobby -----</b><br>");
+        $('#leaderboard').append("<b>" + CONSTANTS.FAMESCORE + "+ Hall of Fame (out of 6600 points)</b><br>");
+        $('#leaderboard').append(hall);
+        $('#leaderboard').append("<b>Recent Records:</b><br>");
+        $('#leaderboard').append("<font size=\"1\">" + recent + "</font>");
+        $('#scoreboard').append("<b>----- Players in Lobby -----</b><br>");
     }
 }
 

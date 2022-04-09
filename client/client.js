@@ -21,22 +21,22 @@ var myRoomName = CONSTANTS.LOBBY;
 const canvas = window.document.getElementById('map');
 const panel = window.document.getElementById('panel');
 const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1; // hack for scaling
-var lastScale = 999; 
+var lastScale = 999;
 var noScale = false;
 var betweenGames = true;
 var clickedReady = false;
 var booted = false;
 
 const playerClick = {
-  clickEvent: false,
-  mouseDown: false,
-  touchDown: false,
-  downCount: 0,
-  cursorX: 0,
-  cursorY: 0
+    clickEvent: false,
+    mouseDown: false,
+    touchDown: false,
+    downCount: 0,
+    cursorX: 0,
+    cursorY: 0
 };
 
-$(document).ready(function(){
+$(document).ready(function() {
     // Player connects
     socket.emit('newPlayer');
 
@@ -48,23 +48,49 @@ $(document).ready(function(){
 
     /**** Scoreboard *****/
     const scoreboard = new Scoreboard(socket);
-    socket.on('clear scores', () => {scoreboard.clearScores()});
-    socket.on('post score', (rank, name, color, score, wins) => {scoreboard.postScore(rank,name,color,score,wins)});
-    socket.on('post group', (category, dict) => {scoreboard.postGroup(category, dict)});
-    socket.on('post score title', (citysrc) => {scoreboard.postScoreTitle(citysrc)});
-    socket.on('post space', () => {scoreboard.postSpace()});
-    socket.on('post lobby', (recent, hall) => {scoreboard.postLobby(recent, hall)});
-    socket.on('announce record', (category, room, medal, name, score, color) => {socket.emit("announcement", '[New ' + category + ' record set by <font color="' + color + '">' + medal + name + ' (' + score + ')</font> in ' + room + ']<br>')});
-    socket.on('announce hall', (room, name, score, color) => {socket.emit("announcement", '<b>WOW!! <font color="' + color + '">' + name + '</font> made it into the hall of fame with ' + score + ' points in ' + room + '!!!  How is that even possible?!</b><br>')});
+    socket.on('clear scores', () => {
+        scoreboard.clearScores()
+    });
+    socket.on('post score', (rank, name, color, score, wins) => {
+        scoreboard.postScore(rank, name, color, score, wins)
+    });
+    socket.on('post group', (category, dict) => {
+        scoreboard.postGroup(category, dict)
+    });
+    socket.on('post score title', (citysrc) => {
+        scoreboard.postScoreTitle(citysrc)
+    });
+    socket.on('post space', () => {
+        scoreboard.postSpace()
+    });
+    socket.on('post lobby', (recent, hall) => {
+        scoreboard.postLobby(recent, hall)
+    });
+    socket.on('announce record', (category, room, medal, name, score, color) => {
+        socket.emit("announcement", '[New ' + category + ' record set by <font color="' + color + '">' + medal + name + ' (' + score + ')</font> in ' + room + ']<br>')
+    });
+    socket.on('announce hall', (room, name, score, color) => {
+        socket.emit("announcement", '<b>WOW!! <font color="' + color + '">' + name + '</font> made it into the hall of fame with ' + score + ' points in ' + room + '!!!  How is that even possible?!</b><br>')
+    });
 
     /**** Commands *****/
     const sounds = new Sounds(socket);
 
     const commands = new Commands(socket);
-    socket.on('update counts', (newdict) => {commands.updateCounts(newdict);commands.postButtons();})
-    socket.on('draw buttons', () => {commands.postButtons()});
-    socket.on('update joe button', (hasJoe) => {commands.hasJoe = hasJoe; commands.postButtons()});
-    socket.on('draw timer', (time,color) => {commands.postTime(time,color)});
+    socket.on('update counts', (newdict) => {
+        commands.updateCounts(newdict);
+        commands.postButtons();
+    })
+    socket.on('draw buttons', () => {
+        commands.postButtons()
+    });
+    socket.on('update joe button', (hasJoe) => {
+        commands.hasJoe = hasJoe;
+        commands.postButtons()
+    });
+    socket.on('draw timer', (time, color) => {
+        commands.postTime(time, color)
+    });
     socket.on('draw prepare', (round) => {
         betweenGames = true;
         commands.drawCommand(" seconds until new game auto-starts...", "", "", "", round, true, false)
@@ -76,7 +102,7 @@ $(document).ready(function(){
         if (time === CONSTANTS.BEGIN_GAME_DURATION) sounds.playGameBeginSound();
     });
     socket.on('draw guess city', (city, capital, iso2, round) => {
-        commands.drawCommand( "Find!       ", city, capital, iso2, round, false, false);
+        commands.drawCommand("Find!       ", city, capital, iso2, round, false, false);
         sounds.playRoundBeginSound();
     });
     socket.on('draw reveal city', (city, capital, iso2, round) => {
@@ -84,43 +110,47 @@ $(document).ready(function(){
         sounds.playRoundEndSound();
     });
     socket.on('draw booted', () => {
-        commands.drawCommand("You have been booted due to inactivity!", "Please refresh to rejoin","", "",0, false, false)
+        commands.drawCommand("You have been booted due to inactivity!", "Please refresh to rejoin", "", "", 0, false, false)
         booted = true;
     });
-    socket.on('draw idle', () => {commands.drawCommand("Waiting for players to join...", "", "", "", 0, false, false)});
+    socket.on('draw idle', () => {
+        commands.drawCommand("Waiting for players to join...", "", "", "", 0, false, false)
+    });
     setInterval(() => {
         // Keep track of bot toggle rate.  No more than 6 toggles every 5s
         // Handled on the client side, even though technically someone can get around this
         const currentdate = new Date();
         const unix = currentdate.getTime();
         const droptime = unix - 1000 * CONSTANTS.SPAMPERIOD;
-        var filtered = commands.bottracker.filter(function(value, index, arr){ return value > droptime;})
+        var filtered = commands.bottracker.filter(function(value, index, arr) {
+            return value > droptime;
+        })
         commands.bottracker = filtered
     }, 1000 / 5);
 
     /**** Chat *****/
     const chat = new Chat(socket);
 
-    window.onfocus = function () {
-      chat.isActive(document);
+    window.onfocus = function() {
+        chat.isActive(document);
     };
-    window.onblur = function () {
-      chat.isBlur();
+    window.onblur = function() {
+        chat.isBlur();
     };
     chat.listen();
-    socket.on("update custom messages", function(room, msg, font){
+    socket.on("update custom messages", function(room, msg, font) {
         chat.addCustomMessage(room, msg, font);
         sounds.newMessage(room)
     });
-    socket.on("update messages", function(room, msg){
+    socket.on("update messages", function(room, msg) {
         chat.addMessage(room, msg);
         sounds.newMessage(room)
     });
-    socket.on("mute player", function(id){
+    socket.on("mute player", function(id) {
         sounds.muteMe(id);
         commands.muted = sounds.muted;
     });
-    socket.on("jitter", function(id){
+    socket.on("jitter", function(id) {
         if (socket.id == id) {
             noScale = !commands.antiJitter;
             commands.antiJitter = !commands.antiJitter;
@@ -166,27 +196,43 @@ $(document).ready(function(){
 
     /**** Map *****/
     const map = new Map(socket);
-    socket.on('draw point', (coords, color, radius) => {map.drawPoint(coords, color, radius)});
-    socket.on('draw dist', (coords, color, distance) => {map.drawDist(coords, color, distance)});
-    socket.on('draw answer', (coords) => {map.drawStar(coords)});
+    socket.on('draw point', (coords, color, radius) => {
+        map.drawPoint(coords, color, radius)
+    });
+    socket.on('draw dist', (coords, color, distance) => {
+        map.drawDist(coords, color, distance)
+    });
+    socket.on('draw answer', (coords) => {
+        map.drawStar(coords)
+    });
     // socket.on('draw answer', (coords) => {map.drawPoint(coords, "white", CONSTANTS.BUBBLE_RADIUS*2)});
-    socket.on('draw photo', (coords, link) => {map.drawPhoto(coords, link)});
+    socket.on('draw photo', (coords, link) => {
+        map.drawPhoto(coords, link)
+    });
     socket.on('fresh map', (room) => map.drawMap(room));
     socket.on('blank map', (room) => map.drawBlank(room));
     socket.on('animate', () => map.drawAnimation());
-    socket.on("render map", function(id, style, room){
+    socket.on("render map", function(id, style, room) {
         map.setStyle(id, style, room);
         commands.setStyle(id, style);
     });
 
     /**** History *****/
     const history = new History(socket);
-    socket.on('break history', (room, winner, score, color, record) => {history.breakHistory(room, winner, score, color, record)});
-    socket.on('draw chart', (hist,winner, color, room, max) => {history.drawChart(hist,winner, color, room, max)});
-    socket.on('add history', (room, payload) => {history.addHistory(room, payload)});
+    socket.on('break history', (room, winner, score, color, record) => {
+        history.breakHistory(room, winner, score, color, record)
+    });
+    socket.on('draw chart', (hist, winner, color, room, max) => {
+        history.drawChart(hist, winner, color, room, max)
+    });
+    socket.on('add history', (room, payload) => {
+        history.addHistory(room, payload)
+    });
 
     /***** Player interactions *****/
-    socket.on('request boot', function(id){socket.emit('bootPlayer', id)});
+    socket.on('request boot', function(id) {
+        socket.emit('bootPlayer', id)
+    });
     socket.on('moved to', (mapName, roomName, roomCitysrc, roomState) => {
         myMap = mapName;
         map.myMap = mapName;
@@ -216,17 +262,17 @@ $(document).ready(function(){
         betweenGames = roomState === CONSTANTS.PREPARE_GAME_STATE;
     });
     setInterval(() => {
-      if (playerClick.touchDown) playerClick.downCount = playerClick.downCount + 1;
-      if (playerClick.clickEvent) {
-        socket.emit('playerClick', playerClick);
-        playerClick.clickEvent = false; 
-      }
-      if (chat.hasNewMessage) document.title = "(*) GeoScents"
+        if (playerClick.touchDown) playerClick.downCount = playerClick.downCount + 1;
+        if (playerClick.clickEvent) {
+            socket.emit('playerClick', playerClick);
+            playerClick.clickEvent = false;
+        }
+        if (chat.hasNewMessage) document.title = "(*) GeoScents"
     }, 1000 / CONSTANTS.FPS);
 
     setInterval(() => {
         // Set zoom for resolution
-        const scale = Math.floor(50*Math.max(0.5, Math.min(1, window.innerWidth / 1920)))/50;
+        const scale = Math.floor(50 * Math.max(0.5, Math.min(1, window.innerWidth / 1920))) / 50;
         if (scale != lastScale && !noScale) {
             lastScale = scale;
             document.documentElement.style.zoom = scale;
@@ -236,34 +282,34 @@ $(document).ready(function(){
     }, 1000 / 5);
 
     const mouseUpHandler = (e) => {
-      playerClick.mouseDown = false
-      playerClick.downCount = 0;
-      playerClick.touchDown = false; 
-      playerClick.clickEvent = false;
+        playerClick.mouseDown = false
+        playerClick.downCount = 0;
+        playerClick.touchDown = false;
+        playerClick.clickEvent = false;
     };
     const mouseDownHandler = (evt) => {
-      playerClick.mouseDown = true
-      playerClick.clickEvent = true;
+        playerClick.mouseDown = true
+        playerClick.clickEvent = true;
 
-      const mousePos = getMousePosInPanel(canvas, evt);
-      // var rect = canvas.getBoundingClientRect();
-      playerClick.cursorX = mousePos.x //e.clientX - rect.left
-      playerClick.cursorY = mousePos.y //e.clientY - rect.top
+        const mousePos = getMousePosInPanel(canvas, evt);
+        // var rect = canvas.getBoundingClientRect();
+        playerClick.cursorX = mousePos.x //e.clientX - rect.left
+        playerClick.cursorY = mousePos.y //e.clientY - rect.top
     };
     const touchUpHandler = (e) => {
-      playerClick.clickEvent = true;
-      socket.emit('playerClick', playerClick);
-      playerClick.downCount = 0;
-      playerClick.mouseDown = false;
-      playerClick.touchDown = false;
+        playerClick.clickEvent = true;
+        socket.emit('playerClick', playerClick);
+        playerClick.downCount = 0;
+        playerClick.mouseDown = false;
+        playerClick.touchDown = false;
     };
     const touchDownHandler = (evt) => {
-      playerClick.touchDown = true;
-      playerClick.mouseDown = true;
-      const mousePos = getTouchPosInPanel(canvas, evt);
-      // var rect = canvas.getBoundingClientRect();
-      playerClick.cursorX = mousePos.x //e.touches[0].clientX - rect.left
-      playerClick.cursorY = mousePos.y //e.touches[0].clientY - rect.top
+        playerClick.touchDown = true;
+        playerClick.mouseDown = true;
+        const mousePos = getTouchPosInPanel(canvas, evt);
+        // var rect = canvas.getBoundingClientRect();
+        playerClick.cursorX = mousePos.x //e.touches[0].clientX - rect.left
+        playerClick.cursorY = mousePos.y //e.touches[0].clientY - rect.top
     };
     document.addEventListener('mousedown', mouseDownHandler, false);
     document.addEventListener('mouseup', mouseUpHandler, false);
@@ -271,36 +317,39 @@ $(document).ready(function(){
     document.addEventListener("touchend", touchUpHandler, false);
     canvas.addEventListener('click', function(evt) {
         var mousePos = getMousePosInPanel(canvas, evt);
-        if (isInside(mousePos,commands.ready_button) && myMap !== CONSTANTS.LOBBY && betweenGames) {
+        if (isInside(mousePos, commands.ready_button) && myMap !== CONSTANTS.LOBBY && betweenGames) {
             socket.emit('playerReady');
             commands.drawCommand(" seconds until new game auto-starts...", "", "", "", 0, true, true);
             clickedReady = true;
         }
         Object.values(map.clickable_buttons).forEach(function(btn) {
-            if (isInside(mousePos,btn) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
+            if (isInside(mousePos, btn) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
                 if (btn.label != "?") {
                     window.open(btn.link, '_blank');
                 } else {
                     socket.emit('requestHelpPopup');
                 }
-                    socket.emit('button clicked', btn.label);
+                socket.emit('button clicked', btn.label);
             }
         })
 
         if (!(typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
-            var x = window.scrollX, y = window.scrollY; $("#msg_text").focus(); window.scrollTo(x, y);
+            var x = window.scrollX,
+                y = window.scrollY;
+            $("#msg_text").focus();
+            window.scrollTo(x, y);
         }
     }, false);
     canvas.addEventListener('mousemove', function(evt) {
         var mousePos = getMousePosInPanel(canvas, evt);
         if (myMap === CONSTANTS.LOBBY) {
             Object.values(map.clickable_buttons).forEach(function(btn) {
-                if (isInside(mousePos,btn) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
+                if (isInside(mousePos, btn) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
                     map.highlightButton(btn);
                 } else if (!booted) map.showButton(btn);
             })
         } else {
-            if (betweenGames && !clickedReady && isInside(mousePos,commands.ready_button)) {
+            if (betweenGames && !clickedReady && isInside(mousePos, commands.ready_button)) {
                 commands.highlightReadyButton();
             } else if (betweenGames) commands.showReadyButton(clickedReady);
         }
@@ -323,6 +372,7 @@ $(document).ready(function(){
             y: yPos
         };
     }
+
     function getTouchPosInPanel(canvas, event) {
         var rect = canvas.getBoundingClientRect();
         let xPos;
@@ -340,11 +390,7 @@ $(document).ready(function(){
         };
     }
     //Function to check whether a point is inside a rectangle
-    function isInside(pos, rect){
-        return pos.x > rect.x && pos.x < rect.x+rect.width && pos.y < rect.y+rect.height && pos.y > rect.y
+    function isInside(pos, rect) {
+        return pos.x > rect.x && pos.x < rect.x + rect.width && pos.y < rect.y + rect.height && pos.y > rect.y
     }
 });
-
-
-
-

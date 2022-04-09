@@ -47,19 +47,19 @@ class Sounds {
     }
 
     newMessage(room) {
-      if (room == this.myRoomName) {
-          this.messagePop.play();
-      }
+        if (room == this.myRoomName) {
+            this.messagePop.play();
+        }
     }
 
     playGameBeginSound() {
-    	this.gameBeginSound.play()
+        this.gameBeginSound.play()
     }
     playRoundBeginSound() {
-    	this.roundBeginSound.play()
+        this.roundBeginSound.play()
     }
     playRoundEndSound() {
-    	this.roundEndSound.play()
+        this.roundEndSound.play()
     }
 }
 

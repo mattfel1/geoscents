@@ -59,13 +59,13 @@ class History {
         playersHistory.forEach((hist, player) => {
             i = i + 1;
             Object.keys(hist).forEach((round) => {
-                const x1 = (round) * ((width) / (CONSTANTS.GAME_ROUNDS+1));
+                const x1 = (round) * ((width) / (CONSTANTS.GAME_ROUNDS + 1));
                 var y1 = height;
-                if ((round-1) in hist) {
+                if ((round - 1) in hist) {
                     y1 = height - height * (hist[round - 1] / (Math.max(max, 1)));
                 }
-                const x2 = (1+parseInt(round)) * ((width) / (CONSTANTS.GAME_ROUNDS+1));
-                const y2 = height - height*(hist[round] / (Math.max(max,1)));
+                const x2 = (1 + parseInt(round)) * ((width) / (CONSTANTS.GAME_ROUNDS + 1));
+                const y2 = height - height * (hist[round] / (Math.max(max, 1)));
                 graph = graph + `
 <polyline
     fill="none"

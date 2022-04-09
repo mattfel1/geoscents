@@ -24,34 +24,34 @@ class Chat {
     }
 
     addMessage(room, msg) {
-      if (room == this.myRoomName) {
-        var final_message = $("<font style=\"font-size:20px;\" />").html(msg);
-        if (!this.windowActive) {
-            this.hasNewMessage = true;
+        if (room == this.myRoomName) {
+            var final_message = $("<font style=\"font-size:20px;\" />").html(msg);
+            if (!this.windowActive) {
+                this.hasNewMessage = true;
+            }
+            var historyDiv = $('#history');
+            historyDiv.prepend(final_message);
+            this.chatCount = this.chatCount + 1;
+            if (this.chatCount > CONSTANTS.MAX_CHAT_HIST) {
+                historyDiv.children().last().remove();
+                this.chatCount = this.chatCount - 1;
+            }
         }
-        var historyDiv = $('#history');
-        historyDiv.prepend(final_message);
-        this.chatCount = this.chatCount + 1;
-        if (this.chatCount > CONSTANTS.MAX_CHAT_HIST) {
-            historyDiv.children().last().remove();
-            this.chatCount = this.chatCount - 1;
-        }
-      }
     }
     addCustomMessage(room, msg, fontsize) {
-      if (room == this.myRoomName) {
-        var final_message = $("<font style=\"font-size:" + fontsize + "px;\" />").html(msg);
-        if (!this.windowActive) {
-            this.hasNewMessage = true;
+        if (room == this.myRoomName) {
+            var final_message = $("<font style=\"font-size:" + fontsize + "px;\" />").html(msg);
+            if (!this.windowActive) {
+                this.hasNewMessage = true;
+            }
+            var historyDiv = $('#history');
+            historyDiv.prepend(final_message);
+            this.chatCount = this.chatCount + 1;
+            if (this.chatCount > CONSTANTS.MAX_CHAT_HIST) {
+                historyDiv.children().last().remove();
+                this.chatCount = this.chatCount - 1;
+            }
         }
-        var historyDiv = $('#history');
-        historyDiv.prepend(final_message);
-        this.chatCount = this.chatCount + 1;
-        if (this.chatCount > CONSTANTS.MAX_CHAT_HIST) {
-            historyDiv.children().last().remove();
-            this.chatCount = this.chatCount - 1;
-        }
-      }
     }
     isSpamming() {
         if (this.spamtracker.size > CONSTANTS.MAX_MSG_PER_SPAMPERIOD) {
@@ -69,25 +69,25 @@ class Chat {
         const socket = this.socket;
         const self = this;
         const spamtracker = this.spamtracker;
-         $("form#chat").submit(function(e) {
-           e.preventDefault();
+        $("form#chat").submit(function(e) {
+            e.preventDefault();
             const msg = $(this).find("#msg_text").val();
-           if (msg.length > 0) {
-               if (self.isSpamming()) {
-                  socket.emit("block spam");
-               } else {
-                   socket.emit("send message", msg, function() {
-                     $("form#chat #msg_text").val("");
+            if (msg.length > 0) {
+                if (self.isSpamming()) {
+                    socket.emit("block spam");
+                } else {
+                    socket.emit("send message", msg, function() {
+                        $("form#chat #msg_text").val("");
 
-                     // Add to spamtracker map
-                    const currentdate = new Date();
-                    const unix = currentdate.getTime();
-                    spamtracker.set(unix, msg.length)
-                   });
+                        // Add to spamtracker map
+                        const currentdate = new Date();
+                        const unix = currentdate.getTime();
+                        spamtracker.set(unix, msg.length)
+                    });
                 }
             }
-         });
-         this.spamtracker = spamtracker
+        });
+        this.spamtracker = spamtracker
     }
 }
 
