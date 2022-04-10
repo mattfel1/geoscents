@@ -93,28 +93,28 @@ $(document).ready(function() {
     });
     socket.on('draw prepare', (round) => {
         betweenGames = true;
-        commands.drawCommand(" seconds until new game auto-starts...", "", "", "", round, true, false)
+        commands.drawCommand(" seconds until new game auto-starts...", "", "", "", round, true, false, false)
     });
     socket.on('draw begin', (time, round) => {
         betweenGames = false;
         clickedReady = false;
-        commands.drawCommand(" seconds until first round..  GET READY!", "", "", "", round, false, false);
+        commands.drawCommand(" seconds until first round..  GET READY!", "", "", "", round, false, false, false);
         if (time === CONSTANTS.BEGIN_GAME_DURATION) sounds.playGameBeginSound();
     });
     socket.on('draw guess city', (city, capital, iso2, round) => {
-        commands.drawCommand("Find!       ", city, capital, iso2, round, false, false);
+        commands.drawCommand("Find!       ", city, capital, iso2, round, false, false, true);
         sounds.playRoundBeginSound();
     });
     socket.on('draw reveal city', (city, capital, iso2, round) => {
-        commands.drawCommand("            ", city, capital, iso2, round, false, false);
+        commands.drawCommand("            ", city, capital, iso2, round, false, false, true);
         sounds.playRoundEndSound();
     });
     socket.on('draw booted', () => {
-        commands.drawCommand("You have been booted due to inactivity!", "Please refresh to rejoin", "", "", 0, false, false)
+        commands.drawCommand("You have been booted due to inactivity!", "Please refresh to rejoin", "", "", 0, false, false, false)
         booted = true;
     });
     socket.on('draw idle', () => {
-        commands.drawCommand("Waiting for players to join...", "", "", "", 0, false, false)
+        commands.drawCommand("Waiting for players to join...", "", "", "", 0, false, false, false)
     });
     setInterval(() => {
         // Keep track of bot toggle rate.  No more than 6 toggles every 5s
@@ -319,7 +319,7 @@ $(document).ready(function() {
         var mousePos = getMousePosInPanel(canvas, evt);
         if (isInside(mousePos, commands.ready_button) && myMap !== CONSTANTS.LOBBY && betweenGames) {
             socket.emit('playerReady');
-            commands.drawCommand(" seconds until new game auto-starts...", "", "", "", 0, true, true);
+            commands.drawCommand(" seconds until new game auto-starts...", "", "", "", 0, true, true, false);
             clickedReady = true;
         }
         Object.values(map.clickable_buttons).forEach(function(btn) {

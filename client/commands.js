@@ -64,11 +64,15 @@ class Commands {
 
     drawLastCommand(id) {
         if (this.myRoomName !== CONSTANTS.LOBBY) {
-            this.drawCommand(this.lastCommand['timeDescrip'], this.lastCommand['citystring'], this.lastCommand['capital'], this.lastCommand['iso2'], this.lastCommand['round'], this.lastCommand['button'], this.lastCommand['clicked']);
+            this.drawCommand(this.lastCommand['timeDescrip'], this.lastCommand['citystring'], this.lastCommand['capital'], this.lastCommand['iso2'], this.lastCommand['round'], this.lastCommand['button'], this.lastCommand['clicked'], this.lastCommand['is_target']);
             this.postTime(this.lastTime['time'], this.lastTime['color']);
         }
     }
-    drawCommand(timeDescrip, citystring, capital, iso2, round, button, clicked) {
+    drawCommand(timeDescrip, citystring, capital, iso2_raw, round, button, clicked, is_target) {
+        let iso2 = iso2_raw;
+        if (iso2_raw == "" || iso2_raw == null)
+            iso2 = "earth";
+
         this.lastCommand = {
             'timeDescrip': timeDescrip,
             'citystring': citystring,
@@ -76,7 +80,8 @@ class Commands {
             'iso2': iso2,
             'round': round,
             'button': button,
-            'clicked': clicked
+            'clicked': clicked,
+            'is_target': is_target
         };
         this.ctx.globalAlpha = 0.9;
         this.ctx.fillStyle = CONSTANTS.BGCOLOR;
@@ -90,7 +95,7 @@ class Commands {
         this.ctx.fillText(capital, this.command_window['x'] + citystring.length * 10 + timeDescrip.length * 10 + 50, this.command_window['y'] + 25);
         this.ctx.fillText('Round ' + (round + 1) + '/' + (CONSTANTS.GAME_ROUNDS + 1), this.command_window['x'] + this.command_window['width'] * 0.9, this.command_window['y'] + 25);
 
-        if (iso2 !== "") {
+        if (iso2 !== "" && is_target) {
             var flagImage = new Image();
             flagImage.src = "/resources/flags/" + iso2.toString().toLowerCase() + ".png";
             var ctx = this.ctx;
