@@ -1,5 +1,8 @@
 const CONSTANTS = require('../resources/constants.js')
 
+discordImg = new Image();
+discordImg.src = "/resources/discord.png";
+
 var globeImage = {
     'classic': new Image(),
     'terrain': new Image(),
@@ -110,7 +113,7 @@ class Map {
             height: 40
         };
         this.about_button = {
-            x: 400,
+            x: 360,
             y: 190,
             width: 280,
             height: 60,
@@ -121,11 +124,11 @@ class Map {
             normal_color: "orange",
             highlight_color: "green",
             font_size: 40,
-            link: 'http://geoscents.net/resources/about.html',
+            link: 'https://geoscents.net/resources/about.html',
             label: 'ABOUT GAME'
         };
         this.visualize_button = {
-            x: 710,
+            x: 670,
             y: 190,
             width: 315,
             height: 60,
@@ -136,11 +139,26 @@ class Map {
             normal_color: "orange",
             highlight_color: "green",
             font_size: 40,
-            link: 'http://geoscents.net/plots/index.html',
+            link: 'https://geoscents.net/plots/index.html',
             label: 'EXPLORE DATA'
         };
+        this.discord_button = {
+            x: 1015,
+            y: 190,
+            width: 75,
+            height: 60,
+            x_font_ofs: 5,
+            y_font_ofs: 42,
+            border_color1: "#000000",
+            border_color2: "#808080",
+            normal_color: "orange",
+            highlight_color: "green",
+            font_size: 40,
+            link: 'https://discord.me/geo',
+            label: 'DISCORD'
+        };
         this.help_button = {
-            x: 1055,
+            x: 1120,
             y: 190,
             width: 35,
             height: 60,
@@ -274,7 +292,7 @@ class Map {
             link: 'https://donate.doctorswithoutborders.org/onetime.cfm',
             label: 'Doctors Without Borders'
         };
-        this.clickable_buttons = [this.about_button, this.visualize_button, this.help_button]
+        this.clickable_buttons = [this.about_button, this.visualize_button, this.discord_button, this.help_button]
         // this.clickable_buttons = [this.about_button, this.visualize_button,
         //     this.donate1_button, this.donate2_button, this.donate3_button,
         //     this.donate4_button, this.donate5_button, this.donate6_button,
@@ -474,7 +492,16 @@ class Map {
         this.ctx.fillRect(properties['x'], properties['y'], properties['width'], properties['height']);
         this.ctx.font = properties['font_size'] + "px Arial";
         this.ctx.fillStyle = 'black';
-        this.ctx.fillText(properties['label'], properties['x'] + properties['x_font_ofs'], properties['y'] + properties['y_font_ofs'])
+        // Handle discord button separately to show logo svg
+        if (properties['label'] != "DISCORD") {
+            this.ctx.fillText(properties['label'], properties['x'] + properties['x_font_ofs'], properties['y'] + properties['y_font_ofs'])
+        } else {
+            let ctx = this.ctx;
+            discordImg.onload = function() {
+                ctx.drawImage(discordImg, properties['x'] + 5, properties['y'] + 1, properties['height'], properties['height'])
+            };
+            discordImg.onload();
+        }
     }
     showButton(properties) {
         this.ctx.fillStyle = properties['border_color1'];
@@ -485,7 +512,16 @@ class Map {
         this.ctx.fillRect(properties['x'], properties['y'], properties['width'], properties['height']);
         this.ctx.font = properties['font_size'] + "px Arial";
         this.ctx.fillStyle = 'black';
-        this.ctx.fillText(properties['label'], properties['x'] + properties['x_font_ofs'], properties['y'] + properties['y_font_ofs'])
+        // Handle discord button separately to show logo svg
+        if (properties['label'] != "DISCORD") {
+            this.ctx.fillText(properties['label'], properties['x'] + properties['x_font_ofs'], properties['y'] + properties['y_font_ofs'])
+        } else {
+            let ctx = this.ctx;
+            discordImg.onload = function() {
+                ctx.drawImage(discordImg, properties['x'] + 5, properties['y'] + 1, properties['height'], properties['height'])
+            };
+            discordImg.onload();
+        }
     }
 
     cellOf(coords) {

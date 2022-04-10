@@ -143,6 +143,11 @@ app.get('/resources/*.png', (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.sendFile(path.join(__dirname, '..', 'resources/' + wildcard + '.png'));
 });
+app.get('/resources/*.svg', (req, res, next) => {
+    const wildcard = req.params['0'];
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.sendFile(path.join(__dirname, '..', 'resources/' + wildcard + '.svg'));
+});
 app.get('/.well-known/pki-validation/*', (req, res, next) => {
     const wildcard = req.params['0'];
     res.sendFile(path.join(__dirname, '..', '.well-known/pki-validation/' + wildcard));
