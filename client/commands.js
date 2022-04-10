@@ -93,7 +93,7 @@ class Commands {
         this.ctx.fillText(timeDescrip, this.command_window['x'] + 5, this.command_window['y'] + 25);
         this.ctx.fillText(citystring, this.command_window['x'] + timeDescrip.length * 10 + 30, this.command_window['y'] + 25);
         this.ctx.fillText(capital, this.command_window['x'] + citystring.length * 10 + timeDescrip.length * 10 + 50, this.command_window['y'] + 25);
-        this.ctx.fillText('Round ' + (round + 1) + '/' + (CONSTANTS.GAME_ROUNDS + 1), this.command_window['x'] + this.command_window['width'] * 0.9, this.command_window['y'] + 25);
+        this.ctx.fillText('Round ' + (round + 1) + '/' + (CONSTANTS.GAME_ROUNDS), this.command_window['x'] + this.command_window['width'] * 0.9, this.command_window['y'] + 25);
 
         if (iso2 !== "" && is_target) {
             var flagImage = new Image();

@@ -25,9 +25,63 @@ class History {
         }
     }
 
-    drawChart(hist, winner, color, room, max) {
+    drawPath(hist, color, room, score) {
         const width = 560;
         const height = 210;
+        const playersHistory = new Map(JSON.parse(hist));
+        let histcount = this.histcount;
+        let name = "Your";
+        playersHistory.forEach((hist, player) => {
+            if (this.socket.id == player.id) {
+                name = "<font color=\"" + player.color + "\">" + player.name + "</font>'s";
+            }
+        });
+        // var history = "<br><button id=\"sharepath" + histcount + "\">copy</button><br>" + "<div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points";
+        var history = "<br><div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points";
+        playersHistory.forEach((hist, player) => {
+            if (this.socket.id == player.id) {
+                var i = 1;
+                Object.keys(hist).forEach((round) => {
+                    let datapoint = hist[round];
+                    let points = datapoint['round_points'];
+                    points = points.toString().padEnd(3).replace(/\s/g, "&nbsp;")
+                    let time = datapoint['time'];
+                    time = time.toString().padEnd(3).replace(/\s/g, "&nbsp;")
+                    let dist = datapoint['dist'];
+                    dist = dist.toString().padEnd(5).replace(/\s/g, "&nbsp;")
+                    let target = datapoint['target']['city'].padEnd(6050).substring(0, 50).replace(/\s/g, "&nbsp");
+                    let iso2 = datapoint['target']['iso2'];
+                    if (iso2 == "" || iso2 == null)
+                        iso2 = "earth";
+                    iso2 = iso2.toLowerCase();
+                    let image = "<img alt=\"" + iso2 + "\" height=16 src=\"resources/flags/" + iso2 + ".png\" />";
+                    history = history + "<br>Round " + i.toString().padEnd(2).replace(/\s/g, "&nbsp;") + ": " + points + "pts [" + dist + "km, " + time + "s]  " + image + " " + target;
+                    i = i + 1;
+                });
+            }
+        });
+
+        history = history + "</tt><br></div>"
+        // TODO: Copy to clipboard button
+//         let js = `<script>
+// var node = document.getElementById('mypath` + histcount + `');
+// var btn = document.getElementById('sharepath` + histcount + `');
+// btn.onclick = function() {
+// node.innerHTML = "I'm an image now."
+//   domtoimage.toBlob(document.getElementById('mypath` + histcount + `'))
+//     .then(function(blob) {
+//       window.saveAs(blob, 'my-node.png');
+//     });
+// }
+// </script>`
+//         history = history + js;
+
+        $('#gamehist').prepend(history);
+    }
+
+    drawChart(hist, winner, color, room, max) {
+        const width = 560;
+        const height = 190;
         const playersHistory = new Map(JSON.parse(hist));
         // based on https://codepen.io/dmmfll/pen/vGbZrK
         var graph = `<br><div class="graph-container">
@@ -59,13 +113,13 @@ class History {
         playersHistory.forEach((hist, player) => {
             i = i + 1;
             Object.keys(hist).forEach((round) => {
-                const x1 = (round) * ((width) / (CONSTANTS.GAME_ROUNDS + 1));
+                const x1 = (round) * ((width) / (CONSTANTS.GAME_ROUNDS));
                 var y1 = height;
                 if ((round - 1) in hist) {
-                    y1 = height - height * (hist[round - 1] / (Math.max(max, 1)));
+                    y1 = height - height * (hist[round - 1]['total_points'] / (Math.max(max, 1)));
                 }
-                const x2 = (1 + parseInt(round)) * ((width) / (CONSTANTS.GAME_ROUNDS + 1));
-                const y2 = height - height * (hist[round] / (Math.max(max, 1)));
+                const x2 = (1 + parseInt(round)) * ((width) / (CONSTANTS.GAME_ROUNDS));
+                const y2 = height - height * (hist[round]['total_points'] / (Math.max(max, 1)));
                 graph = graph + `
 <polyline
     fill="none"
@@ -100,7 +154,6 @@ class History {
             //     this.histcount = this.histcount - 1;
             // }
         }
-
     }
 }
 

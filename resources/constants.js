@@ -139,7 +139,7 @@ module.exports = {
 
 
     // Rooms
-    GAME_ROUNDS: 10,
+    GAME_ROUNDS: 11,
     RECORD_INIT_RANGE: 700,
     RECORD_INIT_BASE: 480,
     RECORD_DELTA_RANGE: 200,

@@ -225,6 +225,9 @@ $(document).ready(function() {
     socket.on('draw chart', (hist, winner, color, room, max) => {
         history.drawChart(hist, winner, color, room, max)
     });
+    socket.on('draw path', (hist, color, room, max) => {
+        history.drawPath(hist, color, room, max)
+    });
     socket.on('add history', (room, payload) => {
         history.addHistory(room, payload)
     });

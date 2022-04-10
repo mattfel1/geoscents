@@ -594,14 +594,21 @@ class Room {
         this.timer = this.timer - 1 / CONSTANTS.FPS
     }
 
-    updateHistory(player, round, score) {
+    updateHistory(player, round, net, diff, time, dist, target) {
+        let datapoint = {
+            'total_points': net,
+            'round_points': diff,
+            'time': time,
+            'dist': dist,
+            'target': target
+        }
         if (this.playersHistory.has(player)) {
             var dict = this.playersHistory.get(player);
-            dict[round] = score;
+            dict[round] = datapoint;
             this.playersHistory.set(player, dict)
         } else {
             var dict = {};
-            dict[round] = score;
+            dict[round] = datapoint;
             this.playersHistory.set(player, dict)
         }
     }
@@ -612,7 +619,7 @@ class Room {
         const target = this.target;
         const map = this.map;
         const round = this.round;
-        const updateHistory = (p, r, s) => this.updateHistory(p, r, s);
+        const updateHistory = (p, r, net, diff, t, d, targ) => this.updateHistory(p, r, net, diff, t, d, targ);
         const historyScore = (player, payload) => {
             this.historyScore(player, payload)
         };
@@ -629,9 +636,12 @@ class Room {
             }
             const update = Geography.score(map, player.geoError, player.mercError, player.clickedAt);
             const newScore = Math.floor(player.score + update);
-            let points_str = ("Points: <b>" + Math.floor(update).toString() + "</b>").padEnd(19).replace(/\s/g, "&nbsp;");
-            let dist_str = ("Error (km): <b>" + Math.floor(player.geoError).toString() + "</b>").padEnd(26).replace(/\s/g, "&nbsp;");
-            let time_str = ("Seconds Remaining: <b>" + (Math.floor(player.clickedAt * 10) / 10).toString() + "</b>").padEnd(34).replace(/\s/g, "&nbsp;");
+            let points = Math.floor(update);
+            let dist = Math.floor(player.geoError);
+            let clicktime = Math.floor(player.clickedAt * 10) / 10;
+            let points_str = ("Points: <b>" + points.toString() + "</b>").padEnd(19).replace(/\s/g, "&nbsp;");
+            let dist_str = ("Error (km): <b>" + dist.toString() + "</b>").padEnd(26).replace(/\s/g, "&nbsp;");
+            let time_str = ("Seconds Remaining: <b>" + clicktime.toString() + "</b>").padEnd(34).replace(/\s/g, "&nbsp;");
             let playerScoreLine = points_str + dist_str + time_str
             if (player.geoError === 999999) {
                 playerScoreLine = " (Did not guess)";
@@ -639,7 +649,7 @@ class Room {
             playerScoreLine = playerScoreLine
             historyScore(player, playerScoreLine);
             player.score = newScore;
-            updateHistory(player, round, newScore);
+            updateHistory(player, round, newScore, points, clicktime, dist, target);
         });
         this.historyRound(this.round + 1, Geography.stringifyTarget(this.target, this.citysrc));
     }
@@ -1056,9 +1066,10 @@ class Room {
                 if (this.timer <= 0 || this.allPlayersClicked()) {
                     this.updateScores();
                     this.sortPlayers();
-                    if (this.round >= CONSTANTS.GAME_ROUNDS) {
+                    if (this.round + 1 >= CONSTANTS.GAME_ROUNDS) {
                         this.winner.won();
                         this.recordPersonalHistory();
+                        this.printPath(this.winner.getName(), this.winner.score, this.winner.color);
                         this.printWinner(this.winner.getName(), this.winner.score, this.winner.color);
                     }
                     this.stateTransition(CONSTANTS.REVEAL_STATE, CONSTANTS.REVEAL_DURATION);
@@ -1079,7 +1090,7 @@ class Room {
                     this.recorded = true
                     this.recordGuesses()
                 }
-                if (this.timer <= 0 && this.round >= CONSTANTS.GAME_ROUNDS) {
+                if (this.timer <= 0 && this.round + 1 >= CONSTANTS.GAME_ROUNDS) {
                     this.round = 0;
                     this.stateTransition(CONSTANTS.PREPARE_GAME_DURATION, CONSTANTS.PREPARE_GAME_DURATION);
                 } else if (this.timer <= 0) {
@@ -1150,6 +1161,15 @@ class Room {
             // socket.emit('break history',  room, winner, score, color);
         });
     }
+
+    printPath(you, score, color) {
+        const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
+        const room = this.citysrc;
+        this.clients.forEach((socket, id) => {
+            socket.emit('draw path', playersHistory, color, room, score);
+        });
+    }
+
     historyRound(round, thisTarget) {
         const room = this.roomName;
         let star = "";
