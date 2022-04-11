@@ -47,8 +47,8 @@ module.exports = {
     MISC_LAT_TS: 0,
     UKRAINE_MIN_LAT: 54,
     UKRAINE_MAX_LAT: 43.2,
-    UKRAINE_MIN_LON: 17.7,
-    UKRAINE_MAX_LON: 45.0,
+    UKRAINE_MIN_LON: 17.5,
+    UKRAINE_MAX_LON: 45.3,
     UKRAINE_LAT_TS: 0,
     US_MIN_LAT: 56.0, // Latitude of top edge of map
     US_MAX_LAT: 10.0, // Latitude of bottom edge of map
