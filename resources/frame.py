@@ -47,7 +47,7 @@ latrng = [-65, 77]
 pop = 9999999999999 # capital cities only
 lonrng = [-180, 180]
 blacklist = []
-whitelist = ['Jersey', 'Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar', 'New Caledonia']
+whitelist = ['Jersey', 'Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, False)
 
 outfile = 'uscities.js'

@@ -2206,7 +2206,7 @@ module.exports = {
             "iso2": "NC",
             "iso3": "NCL",
             "admin_name": "Province Sud",
-            "capital": "",
+            "capital": "primary",
             "population": 93060,
             "id": 1540958092
         },

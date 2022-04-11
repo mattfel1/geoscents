@@ -3646,8 +3646,8 @@ module.exports = {
             "id": 1156546994
         },
         {
-            "city": "Qu\u1ea3ng H\u00e0",
-            "city_ascii": "Quang Ha",
+            "city": "Da Nang",
+            "city_ascii": "Da Nang",
             "lat": 16.06,
             "lng": 108.25,
             "country": "Vietnam",
@@ -5833,19 +5833,6 @@ module.exports = {
             "capital": "admin",
             "population": 594605,
             "id": 1368916692
-        },
-        {
-            "city": "Al \u1e28illah",
-            "city_ascii": "Al Hillah",
-            "lat": 23.4895,
-            "lng": 46.7564,
-            "country": "Saudi Arabia",
-            "iso2": "SA",
-            "iso3": "SAU",
-            "admin_name": "Ar Riy\u0101\u1e11",
-            "capital": "",
-            "population": 594605,
-            "id": 1682494753
         },
         {
             "city": "Rasht",

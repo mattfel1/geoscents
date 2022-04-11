@@ -353,6 +353,19 @@ module.exports = {
             "id": 1704413791
         },
         {
+            "city": "Yangon",
+            "city_ascii": "Yangon",
+            "lat": 16.7834,
+            "lng": 96.1667,
+            "country": "Myanmar",
+            "iso2": "MM",
+            "iso3": "MMR",
+            "admin_name": "Yangon",
+            "capital": "primary",
+            "population": 4088000,
+            "id": 1104616656
+        },
+        {
             "city": "Bras\u00edlia",
             "city_ascii": "Brasilia",
             "lat": -15.7833,
@@ -2736,35 +2749,9 @@ module.exports = {
             "iso2": "NC",
             "iso3": "NCL",
             "admin_name": "Province Sud",
-            "capital": "",
+            "capital": "primary",
             "population": 93060,
             "id": 1540958092
-        },
-        {
-            "city": "Kon\u00e9",
-            "city_ascii": "Kone",
-            "lat": -21.0667,
-            "lng": 164.8667,
-            "country": "New Caledonia",
-            "iso2": "NC",
-            "iso3": "NCL",
-            "admin_name": "Province Nord",
-            "capital": "admin",
-            "population": "",
-            "id": 1540397627
-        },
-        {
-            "city": "W\u00e9",
-            "city_ascii": "We",
-            "lat": -20.9,
-            "lng": 167.2667,
-            "country": "New Caledonia",
-            "iso2": "NC",
-            "iso3": "NCL",
-            "admin_name": "Province \u00celes",
-            "capital": "admin",
-            "population": "",
-            "id": 1540672599
         },
         {
             "city": "Hamilton",
