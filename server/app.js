@@ -171,6 +171,9 @@ app.get('/plots/*', (req, res, next) => {
     const wildcard = req.params['0'];
     res.sendFile(path.join(__dirname, '..', 'plots/' + wildcard));
 });
+app.get('/ads.txt', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '..', 'ads.txt'));
+});
 
 app.use((req, res, next) => {
     const err = new Error('Not Found');
