@@ -41,7 +41,7 @@ class History {
         var history = "<br><div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points on " + room + ":";
         playersHistory.forEach((hist, player) => {
             if (this.socket.id == player.id) {
-                var i = 1;
+                var i = CONSTANTS.GAME_ROUNDS - Object.keys(hist).length + 1;
                 Object.keys(hist).forEach((round) => {
                     let datapoint = hist[round];
                     let points = datapoint['round_points'];
