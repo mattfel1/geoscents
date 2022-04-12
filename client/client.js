@@ -327,7 +327,7 @@ $(document).ready(function() {
         }
         Object.values(map.clickable_buttons).forEach(function(btn) {
             if (isInside(mousePos, btn) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
-                if (btn.label != "?") {
+                if (btn.label.trim() != "?") {
                     window.open(btn.link, '_blank');
                 } else {
                     socket.emit('requestHelpPopup');

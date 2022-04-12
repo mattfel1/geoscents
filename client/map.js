@@ -113,9 +113,9 @@ class Map {
             height: 40
         };
         this.about_button = {
-            x: 360,
+            x: 545,
             y: 190,
-            width: 280,
+            width: 110,
             height: 60,
             x_font_ofs: 5,
             y_font_ofs: 42,
@@ -125,12 +125,12 @@ class Map {
             highlight_color: "green",
             font_size: 40,
             link: 'https://geoscents.net/resources/about.html',
-            label: 'ABOUT GAME'
+            label: 'INFO'
         };
         this.visualize_button = {
-            x: 670,
+            x: 675,
             y: 190,
-            width: 315,
+            width: 65,
             height: 60,
             x_font_ofs: 5,
             y_font_ofs: 42,
@@ -138,14 +138,14 @@ class Map {
             border_color2: "#808080",
             normal_color: "orange",
             highlight_color: "green",
-            font_size: 40,
+            font_size: 45,
             link: 'https://geoscents.net/plots/index.html',
-            label: 'EXPLORE DATA'
+            label: '📈'
         };
         this.discord_button = {
-            x: 1015,
+            x: 760,
             y: 190,
-            width: 75,
+            width: 70,
             height: 60,
             x_font_ofs: 5,
             y_font_ofs: 42,
@@ -158,9 +158,9 @@ class Map {
             label: 'DISCORD'
         };
         this.help_button = {
-            x: 1120,
+            x: 850,
             y: 190,
-            width: 35,
+            width: 65,
             height: 60,
             x_font_ofs: 5,
             y_font_ofs: 42,
@@ -168,9 +168,9 @@ class Map {
             border_color2: "#808080",
             normal_color: "orange",
             highlight_color: "green",
-            font_size: 40,
+            font_size: 45,
             link: '',
-            label: '?'
+            label: ' ?'
         };
         this.donate1_button = {
             x: 500,

@@ -64,18 +64,18 @@ class History {
 
         history = history + "</tt><br></div>"
         // TODO: Copy to clipboard button
-//         let js = `<script>
-// var node = document.getElementById('mypath` + histcount + `');
-// var btn = document.getElementById('sharepath` + histcount + `');
-// btn.onclick = function() {
-// node.innerHTML = "I'm an image now."
-//   domtoimage.toBlob(document.getElementById('mypath` + histcount + `'))
-//     .then(function(blob) {
-//       window.saveAs(blob, 'my-node.png');
-//     });
-// }
-// </script>`
-//         history = history + js;
+        //         let js = `<script>
+        // var node = document.getElementById('mypath` + histcount + `');
+        // var btn = document.getElementById('sharepath` + histcount + `');
+        // btn.onclick = function() {
+        // node.innerHTML = "I'm an image now."
+        //   domtoimage.toBlob(document.getElementById('mypath` + histcount + `'))
+        //     .then(function(blob) {
+        //       window.saveAs(blob, 'my-node.png');
+        //     });
+        // }
+        // </script>`
+        //         history = history + js;
 
         $('#gamehist').prepend(history);
     }
