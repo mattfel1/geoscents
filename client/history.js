@@ -1,4 +1,5 @@
 const CONSTANTS = require('../resources/constants.js')
+const Geography = require('../server/geography.js');
 
 class History {
     constructor(socket) {
@@ -37,7 +38,7 @@ class History {
             }
         });
         // var history = "<br><button id=\"sharepath" + histcount + "\">copy</button><br>" + "<div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points";
-        var history = "<br><div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points";
+        var history = "<br><div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points on " + room + ":";
         playersHistory.forEach((hist, player) => {
             if (this.socket.id == player.id) {
                 var i = 1;
@@ -49,7 +50,7 @@ class History {
                     time = time.toString().padEnd(3).replace(/\s/g, "&nbsp;")
                     let dist = datapoint['dist'];
                     dist = dist.toString().padEnd(5).replace(/\s/g, "&nbsp;")
-                    let target = datapoint['target']['city'].padEnd(6050).substring(0, 50).replace(/\s/g, "&nbsp");
+                    let target = Geography.stringifyTarget(datapoint['target'], room).string.padEnd(6050).substring(0, 50).replace(/\s/g, "&nbsp");
                     let iso2 = datapoint['target']['iso2'];
                     if (iso2 == "" || iso2 == null)
                         iso2 = "earth";
