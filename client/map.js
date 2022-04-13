@@ -154,7 +154,7 @@ class Map {
             normal_color: "orange",
             highlight_color: "green",
             font_size: 40,
-            link: 'https://discord.me/geo',
+            link: 'https://discord.gg/CZzDFKqPdB',
             label: 'DISCORD'
         };
         this.help_button = {
