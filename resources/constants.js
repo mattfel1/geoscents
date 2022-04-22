@@ -26,6 +26,8 @@ module.exports = {
         "PLAYER busted BOT out of prison!"
     ],
 
+    DEBUG_MODE: 0,
+
     // Map and Panel
     EARTH_RADIUS: 6371, // Earth radius in km
     MAP_WIDTH: 1530,

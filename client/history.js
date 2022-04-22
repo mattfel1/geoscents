@@ -26,6 +26,44 @@ class History {
         }
     }
 
+    pointsToEmoji(points) {
+        // 0   - 60  = X
+        // 60  - 120 = black
+        // 120 - 180 = brown
+        // 180 - 240 = red
+        // 240 - 300 = orange
+        // 300 - 360 = yellow
+        // 360 - 420 = green
+        // 420 - 480 = blue
+        // 480 - 540 = purple
+        // 540 - 599 = star
+        // 600       = check
+
+        if (points < 60)
+            return "❌";
+        if (points < 120)
+            return "⬛";
+        if (points < 180)
+            return "🟫";
+        if (points < 240)
+            return "🟥";
+        if (points < 300)
+            return "🟧"
+        if (points < 360)
+            return "🟨";
+        if (points < 420)
+            return "🟩"
+        if (points < 480)
+            return "🟦";
+        if (points < 540)
+            return "🟪";
+        if (points < 600)
+            return "⭐";
+        if (points = 600)
+            return "✔";
+    }
+
+
     drawPath(hist, color, room, score) {
         const width = 560;
         const height = 210;
@@ -37,6 +75,11 @@ class History {
                 name = "<font color=\"" + player.color + "\">" + player.name + "</font>'s";
             }
         });
+
+        let color_plot = "";
+        const pointsToEmoji = (p) => {
+            return this.pointsToEmoji(p)
+        };
         // var history = "<br><button id=\"sharepath" + histcount + "\">copy</button><br>" + "<div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points";
         var history = "<br><div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points on " + room + ":";
         playersHistory.forEach((hist, player) => {
@@ -45,6 +88,7 @@ class History {
                 Object.keys(hist).forEach((round) => {
                     let datapoint = hist[round];
                     let points = datapoint['round_points'];
+                    color_plot = color_plot + pointsToEmoji(points);
                     points = points.toString().padEnd(3).replace(/\s/g, "&nbsp;")
                     let time = datapoint['time'];
                     time = time.toString().padEnd(3).replace(/\s/g, "&nbsp;")
@@ -62,7 +106,7 @@ class History {
             }
         });
 
-        history = history + "</tt><br></div>"
+        history = history + "</tt><br>" + color_plot + "<br></div>"
         // TODO: Copy to clipboard button
         //         let js = `<script>
         // var node = document.getElementById('mypath` + histcount + `');

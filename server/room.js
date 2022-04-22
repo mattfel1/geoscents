@@ -46,7 +46,7 @@ class Room {
         this.allRecord;
         this.loadRecords();
         this.createJoe();
-        this.hasJoe = roomName != CONSTANTS.LOBBY;
+        this.hasJoe = roomName != CONSTANTS.LOBBY && !CONSTANTS.DEBUG_MODE;
         this.recorded = false; // Toggle for making sure we only record once per reveal_state
     }
 
@@ -1022,6 +1022,13 @@ class Room {
             }));
             this.bootInactive();
         } else {
+            let reveal_duration = CONSTANTS.REVEAL_DURATION;
+            if (CONSTANTS.DEBUG_MODE)
+                reveal_duration = 0;
+            let begin_game_duration = CONSTANTS.BEGIN_GAME_DURATION;
+            if (CONSTANTS.DEBUG_MODE)
+                begin_game_duration = 0;
+
             if (this.numPlayers() === 0 && this.roomName !== CONSTANTS.LOBBY) {
                 this.timerColor = CONSTANTS.LOBBY_COLOR;
                 this.state = CONSTANTS.IDLE_STATE;
@@ -1040,7 +1047,7 @@ class Room {
                     this.blacklist = [];
                     this.removePoppers();
                     this.playersHistory = new Map();
-                    this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, CONSTANTS.BEGIN_GAME_DURATION);
+                    this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, begin_game_duration);
                     Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
                     if (this.hasJoe) this.joe.deepReset(this.players.values().size)
                 }
@@ -1061,7 +1068,7 @@ class Room {
                     this.round = 0;
                     this.timerColor = CONSTANTS.BEGIN_COLOR;
                     Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
-                    this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, CONSTANTS.BEGIN_GAME_DURATION - 2);
+                    this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, begin_game_duration - 2);
                 }
                 if (this.timer <= 0 || this.allPlayersClicked()) {
                     this.updateScores();
@@ -1072,7 +1079,7 @@ class Room {
                         this.printPath(this.winner.getName(), this.winner.score, this.winner.color);
                         this.printWinner(this.winner.getName(), this.winner.score, this.winner.color);
                     }
-                    this.stateTransition(CONSTANTS.REVEAL_STATE, CONSTANTS.REVEAL_DURATION);
+                    this.stateTransition(CONSTANTS.REVEAL_STATE, reveal_duration);
                     this.recorded = false
                     this.timerColor = CONSTANTS.REVEAL_COLOR;
                 }
@@ -1083,7 +1090,7 @@ class Room {
                     this.round = 0;
                     this.timerColor = CONSTANTS.BEGIN_COLOR;
                     Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
-                    this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, CONSTANTS.BEGIN_GAME_DURATION - 2);
+                    this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, begin_game_duration - 2);
                 }
                 // Record in the middle of the reveal_state
                 if (this.recorded == false && this.timer <= 4) {
