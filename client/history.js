@@ -60,7 +60,7 @@ class History {
         if (points < 600)
             return "⭐";
         if (points = 600)
-            return "✔";
+            return "✅";
     }
 
 
