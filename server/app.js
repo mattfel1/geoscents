@@ -509,6 +509,7 @@ io.on('connection', (socket) => {
                 var leave_msg = "[ <font color='" + rooms[originRoomName].getPlayerColor(socket) + "'><b>" + rooms[originRoomName].getPlayerRawName(socket) + "</b> has changed the map to " + askcitysrc + "!</font> ]<br>";
                 io.sockets.emit("update messages", originRoomName, leave_msg);
                 let citysrc = askcitysrc;
+                if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) rooms[dest].whisperMessage(socket, "<i><b>" + CONSTANTS.SPECIAL_WELCOMES[CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc)] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
                 rooms[dest].map = map;
                 rooms[dest].citysrc = citysrc;
                 rooms[dest].reset();
@@ -743,9 +744,9 @@ setInterval(() => {
     }
 
     // Get new special
-    special_idx = Math.floor(Math.random() * CONSTANTS.SPECIAL_COUNTRIES.length);
-    special = CONSTANTS.SPECIAL_COUNTRIES[special_idx];
     if (reset_now) {
+        special_idx = Math.floor(Math.random() * CONSTANTS.SPECIAL_COUNTRIES.length);
+        special = CONSTANTS.SPECIAL_COUNTRIES[special_idx];
         Object.values(rooms).forEach(function(room) {
             room.flushRecords(week, month, year);
             if (room.roomName == CONSTANTS.SPECIAL) {
