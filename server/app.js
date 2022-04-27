@@ -1,5 +1,6 @@
 /** Top level file for handling connections, messages, and dispatching the game FSM */
 
+const Geography = require('./geography.js');
 const crypto = require('crypto'),
     fs = require("fs"),
     http = require("http");
@@ -188,19 +189,24 @@ app.use((err, req, res, next) => {
 
 // Game state info
 // map, roomName, citysrc
+let special_idx = Math.floor(Math.random() * CONSTANTS.SPECIAL_COUNTRIES.length);
+let special = CONSTANTS.SPECIAL_COUNTRIES[special_idx];
 var rooms = {
-    'World': new Room(CONSTANTS.WORLD, 'World', CONSTANTS.WORLD),
+    'World': new Room(CONSTANTS.WORLD, CONSTANTS.WORLD, CONSTANTS.WORLD),
     'World Capitals': new Room(CONSTANTS.WORLD, CONSTANTS.WORLD_EASY, CONSTANTS.WORLD_EASY),
-    'N. America': new Room(CONSTANTS.US, 'N. America', CONSTANTS.US),
-    'S. America': new Room(CONSTANTS.SAMERICA, 'S. America', CONSTANTS.SAMERICA),
-    'Europe': new Room(CONSTANTS.EURO, 'Europe', CONSTANTS.EURO),
-    'Africa': new Room(CONSTANTS.AFRICA, 'Africa', CONSTANTS.AFRICA),
-    'Asia': new Room(CONSTANTS.ASIA, 'Asia', CONSTANTS.ASIA),
-    'Oceania': new Room(CONSTANTS.OCEANIA, 'Oceania', CONSTANTS.OCEANIA),
-    'Trivia': new Room(CONSTANTS.MISC, 'Trivia', CONSTANTS.MISC),
-    'Ukraine': new Room(CONSTANTS.SPECIAL, 'Ukraine', CONSTANTS.SPECIAL),
-    'Lobby': new Room(CONSTANTS.LOBBY, 'Lobby', CONSTANTS.LOBBY),
+    'N. America': new Room(CONSTANTS.US, CONSTANTS.US, CONSTANTS.US),
+    'S. America': new Room(CONSTANTS.SAMERICA, CONSTANTS.SAMERICA, CONSTANTS.SAMERICA),
+    'Europe': new Room(CONSTANTS.EURO, CONSTANTS.EURO, CONSTANTS.EURO),
+    'Africa': new Room(CONSTANTS.AFRICA, CONSTANTS.AFRICA, CONSTANTS.AFRICA),
+    'Asia': new Room(CONSTANTS.ASIA, CONSTANTS.ASIA, CONSTANTS.ASIA),
+    'Oceania': new Room(CONSTANTS.OCEANIA, CONSTANTS.OCEANIA, CONSTANTS.OCEANIA),
+    'Trivia': new Room(CONSTANTS.MISC, CONSTANTS.MISC, CONSTANTS.MISC),
+    'Daily Country': new Room(special, CONSTANTS.SPECIAL, special),
+    'Lobby': new Room(CONSTANTS.LOBBY, CONSTANTS.LOBBY, CONSTANTS.LOBBY),
 };
+Object.values(rooms).forEach(function(room) {
+    room.game_special_idx = special_idx;
+});
 var playerRooms = new Map();
 
 const WELCOME_MESSAGE1 = 'Have you done today\'s <a href=https://worldle.teuteuf.fr target=\"_blank\">worldle</a>?<br><br> ' +
@@ -208,7 +214,7 @@ const WELCOME_MESSAGE1 = 'Have you done today\'s <a href=https://worldle.teuteuf
     'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
     '<br>If you have feedback, simply shout it directly into this chat box, starting with the word /feedback. ' +
     'If you are enjoying this game, please share it with a friend!  If you really love it, consider donating at the bottom of the page to help keep the server ' +
-    'running!';
+    'running! You can also click on the ads to help pay for the server!';
 const PRIVATE_MESSAGE = '<i>Welcome to a private room!  You can whisper your secret code to a friend by typing the command /whisper "username" in the chat box. ' +
     'You can use the command /hidden to see if your friend is hiding in another private game.</i><br>';
 
@@ -412,7 +418,7 @@ io.on('connection', (socket) => {
         if (playerRooms.has(socket.id)) {
             const room = playerRooms.get(socket.id);
             helpers.log("Player " + socket.handshake.address + " switched to map style " + style);
-            io.sockets.emit('render map', socket.id, style, room.roomName);
+            io.sockets.emit('render map', socket.id, style, room.map);
             room.redrawMap(socket);
         } else {
             helpers.log("Player " + socket.handshake.address + " tried to switch maps without being in a room!")
@@ -448,7 +454,7 @@ io.on('connection', (socket) => {
             var join_msg = "[ <font color='" + rooms[roomName].getPlayerColor(socket) + "'><b>" + rooms[roomName].getPlayerRawName(socket) + "</b> has joined " + roomName + "!</font> ]<br>";
             io.sockets.emit("update messages", roomName, join_msg);
             if (roomName == CONSTANTS.MISC) rooms[roomName].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items or complain about current items by typing a message starting with /feedback!</i><br>", function() {});
-            if (roomName == CONSTANTS.SPECIAL) rooms[roomName].whisperMessage(socket, "<i>Learn Ukraine so you can put the news into geographical context!</i><br>", function() {});
+            if (roomName == CONSTANTS.SPECIAL) rooms[CONSTANTS.SPECIAL].whisperMessage(socket, "<i><b>" + CONSTANTS.SPECIAL_WELCOMES[special_idx] + "</b>! Today's special country is <b>" + special + "</b>!</i><br>", function() {});
             if (roomName == CONSTANTS.WORLD_EASY) rooms[roomName].whisperMessage(socket, "<i>Welcome to the World Capitals map!  This map no longer includes province and state capitals of the largest countries (i.e. Canada, USA, China, India, and Australia).  Let me know if you think this is better or worse by leaving /feedback!</i><br>", function() {});
             io.sockets.emit('update counts', {
                 [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
@@ -479,7 +485,6 @@ io.on('connection', (socket) => {
         socket.emit('request help popup');
     });
     socket.on('moveToPrivate', (askcitysrc, code) => {
-        console.log('move to private with citysrc ' + askcitysrc + ' and code ' + code)
         // Convert citysrc to the map that it is played on
         let map = askcitysrc;
         if (map.includes('World'))
@@ -531,6 +536,7 @@ io.on('connection', (socket) => {
                 socket.emit('update messages', dest, PRIVATE_MESSAGE);
                 rooms[dest].addPlayer(socket, info);
                 playerRooms.set(socket.id, rooms[dest]);
+                if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) rooms[dest].whisperMessage(socket, "<i><b>" + CONSTANTS.SPECIAL_WELCOMES[CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc)] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
                 var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'><b>" + rooms[dest].getPlayerRawName(socket) + "</b> has joined " + dest + "!</font> ]<br>";
                 io.sockets.emit("update messages", dest, join_msg);
                 // if (dest == CONSTANTS.MISC) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
@@ -725,12 +731,30 @@ setInterval(() => {
     if (week && !month && year) s = ", weekly, and yearly"
     if (!week && month && year) s = ", monthly, and yearly"
     if (week && month && year) s = ", weekly, monthly, and yearly"
-    if (d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() <= 29) {
-        announce("<font size=10 color=\"red\"><b>WARNING: Daily" + s + " records will reset in 30 seconds!</b></font><br>")
+
+    // // Debug rapid reset
+    // let reset_imminent = d.getMinutes() % 2 === 0 && d.getSeconds() <= 29; 
+    // let reset_now = d.getMinutes() % 2 === 0 && d.getSeconds() > 29;
+
+    let reset_imminent = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() <= 29;
+    let reset_now = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() > 29;
+    if (reset_imminent) {
+        announce("<font size=9 color=\"red\"><b>WARNING: Daily" + s + " records will reset in 30 seconds! Daily country will also be changed!</b></font><br>")
     }
-    if (d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() > 29) {
+
+    // Get new special
+    special_idx = Math.floor(Math.random() * CONSTANTS.SPECIAL_COUNTRIES.length);
+    special = CONSTANTS.SPECIAL_COUNTRIES[special_idx];
+    if (reset_now) {
         Object.values(rooms).forEach(function(room) {
             room.flushRecords(week, month, year);
+            if (room.roomName == CONSTANTS.SPECIAL) {
+                room.killJoe();
+                room.map = special;
+                room.citysrc = special;
+                room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
+                room.createJoe();
+            }
         });
         announce("<font size=10 color=\"red\"><b>Daily" + s + " records have been reset!</b></font><br>")
     }

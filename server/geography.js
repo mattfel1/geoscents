@@ -10,7 +10,15 @@ const AFRICACITIES = require('../resources/africacities.js').CITIES;
 const ASIACITIES = require('../resources/asiacities.js').CITIES;
 const OCEANIACITIES = require('../resources/oceaniacities.js').CITIES;
 const SAMERICACITIES = require('../resources/samericacities.js').CITIES;
+
 const UKRAINECITIES = require('../resources/ukrainecities.js').CITIES;
+const ARGENTINACITIES = require('../resources/argentinacities.js').CITIES;
+const AUSTRALIACITIES = require('../resources/australiacities.js').CITIES;
+const CANADACITIES = require('../resources/canadacities.js').CITIES;
+const JAPANCITIES = require('../resources/japancities.js').CITIES;
+const KENYACITIES = require('../resources/kenyacities.js').CITIES;
+const ROMANIACITIES = require('../resources/romaniacities.js').CITIES;
+
 const CONSTANTS = require('../resources/constants.js');
 // var idx = 0;
 
@@ -75,9 +83,24 @@ const randomCity = (citysrc, blacklist) => {
             if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
-    } else if (citysrc === CONSTANTS.SPECIAL) {
+    } else if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) {
         while (!acceptable) {
-            proposal = UKRAINECITIES[Math.floor(Math.random() * UKRAINECITIES.length)];
+            if (citysrc === "Argentina")
+                proposal = ARGENTINACITIES[Math.floor(Math.random() * ARGENTINACITIES.length)];
+            else if (citysrc === "Australia")
+                proposal = AUSTRALIACITIES[Math.floor(Math.random() * AUSTRALIACITIES.length)];
+            else if (citysrc === "Kenya")
+                proposal = KENYACITIES[Math.floor(Math.random() * KENYACITIES.length)];
+            else if (citysrc === "Canada")
+                proposal = CANADACITIES[Math.floor(Math.random() * CANADACITIES.length)];
+            else if (citysrc === "Japan")
+                proposal = JAPANCITIES[Math.floor(Math.random() * JAPANCITIES.length)];
+            else if (citysrc === "Romania")
+                proposal = ROMANIACITIES[Math.floor(Math.random() * ROMANIACITIES.length)];
+            else if (citysrc === "Ukraine")
+                proposal = UKRAINECITIES[Math.floor(Math.random() * UKRAINECITIES.length)];
+            else
+                console.assert(false, "No city src database for " + citysrc);
             if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
@@ -102,7 +125,7 @@ const includeAdmin = (target, citysrc) => {
         target['country'] === 'Russia' ||
         target['country'] === 'Indonesia' ||
         target['country'] === 'Brazil' ||
-        citysrc === CONSTANTS.SPECIAL
+        CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1
 };
 
 const stringifyTarget = (target, citysrc) => {
@@ -154,7 +177,7 @@ const requireUniqueAdmin = (citysrc, target) => {
         return true
     } else if (citysrc === CONSTANTS.ASIA && (target['country'] === 'China' || target['country'] === 'India')) {
         return true
-    } else if (citysrc === CONSTANTS.SPECIAL) {
+    } else if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) {
         return true
     }
     // else if (citysrc === CONSTANTS.OCEANIA && target['country'] === 'Australia') {return true}
@@ -170,45 +193,37 @@ const uniqueInBlacklist = (citysrc, target, blacklist) => {
 const mercDist = (map, row1, col1, row2, col2) => {
     const row_err = Math.pow(row1 - row2, 2);
     let col_err = Math.min(Math.pow(col1 - col2, 2), Math.pow(col1 - col2 + CONSTANTS.MAP_WIDTH, 2), Math.pow(col1 - col2 - CONSTANTS.MAP_WIDTH, 2));
-    if (map === CONSTANTS.US || map === CONSTANTS.EURO || map === CONSTANTS.AFRICA || map === CONSTANTS.SAMERICA || map === CONSTANTS.ASIA || map === CONSTANTS.OCEANIA || map === CONSTANTS.SPECIAL) { // No wrap
+    if (map === CONSTANTS.US || map === CONSTANTS.EURO || map === CONSTANTS.AFRICA || map === CONSTANTS.SAMERICA || map === CONSTANTS.ASIA || map === CONSTANTS.OCEANIA || CONSTANTS.SPECIAL_COUNTRIES.indexOf(map) !== -1) { // No wrap
         col_err = Math.pow(col1 - col2, 2);
     }
     return Math.sqrt(row_err + col_err);
 };
 
-const geoDist = (map, lat1, lon1, lat2, lon2) => {
+const calcGeoDist = (lat1, lon1, lat2, lon2) => {
     const lon_diff = Math.min(Math.abs(Math.max(lon1, lon2) - (Math.min(lon1, lon2) + 360), Math.abs(lon1 - lon2))); // in degrees
     const lon_err = Math.pow(Math.sin(Math.PI / 180 * Math.abs(lon_diff) / 2), 2, 2);
-    // Not really necessary since the +2PI correction will always be larger in the tinier maps
-    // if (map == CONSTANTS.US || map == CONSTANTS.EURO || map == CONSTANTS.AFRICA || map == CONSTANTS.SAMERICA) { // No wrap
-    //     lon_err = Math.pow(col1-col2,2);
-    // }
     const a = Math.pow(Math.sin(Math.PI / 180 * Math.abs(lat1 - lat2) / 2), 2) + Math.cos(Math.PI / 180 * lat1) * Math.cos(Math.PI / 180 * lat2) * lon_err;
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     // console.log("dist for " + lat1 + ", " + lon1 + " to " + lat2 + ", " + lon2 + " = " + (CONSTANTS.EARTH_RADIUS * c));
     return CONSTANTS.EARTH_RADIUS * c
 };
 
-const fullDiag = 2 * geoDist(CONSTANTS.WORLD, (CONSTANTS.WORLD_MAX_LAT + CONSTANTS.WORLD_MIN_LAT) / 2, (CONSTANTS.WORLD_MAX_LON + CONSTANTS.WORLD_MIN_LON) / 2, CONSTANTS.WORLD_MIN_LAT, CONSTANTS.WORLD_MIN_LON);
-const miscDiag = fullDiag
-const euroDiag = geoDist(CONSTANTS.EURO, CONSTANTS.EURO_MAX_LAT, CONSTANTS.EURO_MAX_LON, CONSTANTS.EURO_MIN_LAT, CONSTANTS.EURO_MIN_LON);
-const africaDiag = geoDist(CONSTANTS.AFRICA, CONSTANTS.AFRICA_MAX_LAT, CONSTANTS.AFRICA_MAX_LON, CONSTANTS.AFRICA_MIN_LAT, CONSTANTS.AFRICA_MIN_LON);
-const asiaDiag = geoDist(CONSTANTS.ASIA, CONSTANTS.ASIA_MAX_LAT, CONSTANTS.ASIA_MAX_LON, CONSTANTS.ASIA_MIN_LAT, CONSTANTS.ASIA_MIN_LON);
-const oceaniaDiag = geoDist(CONSTANTS.OCEANIA, CONSTANTS.OCEANIA_MAX_LAT, CONSTANTS.OCEANIA_MAX_LON, CONSTANTS.OCEANIA_MIN_LAT, CONSTANTS.OCEANIA_MIN_LON);
-const usDiag = geoDist(CONSTANTS.US, CONSTANTS.US_MAX_LAT, CONSTANTS.US_MAX_LON, CONSTANTS.US_MIN_LAT, CONSTANTS.US_MIN_LON);
-const samericaDiag = geoDist(CONSTANTS.SAMERICA, CONSTANTS.SAMERICA_MAX_LAT, CONSTANTS.SAMERICA_MAX_LON, CONSTANTS.SAMERICA_MIN_LAT, CONSTANTS.SAMERICA_MIN_LON);
-const ukraineDiag = geoDist(CONSTANTS.SPECIAL, CONSTANTS.UKRAINE_MAX_LAT, CONSTANTS.UKRAINE_MAX_LON, CONSTANTS.UKRAINE_MIN_LAT, CONSTANTS.UKRAINE_MIN_LON);
-
 const score = (map, geoDist, mercDist, timeBonus) => {
     // Scale geoDist based on the length of the map's diagonal
+    let bounds = CONSTANTS.MAP_BOUNDS[map];
+    let world_bounds = CONSTANTS.MAP_BOUNDS[CONSTANTS.WORLD];
+    let diag = calcGeoDist(bounds["max_lat"], bounds["max_lon"], bounds["min_lat"], bounds["min_lon"]);
     let scalingFactor = 1;
-    if (map === CONSTANTS.EURO) scalingFactor = fullDiag / euroDiag;
-    else if (map === CONSTANTS.AFRICA) scalingFactor = fullDiag / africaDiag;
-    else if (map === CONSTANTS.ASIA) scalingFactor = fullDiag / asiaDiag;
-    else if (map === CONSTANTS.OCEANIA) scalingFactor = fullDiag / oceaniaDiag;
-    else if (map === CONSTANTS.US) scalingFactor = fullDiag / usDiag;
-    else if (map === CONSTANTS.SAMERICA) scalingFactor = fullDiag / samericaDiag;
-    else if (map === CONSTANTS.SPECIAL) scalingFactor = fullDiag / (2.5 * ukraineDiag);
+    let fullDiag = 2 * calcGeoDist((world_bounds["max_lat"] + world_bounds["min_lat"]) / 2, (world_bounds["max_lon"] + world_bounds["min_lon"]) / 2, world_bounds["min_lat"], world_bounds["min_lon"]);
+    if (bounds["min_lon"] == -180 && bounds["max_lon"] == 180) {
+        // No scaling for full map
+    } else {
+        let fudge_factor = 1
+        // Tiny maps need slightly different math
+        if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(map) !== -1)
+            fudge_factor = 2.5;
+        scalingFactor = fullDiag / (fudge_factor * diag);
+    }
 
     // // Pixel-distance based score (old)
     // const timeLogistic = CONSTANTS.LOGISTIC_C3/(2+Math.exp(CONSTANTS.LOGISTIC_C1*(-timeBonus+CONSTANTS.LOGISTIC_C2)))+CONSTANTS.LOGISTIC_C4;
@@ -230,60 +245,12 @@ const score = (map, geoDist, mercDist, timeBonus) => {
 };
 
 const mercToGeo = (map, row, col) => {
-    let zero_lat = CONSTANTS.WORLD_MIN_LAT;
-    let max_lat = CONSTANTS.WORLD_MAX_LAT;
-    let min_lon = CONSTANTS.WORLD_MIN_LON;
-    let max_lon = CONSTANTS.WORLD_MAX_LON;
-    let lat_ts = CONSTANTS.WORLD_LAT_TS;
-    if (map === CONSTANTS.US) {
-        zero_lat = CONSTANTS.US_MIN_LAT;
-        max_lat = CONSTANTS.US_MAX_LAT;
-        min_lon = CONSTANTS.US_MIN_LON;
-        max_lon = CONSTANTS.US_MAX_LON;
-        lat_ts = CONSTANTS.US_LAT_TS;
-    } else if (map === CONSTANTS.EURO) {
-        zero_lat = CONSTANTS.EURO_MIN_LAT;
-        max_lat = CONSTANTS.EURO_MAX_LAT;
-        min_lon = CONSTANTS.EURO_MIN_LON;
-        max_lon = CONSTANTS.EURO_MAX_LON;
-        lat_ts = CONSTANTS.EURO_LAT_TS;
-    } else if (map === CONSTANTS.MISC) {
-        zero_lat = CONSTANTS.MISC_MIN_LAT;
-        max_lat = CONSTANTS.MISC_MAX_LAT;
-        min_lon = CONSTANTS.MISC_MIN_LON;
-        max_lon = CONSTANTS.MISC_MAX_LON;
-        lat_ts = CONSTANTS.MISC_LAT_TS;
-    } else if (map === CONSTANTS.AFRICA) {
-        zero_lat = CONSTANTS.AFRICA_MIN_LAT;
-        max_lat = CONSTANTS.AFRICA_MAX_LAT;
-        min_lon = CONSTANTS.AFRICA_MIN_LON;
-        max_lon = CONSTANTS.AFRICA_MAX_LON;
-        lat_ts = CONSTANTS.AFRICA_LAT_TS;
-    } else if (map === CONSTANTS.ASIA) {
-        zero_lat = CONSTANTS.ASIA_MIN_LAT;
-        max_lat = CONSTANTS.ASIA_MAX_LAT;
-        min_lon = CONSTANTS.ASIA_MIN_LON;
-        max_lon = CONSTANTS.ASIA_MAX_LON;
-        lat_ts = CONSTANTS.ASIA_LAT_TS;
-    } else if (map === CONSTANTS.OCEANIA) {
-        zero_lat = CONSTANTS.OCEANIA_MIN_LAT;
-        max_lat = CONSTANTS.OCEANIA_MAX_LAT;
-        min_lon = CONSTANTS.OCEANIA_MIN_LON;
-        max_lon = CONSTANTS.OCEANIA_MAX_LON;
-        lat_ts = CONSTANTS.OCEANIA_LAT_TS;
-    } else if (map === CONSTANTS.SAMERICA) {
-        zero_lat = CONSTANTS.SAMERICA_MIN_LAT;
-        max_lat = CONSTANTS.SAMERICA_MAX_LAT;
-        min_lon = CONSTANTS.SAMERICA_MIN_LON;
-        max_lon = CONSTANTS.SAMERICA_MAX_LON;
-        lat_ts = CONSTANTS.SAMERICA_LAT_TS;
-    } else if (map === CONSTANTS.SPECIAL) {
-        zero_lat = CONSTANTS.UKRAINE_MIN_LAT;
-        max_lat = CONSTANTS.UKRAINE_MAX_LAT;
-        min_lon = CONSTANTS.UKRAINE_MIN_LON;
-        max_lon = CONSTANTS.UKRAINE_MAX_LON;
-        lat_ts = CONSTANTS.UKRAINE_LAT_TS;
-    }
+    let bounds = CONSTANTS.MAP_BOUNDS[map];
+    let zero_lat = bounds["min_lat"];
+    let max_lat = bounds["max_lat"];
+    let min_lon = bounds["min_lon"];
+    let max_lon = bounds["max_lon"];
+    let lat_ts = bounds["lat_ts"];
     const eqMin = Math.atanh(Math.sin(zero_lat * Math.PI / 180));
     const eqRange = Math.atanh(Math.sin(max_lat * Math.PI / 180)) - eqMin;
     const lon = ((col) * (max_lon - min_lon) / CONSTANTS.MAP_WIDTH) + min_lon;
@@ -295,60 +262,12 @@ const mercToGeo = (map, row, col) => {
 };
 
 const geoToMerc = (map, lat, lon) => {
-    let zero_lat = CONSTANTS.WORLD_MIN_LAT;
-    let max_lat = CONSTANTS.WORLD_MAX_LAT;
-    let min_lon = CONSTANTS.WORLD_MIN_LON;
-    let max_lon = CONSTANTS.WORLD_MAX_LON;
-    let lat_ts = CONSTANTS.WORLD_LAT_TS;
-    if (map === CONSTANTS.US) {
-        zero_lat = CONSTANTS.US_MIN_LAT;
-        max_lat = CONSTANTS.US_MAX_LAT;
-        min_lon = CONSTANTS.US_MIN_LON;
-        max_lon = CONSTANTS.US_MAX_LON;
-        lat_ts = CONSTANTS.US_LAT_TS;
-    } else if (map === CONSTANTS.EURO) {
-        zero_lat = CONSTANTS.EURO_MIN_LAT;
-        max_lat = CONSTANTS.EURO_MAX_LAT;
-        min_lon = CONSTANTS.EURO_MIN_LON;
-        max_lon = CONSTANTS.EURO_MAX_LON;
-        lat_ts = CONSTANTS.EURO_LAT_TS;
-    } else if (map === CONSTANTS.MISC) {
-        zero_lat = CONSTANTS.MISC_MIN_LAT;
-        max_lat = CONSTANTS.MISC_MAX_LAT;
-        min_lon = CONSTANTS.MISC_MIN_LON;
-        max_lon = CONSTANTS.MISC_MAX_LON;
-        lat_ts = CONSTANTS.MISC_LAT_TS;
-    } else if (map === CONSTANTS.AFRICA) {
-        zero_lat = CONSTANTS.AFRICA_MIN_LAT;
-        max_lat = CONSTANTS.AFRICA_MAX_LAT;
-        min_lon = CONSTANTS.AFRICA_MIN_LON;
-        max_lon = CONSTANTS.AFRICA_MAX_LON;
-        lat_ts = CONSTANTS.AFRICA_LAT_TS;
-    } else if (map === CONSTANTS.ASIA) {
-        zero_lat = CONSTANTS.ASIA_MIN_LAT;
-        max_lat = CONSTANTS.ASIA_MAX_LAT;
-        min_lon = CONSTANTS.ASIA_MIN_LON;
-        max_lon = CONSTANTS.ASIA_MAX_LON;
-        lat_ts = CONSTANTS.ASIA_LAT_TS;
-    } else if (map === CONSTANTS.OCEANIA) {
-        zero_lat = CONSTANTS.OCEANIA_MIN_LAT;
-        max_lat = CONSTANTS.OCEANIA_MAX_LAT;
-        min_lon = CONSTANTS.OCEANIA_MIN_LON;
-        max_lon = CONSTANTS.OCEANIA_MAX_LON;
-        lat_ts = CONSTANTS.OCEANIA_LAT_TS;
-    } else if (map === CONSTANTS.SAMERICA) {
-        zero_lat = CONSTANTS.SAMERICA_MIN_LAT;
-        max_lat = CONSTANTS.SAMERICA_MAX_LAT;
-        min_lon = CONSTANTS.SAMERICA_MIN_LON;
-        max_lon = CONSTANTS.SAMERICA_MAX_LON;
-        lat_ts = CONSTANTS.SAMERICA_LAT_TS;
-    } else if (map === CONSTANTS.SPECIAL) {
-        zero_lat = CONSTANTS.UKRAINE_MIN_LAT;
-        max_lat = CONSTANTS.UKRAINE_MAX_LAT;
-        min_lon = CONSTANTS.UKRAINE_MIN_LON;
-        max_lon = CONSTANTS.UKRAINE_MAX_LON;
-        lat_ts = CONSTANTS.UKRAINE_LAT_TS;
-    }
+    let bounds = CONSTANTS.MAP_BOUNDS[map];
+    let zero_lat = bounds["min_lat"];
+    let max_lat = bounds["max_lat"];
+    let min_lon = bounds["min_lon"];
+    let max_lon = bounds["max_lon"];
+    let lat_ts = bounds["lat_ts"];
     // get col value
     let col = (parseFloat(lon) - min_lon) * (CONSTANTS.MAP_WIDTH / (max_lon - min_lon));
     if (parseFloat(lon) < min_lon) {
@@ -372,7 +291,7 @@ const geoToMerc = (map, lat, lon) => {
 module.exports = {
     randomCity,
     mercDist,
-    geoDist,
+    calcGeoDist,
     mercToGeo,
     geoToMerc,
     score,

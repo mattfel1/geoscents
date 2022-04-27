@@ -11,7 +11,7 @@ const Popup = require('./popup.js');
 const PrivatePopup = require('./privatepopup.js');
 const HelpPopup = require('./helppopup.js');
 const Chat = require('./chat.js');
-const Map = require('./map.js');
+const MapPanel = require('./map.js');
 const History = require('./history.js');
 const CONSTANTS = require('../resources/constants.js');
 
@@ -195,7 +195,7 @@ $(document).ready(function() {
     });
 
     /**** Map *****/
-    const map = new Map(socket);
+    const map = new MapPanel(socket);
     socket.on('draw point', (coords, color, radius) => {
         map.drawPoint(coords, color, radius)
     });

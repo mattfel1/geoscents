@@ -13,9 +13,9 @@ const app = require('./app.js')
 
 class Room {
     constructor(map, roomName, citysrc) {
-        this.map = map; // Underlying map
-        this.roomName = roomName; // User-friendly room name
-        this.citysrc = citysrc; // source for random city selection
+        this.map = map; // Underlying map ("Ukraine")
+        this.roomName = roomName; // User-friendly room name ("Weekly Country")
+        this.citysrc = citysrc; // source for random city selection ("Ukraine")
         this.isPrivate = roomName.startsWith('private');
         this.joeTime = 10;
         this.joeLat = 0;
@@ -48,6 +48,7 @@ class Room {
         this.createJoe();
         this.hasJoe = roomName != CONSTANTS.LOBBY && !CONSTANTS.DEBUG_MODE;
         this.recorded = false; // Toggle for making sure we only record once per reveal_state
+        this.game_special_idx;
     }
 
 
@@ -60,8 +61,9 @@ class Room {
     }
     createJoe() {
         let name = CONSTANTS.AVERAGE_NAMES[Math.floor(Math.random() * CONSTANTS.AVERAGE_NAMES.length)]
-        if (this.citysrc == CONSTANTS.SPECIAL)
-            name = "Volodymyr"
+        console.log("create joe in " + this.map + " idx " + CONSTANTS.SPECIAL_COUNTRIES.indexOf(this.map))
+        if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(this.map) !== -1)
+            name = CONSTANTS.SPECIAL_JOES[CONSTANTS.SPECIAL_COUNTRIES.indexOf(this.map)]
         const avg_name = "Average " + name;
         this.joe = new Player(this.roomName + "_joe", 0, this.map, this.ordinalCounter, this.ordinalCounter, avg_name, {
             'moved': true,
@@ -628,7 +630,7 @@ class Room {
             playersToScore.push(this.joe);
         Array.from(playersToScore).forEach(function(player) {
             const merc = Geography.geoToMerc(map, parseFloat(target['lat']), parseFloat(target['lng']));
-            player.geoError = Geography.geoDist(map, player.lat, player.lon, parseFloat(target['lat']), parseFloat(target['lng']));
+            player.geoError = Geography.calcGeoDist(player.lat, player.lon, parseFloat(target['lat']), parseFloat(target['lng']));
             player.mercError = Geography.mercDist(map, player.row, player.col, merc['row'], merc['col']);
             if (!player.clicked || isNaN(player.mercError)) {
                 player.mercError = 9999;
@@ -660,7 +662,7 @@ class Room {
             else return x.ip;
         };
         let map = this.map;
-        // Stick ukraine, or any special maps, into world data
+        // Stick ukraine, or any special maps, into world data for now because laziness
         if (map == CONSTANTS.SPECIAL)
             map = CONSTANTS.WORLD
         const dists = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.geoError);

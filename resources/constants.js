@@ -32,56 +32,158 @@ module.exports = {
     EARTH_RADIUS: 6371, // Earth radius in km
     MAP_WIDTH: 1530,
     MAP_HEIGHT: 900,
-    WORLD_MIN_LAT: 77.0, // Latitude of top edge of map
-    WORLD_MAX_LAT: -65.5, // Latitude of bottom edge of map
-    WORLD_MIN_LON: -180, // Latitude of top edge of map
-    WORLD_MAX_LON: 180, // Latitude of bottom edge of map
-    WORLD_LAT_TS: 0,
-    WORLD_EASY_MIN_LAT: 77.0, // Latitude of top edge of map
-    WORLD_EASY_MAX_LAT: -65.5, // Latitude of bottom edge of map
-    WORLD_EASY_MIN_LON: -180, // Latitude of top edge of map
-    WORLD_EASY_MAX_LON: 180, // Latitude of bottom edge of map
-    WORLD_EASY_LAT_TS: 0,
-    MISC_MIN_LAT: 81.0, // Latitude of top edge of map
-    MISC_MAX_LAT: -56.0, // Latitude of bottom edge of map
-    MISC_MIN_LON: -180, // Latitude of top edge of map
-    MISC_MAX_LON: 180, // Latitude of bottom edge of map
-    MISC_LAT_TS: 0,
-    UKRAINE_MIN_LAT: 54,
-    UKRAINE_MAX_LAT: 43.2,
-    UKRAINE_MIN_LON: 17.5,
-    UKRAINE_MAX_LON: 45.3,
-    UKRAINE_LAT_TS: 0,
-    US_MIN_LAT: 56.0, // Latitude of top edge of map
-    US_MAX_LAT: 10.0, // Latitude of bottom edge of map
-    US_MIN_LON: -141.0, // Latitude of top edge of map
-    US_MAX_LON: -43.0, // Latitude of bottom edge of map
-    US_LAT_TS: 0,
-    EURO_MIN_LAT: 66.3, // Latitude of top edge of map
-    EURO_MAX_LAT: 35.0, // Latitude of bottom edge of map
-    EURO_MIN_LON: -36, // Latitude of top edge of map
-    EURO_MAX_LON: 52, // Latitude of bottom edge of map
-    EURO_LAT_TS: 0,
-    AFRICA_MIN_LAT: 41.0, // Latitude of top edge of map
-    AFRICA_MAX_LAT: -36.0, // Latitude of bottom edge of map
-    AFRICA_MIN_LON: -60, // Latitude of top edge of map
-    AFRICA_MAX_LON: 82, // Latitude of bottom edge of map  
-    AFRICA_LAT_TS: 0,
-    ASIA_MIN_LAT: 61.0, // Latitude of top edge of map
-    ASIA_MAX_LAT: -0.5, // Latitude of bottom edge of map
-    ASIA_MIN_LON: 25, // Latitude of top edge of map
-    ASIA_MAX_LON: 158, // Latitude of bottom edge of map
-    ASIA_LAT_TS: 0,
-    SAMERICA_MIN_LAT: 24.0, // Latitude of top edge of map
-    SAMERICA_MAX_LAT: -56.0, // Latitude of bottom edge of map
-    SAMERICA_MIN_LON: -140, // Latitude of top edge of map
-    SAMERICA_MAX_LON: 17, // Latitude of bottom edge of map
-    SAMERICA_LAT_TS: 0,
-    OCEANIA_MIN_LAT: 28, // Latitude of top edge of map
-    OCEANIA_MAX_LAT: -54.5, // Latitude of bottom edge of map
-    OCEANIA_MIN_LON: 92, // Latitude of top edge of map
-    OCEANIA_MAX_LON: 252, // Latitude of bottom edge of map
-    OCEANIA_LAT_TS: 0,
+
+    WORLD: 'World',
+    WORLD_EASY: 'World Capitals',
+    PRIVATE: 'Private',
+    LOBBY: 'Lobby',
+    US: 'N. America',
+    EURO: 'Europe',
+    ASIA: 'Asia',
+    OCEANIA: 'Oceania',
+    MISC: 'Trivia',
+    SPECIAL: 'Daily Country',
+    AFRICA: 'Africa',
+    SAMERICA: "S. America",
+    SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania"],
+    SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Morrison", "Iohannis"],
+    SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)", "Welcome/Bienvenue", "Bienvenidos", "Karibu/Welcome", "Welcome", "Bine ati venit"],
+
+    // IDs generally used for map pngs and css div classes
+    MAP_TO_ID: {
+        "World": "world",
+        "Trivia": "misc",
+        "World Capitals": "world_easy",
+        "N. America": "us",
+        "Europe": "euro",
+        "Oceania": "oceania",
+        "Asia": "asia",
+        "Africa": "africa",
+        "S. America": "samerica",
+        "Ukraine": "ukraine",
+        "Japan": "japan",
+        "Canada": "canada",
+        "Argentina": "argentina",
+        "Kenya": "kenya",
+        "Romania": "romania",
+        "Australia": "australia",
+    },
+
+    MAP_BOUNDS: {
+        "World": {
+            "min_lon": -180,
+            "max_lon": 180,
+            "max_lat": -65.5, // Bottom edge of map (max row pixel coordinate)
+            "min_lat": 77.0, // Top edge of map (min row pixel coordinate)
+            "lat_ts": 0
+        },
+        "World Capitals": {
+            "min_lon": -180,
+            "max_lon": 180,
+            "max_lat": -65.5,
+            "min_lat": 77.0,
+            "lat_ts": 0
+        },
+        "Trivia": {
+            "min_lon": -180,
+            "max_lon": 180,
+            "max_lat": -56.0,
+            "min_lat": 81.0,
+            "lat_ts": 0
+        },
+        "N. America": {
+            "min_lon": -141,
+            "max_lon": -43,
+            "max_lat": 10.0,
+            "min_lat": 56.0,
+            "lat_ts": 0
+        },
+        "S. America": {
+            "min_lon": -140,
+            "max_lon": 17,
+            "max_lat": -56.0,
+            "min_lat": 24.0,
+            "lat_ts": 0
+        },
+        "Europe": {
+            "min_lon": -36,
+            "max_lon": -52,
+            "max_lat": 35.0,
+            "min_lat": 66.3,
+            "lat_ts": 0
+        },
+        "Africa": {
+            "min_lon": -60,
+            "max_lon": 82,
+            "max_lat": -36.0,
+            "min_lat": 41.0,
+            "lat_ts": 0
+        },
+        "Asia": {
+            "min_lon": 25,
+            "max_lon": 158,
+            "max_lat": -0.5,
+            "min_lat": 24,
+            "lat_ts": 0
+        },
+        "Oceania": {
+            "min_lon": 92,
+            "max_lon": 252,
+            "max_lat": -54.5,
+            "min_lat": 28,
+            "lat_ts": 0
+        },
+        "Argentina": {
+            "min_lon": -102,
+            "max_lon": -20,
+            "max_lat": -56.5,
+            "min_lat": -20,
+            "lat_ts": 0
+        },
+        "Australia": {
+            "min_lon": 97,
+            "max_lon": 170,
+            "max_lat": -45.5,
+            "min_lat": -8,
+            "lat_ts": 0
+        },
+        "Canada": {
+            "min_lon": -152.1,
+            "max_lon": -40,
+            "max_lat": 38,
+            "min_lat": 72.5,
+            "lat_ts": 0
+        },
+        "Japan": {
+            "min_lon": 110,
+            "max_lon": 164.5,
+            "max_lat": 23.5,
+            "min_lat": 49,
+            "lat_ts": 0
+        },
+        "Kenya": {
+            "min_lon": 30,
+            "max_lon": 49,
+            "max_lat": -5.33,
+            "min_lat": 5.9,
+            "lat_ts": 0
+        },
+        "Romania": {
+            "min_lon": 19,
+            "max_lon": 33.7,
+            "max_lat": 43,
+            "min_lat": 49,
+            "lat_ts": 0
+        },
+        "Ukraine": {
+            "min_lon": 17.4,
+            "max_lon": 45.3,
+            "max_lat": 43.18,
+            "min_lat": 54,
+            "lat_ts": 0
+        },
+    },
+
     VERT_WRITE_CELLS: 30,
     HORZ_WRITE_CELLS: 15,
 
@@ -145,18 +247,6 @@ module.exports = {
     RECORD_INIT_RANGE: 700,
     RECORD_INIT_BASE: 480,
     RECORD_DELTA_RANGE: 200,
-    WORLD: 'World',
-    WORLD_EASY: 'World Capitals',
-    PRIVATE: 'Private',
-    LOBBY: 'Lobby',
-    US: 'N. America',
-    EURO: 'Europe',
-    ASIA: 'Asia',
-    OCEANIA: 'Oceania',
-    MISC: 'Trivia',
-    SPECIAL: 'Ukraine',
-    AFRICA: 'Africa',
-    SAMERICA: "S. America",
     MAX_INACTIVE: 10, // Rounds of no click before you get booted
     MAX_S_INACTIVE: 2400, // seconds * fps spent in lobby before you get booted
     INIT_RECORD: {

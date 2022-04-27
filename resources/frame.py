@@ -15,15 +15,19 @@ def scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, include_admi
             thisPop = 0 if (entry['population'] == '') else int(entry['population'])
             thisMinorCap = (entry['iso2'] == 'US' or entry['iso2'] == 'CN' or entry['iso2'] == 'CA' or entry['iso2'] == 'AU' or entry['iso2'] == 'IN') and  entry['capital'] == 'admin'
             thisCap = (include_admin and thisMinorCap) or entry['capital'] == 'primary'
-            mustRemove = entry['country'] in blacklist
+            mustRemove = entry['country'] in blacklist or (blacklist == ['*'] and entry['country'] not in whitelist)
             mustKeep = entry['country'] in whitelist or entry['admin_name'] in whitelist or entry['city_ascii'] in whitelist
+            # Still respect population if this is a single-country scrape
+            if (blacklist == ['*']):
+                mustKeep = mustKeep and (thisPop >= pop or thisCap)
+
             inLat = entry['lat'] < latrng[1] and entry['lat'] > latrng[0]
             inLon = (entry['lng'] < lonrng[1] and entry['lng'] > lonrng[0]) or ((entry['lng'] + 360) < lonrng[1] and (entry['lng'] + 360) > lonrng[0])
             if (mustKeep or (not mustRemove and inLat and inLon and (thisPop >= pop or thisCap))):
                 filtered.append(entry)
                 if (entry['country'] not in countries):
                     countries.append(entry['country'])
-        print('%d entries' % len(filtered))
+        print('\n%d entries' % len(filtered))
         print('%d countries' % len(countries))
         print(countries)
 
@@ -106,3 +110,50 @@ blacklist = ['Moldova', 'Belarus', 'Russia', 'Poland', 'Romania', 'Hungary', 'Se
 whitelist = []
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
+outfile = 'argentinacities.js'
+latrng = [-56.5, -20]
+pop = 30000
+lonrng = [-102, -20]
+blacklist = ['*']
+whitelist = ['Argentina']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'australiacities.js'
+latrng = [-45.5, -8]
+pop = 15000
+lonrng = [97, 170]
+blacklist = ['*']
+whitelist = ['Australia']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'canadacities.js'
+latrng = [38, 77.5]
+pop = 15000
+lonrng = [-160, -15]
+blacklist = ['*']
+whitelist = ['Canada']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'japancities.js'
+latrng = [23.5, 49]
+pop = 0
+lonrng = [110, 164.5]
+blacklist = ['*']
+whitelist = ['Japan']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'kenyacities.js'
+latrng = [5.9, -5.3]
+pop = 0
+lonrng = [30, 49]
+blacklist = ['*']
+whitelist = ['Kenya']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'romaniacities.js'
+latrng = [49, 43]
+pop = 0
+lonrng = [19, 33.7]
+blacklist = ['*']
+whitelist = ['Romania']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)

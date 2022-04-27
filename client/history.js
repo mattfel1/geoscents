@@ -76,7 +76,6 @@ class History {
             }
         });
 
-        let color_plot = "";
         const pointsToEmoji = (p) => {
             return this.pointsToEmoji(p)
         };
@@ -88,7 +87,6 @@ class History {
                 Object.keys(hist).forEach((round) => {
                     let datapoint = hist[round];
                     let points = datapoint['round_points'];
-                    color_plot = color_plot + pointsToEmoji(points);
                     points = points.toString().padEnd(3).replace(/\s/g, "&nbsp;")
                     let time = datapoint['time'];
                     time = time.toString().padEnd(3).replace(/\s/g, "&nbsp;")
@@ -100,13 +98,13 @@ class History {
                         iso2 = "earth";
                     iso2 = iso2.toLowerCase();
                     let image = "<img alt=\"" + iso2 + "\" height=16 src=\"resources/flags/" + iso2 + ".png\" />";
-                    history = history + "<br>Round " + i.toString().padEnd(2).replace(/\s/g, "&nbsp;") + ": " + points + "pts [" + dist + "km, " + time + "s]  " + image + " " + target;
+                    history = history + "<br>" + pointsToEmoji(points) + " Round " + i.toString().padEnd(2).replace(/\s/g, "&nbsp;") + ": " + points + "pts [" + dist + "km, " + time + "s]  " + image + " " + target;
                     i = i + 1;
                 });
             }
         });
 
-        history = history + "</tt><br>" + color_plot + "<br></div>"
+        history = history + "</tt><br></div>"
         // TODO: Copy to clipboard button
         //         let js = `<script>
         // var node = document.getElementById('mypath` + histcount + `');
@@ -125,14 +123,14 @@ class History {
     }
 
     drawChart(hist, winner, color, room, max) {
-        const width = 560;
-        const height = 190;
+        const width = 540;
+        const height = 115;
         const playersHistory = new Map(JSON.parse(hist));
         // based on https://codepen.io/dmmfll/pen/vGbZrK
         var graph = `<br><div class="graph-container">
 <font color="${color}">${winner}</font> wins ${room} with ${max} points!
   <div class="chart-box">
-    <svg viewBox="0 0 ${width} ${height}" class="chart">`
+    <svg height="${height}" width="${width}">`
 
         const graph_footer = `  </svg>
     <div class="x-labels" >

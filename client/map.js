@@ -12,94 +12,14 @@ globeImage['classic'].src = "/resources/spritesheet_classic.png";
 globeImage['terrain'].src = "/resources/spritesheet_terrain.png";
 globeImage['satellite'].src = "/resources/spritesheet_satellite.png";
 
-var worldImg = {
-    'classic': new Image(),
-    'terrain': new Image(),
-    'satellite': new Image()
-};
-worldImg['classic'].src = "/resources/world_classic.png";
-worldImg['terrain'].src = "/resources/world_terrain.png";
-worldImg['satellite'].src = "/resources/world_satellite.png";
-
-var miscImg = {
-    'classic': new Image(),
-    'terrain': new Image(),
-    'satellite': new Image()
-};
-miscImg['classic'].src = "/resources/misc_classic.png";
-miscImg['terrain'].src = "/resources/misc_terrain.png";
-miscImg['satellite'].src = "/resources/misc_satellite.png";
-
-var usImg = {
-    'classic': new Image(),
-    'terrain': new Image(),
-    'satellite': new Image()
-};
-usImg['classic'].src = "/resources/us_classic.png";
-usImg['terrain'].src = "/resources/us_terrain.png";
-usImg['satellite'].src = "/resources/us_satellite.png";
-
-var euroImg = {
-    'classic': new Image(),
-    'terrain': new Image(),
-    'satellite': new Image()
-};
-euroImg['classic'].src = "/resources/euro_classic.png";
-euroImg['terrain'].src = "/resources/euro_terrain.png";
-euroImg['satellite'].src = "/resources/euro_satellite.png";
-
-var oceaniaImg = {
-    'classic': new Image(),
-    'terrain': new Image(),
-    'satellite': new Image()
-};
-oceaniaImg['classic'].src = "/resources/oceania_classic.png";
-oceaniaImg['terrain'].src = "/resources/oceania_terrain.png";
-oceaniaImg['satellite'].src = "/resources/oceania_satellite.png";
-
-var asiaImg = {
-    'classic': new Image(),
-    'terrain': new Image(),
-    'satellite': new Image()
-};
-asiaImg['classic'].src = "/resources/asia_classic.png";
-asiaImg['terrain'].src = "/resources/asia_terrain.png";
-asiaImg['satellite'].src = "/resources/asia_satellite.png";
-
-var africaImg = {
-    'classic': new Image(),
-    'terrain': new Image(),
-    'satellite': new Image()
-};
-africaImg['classic'].src = "/resources/africa_classic.png";
-africaImg['terrain'].src = "/resources/africa_terrain.png";
-africaImg['satellite'].src = "/resources/africa_satellite.png";
-
-var samericaImg = {
-    'classic': new Image(),
-    'terrain': new Image(),
-    'satellite': new Image()
-};
-samericaImg['classic'].src = "/resources/samerica_classic.png";
-samericaImg['terrain'].src = "/resources/samerica_terrain.png";
-samericaImg['satellite'].src = "/resources/samerica_satellite.png";
-
-var specialImg = {
-    'classic': new Image(),
-    'terrain': new Image(),
-    'satellite': new Image()
-};
-specialImg['classic'].src = "/resources/ukraine_classic.png";
-specialImg['terrain'].src = "/resources/ukraine_terrain.png";
-specialImg['satellite'].src = "/resources/ukraine_satellite.png";
-
 var frame_cnt = 0;
 var frames = 120;
 var rate = 2;
 
-class Map {
+class MapPanel {
     constructor(socket) {
         this.socket = socket;
+        this.special_idx;
         this.occupiedCells = []; // For keeping track of which "cells" we can write distance popups in
         this.myRoomName = CONSTANTS.LOBBY;
         this.myMap = CONSTANTS.LOBBY;
@@ -172,131 +92,23 @@ class Map {
             link: '',
             label: ' ?'
         };
-        this.donate1_button = {
-            x: 500,
-            y: 200,
-            width: 80,
-            height: 40,
-            x_font_ofs: 5,
-            y_font_ofs: 30,
-            border_color1: "#000000",
-            border_color2: "#808080",
-            normal_color: "grey",
-            highlight_color: "purple",
-            font_size: 25,
-            link: 'https://action.aclu.org/give/now',
-            label: 'ACLU'
-        };
-        this.donate2_button = {
-            x: 600,
-            y: 200,
-            width: 340,
-            height: 40,
-            x_font_ofs: 5,
-            y_font_ofs: 30,
-            border_color1: "#000000",
-            border_color2: "#808080",
-            normal_color: "grey",
-            highlight_color: "purple",
-            font_size: 25,
-            link: 'https://org2.salsalabs.com/o/6857/p/salsa/donation/common/public/?donate_page_KEY=15780',
-            label: 'NAACP Legal Defense Fund'
-        };
-        this.donate3_button = {
-            x: 960,
-            y: 200,
-            width: 120,
-            height: 40,
-            x_font_ofs: 5,
-            y_font_ofs: 30,
-            border_color1: "#000000",
-            border_color2: "#808080",
-            normal_color: "grey",
-            highlight_color: "purple",
-            font_size: 25,
-            link: 'https://secure.actblue.com/donate/fair-fight-1',
-            label: 'Fair Fight'
-        };
-        this.donate4_button = {
-            x: 480,
-            y: 260,
-            width: 230,
-            height: 40,
-            x_font_ofs: 5,
-            y_font_ofs: 30,
-            border_color1: "#000000",
-            border_color2: "#808080",
-            normal_color: "grey",
-            highlight_color: "purple",
-            font_size: 25,
-            link: 'https://secure3.convio.net/thp/site/Donation2?df_id=2600&mfc_pref=T&2600.donation=form1',
-            label: 'The Hunger Project'
-        };
-        this.donate5_button = {
-            x: 730,
-            y: 260,
-            width: 220,
-            height: 40,
-            x_font_ofs: 5,
-            y_font_ofs: 30,
-            border_color1: "#000000",
-            border_color2: "#808080",
-            normal_color: "grey",
-            highlight_color: "purple",
-            font_size: 25,
-            link: 'https://secure.actblue.com/donate/ms_blm_homepage_2019',
-            label: 'Black Lives Matter'
-        };
-        this.donate6_button = {
-            x: 970,
-            y: 260,
-            width: 190,
-            height: 40,
-            x_font_ofs: 5,
-            y_font_ofs: 30,
-            border_color1: "#000000",
-            border_color2: "#808080",
-            normal_color: "grey",
-            highlight_color: "purple",
-            font_size: 25,
-            link: 'https://secure.givelively.org/donate/the-bail-project',
-            label: 'The Bail Project'
-        };
-        this.donate7_button = {
-            x: 600,
-            y: 320,
-            width: 240,
-            height: 40,
-            x_font_ofs: 5,
-            y_font_ofs: 30,
-            border_color1: "#000000",
-            border_color2: "#808080",
-            normal_color: "grey",
-            highlight_color: "purple",
-            font_size: 25,
-            link: 'https://www.weareplannedparenthood.org/onlineactions/2U7UN1iNhESWUfDs4gDPNg2?sourceid=1000063',
-            label: 'Planned Parenthood'
-        };
-        this.donate8_button = {
-            x: 860,
-            y: 320,
-            width: 280,
-            height: 40,
-            x_font_ofs: 5,
-            y_font_ofs: 30,
-            border_color1: "#000000",
-            border_color2: "#808080",
-            normal_color: "grey",
-            highlight_color: "purple",
-            font_size: 25,
-            link: 'https://donate.doctorswithoutborders.org/onetime.cfm',
-            label: 'Doctors Without Borders'
-        };
         this.clickable_buttons = [this.about_button, this.visualize_button, this.discord_button, this.help_button]
-        // this.clickable_buttons = [this.about_button, this.visualize_button,
-        //     this.donate1_button, this.donate2_button, this.donate3_button,
-        //     this.donate4_button, this.donate5_button, this.donate6_button,
-        //     this.donate7_button, this.donate8_button]
+        let map_images = new Map();
+        let ctx = this.ctx;
+        Object.values(CONSTANTS.MAP_TO_ID).forEach(function(value) {
+            let x = new Image();
+            x.src = "/resources/" + value + "_classic.png";
+            map_images.set(value + '_classic', x);
+
+            let y = new Image();
+            y.src = "/resources/" + value + "_terrain.png";
+            map_images.set(value + '_terrain', y);
+
+            let z = new Image();
+            z.src = "/resources/" + value + "_satellite.png";
+            map_images.set(value + '_satellite', z);
+        })
+        this.map_images = map_images
     }
 
     canvas_arrow(fromx, fromy, tox, toy) {
@@ -367,12 +179,12 @@ class Map {
         ctx.fill()
 
     }
-    drawMap(room) {
+    drawMap(map) {
         var ctx = this.ctx;
         this.occupiedCells = [];
         const mapStyle = this.mapStyle;
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        if (room == CONSTANTS.LOBBY) {
+        if (map == CONSTANTS.LOBBY) {
             // this.ctx.fillText('Welcome to GeoScents!', 400, 590);
             // this.ctx.fillText('Locate cities as quickly and accurately as possible!',20,650);
             this.ctx.font = "120px Arial bold";
@@ -399,81 +211,19 @@ class Map {
             })
 
 
-        } else if (room == CONSTANTS.WORLD) {
+        } else {
             this.ctx.font = "20px Arial";
             this.ctx.fillText('[ Map is loading... ]', 400, 400);
-            worldImg[this.mapStyle].onload = function() {
-                ctx.drawImage(worldImg[mapStyle], 0, 0)
-            };
-
-            worldImg[mapStyle].onload();
-        } else if (room == CONSTANTS.WORLD_EASY) {
-            this.ctx.font = "20px Arial";
-            this.ctx.fillText('[ Map is loading... ]', 400, 400);
-            worldImg[this.mapStyle].onload = function() {
-                ctx.drawImage(worldImg[mapStyle], 0, 0)
-            };
-
-            worldImg[mapStyle].onload();
-        } else if (room == CONSTANTS.MISC) {
-            this.ctx.font = "20px Arial";
-            this.ctx.fillText('[ Map is loading... ]', 400, 400);
-            miscImg[this.mapStyle].onload = function() {
-                ctx.drawImage(miscImg[mapStyle], 0, 0)
-            };
-
-            miscImg[mapStyle].onload();
-        } else if (room == CONSTANTS.US) {
-            this.ctx.font = "20px Arial";
-            this.ctx.fillText('[ Map is loading... ]', 400, 400);
-            usImg[mapStyle].onload = function() {
-                ctx.drawImage(usImg[mapStyle], 0, 0)
-            };
-            usImg[mapStyle].onload();
-        } else if (room == CONSTANTS.EURO) {
-            this.ctx.font = "20px Arial";
-            this.ctx.fillText('[ Map is loading... ]', 400, 400);
-            euroImg[mapStyle].onload = function() {
-                ctx.drawImage(euroImg[mapStyle], 0, 0)
-            };
-            euroImg[mapStyle].onload();
-        } else if (room == CONSTANTS.AFRICA) {
-            this.ctx.font = "20px Arial";
-            this.ctx.fillText('[ Map is loading... ]', 400, 400);
-            africaImg[mapStyle].onload = function() {
-                ctx.drawImage(africaImg[mapStyle], 0, 0)
-            };
-            africaImg[mapStyle].onload();
-        } else if (room == CONSTANTS.ASIA) {
-            this.ctx.font = "20px Arial";
-            this.ctx.fillText('[ Map is loading... ]', 400, 400);
-            asiaImg[mapStyle].onload = function() {
-                ctx.drawImage(asiaImg[mapStyle], 0, 0)
-            };
-            asiaImg[mapStyle].onload();
-        } else if (room == CONSTANTS.OCEANIA) {
-            this.ctx.font = "20px Arial";
-            this.ctx.fillText('[ Map is loading... ]', 400, 400);
-            oceaniaImg[mapStyle].onload = function() {
-                ctx.drawImage(oceaniaImg[mapStyle], 0, 0)
-            };
-            oceaniaImg[mapStyle].onload();
-        } else if (room == CONSTANTS.SAMERICA) {
-            this.ctx.font = "20px Arial";
-            this.ctx.fillText('[ Map is loading... ]', 400, 400);
-            samericaImg[mapStyle].onload = function() {
-                ctx.drawImage(samericaImg[mapStyle], 0, 0)
-            };
-            samericaImg[mapStyle].onload();
-        } else if (room == CONSTANTS.SPECIAL) {
-            this.ctx.font = "20px Arial";
-            this.ctx.fillText('[ Map is loading... ]', 400, 400);
-            specialImg[mapStyle].onload = function() {
-                ctx.drawImage(specialImg[mapStyle], 0, 0)
-            };
-            specialImg[mapStyle].onload();
+            let image_name = CONSTANTS.MAP_TO_ID[map] + "_" + mapStyle;
+            let image = this.map_images[image_name];
+            if (this.map_images.has(image_name)) {
+                let image = this.map_images.get(image_name);
+                image.onload = function() {
+                    ctx.drawImage(image, 0, 0)
+                };
+                image.onload();
+            }
         }
-
     }
 
     setStyle(id, style, room) {
@@ -667,4 +417,4 @@ class Map {
     }
 }
 
-module.exports = Map
+module.exports = MapPanel
