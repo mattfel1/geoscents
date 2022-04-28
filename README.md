@@ -28,3 +28,9 @@ npm start
 ```
 
 
+# Formatting
+
+```
+npm -g install js-beautify
+js-beautify <file> -r
+```

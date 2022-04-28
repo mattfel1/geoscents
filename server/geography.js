@@ -11,16 +11,14 @@ const ASIACITIES = require('../resources/asiacities.js').CITIES;
 const OCEANIACITIES = require('../resources/oceaniacities.js').CITIES;
 const SAMERICACITIES = require('../resources/samericacities.js').CITIES;
 
-const UKRAINECITIES = require('../resources/ukrainecities.js').CITIES;
-const ARGENTINACITIES = require('../resources/argentinacities.js').CITIES;
-const AUSTRALIACITIES = require('../resources/australiacities.js').CITIES;
-const CANADACITIES = require('../resources/canadacities.js').CITIES;
-const JAPANCITIES = require('../resources/japancities.js').CITIES;
-const KENYACITIES = require('../resources/kenyacities.js').CITIES;
-const ROMANIACITIES = require('../resources/romaniacities.js').CITIES;
-
 const CONSTANTS = require('../resources/constants.js');
-// var idx = 0;
+let SPECIALCITIES = new Map()
+Object.keys(CONSTANTS.MAP_BOUNDS).forEach(function(value) {
+    if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(value) !== -1) {
+        let list = require('../resources/' + value.toLowerCase().trim() + 'cities.js').CITIES;
+        SPECIALCITIES.set(value, list);
+    }
+})
 
 const randomCity = (citysrc, blacklist) => {
     let acceptable = false;
@@ -85,22 +83,9 @@ const randomCity = (citysrc, blacklist) => {
         }
     } else if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) {
         while (!acceptable) {
-            if (citysrc === "Argentina")
-                proposal = ARGENTINACITIES[Math.floor(Math.random() * ARGENTINACITIES.length)];
-            else if (citysrc === "Australia")
-                proposal = AUSTRALIACITIES[Math.floor(Math.random() * AUSTRALIACITIES.length)];
-            else if (citysrc === "Kenya")
-                proposal = KENYACITIES[Math.floor(Math.random() * KENYACITIES.length)];
-            else if (citysrc === "Canada")
-                proposal = CANADACITIES[Math.floor(Math.random() * CANADACITIES.length)];
-            else if (citysrc === "Japan")
-                proposal = JAPANCITIES[Math.floor(Math.random() * JAPANCITIES.length)];
-            else if (citysrc === "Romania")
-                proposal = ROMANIACITIES[Math.floor(Math.random() * ROMANIACITIES.length)];
-            else if (citysrc === "Ukraine")
-                proposal = UKRAINECITIES[Math.floor(Math.random() * UKRAINECITIES.length)];
-            else
-                console.assert(false, "No city src database for " + citysrc);
+            console.assert(SPECIALCITIES.has(citysrc), "No city src database for " + citysrc);
+            let CITIES = SPECIALCITIES.get(citysrc);
+            proposal = CITIES[Math.floor(Math.random() * CITIES.length)];
             if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }

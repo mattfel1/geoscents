@@ -14,8 +14,8 @@ class PrivatePopup {
     goToRoom(info, cb) {
         let citysrc = info['requestedCitysrc'];
         if (citysrc == 'Random') {
-            let options = [CONSTANTS.WORLD, CONSTANTS.WORLD_EASY, CONSTANTS.US, CONSTANTS.EURO, CONSTANTS.AFRICA, CONSTANTS.ASIA, CONSTANTS.OCEANIA, CONSTANTS.MISC, CONSTANTS.SAMERICA];
-            citysrc = options[Math.floor(Math.random() * options.length)];
+            let options = window.document.getElementById('requestedCitysrc').children
+            citysrc = options[Math.floor(Math.random() * options.length)].value;
         }
         this.citysrc = citysrc;
         this.code = info['code'];

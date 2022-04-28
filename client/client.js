@@ -27,6 +27,35 @@ var betweenGames = true;
 var clickedReady = false;
 var booted = false;
 
+// Update index with all countries in special list
+let dropdown = window.document.getElementById('requestedCitysrc')
+let options = [];
+let special_options = [];
+Object.keys(CONSTANTS.MAP_BOUNDS).forEach(function(value) {
+    var entry = document.createElement("option");
+    entry.value = value;
+    if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(value) !== -1) {
+        entry.text = "* " + value
+        special_options.push(entry)
+    } else {
+        entry.text = value
+        options.push(entry)
+    }
+})
+options.sort((a, b) => {
+    return a.text.localeCompare(b.text)
+});
+special_options.sort((a, b) => {
+    return a.text.localeCompare(b.text)
+});
+
+options.forEach((x, i) => {
+    dropdown.appendChild(x);
+})
+special_options.forEach((x, i) => {
+    dropdown.append(x);
+})
+
 const playerClick = {
     clickEvent: false,
     mouseDown: false,

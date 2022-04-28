@@ -39,121 +39,145 @@ def scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, include_admi
 
 
 outfile = 'worldcities.js'
+lonrng = [-180, 180]
 latrng = [-65, 77]
 pop = 580000
-lonrng = [-180, 180]
 blacklist = []
 whitelist = ['Jersey', 'Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar', 'New Caledonia', 'Azores']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'worldeasycities.js'
+lonrng = [-180, 180]
 latrng = [-65, 77]
 pop = 9999999999999 # capital cities only
-lonrng = [-180, 180]
 blacklist = []
 whitelist = ['Jersey', 'Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, False)
 
 outfile = 'uscities.js'
+lonrng = [-141, -43]
 latrng = [12,54]
 pop = 100000
-lonrng = [-141, -43]
 blacklist = ['Barbados', 'Curaçao', 'Aruba', 'Saint Vincent And The Grenadines', 'Saint Lucia', 'Antigua And Barbuda', 'Grenada', 'Dominica', 'Saint Kitts And Nevis', 'Sint Maarten', 'Martinique', 'Guadeloupe']
 whitelist = []
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'oceaniacities.js'
+lonrng = [92,252]
 latrng = [-51,28]
 pop = 10000
-lonrng = [92,252]
 blacklist =  ['Macau', 'Thailand', 'Mexico', 'United States', 'Sri Lanka', 'India', 'China', 'Philippines', 'Vietnam', 'Cambodia', 'Laos', 'Hong Kong', 'Taiwan', 'Bangladesh', 'Burma', 'Nepal', 'Bhutan', 'Japan']
 whitelist = ['Cook Islands', 'Wallis And Futuna', 'Honolulu', 'Hilo', 'Wailuku', 'Lihue', 'Easter Island', 'Tokelau']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'asiacities.js'
+lonrng = [27,156]
 latrng = [2,59]
 pop = 400000
-lonrng = [27,156]
 blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', 'Cyprus', 'South Sudan', 'Northern Mariana Islands', 'Guam', 'Macau', 'Sudan', 'Belarus', 'Somalia']
 whitelist = []
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'samericacities.js'
+lonrng = [-138, -30]
 latrng = [-54,20]
 pop = 61000
-lonrng = [-138, -30]
 blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe', 'Pitcairn Islands']
 whitelist = ['Falkland Islands (Islas Malvinas)', 'Galápagos', 'South Georgia And South Sandwich Islands', 'Easter Island']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'eurocities.js'
+lonrng = [-36, 52]
 latrng = [37,66]
 pop = 100000
-lonrng = [-36, 52]
 blacklist = ['Azerbaijan', 'Iran', 'Armenia', 'Georgia', 'Kazakhstan', 'Iraq', 'Syria', 'Tunisia']
 whitelist = ['Isle Of Man', 'Gibraltar', 'Shetland Islands', 'Torshavn', 'Azores', 'Jersey']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'africacities.js'
+lonrng = [-58, 80]
 latrng = [-34,39]
 pop = 100000
-lonrng = [-58, 80]
 blacklist = ['India', 'Brazil', 'Pakistan', 'Iran', 'Iraq', 'Saudi Arabia', 'Afghanistan', 'Greece', 'Israel', 'Portugal', 'Syria', 'Turkey', 'Kuwait', 'Yemen', 'Paraguay', 'Lebanon', 'Qatar', 'United Arab Emirates', 'Spain', 'Tajikistan', 'Jordan', 'Oman', 'Turkmenistan', 'Bahrain', 'Malta', 'Suriname', 'Cyprus', 'Sri Lanka', 'Maldives', 'West Bank', 'Italy', 'Uzbekistan', 'China', 'Argentina', 'Uruguay']
 whitelist = ['Gibraltar']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'ukrainecities.js'
+lonrng = [17.7, 45]
 latrng = [43.2, 54]
 pop = 0
-lonrng = [17.7, 45]
 blacklist = ['Moldova', 'Belarus', 'Russia', 'Poland', 'Romania', 'Hungary', 'Serbia', 'Bosnia And Herzegovina', 'Czechia', 'Bulgaria', 'Slovakia', 'Gibraltar', 'Croatia', 'Montenegro']
 whitelist = []
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'argentinacities.js'
+lonrng = [-102, -20]
 latrng = [-56.5, -20]
 pop = 30000
-lonrng = [-102, -20]
 blacklist = ['*']
 whitelist = ['Argentina']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'australiacities.js'
+lonrng = [97, 170]
 latrng = [-45.5, -8]
 pop = 15000
-lonrng = [97, 170]
 blacklist = ['*']
 whitelist = ['Australia']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'canadacities.js'
+lonrng = [-160, -15]
 latrng = [38, 77.5]
 pop = 15000
-lonrng = [-160, -15]
 blacklist = ['*']
 whitelist = ['Canada']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'japancities.js'
+lonrng = [110, 164.5]
 latrng = [23.5, 49]
 pop = 0
-lonrng = [110, 164.5]
 blacklist = ['*']
 whitelist = ['Japan']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'kenyacities.js'
+lonrng = [30, 49]
 latrng = [5.9, -5.3]
 pop = 0
-lonrng = [30, 49]
 blacklist = ['*']
 whitelist = ['Kenya']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'romaniacities.js'
+lonrng = [19, 33.7]
 latrng = [49, 43]
 pop = 0
-lonrng = [19, 33.7]
 blacklist = ['*']
 whitelist = ['Romania']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'perucities.js'
+lonrng = [-92, -55]
+latrng = [-19.5, 2]
+pop = 20000
+blacklist = ['*']
+whitelist = ['Peru']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'egyptcities.js'
+lonrng = [16.5, 41.7]
+latrng = [34, 20.81]
+pop = 0
+blacklist = ['*']
+whitelist = ['Egypt']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'indonesiacities.js'
+lonrng = [84.5, 151]
+latrng = [15, -23.5]
+pop = 90000
+blacklist = ['*']
+whitelist = ['Indonesia']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)

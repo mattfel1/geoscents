@@ -45,9 +45,11 @@ module.exports = {
     SPECIAL: 'Daily Country',
     AFRICA: 'Africa',
     SAMERICA: "S. America",
-    SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania"],
-    SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Morrison", "Iohannis"],
-    SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)", "Welcome/Bienvenue", "Bienvenidos", "Karibu/Welcome", "Welcome", "Bine ati venit"],
+    SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania", "Egypt", "Peru", "Indonesia"],
+    SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Morrison", "Iohannis", "el-Sisi", "Castillo", "Widodo"],
+    SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)",
+        "Welcome/Bienvenue", "Bienvenidos", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenidos", "Selamat datang"
+    ],
 
     // IDs generally used for map pngs and css div classes
     MAP_TO_ID: {
@@ -74,21 +76,21 @@ module.exports = {
             "min_lon": -180,
             "max_lon": 180,
             "max_lat": -65.5, // Bottom edge of map (max row pixel coordinate)
-            "min_lat": 77.0, // Top edge of map (min row pixel coordinate)
+            "min_lat": 77.2, // Top edge of map (min row pixel coordinate)
             "lat_ts": 0
         },
         "World Capitals": {
             "min_lon": -180,
             "max_lon": 180,
             "max_lat": -65.5,
-            "min_lat": 77.0,
+            "min_lat": 77.2,
             "lat_ts": 0
         },
         "Trivia": {
             "min_lon": -180,
             "max_lon": 180,
             "max_lat": -56.0,
-            "min_lat": 81.0,
+            "min_lat": 80.85,
             "lat_ts": 0
         },
         "N. America": {
@@ -102,12 +104,12 @@ module.exports = {
             "min_lon": -140,
             "max_lon": 17,
             "max_lat": -56.0,
-            "min_lat": 24.0,
+            "min_lat": 24.1,
             "lat_ts": 0
         },
         "Europe": {
-            "min_lon": -36,
-            "max_lon": -52,
+            "min_lon": -36.3,
+            "max_lon": 52,
             "max_lat": 35.0,
             "min_lat": 66.3,
             "lat_ts": 0
@@ -115,15 +117,15 @@ module.exports = {
         "Africa": {
             "min_lon": -60,
             "max_lon": 82,
-            "max_lat": -36.0,
+            "max_lat": -36.3,
             "min_lat": 41.0,
             "lat_ts": 0
         },
         "Asia": {
             "min_lon": 25,
             "max_lon": 158,
-            "max_lat": -0.5,
-            "min_lat": 24,
+            "max_lat": -1,
+            "min_lat": 61.05,
             "lat_ts": 0
         },
         "Oceania": {
@@ -180,6 +182,27 @@ module.exports = {
             "max_lon": 45.3,
             "max_lat": 43.18,
             "min_lat": 54,
+            "lat_ts": 0
+        },
+        "Peru": {
+            "min_lon": -92,
+            "max_lon": -55,
+            "max_lat": -19.5,
+            "min_lat": 2,
+            "lat_ts": 0
+        },
+        "Egypt": {
+            "min_lon": 16.5,
+            "max_lon": 41.7,
+            "max_lat": 34,
+            "min_lat": 20.81,
+            "lat_ts": 0
+        },
+        "Indonesia": {
+            "min_lon": 84.5,
+            "max_lon": 151,
+            "max_lat": 15,
+            "min_lat": -23.5,
             "lat_ts": 0
         },
     },
