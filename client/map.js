@@ -95,7 +95,15 @@ class MapPanel {
         this.clickable_buttons = [this.about_button, this.visualize_button, this.discord_button, this.help_button]
         let map_images = new Map();
         let ctx = this.ctx;
-        Object.values(CONSTANTS.MAP_TO_ID).forEach(function(value) {
+
+        Object.keys(CONSTANTS.MAP_BOUNDS).forEach(function(k) {
+            let value;
+            if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(k) !== -1) {
+                value = k.toLowerCase().trim();
+            } else {
+                value = CONSTANTS.MAP_TO_ID[k];
+            }
+
             let x = new Image();
             x.src = "/resources/" + value + "_classic.png";
             map_images.set(value + '_classic', x);

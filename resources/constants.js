@@ -62,13 +62,6 @@ module.exports = {
         "Asia": "asia",
         "Africa": "africa",
         "S. America": "samerica",
-        "Ukraine": "ukraine",
-        "Japan": "japan",
-        "Canada": "canada",
-        "Argentina": "argentina",
-        "Kenya": "kenya",
-        "Romania": "romania",
-        "Australia": "australia",
     },
 
     MAP_BOUNDS: {
