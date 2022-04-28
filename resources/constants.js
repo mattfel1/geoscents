@@ -187,15 +187,15 @@ module.exports = {
         "Egypt": {
             "min_lon": 16.5,
             "max_lon": 41.7,
-            "max_lat": 34,
-            "min_lat": 20.81,
+            "max_lat": 20.81,
+            "min_lat": 34,
             "lat_ts": 0
         },
         "Indonesia": {
             "min_lon": 84.5,
             "max_lon": 151,
-            "max_lat": 15,
-            "min_lat": -23.5,
+            "max_lat": -23.5,
+            "min_lat": 15,
             "lat_ts": 0
         },
     },
