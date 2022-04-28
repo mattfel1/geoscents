@@ -103,6 +103,7 @@ class MapPanel {
             } else {
                 value = CONSTANTS.MAP_TO_ID[k];
             }
+            console.log("adding " + value)
 
             let x = new Image();
             x.src = "/resources/" + value + "_classic.png";
@@ -222,7 +223,13 @@ class MapPanel {
         } else {
             this.ctx.font = "20px Arial";
             this.ctx.fillText('[ Map is loading... ]', 400, 400);
-            let image_name = CONSTANTS.MAP_TO_ID[map] + "_" + mapStyle;
+            let value;
+            if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(map) !== -1) {
+                value = map.toLowerCase().trim();
+            } else {
+                value = CONSTANTS.MAP_TO_ID[map];
+            }
+            let image_name = value + "_" + mapStyle;
             let image = this.map_images[image_name];
             if (this.map_images.has(image_name)) {
                 let image = this.map_images.get(image_name);
