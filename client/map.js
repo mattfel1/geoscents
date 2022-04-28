@@ -103,7 +103,6 @@ class MapPanel {
             } else {
                 value = CONSTANTS.MAP_TO_ID[k];
             }
-            console.log("adding " + value)
 
             let x = new Image();
             x.src = "/resources/" + value + "_classic.png";
