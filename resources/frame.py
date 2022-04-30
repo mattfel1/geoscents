@@ -193,7 +193,7 @@ scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 outfile = 'chinacities.js'
 lonrng = [62, 148]
 latrng = [16.85, 56]
-pop = 1200000
+pop = 600000
 blacklist = ['*']
 whitelist = ['China']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
@@ -201,7 +201,7 @@ scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 outfile = 'unitedstatescities.js'
 lonrng = [-130, -60]
 latrng = [22, 53.7]
-pop = 800000
+pop = 250000
 blacklist = ['*']
 whitelist = ['United States']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
