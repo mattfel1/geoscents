@@ -193,12 +193,12 @@ app.use((err, req, res, next) => {
 });
 
 const calculate_special = () => {
-    // Get days since jan 1
+    // Get days since jan 1 (plus two so special doesn't change the day I implemented this)
     var now = new Date();
     var start = new Date(now.getFullYear(), 0, 0);
     var diff = now - start;
     var oneDay = 1000 * 60 * 60 * 24;
-    var day = Math.floor(diff / oneDay);
+    var day = Math.floor(diff / oneDay) + 2;
 
     // We want day % num_specials to be our new special_idx, but this is not stable when num_specials grows.
     // To be more stable, we upcast num_specials to the nearest multiple of 20 and mod by that.  Then mod by num_specials.
