@@ -45,11 +45,11 @@ module.exports = {
     SPECIAL: 'Daily Country',
     AFRICA: 'Africa',
     SAMERICA: "S. America",
-    SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania", "Egypt", "Peru", "Indonesia", "Spain", "China", "United States"],
-    SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Morrison", "Iohannis", "el-Sisi", "Castillo", "Widodo", "Sánchez", "Xi", "Biden"],
+    SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania", "Egypt", "Peru", "Indonesia", "Spain", "China", "United States", "Iran"],
+    SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Morrison", "Iohannis", "el-Sisi", "Castillo", "Widodo", "Sánchez", "Xi", "Biden", "Raisi"],
     SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)",
         "Welcome/Bienvenue", "Bienvenido", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenido", "Selamat datang",
-        "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome"
+        "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome", "خوش آمدی (xoš âmadi)"
     ],
 
     // IDs generally used for map pngs and css div classes
