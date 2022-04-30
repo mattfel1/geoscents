@@ -4742,50 +4742,51 @@ module.exports = {
             "img_link": "https://gumlet.assettype.com/swarajya%2F2022-01%2F10d51e40-582e-4958-8a46-e2afbeb0c355%2Fnew_capital.jpg?q=75&auto=format%2Ccompress&w=1200",
             "wiki": "https://en.wikipedia.org/wiki/Nusantara_(city)"
         },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
+        {
+          "city": "The Pirate Cemetery",
+          "city_ascii": "",
+          "lat": -17.0118,
+          "lng": 49.8478,
+          "iso2": "MG",
+          "country": "",
+          "population": 0,
+          "capital": "",
+          "img_link": "https://upload.wikimedia.org/wikipedia/commons/8/80/Pirates_Cemetery_Ile_Ste_Marie_Madagascar.jpg",
+          "wiki": "https://www.atlasobscura.com/places/the-pirate-cemetery-analanjirofo-madagascar"
+        },
+        {
+          "city": "Ahsan Manzil (আহসান মঞ্জিল)",
+          "city_ascii": "Ahsan Manzil",
+          "lat": 23.708597,
+          "lng": 90.406058,
+          "iso2": "BD",
+          "country": "",
+          "population": 0,
+          "capital": "",
+          "wiki": "https://en.wikipedia.org/wiki/Ahsan_Manzil"
+        },
+        {
+          "city": "Annapurna (अन्नपूर्ण)",
+          "city_ascii": "Annapurna",
+          "lat": 28.596111,
+          "lng": 83.820278,
+          "iso2": "NP",
+          "country": "",
+          "population": 0,
+          "capital": "",
+          "wiki": "https://en.wikipedia.org/wiki/Annapurna"
+        },
+        {
+          "city": "Gangteng Monastery (སྒང་སྟེང་དགོན་པ)",
+          "city_ascii": "Gangteng Monastery",
+          "lat": 27.5,
+          "lng": 90.166667,
+          "iso2": "BT",
+          "country": "",
+          "population": 0,
+          "capital": "",
+          "wiki": "https://en.wikipedia.org/wiki/Gangteng_Monastery"
+        },
         // {
         //   "city": "",
         //   "city_ascii": "",
