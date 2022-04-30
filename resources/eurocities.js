@@ -4827,19 +4827,6 @@ module.exports = {
             "id": 1348655615
         },
         {
-            "city": "Gibraltar",
-            "city_ascii": "Gibraltar",
-            "lat": 36.1324,
-            "lng": -5.3781,
-            "country": "Gibraltar",
-            "iso2": "GI",
-            "iso3": "GIB",
-            "admin_name": "",
-            "capital": "",
-            "population": 187083,
-            "id": 1292385245
-        },
-        {
             "city": "Olsztyn",
             "city_ascii": "Olsztyn",
             "lat": 53.8,

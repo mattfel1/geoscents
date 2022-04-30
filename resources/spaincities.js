@@ -130,19 +130,6 @@ module.exports = {
             "id": 1724045676
         },
         {
-            "city": "Las Palmas de Gran Canaria",
-            "city_ascii": "Las Palmas de Gran Canaria",
-            "lat": 28.1,
-            "lng": -15.43,
-            "country": "Spain",
-            "iso2": "ES",
-            "iso3": "ESP",
-            "admin_name": "Canary Islands",
-            "capital": "admin",
-            "population": 378495,
-            "id": 1724501748
-        },
-        {
             "city": "Palma",
             "city_ascii": "Palma",
             "lat": 39.5743,
@@ -180,19 +167,6 @@ module.exports = {
             "capital": "minor",
             "population": 357468,
             "id": 1724910555
-        },
-        {
-            "city": "Santa Cruz de Tenerife",
-            "city_ascii": "Santa Cruz de Tenerife",
-            "lat": 28.47,
-            "lng": -16.25,
-            "country": "Spain",
-            "iso2": "ES",
-            "iso3": "ESP",
-            "admin_name": "Canary Islands",
-            "capital": "admin",
-            "population": 336061,
-            "id": 1724813158
         },
         {
             "city": "Gij\u00f3n",
@@ -570,19 +544,6 @@ module.exports = {
             "capital": "admin",
             "population": 74632,
             "id": 1724171411
-        },
-        {
-            "city": "Arrecife",
-            "city_ascii": "Arrecife",
-            "lat": 28.969,
-            "lng": -13.5378,
-            "country": "Spain",
-            "iso2": "ES",
-            "iso3": "ESP",
-            "admin_name": "Canary Islands",
-            "capital": "",
-            "population": 52944,
-            "id": 1724630905
         },
         {
             "city": "M\u00e9rida",

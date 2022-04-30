@@ -45,10 +45,11 @@ module.exports = {
     SPECIAL: 'Daily Country',
     AFRICA: 'Africa',
     SAMERICA: "S. America",
-    SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania", "Egypt", "Peru", "Indonesia"],
-    SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Morrison", "Iohannis", "el-Sisi", "Castillo", "Widodo"],
+    SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania", "Egypt", "Peru", "Indonesia", "Spain", "China", "United States"],
+    SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Morrison", "Iohannis", "el-Sisi", "Castillo", "Widodo", "Sánchez", "Xi", "Biden"],
     SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)",
-        "Welcome/Bienvenue", "Bienvenidos", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenidos", "Selamat datang"
+        "Welcome/Bienvenue", "Bienvenido", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenido", "Selamat datang",
+        "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome"
     ],
 
     // IDs generally used for map pngs and css div classes
@@ -205,6 +206,21 @@ module.exports = {
             "min_lat": 45,
             "lat_ts": 0
         },
+        "China": {
+            "min_lon": 62,
+            "max_lon": 148,
+            "max_lat": 16.85,
+            "min_lat": 56,
+            "lat_ts": 0
+        },
+        "United States": {
+            "min_lon": -130,
+            "max_lon": -60,
+            "max_lat": 22,
+            "min_lat": 53.7,
+            "lat_ts": 0
+        },
+
     },
 
     VERT_WRITE_CELLS: 30,

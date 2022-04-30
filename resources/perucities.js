@@ -624,19 +624,6 @@ module.exports = {
             "id": 1604864093
         },
         {
-            "city": "Peru",
-            "city_ascii": "Peru",
-            "lat": 41.349,
-            "lng": -89.1368,
-            "country": "United States",
-            "iso2": "US",
-            "iso3": "USA",
-            "admin_name": "Illinois",
-            "capital": "",
-            "population": 30611,
-            "id": 1840009273
-        },
-        {
             "city": "Casma",
             "city_ascii": "Casma",
             "lat": -9.44,

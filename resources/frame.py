@@ -23,7 +23,7 @@ def scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, include_admi
 
             inLat = entry['lat'] < latrng[1] and entry['lat'] > latrng[0]
             inLon = (entry['lng'] < lonrng[1] and entry['lng'] > lonrng[0]) or ((entry['lng'] + 360) < lonrng[1] and (entry['lng'] + 360) > lonrng[0])
-            if (mustKeep or (not mustRemove and inLat and inLon and (thisPop >= pop or thisCap))):
+            if (inLat and inLon and (mustKeep or (not mustRemove and (thisPop >= pop or thisCap)))): 
                 filtered.append(entry)
                 if (entry['country'] not in countries):
                     countries.append(entry['country'])
@@ -144,7 +144,7 @@ scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'kenyacities.js'
 lonrng = [30, 49]
-latrng = [5.9, -5.3]
+latrng = [-5.3, 5.9]
 pop = 0
 blacklist = ['*']
 whitelist = ['Kenya']
@@ -152,7 +152,7 @@ scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'romaniacities.js'
 lonrng = [19, 33.7]
-latrng = [49, 43]
+latrng = [43, 49]
 pop = 0
 blacklist = ['*']
 whitelist = ['Romania']
@@ -168,7 +168,7 @@ scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'egyptcities.js'
 lonrng = [16.5, 41.7]
-latrng = [34, 20.81]
+latrng = [20.81, 34]
 pop = 0
 blacklist = ['*']
 whitelist = ['Egypt']
@@ -176,7 +176,7 @@ scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
 outfile = 'indonesiacities.js'
 lonrng = [84.5, 151]
-latrng = [15, -23.5]
+latrng = [-23.5, 15]
 pop = 90000
 blacklist = ['*']
 whitelist = ['Indonesia']
@@ -188,4 +188,20 @@ latrng = [35, 45]
 pop = 0
 blacklist = ['*']
 whitelist = ['Spain']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'chinacities.js'
+lonrng = [62, 148]
+latrng = [16.85, 56]
+pop = 1200000
+blacklist = ['*']
+whitelist = ['China']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'unitedstatescities.js'
+lonrng = [-130, -60]
+latrng = [22, 53.7]
+pop = 800000
+blacklist = ['*']
+whitelist = ['United States']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)

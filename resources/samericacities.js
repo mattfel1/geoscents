@@ -6192,19 +6192,6 @@ module.exports = {
             "id": 1238780509
         },
         {
-            "city": "Grytviken",
-            "city_ascii": "Grytviken",
-            "lat": -54.2806,
-            "lng": -36.508,
-            "country": "South Georgia And South Sandwich Islands",
-            "iso2": "GS",
-            "iso3": "SGS",
-            "admin_name": "",
-            "capital": "",
-            "population": 99,
-            "id": 1239048837
-        },
-        {
             "city": "Hanga Roa",
             "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Moais%2C_Isla_de_Pascua._-_panoramio.jpg/1280px-Moais%2C_Isla_de_Pascua._-_panoramio.jpg",
             "city_ascii": "Hanga Roa",
