@@ -383,7 +383,9 @@ $(document).ready(function() {
         } else {
             if (betweenGames && !clickedReady && isInside(mousePos, commands.ready_button)) {
                 commands.highlightReadyButton();
-            } else if (betweenGames) commands.showReadyButton(clickedReady);
+            } else if (betweenGames) {
+                commands.showReadyButton(clickedReady);
+            }
         }
     }, false);
 

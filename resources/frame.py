@@ -181,3 +181,11 @@ pop = 90000
 blacklist = ['*']
 whitelist = ['Indonesia']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'spaincities.js'
+lonrng = [-14.18, 8]
+latrng = [35, 45]
+pop = 0
+blacklist = ['*']
+whitelist = ['Spain']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)

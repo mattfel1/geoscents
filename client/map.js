@@ -8,9 +8,9 @@ var globeImage = {
     'terrain': new Image(),
     'satellite': new Image()
 };
-globeImage['classic'].src = "/resources/spritesheet_classic.png";
-globeImage['terrain'].src = "/resources/spritesheet_terrain.png";
-globeImage['satellite'].src = "/resources/spritesheet_satellite.png";
+globeImage['classic'].src = "/resources/maps/spritesheet_classic.png";
+globeImage['terrain'].src = "/resources/maps/spritesheet_terrain.png";
+globeImage['satellite'].src = "/resources/maps/spritesheet_satellite.png";
 
 var frame_cnt = 0;
 var frames = 120;
@@ -93,30 +93,32 @@ class MapPanel {
             label: ' ?'
         };
         this.clickable_buttons = [this.about_button, this.visualize_button, this.discord_button, this.help_button]
-        let map_images = new Map();
-        let ctx = this.ctx;
+        this.map_images = new Map();
 
-        Object.keys(CONSTANTS.MAP_BOUNDS).forEach(function(k) {
-            let value;
-            if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(k) !== -1) {
-                value = k.toLowerCase().trim();
-            } else {
-                value = CONSTANTS.MAP_TO_ID[k];
-            }
+        // Initialize all maps (changed to lazy init for saving compute power)
+        // Object.keys(CONSTANTS.MAP_BOUNDS).forEach(function(k) {
+        //     let value;
+        //     if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(k) !== -1) {
+        //         value = k.toLowerCase().trim();
+        //     } else {
+        //         value = CONSTANTS.MAP_TO_ID[k];
+        //     }
 
-            let x = new Image();
-            x.src = "/resources/" + value + "_classic.png";
-            map_images.set(value + '_classic', x);
+        //     let x = new Image();
+        //     x.src = "/resources/maps/" + value + "_classic.png";
+        //     map_images.set(value + '_classic', x);
 
-            let y = new Image();
-            y.src = "/resources/" + value + "_terrain.png";
-            map_images.set(value + '_terrain', y);
+        //     let y = new Image();
+        //     y.src = "/resources/maps/" + value + "_terrain.png";
+        //     map_images.set(value + '_terrain', y);
 
-            let z = new Image();
-            z.src = "/resources/" + value + "_satellite.png";
-            map_images.set(value + '_satellite', z);
-        })
-        this.map_images = map_images
+        //     let z = new Image();
+        //     z.src = "/resources/maps/" + value + "_satellite.png";
+        //     map_images.set(value + '_satellite', z);
+        // })
+        // this.map_images = map_images
+
+
     }
 
     canvas_arrow(fromx, fromy, tox, toy) {
@@ -229,14 +231,27 @@ class MapPanel {
                 value = CONSTANTS.MAP_TO_ID[map];
             }
             let image_name = value + "_" + mapStyle;
-            let image = this.map_images[image_name];
-            if (this.map_images.has(image_name)) {
-                let image = this.map_images.get(image_name);
-                image.onload = function() {
-                    ctx.drawImage(image, 0, 0)
-                };
-                image.onload();
+
+            let first_load = !this.map_images.has(image_name);
+            if (first_load) {
+                let x = new Image();
+                x.src = "/resources/maps/" + image_name + ".png";
+                this.map_images.set(image_name, x);
             }
+
+            let image = this.map_images.get(image_name);
+            let socket = this.socket;
+            image.onload = function() {
+                ctx.drawImage(image, 0, 0)
+                if (first_load) {
+                    setTimeout(() => {
+                        console.log("timeout hack to redraw command after joining new map...");
+                        socket.emit("drawCommand");
+                    }, 500);
+
+                }
+            };
+            image.onload();
         }
     }
 

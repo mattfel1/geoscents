@@ -164,7 +164,7 @@ module.exports = {
             "lat_ts": 0
         },
         "Romania": {
-            "min_lon": 19,
+            "min_lon": 18.8,
             "max_lon": 33.7,
             "max_lat": 43,
             "min_lat": 49,
@@ -196,6 +196,13 @@ module.exports = {
             "max_lon": 151,
             "max_lat": -23.5,
             "min_lat": 15,
+            "lat_ts": 0
+        },
+        "Spain": {
+            "min_lon": -14.18,
+            "max_lon": 8,
+            "max_lat": 35,
+            "min_lat": 45,
             "lat_ts": 0
         },
     },

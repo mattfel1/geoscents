@@ -144,6 +144,11 @@ app.get('/resources/*.png', (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.sendFile(path.join(__dirname, '..', 'resources/' + wildcard + '.png'));
 });
+app.get('/resources/maps/*.png', (req, res, next) => {
+    const wildcard = req.params['0'];
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.sendFile(path.join(__dirname, '..', 'resources/maps/' + wildcard + '.png'));
+});
 app.get('/resources/*.svg', (req, res, next) => {
     const wildcard = req.params['0'];
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -347,6 +352,12 @@ io.on('connection', (socket) => {
     });
     socket.on('announcement', (text) => {
         announce(text);
+    });
+    socket.on('drawCommand', (text) => {
+        if (playerRooms.has(socket.id)) {
+            const room = playerRooms.get(socket.id);
+            room.drawCommand(socket);
+        }
     });
     socket.on('playerReady', () => {
         if (playerRooms.has(socket.id)) {
