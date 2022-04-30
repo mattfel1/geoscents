@@ -379,7 +379,7 @@ class Room {
                     player.col = playerClick.cursorX;
                     // console.log("player clicked at time " + this.timer)
                     player.clickedAt = this.timer;
-                    const geo = Geography.mercToGeo(player.roomName, player.row, player.col);
+                    const geo = Geography.mercToGeo(this.map, player.row, player.col);
                     player.lat = geo['lat'];
                     player.lon = geo['lng'];
                     // console.log('click at ' + player.row + ',' + player.col + ' (' + player.lat + ',' + player.lon + ')')
