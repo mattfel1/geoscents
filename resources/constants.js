@@ -220,6 +220,13 @@ module.exports = {
             "min_lat": 53.7,
             "lat_ts": 0
         },
+        "Iran": {
+            "min_lon": 36,
+            "max_lon": 72.6,
+            "max_lat": 24,
+            "min_lat": 42,
+            "lat_ts": 0
+        },
 
     },
 

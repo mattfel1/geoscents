@@ -192,10 +192,26 @@ app.use((err, req, res, next) => {
     res.send(err.message || 'Internal server error');
 });
 
+const calculate_special = () => {
+    // Get days since jan 1
+    var now = new Date();
+    var start = new Date(now.getFullYear(), 0, 0);
+    var diff = now - start;
+    var oneDay = 1000 * 60 * 60 * 24;
+    var day = Math.floor(diff / oneDay);
+
+    // We want day % num_specials to be our new special_idx, but this is not stable when num_specials grows.
+    // To be more stable, we upcast num_specials to the nearest multiple of 20 and mod by that.  Then mod by num_specials.
+    let num_specials = CONSTANTS.SPECIAL_COUNTRIES.length;
+    let upcast_num_specials = (Math.round(num_specials / 20) + 1) * 20
+    return (day % upcast_num_specials) % num_specials
+}
+
+let special_idx = calculate_special();
+let special = CONSTANTS.SPECIAL_COUNTRIES[special_idx];
+
 // Game state info
 // map, roomName, citysrc
-let special_idx = Math.floor(Math.random() * CONSTANTS.SPECIAL_COUNTRIES.length);
-let special = CONSTANTS.SPECIAL_COUNTRIES[special_idx];
 var rooms = {
     'World': new Room(CONSTANTS.WORLD, CONSTANTS.WORLD, CONSTANTS.WORLD),
     'World Capitals': new Room(CONSTANTS.WORLD, CONSTANTS.WORLD_EASY, CONSTANTS.WORLD_EASY),
@@ -756,7 +772,7 @@ setInterval(() => {
 
     // Get new special
     if (reset_now) {
-        special_idx = Math.floor(Math.random() * CONSTANTS.SPECIAL_COUNTRIES.length);
+        special_idx = calculate_special();
         special = CONSTANTS.SPECIAL_COUNTRIES[special_idx];
         Object.values(rooms).forEach(function(room) {
             room.flushRecords(week, month, year);

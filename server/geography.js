@@ -1,21 +1,21 @@
 /**
  * Class for storing all geography methods
  */
-const WORLDCITIES = require('../resources/worldcities.js').CITIES;
-const WORLDEASYCITIES = require('../resources/worldeasycities.js').CITIES;
-const MISCCITIES = require('../resources/misccities.js').CITIES;
-const USCITIES = require('../resources/uscities.js').CITIES;
-const EUROCITIES = require('../resources/eurocities.js').CITIES;
-const AFRICACITIES = require('../resources/africacities.js').CITIES;
-const ASIACITIES = require('../resources/asiacities.js').CITIES;
-const OCEANIACITIES = require('../resources/oceaniacities.js').CITIES;
-const SAMERICACITIES = require('../resources/samericacities.js').CITIES;
+const WORLDCITIES = require('../resources/databases/worldcities.js').CITIES;
+const WORLDEASYCITIES = require('../resources/databases/worldeasycities.js').CITIES;
+const MISCCITIES = require('../resources/databases/misccities.js').CITIES;
+const USCITIES = require('../resources/databases/uscities.js').CITIES;
+const EUROCITIES = require('../resources/databases/eurocities.js').CITIES;
+const AFRICACITIES = require('../resources/databases/africacities.js').CITIES;
+const ASIACITIES = require('../resources/databases/asiacities.js').CITIES;
+const OCEANIACITIES = require('../resources/databases/oceaniacities.js').CITIES;
+const SAMERICACITIES = require('../resources/databases/samericacities.js').CITIES;
 
 const CONSTANTS = require('../resources/constants.js');
 let SPECIALCITIES = new Map()
 Object.keys(CONSTANTS.MAP_BOUNDS).forEach(function(value) {
     if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(value) !== -1) {
-        let list = require('../resources/' + value.toLowerCase().replace(" ", "") + 'cities.js').CITIES;
+        let list = require('../resources/databases/' + value.toLowerCase().replace(" ", "") + 'cities.js').CITIES;
         SPECIALCITIES.set(value, list);
     }
 })
