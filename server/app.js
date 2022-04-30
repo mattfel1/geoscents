@@ -218,8 +218,8 @@ const WELCOME_MESSAGE1 = 'Have you done today\'s <a href=https://worldle.teuteuf
     '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
     'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
     '<br>If you have feedback, simply shout it directly into this chat box, starting with the word /feedback. ' +
-    'If you are enjoying this game, please share it with a friend!  If you really love it, consider donating at the bottom of the page to help keep the server ' +
-    'running! You can also click on the ads to help pay for the server!';
+    'If you are enjoying this game, please share it with a friend!  You can donate to help keep the server ' +
+    'running using the buttons at the bottom of the page! You can also click on the ads to help pay for the server!';
 const PRIVATE_MESSAGE = '<i>Welcome to a private room!  You can whisper your secret code to a friend by typing the command /whisper "username" in the chat box. ' +
     'You can use the command /hidden to see if your friend is hiding in another private game.</i><br>';
 
