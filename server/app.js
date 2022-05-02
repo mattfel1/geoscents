@@ -658,7 +658,6 @@ io.on('connection', (socket) => {
         const cb = () => {
             callback()
         };
-        console.log("is count? " + isCount + " msg " + msg.toLowerCase().trim())
         Object.values(rooms).forEach(function(room) {
             if (room.hasPlayer(socket)) {
                 var new_sent_msg = msg;

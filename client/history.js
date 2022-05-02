@@ -88,7 +88,7 @@ class History {
                 Object.keys(hist).forEach((round) => {
                     let datapoint = hist[round];
                     let points_int = datapoint['round_points'];
-                    points = points_int.toString().padEnd(3).replace(/\s/g, "&nbsp;")
+                    let points = points_int.toString().padEnd(3).replace(/\s/g, "&nbsp;")
                     let time = datapoint['time'];
                     time = time.toString().padEnd(3).replace(/\s/g, "&nbsp;")
                     let dist = datapoint['dist'];
