@@ -61,6 +61,7 @@ class History {
             return "⭐";
         if (points == 600)
             return "✅";
+        return "?";
     }
 
 
@@ -86,8 +87,8 @@ class History {
                 var i = CONSTANTS.GAME_ROUNDS - Object.keys(hist).length + 1;
                 Object.keys(hist).forEach((round) => {
                     let datapoint = hist[round];
-                    let points = datapoint['round_points'];
-                    points = points.toString().padEnd(3).replace(/\s/g, "&nbsp;")
+                    let points_int = datapoint['round_points'];
+                    points = points_int.toString().padEnd(3).replace(/\s/g, "&nbsp;")
                     let time = datapoint['time'];
                     time = time.toString().padEnd(3).replace(/\s/g, "&nbsp;")
                     let dist = datapoint['dist'];
@@ -98,7 +99,7 @@ class History {
                         iso2 = "earth";
                     iso2 = iso2.toLowerCase();
                     let image = "<img alt=\"" + iso2 + "\" height=16 src=\"resources/flags/" + iso2 + ".png\" />";
-                    history = history + "<br>" + pointsToEmoji(points) + " Round " + i.toString().padEnd(2).replace(/\s/g, "&nbsp;") + ": " + points + "pts [" + dist + "km, " + time + "s]  " + image + " " + target;
+                    history = history + "<br>" + pointsToEmoji(points_int) + " Round " + i.toString().padEnd(2).replace(/\s/g, "&nbsp;") + ": " + points + "pts [" + dist + "km, " + time + "s]  " + image + " " + target;
                     i = i + 1;
                 });
             }
