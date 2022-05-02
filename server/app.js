@@ -192,8 +192,20 @@ app.use((err, req, res, next) => {
     res.send(err.message || 'Internal server error');
 });
 
+const coprime = (num1, num2) => {
+    const smaller = num1 > num2 ? num1 : num2;
+    for (let ind = 2; ind < smaller; ind++) {
+        const condition1 = num1 % ind === 0;
+        const condition2 = num2 % ind === 0;
+        if (condition1 && condition2) {
+            return false;
+        };
+    };
+    return true;
+};
+
 const calculate_special = () => {
-    // Get days since jan 1 (plus two so special doesn't change the day I implemented this)
+    // Get days since jan 1
     var now = new Date();
     var start = new Date(now.getFullYear(), 0, 0);
     var diff = now - start;
@@ -204,7 +216,26 @@ const calculate_special = () => {
     // To be more stable, we upcast num_specials to the nearest multiple of 20 and mod by that.  Then mod by num_specials.
     let num_specials = CONSTANTS.SPECIAL_COUNTRIES.length;
     let upcast_num_specials = (Math.round(num_specials / 20) + 1) * 20
-    return (day % upcast_num_specials) % num_specials
+    let raw_idx = (day % upcast_num_specials) % num_specials;
+
+    // "Randomize" the special country so you can't easily tell the order by looking at constants.js.
+    // Find a multiplier, mult, that is coprime with num_specials, and recalculate special idx by multiplying
+    // with this value and re-modding with num_specials.
+    // Basically, since the lcm of two coprime numbers, A and B, is A*B, that means you can use A to re-index
+    // values from 0 to B. For example, B = 10, A = 3, integers 0, 1, 2, ..., 9 would become 0, 3, 6, ..., 7.
+    // Choose mult as the first coprime number above currenty "epoch."  Epoch = raw_idx / upcast_num_specials.
+    let epoch = Math.floor(day / upcast_num_specials) % num_specials;
+    let mult = 1;
+    for (let i = epoch; i < num_specials; i++) {
+        if (i != 0 && coprime(i, num_specials)) {
+            mult = i;
+            break;
+        }
+    }
+    // Plus 6 to match country the day this was implemented
+    let idx = (6 + mult * raw_idx) % num_specials;
+
+    return idx;
 }
 
 let special_idx = calculate_special();
@@ -622,10 +653,12 @@ io.on('connection', (socket) => {
         const isAnnounce = (msg.toLowerCase().trim().startsWith('/announce'));
         const isWhisper = (msg.toLowerCase().trim().startsWith('/whisper'));
         const isHidden = (msg.toLowerCase().trim().startsWith('/hidden'));
+        const isCount = (msg.toLowerCase().trim().startsWith('/count'));
         const isUnknownCmd = (msg.toLowerCase().trim().startsWith('/'));
         const cb = () => {
             callback()
         };
+        console.log("is count? " + isCount + " msg " + msg.toLowerCase().trim())
         Object.values(rooms).forEach(function(room) {
             if (room.hasPlayer(socket)) {
                 var new_sent_msg = msg;
@@ -693,6 +726,16 @@ io.on('connection', (socket) => {
                     })
                     if (numHidden > 0) room.distributeMessage(socket, "The following players are in private games: ", cb);
                     else room.distributeMessage(socket, "No players are currently in private games", cb);
+                } else if (isCount) {
+                    let numCount = 0;
+                    room.distributeMessage(socket, new_sent_msg, cb)
+                    Object.values(rooms).forEach(function(r) {
+                        Array.from(r.players.values()).forEach(function(player) {
+                            numCount = numCount + 1;
+                        })
+                    })
+                    if (numCount > 1) room.distributeMessage(socket, "<b>Total online  (including you): " + numCount + "</b>", cb);
+                    else room.distributeMessage(socket, "<b>You are the only player online!</b>", cb);
                 } else if (isWhisper) {
                     const playerName = room.getPlayerName(socket);
                     const playerColor = room.getPlayerColor(socket);
