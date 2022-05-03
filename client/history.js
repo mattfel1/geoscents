@@ -98,7 +98,7 @@ class History {
                     if (iso2 == "" || iso2 == null)
                         iso2 = "earth";
                     iso2 = iso2.toLowerCase();
-                    let image = "<img alt=\"" + iso2 + "\" height=16 src=\"resources/flags/" + iso2 + ".png\" />";
+                    let image = "<img alt=\":flag_" + iso2 + ":\" height=16 src=\"resources/flags/" + iso2 + ".png\" />";
                     history = history + "<br>" + pointsToEmoji(points_int) + " Round " + i.toString().padEnd(2).replace(/\s/g, "&nbsp;") + ": " + points + "pts [" + dist + "km, " + time + "s]  " + image + " " + target;
                     i = i + 1;
                 });
