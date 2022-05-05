@@ -1145,8 +1145,8 @@ module.exports = {
             "id": 1156137209
         },
         {
-            "city": "Shuangshui",
-            "city_ascii": "Shuangshui",
+            "city": "Liupanshui",
+            "city_ascii": "Liupanshui",
             "lat": 26.5944,
             "lng": 104.8333,
             "country": "China",

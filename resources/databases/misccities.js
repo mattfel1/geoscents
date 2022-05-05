@@ -4787,6 +4787,127 @@ module.exports = {
             "capital": "",
             "wiki": "https://en.wikipedia.org/wiki/Gangteng_Monastery"
         },
+        {
+            "city": "Jaya Sri Maha Bodhi Tree (ජය ශ්‍රී මහා බොධිය)",
+            "city_ascii": "",
+            "lat": 8.344722,
+            "lng": 80.396667,
+            "iso2": "LK",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Jaya_Sri_Maha_Bodhi"
+        },
+        {
+            "city": "Burke and Wills Dig Tree",
+            "city_ascii": "",
+            "lat": -27.6237,
+            "lng": 141.0758,
+            "iso2": "AU",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Burke_and_Wills_Dig_Tree"
+        },
+        {
+            "city": "Boab Prison Tree",
+            "city_ascii": "",
+            "lat": -17.3507,
+            "lng": 123.6699,
+            "iso2": "AU",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Boab_Prison_Tree,_Derby"
+        },
+        {
+            "city": "El Árbol del Tule (World's Stoutest Tree)",
+            "city_ascii": "",
+            "lat": 17.0465,
+            "lng": -96.636111,
+            "iso2": "MX",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/%C3%81rbol_del_Tule"
+        },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "",
+        //   "country": "",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "",
+        //   "country": "",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "",
+        //   "country": "",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "",
+        //   "country": "",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "",
+        //   "country": "",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "",
+        //   "country": "",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "",
+        //   "country": "",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
         // {
         //   "city": "",
         //   "city_ascii": "",
