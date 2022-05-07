@@ -45,11 +45,16 @@ module.exports = {
     SPECIAL: 'Daily Country',
     AFRICA: 'Africa',
     SAMERICA: "S. America",
-    SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania", "Egypt", "Peru", "Indonesia", "Spain", "China", "United States", "Iran"],
-    SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Morrison", "Iohannis", "el-Sisi", "Castillo", "Widodo", "Sánchez", "Xi", "Biden", "Raisi"],
+    SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania", "Egypt", "Peru", "Indonesia",
+        "Spain", "China", "United States", "Iran", "Brazil", "Mexico", "India", "United Kingdom", "Italy", "Germany", "France"
+    ],
+    SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Morrison", "Iohannis", "el-Sisi", "Castillo", "Widodo",
+        "Sánchez", "Xi", "Biden", "Raisi", "Bolsonaro", "AMLO", "Modi", "Johnson", "Mattarella", "Scholz", "Macron"
+    ],
     SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)",
         "Welcome/Bienvenue", "Bienvenido", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenido", "Selamat datang",
-        "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome", "خوش آمدی (xoš âmadi)"
+        "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome", "خوش آمدی (xoš âmadi)", "Receber", "Bienvenido", "Welcome/स्वागत हे(svaagat he)", "Welcome",
+        "Benvenuto/Benvenuta", "Willkommen", "Bienvenue"
     ],
 
     // IDs generally used for map pngs and css div classes
@@ -225,6 +230,55 @@ module.exports = {
             "max_lon": 72.6,
             "max_lat": 24,
             "min_lat": 42,
+            "lat_ts": 0
+        },
+        "Brazil": {
+            "min_lon": -91.7,
+            "max_lon": -17,
+            "max_lat": -34,
+            "min_lat": 8,
+            "lat_ts": 0
+        },
+        "Mexico": {
+            "min_lon": -120,
+            "max_lon": -80,
+            "max_lat": 13.61,
+            "min_lat": 35,
+            "lat_ts": 0
+        },
+        "India": {
+            "min_lon": 50,
+            "max_lon": 107.3,
+            "max_lat": 6,
+            "min_lat": 37,
+            "lat_ts": 0
+        },
+        "Italy": {
+            "min_lon": -2.1,
+            "max_lon": 25.4,
+            "max_lat": 36,
+            "min_lat": 48,
+            "lat_ts": 0
+        },
+        "United Kingdom": {
+            "min_lon": -19.55,
+            "max_lon": 15,
+            "max_lat": 49.5,
+            "min_lat": 61,
+            "lat_ts": 0
+        },
+        "Germany": {
+            "min_lon": -2.1,
+            "max_lon": 23,
+            "max_lat": 46.8,
+            "min_lat": 56,
+            "lat_ts": 0
+        },
+        "France": {
+            "min_lon": -10.2,
+            "max_lon": 17,
+            "max_lat": 41,
+            "min_lat": 52,
             "lat_ts": 0
         },
 

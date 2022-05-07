@@ -213,3 +213,59 @@ pop = 0
 blacklist = ['*']
 whitelist = ['Iran']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'brazilcities.js'
+lonrng = [-91.7, -17]
+latrng = [-34, 8]
+pop = 80000
+blacklist = ['*']
+whitelist = ['Brazil']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'mexicocities.js'
+lonrng = [-120, -80]
+latrng = [13.61, 35]
+pop = 0
+blacklist = ['*']
+whitelist = ['Mexico']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'indiacities.js'
+lonrng = [50, 107.3]
+latrng = [6, 37]
+pop = 0
+blacklist = ['*']
+whitelist = ['India']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'italycities.js'
+lonrng = [-2.1, 25.4]
+latrng = [36, 48]
+pop = 0
+blacklist = ['*']
+whitelist = ['Italy']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'unitedkingdomcities.js'
+lonrng = [-19.55, 15]
+latrng = [49.5, 61]
+pop = 1000
+blacklist = ['*']
+whitelist = ['United Kingdom']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'germanycities.js'
+lonrng = [-2.1, 23]
+latrng = [46.8, 56]
+pop = 0
+blacklist = ['*']
+whitelist = ['Germany']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'francecities.js'
+lonrng = [-10.2, 17]
+latrng = [41, 52]
+pop = 0
+blacklist = ['*']
+whitelist = ['France']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
