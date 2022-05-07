@@ -269,3 +269,35 @@ pop = 0
 blacklist = ['*']
 whitelist = ['France']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'nigeriacities.js'
+lonrng = [-2.48, 19]
+latrng = [3.5, 16]
+pop = 0
+blacklist = ['*']
+whitelist = ['Nigeria']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'southafricacities.js'
+lonrng = [9, 37]
+latrng = [-35.51, -21]
+pop = 0
+blacklist = ['*']
+whitelist = ['South Africa']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'democraticrepublicofthecongocities.js'
+lonrng = [3.53, 41]
+latrng = [-14, 8]
+pop = 0
+blacklist = ['*']
+whitelist = ['Congo (Kinshasa)']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = 'moroccocities.js'
+lonrng = [-25, 10]
+latrng = [20.03, 38]
+pop = 0
+blacklist = ['*']
+whitelist = ['Morocco']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)

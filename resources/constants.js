@@ -281,6 +281,34 @@ module.exports = {
             "min_lat": 52,
             "lat_ts": 0
         },
+        "Nigeria": {
+            "min_lon": -2.48,
+            "max_lon": 19,
+            "max_lat": 3.5,
+            "min_lat": 16,
+            "lat_ts": 0
+        },
+        "South Africa": {
+            "min_lon": 9,
+            "max_lon": 37,
+            "max_lat": -35.51,
+            "min_lat": -21,
+            "lat_ts": 0
+        },
+        "Democratic Republic of the Congo": {
+            "min_lon": 3.53,
+            "max_lon": 41,
+            "max_lat": -14,
+            "min_lat": 8,
+            "lat_ts": 0
+        },
+        "Morocco": {
+            "min_lon": -25,
+            "max_lon": 10,
+            "max_lat": 20.03,
+            "min_lat": 38,
+            "lat_ts": 0
+        },
 
     },
 
