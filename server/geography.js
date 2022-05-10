@@ -209,7 +209,7 @@ const score = (map, geoDist, mercDist, timeBonus) => {
         if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(map) !== -1)
             fudge_factor = 2.5;
         if (map == "Vatican City")
-            fudge_factor = 100;
+            fudge_factor = 30;
         scalingFactor = fullDiag / (fudge_factor * diag);
     }
     // console.log("diag = " + diag + " sf = " + scalingFactor + " geo dist " + geoDist + " merc dist " + mercDist)
