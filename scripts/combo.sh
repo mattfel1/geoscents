@@ -2,9 +2,8 @@
 
 # example usage
 #   bash combo.sh ar.png cl.png
-#   mv new.png arcl.png
-#   rm *.png.new
 
+geoscents_home="/home/mattfel/geoscents/"
 #This script will merge two jpg images into one using imageMagick.
 #The final result will be a picture that is split diagonally.
 #The diagonal line will start from the bottom left of the image.
@@ -13,17 +12,19 @@
  
 #If command line argument 1 is not provided, the value will default to the variable $LEFT_DEFAULT
 LEFT_DEFAULT="Left.jpg";
-LEFT=${1:-$LEFT_DEFAULT};
+MAP1=`echo $1 | sed "s/.png//"`
+LEFT=${geoscents_home}/resources/flags/${1:-$LEFT_DEFAULT};
  
 #If command line argument 2 is not provided, the value will default to the variable $Right_DEFAULT
 RIGHT_DEFAULT="Right.jpg";
-RIGHT=${2:-$RIGHT_DEFAULT};
+MAP2=`echo $2 | sed "s/.png//"`
+RIGHT=${geoscents_home}/resources/flags/${2:-$RIGHT_DEFAULT};
  
 #The intermediate images we will use must be png to support transparency.
 #We remove the extension '.jpg' from the filenames and add the extension '.png'.
 LEFT_OUT="${LEFT%.jpg}.new.png";
 RIGHT_OUT="${RIGHT%.jpg}.new.png";
-OUT="new.png";
+OUT="${geoscents_home}/resources/flags/$MAP1$MAP2.png";
  
 #Read the width of one of the images;
 WIDTH=`identify -format %w "$LEFT"`;
@@ -43,3 +44,4 @@ convert -respect-parenthesis \
  
 #Cleaning up
 rm "MASK_$RIGHT_OUT" "MASK_$LEFT_OUT" "$LEFT_OUT" "$RIGHT_OUT";
+echo "Created combined flag $OUT"
