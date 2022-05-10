@@ -7,5 +7,5 @@ certs/
 *.crt
 *.csr
 *.pem
+scripts/*.ipynb_checkpoints
 yarn.lock
-resources/maps/.ipynb_checkpoints
