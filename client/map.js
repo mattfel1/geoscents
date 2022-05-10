@@ -226,7 +226,7 @@ class MapPanel {
             this.ctx.fillText('[ Map is loading... ]', 400, 400);
             let value;
             if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(map) !== -1) {
-                value = map.toLowerCase().replaceAll(" ", "");
+                value = map.toLowerCase().replace(" ", "");
             } else {
                 value = CONSTANTS.MAP_TO_ID[map];
             }

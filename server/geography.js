@@ -15,7 +15,7 @@ const CONSTANTS = require('../resources/constants.js');
 let SPECIALCITIES = new Map()
 Object.keys(CONSTANTS.MAP_BOUNDS).forEach(function(value) {
     if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(value) !== -1) {
-        let list = require('../resources/databases/' + value.toLowerCase().replaceAll(" ", "") + 'cities.js').CITIES;
+        let list = require('../resources/databases/' + value.toLowerCase().replace(" ", "") + 'cities.js').CITIES;
         SPECIALCITIES.set(value, list);
     }
 })
