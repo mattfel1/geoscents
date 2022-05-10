@@ -5,11 +5,9 @@ from pathlib import Path
 import urllib.request
 import re
 
-geoscents_home='/home/mattfel/geoscents/'
-
 def scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, include_admin):
     countries = []
-    file = geoscents_home + 'resources/databases/cities.js'
+    file = 'cities.js'
     with open(file) as json_file:
         data = json.load(json_file)
         filtered = []
@@ -40,7 +38,7 @@ def scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, include_admi
             data_file.write("}")
 
 
-outfile = geoscents_home + 'resources/databases/worldcities.js'
+outfile = 'worldcities.js'
 lonrng = [-180, 180]
 latrng = [-65, 77]
 pop = 580000
@@ -48,7 +46,7 @@ blacklist = []
 whitelist = ['Jersey', 'Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar', 'New Caledonia', 'Azores']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/worldcapitalcities.js'
+outfile = 'worldeasycities.js'
 lonrng = [-180, 180]
 latrng = [-65, 77]
 pop = 9999999999999 # capital cities only
@@ -56,7 +54,7 @@ blacklist = []
 whitelist = ['Jersey', 'Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, False)
 
-outfile = geoscents_home + 'resources/databases/namericacities.js'
+outfile = 'namericacities.js'
 lonrng = [-141, -43]
 latrng = [12,54]
 pop = 100000
@@ -64,7 +62,7 @@ blacklist = ['Barbados', 'Curaçao', 'Aruba', 'Saint Vincent And The Grenadines'
 whitelist = []
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/oceaniacities.js'
+outfile = 'oceaniacities.js'
 lonrng = [92,252]
 latrng = [-51,28]
 pop = 10000
@@ -72,7 +70,7 @@ blacklist =  ['Macau', 'Thailand', 'Mexico', 'United States', 'Sri Lanka', 'Indi
 whitelist = ['Cook Islands', 'Wallis And Futuna', 'Honolulu', 'Hilo', 'Wailuku', 'Lihue', 'Easter Island', 'Tokelau']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/asiacities.js'
+outfile = 'asiacities.js'
 lonrng = [27,156]
 latrng = [2,59]
 pop = 400000
@@ -80,7 +78,7 @@ blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', '
 whitelist = []
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/samericacities.js'
+outfile = 'samericacities.js'
 lonrng = [-138, -30]
 latrng = [-54,20]
 pop = 61000
@@ -88,7 +86,7 @@ blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemal
 whitelist = ['Falkland Islands (Islas Malvinas)', 'Galápagos', 'South Georgia And South Sandwich Islands', 'Easter Island']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/europecities.js'
+outfile = 'europecities.js'
 lonrng = [-36, 52]
 latrng = [37,66]
 pop = 100000
@@ -96,7 +94,7 @@ blacklist = ['Azerbaijan', 'Iran', 'Armenia', 'Georgia', 'Kazakhstan', 'Iraq', '
 whitelist = ['Isle Of Man', 'Gibraltar', 'Shetland Islands', 'Torshavn', 'Azores', 'Jersey']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/africacities.js'
+outfile = 'africacities.js'
 lonrng = [-58, 80]
 latrng = [-34,39]
 pop = 100000
@@ -104,7 +102,7 @@ blacklist = ['India', 'Brazil', 'Pakistan', 'Iran', 'Iraq', 'Saudi Arabia', 'Afg
 whitelist = ['Gibraltar']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/ukrainecities.js'
+outfile = 'ukrainecities.js'
 lonrng = [17.7, 45]
 latrng = [43.2, 54]
 pop = 0
@@ -112,7 +110,7 @@ blacklist = ['Moldova', 'Belarus', 'Russia', 'Poland', 'Romania', 'Hungary', 'Se
 whitelist = []
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/argentinacities.js'
+outfile = 'argentinacities.js'
 lonrng = [-102, -20]
 latrng = [-56.5, -20]
 pop = 30000
@@ -120,7 +118,7 @@ blacklist = ['*']
 whitelist = ['Argentina']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/australiacities.js'
+outfile = 'australiacities.js'
 lonrng = [97, 170]
 latrng = [-45.5, -8]
 pop = 15000
@@ -128,7 +126,7 @@ blacklist = ['*']
 whitelist = ['Australia']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/canadacities.js'
+outfile = 'canadacities.js'
 lonrng = [-160, -15]
 latrng = [38, 77.5]
 pop = 15000
@@ -136,7 +134,7 @@ blacklist = ['*']
 whitelist = ['Canada']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/japancities.js'
+outfile = 'japancities.js'
 lonrng = [110, 164.5]
 latrng = [23.5, 49]
 pop = 0
@@ -144,7 +142,7 @@ blacklist = ['*']
 whitelist = ['Japan']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/kenyacities.js'
+outfile = 'kenyacities.js'
 lonrng = [30, 49]
 latrng = [-5.3, 5.9]
 pop = 0
@@ -152,7 +150,7 @@ blacklist = ['*']
 whitelist = ['Kenya']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/romaniacities.js'
+outfile = 'romaniacities.js'
 lonrng = [19, 33.7]
 latrng = [43, 49]
 pop = 0
@@ -160,7 +158,7 @@ blacklist = ['*']
 whitelist = ['Romania']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/perucities.js'
+outfile = 'perucities.js'
 lonrng = [-92, -55]
 latrng = [-19.5, 2]
 pop = 20000
@@ -168,7 +166,7 @@ blacklist = ['*']
 whitelist = ['Peru']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/egyptcities.js'
+outfile = 'egyptcities.js'
 lonrng = [16.5, 41.7]
 latrng = [20.81, 34]
 pop = 0
@@ -176,7 +174,7 @@ blacklist = ['*']
 whitelist = ['Egypt']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/indonesiacities.js'
+outfile = 'indonesiacities.js'
 lonrng = [84.5, 151]
 latrng = [-23.5, 15]
 pop = 90000
@@ -184,7 +182,7 @@ blacklist = ['*']
 whitelist = ['Indonesia']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/spaincities.js'
+outfile = 'spaincities.js'
 lonrng = [-14.18, 8]
 latrng = [35, 45]
 pop = 0
@@ -192,7 +190,7 @@ blacklist = ['*']
 whitelist = ['Spain']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/chinacities.js'
+outfile = 'chinacities.js'
 lonrng = [62, 148]
 latrng = [16.85, 56]
 pop = 500000
@@ -200,7 +198,7 @@ blacklist = ['*']
 whitelist = ['China']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/unitedstatescities.js'
+outfile = 'unitedstatescities.js'
 lonrng = [-130, -60]
 latrng = [22, 53.7]
 pop = 200000
@@ -208,7 +206,7 @@ blacklist = ['*']
 whitelist = ['United States']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/irancities.js'
+outfile = 'irancities.js'
 lonrng = [36, 72.6]
 latrng = [24, 42]
 pop = 0
@@ -216,7 +214,7 @@ blacklist = ['*']
 whitelist = ['Iran']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/brazilcities.js'
+outfile = 'brazilcities.js'
 lonrng = [-91.7, -17]
 latrng = [-34, 8]
 pop = 80000
@@ -224,7 +222,7 @@ blacklist = ['*']
 whitelist = ['Brazil']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/mexicocities.js'
+outfile = 'mexicocities.js'
 lonrng = [-120, -80]
 latrng = [13.61, 35]
 pop = 0
@@ -232,7 +230,7 @@ blacklist = ['*']
 whitelist = ['Mexico']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/indiacities.js'
+outfile = 'indiacities.js'
 lonrng = [50, 107.3]
 latrng = [6, 37]
 pop = 0
@@ -240,7 +238,7 @@ blacklist = ['*']
 whitelist = ['India']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/italycities.js'
+outfile = 'italycities.js'
 lonrng = [-2.1, 25.4]
 latrng = [36, 48]
 pop = 0
@@ -248,7 +246,7 @@ blacklist = ['*']
 whitelist = ['Italy']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/unitedkingdomcities.js'
+outfile = 'unitedkingdomcities.js'
 lonrng = [-19.55, 15]
 latrng = [49.5, 61]
 pop = 1000
@@ -256,7 +254,7 @@ blacklist = ['*']
 whitelist = ['United Kingdom']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/germanycities.js'
+outfile = 'germanycities.js'
 lonrng = [-2.1, 23]
 latrng = [46.8, 56]
 pop = 0
@@ -264,7 +262,7 @@ blacklist = ['*']
 whitelist = ['Germany']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/francecities.js'
+outfile = 'francecities.js'
 lonrng = [-10.2, 17]
 latrng = [41, 52]
 pop = 0
@@ -272,7 +270,7 @@ blacklist = ['*']
 whitelist = ['France']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/nigeriacities.js'
+outfile = 'nigeriacities.js'
 lonrng = [-2.48, 19]
 latrng = [3.5, 16]
 pop = 0
@@ -280,7 +278,7 @@ blacklist = ['*']
 whitelist = ['Nigeria']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/southafricacities.js'
+outfile = 'southafricacities.js'
 lonrng = [9, 37]
 latrng = [-35.51, -21]
 pop = 0
@@ -288,7 +286,7 @@ blacklist = ['*']
 whitelist = ['South Africa']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/democraticrepublicofthecongocities.js'
+outfile = 'democraticrepublicofthecongocities.js'
 lonrng = [3.53, 41]
 latrng = [-14, 8]
 pop = 0
@@ -296,7 +294,7 @@ blacklist = ['*']
 whitelist = ['Congo (Kinshasa)']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/moroccocities.js'
+outfile = 'moroccocities.js'
 lonrng = [-25, 10]
 latrng = [20.03, 38]
 pop = 0

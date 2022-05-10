@@ -34,14 +34,14 @@ module.exports = {
     MAP_HEIGHT: 900,
 
     WORLD: 'World',
-    WORLD_EASY: 'World Capitals',
+    WORLD_CAPITALS: 'World Capitals',
     PRIVATE: 'Private',
     LOBBY: 'Lobby',
-    US: 'N. America',
-    EURO: 'Europe',
+    NAMERICA: 'N. America',
+    EUROPE: 'Europe',
     ASIA: 'Asia',
     OCEANIA: 'Oceania',
-    MISC: 'Trivia',
+    TRIVIA: 'Trivia',
     SPECIAL: 'Daily Country',
     AFRICA: 'Africa',
     SAMERICA: "S. America",
@@ -57,19 +57,6 @@ module.exports = {
         "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome", "خوش آمدی (xoš âmadi)", "Receber", "Bienvenido", "Welcome/स्वागत हे(svaagat he)", "Welcome",
         "Benvenuto/Benvenuta", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "أهلا بك ('ahlan bik)"
     ],
-
-    // IDs generally used for map pngs and css div classes
-    MAP_TO_ID: {
-        "World": "world",
-        "Trivia": "misc",
-        "World Capitals": "world_easy",
-        "N. America": "us",
-        "Europe": "euro",
-        "Oceania": "oceania",
-        "Asia": "asia",
-        "Africa": "africa",
-        "S. America": "samerica",
-    },
 
     MAP_BOUNDS: {
         "World": {

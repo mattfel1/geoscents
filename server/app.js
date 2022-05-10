@@ -245,14 +245,14 @@ let special = CONSTANTS.SPECIAL_COUNTRIES[special_idx];
 // map, roomName, citysrc
 var rooms = {
     'World': new Room(CONSTANTS.WORLD, CONSTANTS.WORLD, CONSTANTS.WORLD),
-    'World Capitals': new Room(CONSTANTS.WORLD, CONSTANTS.WORLD_EASY, CONSTANTS.WORLD_EASY),
-    'N. America': new Room(CONSTANTS.US, CONSTANTS.US, CONSTANTS.US),
+    'World Capitals': new Room(CONSTANTS.WORLD, CONSTANTS.WORLD_CAPITALS, CONSTANTS.WORLD_CAPITALS),
+    'N. America': new Room(CONSTANTS.NAMERICA, CONSTANTS.NAMERICA, CONSTANTS.NAMERICA),
     'S. America': new Room(CONSTANTS.SAMERICA, CONSTANTS.SAMERICA, CONSTANTS.SAMERICA),
-    'Europe': new Room(CONSTANTS.EURO, CONSTANTS.EURO, CONSTANTS.EURO),
+    'Europe': new Room(CONSTANTS.EUROPE, CONSTANTS.EUROPE, CONSTANTS.EUROPE),
     'Africa': new Room(CONSTANTS.AFRICA, CONSTANTS.AFRICA, CONSTANTS.AFRICA),
     'Asia': new Room(CONSTANTS.ASIA, CONSTANTS.ASIA, CONSTANTS.ASIA),
     'Oceania': new Room(CONSTANTS.OCEANIA, CONSTANTS.OCEANIA, CONSTANTS.OCEANIA),
-    'Trivia': new Room(CONSTANTS.MISC, CONSTANTS.MISC, CONSTANTS.MISC),
+    'Trivia': new Room(CONSTANTS.TRIVIA, CONSTANTS.TRIVIA, CONSTANTS.TRIVIA),
     'Daily Country': new Room(special, CONSTANTS.SPECIAL, special),
     'Lobby': new Room(CONSTANTS.LOBBY, CONSTANTS.LOBBY, CONSTANTS.LOBBY),
 };
@@ -288,17 +288,16 @@ io.on('connection', (socket) => {
         io.sockets.emit('update counts', {
             [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
             [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
-            [CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),
-            [CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),
-            [CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),
+            [CONSTANTS.WORLD_CAPITALS]: rooms[CONSTANTS.WORLD_CAPITALS].playerCount(),
+            [CONSTANTS.NAMERICA]: rooms[CONSTANTS.NAMERICA].playerCount(),
+            [CONSTANTS.EUROPE]: rooms[CONSTANTS.EUROPE].playerCount(),
             [CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),
             [CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),
             [CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),
             [CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),
-            [CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount(),
+            [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
             [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()
         });
-        helpers.logHistogram(rooms);
         helpers.log("User connected    " + socket.handshake.address);
         socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
     });
@@ -322,14 +321,14 @@ io.on('connection', (socket) => {
             io.sockets.emit('update counts', {
                 [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
                 [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
-                [CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),
-                [CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),
-                [CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),
+                [CONSTANTS.WORLD_CAPITALS]: rooms[CONSTANTS.WORLD_CAPITALS].playerCount(),
+                [CONSTANTS.NAMERICA]: rooms[CONSTANTS.NAMERICA].playerCount(),
+                [CONSTANTS.EUROPE]: rooms[CONSTANTS.EUROPE].playerCount(),
                 [CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),
                 [CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),
                 [CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),
                 [CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),
-                [CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount(),
+                [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
                 [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()
             });
         }
@@ -382,18 +381,17 @@ io.on('connection', (socket) => {
             io.sockets.emit('update counts', {
                 [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
                 [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
-                [CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),
-                [CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),
-                [CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),
+                [CONSTANTS.WORLD_CAPITALS]: rooms[CONSTANTS.WORLD_CAPITALS].playerCount(),
+                [CONSTANTS.NAMERICA]: rooms[CONSTANTS.NAMERICA].playerCount(),
+                [CONSTANTS.EUROPE]: rooms[CONSTANTS.EUROPE].playerCount(),
                 [CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),
                 [CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),
                 [CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),
                 [CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),
-                [CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount(),
+                [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
                 [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()
             });
 
-            helpers.logHistogram(rooms)
         }
         callback()
     });
@@ -431,14 +429,14 @@ io.on('connection', (socket) => {
         io.sockets.emit('update counts', {
             [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
             [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
-            [CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),
-            [CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),
-            [CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),
+            [CONSTANTS.WORLD_CAPITALS]: rooms[CONSTANTS.WORLD_CAPITALS].playerCount(),
+            [CONSTANTS.NAMERICA]: rooms[CONSTANTS.NAMERICA].playerCount(),
+            [CONSTANTS.EUROPE]: rooms[CONSTANTS.EUROPE].playerCount(),
             [CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),
             [CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),
             [CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),
             [CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),
-            [CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount(),
+            [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
             [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()
         });
     });
@@ -511,24 +509,23 @@ io.on('connection', (socket) => {
             playerRooms.set(socket.id, rooms[roomName]);
             var join_msg = "[ <font color='" + rooms[roomName].getPlayerColor(socket) + "'><b>" + rooms[roomName].getPlayerRawName(socket) + "</b> has joined " + roomName + "!</font> ]<br>";
             io.sockets.emit("update messages", roomName, join_msg);
-            if (roomName == CONSTANTS.MISC) rooms[roomName].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items or complain about current items by typing a message starting with /feedback!</i><br>", function() {});
+            if (roomName == CONSTANTS.TRIVIA) rooms[roomName].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items or complain about current items by typing a message starting with /feedback!</i><br>", function() {});
             if (roomName == CONSTANTS.SPECIAL) rooms[CONSTANTS.SPECIAL].whisperMessage(socket, "<i><b>" + CONSTANTS.SPECIAL_WELCOMES[special_idx] + "</b>! Today's special country is <b>" + special + "</b>!</i><br>", function() {});
-            if (roomName == CONSTANTS.WORLD_EASY) rooms[roomName].whisperMessage(socket, "<i>Welcome to the World Capitals map!  This map no longer includes province and state capitals of the largest countries (i.e. Canada, USA, China, India, and Australia).  Let me know if you think this is better or worse by leaving /feedback!</i><br>", function() {});
+            if (roomName == CONSTANTS.WORLD_CAPITALS) rooms[roomName].whisperMessage(socket, "<i>Welcome to the World Capitals map!  This map no longer includes province and state capitals of the largest countries (i.e. Canada, USA, China, India, and Australia).  Let me know if you think this is better or worse by leaving /feedback!</i><br>", function() {});
             io.sockets.emit('update counts', {
                 [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
                 [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
-                [CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),
-                [CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),
-                [CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),
+                [CONSTANTS.WORLD_CAPITALS]: rooms[CONSTANTS.WORLD_CAPITALS].playerCount(),
+                [CONSTANTS.NAMERICA]: rooms[CONSTANTS.NAMERICA].playerCount(),
+                [CONSTANTS.EUROPE]: rooms[CONSTANTS.EUROPE].playerCount(),
                 [CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),
                 [CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),
                 [CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),
                 [CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),
-                [CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount(),
+                [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
                 [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()
             });
             rooms[roomName].joeMessage();
-            helpers.logHistogram(rooms)
         }
         Object.values(rooms).forEach(function(room) {
             if (room.isPrivate && room.playerCount() == 0 && rooms.hasOwnProperty(room.roomName)) {
@@ -573,7 +570,6 @@ io.on('connection', (socket) => {
                 rooms[dest].reset();
                 socket.emit('moved to', map, dest, citysrc, rooms[dest].state);
                 helpers.log("Player " + socket.handshake.address + " " + rooms[dest].getPlayerName(socket) + " changed map in " + dest);
-                helpers.logHistogram(rooms)
             } else {
                 console.log('making private room ' + dest)
                 var leave_msg = "[ <font color='" + rooms[originRoomName].getPlayerColor(socket) + "'><b>" + rooms[originRoomName].getPlayerRawName(socket) + "</b> has left " + originRoomName + " and joined a private room!</font> ]<br>";
@@ -598,23 +594,22 @@ io.on('connection', (socket) => {
                 if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) rooms[dest].whisperMessage(socket, "<i><b>" + CONSTANTS.SPECIAL_WELCOMES[CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc)] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
                 var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'><b>" + rooms[dest].getPlayerRawName(socket) + "</b> has joined " + dest + "!</font> ]<br>";
                 io.sockets.emit("update messages", dest, join_msg);
-                // if (dest == CONSTANTS.MISC) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
+                // if (dest == CONSTANTS.TRIVIA) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
                 io.sockets.emit('update counts', {
                     [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
                     [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
-                    [CONSTANTS.WORLD_EASY]: rooms[CONSTANTS.WORLD_EASY].playerCount(),
-                    [CONSTANTS.US]: rooms[CONSTANTS.US].playerCount(),
-                    [CONSTANTS.EURO]: rooms[CONSTANTS.EURO].playerCount(),
+                    [CONSTANTS.WORLD_CAPITALS]: rooms[CONSTANTS.WORLD_CAPITALS].playerCount(),
+                    [CONSTANTS.NAMERICA]: rooms[CONSTANTS.NAMERICA].playerCount(),
+                    [CONSTANTS.EUROPE]: rooms[CONSTANTS.EUROPE].playerCount(),
                     [CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),
                     [CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),
                     [CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),
                     [CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),
-                    [CONSTANTS.MISC]: rooms[CONSTANTS.MISC].playerCount(),
+                    [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
                     [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()
                 });
                 helpers.log("Player " + socket.handshake.address + " " + rooms[dest].getPlayerName(socket) + " moved to room " + dest);
                 rooms[dest].joeMessage();
-                helpers.logHistogram(rooms)
             }
         }
     });
@@ -718,7 +713,7 @@ io.on('connection', (socket) => {
                     Object.values(rooms).forEach(function(r) {
                         if (r.isPrivate) {
                             Array.from(r.players.values()).forEach(function(player) {
-                                room.distributeMessage(socket, "  - <font color='" + player.color + "'><b>" + player.name + "</b></font>", cb)
+                                room.distributeMessage(socket, "  - <font color='" + player.color + "'><b>" + player.name + "</b></font> (" + r.citysrc + ")", cb)
                                 numHidden = numHidden + 1;
                             })
                         }

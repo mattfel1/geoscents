@@ -13,9 +13,9 @@ const app = require('./app.js')
 
 class Room {
     constructor(map, roomName, citysrc) {
-        this.map = map; // Underlying map ("Ukraine")
-        this.roomName = roomName; // User-friendly room name ("Weekly Country")
-        this.citysrc = citysrc; // source for random city selection ("Ukraine")
+        this.map = map; // Underlying map ("Ukraine" or "World")
+        this.roomName = roomName; // User-friendly room name ("Weekly Country" or "Trivia")
+        this.citysrc = citysrc; // source for random city selection ("Ukraine" or "Trivia")
         this.isPrivate = roomName.startsWith('private');
         this.joeTime = 10;
         this.joeLat = 0;

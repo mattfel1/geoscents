@@ -98,11 +98,7 @@ class MapPanel {
         // Initialize all maps (changed to lazy init for saving compute power)
         // Object.keys(CONSTANTS.MAP_BOUNDS).forEach(function(k) {
         //     let value;
-        //     if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(k) !== -1) {
-        //         value = k.toLowerCase().replace(" ","");
-        //     } else {
-        //         value = CONSTANTS.MAP_TO_ID[k];
-        //     }
+        //     value = k.toLowerCase().replace(" ","");
 
         //     let x = new Image();
         //     x.src = "/resources/maps/" + value + "_classic.png";
@@ -225,11 +221,7 @@ class MapPanel {
             this.ctx.font = "20px Arial";
             this.ctx.fillText('[ Map is loading... ]', 400, 400);
             let value;
-            if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(map) !== -1) {
-                value = map.toLowerCase().replace(" ", "");
-            } else {
-                value = CONSTANTS.MAP_TO_ID[map];
-            }
+            value = map.toLowerCase().replace(" ", "").replace(".", "");
             let image_name = value + "_" + mapStyle;
 
             let first_load = !this.map_images.has(image_name);

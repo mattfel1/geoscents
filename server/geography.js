@@ -2,10 +2,10 @@
  * Class for storing all geography methods
  */
 const WORLDCITIES = require('../resources/databases/worldcities.js').CITIES;
-const WORLDEASYCITIES = require('../resources/databases/worldeasycities.js').CITIES;
-const MISCCITIES = require('../resources/databases/misccities.js').CITIES;
-const USCITIES = require('../resources/databases/uscities.js').CITIES;
-const EUROCITIES = require('../resources/databases/eurocities.js').CITIES;
+const WORLDCAPITALSCITIES = require('../resources/databases/worldcapitalScities.js').CITIES;
+const TRIVIACITIES = require('../resources/databases/triviacities.js').CITIES;
+const NAMERICACITIES = require('../resources/databases/namericacities.js').CITIES;
+const EUROPECITIES = require('../resources/databases/europecities.js').CITIES;
 const AFRICACITIES = require('../resources/databases/africacities.js').CITIES;
 const ASIACITIES = require('../resources/databases/asiacities.js').CITIES;
 const OCEANIACITIES = require('../resources/databases/oceaniacities.js').CITIES;
@@ -31,29 +31,29 @@ const randomCity = (citysrc, blacklist) => {
             if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
-    } else if (citysrc === CONSTANTS.WORLD_EASY) {
+    } else if (citysrc === CONSTANTS.WORLD_CAPITALS) {
         while (!acceptable) {
-            proposal = WORLDEASYCITIES[Math.floor(Math.random() * WORLDEASYCITIES.length)];
+            proposal = WORLDCAPITALSCITIES[Math.floor(Math.random() * WORLDCAPITALSCITIES.length)];
             if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
-    } else if (citysrc === CONSTANTS.MISC) {
+    } else if (citysrc === CONSTANTS.TRIVIA) {
         while (!acceptable) {
-            proposal = MISCCITIES[Math.floor(Math.random() * MISCCITIES.length)];
-            // proposal = MISCCITIES[idx];
+            proposal = TRIVIACITIES[Math.floor(Math.random() * TRIVIACITIES.length)];
+            // proposal = TRIVIACITIES[idx];
             // idx = idx + 1
             if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
     } else if (citysrc === CONSTANTS.US) {
         while (!acceptable) {
-            proposal = USCITIES[Math.floor(Math.random() * USCITIES.length)];
+            proposal = NAMERICACITIES[Math.floor(Math.random() * NAMERICACITIES.length)];
             if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
     } else if (citysrc === CONSTANTS.EURO) {
         while (!acceptable) {
-            proposal = EUROCITIES[Math.floor(Math.random() * EUROCITIES.length)];
+            proposal = EUROPECITIES[Math.floor(Math.random() * EUROPECITIES.length)];
             if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
@@ -92,7 +92,7 @@ const randomCity = (citysrc, blacklist) => {
     }
     if (requireUniqueAdmin(citysrc, proposal)) {
         blacklist.push(proposal['admin_name'])
-    } else if (citysrc == CONSTANTS.MISC) blacklist.push(stringifyTarget(proposal, citysrc)['string'])
+    } else if (citysrc == CONSTANTS.TRIVIA) blacklist.push(stringifyTarget(proposal, citysrc)['string'])
     else blacklist.push(proposal['country']);
     return [proposal, blacklist];
 };
@@ -170,7 +170,7 @@ const requireUniqueAdmin = (citysrc, target) => {
 };
 
 const uniqueInBlacklist = (citysrc, target, blacklist) => {
-    if (citysrc == CONSTANTS.MISC) return !blacklist.includes(stringifyTarget(target, citysrc)['string'])
+    if (citysrc == CONSTANTS.TRIVIA) return !blacklist.includes(stringifyTarget(target, citysrc)['string'])
     else if (requireUniqueAdmin(citysrc, target)) return !blacklist.includes(target['admin_name']);
     else return !blacklist.includes(target['country']);
 };
