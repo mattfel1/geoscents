@@ -6,14 +6,14 @@ class Sounds {
         this.myMap = CONSTANTS.LOBBY;
         this.myCitysrc = CONSTANTS.LOBBY;
         this.myRoomName = CONSTANTS.LOBBY;
-        this.messagePop = new Audio('/resources/message.mp3');
+        this.messagePop = new Audio('/resources/audio/message.mp3');
         this.messagePop.volume = 0.5;
-        // this.gameBeginSound = new Audio('/resources/gamestart.mp3');
-        this.gameBeginSound = new Audio('/resources/jingle.mp3');
+        // this.gameBeginSound = new Audio('/resources/audio/gamestart.mp3');
+        this.gameBeginSound = new Audio('/resources/audio/jingle.mp3');
         this.gameBeginSound.volume = 0.25;
-        this.roundBeginSound = new Audio('/resources/roundstart.mp3');
+        this.roundBeginSound = new Audio('/resources/audio/roundstart.mp3');
         this.roundBeginSound.volume = 0.5;
-        this.roundEndSound = new Audio('/resources/roundstop.mp3');
+        this.roundEndSound = new Audio('/resources/audio/roundstop.mp3');
         this.roundEndSound.volume = 0.5;
         this.muted = false;
     }

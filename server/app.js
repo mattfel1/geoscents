@@ -161,9 +161,9 @@ app.get('/.well-known/pki-validation/*', (req, res, next) => {
 app.get('/overlaypopup.css', (req, res, next) => {
     res.sendFile(path.join(__dirname, '..', 'overlaypopup.css'));
 });
-app.get('/resources/*.mp3', (req, res, next) => {
+app.get('/resources/audio/*.mp3', (req, res, next) => {
     const wildcard = req.params['0'];
-    res.sendFile(path.join(__dirname, '..', 'resources/' + wildcard + '.mp3'));
+    res.sendFile(path.join(__dirname, '..', 'resources/audio/' + wildcard + '.mp3'));
 });
 app.get('/resources/flags/*.png', (req, res, next) => {
     const wildcard = req.params['0'];
