@@ -24,6 +24,7 @@ class MapPanel {
         this.myRoomName = CONSTANTS.LOBBY;
         this.myMap = CONSTANTS.LOBBY;
         this.mapStyle = 'terrain';
+        this.hueShift = 0;
         this.canvas = window.document.getElementById('map');
         this.ctx = this.canvas.getContext('2d');
         this.command_window = {
@@ -156,7 +157,9 @@ class MapPanel {
         frame_cnt = (frame_cnt + 1) % (frames * rate);
         const sx = Math.floor(frame_cnt / rate) * 450;
         var ctx = this.ctx;
+        let shift = this.hueShift;
         globeImage[mapStyle].onload = function(sx) {
+            document.getElementById("map").style.filter = "hue-rotate(" + shift + "deg)";
             return ctx.drawImage(globeImage[mapStyle], sx, 0, 450, 450, 350, 200, 780, 780);
         };
         globeImage[mapStyle].onload(sx);
@@ -233,8 +236,10 @@ class MapPanel {
 
             let image = this.map_images.get(image_name);
             let socket = this.socket;
+            let shift = this.hueShift;
             image.onload = function() {
                 ctx.drawImage(image, 0, 0)
+                document.getElementById("map").style.filter = "hue-rotate(" + shift + "deg)";
                 if (first_load) {
                     setTimeout(() => {
                         console.log("timeout hack to redraw command after joining new map...");
@@ -250,6 +255,12 @@ class MapPanel {
     setStyle(id, style, room) {
         if (this.socket.id == id) {
             this.mapStyle = style;
+            this.drawMap(room);
+        }
+    }
+    setHueShift(id, shift, room) {
+        if (this.socket.id == id) {
+            this.hueShift = shift;
             this.drawMap(room);
         }
     }

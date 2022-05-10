@@ -99,7 +99,7 @@ const randomCity = (citysrc, blacklist) => {
 
 // Include the admin field when displaying city/country string to player
 const includeAdmin = (target, citysrc) => {
-    return target['country'] === 'United States' ||
+    return (target['country'] === 'United States' ||
         target['country'] === 'USA' ||
         target['country'] === 'Canada' ||
         target['country'] === 'Mexico' ||
@@ -110,7 +110,8 @@ const includeAdmin = (target, citysrc) => {
         target['country'] === 'Russia' ||
         target['country'] === 'Indonesia' ||
         target['country'] === 'Brazil' ||
-        CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1
+        CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) &&
+        target['country'] !== "Vatican City"
 };
 
 const stringifyTarget = (target, citysrc) => {
@@ -209,6 +210,7 @@ const score = (map, geoDist, mercDist, timeBonus) => {
             fudge_factor = 2.5;
         scalingFactor = fullDiag / (fudge_factor * diag);
     }
+    console.log("diag = " + diag + " sf = " + scalingFactor + " geo dist " + geoDist + " merc dist " + mercDist)
 
     // // Pixel-distance based score (old)
     // const timeLogistic = CONSTANTS.LOGISTIC_C3/(2+Math.exp(CONSTANTS.LOGISTIC_C1*(-timeBonus+CONSTANTS.LOGISTIC_C2)))+CONSTANTS.LOGISTIC_C4;

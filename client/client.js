@@ -245,6 +245,10 @@ $(document).ready(function() {
         map.setStyle(id, style, room);
         commands.setStyle(id, style);
     });
+    socket.on("shift hue", function(id, shift, room) {
+        map.setHueShift(id, shift, room);
+        commands.setHueShift(id, shift);
+    });
 
     /**** History *****/
     const history = new History(socket);

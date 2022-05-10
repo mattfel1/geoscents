@@ -6,7 +6,7 @@ module.exports = {
           "lat": 41.902222,
           "lng": 12.453333,
           "iso2": "VA",
-          "country": "",
+          "country": "Vatican City",
           "population": 0,
           "capital": "",
           "wiki": ""
@@ -17,7 +17,7 @@ module.exports = {
           "lat": 41.906389,
           "lng": 12.454444,
           "iso2": "VA",
-          "country": "",
+          "country": "Vatican City",
           "population": 0,
           "capital": "",
           "wiki": ""
@@ -28,7 +28,7 @@ module.exports = {
           "lat": 41.902222,
           "lng": 12.453333,
           "iso2": "VA",
-          "country": "",
+          "country": "Vatican City",
           "population": 0,
           "capital": "",
           "wiki": ""
@@ -39,7 +39,7 @@ module.exports = {
           "lat": 41.900694,
           "lng": 12.454694,
           "iso2": "VA",
-          "country": "",
+          "country": "Vatican City",
           "population": 0,
           "capital": "",
           "wiki": ""
@@ -50,7 +50,7 @@ module.exports = {
           "lat": 41.9014,
           "lng": 12.4544,
           "iso2": "VA",
-          "country": "",
+          "country": "Vatican City",
           "population": 0,
           "capital": "",
           "wiki": ""
@@ -61,7 +61,7 @@ module.exports = {
           "lat": 41.9022,
           "lng": 12.4572,
           "iso2": "VA",
-          "country": "",
+          "country": "Vatican City",
           "population": 0,
           "capital": "",
           "wiki": ""
@@ -72,7 +72,7 @@ module.exports = {
           "lat": 41.903611,
           "lng": 12.456389,
           "iso2": "VA",
-          "country": "",
+          "country": "Vatican City",
           "population": 0,
           "capital": "",
           "wiki": ""
@@ -83,7 +83,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -94,7 +94,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -105,7 +105,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -116,7 +116,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -127,7 +127,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -138,7 +138,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -149,7 +149,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -160,7 +160,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -171,7 +171,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -182,7 +182,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -193,7 +193,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -204,7 +204,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -215,7 +215,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -226,7 +226,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -237,7 +237,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -248,7 +248,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -259,7 +259,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -270,7 +270,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -281,7 +281,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -292,7 +292,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -303,7 +303,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -314,7 +314,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -325,7 +325,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -336,7 +336,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -347,7 +347,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -358,7 +358,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -369,7 +369,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -380,7 +380,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -391,7 +391,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -402,7 +402,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -413,7 +413,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -424,7 +424,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -435,7 +435,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -446,7 +446,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""
@@ -457,7 +457,7 @@ module.exports = {
         //   "lat": ,
         //   "lng": ,
         //   "iso2": "VA",
-        //   "country": "",
+        //   "country": "Vatican City",
         //   "population": 0,
         //   "capital": "",
         //   "wiki": ""

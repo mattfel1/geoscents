@@ -480,6 +480,13 @@ io.on('connection', (socket) => {
             helpers.log("Player " + socket.handshake.address + " tried to switch maps without being in a room!")
         }
     });
+    socket.on('shiftHue', (shift) => {
+        if (playerRooms.has(socket.id)) {
+            const room = playerRooms.get(socket.id);
+            io.sockets.emit('shift hue', socket.id, shift, room.map);
+            room.redrawMap(socket);
+        }
+    });
     socket.on('moveTo', (citysrc) => {
         if (playerRooms.has(socket.id)) {
             const room = playerRooms.get(socket.id);
