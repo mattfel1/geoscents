@@ -1,7 +1,7 @@
 const CONSTANTS = require('../resources/constants.js')
 
 discordImg = new Image();
-discordImg.src = "/resources/discord.png";
+discordImg.src = "/resources/images/discord.png";
 
 var globeImage = {
     'classic': new Image(),

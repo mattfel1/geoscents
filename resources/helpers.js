@@ -16,10 +16,10 @@ const playerHistHtml = (name) => {
     <meta name="description" content="Plots for Geoscents. An online multiplayer world geography game!  Test your knowledge of city locations." />
     <title>` + name + ` Play History</title>
     <!-- Place this tag in your head or just before your close body tag. -->
-    <link rel="icon" type="image/png" href="https://geoscents.net/resources/favicon.png" sizes="48x48">
+    <link rel="icon" type="image/png" href="https://geoscents.net/resources/images/favicon.png" sizes="48x48">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.6.3/papaparse.min.js"></script>
     <meta name="GeoScents Plots" content="Plots for Geoscents.  An online multiplayer world geography game!  Test your knowledge of city locations. This is a recreation of the game Geosense from geosense.net.">
-    <meta property="og:image" content="https://geoscents.net/resources/ogimage.png" />
+    <meta property="og:image" content="https://geoscents.net/resources/images/ogimage.png" />
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <style>

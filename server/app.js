@@ -139,20 +139,20 @@ app.get('/resources/*.html', (req, res, next) => {
     const wildcard = req.params['0'];
     res.sendFile(path.join(__dirname, '..', 'resources/' + wildcard + '.html'));
 });
-app.get('/resources/*.png', (req, res, next) => {
+app.get('/resources/images/*.png', (req, res, next) => {
     const wildcard = req.params['0'];
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.sendFile(path.join(__dirname, '..', 'resources/' + wildcard + '.png'));
+    res.sendFile(path.join(__dirname, '..', 'resources/images/' + wildcard + '.png'));
 });
 app.get('/resources/maps/*.png', (req, res, next) => {
     const wildcard = req.params['0'];
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.sendFile(path.join(__dirname, '..', 'resources/maps/' + wildcard + '.png'));
 });
-app.get('/resources/*.svg', (req, res, next) => {
+app.get('/resources/images/*.svg', (req, res, next) => {
     const wildcard = req.params['0'];
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.sendFile(path.join(__dirname, '..', 'resources/' + wildcard + '.svg'));
+    res.sendFile(path.join(__dirname, '..', 'resources/images/' + wildcard + '.svg'));
 });
 app.get('/.well-known/pki-validation/*', (req, res, next) => {
     const wildcard = req.params['0'];
