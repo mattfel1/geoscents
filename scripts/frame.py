@@ -5,9 +5,11 @@ from pathlib import Path
 import urllib.request
 import re
 
+geoscents_home='/home/mattfel/geoscents/'
+
 def scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, include_admin):
     countries = []
-    file = 'cities.js'
+    file = geoscents_home + 'resources/databases/cities.js'
     with open(file) as json_file:
         data = json.load(json_file)
         filtered = []
@@ -37,7 +39,6 @@ def scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, include_admi
             data_file.write(string_data)
             data_file.write("}")
 
-geoscents_home='/home/mattfel/geoscents/'
 
 outfile = geoscents_home + 'resources/databases/worldcities.js'
 lonrng = [-180, 180]
