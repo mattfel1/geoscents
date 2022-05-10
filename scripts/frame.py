@@ -48,7 +48,7 @@ blacklist = []
 whitelist = ['Jersey', 'Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar', 'New Caledonia', 'Azores']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
-outfile = geoscents_home + 'resources/databases/worldcapitalcities.js'
+outfile = geoscents_home + 'resources/databases/worldcapitalscities.js'
 lonrng = [-180, 180]
 latrng = [-65, 77]
 pop = 9999999999999 # capital cities only

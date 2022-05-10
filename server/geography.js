@@ -2,7 +2,7 @@
  * Class for storing all geography methods
  */
 const WORLDCITIES = require('../resources/databases/worldcities.js').CITIES;
-const WORLDCAPITALSCITIES = require('../resources/databases/worldcapitalScities.js').CITIES;
+const WORLDCAPITALSCITIES = require('../resources/databases/worldcapitalscities.js').CITIES;
 const TRIVIACITIES = require('../resources/databases/triviacities.js').CITIES;
 const NAMERICACITIES = require('../resources/databases/namericacities.js').CITIES;
 const EUROPECITIES = require('../resources/databases/europecities.js').CITIES;
