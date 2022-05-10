@@ -47,15 +47,15 @@ module.exports = {
     SAMERICA: "S. America",
     SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania", "Egypt", "Peru", "Indonesia",
         "Spain", "China", "United States", "Iran", "Brazil", "Mexico", "India", "United Kingdom", "Italy", "Germany", "France",
-        "Nigeria", "South Africa", "Morocco"
+        "Nigeria", "South Africa", "Morocco", "Vatican City",
     ],
     SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Morrison", "Iohannis", "el-Sisi", "Castillo", "Widodo",
-        "Sánchez", "Xi", "Biden", "Raisi", "Bolsonaro", "AMLO", "Modi", "Johnson", "Mattarella", "Scholz", "Macron", "Buhari", "Ramaphosa", "Akhannouch"
+        "Sánchez", "Xi", "Biden", "Raisi", "Bolsonaro", "AMLO", "Modi", "Johnson", "Mattarella", "Scholz", "Macron", "Buhari", "Ramaphosa", "Akhannouch", "Bertello"
     ],
     SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)",
         "Welcome/Bienvenue", "Bienvenido", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenido", "Selamat datang",
         "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome", "خوش آمدی (xoš âmadi)", "Receber", "Bienvenido", "Welcome/स्वागत हे(svaagat he)", "Welcome",
-        "Benvenuto/Benvenuta", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "أهلا بك ('ahlan bik)"
+        "Benvenuto/Benvenuta", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "أهلا بك ('ahlan bik)", "Benvenuto/Benvenuta (please use satellite map)" 
     ],
 
     MAP_BOUNDS: {
@@ -290,6 +290,14 @@ module.exports = {
             "min_lat": 38,
             "lat_ts": 0
         },
+        "Vatican City": {
+            "min_lon": 12.440,
+            "max_lon": 12.4605,
+            "max_lat": 41.899, 
+            "min_lat": 41.908,
+            "lat_ts": 0
+        },
+        
 
     },
 

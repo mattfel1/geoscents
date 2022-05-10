@@ -45,13 +45,13 @@ const randomCity = (citysrc, blacklist) => {
             if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
-    } else if (citysrc === CONSTANTS.US) {
+    } else if (citysrc === CONSTANTS.NAMERICA) {
         while (!acceptable) {
             proposal = NAMERICACITIES[Math.floor(Math.random() * NAMERICACITIES.length)];
             if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
-    } else if (citysrc === CONSTANTS.EURO) {
+    } else if (citysrc === CONSTANTS.EUROPE) {
         while (!acceptable) {
             proposal = EUROPECITIES[Math.floor(Math.random() * EUROPECITIES.length)];
             if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
@@ -158,7 +158,7 @@ const stringifyTargetAscii = (target, citysrc) => {
 
 // Allow this country to be repeated if the state is unique
 const requireUniqueAdmin = (citysrc, target) => {
-    if (citysrc === CONSTANTS.US && (target['country'] === 'United States' || target['country'] === 'Canada')) {
+    if (citysrc === CONSTANTS.NAMERICA && (target['country'] === 'United States' || target['country'] === 'Canada')) {
         return true
     } else if (citysrc === CONSTANTS.ASIA && (target['country'] === 'China' || target['country'] === 'India')) {
         return true
@@ -178,7 +178,7 @@ const uniqueInBlacklist = (citysrc, target, blacklist) => {
 const mercDist = (map, row1, col1, row2, col2) => {
     const row_err = Math.pow(row1 - row2, 2);
     let col_err = Math.min(Math.pow(col1 - col2, 2), Math.pow(col1 - col2 + CONSTANTS.MAP_WIDTH, 2), Math.pow(col1 - col2 - CONSTANTS.MAP_WIDTH, 2));
-    if (map === CONSTANTS.US || map === CONSTANTS.EURO || map === CONSTANTS.AFRICA || map === CONSTANTS.SAMERICA || map === CONSTANTS.ASIA || map === CONSTANTS.OCEANIA || CONSTANTS.SPECIAL_COUNTRIES.indexOf(map) !== -1) { // No wrap
+    if (map === CONSTANTS.NAMERICA || map === CONSTANTS.EUROPE || map === CONSTANTS.AFRICA || map === CONSTANTS.SAMERICA || map === CONSTANTS.ASIA || map === CONSTANTS.OCEANIA || CONSTANTS.SPECIAL_COUNTRIES.indexOf(map) !== -1) { // No wrap
         col_err = Math.pow(col1 - col2, 2);
     }
     return Math.sqrt(row_err + col_err);
