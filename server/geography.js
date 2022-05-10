@@ -208,9 +208,11 @@ const score = (map, geoDist, mercDist, timeBonus) => {
         // Tiny maps need slightly different math
         if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(map) !== -1)
             fudge_factor = 2.5;
+        if (map == "Vatican City")
+            fudge_factor = 100;
         scalingFactor = fullDiag / (fudge_factor * diag);
     }
-    console.log("diag = " + diag + " sf = " + scalingFactor + " geo dist " + geoDist + " merc dist " + mercDist)
+    // console.log("diag = " + diag + " sf = " + scalingFactor + " geo dist " + geoDist + " merc dist " + mercDist)
 
     // // Pixel-distance based score (old)
     // const timeLogistic = CONSTANTS.LOGISTIC_C3/(2+Math.exp(CONSTANTS.LOGISTIC_C1*(-timeBonus+CONSTANTS.LOGISTIC_C2)))+CONSTANTS.LOGISTIC_C4;

@@ -639,10 +639,18 @@ class Room {
             const update = Geography.score(map, player.geoError, player.mercError, player.clickedAt);
             const newScore = Math.floor(player.score + update);
             let points = Math.floor(update);
-            let dist = Math.floor(player.geoError);
+            var dist;
+            var error_unit;
+            if (dist > 10) {
+                dist = Math.floor(player.geoError)
+                error_unit = "km"
+            } else {
+                dist = Math.floor(player.geoError * 1000)
+                error_unit = "m";
+            }
             let clicktime = Math.floor(player.clickedAt * 10) / 10;
             let points_str = ("Points: <b>" + points.toString() + "</b>").padEnd(19).replace(/\s/g, "&nbsp;");
-            let dist_str = ("Error (km): <b>" + dist.toString() + "</b>").padEnd(26).replace(/\s/g, "&nbsp;");
+            let dist_str = ("Error (" + error_unit + "): <b>" + dist.toString() + "</b>").padEnd(26).replace(/\s/g, "&nbsp;");
             let time_str = ("Seconds Remaining: <b>" + clicktime.toString() + "</b>").padEnd(34).replace(/\s/g, "&nbsp;");
             let playerScoreLine = points_str + dist_str + time_str
             if (player.geoError === 999999) {
