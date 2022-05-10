@@ -263,7 +263,7 @@ class Commands {
         this.bindClick(room, CONSTANTS.WORLD_CAPITALS, "world_capitals", socket)
         this.bindClick(room, CONSTANTS.TRIVIA, "trivia", socket)
         this.bindClick(room, CONSTANTS.NAMERICA, "namerica", socket)
-        this.bindClick(room, CONSTANTS.EUROPE, "euro", socket)
+        this.bindClick(room, CONSTANTS.EUROPE, "europe", socket)
         this.bindClick(room, CONSTANTS.AFRICA, "africa", socket)
         this.bindClick(room, CONSTANTS.ASIA, "asia", socket)
         this.bindClick(room, CONSTANTS.OCEANIA, "oceania", socket)
