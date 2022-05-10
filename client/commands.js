@@ -14,14 +14,14 @@ class Commands {
         this.counts = {
             [CONSTANTS.LOBBY]: 0,
             [CONSTANTS.WORLD]: 0,
-            [CONSTANTS.WORLD_EASY]: 0,
-            [CONSTANTS.EURO]: 0,
-            [CONSTANTS.US]: 0,
+            [CONSTANTS.WORLD_CAPITALS]: 0,
+            [CONSTANTS.EUROPE]: 0,
+            [CONSTANTS.NAMERICA]: 0,
             [CONSTANTS.AFRICA]: 0,
             [CONSTANTS.ASIA]: 0,
             [CONSTANTS.OCEANIA]: 0,
             [CONSTANTS.SAMERICA]: 0,
-            [CONSTANTS.MISC]: 0,
+            [CONSTANTS.TRIVIA]: 0,
             [CONSTANTS.SPECIAL]: 0
         }
         this.mapStyle = 'terrain';
@@ -210,13 +210,13 @@ class Commands {
         if (this.isPrivate) $('#commands').append($("<button class='private-room-btn' id='private_button'><b>" + this.privateCitysrc + "</b><br>code: " + this.privateCode + "</button><br>"));
         else $('#commands').append($("<button class='private-room-btn' id='private_button'><b>To Private Room</b></button><br>"));
         this.roomButton(CONSTANTS.WORLD, "world");
-        this.roomButton(CONSTANTS.WORLD_EASY, "world_easy");
-        this.roomButton(CONSTANTS.MISC, "misc", true);
-        this.roomButton(CONSTANTS.EURO, "euro");
+        this.roomButton(CONSTANTS.WORLD_CAPITALS, "world_capitals");
+        this.roomButton(CONSTANTS.TRIVIA, "trivia", true);
+        this.roomButton(CONSTANTS.EUROPE, "europe");
         this.roomButton(CONSTANTS.AFRICA, "africa");
         this.roomButton(CONSTANTS.ASIA, "asia");
         this.roomButton(CONSTANTS.OCEANIA, "oceania");
-        this.roomButton(CONSTANTS.US, "us");
+        this.roomButton(CONSTANTS.NAMERICA, "namerica");
         this.roomButton(CONSTANTS.SAMERICA, "samerica");
         this.roomButton(CONSTANTS.SPECIAL, "special", true);
 
@@ -260,10 +260,10 @@ class Commands {
         });
         this.bindClick(room, CONSTANTS.LOBBY, "lobby", socket)
         this.bindClick(room, CONSTANTS.WORLD, "world", socket)
-        this.bindClick(room, CONSTANTS.WORLD_EASY, "world_easy", socket)
-        this.bindClick(room, CONSTANTS.MISC, "misc", socket)
-        this.bindClick(room, CONSTANTS.US, "us", socket)
-        this.bindClick(room, CONSTANTS.EURO, "euro", socket)
+        this.bindClick(room, CONSTANTS.WORLD_CAPITALS, "world_capitals", socket)
+        this.bindClick(room, CONSTANTS.TRIVIA, "trivia", socket)
+        this.bindClick(room, CONSTANTS.NAMERICA, "namerica", socket)
+        this.bindClick(room, CONSTANTS.EUROPE, "euro", socket)
         this.bindClick(room, CONSTANTS.AFRICA, "africa", socket)
         this.bindClick(room, CONSTANTS.ASIA, "asia", socket)
         this.bindClick(room, CONSTANTS.OCEANIA, "oceania", socket)
