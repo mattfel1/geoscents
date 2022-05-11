@@ -443,8 +443,8 @@ io.on('connection', (socket) => {
     socket.on('mute', () => {
         io.sockets.emit('mute player', socket.id)
     });
-    socket.on('jitter', () => {
-        io.sockets.emit('jitter', socket.id)
+    socket.on('autoscale', () => {
+        io.sockets.emit('autoscale', socket.id)
     });
     socket.on('toggle joe', () => {
         if (playerRooms.has(socket.id)) {

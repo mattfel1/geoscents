@@ -1194,6 +1194,7 @@ class Room {
         if (thisTarget['minorcapital']) star = "†";
         const base = "<b>Round " + round + "</b>: <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + helpers.makeLink(room, this.target) + "\">" + star + thisTarget['string'] + "</a> (pop: " + thisTarget['pop'].toLocaleString() + ")<br>";
 
+        console.log("made link " + base)
         this.clients.forEach((socket, id) => {
             socket.emit('add history', room, base);
             socket.emit('add history', room, "<br>");

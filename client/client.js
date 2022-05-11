@@ -179,11 +179,11 @@ $(document).ready(function() {
         sounds.muteMe(id);
         commands.muted = sounds.muted;
     });
-    socket.on("jitter", function(id) {
+    socket.on("autoscale", function(id) {
         if (socket.id == id) {
-            noScale = !commands.antiJitter;
-            commands.antiJitter = !commands.antiJitter;
-            commands.setJitter(id)
+            noScale = !commands.autoscale;
+            commands.autoscale = !commands.autoscale;
+            commands.setAutoscale(id)
             lastScale = 1;
             document.documentElement.style.zoom = 1;
             document.documentElement.style.MozTransform = "scale(1)";

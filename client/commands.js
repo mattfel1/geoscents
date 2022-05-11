@@ -57,7 +57,7 @@ class Commands {
             height: 40
         };
         this.muted = false;
-        this.antiJitter = false;
+        this.autoscale = false;
         this.bottracker = [];
         this.hueShift = 0;
         this.isBotSpamming();
@@ -195,11 +195,11 @@ class Commands {
         if (!this.hasJoe) killJoe = 'Create Bot';
         let joeButton = "<div id='joe_button' class='joe-btn-container'><button class='joe-btn'>" + killJoe + "</button></div>";
         $('#settings-box').append($("<div id='map-btns' style=\"display:inline-block\">" + rebootButton + joeButton + "</div>"));
-        let pressedJitter = '';
-        if (this.antiJitter) pressedJitter = '-clicked';
-        let jitterButton = "<div style=\"display: inline-block\" id='jitter_button' class='map-style-btn-container'><button class='map-style-btn" + pressedJitter + "'>Anti-Jitter</button></div>";
-        if (this.muted) $('#settings-box').append($("<div style='display: inline-block'><button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔇 <font color=\"white\">(muted)</font></button><br>" + jitterButton + "</div><br>"));
-        else $('#settings-box').append($("<div style='display: inline-block'><button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔊</button><br>" + jitterButton + "</div><br>"));
+        let pressedAutoscale = '';
+        if (this.autoscale) pressedAutoscale = '-clicked';
+        let autoscaleButton = "<div style=\"display: inline-block\" id='autoscale_button' class='map-style-btn-container'><button class='map-style-btn" + pressedAutoscale + "'>Autoscale</button></div>";
+        if (this.muted) $('#settings-box').append($("<div style='display: inline-block'><button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔇 <font color=\"white\">(muted)</font></button><br>" + autoscaleButton + "</div><br>"));
+        else $('#settings-box').append($("<div style='display: inline-block'><button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔊</button><br>" + autoscaleButton + "</div><br>"));
         $('#commands').append($("</div><br>"))
         let lobby_string;
         if (this.counts[CONSTANTS.LOBBY] > 0) {
@@ -208,7 +208,7 @@ class Commands {
             lobby_string = "<font color=\"white\">(0 players)</font>"
         }
         
-        let hueSlider = "<div class=\"slidecontainer\"><input type=\"range\" min=\"0\" max=\"360\" value=\"" + this.hueShift + "\" class=\"slider\" id=\"hue_shift\"></div>"
+        let hueSlider = "<div class=\"slidecontainer\">hue: <input type=\"range\" min=\"0\" max=\"360\" value=\"" + this.hueShift + "\" class=\"slider\" id=\"hue_shift\"></div>"
         $('#settings-box').append($(hueSlider))
         
         $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>To Lobby</b> <font size=2>" + lobby_string + "</font></button>"))
@@ -231,8 +231,8 @@ class Commands {
             socket.emit('mute');
             this.refocus()
         });
-        $('#jitter_button').bind("click", () => {
-            socket.emit('jitter');
+        $('#autoscale_button').bind("click", () => {
+            socket.emit('autoscale');
             this.refocus()
         });
         $('#reboot_button').bind("click", () => {
@@ -313,13 +313,13 @@ class Commands {
             this.drawLastCommand(id);
         }
     }
-    setJitter(id) {
+    setAutoscale(id) {
         if (this.socket.id === id) {
-            $('#jitter_button').empty();
-            let pressedJitter = '';
-            if (this.antiJitter) pressedJitter = '-clicked';
-            let jitterButton = "<button class='map-style-btn" + pressedJitter + "'>Anti-Jitter</button>";
-            $('#jitter_button').append($(jitterButton + "<br>"))
+            $('#autoscale_button').empty();
+            let pressedAutoscale = '';
+            if (this.autoscale) pressedAutoscale = '-clicked';
+            let autoscaleButton = "<button class='map-style-btn" + pressedAutoscale + "'>Autoscale</button>";
+            $('#autoscale_button').append($(autoscaleButton + "<br>"))
         }
     }
 
