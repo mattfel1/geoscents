@@ -91,6 +91,7 @@ class History {
                     let points = points_int.toString().padEnd(3).replace(/\s/g, "&nbsp;")
                     let time = datapoint['time'];
                     time = time.toString().padEnd(3).replace(/\s/g, "&nbsp;")
+                    let error_unit = datapoint['error_unit']
                     let dist = datapoint['dist'];
                     dist = dist.toString().padEnd(5).replace(/\s/g, "&nbsp;")
                     let target = Geography.stringifyTarget(datapoint['target'], room).string.padEnd(6050).substring(0, 50).replace(/\s/g, "&nbsp");
@@ -99,7 +100,7 @@ class History {
                         iso2 = "earth";
                     iso2 = iso2.toLowerCase();
                     let image = "<img alt=\":flag_" + iso2 + ":\" height=16 src=\"resources/flags/" + iso2 + ".png\" />";
-                    history = history + "<br>" + pointsToEmoji(points_int) + " Round " + i.toString().padEnd(2).replace(/\s/g, "&nbsp;") + ": " + points + "pts [" + dist + "km, " + time + "s]  " + image + " " + target;
+                    history = history + "<br>" + pointsToEmoji(points_int) + " Round " + i.toString().padEnd(2).replace(/\s/g, "&nbsp;") + ": " + points + "pts [" + dist + error_unit + ", " + time + "s]  " + image + " " + target;
                     i = i + 1;
                 });
             }

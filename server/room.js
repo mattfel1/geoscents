@@ -596,12 +596,13 @@ class Room {
         this.timer = this.timer - 1 / CONSTANTS.FPS
     }
 
-    updateHistory(player, round, net, diff, time, dist, target) {
+    updateHistory(player, round, net, diff, time, dist, target, error_unit) {
         let datapoint = {
             'total_points': net,
             'round_points': diff,
             'time': time,
             'dist': dist,
+            'error_unit': error_unit,
             'target': target
         }
         if (this.playersHistory.has(player)) {
@@ -641,7 +642,7 @@ class Room {
             let points = Math.floor(update);
             var dist;
             var error_unit;
-            if (dist > 10) {
+            if (player.geoError > 10) {
                 dist = Math.floor(player.geoError)
                 error_unit = "km"
             } else {
@@ -659,7 +660,7 @@ class Room {
             playerScoreLine = playerScoreLine
             historyScore(player, playerScoreLine);
             player.score = newScore;
-            updateHistory(player, round, newScore, points, clicktime, dist, target);
+            updateHistory(player, round, newScore, points, clicktime, dist, target, error_unit);
         });
         this.historyRound(this.round + 1, Geography.stringifyTarget(this.target, this.citysrc));
     }
