@@ -55,7 +55,7 @@ module.exports = {
     SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)",
         "Welcome/Bienvenue", "Bienvenido", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenido", "Selamat datang",
         "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome", "خوش آمدی (xoš âmadi)", "Receber", "Bienvenido", "Welcome/स्वागत हे(svaagat he)", "Welcome",
-        "Benvenuto/Benvenuta", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "Benvenuto/Benvenuta" 
+        "Benvenuto/Benvenuta", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "Benvenuto/Benvenuta"
     ],
 
     MAP_BOUNDS: {
@@ -286,11 +286,11 @@ module.exports = {
         "Vatican City": {
             "min_lon": 12.440,
             "max_lon": 12.4605,
-            "max_lat": 41.899, 
+            "max_lat": 41.899,
             "min_lat": 41.908,
             "lat_ts": 0
         },
-        
+
 
     },
 

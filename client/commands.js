@@ -207,10 +207,10 @@ class Commands {
         } else {
             lobby_string = "<font color=\"white\">(0 players)</font>"
         }
-        
-        let hueSlider = "<div class=\"slidecontainer\">hue: <input type=\"range\" min=\"0\" max=\"360\" value=\"" + this.hueShift + "\" class=\"slider\" id=\"hue_shift\"></div>"
-        $('#settings-box').append($(hueSlider))
-        
+
+        // let hueSlider = "<div class=\"slidecontainer\">hue: <input type=\"range\" min=\"0\" max=\"360\" value=\"" + this.hueShift + "\" class=\"slider\" id=\"hue_shift\"></div>"
+        // $('#settings-box').append($(hueSlider))
+
         $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>To Lobby</b> <font size=2>" + lobby_string + "</font></button>"))
         if (this.isPrivate) $('#commands').append($("<button class='private-room-btn' id='private_button'><b>" + this.privateCitysrc + "</b><br>code: " + this.privateCode + "</button><br>"));
         else $('#commands').append($("<button class='private-room-btn' id='private_button'><b>To Private Room</b></button><br>"));
@@ -263,11 +263,11 @@ class Commands {
             socket.emit('renderMap', 'satellite');
             this.refocus()
         });
-        $('#hue_shift').bind("input", () => {
-            let shift = $('#hue_shift').val();
-            socket.emit('shiftHue', shift);
-            this.refocus()
-        });
+        // $('#hue_shift').bind("input", () => {
+        //     let shift = $('#hue_shift').val();
+        //     socket.emit('shiftHue', shift);
+        //     this.refocus()
+        // });
         this.bindClick(room, CONSTANTS.LOBBY, "lobby", socket)
         this.bindClick(room, CONSTANTS.WORLD, "world", socket)
         this.bindClick(room, CONSTANTS.WORLD_CAPITALS, "world_capitals", socket)

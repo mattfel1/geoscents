@@ -100,17 +100,17 @@ const randomCity = (citysrc, blacklist) => {
 // Include the admin field when displaying city/country string to player
 const includeAdmin = (target, citysrc) => {
     return (target['country'] === 'United States' ||
-        target['country'] === 'USA' ||
-        target['country'] === 'Canada' ||
-        target['country'] === 'Mexico' ||
-        target['country'] === 'Portugal' ||
-        target['country'] === 'India' ||
-        target['country'] === 'China' ||
-        target['country'] === 'Australia' ||
-        target['country'] === 'Russia' ||
-        target['country'] === 'Indonesia' ||
-        target['country'] === 'Brazil' ||
-        CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) &&
+            target['country'] === 'USA' ||
+            target['country'] === 'Canada' ||
+            target['country'] === 'Mexico' ||
+            target['country'] === 'Portugal' ||
+            target['country'] === 'India' ||
+            target['country'] === 'China' ||
+            target['country'] === 'Australia' ||
+            target['country'] === 'Russia' ||
+            target['country'] === 'Indonesia' ||
+            target['country'] === 'Brazil' ||
+            CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) &&
         target['country'] !== "Vatican City"
 };
 
