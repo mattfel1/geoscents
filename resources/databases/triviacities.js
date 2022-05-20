@@ -3178,7 +3178,7 @@ module.exports = {
             "population": 0,
             "iso2": "MX",
             "capital": "",
-            "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/1968_Mexico_emblem.svg/1920px-1968_Mexico_emblem.svg.png",
+            "img_link": "https://upload.wikimedia.org/wikipedia/commons/3/3e/John_Carlos%2C_Tommie_Smith%2C_Peter_Norman_1968cr.jpg",
             "wiki": "https://en.wikipedia.org/wiki/1968_Summer_Olympics"
         },
         {
@@ -3352,6 +3352,7 @@ module.exports = {
             "iso2": "KN",
             "population": 0,
             "capital": "",
+            "img_link": "https://media-cdn.tripadvisor.com/media/photo-s/04/9c/a8/9a/shipwreck-in-shitten.jpg",
             "wiki": "https://www.inspirock.com/st-kitts-and-nevis/basseterre/shitten-bay-a1595644453"
         },
         {
@@ -4831,17 +4832,17 @@ module.exports = {
             "capital": "",
             "wiki": "https://en.wikipedia.org/wiki/%C3%81rbol_del_Tule"
         },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
+        {
+          "city": "Llanfairpwllgwyngyll",
+          "city_ascii": "",
+          "lat": 53.2232,
+          "lng": -4.2008,
+          "iso2": "GB",
+          "country": "United Kingdom",
+          "population": 0,
+          "capital": "",
+          "wiki": "https://en.wikipedia.org/wiki/Llanfairpwllgwyngyll"
+        },
         // {
         //   "city": "",
         //   "city_ascii": "",
