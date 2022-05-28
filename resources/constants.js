@@ -26,7 +26,7 @@ module.exports = {
         "PLAYER busted BOT out of prison!"
     ],
 
-    DEBUG_MODE: 1,
+    DEBUG_MODE: 0,
 
     // Map and Panel
     EARTH_RADIUS: 6371, // Earth radius in km
@@ -47,15 +47,15 @@ module.exports = {
     SAMERICA: "S. America",
     SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania", "Egypt", "Peru", "Indonesia",
         "Spain", "China", "United States", "Iran", "Brazil", "Mexico", "India", "United Kingdom", "Italy", "Germany", "France",
-        "Nigeria", "South Africa", "Vatican City",
+        "Nigeria", "South Africa", "Vatican City", "Democratic Republic of the Congo", "Pakistan", "New Zealand",
     ],
     SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Morrison", "Iohannis", "el-Sisi", "Castillo", "Widodo",
-        "Sánchez", "Xi", "Biden", "Raisi", "Bolsonaro", "AMLO", "Modi", "Johnson", "Mattarella", "Scholz", "Macron", "Buhari", "Ramaphosa", "Bertello"
+        "Sánchez", "Xi", "Biden", "Raisi", "Bolsonaro", "AMLO", "Modi", "Johnson", "Mattarella", "Scholz", "Macron", "Buhari", "Ramaphosa", "Bertello", "Tshisekedi", "Alvi", "Ardern"
     ],
     SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)",
         "Welcome/Bienvenue", "Bienvenido", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenido", "Selamat datang",
         "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome", "خوش آمدی (xoš âmadi)", "Receber", "Bienvenido", "Welcome/स्वागत हे(svaagat he)", "Welcome",
-        "Benvenuto/Benvenuta", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "Benvenuto/Benvenuta"
+        "Benvenuto/Benvenuta", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "Benvenuto/Benvenuta", "Bienvenue/Boyei malamu/Karibu", "خوش آمدید (Khush Amdeed)/Welcome", "Kia ora/Welcome"
     ],
 
     MAP_BOUNDS: {
@@ -118,7 +118,7 @@ module.exports = {
         "Oceania": {
             "min_lon": 92,
             "max_lon": 252,
-            "max_lat": -54.5,
+            "max_lat": -54.55,
             "min_lat": 28,
             "lat_ts": 0
         },
@@ -302,6 +302,13 @@ module.exports = {
             "max_lon": 41,
             "max_lat": -14,
             "min_lat": 8,
+            "lat_ts": 0
+        },
+        "New Zealand": {
+            "min_lon": 151,
+            "max_lon": 190.4,
+            "max_lat": -49,
+            "min_lat": -31.4,
             "lat_ts": 0
         },
 

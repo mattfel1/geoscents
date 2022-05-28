@@ -661,12 +661,7 @@ const hallJsonToBoard = (famers) => {
 
     console.log(entries)
     entries = entries.sort(function(a, b) {
-        console.log(a)
-        console.log("before")
-        console.log(b)
-        console.log("check " + record_time[entries.indexOf(a)] + " < " + record_time[entries.indexOf(b)])
         let time_delta = record_time[entries.indexOf(b)] - record_time[entries.indexOf(a)]
-        console.log(time_delta)
         return time_delta;
     });
     console.log(entries)

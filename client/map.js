@@ -224,7 +224,7 @@ class MapPanel {
             this.ctx.font = "20px Arial";
             this.ctx.fillText('[ Map is loading... ]', 400, 400);
             let value;
-            value = map.toLowerCase().replace(" ", "").replace(".", "");
+            value = map.toLowerCase().replaceAll(" ", "").replaceAll(".", "");
             let image_name = value + "_" + mapStyle;
 
             let first_load = !this.map_images.has(image_name);
