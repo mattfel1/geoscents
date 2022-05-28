@@ -201,7 +201,7 @@ class Commands {
         let hueSlider = "<div style=\"display: inline-block\" class=\"slidecontainer\">hue: <input style=\"width: 100px\" type=\"range\" min=\"0\" max=\"360\" value=\"" + this.hueShift + "\" class=\"slider\" id=\"hue_shift\"></div>"
         if (this.muted) $('#settings-box').append($("<div style='display: inline-block'><button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔇 <font color=\"white\">(muted)</font></button><br>" + autoscaleButton + "</div><br>"));
         else $('#settings-box').append($("<div style='display: inline-block'><button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔊</button><br>" + autoscaleButton + hueSlider + "</div><br>"));
-        
+
         // $('#settings-box').append($(hueSlider))
 
         $('#commands').append($("</div><br>"))
@@ -211,7 +211,7 @@ class Commands {
         } else {
             lobby_string = "<font color=\"white\">(0 players)</font>"
         }
-        
+
         $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>To Lobby</b> <font size=2>" + lobby_string + "</font></button>"))
         if (this.isPrivate) $('#commands').append($("<button class='private-room-btn' id='private_button'><b>" + this.privateCitysrc + "</b><br>code: " + this.privateCode + "</button><br>"));
         else $('#commands').append($("<button class='private-room-btn' id='private_button'><b>To Private Room</b></button><br>"));

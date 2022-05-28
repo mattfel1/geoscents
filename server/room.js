@@ -70,6 +70,7 @@ class Room {
             'moved': true,
             'color': 'black',
             'wins': 0,
+            'flair': '',
             'name': avg_name,
             'optOut': true
         });
@@ -533,7 +534,7 @@ class Room {
             const minute = time.getMinutes();
             let famescore = CONSTANTS.FAMESCORE;
             if (CONSTANTS.DEBUG_MODE)
-                famescore = 6000
+                famescore = 5
             if (player.score >= famescore) {
                 const payload = "- " + month + day + ": <font color=" + player.color + "><b>" + player.name + "</b></font> scored <b>" + player.score + "</b> on " + citysrc;
                 if (player.hash == "" || typeof player.hash === 'undefined') {
@@ -542,7 +543,7 @@ class Room {
                     player.public_hash = helpers.randstring(10)
                 }
                 this.clients.get(player.id).emit("announce hall", citysrc, player.name, player.score, player.color);
-                this.whisperMessage(player, "<i>Your PRIVATE username is <b>" + player.hash + "</b>.  Please rejoin the game any time using this name and you can select a flair for this achievement, and you can collect more!  If you forget this hash, you can leave log /feedback with your name and email, or you can ask on discord.  If multiple users are using your current display name, then your unique public identifier is <b>" + player.public_hash + "</b></i><br>", () => {})
+                this.whisperMessage(player, "<br><i>Your PRIVATE username is <b>" + player.hash + "</b>.  Please rejoin the game any time using this name and you can select a flair for this achievement, and you can collect more!  If you forget this hash, you can leave log /feedback with your name and email, or you can ask on discord.  If multiple users are using your current display name, then your unique public identifier is <b>" + player.public_hash + "</b></i><br><br>", () => {})
                 const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
                 let path_str = helpers.formatPath(playersHistory, CONSTANTS.GAME_ROUNDS, player.color, player.id, citysrc, player.score)
                 let new_famers = helpers.insertHallOfFame(player.hash, player.public_hash, player.name, citysrc, path_str, player.score, player.color)

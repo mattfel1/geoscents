@@ -389,7 +389,7 @@ io.on('connection', (socket) => {
                 name = 'Naughty'
                 bad_msg = "I used a bad word in my name :(";
             }
-          
+
             // If player has flair now, then use the name they chose during flair selection instead of their secret hash
             rooms[CONSTANTS.LOBBY].renamePlayer(socket, name, color, logger, famerhash, famerpublichash, flair);
             var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'><b>" + rooms[CONSTANTS.LOBBY].getPlayerName(socket) + "</b> has entered the lobby!</font> ] " + bad_msg + "<br>";

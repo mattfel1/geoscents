@@ -550,15 +550,15 @@ const flairToEmoji = (flair) => {
     if (flair === "Ukraine")
         return "🇺🇦";
     if (flair === "Japan")
-        return "🇯🇵";
+        return "🗻";
     if (flair === "Canada")
-        return "🇨🇦";
+        return "🍁";
     if (flair === "Argentina")
         return "🇦🇷";
     if (flair === "Kenya")
         return "🇰🇪";
     if (flair === "Australia")
-        return "🇦🇺";
+        return "🦘";
     if (flair === "Romania")
         return "🇷🇴";
     if (flair === "Egypt")
@@ -570,9 +570,9 @@ const flairToEmoji = (flair) => {
     if (flair === "Spain")
         return "🇪🇸";
     if (flair === "China")
-        return "🇨🇳";
+        return "🐼";
     if (flair === "United States")
-        return "🇺🇸";
+        return "🦅";
     if (flair === "Iran")
         return "🇮🇷";
     if (flair === "Brazil")
@@ -584,18 +584,22 @@ const flairToEmoji = (flair) => {
     if (flair === "United Kingdom")
         return "🇬🇧";
     if (flair === "Italy")
-        return "🇮🇹";
+        return "🤌";
     if (flair === "Germany")
         return "🇩🇪";
     if (flair === "France")
-        return "🇫🇷";
+        return "🥐";
     if (flair === "Nigeria")
         return "🇳🇬";
     if (flair === "South Africa")
         return "🇿🇦";
     if (flair === "Vatican City")
         return "🇻🇦";
-    
+    if (flair === "Democratic Republic of the Congo")
+        return "🇨🇩";
+    if (flair === "Pakistan")
+        return "🇵🇰";
+
     return "?";
 }
 
@@ -648,22 +652,22 @@ const hallJsonToBoard = (famers) => {
             }
 
 
-            let link = "<a target=\"_blank\" href='resources/famers/" + value['name'] + ".html'>" + link_name + "</a>"
+            let link = "<a target=\"_blank\" href='resources/famers/" + value['name'].replace(/ /g, '_') + ".html'>" + link_name + "</a>"
             posted_names.push(value['name'])
             record_time.push(last_record)
             entries.push(link)
         }
     }
 
-console.log(entries)
-    entries = entries.sort(function(a, b){
+    console.log(entries)
+    entries = entries.sort(function(a, b) {
         console.log(a)
         console.log("before")
         console.log(b)
         console.log("check " + record_time[entries.indexOf(a)] + " < " + record_time[entries.indexOf(b)])
         let time_delta = record_time[entries.indexOf(b)] - record_time[entries.indexOf(a)]
         console.log(time_delta)
-      return time_delta;
+        return time_delta;
     });
     console.log(entries)
 
@@ -705,7 +709,7 @@ const formatPath = (hist, histcount, color, socketid, room, score) => {
         if (points == 600)
             return "✅";
         return "?";
-        };
+    };
     // var history = "<br><button id=\"sharepath" + histcount + "\">copy</button><br>" + "<div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points";
     var history = "<br><div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points on " + room + ":";
     playersHistory.forEach((hist, player) => {
@@ -720,7 +724,8 @@ const formatPath = (hist, histcount, color, socketid, room, score) => {
                 let error_unit = datapoint['error_unit']
                 let dist = datapoint['dist'];
                 dist = dist.toString().padEnd(5).replace(/\s/g, "&nbsp;")
-                let target = Geography.stringifyTarget(datapoint['target'], room).string.padEnd(6050).substring(0, 50).replace(/\s/g, "&nbsp");
+                // TODO: Why pad target at all if it is the last thing in the string?
+                let target = Geography.stringifyTarget(datapoint['target'], room).string.padEnd(6050).substring(0, 30).replace(/\s/g, "&nbsp");
                 let iso2 = datapoint['target']['iso2'];
                 if (iso2 == "" || iso2 == null)
                     iso2 = "earth";
@@ -756,7 +761,12 @@ const insertHallOfFame = (hash, public_hash, player_name, map, path, score, colo
         old['last_record'] = unixtime
         famers.set(hash, old)
     } else {
-        let dict = {'name': player_name, 'maps': [map], 'last_record': unixtime, 'public_hash': public_hash}
+        let dict = {
+            'name': player_name,
+            'maps': [map],
+            'last_record': unixtime,
+            'public_hash': public_hash
+        }
         famers.set(hash, dict)
     }
 
@@ -774,7 +784,7 @@ const insertHallOfFame = (hash, public_hash, player_name, map, path, score, colo
     // Update specific famer file
     try {
         let spaceless_name = player_name.replace(/ /g, '_')
-        const filebase = '/scratch/famers/' + spaceless_name ;
+        const filebase = '/scratch/famers/' + spaceless_name;
 
         // Set html
         fs.writeFile(filebase + ".html", famerHistHtml(spaceless_name, public_hash), {
@@ -811,14 +821,14 @@ const insertHallOfFame = (hash, public_hash, player_name, map, path, score, colo
 };
 
 const randstring = (length) => {
-    var result           = '';
-    var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * 
- charactersLength));
-   }
-   return result;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() *
+            charactersLength));
+    }
+    return result;
 }
 
 

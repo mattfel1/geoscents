@@ -26,7 +26,7 @@ module.exports = {
         "PLAYER busted BOT out of prison!"
     ],
 
-    DEBUG_MODE: 0,
+    DEBUG_MODE: 1,
 
     // Map and Panel
     EARTH_RADIUS: 6371, // Earth radius in km
@@ -288,6 +288,20 @@ module.exports = {
             "max_lon": 12.4605,
             "max_lat": 41.899,
             "min_lat": 41.908,
+            "lat_ts": 0
+        },
+        "Pakistan": {
+            "min_lon": 52.25,
+            "max_lon": 84,
+            "max_lat": 23,
+            "min_lat": 39,
+            "lat_ts": 0
+        },
+        "Democratic Republic of the Congo": {
+            "min_lon": 3.53,
+            "max_lon": 41,
+            "max_lat": -14,
+            "min_lat": 8,
             "lat_ts": 0
         },
 

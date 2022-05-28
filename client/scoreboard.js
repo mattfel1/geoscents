@@ -50,9 +50,9 @@ class Scoreboard {
         $('#scoreboard').append("<b>----- Player Scores in " + citysrc + " -----</b><br>");
     }
     postLobby(board) {
-        $('#leaderboard').append("<b>" + CONSTANTS.FAMESCORE + "+ Hall of Fame (out of 6600 points)</b><br>");
+        $('#leaderboard').append("<b>" + CONSTANTS.FAMESCORE + "+ Hall of Fame</b><br>");
         board.forEach(function(x) {
-          $('#leaderboard').append(x + "<br>");
+            $('#leaderboard').append(x + "<br>");
         })
         $('#scoreboard').append("<b>----- Players in Lobby -----</b><br>");
     }
