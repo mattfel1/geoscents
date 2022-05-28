@@ -663,12 +663,10 @@ const hallJsonToBoard = (famers) => {
         }
     }
 
-    console.log(entries)
     entries = entries.sort(function(a, b) {
         let time_delta = record_time[entries.indexOf(b)] - record_time[entries.indexOf(a)]
         return time_delta;
     });
-    console.log(entries)
 
     return entries;
 };
