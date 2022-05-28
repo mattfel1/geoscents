@@ -537,6 +537,8 @@ const flairToEmoji = (flair) => {
         return "🗺️";
     if (flair === "N. America")
         return "🌎";
+    if (flair === "Trivia")
+        return "🧠";
     if (flair === "S. America")
         return "🌎";
     if (flair === "Africa")

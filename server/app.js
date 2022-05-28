@@ -633,7 +633,7 @@ io.on('connection', (socket) => {
                 helpers.log("Player " + socket.handshake.address + " " + rooms[dest].getPlayerName(socket) + " changed map in " + dest);
             } else {
                 console.log('making private room ' + dest)
-                var leave_msg = "[ <font color='" + rooms[originRoomName].getPlayerColor(socket) + "'><b>" + rooms[originRoomName].getPlayerRawName(socket) + "</b> has left " + originRoomName + " and joined a private room!</font> ]<br>";
+                var leave_msg = "[ <font color='" + rooms[originRoomName].getPlayerColor(socket) + "'><b>" + rooms[originRoomName].getPlayerName(socket) + "</b> has left " + originRoomName + " and joined a private room!</font> ]<br>";
                 io.sockets.emit("update messages", originRoomName, leave_msg)
                 rooms[originRoomName].killPlayer(socket);
                 Object.values(rooms).forEach(function(room) {
@@ -653,7 +653,7 @@ io.on('connection', (socket) => {
                 rooms[dest].addPlayer(socket, info);
                 playerRooms.set(socket.id, rooms[dest]);
                 if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) rooms[dest].whisperMessage(socket, "<i><b>" + CONSTANTS.SPECIAL_WELCOMES[CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc)] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
-                var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'><b>" + rooms[dest].getPlayerRawName(socket) + "</b> has joined " + dest + "!</font> ]<br>";
+                var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'><b>" + rooms[dest].getPlayerName(socket) + "</b> has joined " + dest + "!</font> ]<br>";
                 io.sockets.emit("update messages", dest, join_msg);
                 // if (dest == CONSTANTS.TRIVIA) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
                 io.sockets.emit('update counts', {
