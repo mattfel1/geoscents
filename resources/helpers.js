@@ -599,6 +599,8 @@ const flairToEmoji = (flair) => {
         return "🇨🇩";
     if (flair === "Pakistan")
         return "🇵🇰";
+    if (flair === "New Zealand")
+        return "🥝";
 
     return "?";
 }
