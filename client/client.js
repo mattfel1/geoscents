@@ -9,6 +9,7 @@ const Commands = require('./commands.js');
 const Sounds = require('./sounds.js');
 const Popup = require('./popup.js');
 const PrivatePopup = require('./privatepopup.js');
+const FamerPopup = require('./famerpopup.js');
 const HelpPopup = require('./helppopup.js');
 const Chat = require('./chat.js');
 const MapPanel = require('./map.js');
@@ -92,11 +93,11 @@ $(document).ready(function() {
     socket.on('post space', () => {
         scoreboard.postSpace()
     });
-    socket.on('post lobby', (recent, hall) => {
-        scoreboard.postLobby(recent, hall)
+    socket.on('post lobby', (board) => {
+        scoreboard.postLobby(board)
     });
-    socket.on('announce record', (category, room, medal, name, score, color) => {
-        socket.emit("announcement", '[New ' + category + ' record set by <font color="' + color + '">' + medal + name + ' (' + score + ')</font> in ' + room + ']<br>')
+    socket.on('announce record', (category, room, name, score, color) => {
+        socket.emit("announcement", '[New ' + category + ' record set by <font color="' + color + '">' + name + ' (' + score + ')</font> in ' + room + ']<br>')
     });
     socket.on('announce hall', (room, name, score, color) => {
         socket.emit("announcement", '<b>WOW!! <font color="' + color + '">' + name + '</font> made it into the hall of fame with ' + score + ' points in ' + room + '!!!  How is that even possible?!</b><br>')
@@ -223,6 +224,30 @@ $(document).ready(function() {
             privatepopup.showPopup("Choose a map<br>(Ignored if room already exists)<br>")
     });
 
+    /**** FAMER POPUP *****/
+    const famerpopup = new FamerPopup(socket);
+    famerpopup.hide();
+    socket.on('request famer popup', (name, color, logger, hash, public_hash, famer_emojis, cb) => {
+        // Update index with all flairs
+        // TODO: This should probably be handled on the server side so it can't be edited by user
+        let dropdown = window.document.getElementById('requestedFlair')
+        let options = [];
+        for (const [key, value] of Object.entries(famer_emojis)) {
+            var entry = document.createElement("option");
+            entry.value = value;
+            entry.text = value + key;
+            options.push(entry)
+        }
+        options.forEach((x, i) => {
+            dropdown.append(x);
+        })
+
+        window.document.getElementById('selected_famer_name').append(name)
+        window.document.getElementById('selected_famer_name').style.color = color
+
+        famerpopup.showPopup(name, color, logger, hash, public_hash)
+    });
+
     /**** Map *****/
     const map = new MapPanel(socket);
     socket.on('draw point', (coords, color, radius) => {
@@ -258,8 +283,8 @@ $(document).ready(function() {
     socket.on('draw chart', (hist, winner, color, room, max) => {
         history.drawChart(hist, winner, color, room, max)
     });
-    socket.on('draw path', (hist, color, room, max) => {
-        history.drawPath(hist, color, room, max)
+    socket.on('draw path', (h) => {
+        history.drawPath(h)
     });
     socket.on('add history', (room, payload) => {
         history.addHistory(room, payload)

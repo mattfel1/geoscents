@@ -173,6 +173,10 @@ app.get('/resources/histories/*', (req, res, next) => {
     const wildcard = req.params['0'];
     res.sendFile(path.join(__dirname, '..', 'resources/histories/' + wildcard));
 });
+app.get('/resources/famers/*', (req, res, next) => {
+    const wildcard = req.params['0'];
+    res.sendFile(path.join(__dirname, '..', 'resources/famers/' + wildcard));
+});
 app.get('/plots/*', (req, res, next) => {
     const wildcard = req.params['0'];
     res.sendFile(path.join(__dirname, '..', 'plots/' + wildcard));
@@ -191,6 +195,9 @@ app.use((err, req, res, next) => {
     res.status(err.status || 500);
     res.send(err.message || 'Internal server error');
 });
+
+// Load hall of fame stuff
+var famers = helpers.loadHallOfFame();
 
 const coprime = (num1, num2) => {
     const smaller = num1 > num2 ? num1 : num2;
@@ -256,12 +263,15 @@ var rooms = {
     'Daily Country': new Room(special, CONSTANTS.SPECIAL, special),
     'Lobby': new Room(CONSTANTS.LOBBY, CONSTANTS.LOBBY, CONSTANTS.LOBBY),
 };
+
+// Populate hall of fame into lobby room
+rooms[CONSTANTS.LOBBY].hall_of_fame = famers;
 Object.values(rooms).forEach(function(room) {
     room.game_special_idx = special_idx;
 });
 var playerRooms = new Map();
 
-const WELCOME_MESSAGE1 = 'Have you done today\'s <a href=https://9ps.github.io/statdle/ target=\"_blank\">statdle</a>?<br><br> ' +
+const WELCOME_MESSAGE1 = 'Have you done today\'s <a href=https://9ps.github.io/statdle/ target=\"_blank\">statdle</a> and <a href=https://worldle.teuteuf.fr/ target=\"_blank\">worldle</a>?<br><br> ' +
     '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
     'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
     '<br>If you have feedback, simply shout it directly into this chat box, starting with the word /feedback. ' +
@@ -338,7 +348,8 @@ io.on('connection', (socket) => {
             }
         });
     });
-    socket.on('playerJoin', (newname, newcolor, newlogger, callback) => {
+
+    socket.on('playerJoin', (newname, newcolor, newlogger, famerhash, famerpublichash, flair, callback) => {
         var name = '';
         if (newname !== null) name = newname;
         var color = '';
@@ -346,18 +357,47 @@ io.on('connection', (socket) => {
         var logger = '';
         if (newlogger !== null) logger = newlogger;
         helpers.log("User " + socket.handshake.address + " named themself    " + newname);
-        if (rooms[CONSTANTS.LOBBY].hasPlayer(socket)) {
-            var badname = "";
-            CONSTANTS.PROFANITY_REGEX.forEach((word) => {
-                var re = new RegExp(word, "i");
-                if (re.test(name)) badname = "I used a bad word in my name :(";
-            });
-            if (badname != "") {
-                name = 'Naughty'
+
+        // Handle hall of fame login
+        let is_famer = false;
+        let famer_emojis = new Map();
+        let public_hash = "";
+        let famer_name = "";
+        for (const [key, value] of famers.entries()) {
+            if (key === name) {
+                console.log("Login from hall of famer hash " + name)
+                famer_countries = value['maps']
+                is_famer = true;
+                public_hash = value['public_hash']
+                famer_name = value['name']
+                Object.values(famer_countries).forEach(function(value) {
+                    famer_emojis.set(value, helpers.flairToEmoji(value));
+                })
             }
-            rooms[CONSTANTS.LOBBY].renamePlayer(socket, name, color, logger);
-            var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'><b>" + rooms[CONSTANTS.LOBBY].getPlayerRawName(socket) + "</b> has entered the lobby!</font> ] " + badname + "<br>";
+        }
+        if (is_famer) {
+            // famer popup will call playerJoin again with a flaired name
+            callback()
+            socket.emit('request famer popup', famer_name, newcolor, newlogger, name, public_hash, Object.fromEntries(famer_emojis), callback);
+            return
+        }
+
+        if (rooms[CONSTANTS.LOBBY].hasPlayer(socket)) {
+            var badname = helpers.filterName(name);
+            var bad_msg = ""
+            if (badname) {
+                name = 'Naughty'
+                bad_msg = "I used a bad word in my name :(";
+            }
+          
+            // If player has flair now, then use the name they chose during flair selection instead of their secret hash
+            rooms[CONSTANTS.LOBBY].renamePlayer(socket, name, color, logger, famerhash, famerpublichash, flair);
+            var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'><b>" + rooms[CONSTANTS.LOBBY].getPlayerName(socket) + "</b> has entered the lobby!</font> ] " + bad_msg + "<br>";
             io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
+            if (famerpublichash != "") {
+                var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'><b>" + rooms[CONSTANTS.LOBBY].getPlayerName(socket) + "</b></font> is a hall of famer (with public hash " + famerpublichash + ")! ] " + bad_msg + "<br>";
+                io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
+            }
             // Send whispers to specific players
             const specificGreeting = (socket, name, target, msg) => {
                 if (name == target && !fs.existsSync('/tmp/' + target)) {
@@ -397,6 +437,8 @@ io.on('connection', (socket) => {
     });
     socket.on('announcement', (text) => {
         announce(text);
+        famers = helpers.loadHallOfFame();
+        rooms[CONSTANTS.LOBBY].hall_of_fame = famers;
     });
     socket.on('drawCommand', (text) => {
         if (playerRooms.has(socket.id)) {
@@ -496,12 +538,18 @@ io.on('connection', (socket) => {
             const oldName = rooms[originRoomName].getPlayerRawName(socket);
             const oldWins = rooms[originRoomName].getPlayerWins(socket);
             const oldOptOut = rooms[originRoomName].getPlayerOptOut(socket);
+            const oldHash = rooms[originRoomName].getPlayerHash(socket);
+            const oldPublicHash = rooms[originRoomName].getPlayerPublicHash(socket);
+            const oldFlair = rooms[originRoomName].getPlayerFlair(socket);
             const info = {
                 'moved': true,
                 'color': oldColor,
                 'name': oldName,
                 'wins': oldWins,
                 'logger': oldLogger,
+                'hash': oldHash,
+                'public_hash': oldPublicHash,
+                'flair': oldFlair,
                 'optOut': oldOptOut
             }
             var leave_msg = "[ <font color='" + rooms[originRoomName].getPlayerColor(socket) + "'><b>" + rooms[originRoomName].getPlayerRawName(socket) + "</b> has left " + originRoomName + " and joined " + citysrc + "!</font> ]<br>";
@@ -560,11 +608,17 @@ io.on('connection', (socket) => {
             const oldName = rooms[originRoomName].getPlayerRawName(socket);
             const oldWins = rooms[originRoomName].getPlayerWins(socket);
             const oldOptOut = rooms[originRoomName].getPlayerOptOut(socket);
+            const oldHash = rooms[originRoomName].getPlayerHash(socket);
+            const oldPublicHash = rooms[originRoomName].getPlayerPublicHash(socket);
+            const oldFlair = rooms[originRoomName].getPlayerFlair(socket);
             const info = {
                 'moved': true,
                 'color': oldColor,
                 'name': oldName,
                 'wins': oldWins,
+                'hash': oldHash,
+                'public_hash': oldPublicHash,
+                'flair': oldFlair,
                 'optOut': oldOptOut
             }
             if (originRoomName == dest) {

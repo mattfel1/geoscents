@@ -49,11 +49,11 @@ class Scoreboard {
     postScoreTitle(citysrc) {
         $('#scoreboard').append("<b>----- Player Scores in " + citysrc + " -----</b><br>");
     }
-    postLobby(recent, hall) {
+    postLobby(board) {
         $('#leaderboard').append("<b>" + CONSTANTS.FAMESCORE + "+ Hall of Fame (out of 6600 points)</b><br>");
-        $('#leaderboard').append(hall);
-        $('#leaderboard').append("<b>Recent Records:</b><br>");
-        $('#leaderboard').append("<font size=\"1\">" + recent + "</font>");
+        board.forEach(function(x) {
+          $('#leaderboard').append(x + "<br>");
+        })
         $('#scoreboard').append("<b>----- Players in Lobby -----</b><br>");
     }
 }

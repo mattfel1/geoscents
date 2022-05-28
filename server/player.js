@@ -25,14 +25,15 @@ class Player {
         this.consecutiveSecondsInactive = 0;
         this.ready = '';
         this.reboot = '';
-        this.trophy = '';
-        this.medal = '';
-        this.record = '';
         this.logger = true;
         this.roomName = roomName;
         this.choseName = false;
         this.name = name;
+        this.hash = '';
+        this.public_hash = '';
+        this.flair = '';
         this.optOut = false;
+        this.histCount = 0;
 
 
         // Override values based on info map
@@ -42,6 +43,9 @@ class Player {
             this.logger = info['logger'];
             this.wins = info['wins'];
             this.name = info['name'];
+            this.flair = info['flair'];
+            this.hash = info['hash'];
+            this.public_hash = info['public_hash'];
             this.optOut = info['optOut']
         }
     }
@@ -50,14 +54,12 @@ class Player {
     reset() {
         this.clicked = false;
         this.ready = '';
-        this.trophy = '';
-        this.medal = '';
-        this.record = '';
         this.lat = 0;
         this.lon = 0;
         this.row = 0;
         this.col = 0;
         this.clickedAt = 0;
+        this.histCount = this.histCount + 1;
     }
 
     deepReset(rank) {
@@ -65,14 +67,6 @@ class Player {
         this.reboot = '';
         this.rank = rank;
         this.reset();
-    }
-
-    giveMedal(position, category) {
-        if (position == 1) this.medal = this.medal + '🥇';
-        else if (position == 2) this.medal = this.medal + '🥈';
-        else if (position == 3) this.medal = this.medal + '🥉';
-        else if (position == 4) this.medal = this.medal + '🏅';
-        else if (position == 5) this.medal = this.medal + '🏅';
     }
 
     radius() {
@@ -93,10 +87,9 @@ class Player {
     }
     won() {
         this.wins = this.wins + 1;
-        this.trophy = '🏆';
     }
     getName() {
-        const fullname = this.ready + this.reboot + this.record + this.medal + this.trophy + this.name;
+        const fullname = this.ready + this.reboot + this.name + ' ' + this.flair;
         return fullname;
     }
 };

@@ -49,6 +49,7 @@ class Room {
         this.hasJoe = roomName != CONSTANTS.LOBBY && !CONSTANTS.DEBUG_MODE;
         this.recorded = false; // Toggle for making sure we only record once per reveal_state
         this.game_special_idx;
+        this.hall_of_fame; // Keep hall of fame in-memory if this is the lobby
     }
 
 
@@ -61,7 +62,7 @@ class Room {
     }
     createJoe() {
         let name = CONSTANTS.AVERAGE_NAMES[Math.floor(Math.random() * CONSTANTS.AVERAGE_NAMES.length)]
-        console.log("create joe in " + this.map + " idx " + CONSTANTS.SPECIAL_COUNTRIES.indexOf(this.map))
+        // console.log("create joe in " + this.map + " idx " + CONSTANTS.SPECIAL_COUNTRIES.indexOf(this.map))
         if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(this.map) !== -1)
             name = CONSTANTS.SPECIAL_JOES[CONSTANTS.SPECIAL_COUNTRIES.indexOf(this.map)]
         const avg_name = "Average " + name;
@@ -252,15 +253,26 @@ class Room {
         } else return null;
     }
 
-    renamePlayer(socket, name, color, logger) {
+    renamePlayer(socket, name, color, logger, hash, public_hash, flair) {
         if (this.players.has(socket.id)) {
             if (name !== '') this.players.get(socket.id).name = name;
             if (color !== 'random') this.players.get(socket.id).color = color;
             if (logger == 'No') this.players.get(socket.id).logger = false
+            if (hash !== '') this.players.get(socket.id).hash = hash;
+            if (public_hash !== '') this.players.get(socket.id).public_hash = public_hash;
+            if (flair !== '') this.players.get(socket.id).flair = flair;
             this.players.get(socket.id).choseName = true;
         }
         this.drawScorePanel(socket.id);
         socket.emit('fresh map', this.map);
+    }
+
+    flairPlayer(socket, name, flair) {
+        if (this.players.has(socket.id)) {
+            if (name !== '') this.players.get(socket.id).name = name;
+            if (flair !== '') this.players.get(socket.id).flair = flair;
+            this.players.get(socket.id).choseName = true;
+        }
     }
 
     getPlayerRawName(socket) {
@@ -293,6 +305,27 @@ class Room {
             return this.players.get(socket.id).color
         } else {
             return '#000000'
+        }
+    }
+    getPlayerFlair(socket) {
+        if (this.players.has(socket.id)) {
+            return this.players.get(socket.id).flair
+        } else {
+            return ''
+        }
+    }
+    getPlayerHash(socket) {
+        if (this.players.has(socket.id)) {
+            return this.players.get(socket.id).hash
+        } else {
+            return ''
+        }
+    }
+    getPlayerPublicHash(socket) {
+        if (this.players.has(socket.id)) {
+            return this.players.get(socket.id).public_hash
+        } else {
+            return ''
         }
     }
     getPlayerWins(socket) {
@@ -411,15 +444,8 @@ class Room {
         dict['recordColor' + position] = copy(player.color);
         dict['recordName' + position] = copy(player.name);
         dict['recordBroken' + position] = true;
-        player.giveMedal(position, category);
-        let medal = '';
-        if (position === 1) medal = '🥇';
-        else if (position === 2) medal = '🥈';
-        else if (position === 3) medal = '🥉';
-        else if (position === 4) medal = '🏅';
-        else if (position === 5) medal = '🏅';
         if (this.clients.has(player.id)) {
-            this.clients.get(player.id).emit("announce record", category, room, medal, player.name, player.score, player.color);
+            this.clients.get(player.id).emit("announce record", category, room, player.name, player.score, player.color);
         }
         // fs.writeFile("/scratch/" + room + "_" + category + "_record", JSON.stringify(dict), function(err) {
         //     if(err) {
@@ -505,11 +531,21 @@ class Room {
             const day = time.getDate();
             const hour = time.getHours();
             const minute = time.getMinutes();
-            if (player.score >= CONSTANTS.FAMESCORE) {
-                this.clients.get(player.id).emit("announce hall", citysrc, player.name, player.score, player.color);
+            let famescore = CONSTANTS.FAMESCORE;
+            if (CONSTANTS.DEBUG_MODE)
+                famescore = 6000
+            if (player.score >= famescore) {
                 const payload = "- " + month + day + ": <font color=" + player.color + "><b>" + player.name + "</b></font> scored <b>" + player.score + "</b> on " + citysrc;
-                helpers.prependHallOfFame(payload)
-                helpers.log("Hall of Fame achieved by " + player.name + " (" + player.ip + ")")
+                if (player.hash == "" || typeof player.hash === 'undefined') {
+                    player.hash = helpers.randstring(10)
+                    // If they don't yet have a hash, they definitely don't have a public_hash either
+                    player.public_hash = helpers.randstring(10)
+                }
+                this.clients.get(player.id).emit("announce hall", citysrc, player.name, player.score, player.color);
+                this.whisperMessage(player, "<i>Your PRIVATE username is <b>" + player.hash + "</b>.  Please rejoin the game any time using this name and you can select a flair for this achievement, and you can collect more!  If you forget this hash, you can leave log /feedback with your name and email, or you can ask on discord.  If multiple users are using your current display name, then your unique public identifier is <b>" + player.public_hash + "</b></i><br>", () => {})
+                const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
+                let path_str = helpers.formatPath(playersHistory, CONSTANTS.GAME_ROUNDS, player.color, player.id, citysrc, player.score)
+                let new_famers = helpers.insertHallOfFame(player.hash, player.public_hash, player.name, citysrc, path_str, player.score, player.color)
             }
             const num_records = 5
             let allStr = "";
@@ -532,17 +568,17 @@ class Room {
                 allStr = "<b>" + (getPosition(player.score, allRecord)) + sufx[(getPosition(player.score, allRecord) - 1)] + "</b>" + " yearly"
                 allRecord = copy(insertRecord(getPosition(player.score, allRecord), "all-time", copy(allRecord), citysrc, player));
             }
-            if (dayStr !== "" || wkStr !== "" || monStr !== "" || allStr !== "") {
-                lastRecordUpdate(new Date().getTime());
-                let c1 = "";
-                if (allStr !== "" && (monStr !== "" | (monStr === "" && wkStr !== "") || (monStr === "" && wkStr === "" && dayStr !== ""))) c1 = ", ";
-                let c2 = "";
-                if (monStr !== "" && (wkStr !== "" | (wkStr === "" && dayStr !== ""))) c2 = ", ";
-                let c3 = "";
-                if (wkStr !== "" && (dayStr !== "")) c3 = ", ";
-                const payload = "- " + month + day + " (" + citysrc + ") <font color=" + player.color + "><b>" + player.name + "</b></font>: " + allStr + c1 + monStr + c2 + wkStr + c3 + dayStr;
-                helpers.prependRecentActivity(payload)
-            }
+            // if (dayStr !== "" || wkStr !== "" || monStr !== "" || allStr !== "") {
+            //     lastRecordUpdate(new Date().getTime());
+            //     let c1 = "";
+            //     if (allStr !== "" && (monStr !== "" | (monStr === "" && wkStr !== "") || (monStr === "" && wkStr === "" && dayStr !== ""))) c1 = ", ";
+            //     let c2 = "";
+            //     if (monStr !== "" && (wkStr !== "" | (wkStr === "" && dayStr !== ""))) c2 = ", ";
+            //     let c3 = "";
+            //     if (wkStr !== "" && (dayStr !== "")) c3 = ", ";
+            //     const payload = "- " + month + day + " (" + citysrc + ") <font color=" + player.color + "><b>" + player.name + "</b></font>: " + allStr + c1 + monStr + c2 + wkStr + c3 + dayStr;
+            //     helpers.prependRecentActivity(payload)
+            // }
         });
         fs.writeFile("/scratch/" + citysrc + "_day_record", JSON.stringify(copy(dayRecord), null, 2), function(err) {
             if (err) {
@@ -580,7 +616,7 @@ class Room {
             socket.emit('post group', 'Daily Records:', this.dayRecord);
             socket.emit('post score title', this.citysrc);
         } else {
-            socket.emit('post lobby', helpers.readRecentActivity(8), helpers.readHallOfFame(100));
+            socket.emit('post lobby', helpers.hallJsonToBoard(this.hall_of_fame));
         }
         const sortedPlayers = this.sortPlayers();
         Array.from(sortedPlayers.values()).forEach(function(player, index) {
@@ -622,7 +658,7 @@ class Room {
         const target = this.target;
         const map = this.map;
         const round = this.round;
-        const updateHistory = (p, r, net, diff, t, d, targ) => this.updateHistory(p, r, net, diff, t, d, targ);
+        const updateHistory = (p, r, net, diff, t, d, targ, erunit) => this.updateHistory(p, r, net, diff, t, d, targ, erunit);
         const historyScore = (player, payload) => {
             this.historyScore(player, payload)
         };
@@ -764,7 +800,7 @@ class Room {
             url += "&" + key + "=" + params[key];
         });
         let target = this.target
-        console.log(url)
+        // console.log(url)
         fetch(url)
             .then(function(response) {
                 return response.json();
@@ -803,7 +839,7 @@ class Room {
                 Object.keys(params).forEach(function(key) {
                     url += "&" + key + "=" + params[key];
                 });
-                console.log(url)
+                // console.log(url)
                 fetch(url)
                     .then(function(response) {
                         return response.json();
@@ -822,8 +858,8 @@ class Room {
                         })
                     })
                     .catch(function(error) {
-                        console.log("failed to fetch 2" + url)
-                        console.log(error);
+                        // console.log("failed to fetch 2" + url)
+                        // console.log(error);
                     });
 
             })
@@ -846,7 +882,7 @@ class Room {
                 Object.keys(params).forEach(function(key) {
                     url += "&" + key + "=" + params[key];
                 });
-                console.log(url)
+                // console.log(url)
                 fetch(url)
                     .then(function(response) {
                         return response.json();
@@ -865,8 +901,8 @@ class Room {
                         })
                     })
                     .catch(function(error) {
-                        console.log("failed to fetch 2" + url)
-                        console.log(error);
+                        // console.log("failed to fetch 2" + url)
+                        // console.log(error);
                     });
             });
 
@@ -1183,8 +1219,10 @@ class Room {
     printPath(you, score, color) {
         const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
         const room = this.citysrc;
+        const players = this.players
         this.clients.forEach((socket, id) => {
-            socket.emit('draw path', playersHistory, color, room, score);
+            let history = helpers.formatPath(playersHistory, players.get(socket.id).histCount, players.get(socket.id).color, id, room, score)
+            socket.emit('draw path', history);
         });
     }
 
@@ -1195,7 +1233,7 @@ class Room {
         if (thisTarget['minorcapital']) star = "†";
         const base = "<b>Round " + round + "</b>: <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + helpers.makeLink(room, this.target) + "\">" + star + thisTarget['string'] + "</a> (pop: " + thisTarget['pop'].toLocaleString() + ")<br>";
 
-        console.log("made link " + base)
+        // console.log("made link " + base)
         this.clients.forEach((socket, id) => {
             socket.emit('add history', room, base);
             socket.emit('add history', room, "<br>");

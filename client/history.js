@@ -26,87 +26,8 @@ class History {
         }
     }
 
-    pointsToEmoji(points) {
-        // 0   - 60  = X
-        // 60  - 120 = black
-        // 120 - 180 = brown
-        // 180 - 240 = red
-        // 240 - 300 = orange
-        // 300 - 360 = yellow
-        // 360 - 420 = green
-        // 420 - 480 = blue
-        // 480 - 540 = purple
-        // 540 - 599 = star
-        // 600       = check
 
-        if (points < 60)
-            return "❌";
-        if (points < 120)
-            return "⬛";
-        if (points < 180)
-            return "🟫";
-        if (points < 240)
-            return "🟥";
-        if (points < 300)
-            return "🟧"
-        if (points < 360)
-            return "🟨";
-        if (points < 420)
-            return "🟩"
-        if (points < 480)
-            return "🟦";
-        if (points < 540)
-            return "🟪";
-        if (points < 600)
-            return "⭐";
-        if (points == 600)
-            return "✅";
-        return "?";
-    }
-
-
-    drawPath(hist, color, room, score) {
-        const width = 560;
-        const height = 210;
-        const playersHistory = new Map(JSON.parse(hist));
-        let histcount = this.histcount;
-        let name = "Your";
-        playersHistory.forEach((hist, player) => {
-            if (this.socket.id == player.id) {
-                name = "<font color=\"" + player.color + "\">" + player.name + "</font>'s";
-            }
-        });
-
-        const pointsToEmoji = (p) => {
-            return this.pointsToEmoji(p)
-        };
-        // var history = "<br><button id=\"sharepath" + histcount + "\">copy</button><br>" + "<div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points";
-        var history = "<br><div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points on " + room + ":";
-        playersHistory.forEach((hist, player) => {
-            if (this.socket.id == player.id) {
-                var i = CONSTANTS.GAME_ROUNDS - Object.keys(hist).length + 1;
-                Object.keys(hist).forEach((round) => {
-                    let datapoint = hist[round];
-                    let points_int = datapoint['round_points'];
-                    let points = points_int.toString().padEnd(3).replace(/\s/g, "&nbsp;")
-                    let time = datapoint['time'];
-                    time = time.toString().padEnd(3).replace(/\s/g, "&nbsp;")
-                    let error_unit = datapoint['error_unit']
-                    let dist = datapoint['dist'];
-                    dist = dist.toString().padEnd(5).replace(/\s/g, "&nbsp;")
-                    let target = Geography.stringifyTarget(datapoint['target'], room).string.padEnd(6050).substring(0, 50).replace(/\s/g, "&nbsp");
-                    let iso2 = datapoint['target']['iso2'];
-                    if (iso2 == "" || iso2 == null)
-                        iso2 = "earth";
-                    iso2 = iso2.toLowerCase();
-                    let image = "<img alt=\":flag_" + iso2 + ":\" height=16 src=\"resources/flags/" + iso2 + ".png\" />";
-                    history = history + "<br>" + pointsToEmoji(points_int) + " Round " + i.toString().padEnd(2).replace(/\s/g, "&nbsp;") + ": " + points + "pts [" + dist + error_unit + ", " + time + "s]  " + image + " " + target;
-                    i = i + 1;
-                });
-            }
-        });
-
-        history = history + "</tt><br></div>"
+    drawPath(history) {
         // TODO: Copy to clipboard button
         //         let js = `<script>
         // var node = document.getElementById('mypath` + histcount + `');

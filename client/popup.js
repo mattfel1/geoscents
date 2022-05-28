@@ -7,7 +7,7 @@ class Popup {
 
     join(info, cb) {
         this.choseName = true;
-        this.socket.emit('playerJoin', info['name'], info['color'], info['logger'], cb);
+        this.socket.emit('playerJoin', info['name'], info['color'], info['logger'], "", "", "", cb);
     }
     getChoseName() {
         return this.choseName;
