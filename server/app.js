@@ -271,7 +271,7 @@ Object.values(rooms).forEach(function(room) {
 });
 var playerRooms = new Map();
 
-const WELCOME_MESSAGE1 = 'Have you done today\'s <a href=https://9ps.github.io/statdle/ target=\"_blank\">statdle</a> and <a href=https://worldle.teuteuf.fr/ target=\"_blank\">worldle</a>?<br><br> ' +
+const WELCOME_MESSAGE1 = 'Have you done today\'s <a href=https://statdle.github.io/ target=\"_blank\">statdle</a> and <a href=https://worldle.teuteuf.fr/ target=\"_blank\">worldle</a>?<br><br> ' +
     '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
     'This is an attempt at recreating the similarly-named game from the mid 2000s, Geosense (geosense.net), which is no longer available. ' +
     '<br>If you have feedback, simply shout it directly into this chat box, starting with the word /feedback. ' +
