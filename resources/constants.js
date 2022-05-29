@@ -49,7 +49,7 @@ module.exports = {
         "Spain", "China", "United States", "Iran", "Brazil", "Mexico", "India", "United Kingdom", "Italy", "Germany", "France",
         "Nigeria", "South Africa", "Vatican City", "Democratic Republic of the Congo", "Pakistan", "New Zealand",
     ],
-    SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Morrison", "Iohannis", "el-Sisi", "Castillo", "Widodo",
+    SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Albanese", "Iohannis", "el-Sisi", "Castillo", "Widodo",
         "Sánchez", "Xi", "Biden", "Raisi", "Bolsonaro", "AMLO", "Modi", "Johnson", "Mattarella", "Scholz", "Macron", "Buhari", "Ramaphosa", "Bertello", "Tshisekedi", "Alvi", "Ardern"
     ],
     SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)",
