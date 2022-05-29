@@ -47,15 +47,19 @@ module.exports = {
     SAMERICA: "S. America",
     SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania", "Egypt", "Peru", "Indonesia",
         "Spain", "China", "United States", "Iran", "Brazil", "Mexico", "India", "United Kingdom", "Italy", "Germany", "France",
-        "Nigeria", "South Africa", "Vatican City", "Democratic Republic of the Congo", "Pakistan", "New Zealand",
+        "Nigeria", "South Africa", "Vatican City", "Democratic Republic of the Congo", "Pakistan", "New Zealand", "Turkey", "Switzerland",
+        "Morocco"
     ],
     SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Morrison", "Iohannis", "el-Sisi", "Castillo", "Widodo",
-        "Sánchez", "Xi", "Biden", "Raisi", "Bolsonaro", "AMLO", "Modi", "Johnson", "Mattarella", "Scholz", "Macron", "Buhari", "Ramaphosa", "Bertello", "Tshisekedi", "Alvi", "Ardern"
+        "Sánchez", "Xi", "Biden", "Raisi", "Bolsonaro", "AMLO", "Modi", "Johnson", "Mattarella", "Scholz", "Macron", "Buhari", "Ramaphosa", "Bertello", "Tshisekedi", "Alvi", "Ardern",
+        "Erdoğan", "Cassis", "Akhannouch",
+
     ],
     SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)",
         "Welcome/Bienvenue", "Bienvenido", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenido", "Selamat datang",
         "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome", "خوش آمدی (xoš âmadi)", "Receber", "Bienvenido", "Welcome/स्वागत हे(svaagat he)", "Welcome",
-        "Benvenuto/Benvenuta", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "Benvenuto/Benvenuta", "Bienvenue/Boyei malamu/Karibu", "خوش آمدید (Khush Amdeed)/Welcome", "Kia ora/Welcome"
+        "Benvenuto/Benvenuta", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "Benvenuto/Benvenuta", "Bienvenue/Boyei malamu/Karibu", "خوش آمدید (Khush Amdeed)/Welcome", "Kia ora/Welcome",
+        "مرحبا‎ (Merhaba)", "Willkommen/Bienvenue/Benvenuto/Benvenuta/Bainvegni", "أهلا بك (Ahlan bik)"
     ],
 
     MAP_BOUNDS: {
@@ -309,6 +313,27 @@ module.exports = {
             "max_lon": 190.4,
             "max_lat": -49,
             "min_lat": -31.4,
+            "lat_ts": 0
+        },
+        "Turkey": {
+            "min_lon": 22,
+            "max_lon": 48,
+            "max_lat": 33.14,
+            "min_lat": 45,
+            "lat_ts": 0
+        },
+        "Switzerland": {
+            "min_lon": 4,
+            "max_lon": 12.66,
+            "max_lat": 45,
+            "min_lat": 48.5,
+            "lat_ts": 0
+        },
+        "Morocco": {
+            "min_lon": -25,
+            "max_lon": 10,
+            "max_lat": 20.03,
+            "min_lat": 38,
             "lat_ts": 0
         },
 
