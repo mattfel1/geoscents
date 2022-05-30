@@ -312,6 +312,22 @@ blacklist = ['*']
 whitelist = ['New Zealand']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
 
+outfile = geoscents_home + 'resources/databases/turkeycities.js'
+lonrng = [22, 48]
+latrng = [33.14, 45]
+pop = 0
+blacklist = ['*']
+whitelist = ['Turkey']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = geoscents_home + 'resources/databases/switzerlandcities.js'
+lonrng = [4, 12.66]
+latrng = [45, 48.5]
+pop = 0
+blacklist = ['*']
+whitelist = ['Switzerland']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
 outfile = geoscents_home + 'resources/databases/moroccocities.js'
 lonrng = [-25, 10]
 latrng = [20.03, 38]

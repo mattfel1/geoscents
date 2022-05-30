@@ -256,7 +256,7 @@ const flushGuesses = (map) => {
                 history = {}
                 const currentdate = new Date();
                 const timestamp = currentdate.getHours() + "-" + currentdate.getMinutes() + currentdate.getSeconds();
-                logFeedback("Staging file " + file + " seems corrupted!!  Writing it to /scratch/corrupted" + timestamp)
+                // logFeedback("Staging file " + file + " seems corrupted!!  Writing it to /scratch/corrupted" + timestamp)
                 fs.writeFile("/scratch/corrupted" + timestamp, data, {
                     flag: 'w'
                 }, function(err) {
@@ -326,7 +326,7 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
                     history = {}
                     const currentdate = new Date();
                     const timestamp = currentdate.getHours() + "-" + currentdate.getMinutes() + currentdate.getSeconds();
-                    logFeedback("File " + file + " seems corrupted!!  Writing it to /scratch/corrupted" + timestamp)
+                    // logFeedback("File " + file + " seems corrupted!!  Writing it to /scratch/corrupted" + timestamp)
                     fs.writeFile("/scratch/corrupted" + timestamp, data, {
                         flag: 'w'
                     }, function(err) {
@@ -603,6 +603,12 @@ const flairToEmoji = (flair) => {
         return "🇵🇰";
     if (flair === "New Zealand")
         return "🥝";
+    if (flair === "Turkey")
+        return "🦃";
+    if (flair === "Switzerland")
+        return "🇨🇭";
+    if (flair === "Morocco")
+        return "🇲🇦";
 
     return "?";
 }

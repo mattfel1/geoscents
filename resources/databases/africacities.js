@@ -5802,6 +5802,30 @@ module.exports = {
             "capital": "minor",
             "population": 100000,
             "id": 1562695011
+        },
+        {
+            "city": "Laayoune",
+            "city_ascii": "Laayoune",
+            "lat": 27.153611,
+            "lng": -13.203333,
+            "country": "Morocco",
+            "iso2": "MA",
+            "admin_name": "La\u00e2youne-Boujdour-Sakia El Hamra",
+            "capital": "admin",
+            "population": 217732,
+            "id": 9999999995
+        },
+        {
+            "city": "Dakhla",
+            "city_ascii": "Dakhla",
+            "lat": 23.708056,
+            "lng": -15.945556,
+            "country": "Morocco",
+            "iso2": "MA",
+            "admin_name": "Dakhla-Oued Ed-Dahab",
+            "capital": "admin",
+            "population": 106277,
+            "id": 9999999996
         }
     ]
 }

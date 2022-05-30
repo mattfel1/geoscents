@@ -271,6 +271,103 @@ module.exports = {
             "capital": "",
             "population": 57705,
             "id": 1504399838
+        },
+        {
+            "city": "Laayoune",
+            "city_ascii": "Laayoune",
+            "lat": 27.153611,
+            "lng": -13.203333,
+            "country": "Morocco",
+            "iso2": "MA",
+            "admin_name": "La\u00e2youne-Boujdour-Sakia El Hamra",
+            "capital": "admin",
+            "population": 217732,
+            "id": 9999999995
+        },
+        {
+            "city": "Dakhla",
+            "city_ascii": "Dakhla",
+            "lat": 23.708056,
+            "lng": -15.945556,
+            "country": "Morocco",
+            "iso2": "MA",
+            "admin_name": "Dakhla-Oued Ed-Dahab",
+            "capital": "admin",
+            "population": 106277,
+            "id": 9999999996
+        },
+        {
+            "city": "Smara",
+            "city_ascii": "Smara",
+            "lat": 26.739444,
+            "lng": -11.670278,
+            "country": "Morocco",
+            "iso2": "MA",
+            "admin_name": "La\u00e2youne-Boujdour-Sakia El Hamra",
+            "capital": "",
+            "population": 57035,
+            "id": 9999999997
+        },
+        {
+            "city": "Cape Bojador",
+            "city_ascii": "Cape Bojador",
+            "lat": 26.133333,
+            "lng": -14.5,
+            "country": "Morocco",
+            "iso2": "MA",
+            "admin_name": "La\u00e2youne-Boujdour-Sakia El Hamra",
+            "capital": "",
+            "population": 42651,
+            "id": 9999999998
+        },
+        {
+            "city": "El Marsa",
+            "city_ascii": "El Marsa",
+            "lat": 27.097944,
+            "lng": -13.414472,
+            "country": "Morocco",
+            "iso2": "MA",
+            "admin_name": "La\u00e2youne-Boujdour-Sakia El Hamra",
+            "capital": "",
+            "population": 33500,
+            "id": 9999999999
+        },
+        {
+            "city": "Guerguerat",
+            "city_ascii": "Guerguerat",
+            "lat": 21.426111,
+            "lng": -16.958611,
+            "country": "Morocco",
+            "iso2": "MA",
+            "admin_name": "Dakhla-Oued Ed-Dahab",
+            "capital": "",
+            "population": 0,
+            "id": 10000000000
+        },
+        {
+            "city": "Tichla",
+            "city_ascii": "Tichla",
+            "lat": 21.583496,
+            "lng": -14.972788,
+            "country": "Morocco",
+            "iso2": "MA",
+            "admin_name": "Dakhla-Oued Ed-Dahab",
+            "capital": "",
+            "population": 0,
+            "id": 10000000001
+        },
+        {
+            "city": "La G\u00fcera",
+            "city_ascii": "La Guerra",
+            "lat": 20.833333,
+            "lng": -17.091667,
+            "country": "Morocco",
+            "iso2": "MA",
+            "admin_name": "Dakhla-Oued Ed-Dahab",
+            "capital": "",
+            "population": 0,
+            "img_link": "https://upload.wikimedia.org/wikipedia/commons/7/70/Casa_del_gobierno_La_Ag%C3%BCera_1.928-1.935.jpg",
+            "id": 10000000001
         }
     ]
 }

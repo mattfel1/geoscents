@@ -4843,17 +4843,18 @@ module.exports = {
             "capital": "",
             "wiki": "https://en.wikipedia.org/wiki/Llanfairpwllgwyngyll"
         },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
+        {
+            "city": "Molinere Underwater Sculpture Park",
+            "city_ascii": "",
+            "lat": 12.08343,
+            "lng": -61.765576,
+            "iso2": "GD",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Molinere_Underwater_Sculpture_Park",
+            "img_link": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Underwater_sculptures_at_Molinere_Underwater_Sculpture_Park.jpg"
+        },
         // {
         //   "city": "",
         //   "city_ascii": "",
