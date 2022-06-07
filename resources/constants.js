@@ -53,14 +53,14 @@ module.exports = {
   
     SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Albanese", "Iohannis", "el-Sisi", "Castillo", "Widodo",
         "Sánchez", "Xi", "Biden", "Raisi", "Bolsonaro", "AMLO", "Modi", "Johnson", "Mattarella", "Scholz", "Macron", "Buhari", "Ramaphosa", "Bertello", "Tshisekedi", "Alvi", "Ardern"
-        "Erdoğan", "Cassis", "Akhannouch",
+        "Erdogan", "Cassis", "Akhannouch",
 
     ],
     SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)",
         "Welcome/Bienvenue", "Bienvenido", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenido", "Selamat datang",
         "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome", "خوش آمدی (xoš âmadi)", "Receber", "Bienvenido", "Welcome/स्वागत हे(svaagat he)", "Welcome",
-        "Benvenuto/Benvenuta", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "Benvenuto/Benvenuta", "Bienvenue/Boyei malamu/Karibu", "خوش آمدید (Khush Amdeed)/Welcome", "Kia ora/Welcome",
-        "مرحبا‎ (Merhaba)", "Willkommen/Bienvenue/Benvenuto/Benvenuta/Bainvegni", "أهلا بك (Ahlan bik)"
+        "Benvenuto", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "Benvenuto", "Bienvenue/Boyei malamu/Karibu", "خوش آمدید (Khush Amdeed)/Welcome", "Kia ora/Welcome",
+        "مرحبا‎ (Merhaba)", "Willkommen/Bienvenue/Benvenuto/Bainvegni", "أهلا بك (Ahlan bik)"
     ],
 
     MAP_BOUNDS: {
