@@ -62,7 +62,6 @@ class PrivatePopup {
             e.preventDefault();
             var code = $(this).find("#selected_code").val();
             var requestedCitysrc = $(this).find("#requestedCitysrc").val();
-            console.log('Requesting private room ' + code + ' with citysrc ' + requestedCitysrc)
             goToRoom({
                 'code': code,
                 'requestedCitysrc': requestedCitysrc
