@@ -32,5 +32,5 @@ npm start
 
 ```
 npm -g install js-beautify
-js-beautify <file> -r
+bash scripts/format.sh # calls beautify on all files js-beautify <file> -r
 ```
