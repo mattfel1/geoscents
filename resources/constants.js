@@ -48,19 +48,19 @@ module.exports = {
     SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania", "Egypt", "Peru", "Indonesia",
         "Spain", "China", "United States", "Iran", "Brazil", "Mexico", "India", "United Kingdom", "Italy", "Germany", "France",
         "Nigeria", "South Africa", "Vatican City", "Democratic Republic of the Congo", "Pakistan", "New Zealand", "Turkey", "Switzerland",
-        "Morocco"
+        "Morocco", "Philippines", "South Korea", "Vietnam", "Saudi Arabia"
     ],
-  
+
     SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Albanese", "Iohannis", "el-Sisi", "Castillo", "Widodo",
         "Sánchez", "Xi", "Biden", "Raisi", "Bolsonaro", "AMLO", "Modi", "Johnson", "Mattarella", "Scholz", "Macron", "Buhari", "Ramaphosa", "Bertello", "Tshisekedi", "Alvi", "Ardern",
-        "Erdoğan", "Cassis", "Akhannouch",
+        "Erdoğan", "Cassis", "Akhannouch", "Bongbong", "Yoon", "Nguyen", "Salman"
 
     ],
     SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)",
         "Welcome/Bienvenue", "Bienvenido", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenido", "Selamat datang",
         "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome", "خوش آمدی (xoš âmadi)", "Receber", "Bienvenido", "Welcome/स्वागत हे(svaagat he)", "Welcome",
         "Benvenuto", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "Benvenuto", "Bienvenue/Boyei malamu/Karibu", "خوش آمدید (Khush Amdeed)/Welcome", "Kia ora/Welcome",
-        "مرحبا‎ (Merhaba)", "Willkommen/Bienvenue/Benvenuto/Bainvegni", "أهلا بك (Ahlan bik)"
+        "مرحبا‎ (Merhaba)", "Willkommen/Bienvenue/Benvenuto/Bainvegni", "أهلا بك (Ahlan bik)", "Maligayang Pagdating", "환영하다 (hwan-yeonghada)", "Hoan Nghênh", "أهلا بك (Ahlan bik)"
     ],
 
     MAP_BOUNDS: {
@@ -335,6 +335,34 @@ module.exports = {
             "max_lon": 10,
             "max_lat": 20.03,
             "min_lat": 38,
+            "lat_ts": 0
+        },
+        "Philippines": {
+            "min_lon": 105,
+            "max_lon": 140,
+            "max_lat": 2,
+            "min_lat": 22.15,
+            "lat_ts": 0
+        },
+        "Vietnam": {
+            "min_lon": 90,
+            "max_lon": 120.1,
+            "max_lat": 8,
+            "min_lat": 25,
+            "lat_ts": 0
+        },
+        "South Korea": {
+            "min_lon": 121,
+            "max_lon": 135.75,
+            "max_lat": 33,
+            "min_lat": 40,
+            "lat_ts": 0
+        },
+        "Saudi Arabia": {
+            "min_lon": 23.8,
+            "max_lon": 63.5,
+            "max_lat": 15,
+            "min_lat": 36,
             "lat_ts": 0
         },
 

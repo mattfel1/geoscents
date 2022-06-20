@@ -335,3 +335,35 @@ pop = 0
 blacklist = ['*']
 whitelist = ['Morocco']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = geoscents_home + 'resources/databases/philippinescities.js'
+lonrng = [105, 140]
+latrng = [2, 22.15]
+pop = 0
+blacklist = ['*']
+whitelist = ['Philippines']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = geoscents_home + 'resources/databases/southkoreacities.js'
+lonrng = [121, 135.75]
+latrng = [33, 40]
+pop = 0
+blacklist = ['*']
+whitelist = ['Korea, South']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = geoscents_home + 'resources/databases/vietnamcities.js'
+lonrng = [90, 120.1]
+latrng = [8, 25]
+pop = 0
+blacklist = ['*']
+whitelist = ['Vietnam']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = geoscents_home + 'resources/databases/saudiarabiacities.js'
+lonrng = [23.8, 63.5]
+latrng = [15, 36]
+pop = 0
+blacklist = ['*']
+whitelist = ['Saudi Arabia']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)

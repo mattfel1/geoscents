@@ -4855,50 +4855,51 @@ module.exports = {
             "wiki": "https://en.wikipedia.org/wiki/Molinere_Underwater_Sculpture_Park",
             "img_link": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Underwater_sculptures_at_Molinere_Underwater_Sculpture_Park.jpg"
         },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
+        {
+            "city": "Snake Island (Ilha da Queimada Grande)",
+            "city_ascii": "",
+            "lat": -24.486111,
+            "lng": -46.675,
+            "iso2": "BR",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Ilha_da_Queimada_Grande"
+        },
+        {
+            "city": "Bhangarh Fort",
+            "city_ascii": "",
+            "lat": 27.095833,
+            "lng": 76.2875,
+            "iso2": "IN",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Bhangarh_Fort"
+        },
+        {
+            "city": "Lascaux Cave",
+            "city_ascii": "",
+            "lat": 45.053611,
+            "lng": 1.17,
+            "iso2": "FR",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "img_link": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Lascaux_painting.jpg",
+            "wiki": "https://en.wikipedia.org/wiki/Lascaux"
+        },
+        {
+            "city": "Discovery Site of Hurrian Hymn to Nikkal (Oldest Substantially Complete Notated Music)",
+            "city_ascii": "",
+            "lat": 35.602,
+            "lng": 35.782,
+            "iso2": "SY",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Hurrian_songs"
+        },
         // {
         //   "city": "",
         //   "city_ascii": "",
