@@ -206,8 +206,10 @@ class Room {
     }
     reset() {
         this.state = CONSTANTS.IDLE_STATE;
+        this.killJoe();
         this.loadRecords();
         this.drawScorePanel();
+        this.createJoe();
     }
     // Player count
     playerCount() {
