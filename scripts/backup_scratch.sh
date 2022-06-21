@@ -12,5 +12,5 @@ do
 done
 
 mkdir ${backup_dir}/scratch0
-scp -r geoscents.net:/scratch/* ${backup_dir}/scratch0/
+scp -r root@geoscents.net:/scratch/* ${backup_dir}/scratch0/
 touch ${backup_dir}/scratch0/"$(date)"
