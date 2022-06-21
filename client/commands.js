@@ -211,10 +211,13 @@ class Commands {
         } else {
             lobby_string = "<font color=\"white\">(0 players)</font>"
         }
+        let private_string;
+        private_string = "<font color=\"white\">(? players)</font>"
 
-        $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>To Lobby</b> <font size=2>" + lobby_string + "</font></button>"))
-        if (this.isPrivate) $('#commands').append($("<button class='private-room-btn' id='private_button'><b>" + this.privateCitysrc + "</b><br>code: " + this.privateCode + "</button><br>"));
-        else $('#commands').append($("<button class='private-room-btn' id='private_button'><b>To Private Room</b></button><br>"));
+        $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>Lobby</b> <font size=2><br>" + lobby_string + "</font></button>"))
+        if (this.isPrivate) $('#commands').append($("<button class='private-room-btn' id='private_button'><b>" + this.privateCitysrc + "</b><br>code: " + this.privateCode + "</button>"));
+        else $('#commands').append($("<button class='private-room-btn' id='private_button'><b>Private</b><font size=2><br>" + private_string + "</font></button>"));
+        this.roomButton(CONSTANTS.SPECIAL, "special", true);
         this.roomButton(CONSTANTS.WORLD, "world");
         this.roomButton(CONSTANTS.WORLD_CAPITALS, "world_capitals");
         this.roomButton(CONSTANTS.TRIVIA, "trivia", true);
@@ -224,7 +227,6 @@ class Commands {
         this.roomButton(CONSTANTS.OCEANIA, "oceania");
         this.roomButton(CONSTANTS.NAMERICA, "namerica");
         this.roomButton(CONSTANTS.SAMERICA, "samerica");
-        this.roomButton(CONSTANTS.SPECIAL, "special", true);
 
         var room = this.myRoomName;
 

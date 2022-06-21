@@ -115,7 +115,7 @@
 .private-room-btn {
     cursor: pointer;
     border: 1px solid #333;
-    width: 140px;
+    width: 110px;
     padding: 2px 2px;
     margin: 3px 3px;
     font-size: 14px;
@@ -153,6 +153,7 @@
 .lobby-btn {
     cursor: pointer;
     border: 1px solid #333;
+    width: 110px;
     padding: 2px 2px;
     margin: 3px 3px;
     font-size: 16px;
