@@ -93,8 +93,8 @@ if (hostname === "matt-machwx9") {
                 });
                 console.log("http request detected from " + req.connection.remoteAddress + ", sending to >> https://" + req.headers['host'].replace(PORT, SPORT) + req.url);
                 res.end();
-            } catch {
-                console.log("failed to redirect " + req)
+            } catch (err) {
+                console.log("failed to redirect " + req + ": " + err.message)
             }
         });
         httpServer.listen(PORT);
