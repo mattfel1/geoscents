@@ -71,7 +71,7 @@ class Commands {
 
         var old_hue = localStorage.getItem("hue");
         if (old_hue === null) old_hue = 0
-        this.hueShift = old_hue; 
+        this.hueShift = old_hue;
         this.isBotSpamming();
     }
 
@@ -209,7 +209,7 @@ class Commands {
         if (!this.hasJoe) killJoe = 'Create Bot';
         let joeButton = "<span id='joe_button' class='settings-btn-container'><button class='settings-btn'>" + killJoe + "</button></span>";
         let muteButton = "<span class='settings-btn-container'><button class='settings-btn' id='mute_button'>Mute</button></span>"
-        if (this.muted) 
+        if (this.muted)
             muteButton = "<span class='settings-btn-container'><button class='settings-btn-clicked' id='mute_button'>Unmute</button></span>"
         $('#settings-box').append($("<span>Game Controls:</span><span>" + rebootButton + joeButton + muteButton + "</span>"));
 

@@ -250,6 +250,7 @@
     border-radius: 1px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
+
 /*
 input[type="range"] {
    position: absolute;
@@ -276,11 +277,9 @@ input[type="range"] {
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
-.map-textures-container {
-}
+.map-textures-container {}
 
-.settings-btn-container {
-}
+.settings-btn-container {}
 
 .map-style-btn-clicked {
     cursor: pointer;
