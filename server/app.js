@@ -158,8 +158,8 @@ app.get('/.well-known/pki-validation/*', (req, res, next) => {
     const wildcard = req.params['0'];
     res.sendFile(path.join(__dirname, '..', '.well-known/pki-validation/' + wildcard));
 });
-app.get('/overlaypopup.css', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '..', 'overlaypopup.css'));
+app.get('/design.css', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '..', 'design.css'));
 });
 app.get('/resources/audio/*.mp3', (req, res, next) => {
     const wildcard = req.params['0'];

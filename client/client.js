@@ -23,7 +23,10 @@ const canvas = window.document.getElementById('map');
 const panel = window.document.getElementById('panel');
 const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1; // hack for scaling
 var lastScale = 999;
-var noScale = false;
+var was_autoscaled = localStorage.getItem("autoscaled");
+if (was_autoscaled === "false") was_autoscaled = false
+else was_autoscaled = true
+var autoscale = was_autoscaled;
 var betweenGames = true;
 var clickedReady = false;
 var booted = false;
@@ -182,8 +185,8 @@ $(document).ready(function() {
     });
     socket.on("autoscale", function(id) {
         if (socket.id == id) {
-            noScale = !commands.autoscale;
             commands.autoscale = !commands.autoscale;
+            autoscale = commands.autoscale;
             commands.setAutoscale(id)
             lastScale = 1;
             document.documentElement.style.zoom = 1;
@@ -334,7 +337,7 @@ $(document).ready(function() {
     setInterval(() => {
         // Set zoom for resolution
         const scale = Math.floor(50 * Math.max(0.5, Math.min(1, window.innerWidth / 1920))) / 50;
-        if (scale != lastScale && !noScale) {
+        if (scale != lastScale && autoscale) {
             lastScale = scale;
             document.documentElement.style.zoom = scale;
             document.documentElement.style.MozTransform = "scale(" + scale + ")";

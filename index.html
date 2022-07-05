@@ -11,10 +11,28 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <link rel="icon" type="image/png" href="resources/images/favicon.png" sizes="48x48">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="overlaypopup.css" />
+    <link type="text/css" rel="stylesheet" href="design.css" />
     <meta name="GeoScents" content="An online multiplayer world geography game!  Test your knowledge of city locations. This is a recreation of the game Geosense from geosense.net.">
     <meta property="og:image" content="http://geoscents.net/resources/images/ogimage.png" />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6780905379201491" crossorigin="anonymous"></script>
+
+    <script>
+var changeColor = function (){
+  // select your select tag
+  var selectStatus = document.getElementById("selected_color");
+  // get the number of the option currently selected
+  var optionSelected = selectStatus.selectedIndex;
+  // set his background-color to the class'name of the option
+  var color = selectStatus.options[optionSelected].value;
+  if (color == "random")
+    color = "black"
+  selectStatus.style.color = color;
+  //Then color each option in her proper class
+  // for (var option in selectStatus.options){
+  //   selectStatus.options[option].style.color =  selectStatus.options[option].value;
+  // }
+};
+</script>
 </head>
 
 <body>
@@ -68,7 +86,7 @@
                 <tr>
             </table>
             <br>
-            <div style="text-align: center;vertical-align: middle;"><input type="submit" value="Join!" /></div>
+            <div style="text-align: center;vertical-align: middle;"><input type="submit" value="Join!" id="submit_famer" /></div>
         </form>
     </div>
 
@@ -77,54 +95,40 @@
 
     </div>
     <div class="overlay-content-name popup">
-        <p>Please choose a name and color (or leave blank for random)</p>
+        <p>Please choose a name and color (or hit escape for random)</p>
         <form id="rename" method="post">
-            <table style="height:0px">
-                <td style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey;width:28%;height:100%">
-                    <b>Name:</b><br>
+            <div>
+                    <span style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey"><b>Name:</b><br>
                     <input type="text" id="selected_name" autofocus name="selected_name" style="width: 120px;" maxlength="14" pattern="[a-zA-Z0-9][a-zA-Z0-9 ?!]+[a-zA-Z0-9]" title="Name should only contain letters, numbers, and spaces">
-                </td>
-                <td style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey;width:28%;height:100%"><b>Color:</b><br>
-                    <input type="radio" name="selected_color" value="random" checked> random
-                    <input type="radio" name="selected_color" value="red">
-                    <font color="red"><b>█</b></font>
-                    <input type="radio" name="selected_color" value="blue">
-                    <font color="blue"><b>█</b></font>
-                    <input type="radio" name="selected_color" value="purple">
-                    <font color="purple"><b>█</b></font>
-                    <input type="radio" name="selected_color" value="magenta">
-                    <font color="magenta"><b>█</b></font>
-                    <input type="radio" name="selected_color" value="grey">
-                    <font color="grey"><b>█</b></font>
-                    <input type="radio" name="selected_color" value="orange">
-                    <font color="orange"><b>█</b></font>
-                    <input type="radio" name="selected_color" value="green">
-                    <font color="green"><b>█</b></font>
-                    <input type="radio" name="selected_color" value="#1f77b4">
-                    <font color="#1f77b4"><b>█</b></font>
-                    <input type="radio" name="selected_color" value="#2ca02c">
-                    <font color="#2ca02c"><b>█</b></font>
-                    <input type="radio" name="selected_color" value="#995c00">
-                    <font color="#995c00"><b>█</b></font>
-                    <input type="radio" name="selected_color" value="#9467bd">
-                    <font color="#9467bd"><b>█</b></font>
-                    <input type="radio" name="selected_color" value="#8c564b">
-                    <font color="#8c564b"><b>█</b></font>
-                    <input type="radio" name="selected_color" value="#e377c2">
-                    <font color="#e377c2"><b>█</b></font>
-                    <input type="radio" name="selected_color" value="#adad1f">
-                    <font color="#adad1f"><b>█</b></font>
-                    <input type="radio" name="selected_color" value="#17becf">
-                    <font color="#17becf"><b>█</b></font>
-                </td>
-                <td style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey;width:28%;height:100%"><b><a target="_blank" href="https://geoscents.net/resources/about.html#9">Log history</a>:</b><br>
-                    <input type="radio" name="selected_log" value="Yes" checked> Yes
-                    <input type="radio" name="selected_log" value="No"> No
-                </td>
-                <tr>
-            </table>
-            <br>
+                </span>
+<span style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey"><b>Color:</b><br>
+<select id="selected_color" onclick="changeColor()">
+                    <option value="random">?</option>
+                    <option value=red style="color:red"><b>█</b></option>
+                    <option value="blue" style="color:blue"><b>█</b></font></option>
+                    <option value="purple" style="color:purple"><b>█</b></font></option>
+                    <option value="magenta" style="color:magenta"><b>█</b></font></option>
+                    <option value="grey" style="color:grey"><b>█</b></font></option>
+                    <option value="orange" style="color:orange"><b>█</b></font></option>
+                    <option value="green" style="color:green"><b>█</b></font></option>
+                    <option value="#1f77b4" style="color:#1f77b4"><b>█</b></font></option>
+                    <option value="#2ca02c" style="color:#2ca02c"><b>█</b></font></option>
+                    <option value="#995c00" style="color:#995c00"><b>█</b></font></option>
+                    <option value="#9467bd" style="color:#9467bd"><b>█</b></font></option>
+                    <option value="#8c564b" style="color:#8c564b"><b>█</b></font></option>
+                    <option value="#e377c2" style="color:#e377c2"><b>█</b></font></option>
+                    <option value="#adad1f" style="color:#adad1f"><b>█</b></font></option>
+                    <option value="#17becf" style="color:#17becf"><b>█</b></font></option>
+                </select>
+                </span>
+<span style="border-style: inset;padding: 5px;display:inline-block;background:lightgrey"><b>Log history:</b><br>
+<select id="selected_log">
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+</select>
+                </span>
             <div style="text-align: center;vertical-align: middle;"><input type="submit" value="Join!" /></div>
+        </div>
         </form>
     </div>
 

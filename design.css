@@ -54,10 +54,11 @@
     text-align: center;
 }
 
-.settings {
+.settings-panel {
     border-style: inset;
     padding-bottom: 5px;
-    display: inline-block;
+    display: grid;
+    grid-template-columns: auto auto;
     background: #C6C6DA;
 }
 
@@ -65,7 +66,6 @@
     display: none;
     background: #fff;
     padding: 1%;
-    width: 25%;
     position: absolute;
     top: 800px;
     left: 800px;
@@ -205,7 +205,7 @@
 
 .joe-btn-container {
     padding: 0px 0px;
-    margin: -5px 0px;
+    margin: 0px 0px;
 }
 
 .map-style-btn {
@@ -226,9 +226,60 @@
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
-.map-style-btn-container {
-    padding: 0px 5px;
-    margin: -5px 0px;
+
+.settings-container {
+    padding: 0px 0px;
+    margin: 0px 0px;
+}
+
+.settings-btn {
+    cursor: pointer;
+    border: 1px solid #333;
+    padding: 1px 1px;
+    margin: 1px 1px;
+    font-size: 10px;
+    width: 60px;
+    background: #dddddd;
+    /* fallback */
+    background: -moz-linear-gradient(top, #dddddd 0%, #bbbbbb 4%, #999999 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #dddddd), color-stop(4%, #bbbbbb), color-stop(100%, #999999));
+    background: -webkit-linear-gradient(top, #dddddd 0%, #bbbbbb 4%, #999999 100%);
+    background: -o-linear-gradient(top, #dddddd 0%, #bbbbbb 4%, #999999 100%);
+    background: -ms-linear-gradient(top, #dddddd 0%, #bbbbbb 4%, #999999 100%);
+    background: linear-gradient(to bottom, #dddddd 0%, #bbbbbb 4%, #999999 100%);
+    border-radius: 1px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+/*
+input[type="range"] {
+   position: absolute;
+   top: 40%;
+   transform: rotate(270deg);
+}
+*/
+.settings-btn-clicked {
+    cursor: pointer;
+    border: 1px solid #333;
+    padding: 1px 1px;
+    margin: 1px 1px;
+    font-size: 10px;
+    width: 60px;
+    background: #dddddd;
+    /* fallback */
+    background: -moz-linear-gradient(top, #777777 0%, #555555 4%, #999999 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #777777), color-stop(4%, #555555), color-stop(100%, #999999));
+    background: -webkit-linear-gradient(top, #777777 0%, #555555 4%, #999999 100%);
+    background: -o-linear-gradient(top, #777777 0%, #555555 4%, #999999 100%);
+    background: -ms-linear-gradient(top, #777777 0%, #555555 4%, #999999 100%);
+    background: linear-gradient(to bottom, #777777 0%, #555555 4%, #999999 100%);
+    border-radius: 1px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.map-textures-container {
+}
+
+.settings-btn-container {
 }
 
 .map-style-btn-clicked {

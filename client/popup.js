@@ -38,27 +38,21 @@ class Popup {
         if (name !== null) $('#selected_name').val(name);
         var color = localStorage.getItem("selected_color");
         if (color !== null) {
-            var radios = document.getElementsByName("selected_color");
-            for (var i = 0; i < radios.length; i++) {
-                if (radios[i].value == color) radios[i].checked = true
-                else radios[i].checked = false
-            }
+            var radios = document.getElementById("selected_color");
+            radios.selectedIndex = color
+            radios.style.color = radios.options[color].value
         }
         var logger = localStorage.getItem("selected_log");
         if (logger !== null) {
-            var radios = document.getElementsByName("selected_log");
-            for (var i = 0; i < radios.length; i++) {
-                // console.log("radio button " + radios[i].value)
-                if (radios[i].value == logger) radios[i].checked = true
-                else radios[i].checked = false
-            }
+            var radios = document.getElementById("selected_log");
+            radios.selectedIndex = logger
         }
 
         // hide popup when user clicks on close button or if user clicks anywhere outside the container
         $('.close-btn, .overlay-bg').unbind().click(function() {
             join({
                 'name': '',
-                'color': $("input[name='selected_color']:checked").val()
+                'color': $("input[name='selected_color']:value").val()
             }, () => {
                 closePopup()
             });
@@ -68,7 +62,7 @@ class Popup {
             if (e.keyCode == 27 && !choseName()) { // if user presses esc key
                 join({
                     'name': '',
-                    'color': $("input[name='selected_color']:checked").val()
+                    'color': $("input[name='selected_color']:value").val()
                 }, () => {
                     closePopup()
                 });
@@ -81,11 +75,11 @@ class Popup {
 
             if (!choseName()) {
                 var name = $(this).find("#selected_name").val();
-                var color = $("input[name='selected_color']:checked").val();
-                var logger = $("input[name='selected_log']:checked").val();
+                var color = $(this).find("#selected_color").val();
+                var logger = $(this).find("#selected_log").val();
                 localStorage.setItem("selected_name", $('#selected_name').val());
-                localStorage.setItem("selected_color", $("input[name='selected_color']:checked").val());
-                localStorage.setItem("selected_log", $("input[name='selected_log']:checked").val());
+                localStorage.setItem("selected_color", document.getElementById("selected_color").selectedIndex);
+                localStorage.setItem("selected_log", document.getElementById("selected_log").selectedIndex);
                 join({
                     'name': name,
                     'color': color,

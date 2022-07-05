@@ -56,10 +56,22 @@ class Commands {
             width: this.canvas.width * 10 / 12,
             height: 40
         };
-        this.muted = false;
-        this.autoscale = false;
+
+        var was_muted = localStorage.getItem("muted");
+        if (was_muted === null || was_muted === "false") was_muted = false
+        else was_muted = true
+        this.muted = was_muted;
+
+        var was_autoscaled = localStorage.getItem("autoscaled");
+        if (was_autoscaled === "false") was_autoscaled = false
+        else was_autoscaled = true
+        this.autoscale = was_autoscaled;
+
         this.bottracker = [];
-        this.hueShift = 0;
+
+        var old_hue = localStorage.getItem("hue");
+        if (old_hue === null) old_hue = 0
+        this.hueShift = old_hue; 
         this.isBotSpamming();
     }
 
@@ -175,35 +187,41 @@ class Commands {
     }
     postButtons() {
         const socket = this.socket;
+        // Add commands box
         $('#commands').empty();
+        $('#commands').append($("<div id='settings-box' class='settings-panel'>"))
 
+        // Add map texturens
         let pressed1 = '';
         if (this.mapStyle === 'classic') pressed1 = '-clicked';
         let pressed2 = '';
         if (this.mapStyle === 'terrain') pressed2 = '-clicked';
         let pressed3 = '';
         if (this.mapStyle === 'satellite') pressed3 = '-clicked';
-        let button1 = "<div id='classic_button' class='map-style-btn-container'><button class='map-style-btn" + pressed1 + "'>Classic</button></div>";
-        let button2 = "<div id='terrain_button' class='map-style-btn-container'><button class='map-style-btn" + pressed2 + "'>Terrain</button></div>";
-        let button3 = "<div id='satellite_button' class='map-style-btn-container'><button class='map-style-btn" + pressed3 + "'>Satellite</button></div>";
-        $('#commands').append($("<div id='settings-box' class='settings'>"))
-        $('#settings-box').append($("<div id='map-btns' style=\"display: inline-block\">" + button1 + button2 + button3 + "</div>"));
+        let button1 = "<span id='classic_button' class='settings-btn-container'><button class='settings-btn" + pressed1 + "'>Classic</button></span>";
+        let button2 = "<span id='terrain_button' class='settings-btn-container'><button class='settings-btn" + pressed2 + "'>Terrain</button></span>";
+        let button3 = "<span id='satellite_button' class='settings-btn-container'><button class='settings-btn" + pressed3 + "'>Satellite</button></span>";
+        $('#settings-box').append($("<span>Map Terrain:</span><span>" + button1 + button2 + button3 + "</span>"));
 
-
-        let rebootButton = "<div id='reboot_button' class='joe-btn-container'><button class='joe-btn'>Restart Game</button></div><br>";
+        // Add joe and reset buttons
+        let rebootButton = "<span id='reboot_button' class='settings-btn-container'><button class='settings-btn'>Restart</button></span>";
         let killJoe = 'Kill Bot';
         if (!this.hasJoe) killJoe = 'Create Bot';
-        let joeButton = "<div id='joe_button' class='joe-btn-container'><button class='joe-btn'>" + killJoe + "</button></div>";
-        $('#settings-box').append($("<div id='map-btns' style=\"display:inline-block\">" + rebootButton + joeButton + "</div>"));
+        let joeButton = "<span id='joe_button' class='settings-btn-container'><button class='settings-btn'>" + killJoe + "</button></span>";
+        let muteButton = "<span class='settings-btn-container'><button class='settings-btn' id='mute_button'>Mute</button></span>"
+        if (this.muted) 
+            muteButton = "<span class='settings-btn-container'><button class='settings-btn-clicked' id='mute_button'>Unmute</button></span>"
+        $('#settings-box').append($("<span>Game Controls:</span><span>" + rebootButton + joeButton + muteButton + "</span>"));
+
+        // Add jitter and hue
         let pressedAutoscale = '';
         if (this.autoscale) pressedAutoscale = '-clicked';
-        let autoscaleButton = "<div style=\"display: inline-block\" id='autoscale_button' class='map-style-btn-container'><button class='map-style-btn" + pressedAutoscale + "'>Autoscale</button></div>";
-        let hueSlider = "<div style=\"display: inline-block\" class=\"slidecontainer\">hue: <input style=\"width: 100px\" type=\"range\" min=\"0\" max=\"360\" value=\"" + this.hueShift + "\" class=\"slider\" id=\"hue_shift\"></div>"
-        if (this.muted) $('#settings-box').append($("<div style='display: inline-block'><button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔇 <font color=\"white\">(muted)</font></button><br>" + autoscaleButton + "</div><br>"));
-        else $('#settings-box').append($("<div style='display: inline-block'><button class='mute-btn' id='mute_button' style=\"vertical-align: top\">🔊</button><br>" + autoscaleButton + hueSlider + "</div><br>"));
+        let autoscaleButton = "<span id='autoscale_button' class='settings-btn-container'><button class='settings-btn" + pressedAutoscale + "'>Autoscale</button></span>";
+        let hueSlider = "<div style=\"display: inline-block\" class=\"slidecontainer\"><input style=\"width: 90px\" type=\"range\" min=\"0\" max=\"360\" value=\"" + this.hueShift + "\" class=\"slider\" id=\"hue_shift\"></div>"
+        $('#settings-box').append($("<span>Display: </span><span>" + hueSlider + autoscaleButton + "</span>"));
 
-        // $('#settings-box').append($(hueSlider))
 
+        // Add map buttons
         $('#commands').append($("</div><br>"))
         let lobby_string;
         if (this.counts[CONSTANTS.LOBBY] > 0) {
@@ -231,10 +249,12 @@ class Commands {
         var room = this.myRoomName;
 
         $('#mute_button').bind("click", () => {
+            localStorage.setItem("muted", !this.muted);
             socket.emit('mute');
             this.refocus()
         });
         $('#autoscale_button').bind("click", () => {
+            localStorage.setItem("autoscaled", !this.autoscale);
             socket.emit('autoscale');
             this.refocus()
         });
@@ -268,6 +288,7 @@ class Commands {
         });
         $('#hue_shift').bind("input", () => {
             let shift = $('#hue_shift').val();
+            localStorage.setItem("hue", shift);
             socket.emit('shiftHue', shift);
             this.refocus()
         });
@@ -297,15 +318,15 @@ class Commands {
             $('#classic_button').empty();
             let pressed1 = '';
             if (this.mapStyle === 'classic') pressed1 = '-clicked';
-            $('#classic_button').append($("<button class='map-style-btn" + pressed1 + "'>Classic</button>"));
+            $('#classic_button').append($("<button class='settings-btn" + pressed1 + "'>Classic</button>"));
             $('#terrain_button').empty();
             let pressed2 = '';
             if (this.mapStyle === 'terrain') pressed2 = '-clicked';
-            $('#terrain_button').append($("<button class='map-style-btn" + pressed2 + "'>Terrain</button>"));
+            $('#terrain_button').append($("<button class='settings-btn" + pressed2 + "'>Terrain</button>"));
             $('#satellite_button').empty();
             let pressed3 = '';
             if (this.mapStyle === 'satellite') pressed3 = '-clicked';
-            $('#satellite_button').append($("<button class='map-style-btn" + pressed3 + "'>Satellite</button>"));
+            $('#satellite_button').append($("<button class='settings-btn" + pressed3 + "'>Satellite</button>"));
             this.drawLastCommand(id);
         }
     }
@@ -321,7 +342,7 @@ class Commands {
             $('#autoscale_button').empty();
             let pressedAutoscale = '';
             if (this.autoscale) pressedAutoscale = '-clicked';
-            let autoscaleButton = "<button class='map-style-btn" + pressedAutoscale + "'>Autoscale</button>";
+            let autoscaleButton = "<button class='settings-btn" + pressedAutoscale + "'>Autoscale</button>";
             $('#autoscale_button').append($(autoscaleButton + "<br>"))
         }
     }

@@ -24,7 +24,11 @@ class MapPanel {
         this.myRoomName = CONSTANTS.LOBBY;
         this.myMap = CONSTANTS.LOBBY;
         this.mapStyle = 'terrain';
-        this.hueShift = 0;
+
+        var old_hue = localStorage.getItem("hue");
+        if (old_hue === null) old_hue = 0
+        this.hueShift = old_hue; 
+
         this.canvas = window.document.getElementById('map');
         this.ctx = this.canvas.getContext('2d');
         this.command_window = {

@@ -24,7 +24,7 @@ class FamerPopup {
         $('.overlay-bg').show().css({
             'height': docHeight
         }); //display your popup background and set height to the page height
-        $('#selected_famer_flair').focus();
+        $('#submit_famer').focus();
         const join = (info, cb) => this.join(info, cb);
         const closePopup = () => this.closePopup();
         const choseFlair = () => this.getChoseFlair();

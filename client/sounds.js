@@ -15,18 +15,28 @@ class Sounds {
         this.roundBeginSound.volume = 0.5;
         this.roundEndSound = new Audio('/resources/audio/roundstop.mp3');
         this.roundEndSound.volume = 0.5;
-        this.muted = false;
+
+        var was_muted = localStorage.getItem("muted");
+        if (was_muted === null || was_muted === "false") was_muted = false
+        else was_muted = true
+        this.muted = was_muted;
+
+        if (this.muted) {
+            this.muteOn();
+        }
     }
 
     muteMe(id) {
         if (this.socket.id == id) {
             $('#mute_button').empty();
             if (this.muted) {
-                $('#mute_button').append('🔊');
+                $('#mute_button').append('Mute');
+                document.getElementById("mute_button").className = "settings-btn";
                 this.muted = false;
                 this.muteOff();
             } else {
-                $('#mute_button').append('🔇 <font color="white">(muted)</font>');
+                $('#mute_button').append('Unmute');
+                document.getElementById("mute_button").className = "settings-btn-clicked";
                 this.muted = true;
                 this.muteOn();
             }
