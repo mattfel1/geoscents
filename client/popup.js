@@ -57,7 +57,7 @@ class Popup {
         $('.close-btn, .overlay-bg').unbind().click(function() {
             join({
                 'name': '',
-                'color': $("input[name='selected_color']:value").val()
+                'color': $(this).find("#selected_color").val()
             }, () => {
                 closePopup()
             });
@@ -67,7 +67,7 @@ class Popup {
             if (e.keyCode == 27 && !choseName()) { // if user presses esc key
                 join({
                     'name': '',
-                    'color': $("input[name='selected_color']:value").val()
+                    'color': $(this).find("#selected_color").val()
                 }, () => {
                     closePopup()
                 });
