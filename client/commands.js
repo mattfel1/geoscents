@@ -206,8 +206,13 @@ class Commands {
         // Add joe and reset buttons
         let rebootButton = "<span id='reboot_button' class='settings-btn-container'><button class='settings-btn'>Restart</button></span>";
         let killJoe = 'Kill Bot';
-        if (!this.hasJoe) killJoe = 'Create Bot';
-        let joeButton = "<span id='joe_button' class='settings-btn-container'><button class='settings-btn'>" + killJoe + "</button></span>";
+        let joeSfx = '';
+        if (!this.hasJoe) {
+            killJoe = 'Create Bot';
+        } else {
+            joeSfx = '-clicked';
+        }
+        let joeButton = "<span id='joe_button' class='settings-btn-container'><button class='settings-btn" + joeSfx + "'>" + killJoe + "</button></span>";
         let muteButton = "<span class='settings-btn-container'><button class='settings-btn' id='mute_button'>Mute</button></span>"
         if (this.muted)
             muteButton = "<span class='settings-btn-container'><button class='settings-btn-clicked' id='mute_button'>Unmute</button></span>"
