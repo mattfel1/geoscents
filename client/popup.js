@@ -57,7 +57,7 @@ class Popup {
         $('.close-btn, .overlay-bg').unbind().click(function() {
             join({
                 'name': '',
-                'color': $(this).find("#selected_color").val()
+                'color': document.getElementById("selected_color").value
             }, () => {
                 closePopup()
             });
