@@ -40,7 +40,12 @@ class Popup {
         if (color !== null) {
             var radios = document.getElementById("selected_color");
             radios.selectedIndex = color
-            radios.style.color = radios.options[color].value
+            var color_name = radios.options[color]
+            if (color_name == null)
+                color_name="red"
+            else
+                color_name=color_name.value
+            radios.style.color = color_name
         }
         var logger = localStorage.getItem("selected_log");
         if (logger !== null) {
