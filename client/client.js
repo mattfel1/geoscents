@@ -31,6 +31,9 @@ var betweenGames = true;
 var clickedReady = false;
 var booted = false;
 
+// Init zoom
+document.documentElement.style.zoom = 1;
+
 // Update index with all countries in special list
 let dropdown = window.document.getElementById('requestedCitysrc')
 let options = [];

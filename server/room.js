@@ -415,7 +415,7 @@ class Room {
                     player.col = playerClick.cursorX;
                     // console.log("player clicked at time " + this.timer)
                     player.clickedAt = this.timer;
-                    const geo = Geography.mercToGeo(this.map, player.row, player.col);
+                    const geo = Geography.pixelToGeo(this.map, player.row, player.col);
                     player.lat = geo['lat'];
                     player.lon = geo['lng'];
                     // console.log('click at ' + player.row + ',' + player.col + ' (' + player.lat + ',' + player.lon + ')')
@@ -669,7 +669,7 @@ class Room {
         if (this.hasJoe)
             playersToScore.push(this.joe);
         Array.from(playersToScore).forEach(function(player) {
-            const merc = Geography.geoToMerc(map, parseFloat(target['lat']), parseFloat(target['lng']));
+            const merc = Geography.geoToPixel(map, parseFloat(target['lat']), parseFloat(target['lng']));
             player.geoError = Geography.calcGeoDist(player.lat, player.lon, parseFloat(target['lat']), parseFloat(target['lng']));
             player.mercError = Geography.mercDist(map, player.row, player.col, merc['row'], merc['col']);
             if (!player.clicked || isNaN(player.mercError)) {
@@ -759,7 +759,7 @@ class Room {
     }
 
     revealAll(socket) {
-        const answer = Geography.geoToMerc(this.map, this.target['lat'], this.target['lng']);
+        const answer = Geography.geoToPixel(this.map, this.target['lat'], this.target['lng']);
         this.players.forEach((player, id) => {
             Room.broadcastPoint(socket, player.row, player.col, player.color, player.radius(), player.geoError);
         });
@@ -768,7 +768,7 @@ class Room {
     }
 
     drawPhoto(socket) {
-        const answer = Geography.geoToMerc(this.map, this.target['lat'], this.target['lng']);
+        const answer = Geography.geoToPixel(this.map, this.target['lat'], this.target['lng']);
         if ('img_link' in this.target) {
             socket.emit('draw photo', {
                 'row': answer['row'],
@@ -1018,7 +1018,7 @@ class Room {
 
     processJoe() {
         if (!this.joe.clicked && this.timer <= this.joeTime) {
-            const joeGeo = Geography.geoToMerc(this.map, this.joeLat, this.joeLon);
+            const joeGeo = Geography.geoToPixel(this.map, this.joeLat, this.joeLon);
             const playerClick = {
                 mouseDown: false,
                 touchDown: false,

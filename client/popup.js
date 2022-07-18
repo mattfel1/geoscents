@@ -42,9 +42,9 @@ class Popup {
             radios.selectedIndex = color
             var color_name = radios.options[color]
             if (color_name == null)
-                color_name="red"
+                color_name = "red"
             else
-                color_name=color_name.value
+                color_name = color_name.value
             radios.style.color = color_name
         }
         var logger = localStorage.getItem("selected_log");

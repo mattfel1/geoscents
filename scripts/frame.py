@@ -367,3 +367,11 @@ pop = 0
 blacklist = ['*']
 whitelist = ['Saudi Arabia']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = geoscents_home + 'resources/databases/afghanistancities.js'
+lonrng = [56, 78.65]
+latrng = [29, 40]
+pop = 0
+blacklist = ['*']
+whitelist = ['Afghanistan']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)

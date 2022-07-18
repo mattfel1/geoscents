@@ -111,7 +111,9 @@ const includeAdmin = (target, citysrc) => {
             target['country'] === 'Indonesia' ||
             target['country'] === 'Brazil' ||
             CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) &&
-        target['country'] !== "Vatican City"
+        target['country'] !== "Vatican City" &&
+        target['country'] !== "Antarctica"
+
 };
 
 const stringifyTarget = (target, citysrc) => {
@@ -233,43 +235,93 @@ const score = (map, geoDist, mercDist, timeBonus) => {
     return distPortion * timePortion
 };
 
-const mercToGeo = (map, row, col) => {
+const pixelToGeo = (map, row, col) => {
     let bounds = CONSTANTS.MAP_BOUNDS[map];
     let zero_lat = bounds["min_lat"];
     let max_lat = bounds["max_lat"];
     let min_lon = bounds["min_lon"];
     let max_lon = bounds["max_lon"];
     let lat_ts = bounds["lat_ts"];
-    const eqMin = Math.atanh(Math.sin(zero_lat * Math.PI / 180));
-    const eqRange = Math.atanh(Math.sin(max_lat * Math.PI / 180)) - eqMin;
-    const lon = ((col) * (max_lon - min_lon) / CONSTANTS.MAP_WIDTH) + min_lon;
-    const lat = Math.asin(Math.tanh(((row) * eqRange / CONSTANTS.MAP_HEIGHT) + eqMin)) * 180 / Math.PI;
+
+    let lat = 0;
+    let lon = 0;
+    if (map == "Antarctica") {
+        // Azimuthal Equidistant projection
+        // Lon = angle from midpoint
+        // Lat = distance from midpoint
+
+        let x = col - (CONSTANTS.MAP_WIDTH / 2)
+        let y = row - (CONSTANTS.MAP_HEIGHT / 2)
+        // Scaling factor is number of degrees per pixel
+        let lat_sf = (zero_lat - max_lat) / (CONSTANTS.MAP_WIDTH / 2)
+        lat = -90 + Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) * lat_sf
+        if (x == 0)
+            lon = 180
+        else
+            lon = (Math.atan(Math.abs(x) / Math.abs(y)) * 180) / Math.PI
+        if (x < 0 && y < 0)
+            // Top left
+            lon = -lon
+        else if (x < 0 && y > 0)
+            // Bottom left
+            lon = -(180 - lon)
+        else if (x > 0 && y > 0)
+            // Bottom right
+            lon = 180 - lon
+    } else {
+        // Mercator projection
+        const eqMin = Math.atanh(Math.sin(zero_lat * Math.PI / 180));
+        const eqRange = Math.atanh(Math.sin(max_lat * Math.PI / 180)) - eqMin;
+        lon = ((col) * (max_lon - min_lon) / CONSTANTS.MAP_WIDTH) + min_lon;
+        lat = Math.asin(Math.tanh(((row) * eqRange / CONSTANTS.MAP_HEIGHT) + eqMin)) * 180 / Math.PI;
+    }
     return {
         'lat': lat,
         'lng': lon
     }
 };
 
-const geoToMerc = (map, lat, lon) => {
+const geoToPixel = (map, lat, lon) => {
     let bounds = CONSTANTS.MAP_BOUNDS[map];
     let zero_lat = bounds["min_lat"];
     let max_lat = bounds["max_lat"];
     let min_lon = bounds["min_lon"];
     let max_lon = bounds["max_lon"];
     let lat_ts = bounds["lat_ts"];
-    // get col value
-    let col = (parseFloat(lon) - min_lon) * (CONSTANTS.MAP_WIDTH / (max_lon - min_lon));
-    if (parseFloat(lon) < min_lon) {
-        col = (parseFloat(lon) + 360 - min_lon) * (CONSTANTS.MAP_WIDTH / (max_lon - min_lon))
+
+    let col = 0;
+    let row = 0;
+    if (map == "Antarctica") {
+        // Azimuthal Equidistant projection
+        // Lat = radius from origin
+        // Lon = angle from origin
+        // x = cos(lon) * lat + midpoint
+        // y = sin(lon) * lat + midpoint
+        // Longitude scaling factor
+
+        // Scaling factor is number of degrees per pixel
+        let lat_sf = (zero_lat - max_lat) / (CONSTANTS.MAP_WIDTH / 2)
+        let hypot = (lat - max_lat) / lat_sf
+
+        // Square map
+        col = Math.sin(lon * Math.PI / 180) * hypot + (CONSTANTS.MAP_WIDTH / 2)
+        row = -Math.cos(lon * Math.PI / 180) * hypot + (CONSTANTS.MAP_HEIGHT / 2)
+    } else {
+        // Mercator projection
+        // get col value
+        col = (parseFloat(lon) - min_lon) * (CONSTANTS.MAP_WIDTH / (max_lon - min_lon));
+        if (parseFloat(lon) < min_lon) {
+            col = (parseFloat(lon) + 360 - min_lon) * (CONSTANTS.MAP_WIDTH / (max_lon - min_lon))
+        }
+        // convert from degrees to radians
+        const latRad = (parseFloat(lat)) * Math.PI / 180;
+
+        const eqMin = Math.atanh(Math.sin(zero_lat * Math.PI / 180));
+        const eqRange = Math.atanh(Math.sin(max_lat * Math.PI / 180)) - eqMin;
+
+        // get row value
+        row = (CONSTANTS.MAP_HEIGHT / eqRange) * (Math.atanh(Math.sin(latRad)) - eqMin);
     }
-    // convert from degrees to radians
-    const latRad = (parseFloat(lat)) * Math.PI / 180;
-
-    const eqMin = Math.atanh(Math.sin(zero_lat * Math.PI / 180));
-    const eqRange = Math.atanh(Math.sin(max_lat * Math.PI / 180)) - eqMin;
-
-    // get row value
-    const row = (CONSTANTS.MAP_HEIGHT / eqRange) * (Math.atanh(Math.sin(latRad)) - eqMin);
 
     return {
         'row': row,
@@ -281,11 +333,11 @@ module.exports = {
     randomCity,
     mercDist,
     calcGeoDist,
-    mercToGeo,
-    geoToMerc,
+    pixelToGeo,
+    geoToPixel,
     score,
     includeAdmin,
     requireUniqueAdmin,
     stringifyTarget,
-    stringifyTargetAscii
+    stringifyTargetAscii,
 }

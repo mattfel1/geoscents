@@ -4900,28 +4900,28 @@ module.exports = {
             "capital": "",
             "wiki": "https://en.wikipedia.org/wiki/Hurrian_songs"
         },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
+        {
+            "city": "1968 Thule Air Base B-52 Crash, Nuclear Bombs Accidentally Dropped",
+            "city_ascii": "",
+            "lat": 76.527778,
+            "lng": -69.281944,
+            "iso2": "GL",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/1968_Thule_Air_Base_B-52_crash"
+        },
+        {
+            "city": "Joint Security Area (\"Truce Village\") of Korean DMZ",
+            "city_ascii": "",
+            "lat": 37.955833,
+            "lng": 126.676667,
+            "iso2": "kpkr",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Joint_Security_Area"
+        },
         // {
         //   "city": "",
         //   "city_ascii": "",

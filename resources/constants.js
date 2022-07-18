@@ -49,19 +49,19 @@ module.exports = {
     SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania", "Egypt", "Peru", "Indonesia",
         "Spain", "China", "United States", "Iran", "Brazil", "Mexico", "India", "United Kingdom", "Italy", "Germany", "France",
         "Nigeria", "South Africa", "Vatican City", "Democratic Republic of the Congo", "Pakistan", "New Zealand", "Turkey", "Switzerland",
-        "Morocco", "Philippines", "South Korea", "Vietnam", "Saudi Arabia"
+        "Morocco", "Philippines", "South Korea", "Vietnam", "Saudi Arabia", "Afghanistan", "Antarctica"
     ],
 
     SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Albanese", "Iohannis", "el-Sisi", "Castillo", "Widodo",
         "Sánchez", "Xi", "Biden", "Raisi", "Bolsonaro", "AMLO", "Modi", "Johnson", "Mattarella", "Scholz", "Macron", "Buhari", "Ramaphosa", "Bertello", "Tshisekedi", "Alvi", "Ardern",
-        "Erdoğan", "Cassis", "Akhannouch", "Bongbong", "Yoon", "Nguyen", "Salman"
+        "Erdoğan", "Cassis", "Akhannouch", "Bongbong", "Yoon", "Nguyen", "Salman", "Akhund", "Penguin"
 
     ],
     SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)",
         "Welcome/Bienvenue", "Bienvenido", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenido", "Selamat datang",
         "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome", "خوش آمدی (xoš âmadi)", "Receber", "Bienvenido", "Welcome/स्वागत हे(svaagat he)", "Welcome",
         "Benvenuto", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "Benvenuto", "Bienvenue/Boyei malamu/Karibu", "خوش آمدید (Khush Amdeed)/Welcome", "Kia ora/Welcome",
-        "مرحبا‎ (Merhaba)", "Willkommen/Bienvenue/Benvenuto/Bainvegni", "أهلا بك (Ahlan bik)", "Maligayang Pagdating", "환영하다 (hwan-yeonghada)", "Hoan Nghênh", "أهلا بك (Ahlan bik)"
+        "مرحبا‎ (Merhaba)", "Willkommen/Bienvenue/Benvenuto/Bainvegni", "أهلا بك (Ahlan bik)", "Maligayang Pagdating", "환영하다 (hwan-yeonghada)", "Hoan Nghênh", "أهلا بك (Ahlan bik)", "سلام (Salâm)/ښه راغلاست (Kha Raghlast)", "Bonvenon"
     ],
 
     MAP_BOUNDS: {
@@ -364,6 +364,20 @@ module.exports = {
             "max_lon": 63.5,
             "max_lat": 15,
             "min_lat": 36,
+            "lat_ts": 0
+        },
+        "Afghanistan": {
+            "min_lon": 56,
+            "max_lon": 78.65,
+            "max_lat": 29,
+            "min_lat": 40,
+            "lat_ts": 0
+        },
+        "Antarctica": {
+            "min_lon": -180,
+            "max_lon": 180,
+            "max_lat": -90,
+            "min_lat": -52,
             "lat_ts": 0
         },
 
