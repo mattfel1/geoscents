@@ -165,6 +165,8 @@ const requireUniqueAdmin = (citysrc, target) => {
         return true
     } else if (citysrc === CONSTANTS.ASIA && (target['country'] === 'China' || target['country'] === 'India')) {
         return true
+    } else if (citysrc === "Vatican City" || citysrc === "Antarctica") {
+        return false
     } else if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) {
         return true
     }
