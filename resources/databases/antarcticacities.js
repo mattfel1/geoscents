@@ -79,7 +79,7 @@ module.exports = {
             "wiki": "https://en.wikipedia.org/wiki/Cape_Denison"
         },
         {
-            "city": "Port Lockroy \"Penguin Post Office\" (Most Southerly Post Office)",
+            "city": "Port Lockroy 'Penguin Post Office' (Most Southerly Post Office)",
             "city_ascii": "",
             "lat": -64.825278,
             "lng": -63.494444,
