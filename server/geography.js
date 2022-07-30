@@ -87,7 +87,7 @@ const randomCity = (citysrc, blacklist) => {
             let CITIES = SPECIALCITIES.get(citysrc);
             proposal = CITIES[Math.floor(Math.random() * CITIES.length)];
             let ok = uniqueInBlacklist(citysrc, proposal, blacklist)
-            console.log("propose: " + proposal + " ok? " + ok)
+            console.log("in blacklist: " + blacklist.includes(stringifyTarget(proposal, citysrc)['string'] + " ok? " + ok)
             if (ok || i >= timeout) acceptable = true;
             else i = i + 1;
         }
