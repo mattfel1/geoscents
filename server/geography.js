@@ -175,7 +175,7 @@ const requireUniqueAdmin = (citysrc, target) => {
 };
 
 const uniqueInBlacklist = (citysrc, target, blacklist) => {
-    if (citysrc == CONSTANTS.TRIVIA) return !blacklist.includes(stringifyTarget(target, citysrc)['string'])
+    if (citysrc == CONSTANTS.TRIVIA || citysrc == "Vatican City" || citysrc == "Antarctica") return !blacklist.includes(stringifyTarget(target, citysrc)['string'])
     else if (requireUniqueAdmin(citysrc, target)) return !blacklist.includes(target['admin_name']);
     else return !blacklist.includes(target['country']);
 };
