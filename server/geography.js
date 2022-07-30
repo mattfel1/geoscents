@@ -86,19 +86,20 @@ const randomCity = (citysrc, blacklist) => {
             console.assert(SPECIALCITIES.has(citysrc), "No city src database for " + citysrc);
             let CITIES = SPECIALCITIES.get(citysrc);
             proposal = CITIES[Math.floor(Math.random() * CITIES.length)];
-            let ok = uniqueInBlacklist(citysrc, proposal, blacklist)
-            console.log("in blacklist: " + blacklist.includes(stringifyTarget(proposal, citysrc)['string']) + " ok? " + ok)
-            if (ok || i >= timeout) acceptable = true;
+            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
             else i = i + 1;
         }
     }
     if (requireUniqueAdmin(citysrc, proposal)) {
         blacklist.push(proposal['admin_name'])
-    } else if (citysrc == CONSTANTS.TRIVIA) blacklist.push(stringifyTarget(proposal, citysrc)['string'])
+    } else if (blacklistEntireString(citysrc)) blacklist.push(stringifyTarget(proposal, citysrc)['string'])
     else blacklist.push(proposal['country']);
     return [proposal, blacklist];
 };
 
+const blacklistEntireString = (citysrc) => {
+    return citysrc == CONSTANTS.TRIVIA || citysrc == "Vatican City" || citysrc == "Antarctica";
+}
 // Include the admin field when displaying city/country string to player
 const includeAdmin = (target, citysrc) => {
     return (target['country'] === 'United States' ||
@@ -113,8 +114,7 @@ const includeAdmin = (target, citysrc) => {
             target['country'] === 'Indonesia' ||
             target['country'] === 'Brazil' ||
             CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) &&
-        target['country'] !== "Vatican City" &&
-        target['country'] !== "Antarctica"
+        !blacklistEntireString(citysrc)
 
 };
 
@@ -167,7 +167,7 @@ const requireUniqueAdmin = (citysrc, target) => {
         return true
     } else if (citysrc === CONSTANTS.ASIA && (target['country'] === 'China' || target['country'] === 'India')) {
         return true
-    } else if (citysrc === "Vatican City" || citysrc === "Antarctica") {
+    } else if (blacklistEntireString(citysrc)) {
         return false
     } else if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) {
         return true
@@ -177,7 +177,7 @@ const requireUniqueAdmin = (citysrc, target) => {
 };
 
 const uniqueInBlacklist = (citysrc, target, blacklist) => {
-    if (citysrc == CONSTANTS.TRIVIA || citysrc == "Vatican City" || citysrc == "Antarctica") return !blacklist.includes(stringifyTarget(target, citysrc)['string'])
+    if (blacklistEntireString(citysrc)) return !blacklist.includes(stringifyTarget(target, citysrc)['string'])
     else if (requireUniqueAdmin(citysrc, target)) return !blacklist.includes(target['admin_name']);
     else return !blacklist.includes(target['country']);
 };
@@ -343,5 +343,6 @@ module.exports = {
     includeAdmin,
     requireUniqueAdmin,
     stringifyTarget,
+    blacklistEntireString,
     stringifyTargetAscii,
 }
