@@ -86,7 +86,9 @@ const randomCity = (citysrc, blacklist) => {
             console.assert(SPECIALCITIES.has(citysrc), "No city src database for " + citysrc);
             let CITIES = SPECIALCITIES.get(citysrc);
             proposal = CITIES[Math.floor(Math.random() * CITIES.length)];
-            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
+            let ok = uniqueInBlacklist(citysrc, proposal, blacklist)
+            console.log("propose: " + proposal + " ok? " + ok)
+            if (ok || i >= timeout) acceptable = true;
             else i = i + 1;
         }
     }
