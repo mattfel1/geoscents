@@ -4912,7 +4912,7 @@ module.exports = {
             "wiki": "https://en.wikipedia.org/wiki/1968_Thule_Air_Base_B-52_crash"
         },
         {
-            "city": "Joint Security Area (\"Truce Village\") of Korean DMZ",
+            "city": "Joint Security Area ('Truce Village') of Korean DMZ",
             "city_ascii": "",
             "lat": 37.955833,
             "lng": 126.676667,
@@ -4923,15 +4923,15 @@ module.exports = {
             "wiki": "https://en.wikipedia.org/wiki/Joint_Security_Area"
         },
         {
-          "city": "'Whisky War' Border Dispute Between Canada and Denmark",
-          "city_ascii": "",
-          "lat": 80.826389,
-          "lng": -66.458333,
-          "iso2": "cadk",
-          "country": "",
-          "population": 0,
-          "capital": "",
-          "wiki": "https://en.wikipedia.org/wiki/Whisky_War"
+            "city": "'Whisky War' Border Dispute Between Canada and Denmark",
+            "city_ascii": "",
+            "lat": 80.826389,
+            "lng": -66.458333,
+            "iso2": "cadk",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Whisky_War"
         },
         // {
         //   "city": "",
