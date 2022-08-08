@@ -49,19 +49,20 @@ module.exports = {
     SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania", "Egypt", "Peru", "Indonesia",
         "Spain", "China", "United States", "Iran", "Brazil", "Mexico", "India", "United Kingdom", "Italy", "Germany", "France",
         "Nigeria", "South Africa", "Vatican City", "Democratic Republic of the Congo", "Pakistan", "New Zealand", "Turkey", "Switzerland",
-        "Morocco", "Philippines", "South Korea", "Vietnam", "Saudi Arabia", "Afghanistan", "Antarctica"
+        "Morocco", "Philippines", "South Korea", "Vietnam", "Saudi Arabia", "Afghanistan", "Antarctica", "Estonia", "Latvia", "Lithuania"
     ],
 
     SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Albanese", "Iohannis", "el-Sisi", "Castillo", "Widodo",
         "Sánchez", "Xi", "Biden", "Raisi", "Bolsonaro", "AMLO", "Modi", "Johnson", "Mattarella", "Scholz", "Macron", "Buhari", "Ramaphosa", "Bertello", "Tshisekedi", "Alvi", "Ardern",
-        "Erdoğan", "Cassis", "Akhannouch", "Bongbong", "Yoon", "Nguyen", "Salman", "Akhund", "Penguin"
+        "Erdoğan", "Cassis", "Akhannouch", "Bongbong", "Yoon", "Nguyen", "Salman", "Akhund", "Penguin", "Karis", "Levits", "Nauseda"
 
     ],
     SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)",
         "Welcome/Bienvenue", "Bienvenido", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenido", "Selamat datang",
         "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome", "خوش آمدی (xoš âmadi)", "Receber", "Bienvenido", "Welcome/स्वागत हे(svaagat he)", "Welcome",
         "Benvenuto", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "Benvenuto", "Bienvenue/Boyei malamu/Karibu", "خوش آمدید (Khush Amdeed)/Welcome", "Kia ora/Welcome",
-        "مرحبا‎ (Merhaba)", "Willkommen/Bienvenue/Benvenuto/Bainvegni", "أهلا بك (Ahlan bik)", "Maligayang Pagdating", "환영하다 (hwan-yeonghada)", "Hoan Nghênh", "أهلا بك (Ahlan bik)", "سلام (Salâm)/ښه راغلاست (Kha Raghlast)", "Bonvenon"
+        "مرحبا‎ (Merhaba)", "Willkommen/Bienvenue/Benvenuto/Bainvegni", "أهلا بك (Ahlan bik)", "Maligayang Pagdating", "환영하다 (hwan-yeonghada)", "Hoan Nghênh", "أهلا بك (Ahlan bik)", "سلام (Salâm)/ښه راغلاست (Kha Raghlast)", "Bonvenon",
+        "Tere tulemast", "Laipni lūdzam", "Sveiki"
     ],
 
     MAP_BOUNDS: {
@@ -378,6 +379,27 @@ module.exports = {
             "max_lon": 180,
             "max_lat": -90,
             "min_lat": -52,
+            "lat_ts": 0
+        },
+        "Estonia": {
+            "min_lon": 20,
+            "max_lon": 30,
+            "max_lat": 56.92,
+            "min_lat": 60,
+            "lat_ts": 0
+        },
+        "Latvia": {
+            "min_lon": 20,
+            "max_lon": 30,
+            "max_lat": 55.285,
+            "min_lat": 58.5,
+            "lat_ts": 0
+        },
+        "Lithuania": {
+            "min_lon": 18.43,
+            "max_lon": 28,
+            "max_lat": 53.8,
+            "min_lat": 57,
             "lat_ts": 0
         },
 

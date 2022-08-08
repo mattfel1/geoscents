@@ -621,6 +621,12 @@ const flairToEmoji = (flair) => {
         return "🇦🇫"
     if (flair === "Antarctica")
         return "🐧"
+    if (flair === "Estonia")
+        return "🇪🇪"
+    if (flair === "Latvia")
+        return "🇱🇻"
+    if (flair === "Lithuania")
+        return "🇱🇹"
 
     return "?";
 }

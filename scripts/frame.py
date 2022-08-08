@@ -375,3 +375,27 @@ pop = 0
 blacklist = ['*']
 whitelist = ['Afghanistan']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = geoscents_home + 'resources/databases/estoniacities.js'
+lonrng = [20, 30]
+latrng = [56.92, 60]
+pop = 0
+blacklist = ['*']
+whitelist = ['Estonia']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = geoscents_home + 'resources/databases/latviacities.js'
+lonrng = [20, 30]
+latrng = [55.285, 58.5]
+pop = 0
+blacklist = ['*']
+whitelist = ['Latvia']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = geoscents_home + 'resources/databases/lithuaniacities.js'
+lonrng = [18.43, 28]
+latrng = [53.8, 57]
+pop = 0
+blacklist = ['*']
+whitelist = ['Lithuania']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
