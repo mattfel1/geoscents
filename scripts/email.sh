@@ -1,6 +1,6 @@
 #!/bin/bash -i
 
-source /root/.bashrc
+. /root/.bashrc
 
 ip=`tail -1 /scratch/feedback.log | sed "s/.*Message passed by ::ffff://g" | sed "s/ .*//g"`
 name=`tail -1 /scratch/feedback.log | sed "s/.*$ip //g" | sed "s/:.*//g"`
