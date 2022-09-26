@@ -323,6 +323,61 @@ module.exports = {
             "capital": "",
             "wiki": "https://en.wikipedia.org/wiki/Lake_Vostok"
         },
+        {
+          "city": "Mount Erebus (Highest Active Volcano in Antarctica)",
+          "city_ascii": "",
+          "lat": -77.529722,
+          "lng": 167.153333,
+          "iso2": "AQ",
+          "country": "Antarctica",
+          "population": 0,
+          "capital": "",
+          "wiki": "https://en.wikipedia.org/wiki/Mount_Erebus"
+        },
+        {
+          "city": "Mount Sidley (Highest Dormant Volcano in Antarctica)",
+          "city_ascii": "",
+          "lat": -77.033333,
+          "lng": -126.1,
+          "iso2": "AQ",
+          "country": "Antarctica",
+          "population": 0,
+          "capital": "",
+          "wiki": "https://en.wikipedia.org/wiki/Mount_Sidley"
+        },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "AQ",
+        //   "country": "Antarctica",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "AQ",
+        //   "country": "Antarctica",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "AQ",
+        //   "country": "Antarctica",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
         // {
         //   "city": "",
         //   "city_ascii": "",
