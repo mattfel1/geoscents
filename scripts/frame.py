@@ -1,5 +1,4 @@
 import os
-import ipinfo
 import json
 from pathlib import Path
 import urllib.request
@@ -399,3 +398,44 @@ pop = 0
 blacklist = ['*']
 whitelist = ['Lithuania']
 scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = geoscents_home + 'resources/databases/colombiacities.js'
+lonrng = [-90, -55.9]
+latrng = [-5, 15]
+pop = 0
+blacklist = ['*']
+whitelist = ['Colombia']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = geoscents_home + 'resources/databases/venezuelacities.js'
+lonrng = [-79.3, -52]
+latrng = [-1, 15]
+pop = 0
+blacklist = ['*']
+whitelist = ['Venezuela']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = geoscents_home + 'resources/databases/paraguaycities.js'
+lonrng = [-69.1, -47]
+latrng = [-29, -17]
+pop = 0
+blacklist = ['*']
+whitelist = ['Paraguay']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = geoscents_home + 'resources/databases/uruguaycities.js'
+lonrng = [-61.98, -48]
+latrng = [-35.5, -28.5]
+pop = 0
+blacklist = ['*']
+whitelist = ['Uruguay']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+
+outfile = geoscents_home + 'resources/databases/boliviacities.js'
+lonrng = [-79, -49.05]
+latrng = [-24, -7]
+pop = 0
+blacklist = ['*']
+whitelist = ['Bolivia']
+scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, True)
+

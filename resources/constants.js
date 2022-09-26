@@ -49,7 +49,7 @@ module.exports = {
     SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania", "Egypt", "Peru", "Indonesia",
         "Spain", "China", "United States", "Iran", "Brazil", "Mexico", "India", "United Kingdom", "Italy", "Germany", "France",
         "Nigeria", "South Africa", "Vatican City", "Democratic Republic of the Congo", "Pakistan", "New Zealand", "Turkey", "Switzerland",
-        "Morocco", "Philippines", "South Korea", "Vietnam", "Saudi Arabia", "Afghanistan", "Antarctica", "Estonia", "Latvia", "Lithuania"
+        "Morocco", "Philippines", "South Korea", "Vietnam", "Saudi Arabia", "Afghanistan", "Antarctica", "Estonia", "Latvia", "Lithuania", "Colombia", "Venezuela", "Paraguay", "Uruguay", "Bolivia"
     ],
 
     SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Albanese", "Iohannis", "el-Sisi", "Castillo", "Widodo",
@@ -400,6 +400,41 @@ module.exports = {
             "max_lon": 28,
             "max_lat": 53.8,
             "min_lat": 57,
+            "lat_ts": 0
+        },
+        "Colombia": {
+            "min_lon": -90,
+            "max_lon": -55.9,
+            "max_lat": -5,
+            "min_lat": 15,
+            "lat_ts": 0
+        },
+        "Venezuela": {
+            "min_lon": -79.3,
+            "max_lon": -52,
+            "max_lat": -1,
+            "min_lat": 15,
+            "lat_ts": 0
+        },
+        "Paraguay": {
+            "min_lon": -69.1,
+            "max_lon": -47,
+            "max_lat": -29,
+            "min_lat": -17,
+            "lat_ts": 0
+        },
+        "Uruguay": {
+            "min_lon": -61.98,
+            "max_lon": -48,
+            "max_lat": -35.5,
+            "min_lat": -28.5,
+            "lat_ts": 0
+        },
+        "Bolivia": {
+            "min_lon": -79,
+            "max_lon": -49.05,
+            "max_lat": -24,
+            "min_lat": -7,
             "lat_ts": 0
         },
 
