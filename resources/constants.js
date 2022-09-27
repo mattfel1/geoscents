@@ -58,11 +58,11 @@ module.exports = {
 
     ],
     SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)",
-        "Welcome/Bienvenue", "Bienvenido", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenido", "Selamat datang",
+        "Welcome/Bienvenue", "Bienvenido", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenido/Jallallt'atapxtawa/Imaynallan", "Selamat datang",
         "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome", "خوش آمدی (xoš âmadi)", "Receber", "Bienvenido", "Welcome/स्वागत हे(svaagat he)", "Welcome",
         "Benvenuto", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "Benvenuto", "Bienvenue/Boyei malamu/Karibu", "خوش آمدید (Khush Amdeed)/Welcome", "Kia ora/Welcome",
         "مرحبا‎ (Merhaba)", "Willkommen/Bienvenue/Benvenuto/Bainvegni", "أهلا بك (Ahlan bik)", "Maligayang Pagdating", "환영하다 (hwan-yeonghada)", "Hoan Nghênh", "أهلا بك (Ahlan bik)", "سلام (Salâm)/ښه راغلاست (Kha Raghlast)", "Bonvenon",
-        "Tere tulemast", "Laipni lūdzam", "Sveiki"
+        "Tere tulemast", "Laipni lūdzam", "Sveiki", "Bienvenido", "Bienvenido", "Bienvenido/Maiteí", "Bienvenido", "Bienvenido/Jallallt'atapxtawa/Imaynallan"
     ],
 
     MAP_BOUNDS: {
