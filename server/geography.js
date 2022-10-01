@@ -12,12 +12,14 @@ const OCEANIACITIES = require('../resources/databases/oceaniacities.js').CITIES;
 const SAMERICACITIES = require('../resources/databases/samericacities.js').CITIES;
 
 const CONSTANTS = require('../resources/constants.js');
-let SPECIALCITIES = new Map()
-Object.keys(CONSTANTS.MAP_BOUNDS).forEach(function(value) {
-    if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(value) !== -1) {
-        let list = require('../resources/databases/' + value.toLowerCase().replace(/ /g, "") + 'cities.js').CITIES;
-        SPECIALCITIES.set(value, list);
-    }
+let ALLCITIES = new Map()
+Object.keys(CONSTANTS.CLASSICS).forEach(function(value) {
+    let list = require('../resources/databases/' + value.toLowerCase().replace(/ /g, "").replace(".", "") + 'cities.js').CITIES;
+    ALLCITIES.set(value, list);
+})
+Object.keys(CONSTANTS.SPECIALS).forEach(function(value) {
+    let list = require('../resources/databases/' + value.toLowerCase().replace(/ /g, "").replace(".", "") + 'cities.js').CITIES;
+    ALLCITIES.set(value, list);
 })
 
 const randomCity = (citysrc, blacklist) => {
@@ -25,70 +27,12 @@ const randomCity = (citysrc, blacklist) => {
     let i = 0;
     let proposal = null;
     let timeout = 20;
-    if (citysrc === CONSTANTS.WORLD) {
-        while (!acceptable) {
-            proposal = WORLDCITIES[Math.floor(Math.random() * WORLDCITIES.length)];
-            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
-            else i = i + 1;
-        }
-    } else if (citysrc === CONSTANTS.WORLD_CAPITALS) {
-        while (!acceptable) {
-            proposal = WORLDCAPITALSCITIES[Math.floor(Math.random() * WORLDCAPITALSCITIES.length)];
-            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
-            else i = i + 1;
-        }
-    } else if (citysrc === CONSTANTS.TRIVIA) {
-        while (!acceptable) {
-            proposal = TRIVIACITIES[Math.floor(Math.random() * TRIVIACITIES.length)];
-            // proposal = TRIVIACITIES[idx];
-            // idx = idx + 1
-            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
-            else i = i + 1;
-        }
-    } else if (citysrc === CONSTANTS.NAMERICA) {
-        while (!acceptable) {
-            proposal = NAMERICACITIES[Math.floor(Math.random() * NAMERICACITIES.length)];
-            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
-            else i = i + 1;
-        }
-    } else if (citysrc === CONSTANTS.EUROPE) {
-        while (!acceptable) {
-            proposal = EUROPECITIES[Math.floor(Math.random() * EUROPECITIES.length)];
-            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
-            else i = i + 1;
-        }
-    } else if (citysrc === CONSTANTS.AFRICA) {
-        while (!acceptable) {
-            proposal = AFRICACITIES[Math.floor(Math.random() * AFRICACITIES.length)];
-            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
-            else i = i + 1;
-        }
-    } else if (citysrc === CONSTANTS.ASIA) {
-        while (!acceptable) {
-            proposal = ASIACITIES[Math.floor(Math.random() * ASIACITIES.length)];
-            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
-            else i = i + 1;
-        }
-    } else if (citysrc === CONSTANTS.OCEANIA) {
-        while (!acceptable) {
-            proposal = OCEANIACITIES[Math.floor(Math.random() * OCEANIACITIES.length)];
-            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
-            else i = i + 1;
-        }
-    } else if (citysrc === CONSTANTS.SAMERICA) {
-        while (!acceptable) {
-            proposal = SAMERICACITIES[Math.floor(Math.random() * SAMERICACITIES.length)];
-            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
-            else i = i + 1;
-        }
-    } else if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) {
-        while (!acceptable) {
-            console.assert(SPECIALCITIES.has(citysrc), "No city src database for " + citysrc);
-            let CITIES = SPECIALCITIES.get(citysrc);
-            proposal = CITIES[Math.floor(Math.random() * CITIES.length)];
-            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
-            else i = i + 1;
-        }
+    console.assert(ALLCITIES.has(citysrc), "No city src database for " + citysrc);
+    let CITIES = ALLCITIES.get(citysrc);
+    while (!acceptable) {
+        proposal = CITIES[Math.floor(Math.random() * CITIES.length)];
+        if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
+        else i = i + 1;
     }
     if (requireUniqueAdmin(citysrc, proposal)) {
         blacklist.push(proposal['admin_name'])
@@ -113,7 +57,7 @@ const includeAdmin = (target, citysrc) => {
             target['country'] === 'Russia' ||
             target['country'] === 'Indonesia' ||
             target['country'] === 'Brazil' ||
-            CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) &&
+            Object.keys(CONSTANTS.SPECIALS).indexOf(citysrc) !== -1) &&
         !blacklistEntireString(citysrc)
 
 };
@@ -169,7 +113,7 @@ const requireUniqueAdmin = (citysrc, target) => {
         return true
     } else if (blacklistEntireString(citysrc)) {
         return false
-    } else if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(citysrc) !== -1) {
+    } else if (Object.keys(CONSTANTS.SPECIALS).indexOf(citysrc) !== -1) {
         return true
     }
     // else if (citysrc === CONSTANTS.OCEANIA && target['country'] === 'Australia') {return true}
@@ -185,7 +129,7 @@ const uniqueInBlacklist = (citysrc, target, blacklist) => {
 const mercDist = (map, row1, col1, row2, col2) => {
     const row_err = Math.pow(row1 - row2, 2);
     let col_err = Math.min(Math.pow(col1 - col2, 2), Math.pow(col1 - col2 + CONSTANTS.MAP_WIDTH, 2), Math.pow(col1 - col2 - CONSTANTS.MAP_WIDTH, 2));
-    if (map === CONSTANTS.NAMERICA || map === CONSTANTS.EUROPE || map === CONSTANTS.AFRICA || map === CONSTANTS.SAMERICA || map === CONSTANTS.ASIA || map === CONSTANTS.OCEANIA || CONSTANTS.SPECIAL_COUNTRIES.indexOf(map) !== -1) { // No wrap
+    if (map === CONSTANTS.NAMERICA || map === CONSTANTS.EUROPE || map === CONSTANTS.AFRICA || map === CONSTANTS.SAMERICA || map === CONSTANTS.ASIA || map === CONSTANTS.OCEANIA || Object.keys(CONSTANTS.SPECIALS).indexOf(map) !== -1) { // No wrap
         col_err = Math.pow(col1 - col2, 2);
     }
     return Math.sqrt(row_err + col_err);
@@ -202,17 +146,30 @@ const calcGeoDist = (lat1, lon1, lat2, lon2) => {
 
 const score = (map, geoDist, mercDist, timeBonus) => {
     // Scale geoDist based on the length of the map's diagonal
-    let bounds = CONSTANTS.MAP_BOUNDS[map];
-    let world_bounds = CONSTANTS.MAP_BOUNDS[CONSTANTS.WORLD];
-    let diag = calcGeoDist(bounds["max_lat"], bounds["max_lon"], bounds["min_lat"], bounds["min_lon"]);
+    var bounds;
+    if (Object.keys(CONSTANTS.CLASSICS).indexOf(map) !== -1)
+        bounds = CONSTANTS.CLASSICS[map]["coords"];
+    else
+        bounds = CONSTANTS.SPECIALS[map]["coords"];
+
+    let min_lon = bounds[0];
+    let max_lon = bounds[1];
+    let max_lat = bounds[2];
+    let min_lat = bounds[3];
+    let world_bounds = CONSTANTS.CLASSICS[CONSTANTS.WORLD]["coords"];
+    let world_min_lon = world_bounds[0];
+    let world_max_lon = world_bounds[1];
+    let world_max_lat = world_bounds[2];
+    let world_min_lat = world_bounds[3];
+    let diag = calcGeoDist(max_lat, max_lon, min_lat, min_lon);
     let scalingFactor = 1;
-    let fullDiag = 2 * calcGeoDist((world_bounds["max_lat"] + world_bounds["min_lat"]) / 2, (world_bounds["max_lon"] + world_bounds["min_lon"]) / 2, world_bounds["min_lat"], world_bounds["min_lon"]);
-    if (bounds["min_lon"] == -180 && bounds["max_lon"] == 180) {
+    let fullDiag = 2 * calcGeoDist((world_max_lat + world_min_lat) / 2, (world_max_lon + world_min_lon) / 2, world_min_lat, world_min_lon);
+    if (min_lon == -180 && max_lon == 180) {
         // No scaling for full map
     } else {
         let fudge_factor = 1
         // Tiny maps need slightly different math
-        if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(map) !== -1)
+        if (Object.keys(CONSTANTS.SPECIALS).indexOf(map) !== -1)
             fudge_factor = 2.5;
         if (map == "Vatican City")
             fudge_factor = 30;
@@ -225,11 +182,9 @@ const score = (map, geoDist, mercDist, timeBonus) => {
     // const distGaussian = Math.exp(-Math.pow(mercDist, 2) / CONSTANTS.GAUSS_C1) * CONSTANTS.MULTIPLIER;
     // return distGaussian * timeLogistic;
     // Geo distance based score
-    const minTimePortion = 1 / 3;
-    const timeCushion = 1.55;
-    const slope = (1 - minTimePortion) / (timeCushion - 10);
+    const slope = (1 - CONSTANTS.PERCENT_AT_MAX_TIME) / (CONSTANTS.NUM_SECONDS_FULL_SCORE - 10);
     const invTime = CONSTANTS.GUESS_DURATION - timeBonus;
-    const timeLine = slope * (invTime - timeCushion) + 1;
+    const timeLine = slope * (invTime - CONSTANTS.NUM_SECONDS_FULL_SCORE) + 1;
     const timePortion = Math.min(1, timeLine);
     // const timePortion = Math.min(13 / 12 - (CONSTANTS.GUESS_DURATION - timeBonus) * 3 / 36, 1);
     // // Logistic distance score
@@ -240,12 +195,17 @@ const score = (map, geoDist, mercDist, timeBonus) => {
 };
 
 const pixelToGeo = (map, row, col) => {
-    let bounds = CONSTANTS.MAP_BOUNDS[map];
-    let zero_lat = bounds["min_lat"];
-    let max_lat = bounds["max_lat"];
-    let min_lon = bounds["min_lon"];
-    let max_lon = bounds["max_lon"];
-    let lat_ts = bounds["lat_ts"];
+    var bounds;
+    if (Object.keys(CONSTANTS.CLASSICS).indexOf(map) !== -1)
+        bounds = CONSTANTS.CLASSICS[map]["coords"];
+    else
+        bounds = CONSTANTS.SPECIALS[map]["coords"];
+
+    let min_lon = bounds[0];
+    let max_lon = bounds[1];
+    let max_lat = bounds[2];
+    let zero_lat = bounds[3];
+    let lat_ts = 0;
 
     let lat = 0;
     let lon = 0;
@@ -286,12 +246,17 @@ const pixelToGeo = (map, row, col) => {
 };
 
 const geoToPixel = (map, lat, lon) => {
-    let bounds = CONSTANTS.MAP_BOUNDS[map];
-    let zero_lat = bounds["min_lat"];
-    let max_lat = bounds["max_lat"];
-    let min_lon = bounds["min_lon"];
-    let max_lon = bounds["max_lon"];
-    let lat_ts = bounds["lat_ts"];
+    var bounds;
+    if (Object.keys(CONSTANTS.CLASSICS).indexOf(map) !== -1)
+        bounds = CONSTANTS.CLASSICS[map]["coords"];
+    else
+        bounds = CONSTANTS.SPECIALS[map]["coords"];
+
+    let min_lon = bounds[0];
+    let max_lon = bounds[1];
+    let max_lat = bounds[2];
+    let zero_lat = bounds[3];
+    let lat_ts = 0;
 
     let col = 0;
     let row = 0;

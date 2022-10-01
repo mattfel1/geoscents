@@ -15,7 +15,7 @@ module.exports = {
         "PLAYER drowned BOT in its own tears!", "PLAYER pulled BOT apart limb by limb!", "PLAYER unravelled BOT thread by thread.",
         "PLAYER sacrificed BOT to the gods.", "PLAYER ran over BOT with a Subaru!", "PLAYER pushed BOT into an alligator pit!",
         "PLAYER sent BOT to Belize.", "PLAYER euthanized BOT!", "PLAYER sent BOT to Davy Jones's Locker!", "PLAYER turned BOT into worm food!",
-        "PLAYER sent some Daleks to exterminate BOT", "PLAYER fed BOT into the wood chipper, like at the end of the Fargo movie!"
+        "PLAYER sent some Daleks to exterminate BOT", "PLAYER fed BOT into the wood chipper, like at the end of the Fargo movie!", "PLAYER pushed BOT out of an airplane with a faulty parachute!"
     ],
     BIRTH_MSGS: ["PLAYER has given birth to BOT!", "PLAYER created BOT!", "PLAYER plugged in BOT!", "PLAYER manufactured BOT!",
         "PLAYER spawned BOT!", "PLAYER produced BOT!", "PLAYER cooked up BOT in a top secret lab!", "PLAYER whipped up BOT using some eggs, flour, water, and yeast!",
@@ -46,401 +46,358 @@ module.exports = {
     SPECIAL: 'Daily Country',
     AFRICA: 'Africa',
     SAMERICA: "S. America",
-    SPECIAL_COUNTRIES: ["Ukraine", "Japan", "Canada", "Argentina", "Kenya", "Australia", "Romania", "Egypt", "Peru", "Indonesia",
-        "Spain", "China", "United States", "Iran", "Brazil", "Mexico", "India", "United Kingdom", "Italy", "Germany", "France",
-        "Nigeria", "South Africa", "Vatican City", "Democratic Republic of the Congo", "Pakistan", "New Zealand", "Turkey", "Switzerland",
-        "Morocco", "Philippines", "South Korea", "Vietnam", "Saudi Arabia", "Afghanistan", "Antarctica", "Estonia", "Latvia", "Lithuania", "Colombia", "Venezuela", "Paraguay", "Uruguay", "Bolivia"
-    ],
-
-    SPECIAL_JOES: ["Zelensky", "Kishida", "Trudeau", "Fernandez", "Kenyatta", "Albanese", "Iohannis", "el-Sisi", "Castillo", "Widodo",
-        "Sánchez", "Xi", "Biden", "Raisi", "Bolsonaro", "AMLO", "Modi", "Johnson", "Mattarella", "Scholz", "Macron", "Buhari", "Ramaphosa", "Bertello", "Tshisekedi", "Alvi", "Ardern",
-        "Erdoğan", "Cassis", "Akhannouch", "Bongbong", "Yoon", "Nguyen", "Salman", "Akhund", "Penguin", "Karis", "Levits", "Nauseda"
-
-    ],
-    SPECIAL_WELCOMES: ["ласкаво просимо (laskavo prosymo)", "いらっしゃいませ (irasshaimase)",
-        "Welcome/Bienvenue", "Bienvenido", "Karibu/Welcome", "Welcome", "Bine ati venit", "أهلا بك (Ahlan bik)", "Bienvenido/Jallallt'atapxtawa/Imaynallan", "Selamat datang",
-        "Bienvenido", "欢迎光临 (Huānyíng guānglín)", "Welcome", "خوش آمدی (xoš âmadi)", "Receber", "Bienvenido", "Welcome/स्वागत हे(svaagat he)", "Welcome",
-        "Benvenuto", "Willkommen", "Bienvenue", "Welcome", "Siyakwamukela/Wamkelekile/Welkom", "Benvenuto", "Bienvenue/Boyei malamu/Karibu", "خوش آمدید (Khush Amdeed)/Welcome", "Kia ora/Welcome",
-        "مرحبا‎ (Merhaba)", "Willkommen/Bienvenue/Benvenuto/Bainvegni", "أهلا بك (Ahlan bik)", "Maligayang Pagdating", "환영하다 (hwan-yeonghada)", "Hoan Nghênh", "أهلا بك (Ahlan bik)", "سلام (Salâm)/ښه راغلاست (Kha Raghlast)", "Bonvenon",
-        "Tere tulemast", "Laipni lūdzam", "Sveiki", "Bienvenido", "Bienvenido", "Bienvenido/Maiteí", "Bienvenido", "Bienvenido/Jallallt'atapxtawa/Imaynallan"
-    ],
-
-    MAP_BOUNDS: {
-        "World": {
-            "min_lon": -180,
-            "max_lon": 180,
-            "max_lat": -65.5, // Bottom edge of map (max row pixel coordinate)
-            "min_lat": 77.2, // Top edge of map (min row pixel coordinate)
-            "lat_ts": 0
-        },
-        "World Capitals": {
-            "min_lon": -180,
-            "max_lon": 180,
-            "max_lat": -65.5,
-            "min_lat": 77.2,
-            "lat_ts": 0
-        },
-        "Trivia": {
-            "min_lon": -180,
-            "max_lon": 180,
-            "max_lat": -56.0,
-            "min_lat": 80.85,
-            "lat_ts": 0
-        },
-        "N. America": {
-            "min_lon": -141,
-            "max_lon": -43,
-            "max_lat": 10.0,
-            "min_lat": 56.0,
-            "lat_ts": 0
-        },
-        "S. America": {
-            "min_lon": -140,
-            "max_lon": 17,
-            "max_lat": -56.0,
-            "min_lat": 24.1,
-            "lat_ts": 0
-        },
-        "Europe": {
-            "min_lon": -36.3,
-            "max_lon": 52,
-            "max_lat": 35.0,
-            "min_lat": 66.3,
-            "lat_ts": 0
-        },
+    CLASSICS: {
         "Africa": {
-            "min_lon": -60,
-            "max_lon": 82,
-            "max_lat": -36.3,
-            "min_lat": 41.0,
-            "lat_ts": 0
+            "coords": [-60, 82, -36.3, 41.0],
+            "flair": "🌍"
         },
         "Asia": {
-            "min_lon": 25,
-            "max_lon": 158,
-            "max_lat": -1,
-            "min_lat": 61.05,
-            "lat_ts": 0
+            "coords": [25, 158, -1, 61.05],
+            "flair": "🌏"
+        },
+        "Europe": {
+            "coords": [-36.3, 52, 35.0, 66.3],
+            "flair": "🇪🇺"
+        },
+        "N. America": {
+            "coords": [-141, -43, 10.0, 56.0],
+            "flair": "🏞️"
         },
         "Oceania": {
-            "min_lon": 92,
-            "max_lon": 252,
-            "max_lat": -54.55,
-            "min_lat": 28,
-            "lat_ts": 0
+            "coords": [92, 252, -54.55, 28],
+            "flair": "🌊"
         },
-        "Argentina": {
-            "min_lon": -102,
-            "max_lon": -20,
-            "max_lat": -56.5,
-            "min_lat": -20,
-            "lat_ts": 0
+        "S. America": {
+            "coords": [-140, 17, -56.0, 24.1],
+            "flair": "🌎"
         },
-        "Australia": {
-            "min_lon": 97,
-            "max_lon": 170,
-            "max_lat": -45.5,
-            "min_lat": -8,
-            "lat_ts": 0
+        "Trivia": {
+            "coords": [-180, 180, -56.0, 80.85],
+            "flair": "🧠"
         },
-        "Canada": {
-            "min_lon": -152.1,
-            "max_lon": -40,
-            "max_lat": 38,
-            "min_lat": 72.5,
-            "lat_ts": 0
+        "World Capitals": {
+            "coords": [-180, 180, -65.5, 77.2],
+            "flair": "🗺️"
         },
-        "Japan": {
-            "min_lon": 110,
-            "max_lon": 164.5,
-            "max_lat": 23.5,
-            "min_lat": 49,
-            "lat_ts": 0
+        "World": {
+            "coords": [-180, 180, -65.5, 77.2],
+            "flair": "🌐"
         },
-        "Kenya": {
-            "min_lon": 30,
-            "max_lon": 49,
-            "max_lat": -5.33,
-            "min_lat": 5.9,
-            "lat_ts": 0
-        },
-        "Romania": {
-            "min_lon": 18.8,
-            "max_lon": 33.7,
-            "max_lat": 43,
-            "min_lat": 49,
-            "lat_ts": 0
-        },
-        "Ukraine": {
-            "min_lon": 17.4,
-            "max_lon": 45.3,
-            "max_lat": 43.18,
-            "min_lat": 54,
-            "lat_ts": 0
-        },
-        "Peru": {
-            "min_lon": -92,
-            "max_lon": -55,
-            "max_lat": -19.5,
-            "min_lat": 2,
-            "lat_ts": 0
-        },
-        "Egypt": {
-            "min_lon": 16.5,
-            "max_lon": 41.7,
-            "max_lat": 20.81,
-            "min_lat": 34,
-            "lat_ts": 0
-        },
-        "Indonesia": {
-            "min_lon": 84.5,
-            "max_lon": 151,
-            "max_lat": -23.5,
-            "min_lat": 15,
-            "lat_ts": 0
-        },
-        "Spain": {
-            "min_lon": -14.18,
-            "max_lon": 8,
-            "max_lat": 35,
-            "min_lat": 45,
-            "lat_ts": 0
-        },
-        "China": {
-            "min_lon": 62,
-            "max_lon": 148,
-            "max_lat": 16.85,
-            "min_lat": 56,
-            "lat_ts": 0
-        },
-        "United States": {
-            "min_lon": -130,
-            "max_lon": -60,
-            "max_lat": 22,
-            "min_lat": 53.7,
-            "lat_ts": 0
-        },
-        "Iran": {
-            "min_lon": 36,
-            "max_lon": 72.6,
-            "max_lat": 24,
-            "min_lat": 42,
-            "lat_ts": 0
-        },
-        "Brazil": {
-            "min_lon": -91.7,
-            "max_lon": -17,
-            "max_lat": -34,
-            "min_lat": 8,
-            "lat_ts": 0
-        },
-        "Mexico": {
-            "min_lon": -120,
-            "max_lon": -80,
-            "max_lat": 13.61,
-            "min_lat": 35,
-            "lat_ts": 0
-        },
-        "India": {
-            "min_lon": 50,
-            "max_lon": 107.3,
-            "max_lat": 6,
-            "min_lat": 37,
-            "lat_ts": 0
-        },
-        "Italy": {
-            "min_lon": -2.1,
-            "max_lon": 25.4,
-            "max_lat": 36,
-            "min_lat": 48,
-            "lat_ts": 0
-        },
-        "United Kingdom": {
-            "min_lon": -19.55,
-            "max_lon": 15,
-            "max_lat": 49.5,
-            "min_lat": 61,
-            "lat_ts": 0
-        },
-        "Germany": {
-            "min_lon": -2.1,
-            "max_lon": 23,
-            "max_lat": 46.8,
-            "min_lat": 56,
-            "lat_ts": 0
-        },
-        "France": {
-            "min_lon": -10.2,
-            "max_lon": 17,
-            "max_lat": 41,
-            "min_lat": 52,
-            "lat_ts": 0
-        },
-        "Nigeria": {
-            "min_lon": -2.48,
-            "max_lon": 19,
-            "max_lat": 3.5,
-            "min_lat": 16,
-            "lat_ts": 0
-        },
-        "South Africa": {
-            "min_lon": 9,
-            "max_lon": 37,
-            "max_lat": -35.51,
-            "min_lat": -21,
-            "lat_ts": 0
-        },
-        "Vatican City": {
-            "min_lon": 12.440,
-            "max_lon": 12.4605,
-            "max_lat": 41.899,
-            "min_lat": 41.908,
-            "lat_ts": 0
-        },
-        "Pakistan": {
-            "min_lon": 52.25,
-            "max_lon": 84,
-            "max_lat": 23,
-            "min_lat": 39,
-            "lat_ts": 0
-        },
-        "Democratic Republic of the Congo": {
-            "min_lon": 3.53,
-            "max_lon": 41,
-            "max_lat": -14,
-            "min_lat": 8,
-            "lat_ts": 0
-        },
-        "New Zealand": {
-            "min_lon": 151,
-            "max_lon": 190.4,
-            "max_lat": -49,
-            "min_lat": -31.4,
-            "lat_ts": 0
-        },
-        "Turkey": {
-            "min_lon": 22,
-            "max_lon": 48,
-            "max_lat": 33.14,
-            "min_lat": 45,
-            "lat_ts": 0
-        },
-        "Switzerland": {
-            "min_lon": 4,
-            "max_lon": 12.66,
-            "max_lat": 45,
-            "min_lat": 48.5,
-            "lat_ts": 0
-        },
-        "Morocco": {
-            "min_lon": -25,
-            "max_lon": 10,
-            "max_lat": 20.03,
-            "min_lat": 38,
-            "lat_ts": 0
-        },
-        "Philippines": {
-            "min_lon": 105,
-            "max_lon": 140,
-            "max_lat": 2,
-            "min_lat": 22.15,
-            "lat_ts": 0
-        },
-        "Vietnam": {
-            "min_lon": 90,
-            "max_lon": 120.1,
-            "max_lat": 8,
-            "min_lat": 25,
-            "lat_ts": 0
-        },
-        "South Korea": {
-            "min_lon": 121,
-            "max_lon": 135.75,
-            "max_lat": 33,
-            "min_lat": 40,
-            "lat_ts": 0
-        },
-        "Saudi Arabia": {
-            "min_lon": 23.8,
-            "max_lon": 63.5,
-            "max_lat": 15,
-            "min_lat": 36,
-            "lat_ts": 0
-        },
+    },
+    SPECIALS: {
         "Afghanistan": {
-            "min_lon": 56,
-            "max_lon": 78.65,
-            "max_lat": 29,
-            "min_lat": 40,
-            "lat_ts": 0
+            "leader": "Akhund",
+            "greeting": "سلام (Salâm)/ښه راغلاست (Kha Raghlast)",
+            "coords": [56, 78.65, 29, 40],
+            "flair": "🇦🇫"
         },
         "Antarctica": {
-            "min_lon": -180,
-            "max_lon": 180,
-            "max_lat": -90,
-            "min_lat": -52,
-            "lat_ts": 0
+            "leader": "Penguin",
+            "greeting": "Bonvenon",
+            "coords": [-180, 180, -90, -52],
+            "flair": "🐧"
         },
-        "Estonia": {
-            "min_lon": 20,
-            "max_lon": 30,
-            "max_lat": 56.92,
-            "min_lat": 60,
-            "lat_ts": 0
+        "Argentina": {
+            "leader": "Fernandez",
+            "greeting": "Bienvenido",
+            "coords": [-102, -20, -56.5, -20],
+            "flair": "🇦🇷"
         },
-        "Latvia": {
-            "min_lon": 20,
-            "max_lon": 30,
-            "max_lat": 55.285,
-            "min_lat": 58.5,
-            "lat_ts": 0
-        },
-        "Lithuania": {
-            "min_lon": 18.43,
-            "max_lon": 28,
-            "max_lat": 53.8,
-            "min_lat": 57,
-            "lat_ts": 0
-        },
-        "Colombia": {
-            "min_lon": -90,
-            "max_lon": -55.9,
-            "max_lat": -5,
-            "min_lat": 15,
-            "lat_ts": 0
-        },
-        "Venezuela": {
-            "min_lon": -79.3,
-            "max_lon": -52,
-            "max_lat": -1,
-            "min_lat": 15,
-            "lat_ts": 0
-        },
-        "Paraguay": {
-            "min_lon": -69.1,
-            "max_lon": -47,
-            "max_lat": -29,
-            "min_lat": -17,
-            "lat_ts": 0
-        },
-        "Uruguay": {
-            "min_lon": -61.98,
-            "max_lon": -48,
-            "max_lat": -35.5,
-            "min_lat": -28.5,
-            "lat_ts": 0
+        "Australia": {
+            "leader": "Albanese",
+            "greeting": "Welcome",
+            "coords": [97, 170, -45.5, -8],
+            "flair": "🦘"
         },
         "Bolivia": {
-            "min_lon": -79,
-            "max_lon": -49.05,
-            "max_lat": -24,
-            "min_lat": -7,
-            "lat_ts": 0
+            "leader": "Arce",
+            "greeting": "Bienvenido/Jallallt'atapxtawa/Imaynallan",
+            "coords": [-79, -49.05, -24, -7],
+            "flair": "🇧🇴"
         },
-
-
+        "Brazil": {
+            "leader": "Bolsonaro",
+            "greeting": "Receber",
+            "coords": [-91.7, -17, -34, 8],
+            "flair": "🇧🇷"
+        },
+        "Canada": {
+            "leader": "Trudeau",
+            "greeting": "Welcome/Bienvenue",
+            "coords": [-152.1, -40, 38, 72.5],
+            "flair": "🍁"
+        },
+        "China": {
+            "leader": "Xi",
+            "greeting": "欢迎光临 (Huānyíng guānglín)",
+            "coords": [62, 148, 16.85, 56],
+            "flair": "🐼"
+        },
+        "Colombia": {
+            "leader": "Petro",
+            "greeting": "Bienvenido",
+            "coords": [-90, -55.9, -5, 15],
+            "flair": "🇨🇴"
+        },
+        "Democratic Republic of the Congo": {
+            "leader": "Tshisekedi",
+            "greeting": "Bienvenue/Boyei malamu/Karibu",
+            "coords": [3.53, 41, -14, 8],
+            "flair": "🇨🇩"
+        },
+        "Egypt": {
+            "leader": "el-Sisi",
+            "greeting": "أهلا بك (Ahlan bik)",
+            "coords": [16.5, 41.7, 20.81, 34],
+            "flair": "🇪🇬"
+        },
+        "Estonia": {
+            "leader": "Karis",
+            "greeting": "Tere tulemast",
+            "coords": [20, 30, 56.92, 60],
+            "flair": "🇪🇪"
+        },
+        "France": {
+            "leader": "Macron",
+            "greeting": "Bienvenue",
+            "coords": [-10.2, 17, 41, 52],
+            "flair": "🥐"
+        },
+        "Germany": {
+            "leader": "Scholz",
+            "greeting": "Willkommen",
+            "coords": [-2.1, 23, 46.8, 56],
+            "flair": "🇩🇪"
+        },
+        "Greater Antilles": {
+            "leader": "Atabey",
+            "greeting": "Akeyi/Bienvenido",
+            "coords": [-85.4, -64.5, 14.43, 26],
+            "flair": "🐠"
+        },
+        "India": {
+            "leader": "Modi",
+            "greeting": "Welcome/स्वागत हे(svaagat he)",
+            "coords": [50, 107.3, 6, 37],
+            "flair": "🇮🇳"
+        },
+        "Indonesia": {
+            "leader": "Widodo",
+            "greeting": "Selamat datang",
+            "coords": [84.5, 151, -23.5, 15],
+            "flair": "🇮🇩"
+        },
+        "Iran": {
+            "leader": "Raisi",
+            "greeting": "خوش آمدی (xoš âmadi)",
+            "coords": [36, 72.6, 24, 42],
+            "flair": "🇮🇷"
+        },
+        "Italy": {
+            "leader": "Mattarella",
+            "greeting": "Benvenuto",
+            "coords": [-2.1, 25.4, 36, 48],
+            "flair": "🤌"
+        },
+        "Japan": {
+            "leader": "Kishida",
+            "greeting": "いらっしゃいませ (irasshaimase)",
+            "coords": [110, 164.5, 23.5, 49],
+            "flair": "🗻"
+        },
+        "Kazakhstan": {
+            "leader": "Tokayev",
+            "greeting": "Сәлеметсіз бе (Sälemetsiz be)",
+            "coords": [42.8, 90, 40, 58],
+            "flair": "🇰🇿"
+        },
+        "Kenya": {
+            "leader": "Kenyatta",
+            "greeting": "Karibu/Welcome",
+            "coords": [30, 49, -5.33, 5.9],
+            "flair": "🇰🇪"
+        },
+        "Kyrgyzstan": {
+            "leader": "Japarov",
+            "greeting": "Кош келдиңиз (Koş keldiŋiz)",
+            "coords": [68.6, 81, 38.5, 44],
+            "flair": "🇰🇬"
+        },
+        "Latvia": {
+            "leader": "Levits",
+            "greeting": "Laipni lūdzam",
+            "coords": [20, 30, 55.285, 58.5],
+            "flair": "🇱🇻"
+        },
+        "Lesser Antilles": {
+            "leader": "Yúcahu",
+            "greeting": "Welcome",
+            "coords": [-74, -56.47, 10, 20],
+            "flair": "🏝️"
+        },
+        "Lithuania": {
+            "leader": "Nauseda",
+            "greeting": "Sveiki",
+            "coords": [18.43, 28, 53.8, 57],
+            "flair": "🇱🇹"
+        },
+        "Mexico": {
+            "leader": "AMLO",
+            "greeting": "Bienvenido",
+            "coords": [-120, -80, 13.61, 35],
+            "flair": "🇲🇽"
+        },
+        "Morocco": {
+            "leader": "Akhannouch",
+            "greeting": "أهلا بك (Ahlan bik)",
+            "coords": [-25, 10, 20.03, 38],
+            "flair": "🇲🇦"
+        },
+        "New Zealand": {
+            "leader": "Ardern",
+            "greeting": "Kia ora/Welcome",
+            "coords": [151, 190.4, -49, -31.4],
+            "flair": "🥝"
+        },
+        "Nigeria": {
+            "leader": "Buhari",
+            "greeting": "Welcome",
+            "coords": [-2.48, 19, 3.5, 16],
+            "flair": "🇳🇬"
+        },
+        "Pakistan": {
+            "leader": "Alvi",
+            "greeting": "خوش آمدید (Khush Amdeed)/Welcome",
+            "coords": [52.25, 84, 23, 39],
+            "flair": "🇵🇰"
+        },
+        "Paraguay": {
+            "leader": "Benítez",
+            "greeting": "Bienvenido/Maiteí",
+            "coords": [-69.1, -47, -29, -17],
+            "flair": "🇵🇾"
+        },
+        "Peru": {
+            "leader": "Castillo",
+            "greeting": "Bienvenido/Jallallt'atapxtawa/Imaynallan",
+            "coords": [-92, -55, -19.5, 2],
+            "flair": "🇵🇪"
+        },
+        "Philippines": {
+            "leader": "Bongbong",
+            "greeting": "Maligayang Pagdating",
+            "coords": [105, 140, 2, 22.15],
+            "flair": "🇵🇭"
+        },
+        "Portugal": {
+            "leader": "de Sousa",
+            "greeting": "Receber",
+            "coords": [-14.34, 0, 36.5, 43],
+            "flair": "🇵🇹"
+        },
+        "Romania": {
+            "leader": "Iohannis",
+            "greeting": "Bine ati venit",
+            "coords": [18.8, 33.7, 43, 49],
+            "flair": "🇷🇴"
+        },
+        "Saudi Arabia": {
+            "leader": "Salman",
+            "greeting": "أهلا بك (Ahlan bik)",
+            "coords": [23.8, 63.5, 15, 36],
+            "flair": "🇸🇦"
+        },
+        "South Africa": {
+            "leader": "Ramaphosa",
+            "greeting": "Siyakwamukela/Wamkelekile/Welkom",
+            "coords": [9, 37, -35.51, -21],
+            "flair": "🇿🇦"
+        },
+        "South Korea": {
+            "leader": "Yoon",
+            "greeting": "환영하다 (hwan-yeonghada)",
+            "coords": [121, 135.75, 33, 40],
+            "flair": "🇰🇷"
+        },
+        "Spain": {
+            "leader": "Sánchez",
+            "greeting": "Bienvenido",
+            "coords": [-14.18, 8, 35, 45],
+            "flair": "🇪🇸"
+        },
+        "Switzerland": {
+            "leader": "Cassis",
+            "greeting": "Willkommen/Bienvenue/Benvenuto/Bainvegni",
+            "coords": [4, 12.66, 45, 48.5],
+            "flair": "🇨🇭"
+        },
+        "Tajikistan": {
+            "leader": "Rahmon",
+            "greeting": "хуш омадед (xuş omaded)",
+            "coords": [64.9, 78, 36, 42],
+            "flair": "🇹🇯"
+        },
+        "Turkey": {
+            "leader": "Erdoğan",
+            "greeting": "مرحبا‎ (Merhaba)",
+            "coords": [22, 48, 33.14, 45],
+            "flair": "🦃"
+        },
+        "Turkmenistan": {
+            "leader": "Berdimuhamedow",
+            "greeting": "Koş geldiniz",
+            "coords": [50, 72, 34, 44.06],
+            "flair": "🇹🇲"
+        },
+        "Ukraine": {
+            "leader": "Zelensky",
+            "welcome": "ласкаво просимо (laskavo prosymo)",
+            "coords": [17.4, 45.3, 43.18, 54],
+            "flair": "🇺🇦"
+        },
+        "United Kingdom": {
+            "leader": "Johnson",
+            "greeting": "Welcome",
+            "coords": [-19.55, 15, 49.5, 61],
+            "flair": "🇬🇧"
+        },
+        "United States": {
+            "leader": "Biden",
+            "greeting": "Welcome",
+            "coords": [-130, -60, 22, 53.7],
+            "flair": "🦅"
+        },
+        "Uruguay": {
+            "leader": "Pou",
+            "greeting": "Bienvenido",
+            "coords": [-61.98, -48, -35.5, -28.5],
+            "flair": "🇺🇾"
+        },
+        "Uzbekistan": {
+            "leader": "Mirziyoyev",
+            "greeting": "xush kelibsiz",
+            "coords": [52, 78, 36, 47.41],
+            "flair": "🇺🇿"
+        },
+        "Vatican City": {
+            "leader": "Bertello",
+            "greeting": "Benvenuto",
+            "coords": [12.440, 12.4605, 41.899, 41.908],
+            "flair": "🇻🇦"
+        },
+        "Venezuela": {
+            "leader": "Maduro",
+            "greeting": "Bienvenido",
+            "coords": [-79.3, -52, -1, 15],
+            "flair": "🇻🇪"
+        },
+        "Vietnam": {
+            "leader": "Nguyen",
+            "greeting": "Hoan Nghênh",
+            "coords": [90, 120.1, 8, 25],
+            "flair": "🇻🇳"
+        },
     },
-
     VERT_WRITE_CELLS: 30,
     HORZ_WRITE_CELLS: 15,
 
@@ -528,6 +485,10 @@ module.exports = {
         'recordColor5': 'black',
         'recordBroken5': false
     },
+
+    // Scoring
+    PERCENT_AT_MAX_TIME: 0.333, // Percent of full credit if you answer in the last second
+    NUM_SECONDS_FULL_SCORE: 1.7, // Number of seconds before you start paying a time penalty
 
     // Chat
     MAX_GAME_HIST: 100,

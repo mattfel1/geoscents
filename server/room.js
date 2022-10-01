@@ -62,9 +62,9 @@ class Room {
     }
     createJoe() {
         let name = CONSTANTS.AVERAGE_NAMES[Math.floor(Math.random() * CONSTANTS.AVERAGE_NAMES.length)]
-        // console.log("create joe in " + this.map + " idx " + CONSTANTS.SPECIAL_COUNTRIES.indexOf(this.map))
-        if (CONSTANTS.SPECIAL_COUNTRIES.indexOf(this.map) !== -1)
-            name = CONSTANTS.SPECIAL_JOES[CONSTANTS.SPECIAL_COUNTRIES.indexOf(this.map)]
+        // console.log("create joe in " + this.map + " idx " + CONSTANTS.SPECIALS.has(this.map))
+        if (Object.keys(CONSTANTS.SPECIALS).indexOf(this.map) !== -1)
+            name = CONSTANTS.SPECIALS[this.map]["leader"]
         const avg_name = "Average " + name;
         this.joe = new Player(this.roomName + "_joe", 0, this.map, this.ordinalCounter, this.ordinalCounter, avg_name, {
             'moved': true,

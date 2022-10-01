@@ -6166,6 +6166,19 @@ module.exports = {
             "id": 1218773967
         },
         {
+            "city": "George Town",
+            "city_ascii": "George Town",
+            "lat": 19.2804,
+            "lng": -81.33,
+            "country": "Cayman Islands",
+            "iso2": "KY",
+            "iso3": "CYM",
+            "admin_name": "",
+            "capital": "primary",
+            "population": 4268,
+            "id": 1136159124
+        },
+        {
             "city": "Puerto Villamil",
             "city_ascii": "Puerto Villamil",
             "lat": -0.9333,

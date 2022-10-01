@@ -1,0 +1,107 @@
+module.exports = {
+    CITIES: [{
+            "city": "Dushanbe",
+            "city_ascii": "Dushanbe",
+            "lat": 38.56,
+            "lng": 68.7739,
+            "country": "Tajikistan",
+            "iso2": "TJ",
+            "iso3": "TJK",
+            "admin_name": "Dushanbe",
+            "capital": "primary",
+            "population": 1086244,
+            "id": 1762930616
+        },
+        {
+            "city": "Kh\u016djand",
+            "city_ascii": "Khujand",
+            "lat": 40.29,
+            "lng": 69.6199,
+            "country": "Tajikistan",
+            "iso2": "TJ",
+            "iso3": "TJK",
+            "admin_name": "Sughd",
+            "capital": "admin",
+            "population": 437684,
+            "id": 1762372787
+        },
+        {
+            "city": "Q\u016drghonteppa",
+            "city_ascii": "Qurghonteppa",
+            "lat": 37.8373,
+            "lng": 68.7713,
+            "country": "Tajikistan",
+            "iso2": "TJ",
+            "iso3": "TJK",
+            "admin_name": "Khatlon",
+            "capital": "admin",
+            "population": 311574,
+            "id": 1762998971
+        },
+        {
+            "city": "Konibodom",
+            "city_ascii": "Konibodom",
+            "lat": 40.2922,
+            "lng": 70.4272,
+            "country": "Tajikistan",
+            "iso2": "TJ",
+            "iso3": "TJK",
+            "admin_name": "Sughd",
+            "capital": "minor",
+            "population": 259876,
+            "id": 1762140294
+        },
+        {
+            "city": "Istaravshan",
+            "city_ascii": "Istaravshan",
+            "lat": 39.9219,
+            "lng": 69.0015,
+            "country": "Tajikistan",
+            "iso2": "TJ",
+            "iso3": "TJK",
+            "admin_name": "Sughd",
+            "capital": "minor",
+            "population": 156621,
+            "id": 1762380072
+        },
+        {
+            "city": "K\u016dlob",
+            "city_ascii": "Kulob",
+            "lat": 37.9212,
+            "lng": 69.7757,
+            "country": "Tajikistan",
+            "iso2": "TJ",
+            "iso3": "TJK",
+            "admin_name": "Khatlon",
+            "capital": "minor",
+            "population": 115164,
+            "id": 1762798596
+        },
+        {
+            "city": "Khorugh",
+            "city_ascii": "Khorugh",
+            "lat": 37.4875,
+            "lng": 71.5476,
+            "country": "Tajikistan",
+            "iso2": "TJ",
+            "iso3": "TJK",
+            "admin_name": "K\u016dhistoni Badakhshon",
+            "capital": "admin",
+            "population": 30000,
+            "id": 1762114045
+        },
+        {
+            "city": "Abdurahmoni Jom\u00ed",
+            "city_ascii": "Abdurahmoni Jomi",
+            "lat": 37.9794,
+            "lng": 68.689,
+            "country": "Tajikistan",
+            "iso2": "TJ",
+            "iso3": "TJK",
+            "admin_name": "Khatlon",
+            "capital": "minor",
+            "population": 8925,
+            "id": 1762589864
+        }
+    ]
+}

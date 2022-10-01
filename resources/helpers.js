@@ -530,115 +530,12 @@ const logPlayerHistory = (name, color, score, room) => {
 };
 
 const flairToEmoji = (flair) => {
-    // Lookup emojis at https://emojipedia.org/flag-peru/
-    if (flair === 'World')
-        return "🌐";
-    if (flair === 'World Capitals')
-        return "🗺️";
-    if (flair === "N. America")
-        return "🌎";
-    if (flair === "Trivia")
-        return "🧠";
-    if (flair === "S. America")
-        return "🌎";
-    if (flair === "Africa")
-        return "🌍";
-    if (flair === "Europe")
-        return "🌍";
-    if (flair === "Oceania")
-        return "🌏";
-    if (flair === "Asia")
-        return "🌏";
-    if (flair === "Ukraine")
-        return "🇺🇦";
-    if (flair === "Japan")
-        return "🗻";
-    if (flair === "Canada")
-        return "🍁";
-    if (flair === "Argentina")
-        return "🇦🇷";
-    if (flair === "Kenya")
-        return "🇰🇪";
-    if (flair === "Australia")
-        return "🦘";
-    if (flair === "Romania")
-        return "🇷🇴";
-    if (flair === "Egypt")
-        return "🇪🇬";
-    if (flair === "Peru")
-        return "🇵🇪";
-    if (flair === "Indonesia")
-        return "🇮🇩";
-    if (flair === "Spain")
-        return "🇪🇸";
-    if (flair === "China")
-        return "🐼";
-    if (flair === "United States")
-        return "🦅";
-    if (flair === "Iran")
-        return "🇮🇷";
-    if (flair === "Brazil")
-        return "🇧🇷";
-    if (flair === "Mexico")
-        return "🇲🇽";
-    if (flair === "India")
-        return "🇮🇳";
-    if (flair === "United Kingdom")
-        return "🇬🇧";
-    if (flair === "Italy")
-        return "🤌";
-    if (flair === "Germany")
-        return "🇩🇪";
-    if (flair === "France")
-        return "🥐";
-    if (flair === "Nigeria")
-        return "🇳🇬";
-    if (flair === "South Africa")
-        return "🇿🇦";
-    if (flair === "Vatican City")
-        return "🇻🇦";
-    if (flair === "Democratic Republic of the Congo")
-        return "🇨🇩";
-    if (flair === "Pakistan")
-        return "🇵🇰";
-    if (flair === "New Zealand")
-        return "🥝";
-    if (flair === "Turkey")
-        return "🦃";
-    if (flair === "Switzerland")
-        return "🇨🇭";
-    if (flair === "Morocco")
-        return "🇲🇦";
-    if (flair === "Philippines")
-        return "🇵🇭"
-    if (flair === "Vietnam")
-        return "🇻🇳"
-    if (flair === "South Korea")
-        return "🇰🇷"
-    if (flair === "Saudi Arabia")
-        return "🇸🇦"
-    if (flair === "Afghanistan")
-        return "🇦🇫"
-    if (flair === "Antarctica")
-        return "🐧"
-    if (flair === "Estonia")
-        return "🇪🇪"
-    if (flair === "Latvia")
-        return "🇱🇻"
-    if (flair === "Lithuania")
-        return "🇱🇹"
-    if (flair === "Colombia")
-        return "🇨🇴"
-    if (flair === "Venezuela")
-        return "🇻🇪"
-    if (flair === "Paraguay")
-        return "🇵🇾"
-    if (flair === "Uruguay")
-        return "🇺🇾"
-    if (flair === "Bolivia")
-        return "🇧🇴"
-
-    return "?";
+    if (Object.keys(CONSTANTS.SPECIALS).indexOf(flair) !== -1)
+        return CONSTANTS.SPECIALS[flair]["flair"]
+    else if (Object.keys(CONSTANTS.CLASSICS).indexOf(flair) !== -1)
+        return CONSTANTS.CLASSICS[flair]["flair"]
+    else
+        return "?";
 }
 
 // Load hall of fame from json

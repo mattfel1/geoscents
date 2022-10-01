@@ -13210,6 +13210,19 @@ module.exports = {
             "id": 1796965313
         },
         {
+            "city": "George Town",
+            "city_ascii": "George Town",
+            "lat": 19.2804,
+            "lng": -81.33,
+            "country": "Cayman Islands",
+            "iso2": "KY",
+            "iso3": "CYM",
+            "admin_name": "",
+            "capital": "primary",
+            "population": 4268,
+            "id": 1136159124
+        },
+        {
             "city": "Avarua",
             "city_ascii": "Avarua",
             "lat": -21.25,
