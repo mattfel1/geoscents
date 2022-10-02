@@ -1,6 +1,4 @@
 const CONSTANTS = require('../resources/constants.js')
-const Geography = require('../server/geography.js');
-
 class History {
     constructor(socket) {
         this.socket = socket;

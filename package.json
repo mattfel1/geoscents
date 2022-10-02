@@ -36,7 +36,7 @@
     "sequelize": "^5.21.5",
     "socket.io": "^2.3.0",
     "svg-country-flags": "^1.2.7",
-    "webpack": "^4.41.5",
+    "webpack": "^5.74.0",
     "webpack-cli": "^3.3.6",
     "xmlhttprequest": "^1.8.0"
   },
@@ -44,6 +44,7 @@
     "start": "webpack -w & pm2 start server/app.js --ignore public"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^9.1.0",
     "css-loader": "^3.4.2",
     "nodemon": "^2.0.2",
     "style-loader": "^1.1.3"

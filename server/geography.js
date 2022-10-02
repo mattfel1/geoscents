@@ -1,24 +1,24 @@
 /**
  * Class for storing all geography methods
  */
-const WORLDCITIES = require('../resources/databases/worldcities.js').CITIES;
-const WORLDCAPITALSCITIES = require('../resources/databases/worldcapitalscities.js').CITIES;
-const TRIVIACITIES = require('../resources/databases/triviacities.js').CITIES;
-const NAMERICACITIES = require('../resources/databases/namericacities.js').CITIES;
-const EUROPECITIES = require('../resources/databases/europecities.js').CITIES;
-const AFRICACITIES = require('../resources/databases/africacities.js').CITIES;
-const ASIACITIES = require('../resources/databases/asiacities.js').CITIES;
-const OCEANIACITIES = require('../resources/databases/oceaniacities.js').CITIES;
-const SAMERICACITIES = require('../resources/databases/samericacities.js').CITIES;
 
 const CONSTANTS = require('../resources/constants.js');
 let ALLCITIES = new Map()
+
+// We don't want all these json files to get in-lined in the bundle,
+// and we can't import at runtime (because imports can't be inside of a loop that is executed at runtime),
+// and we can't use require because it just wild-cards the variable and we end up in-lining every cities.js..
+// We need to trick webpack/babel into not inferring a wildcard in the variable portion of the require file name.
+// Hack over the wildcard with this solution from https://github.com/webpack/webpack/issues/4175#issuecomment-342931035
+// But you have to be careful because these files MUST exist at the path when the game boots up or else it crashes
+
+requireFunc = typeof __webpack_require__ === "function" ? __non_webpack_require__ : require;
 Object.keys(CONSTANTS.CLASSICS).forEach(function(value) {
-    let list = require('../resources/databases/' + value.toLowerCase().replace(/ /g, "").replace(".", "") + 'cities.js').CITIES;
+    let list = requireFunc('../public/' + value.toLowerCase().replace(/ /g, "").replace(".", "") + 'cities.js').CITIES;
     ALLCITIES.set(value, list);
 })
 Object.keys(CONSTANTS.SPECIALS).forEach(function(value) {
-    let list = require('../resources/databases/' + value.toLowerCase().replace(/ /g, "").replace(".", "") + 'cities.js').CITIES;
+    let list = requireFunc('../public/' + value.toLowerCase().replace(/ /g, "").replace(".", "") + 'cities.js').CITIES;
     ALLCITIES.set(value, list);
 })
 
