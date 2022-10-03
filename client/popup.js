@@ -1,3 +1,5 @@
+const CONSTANTS = require('../resources/constants.js');
+
 class Popup {
     constructor(socket) {
         this.socket = socket;

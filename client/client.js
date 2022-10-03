@@ -65,6 +65,16 @@ special_options.forEach((x, i) => {
     dropdown.append(x);
 })
 
+// Update color choices
+let name_dropdown = window.document.getElementById('selected_color')
+CONSTANTS.COLORS.forEach(function(value) {
+    var entry = document.createElement("option");
+    entry.value = value;
+    entry.style = "color:" + value
+    entry.text = '█ '
+    name_dropdown.appendChild(entry);
+})
+
 const playerClick = {
     clickEvent: false,
     mouseDown: false,

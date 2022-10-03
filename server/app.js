@@ -390,6 +390,44 @@ io.on('connection', (socket) => {
                 bad_msg = "I used a bad word in my name :(";
             }
 
+            // Verify player is well-formed
+            let name_ok = name.length >= 1 && name.length <= 14 && /^[a-zA-Z0-9][a-zA-Z0-9 ?!]+[a-zA-Z0-9]$/.test(name);
+            if (!name_ok) {
+                rooms[CONSTANTS.LOBBY].whisperMessage(socket, "<b>Changing name to Error because your name was invalid: " + name + "</b><br>", () => {});
+                name = "Error"
+            }
+
+            const color_ok = CONSTANTS.COLORS.indexOf(color) !== -1 || color == "random"
+            if (!color_ok) {
+                rooms[CONSTANTS.LOBBY].whisperMessage(socket, "<b>Changing color to red because your color was invalid: " + color + "</b><br>", () => {});
+                color = "red"
+            }
+
+            let logger_ok = logger == "Yes" || logger == "No"
+            if (!logger_ok) {
+                rooms[CONSTANTS.LOBBY].whisperMessage(socket, "<b>Changing logger to Yes because your logger was invalid: " + logger + "</b><br>", () => {});
+                newname = "Yes"
+            }
+
+            let flair_ok = true;
+            if (famerhash != "") {
+                flair_ok = false;
+                for (const [key, value] of famers.entries()) {
+                    if (key === famerhash) {
+                        famer_countries = value['maps']
+                        famer_countries.forEach(function(country) {
+                            if (helpers.flairToEmoji(country) == flair)
+                                flair_ok = true;
+                        })
+                    }
+                }
+            }
+            if (!flair_ok) {
+                rooms[CONSTANTS.LOBBY].whisperMessage(socket, "<b>Changing flair to blank because your flair was invalid: " + flair + "</b><br>", () => {});
+                flair = ""
+            }
+
+
             // If player has flair now, then use the name they chose during flair selection instead of their secret hash
             rooms[CONSTANTS.LOBBY].renamePlayer(socket, name, color, logger, famerhash, famerpublichash, flair);
             var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'><b>" + rooms[CONSTANTS.LOBBY].getPlayerName(socket) + "</b> has entered the lobby!</font> ] " + bad_msg + "<br>";
@@ -596,6 +634,29 @@ io.on('connection', (socket) => {
         socket.emit('request help popup');
     });
     socket.on('moveToPrivate', (askcitysrc, code) => {
+        // Verify asked citysrc is valid
+        let unrecognized_citysrc = Object.keys(CONSTANTS.CLASSICS).indexOf(askcitysrc) === -1 && Object.keys(CONSTANTS.SPECIALS).indexOf(askcitysrc) === -1
+        if (unrecognized_citysrc) {
+            Object.values(rooms).forEach(function(room) {
+                if (room.hasPlayer(socket)) {
+                    room.whisperMessage(socket, "<b>Not going to private room because your map was invalid: " + askcitysrc + "</b><br>", () => {});
+                }
+            });
+            return
+        }
+
+        // Verify code is valid
+        let code_valid = code.length >= 1 && code.length <= 5 && /^[a-z0-9]+$/.test(code);
+        if (!code_valid) {
+            Object.values(rooms).forEach(function(room) {
+                if (room.hasPlayer(socket)) {
+                    room.whisperMessage(socket, "<b>Not going to private room because your code was invalid: " + code + "</b><br>", () => {});
+                }
+            });
+            return
+        }
+
+
         // Convert citysrc to the map that it is played on
         let map = askcitysrc;
         if (map.includes('World'))
