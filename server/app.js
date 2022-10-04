@@ -282,6 +282,8 @@ const PRIVATE_MESSAGE = '<i>Welcome to a private room!  You can whisper your sec
 
 //const WELCOME_MESSAGE2 = '[ <b>UPDATE 1/6/2019</b> ] The yearly records are supposed to reset on 1/1/2020, but because of a mistake with cron, they were erroneously reset again on 1/6/2020.  Sorry!<br>'
 
+let random_player_id = 0;
+
 const announce = (text) => {
     Object.values(rooms).forEach(function(room) {
         io.sockets.emit("update messages", room.roomName, text);
@@ -391,6 +393,10 @@ io.on('connection', (socket) => {
             }
 
             // Verify player is well-formed
+            if (name == '') {
+                name = "Player " + random_player_id;
+                random_player_id = (random_player_id + 1) % 100;
+            }
             let name_ok = name.length >= 1 && name.length <= 14 && /^[a-zA-Z0-9][a-zA-Z0-9 ?!]+[a-zA-Z0-9]$/.test(name);
             if (!name_ok) {
                 rooms[CONSTANTS.LOBBY].whisperMessage(socket, "<b>Changing name to Error because your name was invalid: " + name + "</b><br>", () => {});
@@ -406,7 +412,7 @@ io.on('connection', (socket) => {
             let logger_ok = logger == "Yes" || logger == "No"
             if (!logger_ok) {
                 rooms[CONSTANTS.LOBBY].whisperMessage(socket, "<b>Changing logger to Yes because your logger was invalid: " + logger + "</b><br>", () => {});
-                newname = "Yes"
+                logger = "Yes"
             }
 
             let flair_ok = true;

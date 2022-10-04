@@ -63,8 +63,8 @@ class Room {
     createJoe() {
         let name = CONSTANTS.AVERAGE_NAMES[Math.floor(Math.random() * CONSTANTS.AVERAGE_NAMES.length)]
         // console.log("create joe in " + this.map + " idx " + CONSTANTS.SPECIALS.has(this.map))
-        if (Object.keys(CONSTANTS.SPECIALS).indexOf(this.map) !== -1)
-            name = CONSTANTS.SPECIALS[this.map]["leader"]
+        if (Object.keys(CONSTANTS.SPECIALS).indexOf(this.citysrc) !== -1)
+            name = CONSTANTS.SPECIALS[this.citysrc]["leader"]
         const avg_name = "Average " + name;
         this.joe = new Player(this.roomName + "_joe", 0, this.map, this.ordinalCounter, this.ordinalCounter, avg_name, {
             'moved': true,
@@ -1089,7 +1089,16 @@ class Room {
                 this.round = 0;
             } else if (this.state === CONSTANTS.BEGIN_GAME_STATE) {
                 if (this.timer <= 0) {
-                    this.stateTransition(CONSTANTS.SETUP_STATE, 0);
+                    // Make sure this is a real map
+                    let real_map = Object.keys(CONSTANTS.CLASSICS).indexOf(this.citysrc) !== -1 || Object.keys(CONSTANTS.SPECIALS).indexOf(this.citysrc) !== -1
+                    if (!real_map) {
+                        Array.from(this.sortPlayersNoJoe()).forEach((player, id) => {
+                            this.whisperMessage(player, "<br><b>Error detected in this room!  Please refresh the game or change rooms!</b><br><br>", () => {})
+                        });
+                        this.timer = 99;
+                    } else {
+                        this.stateTransition(CONSTANTS.SETUP_STATE, 0);
+                    }
                 }
             } else if (this.state === CONSTANTS.PREPARE_GAME_STATE) {
                 if (this.allReady() || this.timer <= 0) {
@@ -1118,7 +1127,7 @@ class Room {
                     this.round = 0;
                     this.timerColor = CONSTANTS.BEGIN_COLOR;
                     Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
-                    this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, begin_game_duration - 2);
+                    this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, begin_game_duration - 3);
                 }
                 if (this.timer <= 0 || this.allPlayersClicked()) {
                     this.updateScores();
