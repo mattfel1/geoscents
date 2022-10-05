@@ -926,12 +926,12 @@ setInterval(() => {
     if (!week && month && year) s = ", monthly, and yearly"
     if (week && month && year) s = ", weekly, monthly, and yearly"
 
-    // // Debug rapid reset
-    // let reset_imminent = d.getMinutes() % 2 === 0 && d.getSeconds() <= 29; 
-    // let reset_now = d.getMinutes() % 2 === 0 && d.getSeconds() > 29;
+    // Debug rapid reset
+    let reset_imminent = d.getMinutes() % 2 === 0 && d.getSeconds() <= 29;
+    let reset_now = d.getMinutes() % 2 === 0 && d.getSeconds() > 29;
 
-    let reset_imminent = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() <= 29;
-    let reset_now = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() > 29;
+    // let reset_imminent = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() <= 29;
+    // let reset_now = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() > 29;
     if (reset_imminent) {
         announce("<font size=9 color=\"red\"><b>WARNING: Daily" + s + " records will reset in 30 seconds! Daily country will also be changed!</b></font><br>")
     }
@@ -944,8 +944,8 @@ setInterval(() => {
             room.flushRecords(week, month, year);
             if (room.roomName == CONSTANTS.SPECIAL) {
                 room.killJoe();
-                room.map = special.key;
-                room.citysrc = special.key;
+                room.map = special;
+                room.citysrc = special;
                 room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
                 room.createJoe();
             }
