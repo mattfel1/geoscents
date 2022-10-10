@@ -10,6 +10,8 @@ const helpers = require('../resources/helpers.js');
 const fs = require('fs')
 const fetch = require("node-fetch");
 const app = require('./app.js')
+const MAPS = require('../resources/maps.json')
+
 
 class Room {
     constructor(map, roomName, citysrc) {
@@ -63,8 +65,8 @@ class Room {
     createJoe() {
         let name = CONSTANTS.AVERAGE_NAMES[Math.floor(Math.random() * CONSTANTS.AVERAGE_NAMES.length)]
         // console.log("create joe in " + this.map + " idx " + CONSTANTS.SPECIALS.has(this.map))
-        if (Object.keys(CONSTANTS.SPECIALS).indexOf(this.citysrc) !== -1)
-            name = CONSTANTS.SPECIALS[this.citysrc]["leader"]
+        if (this.citysrc != CONSTANTS.LOBBY && Geography.isSpecial(this.citysrc))
+            name = MAPS[this.citysrc]["leader"]
         const avg_name = "Average " + name;
         this.joe = new Player(this.roomName + "_joe", 0, this.map, this.ordinalCounter, this.ordinalCounter, avg_name, {
             'moved': true,
@@ -1090,7 +1092,7 @@ class Room {
             } else if (this.state === CONSTANTS.BEGIN_GAME_STATE) {
                 if (this.timer <= 0) {
                     // Make sure this is a real map
-                    let real_map = Object.keys(CONSTANTS.CLASSICS).indexOf(this.citysrc) !== -1 || Object.keys(CONSTANTS.SPECIALS).indexOf(this.citysrc) !== -1
+                    let real_map = Object.keys(MAPS).indexOf(this.citysrc) !== -1
                     if (!real_map) {
                         Array.from(this.sortPlayersNoJoe()).forEach((player, id) => {
                             this.whisperMessage(player, "<br><b>Error detected in this room!  Please refresh the game or change rooms!</b><br><br>", () => {})

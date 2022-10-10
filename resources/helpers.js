@@ -5,6 +5,7 @@ const logfile = '/scratch/connections.log';
 const messagefile = '/scratch/messages.log';
 const histfile = '/scratch/histograms.log';
 const feedbackfile = '/scratch/feedback.log';
+const MAPS = require('../resources/maps.json')
 var lastUpdates = {};
 
 
@@ -43,7 +44,7 @@ th {
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
 <h3>` + name + ` Play History</h3>
-<table id="` + name + `_history" class="display" width="75%" align="left"></table>
+<table id="history" class="display" width="75%" align="left"></table>
 <br><br>
 
 <script  type="text/javascript" src="` + name + `_history.js"></script>
@@ -64,7 +65,7 @@ $(document).ready(function() {
           "pageLength": 400,
           complete: function(example) {
           $(document).ready(function () {
-              $('#` + name + `_history').DataTable({
+              $('#history').DataTable({
                   data: example.data,
                   dataSrc:"",
                   columns: [
@@ -111,6 +112,17 @@ table {
 th {
   height: 50px;
 }
+.filter-btn {
+    cursor: pointer;
+    border: 1px solid #333;
+    padding: 2px 2px;
+    margin: 3px 3px;
+    font-size: 16px;
+    background: #a9e7f9;
+    /* fallback */
+    border-radius: 2px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
 </style>
 </head>
 <body>
@@ -119,7 +131,8 @@ th {
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
 <h3>` + name + ` Hall of Fame History</h3>
-<table id="` + name + `" class="display" width="75%" align="left"></table>
+<div id="buttons"></div>
+<table id="table" class="display" width="75%" align="left"></table>
 <br><br>
 
 <script  type="text/javascript" src="` + name + `.js"></script>
@@ -135,30 +148,100 @@ const famerHistJs = (name, public_hash) => {
 
 $(document).ready(function() {
       Papa.parse("` + name + `.csv", {
-          download: true,
-          skipEmptyLines: true,
-          "pageLength": 400,
-          complete: function(example) {
-          $(document).ready(function () {
-              $('#` + name + `').DataTable({
-                  data: example.data,
-                  dataSrc:"",
-                  columns: [
-            { title: "Timestamp", "width": "5%"},
-            { title: "Map", "width": "5%"},
-            { title: "Score", "width": "5%" },
-            { title: "Path", "width": "25%" },
-            { title: "Color", "width": "5%"},
-            { title: "Public hash (if multiple users had same username)", "width": "5%"}
-                  ]
-              });
-          });
-          }
-      });
-} );
+        download: true,
+        skipEmptyLines: true,
+        "pageLength": 400,
+        complete: function(results) {
+            $(document).ready(function() {
+                const table = $('#table').DataTable({
+                    data: results.data,
+                    dataSrc: "",
+                    columns: [{
+                            title: "Timestamp",
+                            "width": "5%"
+                        },
+                        {
+                            title: "Map",
+                            "width": "5%"
+                        },
+                        {
+                            title: "Score",
+                            "width": "5%"
+                        },
+                        {
+                            title: "Path",
+                            "width": "25%"
+                        },
+                        {
+                            title: "Color",
+                            "width": "5%"
+                        },
+                        {
+                            title: "Public hash (if multiple users had same username)",
+                            "width": "5%"
+                        }
+                    ]
+                });
+                // All button
+                let all_btn = document.createElement("button");
+                all_btn.id = "all"
+                all_btn.className = "filter-btn"
+                all_btn.style = "background: yellow;"
+                all_btn.innerHTML = "Show All"
+                document.getElementById("buttons").append(all_btn)
 
+                let maps = []
 
+                for (const x in results.data) {
+                    let map = results.data[x][1];
+                    if (!maps.includes(map)) {
+                        maps.push(map)
+                    }
+                }
 
+                $(document).on('click', '#all', function() {
+                    document.getElementById("all").style.background = "yellow"
+                    for (const y in maps) {
+                        let map2 = maps[y].replace(' ', '');
+                        document.getElementById(map2).style.background = "#a9e7f9"
+                    }
+                    table.columns(1).search("").draw();
+                });
+
+                for (const x in maps) {
+                    let map = maps[x]
+                    let spaceless_map = map.replace(' ', '');
+                    let map_btn = document.createElement("button");
+                    map_btn.id = spaceless_map;
+                    map_btn.className = "filter-btn"
+                    let flair = "?"
+                    $.getJSON("../maps.json", function(json) {
+                        // import('../maps.json').then(module => {
+                        if (Object.keys(json).indexOf(map) !== -1) {
+                            flair = json[map]["flair"]
+                            map_btn.innerHTML = map + " " + flair
+                            document.getElementById("buttons").append(map_btn)
+
+                            $(document).on('click', '#' + spaceless_map, function() {
+                                document.getElementById(spaceless_map).style.background = "yellow"
+                                document.getElementById("all").style.background = "#a9e7f9"
+                                for (const y in maps) {
+                                    let map2 = maps[y]
+                                    let spaceless_map2 = map2.replace(' ', '');
+                                    if (spaceless_map2 !== spaceless_map) {
+                                        document.getElementById(spaceless_map2).style.background = "#a9e7f9"
+                                    }
+                                }
+                                table.columns(1).search('^' + map + '$', true, false).draw();
+                            });
+                        }
+                    });
+                }
+
+            });
+        }
+    });
+});
 `
 }
 
@@ -530,10 +613,8 @@ const logPlayerHistory = (name, color, score, room) => {
 };
 
 const flairToEmoji = (flair) => {
-    if (Object.keys(CONSTANTS.SPECIALS).indexOf(flair) !== -1)
-        return CONSTANTS.SPECIALS[flair]["flair"]
-    else if (Object.keys(CONSTANTS.CLASSICS).indexOf(flair) !== -1)
-        return CONSTANTS.CLASSICS[flair]["flair"]
+    if (Object.keys(MAPS).indexOf(flair) !== -1)
+        return MAPS[flair]["flair"]
     else
         return "?";
 }
@@ -560,7 +641,34 @@ const loadHallOfFame = () => {
             if (err) throw err;
         });
     }
-    return new Map(Object.entries(famers));
+
+    let entries = Object.entries(famers)
+
+    // Regenerate hall of fame js and html files in case the code is updated
+    for (const x in entries) {
+        let name = entries[x][1]['name']
+        if (name === undefined)
+            continue
+        let spaceless_name = name.replace(/ /g, '_')
+        let html = famerHistHtml(spaceless_name, entries[x]['public_hash'])
+        let js = famerHistJs(spaceless_name, entries[x]['public_hash'])
+        const filebase = '/scratch/famers/' + spaceless_name;
+        // Set html
+        fs.writeFile(filebase + ".html", html, {
+            flag: 'w'
+        }, function(err) {
+            if (err) throw err;
+        });
+
+        // Set js
+        fs.writeFile(filebase + ".js", js, {
+            flag: 'w'
+        }, function(err) {
+            if (err) throw err;
+        });
+    }
+
+    return new Map(entries)
 }
 
 // Convert hall of fame json to board string

@@ -2,6 +2,7 @@
  * Class for storing all geography methods
  */
 
+const MAPS = require('../resources/maps.json')
 const CONSTANTS = require('../resources/constants.js');
 let ALLCITIES = new Map()
 
@@ -13,11 +14,7 @@ let ALLCITIES = new Map()
 // But you have to be careful because these files MUST exist at the path when the game boots up or else it crashes
 
 requireFunc = typeof __webpack_require__ === "function" ? __non_webpack_require__ : require;
-Object.keys(CONSTANTS.CLASSICS).forEach(function(value) {
-    let list = requireFunc('../public/' + value.toLowerCase().replace(/ /g, "").replace(".", "") + 'cities.js').CITIES;
-    ALLCITIES.set(value, list);
-})
-Object.keys(CONSTANTS.SPECIALS).forEach(function(value) {
+Object.keys(MAPS).forEach(function(value) {
     let list = requireFunc('../public/' + value.toLowerCase().replace(/ /g, "").replace(".", "") + 'cities.js').CITIES;
     ALLCITIES.set(value, list);
 })
@@ -44,6 +41,11 @@ const randomCity = (citysrc, blacklist) => {
 const blacklistEntireString = (citysrc) => {
     return citysrc == CONSTANTS.TRIVIA || citysrc == "Vatican City" || citysrc == "Antarctica";
 }
+
+const isSpecial = (citysrc) => {
+    return MAPS[citysrc]['leader'] !== undefined
+}
+
 // Include the admin field when displaying city/country string to player
 const includeAdmin = (target, citysrc) => {
     return (target['country'] === 'United States' ||
@@ -57,7 +59,7 @@ const includeAdmin = (target, citysrc) => {
             target['country'] === 'Russia' ||
             target['country'] === 'Indonesia' ||
             target['country'] === 'Brazil' ||
-            Object.keys(CONSTANTS.SPECIALS).indexOf(citysrc) !== -1) &&
+            isSpecial(citysrc)) &&
         !blacklistEntireString(citysrc)
 
 };
@@ -113,7 +115,7 @@ const requireUniqueAdmin = (citysrc, target) => {
         return true
     } else if (blacklistEntireString(citysrc)) {
         return false
-    } else if (Object.keys(CONSTANTS.SPECIALS).indexOf(citysrc) !== -1) {
+    } else if (isSpecial(citysrc)) {
         return true
     }
     // else if (citysrc === CONSTANTS.OCEANIA && target['country'] === 'Australia') {return true}
@@ -129,7 +131,7 @@ const uniqueInBlacklist = (citysrc, target, blacklist) => {
 const mercDist = (map, row1, col1, row2, col2) => {
     const row_err = Math.pow(row1 - row2, 2);
     let col_err = Math.min(Math.pow(col1 - col2, 2), Math.pow(col1 - col2 + CONSTANTS.MAP_WIDTH, 2), Math.pow(col1 - col2 - CONSTANTS.MAP_WIDTH, 2));
-    if (map === CONSTANTS.NAMERICA || map === CONSTANTS.EUROPE || map === CONSTANTS.AFRICA || map === CONSTANTS.SAMERICA || map === CONSTANTS.ASIA || map === CONSTANTS.OCEANIA || Object.keys(CONSTANTS.SPECIALS).indexOf(map) !== -1) { // No wrap
+    if (map === CONSTANTS.NAMERICA || map === CONSTANTS.EUROPE || map === CONSTANTS.AFRICA || map === CONSTANTS.SAMERICA || map === CONSTANTS.ASIA || map === CONSTANTS.OCEANIA || isSpecial(map)) { // No wrap
         col_err = Math.pow(col1 - col2, 2);
     }
     return Math.sqrt(row_err + col_err);
@@ -146,17 +148,14 @@ const calcGeoDist = (lat1, lon1, lat2, lon2) => {
 
 const score = (map, geoDist, mercDist, timeBonus) => {
     // Scale geoDist based on the length of the map's diagonal
-    var bounds;
-    if (Object.keys(CONSTANTS.CLASSICS).indexOf(map) !== -1)
-        bounds = CONSTANTS.CLASSICS[map]["coords"];
-    else
-        bounds = CONSTANTS.SPECIALS[map]["coords"];
+    console.assert(Object.keys(MAPS).indexOf(map) !== -1, "Error calculating score for " + map);
+    var bounds = MAPS[map]["coords"];
 
     let min_lon = bounds[0];
     let max_lon = bounds[1];
     let max_lat = bounds[2];
     let min_lat = bounds[3];
-    let world_bounds = CONSTANTS.CLASSICS[CONSTANTS.WORLD]["coords"];
+    let world_bounds = MAPS[CONSTANTS.WORLD]["coords"];
     let world_min_lon = world_bounds[0];
     let world_max_lon = world_bounds[1];
     let world_max_lat = world_bounds[2];
@@ -169,7 +168,7 @@ const score = (map, geoDist, mercDist, timeBonus) => {
     } else {
         let fudge_factor = 1
         // Tiny maps need slightly different math
-        if (Object.keys(CONSTANTS.SPECIALS).indexOf(map) !== -1)
+        if (isSpecial(map))
             fudge_factor = 2.5;
         if (map == "Vatican City")
             fudge_factor = 30;
@@ -195,11 +194,8 @@ const score = (map, geoDist, mercDist, timeBonus) => {
 };
 
 const pixelToGeo = (map, row, col) => {
-    var bounds;
-    if (Object.keys(CONSTANTS.CLASSICS).indexOf(map) !== -1)
-        bounds = CONSTANTS.CLASSICS[map]["coords"];
-    else
-        bounds = CONSTANTS.SPECIALS[map]["coords"];
+    console.assert(Object.keys(MAPS).indexOf(map) !== -1, "Error calculating score for " + map);
+    var bounds = MAPS[map]["coords"];
 
     let min_lon = bounds[0];
     let max_lon = bounds[1];
@@ -246,11 +242,8 @@ const pixelToGeo = (map, row, col) => {
 };
 
 const geoToPixel = (map, lat, lon) => {
-    var bounds;
-    if (Object.keys(CONSTANTS.CLASSICS).indexOf(map) !== -1)
-        bounds = CONSTANTS.CLASSICS[map]["coords"];
-    else
-        bounds = CONSTANTS.SPECIALS[map]["coords"];
+    console.assert(Object.keys(MAPS).indexOf(map) !== -1, "Error calculating score for " + map);
+    var bounds = MAPS[map]["coords"];
 
     let min_lon = bounds[0];
     let max_lon = bounds[1];
@@ -310,4 +303,5 @@ module.exports = {
     stringifyTarget,
     blacklistEntireString,
     stringifyTargetAscii,
+    isSpecial
 }

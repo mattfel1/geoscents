@@ -15,6 +15,7 @@ const Chat = require('./chat.js');
 const MapPanel = require('./map.js');
 const History = require('./history.js');
 const CONSTANTS = require('../resources/constants.js');
+const MAPS = require('../resources/maps.json')
 
 var myMap = CONSTANTS.LOBBY;
 var myCitysrc = CONSTANTS.LOBBY;
@@ -38,19 +39,18 @@ document.documentElement.style.zoom = 1;
 let dropdown = window.document.getElementById('requestedCitysrc')
 let options = [];
 let special_options = [];
-Object.keys(CONSTANTS.CLASSICS).forEach(function(value) {
+Object.keys(MAPS).forEach(function(value) {
     var entry = document.createElement("option");
     entry.value = value;
-    entry.text = value
-    options.push(entry)
+    if (MAPS[value]['leader'] === undefined) {
+        entry.text = value
+        options.push(entry)
+    } else {
+        entry.text = "* " + value
+        special_options.push(entry)
+    }
 })
 
-Object.keys(CONSTANTS.SPECIALS).forEach(function(value) {
-    var entry = document.createElement("option");
-    entry.value = value;
-    entry.text = "* " + value
-    special_options.push(entry)
-})
 options.sort((a, b) => {
     return a.text.localeCompare(b.text)
 });

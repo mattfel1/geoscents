@@ -1,0 +1,350 @@
+{
+    "Africa": {
+        "coords": [-60, 82, -36.3, 41.0],
+        "flair": "🌍"
+    },
+    "Asia": {
+        "coords": [25, 158, -1, 61.05],
+        "flair": "🌏"
+    },
+    "Europe": {
+        "coords": [-36.3, 52, 35.0, 66.3],
+        "flair": "🇪🇺"
+    },
+    "N. America": {
+        "coords": [-141, -43, 10.0, 56.0],
+        "flair": "🏞️"
+    },
+    "Oceania": {
+        "coords": [92, 252, -54.55, 28],
+        "flair": "🌊"
+    },
+    "S. America": {
+        "coords": [-140, 17, -56.0, 24.1],
+        "flair": "🌎"
+    },
+    "Trivia": {
+        "coords": [-180, 180, -56.0, 80.85],
+        "flair": "🧠"
+    },
+    "World Capitals": {
+        "coords": [-180, 180, -65.5, 77.2],
+        "flair": "🗺️"
+    },
+    "World": {
+        "coords": [-180, 180, -65.5, 77.2],
+        "flair": "🌐"
+    },
+    "Afghanistan": {
+        "leader": "Akhund",
+        "greeting": "سلام (Salâm)/ښه راغلاست (Kha Raghlast)",
+        "coords": [56, 78.65, 29, 40],
+        "flair": "🇦🇫"
+    },
+    "Antarctica": {
+        "leader": "Penguin",
+        "greeting": "Bonvenon",
+        "coords": [-180, 180, -90, -52],
+        "flair": "🐧"
+    },
+    "Argentina": {
+        "leader": "Fernandez",
+        "greeting": "Bienvenido",
+        "coords": [-102, -20, -56.5, -20],
+        "flair": "🇦🇷"
+    },
+    "Australia": {
+        "leader": "Albanese",
+        "greeting": "Welcome",
+        "coords": [97, 170, -45.5, -8],
+        "flair": "🦘"
+    },
+    "Bolivia": {
+        "leader": "Arce",
+        "greeting": "Bienvenido/Jallallt'atapxtawa/Imaynallan",
+        "coords": [-79, -49.05, -24, -7],
+        "flair": "🇧🇴"
+    },
+    "Brazil": {
+        "leader": "Bolsonaro",
+        "greeting": "Receber",
+        "coords": [-91.7, -17, -34, 8],
+        "flair": "🇧🇷"
+    },
+    "Canada": {
+        "leader": "Trudeau",
+        "greeting": "Welcome/Bienvenue",
+        "coords": [-152.1, -40, 38, 72.5],
+        "flair": "🍁"
+    },
+    "China": {
+        "leader": "Xi",
+        "greeting": "欢迎光临 (Huānyíng guānglín)",
+        "coords": [62, 148, 16.85, 56],
+        "flair": "🐼"
+    },
+    "Colombia": {
+        "leader": "Petro",
+        "greeting": "Bienvenido",
+        "coords": [-90, -55.9, -5, 15],
+        "flair": "🇨🇴"
+    },
+    "Democratic Republic of the Congo": {
+        "leader": "Tshisekedi",
+        "greeting": "Bienvenue/Boyei malamu/Karibu",
+        "coords": [3.53, 41, -14, 8],
+        "flair": "🇨🇩"
+    },
+    "Egypt": {
+        "leader": "el-Sisi",
+        "greeting": "أهلا بك (Ahlan bik)",
+        "coords": [16.5, 41.7, 20.81, 34],
+        "flair": "🇪🇬"
+    },
+    "Estonia": {
+        "leader": "Karis",
+        "greeting": "Tere tulemast",
+        "coords": [20, 30, 56.92, 60],
+        "flair": "🇪🇪"
+    },
+    "France": {
+        "leader": "Macron",
+        "greeting": "Bienvenue",
+        "coords": [-10.2, 17, 41, 52],
+        "flair": "🥐"
+    },
+    "Germany": {
+        "leader": "Scholz",
+        "greeting": "Willkommen",
+        "coords": [-2.1, 23, 46.8, 56],
+        "flair": "🇩🇪"
+    },
+    "Greater Antilles": {
+        "leader": "Atabey",
+        "greeting": "Akeyi/Bienvenido",
+        "coords": [-85.4, -64.5, 14.43, 26],
+        "flair": "🐠"
+    },
+    "India": {
+        "leader": "Modi",
+        "greeting": "Welcome/स्वागत हे(svaagat he)",
+        "coords": [50, 107.3, 6, 37],
+        "flair": "🇮🇳"
+    },
+    "Indonesia": {
+        "leader": "Widodo",
+        "greeting": "Selamat datang",
+        "coords": [84.5, 151, -23.5, 15],
+        "flair": "🇮🇩"
+    },
+    "Iran": {
+        "leader": "Raisi",
+        "greeting": "خوش آمدی (xoš âmadi)",
+        "coords": [36, 72.6, 24, 42],
+        "flair": "🇮🇷"
+    },
+    "Italy": {
+        "leader": "Mattarella",
+        "greeting": "Benvenuto",
+        "coords": [-2.1, 25.4, 36, 48],
+        "flair": "🤌"
+    },
+    "Japan": {
+        "leader": "Kishida",
+        "greeting": "いらっしゃいませ (irasshaimase)",
+        "coords": [110, 164.5, 23.5, 49],
+        "flair": "🗻"
+    },
+    "Kazakhstan": {
+        "leader": "Tokayev",
+        "greeting": "Сәлеметсіз бе (Sälemetsiz be)",
+        "coords": [42.8, 90, 40, 58],
+        "flair": "🇰🇿"
+    },
+    "Kenya": {
+        "leader": "Kenyatta",
+        "greeting": "Karibu/Welcome",
+        "coords": [30, 49, -5.33, 5.9],
+        "flair": "🇰🇪"
+    },
+    "Kyrgyzstan": {
+        "leader": "Japarov",
+        "greeting": "Кош келдиңиз (Koş keldiŋiz)",
+        "coords": [68.6, 81, 38.5, 44],
+        "flair": "🇰🇬"
+    },
+    "Latvia": {
+        "leader": "Levits",
+        "greeting": "Laipni lūdzam",
+        "coords": [20, 30, 55.285, 58.5],
+        "flair": "🇱🇻"
+    },
+    "Lesser Antilles": {
+        "leader": "Yúcahu",
+        "greeting": "Welcome",
+        "coords": [-74, -56.47, 10, 20],
+        "flair": "🏝️"
+    },
+    "Lithuania": {
+        "leader": "Nauseda",
+        "greeting": "Sveiki",
+        "coords": [18.43, 28, 53.8, 57],
+        "flair": "🇱🇹"
+    },
+    "Mexico": {
+        "leader": "AMLO",
+        "greeting": "Bienvenido",
+        "coords": [-120, -80, 13.61, 35],
+        "flair": "🇲🇽"
+    },
+    "Morocco": {
+        "leader": "Akhannouch",
+        "greeting": "أهلا بك (Ahlan bik)",
+        "coords": [-25, 10, 20.03, 38],
+        "flair": "🇲🇦"
+    },
+    "New Zealand": {
+        "leader": "Ardern",
+        "greeting": "Kia ora/Welcome",
+        "coords": [151, 190.4, -49, -31.4],
+        "flair": "🥝"
+    },
+    "Nigeria": {
+        "leader": "Buhari",
+        "greeting": "Welcome",
+        "coords": [-2.48, 19, 3.5, 16],
+        "flair": "🇳🇬"
+    },
+    "Pakistan": {
+        "leader": "Alvi",
+        "greeting": "خوش آمدید (Khush Amdeed)/Welcome",
+        "coords": [52.25, 84, 23, 39],
+        "flair": "🇵🇰"
+    },
+    "Paraguay": {
+        "leader": "Benítez",
+        "greeting": "Bienvenido/Maiteí",
+        "coords": [-69.1, -47, -29, -17],
+        "flair": "🇵🇾"
+    },
+    "Peru": {
+        "leader": "Castillo",
+        "greeting": "Bienvenido/Jallallt'atapxtawa/Imaynallan",
+        "coords": [-92, -55, -19.5, 2],
+        "flair": "🇵🇪"
+    },
+    "Philippines": {
+        "leader": "Bongbong",
+        "greeting": "Maligayang Pagdating",
+        "coords": [105, 140, 2, 22.15],
+        "flair": "🇵🇭"
+    },
+    "Portugal": {
+        "leader": "de Sousa",
+        "greeting": "Receber",
+        "coords": [-14.34, 0, 36.5, 43],
+        "flair": "🇵🇹"
+    },
+    "Romania": {
+        "leader": "Iohannis",
+        "greeting": "Bine ati venit",
+        "coords": [18.8, 33.7, 43, 49],
+        "flair": "🇷🇴"
+    },
+    "Saudi Arabia": {
+        "leader": "Salman",
+        "greeting": "أهلا بك (Ahlan bik)",
+        "coords": [23.8, 63.5, 15, 36],
+        "flair": "🇸🇦"
+    },
+    "South Africa": {
+        "leader": "Ramaphosa",
+        "greeting": "Siyakwamukela/Wamkelekile/Welkom",
+        "coords": [9, 37, -35.51, -21],
+        "flair": "🇿🇦"
+    },
+    "South Korea": {
+        "leader": "Yoon",
+        "greeting": "환영하다 (hwan-yeonghada)",
+        "coords": [121, 135.75, 33, 40],
+        "flair": "🇰🇷"
+    },
+    "Spain": {
+        "leader": "Sánchez",
+        "greeting": "Bienvenido",
+        "coords": [-14.18, 8, 35, 45],
+        "flair": "🇪🇸"
+    },
+    "Switzerland": {
+        "leader": "Cassis",
+        "greeting": "Willkommen/Bienvenue/Benvenuto/Bainvegni",
+        "coords": [4, 12.66, 45, 48.5],
+        "flair": "🇨🇭"
+    },
+    "Tajikistan": {
+        "leader": "Rahmon",
+        "greeting": "хуш омадед (xuş omaded)",
+        "coords": [64.9, 78, 36, 42],
+        "flair": "🇹🇯"
+    },
+    "Turkey": {
+        "leader": "Erdoğan",
+        "greeting": "مرحبا‎ (Merhaba)",
+        "coords": [22, 48, 33.14, 45],
+        "flair": "🦃"
+    },
+    "Turkmenistan": {
+        "leader": "Berdimuhamedow",
+        "greeting": "Koş geldiniz",
+        "coords": [50, 72, 34, 44.06],
+        "flair": "🇹🇲"
+    },
+    "Ukraine": {
+        "leader": "Zelensky",
+        "welcome": "ласкав;о просимо (laskavo prosymo)",
+        "coords": [17.4, 45.3, 43.18, 54],
+        "flair": "🇺🇦"
+    },
+    "United Kingdom": {
+        "leader": "Johnson",
+        "greeting": "Welcome",
+        "coords": [-19.55, 15, 49.5, 61],
+        "flair": "🇬🇧"
+    },
+    "United States": {
+        "leader": "Biden",
+        "greeting": "Welcome",
+        "coords": [-130, -60, 22, 53.7],
+        "flair": "🦅"
+    },
+    "Uruguay": {
+        "leader": "Pou",
+        "greeting": "Bienvenido",
+        "coords": [-61.98, -48, -35.5, -28.5],
+        "flair": "🇺🇾"
+    },
+    "Uzbekistan": {
+        "leader": "Mirziyoyev",
+        "greeting": "xush kelibsiz",
+        "coords": [52, 78, 36, 47.41],
+        "flair": "🇺🇿"
+    },
+    "Vatican City": {
+        "leader": "Bertello",
+        "greeting": "Benvenuto",
+        "coords": [12.440, 12.4605, 41.899, 41.908],
+        "flair": "🇻🇦"
+    },
+    "Venezuela": {
+        "leader": "Maduro",
+        "greeting": "Bienvenido",
+        "coords": [-79.3, -52, -1, 15],
+        "flair": "🇻🇪"
+    },
+    "Vietnam": {
+        "leader": "Nguyen",
+        "greeting": "Hoan Nghênh",
+        "coords": [90, 120.1, 8, 25],
+        "flair": "🇻🇳"
+    }
+}

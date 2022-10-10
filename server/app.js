@@ -1,6 +1,7 @@
 /** Top level file for handling connections, messages, and dispatching the game FSM */
 
 const Geography = require('./geography.js');
+const MAPS = require('../resources/maps.json')
 const crypto = require('crypto'),
     fs = require("fs"),
     http = require("http");
@@ -149,6 +150,14 @@ app.get('/resources/maps/*.png', (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.sendFile(path.join(__dirname, '..', 'resources/maps/' + wildcard + '.png'));
 });
+app.get('/resources/constants.js', (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.sendFile(path.join(__dirname, '..', 'resources/constants.js'));
+});
+app.get('/resources/maps.json', (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.sendFile(path.join(__dirname, '..', 'resources/maps.json'));
+});
 app.get('/resources/images/*.svg', (req, res, next) => {
     const wildcard = req.params['0'];
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -218,10 +227,17 @@ const calculate_special = () => {
     var diff = now - start;
     var oneDay = 1000 * 60 * 60 * 24;
     var day = Math.floor(diff / oneDay) + 2;
+    let num_specials = 0
+    let num_classics = 0
+    for (const x in MAPS) {
+        if (Geography.isSpecial(x))
+            num_specials = num_specials + 1
+        else
+            num_classics = num_classics + 1
+    }
 
     // We want day % num_specials to be our new special_idx, but this is not stable when num_specials grows.
     // To be more stable, we upcast num_specials to the nearest multiple of 20 and mod by that.  Then mod by num_specials.
-    let num_specials = Object.keys(CONSTANTS.SPECIALS).length;
     let upcast_num_specials = (Math.round(num_specials / 20) + 1) * 20
     let raw_idx = (day % upcast_num_specials) % num_specials;
 
@@ -242,11 +258,12 @@ const calculate_special = () => {
     // Plus 6 to match country the day this was implemented
     let idx = (6 + mult * raw_idx) % num_specials;
 
-    return idx;
+    // Assume classics always come first
+    return idx + num_classics;
 }
 
 let special_idx = calculate_special();
-let special = Object.keys(CONSTANTS.SPECIALS)[special_idx];
+let special = Object.keys(MAPS)[special_idx];
 
 // Game state info
 // map, roomName, citysrc
@@ -610,7 +627,7 @@ io.on('connection', (socket) => {
             var join_msg = "[ <font color='" + rooms[roomName].getPlayerColor(socket) + "'><b>" + rooms[roomName].getPlayerRawName(socket) + "</b> has joined " + roomName + "!</font> ]<br>";
             io.sockets.emit("update messages", roomName, join_msg);
             if (roomName == CONSTANTS.TRIVIA) rooms[roomName].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items or complain about current items by typing a message starting with /feedback!</i><br>", function() {});
-            if (roomName == CONSTANTS.SPECIAL) rooms[CONSTANTS.SPECIAL].whisperMessage(socket, "<i><b>" + CONSTANTS.SPECIALS[special]["greeting"] + "</b>! Today's special country is <b>" + special + "</b>!</i><br>", function() {});
+            if (roomName == CONSTANTS.SPECIAL) rooms[CONSTANTS.SPECIAL].whisperMessage(socket, "<i><b>" + MAPS[special]["greeting"] + "</b>! Today's special country is <b>" + special + "</b>!</i><br>", function() {});
             if (roomName == CONSTANTS.WORLD_CAPITALS) rooms[roomName].whisperMessage(socket, "<i>Welcome to the World Capitals map!  This map no longer includes province and state capitals of the largest countries (i.e. Canada, USA, China, India, and Australia).  Let me know if you think this is better or worse by leaving /feedback!</i><br>", function() {});
             io.sockets.emit('update counts', {
                 [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
@@ -641,7 +658,7 @@ io.on('connection', (socket) => {
     });
     socket.on('moveToPrivate', (askcitysrc, code) => {
         // Verify asked citysrc is valid
-        let unrecognized_citysrc = Object.keys(CONSTANTS.CLASSICS).indexOf(askcitysrc) === -1 && Object.keys(CONSTANTS.SPECIALS).indexOf(askcitysrc) === -1
+        let unrecognized_citysrc = Object.keys(MAPS).indexOf(askcitysrc) === -1
         if (unrecognized_citysrc) {
             Object.values(rooms).forEach(function(room) {
                 if (room.hasPlayer(socket)) {
@@ -693,7 +710,7 @@ io.on('connection', (socket) => {
                 var leave_msg = "[ <font color='" + rooms[originRoomName].getPlayerColor(socket) + "'><b>" + rooms[originRoomName].getPlayerRawName(socket) + "</b> has changed the map to " + askcitysrc + "!</font> ]<br>";
                 io.sockets.emit("update messages", originRoomName, leave_msg);
                 let citysrc = askcitysrc;
-                if (Object.keys(CONSTANTS.SPECIALS).indexOf(citysrc) !== -1) rooms[dest].whisperMessage(socket, "<i><b>" + CONSTANTS.SPECIALS[citysrc]["greeting"] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
+                if (Geography.isSpecial(citysrc)) rooms[dest].whisperMessage(socket, "<i><b>" + MAPS[citysrc]["greeting"] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
                 rooms[dest].map = map;
                 rooms[dest].citysrc = citysrc;
                 rooms[dest].reset();
@@ -720,7 +737,7 @@ io.on('connection', (socket) => {
                 socket.emit('update messages', dest, PRIVATE_MESSAGE);
                 rooms[dest].addPlayer(socket, info);
                 playerRooms.set(socket.id, rooms[dest]);
-                if (Object.keys(CONSTANTS.SPECIALS).indexOf(citysrc) !== -1) rooms[dest].whisperMessage(socket, "<i><b>" + CONSTANTS.SPECIALS[citysrc]["greeting"] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
+                if (Geography.isSpecial(citysrc)) rooms[dest].whisperMessage(socket, "<i><b>" + MAPS[citysrc]["greeting"] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
                 var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'><b>" + rooms[dest].getPlayerName(socket) + "</b> has joined " + dest + "!</font> ]<br>";
                 io.sockets.emit("update messages", dest, join_msg);
                 // if (dest == CONSTANTS.TRIVIA) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
@@ -939,7 +956,7 @@ setInterval(() => {
     // Get new special
     if (reset_now) {
         special_idx = calculate_special();
-        special = Object.keys(CONSTANTS.SPECIALS)[special_idx];
+        special = MAPS[special_idx];
         Object.values(rooms).forEach(function(room) {
             room.flushRecords(week, month, year);
             if (room.roomName == CONSTANTS.SPECIAL) {
