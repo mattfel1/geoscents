@@ -956,7 +956,7 @@ setInterval(() => {
     // Get new special
     if (reset_now) {
         special_idx = calculate_special();
-        special = MAPS[special_idx];
+        special = Object.keys(MAPS)[special_idx];
         Object.values(rooms).forEach(function(room) {
             room.flushRecords(week, month, year);
             if (room.roomName == CONSTANTS.SPECIAL) {
