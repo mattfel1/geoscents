@@ -3993,8 +3993,8 @@ module.exports = {
             "id": 1036951388
         },
         {
-            "city": "Macetown",
-            "city_ascii": "Macetown",
+            "city": "Queenstown",
+            "city_ascii": "Queenstown",
             "lat": -45.0227,
             "lng": 168.7251,
             "country": "New Zealand",
