@@ -117,6 +117,58 @@ module.exports = {
             "id": 1417201811
         },
         {
+            "city": "Kara-K\u00f6l",
+            "city_ascii": "Kara-Kol",
+            "lat": 41.631111,
+            "lng": 72.668611,
+            "country": "Kyrgyzstan",
+            "iso2": "KG",
+            "iso3": "KGZ",
+            "admin_name": "Jalal-Abad",
+            "capital": "",
+            "population": 22050,
+            "id": 1417201812
+        },
+        {
+            "city": "K\u00f6k-Janggak",
+            "city_ascii": "Kok-Janggak",
+            "lat": 41.033333,
+            "lng": 73.2,
+            "country": "Kyrgyzstan",
+            "iso2": "KG",
+            "iso3": "KGZ",
+            "admin_name": "Jalal-Abad",
+            "capital": "",
+            "population": 11786,
+            "id": 1417201813
+        },
+        {
+            "city": "Kyzyl-Kyya",
+            "city_ascii": "Kyzyl-Kyya",
+            "lat": 40.261111,
+            "lng": 72.130556,
+            "country": "Kyrgyzstan",
+            "iso2": "KG",
+            "iso3": "KGZ",
+            "admin_name": "Batken",
+            "capital": "",
+            "population": 40309,
+            "id": 1417201814
+        },
+        {
+            "city": "Mayluu-Suu",
+            "city_ascii": "Mayluu-Suu",
+            "lat": 41.245748,
+            "lng": 72.448039,
+            "country": "Kyrgyzstan",
+            "iso2": "KG",
+            "iso3": "KGZ",
+            "admin_name": "Jalal-Abad",
+            "capital": "",
+            "population": 22347,
+            "id": 1417201815
+        },
+        {
             "city": "Balykchy",
             "city_ascii": "Balykchy",
             "lat": 42.456,
