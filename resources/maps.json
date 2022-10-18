@@ -301,7 +301,7 @@
     },
     "Ukraine": {
         "leader": "Zelensky",
-        "welcome": "ласкав;о просимо (laskavo prosymo)",
+        "welcome": "ласкаво просимо (laskavo prosymo)",
         "coords": [17.4, 45.3, 43.18, 54],
         "flair": "🇺🇦"
     },
@@ -340,6 +340,48 @@
         "greeting": "Bienvenido",
         "coords": [-79.3, -52, -1, 15],
         "flair": "🇻🇪"
+    },
+    "Bangladesh": {
+        "leader": "Hamid",
+        "greeting": "স্বাগত (Sbāgata)",
+        "coords": [84.03, 97, 20.5, 27.5],
+        "flair": "🇧🇩"
+    },
+    "Cambodia": {
+        "leader": "Sen",
+        "greeting": "ស្វាគមន៍ (svakom)",
+        "coords": [100.47, 110, 10, 15.5],
+        "flair": "🇰🇭"
+    },
+    "Cameroon": {
+        "leader": "Biya",
+        "greeting": "Bienvenue/Welcome",
+        "coords": [0, 23.95, 1, 15],
+        "flair": "🇨🇲"
+    },
+    "Niger": {
+        "leader": "Bazoum",
+        "greeting": "Bienvenue/Welcome",
+        "coords": [-3.9, 21.05, 11, 25],
+        "flair": "🇳🇪"
+    },
+    "Chad": {
+        "leader": "Déby",
+        "greeting": "أهلا بك (Ahlan bik)/Bienvenue",
+        "coords": [2, 33.8, 7, 25],
+        "flair": "🇹🇩"
+    },
+    "Central African Republic": {
+        "leader": "Touadéra",
+        "greeting": "Nzoni gango/Bienvenue",
+        "coords": [11.78, 29, 2.1, 12.2],
+        "flair": "🇨🇫"
+    },
+    "Mali": {
+        "leader": "Maïga",
+        "greeting": "Bienvenue",
+        "coords": [-19, 11.37, 9.5, 26.5],
+        "flair": "🇲🇱"
     },
     "Vietnam": {
         "leader": "Nguyen",
