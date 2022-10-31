@@ -72,7 +72,7 @@
         "flair": "🇧🇴"
     },
     "Brazil": {
-        "leader": "Bolsonaro",
+        "leader": "Lula",
         "greeting": "Receber",
         "coords": [-91.7, -17, -34, 8],
         "flair": "🇧🇷"
@@ -136,6 +136,12 @@
         "greeting": "Tere tulemast",
         "coords": [20, 30, 56.92, 60],
         "flair": "🇪🇪"
+    },
+    "Ethiopia": {
+        "leader": "Zewde",
+        "greeting": "እንኳን ደህና መጣህ (inikwani dehina met'ahi)/soo dhawoow/nagayna sin amol tanay/baga nagaan dhufte",
+        "coords": [28, 53.85, 3, 18],
+        "flair": "🇪🇹"
     },
     "France": {
         "leader": "Macron",
@@ -293,6 +299,12 @@
         "coords": [18.8, 33.7, 43, 49],
         "flair": "🇷🇴"
     },
+    "Russia": {
+        "leader": "Putin",
+        "greeting": "добро пожаловать (dobro pozhalovat')",
+        "coords": [19, 190, 31.5, 79],
+        "flair": "🪆"
+    },
     "Saudi Arabia": {
         "leader": "Salman",
         "greeting": "أهلا بك (Ahlan bik)",
@@ -328,6 +340,18 @@
         "greeting": "хуш омадед (xuş omaded)",
         "coords": [64.9, 78, 36, 42],
         "flair": "🇹🇯"
+    },
+    "Tanzania": {
+        "leader": "Hassan",
+        "greeting": "Karibu/Welcome",
+        "coords": [24, 45, -12, 0.35],
+        "flair": "🇹🇿"
+    },
+    "Thailand": {
+        "leader": "Chan-o-cha",
+        "greeting": "ยินดีต้อนรับ (Yindī t̂xnrạb)",
+        "coords": [87, 116.65, 5, 22],
+        "flair": "🇹🇭"
     },
     "Turkey": {
         "leader": "Erdoğan",
