@@ -39,14 +39,20 @@ document.documentElement.style.zoom = 1;
 let dropdown = window.document.getElementById('requestedCitysrc')
 let options = [];
 let special_options = [];
+// Add main maps first, then specific maps
 Object.keys(MAPS).forEach(function(value) {
     var entry = document.createElement("option");
     entry.value = value;
     if (MAPS[value]['leader'] === undefined) {
         entry.text = value
         options.push(entry)
-    } else {
-        entry.text = "* " + value
+    }
+})
+Object.keys(MAPS).forEach(function(value) {
+    var entry = document.createElement("option");
+    entry.value = value;
+    if (MAPS[value]['leader'] !== undefined) {
+        entry.text = value
         special_options.push(entry)
     }
 })

@@ -61,7 +61,7 @@ class PrivatePopup {
         $("form#code").off().submit(function(e) {
             e.preventDefault();
             var code = $(this).find("#selected_code").val();
-            var requestedCitysrc = $(this).find("#requestedCitysrc").val();
+            var requestedCitysrc = $(this).find("#requestedCitysrc_choice").val();
             goToRoom({
                 'code': code,
                 'requestedCitysrc': requestedCitysrc

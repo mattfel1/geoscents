@@ -53,11 +53,11 @@
                 <td style="text-align:center;padding: 8px;width:auto">
                     <div id="maptitle">Choose / change map</div>
 
-
-                    <select id="requestedCitysrc">
+                    <input type="text" list="requestedCitysrc" id="requestedCitysrc_choice" />
+                    <datalist id="requestedCitysrc">
                         <option value="Random">Random</option>
                         <!-- To be filled in by client.js -->
-                    </select>
+                    </datalist>
                     <script type="text/javascript">
                         document.getElementById('requestedCitysrc').value = "<?php echo $_GET['requestedCitysrc'];?>";
                         if (document.getElementById('requestedCitysrc').value.length == 0) document.getElementById('requestedCitysrc').value = "Random"
