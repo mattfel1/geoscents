@@ -24,7 +24,7 @@
         "flair": "🌎"
     },
     "Trivia": {
-        "coords": [-180, 180, -56.0, 80.85],
+        "coords": [-180, 180, -55.1, 81.05],
         "flair": "🧠"
     },
     "World Capitals": {
@@ -40,6 +40,12 @@
         "greeting": "سلام (Salâm)/ښه راغلاست (Kha Raghlast)",
         "coords": [56, 78.65, 29, 40],
         "flair": "🇦🇫"
+    },
+    "Algeria": {
+        "leader": "Tebboune",
+        "greeting": "أهلا بك (Ahlan bik)/Azul",
+        "coords": [-17.8, 23, 18, 39],
+        "flair": "🇩🇿"
     },
     "Antarctica": {
         "leader": "Penguin",
@@ -179,6 +185,12 @@
         "coords": [36, 72.6, 24, 42],
         "flair": "🇮🇷"
     },
+    "Iraq": {
+        "leader": "Rashid",
+        "greeting": "أهلا بك (Ahlan bik)/Bi xêr hatî",
+        "coords": [32.65, 53, 28.5, 38.5],
+        "flair": "🇮🇶"
+    },
     "Italy": {
         "leader": "Mattarella",
         "greeting": "Benvenuto",
@@ -241,9 +253,15 @@
     },
     "Morocco": {
         "leader": "Akhannouch",
-        "greeting": "أهلا بك (Ahlan bik)",
+        "greeting": "أهلا بك (Ahlan bik)/Azul",
         "coords": [-25, 10, 20.03, 38],
         "flair": "🇲🇦"
+    },
+    "Myanmar": {
+        "leader": "Suu Kyi",
+        "greeting": "ကြိုဆိုပါတယ်။ (kyaosopartaal)",
+        "coords": [78, 117, 8.5, 30.1],
+        "flair": "🇲🇲"
     },
     "New Zealand": {
         "leader": "Ardern",
@@ -287,6 +305,12 @@
         "coords": [105, 140, 2, 22.15],
         "flair": "🇵🇭"
     },
+    "Poland": {
+        "leader": "Duda",
+        "greeting": "Witama",
+        "coords": [8.15, 29, 48.5, 56],
+        "flair": "🇵🇱"
+    },
     "Portugal": {
         "leader": "de Sousa",
         "greeting": "Receber",
@@ -329,6 +353,12 @@
         "coords": [-14.18, 8, 35, 45],
         "flair": "🇪🇸"
     },
+    "Sudan": {
+        "leader": "Hussein",
+        "greeting": "أهلا بك (Ahlan bik)/Welcome",
+        "coords": [15, 45, 7.5, 24.5],
+        "flair": "🇸🇩"
+    },
     "Switzerland": {
         "leader": "Cassis",
         "greeting": "Willkommen/Bienvenue/Benvenuto/Bainvegni",
@@ -364,6 +394,12 @@
         "greeting": "Koş geldiniz",
         "coords": [50, 72, 34, 44.06],
         "flair": "🇹🇲"
+    },
+    "Uganda": {
+        "leader": "Museveni",
+        "welcome": "Karibu/Welcome",
+        "coords": [27, 38.335, -1.7, 5],
+        "flair": "🇺🇬"
     },
     "Ukraine": {
         "leader": "Zelensky",
