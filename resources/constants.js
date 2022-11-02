@@ -1,7 +1,6 @@
 module.exports = {
-
     // Players
-    COLORS: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#00ffff", "#ff00ff", "#808080", "#ff8080", "#80ff80", "#8080ff", "#1f77b4", "#2ca02c", "#995c00", "#9467bd", "#8c564b", "#e377c2", "#adad1f", "#17becf"],
+    COLORS: ["#FF0000", "#FF8080", "#E377C2", "#FF00FF", "#9467BD", "#009EAF", "#00D8D8", "#6BAB6B", "#2CA02C", "#00D47B", "#8080FF", "#1F77B4", "#0000FF", "#ADAD1F", "#E0E000", "#808080", "#995C00", "#8C564B"],
     TRUTH_COLOR: 'white',
     AVERAGE_NAMES: ["Joe", "Jane", "Chump", "Dog", "Cat", "Matt", "Elyse", "Avery", "Erica", "Jimbo", "Todd", "Sammy", "Jose", "Errol", "Timmy",
         "Bojack", "Avon", "Tyrion", "Bob", "Marie", "Mohammed", "Fatima", "Pierre", "Helen", "Sebastian", "Benny", "Dwayne", "Darius", "Hugo",

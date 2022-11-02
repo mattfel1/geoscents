@@ -4955,17 +4955,17 @@ module.exports = {
             "capital": "",
             "wiki": "https://en.wikipedia.org/wiki/Yarmouth_suspension_bridge"
         },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
+        {
+          "city": "Krishna's Gigantic Butterball",
+          "city_ascii": "",
+          "lat": 12.6191,
+          "lng": 80.1923,
+          "iso2": "IN",
+          "country": "",
+          "population": 0,
+          "capital": "",
+          "wiki": "https://en.wikipedia.org/wiki/Krishna%27s_Butterball"
+        },
         // {
         //   "city": "",
         //   "city_ascii": "",
