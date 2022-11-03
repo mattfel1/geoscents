@@ -145,14 +145,14 @@ $(document).ready(function() {
     socket.on('draw timer', (time, color) => {
         commands.postTime(time, color)
     });
-    socket.on('draw prepare', (round) => {
+    socket.on('draw prepare', (map, round) => {
         betweenGames = true;
-        commands.drawCommand(" seconds until new game auto-starts...", "", "", "", round, true, false, false)
+        commands.drawCommand(" seconds until new " + map + " game auto-starts...", "", "", "", round, true, false, false)
     });
-    socket.on('draw begin', (time, round) => {
+    socket.on('draw begin', (map, time, round) => {
         betweenGames = false;
         clickedReady = false;
-        commands.drawCommand(" seconds until first round..  GET READY!", "", "", "", round, false, false, false);
+        commands.drawCommand(" seconds until first round of " + map + "..  GET READY!", "", "", "", round, false, false, false);
         if (time === CONSTANTS.BEGIN_GAME_DURATION) sounds.playGameBeginSound();
     });
     socket.on('draw guess city', (city, capital, iso2, round) => {
@@ -215,6 +215,12 @@ $(document).ready(function() {
             document.documentElement.style.MozTransformOrigin = "0 0";
         }
     });
+    socket.on("grind", function(id) {
+        if (socket.id == id) {
+            commands.grind = !commands.grind;
+            commands.setGrind(id);
+        }
+    });
     setInterval(() => {
         // Keep track of message rate.  No more than 3000 chars or 8 messages, every 5s
         // Handle spam on the client side, even though technically someone can get around this
@@ -251,7 +257,7 @@ $(document).ready(function() {
     /**** FAMER POPUP *****/
     const famerpopup = new FamerPopup(socket);
     famerpopup.hide();
-    socket.on('request famer popup', (name, color, logger, hash, public_hash, famer_emojis, cb) => {
+    socket.on('request famer popup', (name, color, logger, hash, public_hash, famer_emojis, grind, cb) => {
         // Update index with all flairs
         // TODO: This should probably be handled on the server side so it can't be edited by user
         let dropdown = window.document.getElementById('requestedFlair')
@@ -269,7 +275,7 @@ $(document).ready(function() {
         window.document.getElementById('selected_famer_name').append(name)
         window.document.getElementById('selected_famer_name').style.color = color
 
-        famerpopup.showPopup(name, color, logger, hash, public_hash)
+        famerpopup.showPopup(name, color, logger, hash, public_hash, grind)
     });
 
     /**** Map *****/

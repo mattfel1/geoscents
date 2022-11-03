@@ -368,7 +368,7 @@ io.on('connection', (socket) => {
         });
     });
 
-    socket.on('playerJoin', (newname, newcolor, newlogger, famerhash, famerpublichash, flair, callback) => {
+    socket.on('playerJoin', (newname, newcolor, newlogger, famerhash, famerpublichash, flair, grind, callback) => {
         var name = '';
         if (newname !== null) name = newname;
         var color = '';
@@ -397,7 +397,7 @@ io.on('connection', (socket) => {
         if (is_famer) {
             // famer popup will call playerJoin again with a flaired name
             callback()
-            socket.emit('request famer popup', famer_name, newcolor, newlogger, name, public_hash, Object.fromEntries(famer_emojis), callback);
+            socket.emit('request famer popup', famer_name, newcolor, newlogger, name, public_hash, Object.fromEntries(famer_emojis), grind, callback);
             return
         }
 
@@ -452,7 +452,7 @@ io.on('connection', (socket) => {
 
 
             // If player has flair now, then use the name they chose during flair selection instead of their secret hash
-            rooms[CONSTANTS.LOBBY].renamePlayer(socket, name, color, logger, famerhash, famerpublichash, flair);
+            rooms[CONSTANTS.LOBBY].renamePlayer(socket, name, color, logger, famerhash, famerpublichash, flair, grind);
             var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'><b>" + rooms[CONSTANTS.LOBBY].getPlayerName(socket) + "</b> has entered the lobby!</font> ] " + bad_msg + "<br>";
             io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
             if (famerpublichash != "") {
@@ -519,6 +519,14 @@ io.on('connection', (socket) => {
             const room = playerRooms.get(socket.id);
             room.playerReboot(socket);
         }
+    });
+    socket.on('grind', (state) => {
+        if (playerRooms.has(socket.id)) {
+            const room = playerRooms.get(socket.id);
+            room.whisperMessage(socket, "<i>Grind mode has been set to <b>" + state + "</b>.  If all players have grind mode enabled, the game will run faster!</i><br>", () => {});
+            room.grind(socket);
+        }
+        io.sockets.emit('grind', socket.id)
     });
     socket.on('bootPlayer', (socketid) => {
         if (playerRooms.has(socketid)) {
@@ -603,6 +611,7 @@ io.on('connection', (socket) => {
             const oldHash = rooms[originRoomName].getPlayerHash(socket);
             const oldPublicHash = rooms[originRoomName].getPlayerPublicHash(socket);
             const oldFlair = rooms[originRoomName].getPlayerFlair(socket);
+            const oldGrind = rooms[originRoomName].getPlayerGrind(socket);
             const info = {
                 'moved': true,
                 'color': oldColor,
@@ -612,6 +621,7 @@ io.on('connection', (socket) => {
                 'hash': oldHash,
                 'public_hash': oldPublicHash,
                 'flair': oldFlair,
+                'grind': oldGrind,
                 'optOut': oldOptOut
             }
             var leave_msg = "[ <font color='" + rooms[originRoomName].getPlayerColor(socket) + "'><b>" + rooms[originRoomName].getPlayerRawName(socket) + "</b> has left " + originRoomName + " and joined " + citysrc + "!</font> ]<br>";
@@ -696,6 +706,7 @@ io.on('connection', (socket) => {
             const oldHash = rooms[originRoomName].getPlayerHash(socket);
             const oldPublicHash = rooms[originRoomName].getPlayerPublicHash(socket);
             const oldFlair = rooms[originRoomName].getPlayerFlair(socket);
+            const oldGrind = rooms[originRoomName].getPlayerGrind(socket);
             const info = {
                 'moved': true,
                 'color': oldColor,
@@ -704,6 +715,7 @@ io.on('connection', (socket) => {
                 'hash': oldHash,
                 'public_hash': oldPublicHash,
                 'flair': oldFlair,
+                'grind': oldGrind,
                 'optOut': oldOptOut
             }
             if (originRoomName == dest) {

@@ -248,8 +248,8 @@ $(document).ready(function() {
 
 const log = (payload) => {
     const currentdate = new Date();
-    const timestamp = currentdate.getDate() + "/" +
-        (currentdate.getMonth() + 1) + "/" +
+    const timestamp = currentdate.getDate().toString().padStart(2, "0") + "/" +
+        (currentdate.getMonth() + 1).toString().padStart(2, "0") + "/" +
         currentdate.getFullYear() + " @ " +
         currentdate.getHours() + ":" +
         currentdate.getMinutes() + ":";
@@ -263,8 +263,8 @@ const log = (payload) => {
 
 const logMessage = (payload) => {
     const currentdate = new Date();
-    const timestamp = currentdate.getDate() + "/" +
-        (currentdate.getMonth() + 1) + "/" +
+    const timestamp = currentdate.getDate().toString().padStart(2, "0") + "/" +
+        (currentdate.getMonth() + 1).toString().padStart(2, "0") + "/" +
         currentdate.getFullYear() + " @ " +
         currentdate.getHours() + ":" +
         currentdate.getMinutes() + ":";
@@ -283,8 +283,8 @@ const trunc = (decimal, n = 2) => {
 
 const logFeedback = (payload) => {
     const currentdate = new Date();
-    const timestamp = currentdate.getDate() + "/" +
-        (currentdate.getMonth() + 1) + "/" +
+    const timestamp = currentdate.getDate().toString().padStart(2, "0") + "/" +
+        (currentdate.getMonth() + 1).toString().padStart(2, "0") + "/" +
         currentdate.getFullYear() + " @ " +
         currentdate.getHours() + ":" +
         currentdate.getMinutes() + ":";
@@ -599,8 +599,8 @@ const logPlayerHistory = (name, color, score, room) => {
         }
         const currentdate = new Date();
         const timestamp = currentdate.getFullYear() + "/" +
-            (currentdate.getMonth() + 1) + "/" +
-            currentdate.getDate() + " @ " +
+            (currentdate.getMonth() + 1).toString().padStart(2, "0") + "/" +
+            currentdate.getDate().toString().padStart(2, "0") + " @ " +
             currentdate.getHours() + ":" +
             currentdate.getMinutes() + " GMT";
         fs.appendFile(filebase + ".csv", "\"" + timestamp + "\",\"" + room + "\",\"" + score + "\",\"<font color=" + color + ">" + name + "</font>\",,,,,,,,,,,,,,,,,,,,,,,,,,,,\n", function(err) {
@@ -781,8 +781,8 @@ const insertHallOfFame = (hash, public_hash, player_name, map, path, score, colo
     let famers = loadHallOfFame()
     const currentdate = new Date();
     const timestamp = currentdate.getFullYear() + "/" +
-        (currentdate.getMonth() + 1) + "/" +
-        currentdate.getDate() + " @ " +
+        (currentdate.getMonth() + 1).toString().padStart(2, "0") + "/" +
+        currentdate.getDate().toString().padStart(2, "0") + " @ " +
         currentdate.getHours() + ":" +
         currentdate.getMinutes() + " GMT";
     var unixtime = Math.round(currentdate.getTime() / 1000);

@@ -9,7 +9,11 @@ class Popup {
 
     join(info, cb) {
         this.choseName = true;
-        this.socket.emit('playerJoin', info['name'], info['color'], info['logger'], "", "", "", cb);
+        var was_grind = localStorage.getItem("grind");
+        if (was_grind === "false") was_grind = false
+        else was_grind = true
+
+        this.socket.emit('playerJoin', info['name'], info['color'], info['logger'], "", "", "", was_grind, cb);
     }
     getChoseName() {
         return this.choseName;

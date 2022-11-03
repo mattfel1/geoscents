@@ -25,6 +25,7 @@ class Player {
         this.consecutiveSecondsInactive = 0;
         this.ready = '';
         this.reboot = '';
+        this.grind = false;
         this.logger = true;
         this.roomName = roomName;
         this.choseName = false;
@@ -46,7 +47,8 @@ class Player {
             this.flair = info['flair'];
             this.hash = info['hash'];
             this.public_hash = info['public_hash'];
-            this.optOut = info['optOut']
+            this.optOut = info['optOut'];
+            this.grind = info['grind'];
         }
     }
 
@@ -89,7 +91,10 @@ class Player {
         this.wins = this.wins + 1;
     }
     getName() {
-        const fullname = this.ready + this.reboot + this.name + ' ' + this.flair;
+        let axe = ''
+        if (this.grind)
+            axe = '🪓'
+        const fullname = this.ready + this.reboot + axe + this.name + ' ' + this.flair;
         return fullname;
     }
 };

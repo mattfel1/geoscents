@@ -52,6 +52,7 @@ module.exports = {
     // FSM
     REVEAL_STATE: 'reveal',
     REVEAL_DURATION: 5,
+    REVEAL_DURATION_GRIND: 2,
     GUESS_STATE: 'guess',
     GUESS_DURATION: 10,
     SETUP_STATE: 'setup',
@@ -60,6 +61,7 @@ module.exports = {
     PREPARE_GAME_DURATION: 45,
     BEGIN_GAME_STATE: 'begingame',
     BEGIN_GAME_DURATION: 5,
+    BEGIN_GAME_DURATION_GRIND: 1,
     ASK_READY_STATE: 'askready',
     LOBBY_STATE: 'lobby',
     SCROLL_THRESHOLD: 25, // Number of frames mobile user can press for that distinguishes a "click" from a "scroll"

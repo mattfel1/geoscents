@@ -276,6 +276,44 @@ input[type="range"] {
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
+.grind-btn {
+    cursor: pointer;
+    border: 1px solid #333;
+    padding: 1px 1px;
+    margin: 1px 1px;
+    font-size: 10px;
+    width: 15px;
+    background: #dddddd;
+    /* fallback */
+    background: -moz-linear-gradient(top, #dddddd 0%, #bbbbbb 4%, #999999 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #dddddd), color-stop(4%, #bbbbbb), color-stop(100%, #999999));
+    background: -webkit-linear-gradient(top, #dddddd 0%, #bbbbbb 4%, #999999 100%);
+    background: -o-linear-gradient(top, #dddddd 0%, #bbbbbb 4%, #999999 100%);
+    background: -ms-linear-gradient(top, #dddddd 0%, #bbbbbb 4%, #999999 100%);
+    background: linear-gradient(to bottom, #dddddd 0%, #bbbbbb 4%, #999999 100%);
+    border-radius: 1px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.grind-btn-clicked {
+    cursor: pointer;
+    border: 1px solid #333;
+    padding: 1px 1px;
+    margin: 1px 1px;
+    font-size: 10px;
+    width: 15px;
+    background: #dddddd;
+    /* fallback */
+    background: -moz-linear-gradient(top, #777777 0%, #555555 4%, #999999 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #777777), color-stop(4%, #555555), color-stop(100%, #999999));
+    background: -webkit-linear-gradient(top, #777777 0%, #555555 4%, #999999 100%);
+    background: -o-linear-gradient(top, #777777 0%, #555555 4%, #999999 100%);
+    background: -ms-linear-gradient(top, #777777 0%, #555555 4%, #999999 100%);
+    background: linear-gradient(to bottom, #777777 0%, #555555 4%, #999999 100%);
+    border-radius: 1px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
 .map-textures-container {}
 
 .settings-btn-container {}

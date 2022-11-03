@@ -258,7 +258,7 @@ class Room {
         } else return null;
     }
 
-    renamePlayer(socket, name, color, logger, hash, public_hash, flair) {
+    renamePlayer(socket, name, color, logger, hash, public_hash, flair, grind) {
         if (this.players.has(socket.id)) {
             if (name !== '') this.players.get(socket.id).name = name;
             if (color !== 'random') this.players.get(socket.id).color = color;
@@ -266,6 +266,7 @@ class Room {
             if (hash !== '') this.players.get(socket.id).hash = hash;
             if (public_hash !== '') this.players.get(socket.id).public_hash = public_hash;
             if (flair !== '') this.players.get(socket.id).flair = flair;
+            this.players.get(socket.id).grind = grind
             this.players.get(socket.id).choseName = true;
         }
         this.drawScorePanel(socket.id);
@@ -317,6 +318,13 @@ class Room {
             return this.players.get(socket.id).flair
         } else {
             return ''
+        }
+    }
+    getPlayerGrind(socket) {
+        if (this.players.has(socket.id)) {
+            return this.players.get(socket.id).grind
+        } else {
+            return false
         }
     }
     getPlayerHash(socket) {
@@ -404,6 +412,14 @@ class Room {
         this.drawScorePanel();
     }
 
+    grind(socket) {
+        if (this.players.has(socket.id)) {
+            const player = this.players.get(socket.id);
+            player.grind = !player.grind;
+        }
+        this.drawScorePanel();
+    }
+
     playerClicked(socket, playerClick) {
         if (this.players.has(socket.id) || socket == this.joe.id) {
             let player;
@@ -447,7 +463,10 @@ class Room {
         }
         dict['record' + position] = copy(player.score);
         dict['recordColor' + position] = copy(player.color);
-        dict['recordName' + position] = copy(player.name);
+        let display_name = player.name
+        if (player.flair !== '')
+            display_name = display_name + ' ' + player.flair
+        dict['recordName' + position] = copy(display_name);
         dict['recordBroken' + position] = true;
         if (this.clients.has(player.id)) {
             this.clients.get(player.id).emit("announce record", category, room, player.name, player.score, player.color);
@@ -959,6 +978,10 @@ class Room {
         return this.players.size > 0 && Array.from(this.players.values()).filter(player => !player.reboot).length === 0
     }
 
+    allGrind() {
+        return this.players.size > 0 && Array.from(this.players.values()).filter(player => !player.grind).length === 0
+    }
+
     onSecond(fcn) {
         if (Math.abs(Math.floor((this.timer * 1000) % 1000)) < 40) {
             fcn()
@@ -968,13 +991,14 @@ class Room {
     drawCommand(socket) {
         let capital;
         const map = this.map;
+        const citysrc = this.citysrc;
         const round = this.round;
         if (this.state === CONSTANTS.PREPARE_GAME_STATE) {
             socket.emit('fresh map', map);
-            socket.emit('draw prepare', round);
+            socket.emit('draw prepare', citysrc.toUpperCase(), round);
         } else if (this.state === CONSTANTS.BEGIN_GAME_STATE) {
             socket.emit('fresh map', map);
-            socket.emit('draw begin', this.timer, round);
+            socket.emit('draw begin', citysrc.toUpperCase(), this.timer, round);
         } else if (this.state === CONSTANTS.GUESS_STATE) {
             const thisTarget = Geography.stringifyTarget(this.target, this.citysrc);
             const citystring = thisTarget['string'];
@@ -1075,11 +1099,14 @@ class Room {
             this.bootInactive();
         } else {
             let reveal_duration = CONSTANTS.REVEAL_DURATION;
-            if (CONSTANTS.DEBUG_MODE)
-                reveal_duration = 0;
             let begin_game_duration = CONSTANTS.BEGIN_GAME_DURATION;
-            if (CONSTANTS.DEBUG_MODE)
+            if (CONSTANTS.DEBUG_MODE) {
                 begin_game_duration = 0;
+                reveal_duration = 0;
+            } else if (this.allGrind()) {
+                begin_game_duration = CONSTANTS.BEGIN_GAME_DURATION_GRIND;
+                reveal_duration = CONSTANTS.REVEAL_DURATION_GRIND;
+            }
 
             if (this.numPlayers() === 0 && this.roomName !== CONSTANTS.LOBBY) {
                 this.timerColor = CONSTANTS.LOBBY_COLOR;
@@ -1129,7 +1156,7 @@ class Room {
                     this.round = 0;
                     this.timerColor = CONSTANTS.BEGIN_COLOR;
                     Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
-                    this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, begin_game_duration - 3);
+                    this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, begin_game_duration);
                 }
                 if (this.timer <= 0 || this.allPlayersClicked()) {
                     this.updateScores();
@@ -1151,7 +1178,7 @@ class Room {
                     this.round = 0;
                     this.timerColor = CONSTANTS.BEGIN_COLOR;
                     Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
-                    this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, begin_game_duration - 2);
+                    this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, begin_game_duration);
                 }
                 // Record in the middle of the reveal_state
                 if (this.recorded == false && this.timer <= 4) {

@@ -39,7 +39,7 @@ class Commands {
             'color': 'white'
         };
         this.ready_button = {
-            x: this.canvas.width * 6 / 12,
+            x: this.canvas.width * 7 / 12,
             y: 5,
             width: 260,
             height: 30
@@ -66,6 +66,11 @@ class Commands {
         if (was_autoscaled === "false") was_autoscaled = false
         else was_autoscaled = true
         this.autoscale = was_autoscaled;
+
+        var was_grind = localStorage.getItem("grind");
+        if (was_grind === "false") was_grind = false
+        else was_grind = true
+        this.grind = was_grind;
 
         this.bottracker = [];
 
@@ -175,8 +180,6 @@ class Commands {
             str = "<font color=\"white\">(0 players)</font>"
         }
         let c = "room-btn"
-        if (special)
-            c = "special-room-btn"
         $('#commands').append($("<button class='" + c + "' id='" + id + "_button'><b>" + room + "</b> <br><font size=2>" + str + "</font></button>"))
     }
     bindClick(myRoom, room, id, socket) {
@@ -218,12 +221,15 @@ class Commands {
             muteButton = "<span class='settings-btn-container'><button class='settings-btn-clicked' id='mute_button'>Unmute</button></span>"
         $('#settings-box').append($("<span>Game Controls:</span><span>" + rebootButton + joeButton + muteButton + "</span>"));
 
-        // Add jitter and hue
+        // Add jitter, hue, and grind
         let pressedAutoscale = '';
         if (this.autoscale) pressedAutoscale = '-clicked';
         let autoscaleButton = "<span id='autoscale_button' class='settings-btn-container'><button class='settings-btn" + pressedAutoscale + "'>Autoscale</button></span>";
+        let pressedGrind = '';
+        if (this.grind) pressedGrind = '-clicked';
+        let grindButton = "<span id='grind_button' class='grind-btn-container'><button class='grind-btn" + pressedGrind + "'>🪓</button></span>";
         let hueSlider = "<div style=\"display: inline-block\" class=\"slidecontainer\"><input style=\"width: 90px\" type=\"range\" min=\"0\" max=\"360\" value=\"" + this.hueShift + "\" class=\"slider\" id=\"hue_shift\"></div>"
-        $('#settings-box').append($("<span>Display: </span><span>" + hueSlider + autoscaleButton + "</span>"));
+        $('#settings-box').append($("<span>Display: </span><span>" + hueSlider + autoscaleButton + grindButton + "</span>"));
 
 
         // Add map buttons
@@ -261,6 +267,11 @@ class Commands {
         $('#autoscale_button').bind("click", () => {
             localStorage.setItem("autoscaled", !this.autoscale);
             socket.emit('autoscale');
+            this.refocus()
+        });
+        $('#grind_button').bind("click", () => {
+            localStorage.setItem("grind", !this.grind);
+            socket.emit('grind', !this.grind);
             this.refocus()
         });
         $('#reboot_button').bind("click", () => {
@@ -348,7 +359,16 @@ class Commands {
             let pressedAutoscale = '';
             if (this.autoscale) pressedAutoscale = '-clicked';
             let autoscaleButton = "<button class='settings-btn" + pressedAutoscale + "'>Autoscale</button>";
-            $('#autoscale_button').append($(autoscaleButton + "<br>"))
+            $('#autoscale_button').append($(autoscaleButton))
+        }
+    }
+    setGrind(id) {
+        if (this.socket.id === id) {
+            $('#grind_button').empty();
+            let pressedGrind = '';
+            if (this.grind) pressedGrind = '-clicked';
+            let grindButton = "<button class='grind-btn" + pressedGrind + "'>🪓</button>";
+            $('#grind_button').append($(grindButton))
         }
     }
 
