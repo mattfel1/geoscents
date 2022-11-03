@@ -10,8 +10,8 @@ class Popup {
     join(info, cb) {
         this.choseName = true;
         var was_grind = localStorage.getItem("grind");
-        if (was_grind === "false") was_grind = false
-        else was_grind = true
+        if (was_grind === "true") was_grind = true
+        else was_grind = false
 
         this.socket.emit('playerJoin', info['name'], info['color'], info['logger'], "", "", "", was_grind, cb);
     }

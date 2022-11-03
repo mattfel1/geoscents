@@ -68,8 +68,8 @@ class Commands {
         this.autoscale = was_autoscaled;
 
         var was_grind = localStorage.getItem("grind");
-        if (was_grind === "false") was_grind = false
-        else was_grind = true
+        if (was_grind === "true") was_grind = true
+        else was_grind = false
         this.grind = was_grind;
 
         this.bottracker = [];
