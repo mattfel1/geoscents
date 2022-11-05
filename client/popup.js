@@ -13,7 +13,7 @@ class Popup {
         if (was_grind === "true") was_grind = true
         else was_grind = false
 
-        this.socket.emit('playerJoin', info['name'], info['color'], info['logger'], "", "", "", was_grind, cb);
+        this.socket.emit('playerJoin', info['name'], info['color'], info['logger'], "", "", "", was_grind, false, "", cb);
     }
     getChoseName() {
         return this.choseName;

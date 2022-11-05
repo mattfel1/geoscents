@@ -321,8 +321,8 @@ const flushGuesses = (map) => {
             return JSON.parse(JSON.stringify(x, null, 2));
         }
 
-        const tmpfile = '/scratch/' + map + '_guesses_staging';
-        const file = '/scratch/' + map + '_guesses';
+        const tmpfile = '/scratch/guesses/' + map + '_guesses_staging';
+        const file = '/scratch/guesses/' + map + '_guesses';
         if (!fs.existsSync(tmpfile)) {
             logFeedback('Staging file ' + tmpfile + ' doesnt exist!!')
             fs.writeFile(tmpfile, "", {
@@ -383,10 +383,10 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
 
         let file;
         if (staged)
-            file = '/scratch/' + map + '_guesses_staging';
+            file = '/scratch/guesses/' + map + '_guesses_staging';
         else
-            file = '/scratch/' + map + '_guesses';
-        const joefile = '/scratch/' + map + '_joe';
+            file = '/scratch/guesses/' + map + '_guesses';
+        const joefile = '/scratch/guesses/' + map + '_joe';
 
         // Ignore updates to same file if it happened less than 1 second ago, hack to prevent file corruption
         const currentdate = new Date();
@@ -562,7 +562,7 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
 
 const joeData = (map, citystring) => {
     try {
-        const file = '/scratch/' + map + '_joe';
+        const file = '/scratch/guesses/' + map + '_joe';
         history = JSON.parse(fs.readFileSync(file, 'utf8'));
         return [history[citystring]["mean_time"], history[citystring]["mean_lat"], history[citystring]["mean_lon"]];
     } catch (err) {
@@ -786,6 +786,7 @@ const insertHallOfFame = (hash, public_hash, player_name, map, path, score, colo
         currentdate.getHours() + ":" +
         currentdate.getMinutes() + " GMT";
     var unixtime = Math.round(currentdate.getTime() / 1000);
+    var perfect = score == 6600
 
     // Update hall of fame summary
     if (famers.has(hash)) {
@@ -795,6 +796,8 @@ const insertHallOfFame = (hash, public_hash, player_name, map, path, score, colo
             old['maps'].push(map)
         }
         old['last_record'] = unixtime
+        if (perfect)
+            old['perfect'] = true
         famers.set(hash, old)
     } else {
         let dict = {
@@ -803,6 +806,8 @@ const insertHallOfFame = (hash, public_hash, player_name, map, path, score, colo
             'last_record': unixtime,
             'public_hash': public_hash
         }
+        if (perfect)
+            dict['perfect'] = true
         famers.set(hash, dict)
     }
 

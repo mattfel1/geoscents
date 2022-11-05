@@ -330,20 +330,14 @@ io.on('connection', (socket) => {
         helpers.log("User connected    " + socket.handshake.address);
         socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
     });
-    socket.on('button clicked', function(btn) {
-        let name = "";
-        if (rooms[CONSTANTS.LOBBY].hasPlayer(socket)) {
-            name = rooms[CONSTANTS.LOBBY].getPlayerName(socket);
-        }
-        helpers.log('User clicked ' + btn + ' ' + socket.handshake.address + " (" + name + ")");
-    });
     socket.on('disconnect', function() {
         if (playerRooms.has(socket.id)) {
             const room = playerRooms.get(socket.id);
-            const name = room.getPlayerName(socket);
+            const info = room.exportPlayer(socket);
+            const name = info['raw_name'];
             helpers.log("User disconnected " + socket.handshake.address + ": " + name);
             if (room.playerChoseName(socket)) {
-                var leave_msg = "[ <font color='" + room.getPlayerColor(socket) + "'><b>" + room.getPlayerRawName(socket) + "</b> has exited GeoScents!</font> ]<br>";
+                var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b> has exited GeoScents!</font> ]<br>";
                 io.sockets.emit("update messages", room.roomName, leave_msg);
             }
             room.killPlayer(socket);
@@ -368,7 +362,7 @@ io.on('connection', (socket) => {
         });
     });
 
-    socket.on('playerJoin', (newname, newcolor, newlogger, famerhash, famerpublichash, flair, grind, callback) => {
+    socket.on('playerJoin', (newname, newcolor, newlogger, famerhash, famerpublichash, flair, grind, perfect, clown, callback) => {
         var name = '';
         if (newname !== null) name = newname;
         var color = '';
@@ -382,11 +376,14 @@ io.on('connection', (socket) => {
         let famer_emojis = new Map();
         let public_hash = "";
         let famer_name = "";
+        var perfect = perfect
         for (const [key, value] of famers.entries()) {
             if (key === name) {
                 console.log("Login from hall of famer hash " + name)
                 famer_countries = value['maps']
                 is_famer = true;
+                if (value['perfect'] !== undefined)
+                    perfect = value['perfect']
                 public_hash = value['public_hash']
                 famer_name = value['name']
                 Object.values(famer_countries).forEach(function(value) {
@@ -397,7 +394,7 @@ io.on('connection', (socket) => {
         if (is_famer) {
             // famer popup will call playerJoin again with a flaired name
             callback()
-            socket.emit('request famer popup', famer_name, newcolor, newlogger, name, public_hash, Object.fromEntries(famer_emojis), grind, callback);
+            socket.emit('request famer popup', famer_name, newcolor, newlogger, name, public_hash, Object.fromEntries(famer_emojis), grind, perfect, "", callback);
             return
         }
 
@@ -452,11 +449,15 @@ io.on('connection', (socket) => {
 
 
             // If player has flair now, then use the name they chose during flair selection instead of their secret hash
-            rooms[CONSTANTS.LOBBY].renamePlayer(socket, name, color, logger, famerhash, famerpublichash, flair, grind);
-            var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'><b>" + rooms[CONSTANTS.LOBBY].getPlayerName(socket) + "</b> has entered the lobby!</font> ] " + bad_msg + "<br>";
+            rooms[CONSTANTS.LOBBY].renamePlayer(socket, name, color, logger, famerhash, famerpublichash, flair, grind, perfect, clown);
+            const info = rooms[CONSTANTS.LOBBY].exportPlayer(socket)
+            var join_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has entered the lobby!</font> ] " + bad_msg + "<br>";
             io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
             if (famerpublichash != "") {
-                var join_msg = "[ <font color='" + rooms[CONSTANTS.LOBBY].getPlayerColor(socket) + "'><b>" + rooms[CONSTANTS.LOBBY].getPlayerName(socket) + "</b></font> is a hall of famer (with public hash " + famerpublichash + ")! ] " + bad_msg + "<br>";
+                var perfect_msg = ''
+                if (perfect)
+                    perfect_msg = ' WHO ACHIEVED A PERFECT SCORE ';
+                var join_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b></font> is a hall of famer " + perfect_msg + " (with public hash " + famerpublichash + ")! ] " + bad_msg + "<br>";
                 io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
             }
             // Send whispers to specific players
@@ -467,7 +468,7 @@ io.on('connection', (socket) => {
                 }
             };
 
-            if (rooms[CONSTANTS.LOBBY].getPlayerLogger(socket)) socket.emit("update messages", CONSTANTS.LOBBY, "Your player history data is available <a target=\"_blank\" href='https://geoscents.net/resources/histories/" + rooms[CONSTANTS.LOBBY].getPlayerRawName(socket).replace(/ /g, '_') + "_history.html'>here</a><br>");
+            if (info['logger']) socket.emit("update messages", CONSTANTS.LOBBY, "Your player history data is available <a target=\"_blank\" href='https://geoscents.net/resources/histories/" + info['raw_name'].replace(/ /g, '_') + "_history.html'>here</a><br>");
 
             // Specific greetings for players
             // specificGreeting(socket, name, "Doz", "<i>Thanks so much for the donation, Doz!</i><br>");
@@ -561,22 +562,23 @@ io.on('connection', (socket) => {
     socket.on('toggle joe', () => {
         if (playerRooms.has(socket.id)) {
             const room = playerRooms.get(socket.id);
+            const info = room.exportPlayer(socket);
             if (room.roomName == CONSTANTS.LOBBY) {
                 socket.emit('update messages', room.roomName, "<i>Cannot create bot in Lobby!</i><br>");
                 return;
             }
             if (room.hasJoe) {
                 const bot_msg = "[ " + CONSTANTS.KILL_MSGS[Math.floor(Math.random() * CONSTANTS.KILL_MSGS.length)]
-                    .replace('PLAYER', "<font color='" + room.getPlayerColor(socket) + "'><b>" + room.getPlayerRawName(socket) + "</b></font>")
+                    .replace('PLAYER', "<font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b></font>")
                     .replace('BOT', "<b>" + room.joe.name + "</b>") + "]<br>";
                 io.sockets.emit("update messages", room.roomName, bot_msg);
-                helpers.log("Player " + socket.handshake.address + " " + room.getPlayerName(socket) + " has killed joe in " + room.roomName);
+                helpers.log("Player " + socket.handshake.address + " " + info['name'] + " has killed joe in " + room.roomName);
                 room.killJoe()
             } else {
-                helpers.log("Player " + socket.handshake.address + " " + room.getPlayerName(socket) + " has birthed joe in " + room.roomName);
+                helpers.log("Player " + socket.handshake.address + " " + info['name'] + " has birthed joe in " + room.roomName);
                 room.createJoe();
                 const bot_msg = "[ " + CONSTANTS.BIRTH_MSGS[Math.floor(Math.random() * CONSTANTS.BIRTH_MSGS.length)]
-                    .replace('PLAYER', "<font color='" + room.getPlayerColor(socket) + "'><b>" + room.getPlayerRawName(socket) + "</b></font>")
+                    .replace('PLAYER', "<font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b></font>")
                     .replace('BOT', "<b>" + room.joe.name + "</b>") + "]<br>";
                 io.sockets.emit("update messages", room.roomName, bot_msg);
             }
@@ -603,28 +605,9 @@ io.on('connection', (socket) => {
         if (playerRooms.has(socket.id)) {
             const room = playerRooms.get(socket.id);
             const originRoomName = room.roomName;
-            const oldColor = rooms[originRoomName].getPlayerColor(socket);
-            const oldLogger = rooms[originRoomName].getPlayerLogger(socket);
-            const oldName = rooms[originRoomName].getPlayerRawName(socket);
-            const oldWins = rooms[originRoomName].getPlayerWins(socket);
-            const oldOptOut = rooms[originRoomName].getPlayerOptOut(socket);
-            const oldHash = rooms[originRoomName].getPlayerHash(socket);
-            const oldPublicHash = rooms[originRoomName].getPlayerPublicHash(socket);
-            const oldFlair = rooms[originRoomName].getPlayerFlair(socket);
-            const oldGrind = rooms[originRoomName].getPlayerGrind(socket);
-            const info = {
-                'moved': true,
-                'color': oldColor,
-                'name': oldName,
-                'wins': oldWins,
-                'logger': oldLogger,
-                'hash': oldHash,
-                'public_hash': oldPublicHash,
-                'flair': oldFlair,
-                'grind': oldGrind,
-                'optOut': oldOptOut
-            }
-            var leave_msg = "[ <font color='" + rooms[originRoomName].getPlayerColor(socket) + "'><b>" + rooms[originRoomName].getPlayerRawName(socket) + "</b> has left " + originRoomName + " and joined " + citysrc + "!</font> ]<br>";
+            var info = rooms[originRoomName].exportPlayer(socket);
+            info['moved'] = true;
+            var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has left " + originRoomName + " and joined " + citysrc + "!</font> ]<br>";
             io.sockets.emit("update messages", originRoomName, leave_msg)
             rooms[originRoomName].killPlayer(socket);
             let map = citysrc
@@ -634,11 +617,11 @@ io.on('connection', (socket) => {
             socket.emit('moved to', map, roomName, citysrc, rooms[citysrc].state);
             rooms[roomName].addPlayer(socket, info);
             playerRooms.set(socket.id, rooms[roomName]);
-            var join_msg = "[ <font color='" + rooms[roomName].getPlayerColor(socket) + "'><b>" + rooms[roomName].getPlayerRawName(socket) + "</b> has joined " + roomName + "!</font> ]<br>";
+            var join_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has joined " + roomName + "!</font> ]<br>";
             io.sockets.emit("update messages", roomName, join_msg);
             if (roomName == CONSTANTS.TRIVIA) rooms[roomName].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items or complain about current items by typing a message starting with /feedback!</i><br>", function() {});
             if (roomName == CONSTANTS.SPECIAL) rooms[CONSTANTS.SPECIAL].whisperMessage(socket, "<i><b>" + MAPS[special]["greeting"] + "</b>! Today's special country is <b>" + special + "</b>!</i><br>", function() {});
-            if (roomName == CONSTANTS.WORLD_CAPITALS) rooms[roomName].whisperMessage(socket, "<i>Welcome to the World Capitals map!  This map no longer includes province and state capitals of the largest countries (i.e. Canada, USA, China, India, and Australia).  Let me know if you think this is better or worse by leaving /feedback!</i><br>", function() {});
+            if (roomName == CONSTANTS.WORLD_CAPITALS) rooms[roomName].whisperMessage(socket, "<i>Welcome to the World Capitals map!</i><br>", function() {});
             io.sockets.emit('update counts', {
                 [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
                 [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
@@ -699,27 +682,10 @@ io.on('connection', (socket) => {
             let dest = "private_" + code;
             const room = playerRooms.get(socket.id);
             const originRoomName = room.roomName;
-            const oldColor = rooms[originRoomName].getPlayerColor(socket);
-            const oldName = rooms[originRoomName].getPlayerRawName(socket);
-            const oldWins = rooms[originRoomName].getPlayerWins(socket);
-            const oldOptOut = rooms[originRoomName].getPlayerOptOut(socket);
-            const oldHash = rooms[originRoomName].getPlayerHash(socket);
-            const oldPublicHash = rooms[originRoomName].getPlayerPublicHash(socket);
-            const oldFlair = rooms[originRoomName].getPlayerFlair(socket);
-            const oldGrind = rooms[originRoomName].getPlayerGrind(socket);
-            const info = {
-                'moved': true,
-                'color': oldColor,
-                'name': oldName,
-                'wins': oldWins,
-                'hash': oldHash,
-                'public_hash': oldPublicHash,
-                'flair': oldFlair,
-                'grind': oldGrind,
-                'optOut': oldOptOut
-            }
+            var info = rooms[originRoomName].exportPlayer(socket);
+            info['moved'] = true;
             if (originRoomName == dest) {
-                var leave_msg = "[ <font color='" + rooms[originRoomName].getPlayerColor(socket) + "'><b>" + rooms[originRoomName].getPlayerRawName(socket) + "</b> has changed the map to " + askcitysrc + "!</font> ]<br>";
+                var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b> has changed the map to " + askcitysrc + "!</font> ]<br>";
                 io.sockets.emit("update messages", originRoomName, leave_msg);
                 let citysrc = askcitysrc;
                 if (Geography.isSpecial(citysrc)) rooms[dest].whisperMessage(socket, "<i><b>" + MAPS[citysrc]["greeting"] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
@@ -727,10 +693,10 @@ io.on('connection', (socket) => {
                 rooms[dest].citysrc = citysrc;
                 rooms[dest].reset();
                 socket.emit('moved to', map, dest, citysrc, rooms[dest].state);
-                helpers.log("Player " + socket.handshake.address + " " + rooms[dest].getPlayerName(socket) + " changed map in " + dest);
+                helpers.log("Player " + socket.handshake.address + " " + info['raw_name'] + " changed map in " + dest);
             } else {
                 console.log('making private room ' + dest)
-                var leave_msg = "[ <font color='" + rooms[originRoomName].getPlayerColor(socket) + "'><b>" + rooms[originRoomName].getPlayerName(socket) + "</b> has left " + originRoomName + " and joined a private room!</font> ]<br>";
+                var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has left " + originRoomName + " and joined a private room!</font> ]<br>";
                 io.sockets.emit("update messages", originRoomName, leave_msg)
                 rooms[originRoomName].killPlayer(socket);
                 Object.values(rooms).forEach(function(room) {
@@ -750,7 +716,7 @@ io.on('connection', (socket) => {
                 rooms[dest].addPlayer(socket, info);
                 playerRooms.set(socket.id, rooms[dest]);
                 if (Geography.isSpecial(citysrc)) rooms[dest].whisperMessage(socket, "<i><b>" + MAPS[citysrc]["greeting"] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
-                var join_msg = "[ <font color='" + rooms[dest].getPlayerColor(socket) + "'><b>" + rooms[dest].getPlayerName(socket) + "</b> has joined " + dest + "!</font> ]<br>";
+                var join_msg = "[ <font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b> has joined " + dest + "!</font> ]<br>";
                 io.sockets.emit("update messages", dest, join_msg);
                 // if (dest == CONSTANTS.TRIVIA) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
                 io.sockets.emit('update counts', {
@@ -766,7 +732,7 @@ io.on('connection', (socket) => {
                     [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
                     [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()
                 });
-                helpers.log("Player " + socket.handshake.address + " " + rooms[dest].getPlayerName(socket) + " moved to room " + dest);
+                helpers.log("Player " + socket.handshake.address + " " + info['raw_name'] + " moved to room " + dest);
                 rooms[dest].joeMessage();
             }
         }
@@ -781,7 +747,6 @@ io.on('connection', (socket) => {
     socket.on("block spam", function() {
         Object.values(rooms).forEach(function(room) {
             if (room.hasPlayer(socket)) {
-                helpers.log("Blocked spammer " + socket.handshake.address + " " + room.getPlayerName(socket));
                 room.whisperMessage(socket, "<i>You are talking too fast!  Please calm down</i><br>", () => {});
             }
         });
@@ -789,7 +754,6 @@ io.on('connection', (socket) => {
     socket.on("block joe toggle", function() {
         Object.values(rooms).forEach(function(room) {
             if (room.hasPlayer(socket)) {
-                helpers.log("Blocked joe toggler " + socket.handshake.address + " " + room.getPlayerName(socket));
                 room.whisperMessage(socket, "<i>Please calm down and stop taking your anger out on the poor bot!</i><br>", () => {});
             }
         });
@@ -824,7 +788,8 @@ io.on('connection', (socket) => {
                     var re = new RegExp(word, "i");
                     new_sent_msg = new_sent_msg.replace(re, " **** ")
                 });
-                helpers.logMessage("Message passed by " + socket.handshake.address + " " + room.getPlayerName(socket) + " " + room.getActiveEntry() + " : " + msg);
+                const info = room.exportPlayer(socket);
+                helpers.logMessage("Message passed by " + socket.handshake.address + " " + info['name'] + " " + room.getActiveEntry() + " : " + msg);
                 if (room.hasJoe && new_sent_msg.toLowerCase().trim().includes("good bot")) {
                     room.distributeMessage(socket, new_sent_msg, cb);
                     room.joeGood(socket);
@@ -852,7 +817,7 @@ io.on('connection', (socket) => {
                 if (isFeedback) {
                     room.distributeMessage(socket, new_sent_msg, cb);
                     room.whisperMessage(socket, "<i>Your feedback has been noted!  Thank you for playing and commenting!</i><br>", cb);
-                    helpers.logFeedback("Message passed by " + socket.handshake.address + " " + room.getPlayerName(socket) + ": " + msg);
+                    helpers.logFeedback("Message passed by " + socket.handshake.address + " " + info['name'] + ": " + msg);
                 } else if (isOptOut) {
                     room.whisperMessage(socket, "<i>Your IP address has been masked.  Thank you for playing the game!  Type /public if you want to opt-in!</i><br>", cb);
                     room.players.get(socket.id).optOut = true;
@@ -860,8 +825,8 @@ io.on('connection', (socket) => {
                     room.whisperMessage(socket, "<i>Your IP address has been unmasked.  Thank you for playing the game and helping to build up the dataset!</i><br>", cb);
                     room.players.get(socket.id).optOut = false;
                 } else if (isAnnounce) {
-                    const playerName = room.getPlayerName(socket);
-                    const playerColor = room.getPlayerColor(socket);
+                    const playerName = info['name'];
+                    const playerColor = info['color'];
                     const playerRoom = room.roomName;
                     announce("[ " + playerRoom + " <b><font color='" + playerColor + "'>" + playerName + "</font></b> Announces ]: " + replaceAll(new_sent_msg, "/announce", "") + "<br>")
                     cb();
@@ -889,8 +854,8 @@ io.on('connection', (socket) => {
                     if (numCount > 1) room.distributeMessage(socket, "<b>Total online  (including you): " + numCount + "</b>", cb);
                     else room.distributeMessage(socket, "<b>You are the only player online!</b>", cb);
                 } else if (isWhisper) {
-                    const playerName = room.getPlayerName(socket);
-                    const playerColor = room.getPlayerColor(socket);
+                    const playerName = info['name'];
+                    const playerColor = info['color'];
                     const playerRoom = room.roomName;
                     let dst = msg.match(/"(.*?)"/g);
                     if (dst == null || dst.length != 1) {

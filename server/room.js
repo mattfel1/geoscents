@@ -90,8 +90,8 @@ class Room {
         });
     }
     joeGood(socket) {
-        const name = this.getPlayerName(socket);
-        const color = this.getPlayerColor(socket);
+        const name = this.exportPlayer(socket)['name'];
+        const color = this.exportPlayer(socket)['color'];
         const roomName = this.roomName;
         const joeName = this.joe.name;
         this.clients.forEach(function(s, id) {
@@ -100,8 +100,8 @@ class Room {
         });
     }
     joeBad(socket) {
-        const name = this.getPlayerName(socket);
-        const color = this.getPlayerColor(socket);
+        const name = this.exportPlayer(socket)['name'];
+        const color = this.exportPlayer(socket)['color'];
         const roomName = this.roomName;
         const joeName = this.joe.name;
         this.clients.forEach(function(s, id) {
@@ -110,8 +110,8 @@ class Room {
         });
     }
     joeGG(socket) {
-        const name = this.getPlayerName(socket);
-        const color = this.getPlayerColor(socket);
+        const name = this.exportPlayer(socket)['name'];
+        const color = this.exportPlayer(socket)['color'];
         const roomName = this.roomName;
         const joeName = this.joe.name;
         this.clients.forEach(function(s, id) {
@@ -120,8 +120,8 @@ class Room {
         });
     }
     joeYeet(socket) {
-        const name = this.getPlayerName(socket);
-        const color = this.getPlayerColor(socket);
+        const name = this.exportPlayer(socket)['name'];
+        const color = this.exportPlayer(socket)['color'];
         const roomName = this.roomName;
         const joeName = this.joe.name;
         this.clients.forEach(function(s, id) {
@@ -146,22 +146,22 @@ class Room {
         if (week) this.weekRecord = CONSTANTS.INIT_RECORD;
         if (month) this.monthRecord = CONSTANTS.INIT_RECORD;
         if (year) this.allRecord = CONSTANTS.INIT_RECORD;
-        fs.writeFile("/scratch/" + this.citysrc + "_day_record", JSON.stringify(copy(this.dayRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + this.citysrc + "_day_record", JSON.stringify(copy(this.dayRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
         });
-        fs.writeFile("/scratch/" + this.citysrc + "_week_record", JSON.stringify(copy(this.weekRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + this.citysrc + "_week_record", JSON.stringify(copy(this.weekRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
         });
-        fs.writeFile("/scratch/" + this.citysrc + "_month_record", JSON.stringify(copy(this.monthRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + this.citysrc + "_month_record", JSON.stringify(copy(this.monthRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
         });
-        fs.writeFile("/scratch/" + this.citysrc + "_all-time_record", JSON.stringify(copy(this.allRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + this.citysrc + "_year_record", JSON.stringify(copy(this.allRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
@@ -169,36 +169,36 @@ class Room {
         this.drawScorePanel();
     }
     loadRecords() {
-        if (fs.existsSync('/scratch/' + this.citysrc + '_day_record')) {
+        if (fs.existsSync('/scratch/records/' + this.citysrc + '_day_record')) {
             try {
-                this.dayRecord = JSON.parse(fs.readFileSync('/scratch/' + this.citysrc + '_day_record', 'utf8'));
+                this.dayRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.citysrc + '_day_record', 'utf8'));
             } catch (err) {
                 this.dayRecord = CONSTANTS.INIT_RECORD;
             }
         } else {
             this.dayRecord = CONSTANTS.INIT_RECORD;
         }
-        if (fs.existsSync('/scratch/' + this.citysrc + '_week_record')) {
+        if (fs.existsSync('/scratch/records/' + this.citysrc + '_week_record')) {
             try {
-                this.weekRecord = JSON.parse(fs.readFileSync('/scratch/' + this.citysrc + '_week_record', 'utf8'));
+                this.weekRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.citysrc + '_week_record', 'utf8'));
             } catch (err) {
                 this.weekRecord = CONSTANTS.INIT_RECORD;
             }
         } else {
             this.weekRecord = CONSTANTS.INIT_RECORD;
         }
-        if (fs.existsSync('/scratch/' + this.citysrc + '_month_record')) {
+        if (fs.existsSync('/scratch/records/' + this.citysrc + '_month_record')) {
             try {
-                this.monthRecord = JSON.parse(fs.readFileSync('/scratch/' + this.citysrc + '_month_record', 'utf8'));
+                this.monthRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.citysrc + '_month_record', 'utf8'));
             } catch (err) {
                 this.monthRecord = CONSTANTS.INIT_RECORD;
             }
         } else {
             this.monthRecord = CONSTANTS.INIT_RECORD;
         }
-        if (fs.existsSync('/scratch/' + this.citysrc + '_all-time_record')) {
+        if (fs.existsSync('/scratch/records/' + this.citysrc + '_year_record')) {
             try {
-                this.allRecord = JSON.parse(fs.readFileSync('/scratch/' + this.citysrc + '_all-time_record', 'utf8'));
+                this.allRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.citysrc + '_year_record', 'utf8'));
             } catch (err) {
                 this.allRecord = CONSTANTS.INIT_RECORD;
             }
@@ -258,7 +258,7 @@ class Room {
         } else return null;
     }
 
-    renamePlayer(socket, name, color, logger, hash, public_hash, flair, grind) {
+    renamePlayer(socket, name, color, logger, hash, public_hash, flair, grind, perfect, clown) {
         if (this.players.has(socket.id)) {
             if (name !== '') this.players.get(socket.id).name = name;
             if (color !== 'random') this.players.get(socket.id).color = color;
@@ -266,6 +266,8 @@ class Room {
             if (hash !== '') this.players.get(socket.id).hash = hash;
             if (public_hash !== '') this.players.get(socket.id).public_hash = public_hash;
             if (flair !== '') this.players.get(socket.id).flair = flair;
+            if (clown !== '') this.players.get(socket.id).clown = clown;
+            this.players.get(socket.id).perfect = perfect
             this.players.get(socket.id).grind = grind
             this.players.get(socket.id).choseName = true;
         }
@@ -281,79 +283,51 @@ class Room {
         }
     }
 
-    getPlayerRawName(socket) {
-        if (this.players.has(socket.id)) {
-            return this.players.get(socket.id).name;
-        } else {
-            return socket.id.substring(5, 0);
-        }
-    }
-
-    getPlayerName(socket) {
-        if (this.players.has(socket.id)) {
-            return this.players.get(socket.id).getName();
-        } else {
-            return socket.id.substring(5, 0);
-        }
-    }
-    getPlayerLogger(socket) {
-        if (this.players.has(socket.id)) {
-            return this.players.get(socket.id).logger;
-        } else {
-            return false;
-        }
-    }
     playerChoseName(socket) {
         return this.players.has(socket.id) && this.players.get(socket.id).choseName;
     }
-    getPlayerColor(socket) {
+    exportPlayer(socket) {
+        var oldColor = '#000000';
+        var oldLogger = false;
+        var oldRawName = socket.id.substring(5, 0);
+        var oldName = socket.id.substring(5, 0);
+        var oldWins = 0;
+        var oldOptOut = false;
+        var oldHash = '';
+        var oldPublicHash = '';
+        var oldFlair = '';
+        var oldGrind = false;
+        var oldPerfect = false;
+        var oldClown = '';
         if (this.players.has(socket.id)) {
-            return this.players.get(socket.id).color
-        } else {
-            return '#000000'
+            oldColor = this.players.get(socket.id).color
+            oldLogger = this.players.get(socket.id).logger;
+            oldName = this.players.get(socket.id).getName();
+            oldRawName = this.players.get(socket.id).name;
+            oldWins = this.players.get(socket.id).wins;
+            oldOptOut = this.players.get(socket.id).optOut;
+            oldHash = this.players.get(socket.id).hash;
+            oldPublicHash = this.players.get(socket.id).public_hash;
+            oldFlair = this.players.get(socket.id).flair;
+            oldGrind = this.players.get(socket.id).grind;
+            oldPerfect = this.players.get(socket.id).perfect;
+            oldClown = this.players.get(socket.id).clown;
         }
-    }
-    getPlayerFlair(socket) {
-        if (this.players.has(socket.id)) {
-            return this.players.get(socket.id).flair
-        } else {
-            return ''
+        const info = {
+            'color': oldColor,
+            'raw_name': oldRawName,
+            'name': oldName,
+            'wins': oldWins,
+            'logger': oldLogger,
+            'hash': oldHash,
+            'public_hash': oldPublicHash,
+            'flair': oldFlair,
+            'grind': oldGrind,
+            'optOut': oldOptOut,
+            'perfect': oldPerfect,
+            'clown': oldClown
         }
-    }
-    getPlayerGrind(socket) {
-        if (this.players.has(socket.id)) {
-            return this.players.get(socket.id).grind
-        } else {
-            return false
-        }
-    }
-    getPlayerHash(socket) {
-        if (this.players.has(socket.id)) {
-            return this.players.get(socket.id).hash
-        } else {
-            return ''
-        }
-    }
-    getPlayerPublicHash(socket) {
-        if (this.players.has(socket.id)) {
-            return this.players.get(socket.id).public_hash
-        } else {
-            return ''
-        }
-    }
-    getPlayerWins(socket) {
-        if (this.players.has(socket.id)) {
-            return this.players.get(socket.id).wins;
-        } else {
-            return 0;
-        }
-    }
-    getPlayerOptOut(socket) {
-        if (this.players.has(socket.id)) {
-            return this.players.get(socket.id).optOut;
-        } else {
-            return false;
-        }
+        return info;
     }
 
     gameActive() {
@@ -468,9 +442,6 @@ class Room {
             display_name = display_name + ' ' + player.flair
         dict['recordName' + position] = copy(display_name);
         dict['recordBroken' + position] = true;
-        if (this.clients.has(player.id)) {
-            this.clients.get(player.id).emit("announce record", category, room, player.name, player.score, player.color);
-        }
         // fs.writeFile("/scratch/" + room + "_" + category + "_record", JSON.stringify(dict), function(err) {
         //     if(err) {
         //         return console.log(err);
@@ -523,6 +494,22 @@ class Room {
         // TODO: update activity log json for display in lobby
     }
 
+    playedAllRounds(data, socketid) {
+        const playersHistory = new Map(JSON.parse(data));
+        let play_count = 0;
+
+        playersHistory.forEach((hist, player) => {
+            if (socketid == player.id) {
+                Object.keys(hist).forEach((round) => {
+                    let datapoint = hist[round];
+                    if (datapoint['time'] > 0)
+                        play_count = play_count + 1
+                })
+            }
+        });
+        return play_count == CONSTANTS.GAME_ROUNDS;
+    }
+
     recordsBroken() {
         function copy(x) {
             return JSON.parse(JSON.stringify(x, null, 2));
@@ -543,6 +530,9 @@ class Room {
         const insertRecord = (p, c, d, r, pl) => {
             return this.insertRecord(p, c, d, r, pl)
         };
+        const playedAllRounds = (data, socketid) => {
+            return this.playedAllRounds(data, socketid)
+        }
         const sufx = ["st", "nd", "rd", "th", "th"];
         const citysrc = this.citysrc;
         Array.from(this.sortPlayersNoJoe()).forEach((player, id) => {
@@ -557,7 +547,7 @@ class Room {
             const minute = time.getMinutes();
             let famescore = CONSTANTS.FAMESCORE;
             if (CONSTANTS.DEBUG_MODE)
-                famescore = 5
+                famescore = 600
             if (player.score >= famescore) {
                 const payload = "- " + month + day + ": <font color=" + player.color + "><b>" + player.name + "</b></font> scored <b>" + player.score + "</b> on " + citysrc;
                 if (player.hash == "" || typeof player.hash === 'undefined') {
@@ -571,26 +561,41 @@ class Room {
                 let path_str = helpers.formatPath(playersHistory, CONSTANTS.GAME_ROUNDS, player.color, player.id, citysrc, player.score)
                 let new_famers = helpers.insertHallOfFame(player.hash, player.public_hash, player.name, citysrc, path_str, player.score, player.color)
             }
+            if (player.score > 0 && player.score < CONSTANTS.CLOWNSCORE) {
+                const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
+                if (playedAllRounds(playersHistory, player.id)) {
+                    player.clown = '🤡';
+                    this.clients.get(player.id).emit("announce clown", citysrc, player.name, player.score, player.color);
+                }
+            }
             const num_records = 5
             let allStr = "";
             let monStr = "";
             let wkStr = "";
             let dayStr = "";
+            let categories = [];
             if (getPosition(player.score, dayRecord) <= num_records) {
                 dayStr = "<b>" + (getPosition(player.score, dayRecord)) + sufx[(getPosition(player.score, dayRecord) - 1)] + "</b>" + " daily"
                 dayRecord = copy(insertRecord(getPosition(player.score, dayRecord), "day", copy(dayRecord), citysrc, player));
+                categories.push("<b>daily</b>");
             }
             if (getPosition(player.score, weekRecord) <= num_records) {
                 wkStr = "<b>" + (getPosition(player.score, weekRecord)) + sufx[(getPosition(player.score, weekRecord) - 1)] + "</b>" + " weekly"
                 weekRecord = copy(insertRecord(getPosition(player.score, weekRecord), "week", copy(weekRecord), citysrc, player));
+                categories.push("<b>weekly</b>");
             }
             if (getPosition(player.score, monthRecord) <= num_records) {
                 monStr = "<b>" + (getPosition(player.score, monthRecord)) + sufx[(getPosition(player.score, monthRecord) - 1)] + "</b>" + " monthly"
                 monthRecord = copy(insertRecord(getPosition(player.score, monthRecord), "month", copy(monthRecord), citysrc, player));
+                categories.push("<b>monthly</b>");
             }
             if (getPosition(player.score, allRecord) <= num_records) {
                 allStr = "<b>" + (getPosition(player.score, allRecord)) + sufx[(getPosition(player.score, allRecord) - 1)] + "</b>" + " yearly"
-                allRecord = copy(insertRecord(getPosition(player.score, allRecord), "all-time", copy(allRecord), citysrc, player));
+                allRecord = copy(insertRecord(getPosition(player.score, allRecord), "yearly", copy(allRecord), citysrc, player));
+                categories.push("<b>yearly</b>");
+            }
+            if (categories.length > 0 && this.clients.has(player.id)) {
+                this.clients.get(player.id).emit("announce record", categories.join(", "), citysrc, player.name, player.score, player.color);
             }
             // if (dayStr !== "" || wkStr !== "" || monStr !== "" || allStr !== "") {
             //     lastRecordUpdate(new Date().getTime());
@@ -604,27 +609,27 @@ class Room {
             //     helpers.prependRecentActivity(payload)
             // }
         });
-        fs.writeFile("/scratch/" + citysrc + "_day_record", JSON.stringify(copy(dayRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + citysrc + "_day_record", JSON.stringify(copy(dayRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
         });
-        fs.writeFile("/scratch/" + citysrc + "_week_record", JSON.stringify(copy(weekRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + citysrc + "_week_record", JSON.stringify(copy(weekRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
         });
-        fs.writeFile("/scratch/" + citysrc + "_month_record", JSON.stringify(copy(monthRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + citysrc + "_month_record", JSON.stringify(copy(monthRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
         });
-        fs.writeFile("/scratch/" + citysrc + "_all-time_record", JSON.stringify(copy(allRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + citysrc + "_year_record", JSON.stringify(copy(allRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
         });
-        console.log("writing record to " + "/scratch/" + citysrc + "_day_record")
+        console.log("writing record to " + "/scratch/records/" + citysrc + "_day_record")
         this.dayRecord = copy(dayRecord);
         this.weekRecord = copy(weekRecord);
         this.monthRecord = copy(monthRecord);
@@ -1208,12 +1213,12 @@ class Room {
     }
 
     distributeMessage(senderSocket, new_sent_msg, cb) {
-        const getname = (s) => this.getPlayerName(s);
+        const getname = (s) => this.exportPlayer(s)['name'];
         if (this.players.has(senderSocket)) {
             this.players.get(senderSocket).consecutiveSecondsInactive = 0;
             this.players.get(senderSocket).consecutiveRoundsInactive = 0;
         }
-        const senderColor = this.getPlayerColor(senderSocket);
+        const senderColor = this.exportPlayer(senderSocket)['color'];
         const room = this.roomName;
         this.clients.forEach((socket, id) => {
             let senderName = getname(senderSocket);

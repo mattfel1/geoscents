@@ -7,14 +7,14 @@ class FamerPopup {
 
     join(info, cb) {
         this.choseFlair = true;
-        this.socket.emit('playerJoin', info['name'], info['color'], info['logger'], info['hash'], info['public_hash'], info['flair'], info['grind'], cb);
+        this.socket.emit('playerJoin', info['name'], info['color'], info['logger'], info['hash'], info['public_hash'], info['flair'], info['grind'], info['perfect'], '', cb);
     }
     getChoseFlair() {
         return this.choseFlair;
     }
 
     // function to show our popups
-    showPopup(name, color, logger, hash, public_hash, grind) {
+    showPopup(name, color, logger, hash, public_hash, grind, perfect, clown) {
         this.isShowing = true;
         var docHeight = $(document).height(); //grab the height of the page
         var scrollTop = $(window).scrollTop(); //grab the px value from the top of the page to where you're scrolling
@@ -54,6 +54,7 @@ class FamerPopup {
                 'logger': logger,
                 'hash': hash,
                 'public_hash': public_hash,
+                'perfect': perfect,
                 'grind': grind
             }, () => {
                 closePopup()
@@ -70,6 +71,7 @@ class FamerPopup {
                     'logger': logger,
                     'hash': hash,
                     'public_hash': public_hash,
+                    'perfect': perfect,
                     'grind': grind
                 }, () => {
                     closePopup()
@@ -91,6 +93,7 @@ class FamerPopup {
                     'logger': logger,
                     'hash': hash,
                     'public_hash': public_hash,
+                    'perfect': perfect,
                     'grind': grind
                 }, callback);
             }

@@ -35,6 +35,8 @@ class Player {
         this.flair = '';
         this.optOut = false;
         this.histCount = 0;
+        this.perfect = false;
+        this.clown = '';
 
 
         // Override values based on info map
@@ -43,12 +45,13 @@ class Player {
             this.color = info['color'];
             this.logger = info['logger'];
             this.wins = info['wins'];
-            this.name = info['name'];
+            this.name = info['raw_name'];
             this.flair = info['flair'];
             this.hash = info['hash'];
             this.public_hash = info['public_hash'];
             this.optOut = info['optOut'];
             this.grind = info['grind'];
+            this.perfect = info['perfect'];
         }
     }
 
@@ -94,7 +97,9 @@ class Player {
         let axe = ''
         if (this.grind)
             axe = '🪓'
-        const fullname = this.ready + this.reboot + axe + this.name + ' ' + this.flair;
+        var fullname = this.ready + this.reboot + axe + this.clown + this.name + this.clown + ' ' + this.flair;
+        if (this.perfect)
+            fullname = "<u>" + fullname + "</u>"
         return fullname;
     }
 };

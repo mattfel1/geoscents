@@ -124,7 +124,13 @@ $(document).ready(function() {
         socket.emit("announcement", '[New ' + category + ' record set by <font color="' + color + '">' + name + ' (' + score + ')</font> in ' + room + ']<br>')
     });
     socket.on('announce hall', (room, name, score, color) => {
-        socket.emit("announcement", '<b>WOW!! <font color="' + color + '">' + name + '</font> made it into the hall of fame with ' + score + ' points in ' + room + '!!!  How is that even possible?!</b><br>')
+        var perfect = ''
+        if (score == 6600)
+            perfect = 'PERFECT SCORE!!!! '
+        socket.emit("announcement", '<b>WOW!! ' + perfect + '<font color="' + color + '">' + name + '</font> made it into the hall of fame with ' + score + ' points in ' + room + '!!!</b><br>')
+    });
+    socket.on('announce clown', (room, name, score, color) => {
+        socket.emit("announcement", '<font color="' + color + '">' + name + '</font> guessed every round and still scored fewer than ' + CONSTANTS.CLOWNSCORE + ' points in ' + room + '! 🤡🤡🤡</b><br>')
     });
 
     /**** Commands *****/
@@ -257,7 +263,7 @@ $(document).ready(function() {
     /**** FAMER POPUP *****/
     const famerpopup = new FamerPopup(socket);
     famerpopup.hide();
-    socket.on('request famer popup', (name, color, logger, hash, public_hash, famer_emojis, grind, cb) => {
+    socket.on('request famer popup', (name, color, logger, hash, public_hash, famer_emojis, grind, perfect, clown, cb) => {
         // Update index with all flairs
         // TODO: This should probably be handled on the server side so it can't be edited by user
         let dropdown = window.document.getElementById('requestedFlair')
@@ -275,7 +281,7 @@ $(document).ready(function() {
         window.document.getElementById('selected_famer_name').append(name)
         window.document.getElementById('selected_famer_name').style.color = color
 
-        famerpopup.showPopup(name, color, logger, hash, public_hash, grind)
+        famerpopup.showPopup(name, color, logger, hash, public_hash, grind, perfect, clown)
     });
 
     /**** Map *****/
@@ -420,7 +426,6 @@ $(document).ready(function() {
                 } else {
                     socket.emit('requestHelpPopup');
                 }
-                socket.emit('button clicked', btn.label);
             }
         })
 
