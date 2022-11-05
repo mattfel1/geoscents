@@ -1069,7 +1069,6 @@ class Room {
         let allPlayers = Array.from(this.players.values());
         if (this.hasJoe) {
             allPlayers.push(this.joe);
-            console.log("adding joe " + this.joe)
         }
         const sortedPlayers = allPlayers.filter((p) => p.choseName).sort((a, b) => {
             return b.score - a.score
