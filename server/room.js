@@ -73,8 +73,11 @@ class Room {
             'color': 'black',
             'wins': 0,
             'flair': '',
-            'name': avg_name,
-            'optOut': true
+            'raw_name': avg_name,
+            'optOut': true,
+            'grind': false,
+            'perfect': false,
+            'clown': ''
         });
         this.hasJoe = true;
         this.sortPlayers();
@@ -1064,8 +1067,10 @@ class Room {
 
     sortPlayers() {
         let allPlayers = Array.from(this.players.values());
-        if (this.hasJoe)
+        if (this.hasJoe) {
             allPlayers.push(this.joe);
+            console.log("adding joe " + this.joe)
+        }
         const sortedPlayers = allPlayers.filter((p) => p.choseName).sort((a, b) => {
             return b.score - a.score
         });
