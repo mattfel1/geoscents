@@ -568,6 +568,7 @@ class Room {
                 const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
                 if (playedAllRounds(playersHistory, player.id)) {
                     player.clown = '🤡';
+                    helpers.logMessage("Player " + player.name + " has been awarded the clown hat in room " + citysrc + "!");
                     this.clients.get(player.id).emit("announce clown", citysrc, player.name, player.score, player.color);
                 }
             }
