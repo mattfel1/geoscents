@@ -52,6 +52,7 @@ class Player {
             this.optOut = info['optOut'];
             this.grind = info['grind'];
             this.perfect = info['perfect'];
+            this.clown = info['clown'];
         }
     }
 

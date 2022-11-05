@@ -569,7 +569,7 @@ class Room {
                 if (playedAllRounds(playersHistory, player.id)) {
                     player.clown = '🤡';
                     helpers.logMessage("Player " + player.name + " has been awarded the clown hat in room " + citysrc + "!");
-                    this.clients.get(player.id).emit("announce clown", citysrc, player.name, player.score, player.color);
+                    this.clients.get(player.id).emit("announce clown", citysrc, player.getName(), player.score, player.color);
                 }
             }
             const num_records = 5
@@ -1166,6 +1166,7 @@ class Room {
                     this.round = 0;
                     this.timerColor = CONSTANTS.BEGIN_COLOR;
                     Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
+                    this.playersHistory = new Map();
                     this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, begin_game_duration);
                 }
                 if (this.timer <= 0 || this.allPlayersClicked()) {
@@ -1188,6 +1189,7 @@ class Room {
                     this.round = 0;
                     this.timerColor = CONSTANTS.BEGIN_COLOR;
                     Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
+                    this.playersHistory = new Map();
                     this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, begin_game_duration);
                 }
                 // Record in the middle of the reveal_state
