@@ -440,9 +440,7 @@ class Room {
         }
         dict['record' + position] = copy(player.score);
         dict['recordColor' + position] = copy(player.color);
-        let display_name = player.name
-        if (player.flair !== '')
-            display_name = display_name + ' ' + player.flair
+        let display_name = player.getNameNoGrind();
         dict['recordName' + position] = copy(display_name);
         dict['recordBroken' + position] = true;
         // fs.writeFile("/scratch/" + room + "_" + category + "_record", JSON.stringify(dict), function(err) {
@@ -599,7 +597,7 @@ class Room {
                 categories.push("<b>yearly</b>");
             }
             if (categories.length > 0 && this.clients.has(player.id)) {
-                this.clients.get(player.id).emit("announce record", categories.join(", "), citysrc, player.name, player.score, player.color);
+                this.clients.get(player.id).emit("announce record", categories.join(", "), citysrc, player.getNameNoGrind(), player.score, player.color);
             }
             // if (dayStr !== "" || wkStr !== "" || monStr !== "" || allStr !== "") {
             //     lastRecordUpdate(new Date().getTime());

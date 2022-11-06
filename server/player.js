@@ -94,6 +94,10 @@ class Player {
     won() {
         this.wins = this.wins + 1;
     }
+    getNameNoGrind() {
+        var fullname = this.ready + this.reboot + this.clown + this.name + this.clown + ' ' + this.flair;
+        return fullname;
+    }
     getName() {
         let axe = ''
         if (this.grind)
