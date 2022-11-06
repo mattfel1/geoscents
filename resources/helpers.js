@@ -170,7 +170,7 @@ $(document).ready(function() {
                         },
                         {
                             title: "Path",
-                            "width": "25%"
+                            "width": "35%"
                         },
                         {
                             title: "Color",
@@ -761,7 +761,7 @@ const formatPath = (hist, histcount, color, socketid, room, score) => {
                 let dist = datapoint['dist'];
                 dist = dist.toString().padEnd(5).replace(/\s/g, "&nbsp;")
                 // TODO: Why pad target at all if it is the last thing in the string?
-                let target = Geography.stringifyTarget(datapoint['target'], room).string.padEnd(6050).substring(0, 50).replace(/\s/g, "&nbsp");
+                let target = Geography.stringifyTarget(datapoint['target'], room).string.padEnd(6050).substring(0, 70).replace(/\s/g, "&nbsp");
                 let iso2 = datapoint['target']['iso2'];
                 if (iso2 == "" || iso2 == null)
                     iso2 = "earth";
