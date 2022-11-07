@@ -94,7 +94,7 @@ class Player {
     won() {
         this.wins = this.wins + 1;
     }
-    getNameNoGrind() {
+    getFlairedName() {
         var fullname = this.ready + this.reboot + this.clown + this.name + this.clown + ' ' + this.flair;
         return fullname;
     }
@@ -103,8 +103,9 @@ class Player {
         if (this.grind)
             axe = '🪓'
         var fullname = this.ready + this.reboot + axe + this.clown + this.name + this.clown + ' ' + this.flair;
-        if (this.perfect)
+        if (this.perfect) {
             fullname = "<u>" + fullname + "</u>"
+        }
         return fullname;
     }
 };

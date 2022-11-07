@@ -124,8 +124,13 @@ $(document).ready(function() {
         socket.emit("announcement", '[New ' + category + ' record set by <font color="' + color + '">' + name + ' (' + score + ')</font> in ' + room + ']<br>')
     });
     socket.on('announce hall', (room, name, score, color) => {
+        // TODO can this be called by client to cheat into hall of fame?
+        let perfect_limit = CONSTANTS.PERFECT_SCORE;
+        if (CONSTANTS.DEBUG_MODE)
+            perfect_limit = CONSTANTS.DEBUG_PERFECT_SCORE;
+        var perfect_thresh = score >= perfect_limit
         var perfect = ''
-        if (score == 6600)
+        if (perfect_thresh)
             perfect = 'PERFECT SCORE!!!! '
         socket.emit("announcement", '<b>WOW!! ' + perfect + '<font color="' + color + '">' + name + '</font> made it into the hall of fame with ' + score + ' points in ' + room + '!!!</b><br>')
     });

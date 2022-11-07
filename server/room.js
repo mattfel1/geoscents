@@ -440,7 +440,7 @@ class Room {
         }
         dict['record' + position] = copy(player.score);
         dict['recordColor' + position] = copy(player.color);
-        let display_name = player.getNameNoGrind();
+        let display_name = player.getFlairedName();
         dict['recordName' + position] = copy(display_name);
         dict['recordBroken' + position] = true;
         // fs.writeFile("/scratch/" + room + "_" + category + "_record", JSON.stringify(dict), function(err) {
@@ -508,7 +508,11 @@ class Room {
                 })
             }
         });
-        return play_count == CONSTANTS.GAME_ROUNDS;
+        let rounds = CONSTANTS.GAME_ROUNDS;
+        if (CONSTANTS.DEBUG_MODE)
+            rounds = CONSTANTS.DEBUG_GAME_ROUNDS;
+
+        return play_count == rounds;
     }
 
     recordsBroken() {
@@ -521,6 +525,9 @@ class Room {
         let weekRecord = copy(this.weekRecord);
         let monthRecord = copy(this.monthRecord);
         let allRecord = copy(this.allRecord);
+        const sleep = (ms) => {
+            this.sleep(ms);
+        }
         const lastRecordUpdate = (t) => {
             this.lastRecordUpdate = t;
             this.serviceRecord = true
@@ -537,6 +544,8 @@ class Room {
         const sufx = ["st", "nd", "rd", "th", "th"];
         const citysrc = this.citysrc;
         Array.from(this.sortPlayersNoJoe()).forEach((player, id) => {
+            // var sortedPlayers = Array.from(this.sortPlayersNoJoe());
+            // for (let player of sortedPlayers) {
             const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             const date = new Date();
             const utcDate = new Date(date.toUTCString());
@@ -548,7 +557,7 @@ class Room {
             const minute = time.getMinutes();
             let famescore = CONSTANTS.FAMESCORE;
             if (CONSTANTS.DEBUG_MODE)
-                famescore = 600
+                famescore = CONSTANTS.DEBUGFAMESCORE
             if (player.score >= famescore) {
                 const payload = "- " + month + day + ": <font color=" + player.color + "><b>" + player.name + "</b></font> scored <b>" + player.score + "</b> on " + citysrc;
                 if (player.hash == "" || typeof player.hash === 'undefined') {
@@ -558,9 +567,6 @@ class Room {
                 }
                 this.clients.get(player.id).emit("announce hall", citysrc, player.name, player.score, player.color);
                 this.whisperMessage(player, "<br><i>Your PRIVATE username is <b>" + player.hash + "</b>.  Please rejoin the game any time using this name and you can select a flair for this achievement, and you can collect more!  If you forget this hash, you can leave log /feedback with your name and email, or you can ask on discord.  If multiple users are using your current display name, then your unique public identifier is <b>" + player.public_hash + "</b></i><br><br>", () => {})
-                const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
-                let path_str = helpers.formatPath(playersHistory, CONSTANTS.GAME_ROUNDS, player.color, player.id, citysrc, player.score)
-                let new_famers = helpers.insertHallOfFame(player.hash, player.public_hash, player.name, citysrc, path_str, player.score, player.color)
             }
             if (player.score > 0 && player.score < CONSTANTS.CLOWNSCORE) {
                 const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
@@ -597,20 +603,22 @@ class Room {
                 categories.push("<b>yearly</b>");
             }
             if (categories.length > 0 && this.clients.has(player.id)) {
-                this.clients.get(player.id).emit("announce record", categories.join(", "), citysrc, player.getNameNoGrind(), player.score, player.color);
+                this.clients.get(player.id).emit("announce record", categories.join(", "), citysrc, player.getFlairedName(), player.score, player.color);
             }
-            // if (dayStr !== "" || wkStr !== "" || monStr !== "" || allStr !== "") {
-            //     lastRecordUpdate(new Date().getTime());
-            //     let c1 = "";
-            //     if (allStr !== "" && (monStr !== "" | (monStr === "" && wkStr !== "") || (monStr === "" && wkStr === "" && dayStr !== ""))) c1 = ", ";
-            //     let c2 = "";
-            //     if (monStr !== "" && (wkStr !== "" | (wkStr === "" && dayStr !== ""))) c2 = ", ";
-            //     let c3 = "";
-            //     if (wkStr !== "" && (dayStr !== "")) c3 = ", ";
-            //     const payload = "- " + month + day + " (" + citysrc + ") <font color=" + player.color + "><b>" + player.name + "</b></font>: " + allStr + c1 + monStr + c2 + wkStr + c3 + dayStr;
-            //     helpers.prependRecentActivity(payload)
-            // }
-        });
+
+            // Javascript is trash.. I can't figure out how to stop later record holders from swamping earlier ones, with every combination of for loop, async, await, etc.
+            // So I just update the json at the very end with a different delay for each player.  This sucks but should be good enough and invisible to the user
+            if (player.score >= famescore) {
+                const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
+                let rounds = CONSTANTS.GAME_ROUNDS;
+                if (CONSTANTS.DEBUG_MODE)
+                    rounds = CONSTANTS.DEBUG_GAME_ROUNDS;
+                let path_str = helpers.formatPath(playersHistory, rounds, player.color, player.id, citysrc, player.score)
+
+                const delay = id * 500
+                helpers.insertHallOfFame(player.hash, player.public_hash, player.name, citysrc, path_str, player.score, player.color, delay)
+            }
+        })
         fs.writeFile("/scratch/records/" + citysrc + "_day_record", JSON.stringify(copy(dayRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
@@ -1170,7 +1178,11 @@ class Room {
                 if (this.timer <= 0 || this.allPlayersClicked()) {
                     this.updateScores();
                     this.sortPlayers();
-                    if (this.round + 1 >= CONSTANTS.GAME_ROUNDS) {
+                    let rounds = CONSTANTS.GAME_ROUNDS;
+                    if (CONSTANTS.DEBUG_MODE)
+                        rounds = CONSTANTS.DEBUG_GAME_ROUNDS;
+
+                    if (this.round + 1 >= rounds) {
                         this.winner.won();
                         this.recordPersonalHistory();
                         this.printPath(this.winner.getName(), this.winner.score, this.winner.color);
@@ -1195,7 +1207,11 @@ class Room {
                     this.recorded = true
                     this.recordGuesses()
                 }
-                if (this.timer <= 0 && this.round + 1 >= CONSTANTS.GAME_ROUNDS) {
+                let rounds = CONSTANTS.GAME_ROUNDS;
+                if (CONSTANTS.DEBUG_MODE)
+                    rounds = CONSTANTS.DEBUG_GAME_ROUNDS;
+
+                if (this.timer <= 0 && this.round + 1 >= rounds) {
                     this.round = 0;
                     this.stateTransition(CONSTANTS.PREPARE_GAME_DURATION, CONSTANTS.PREPARE_GAME_DURATION);
                 } else if (this.timer <= 0) {

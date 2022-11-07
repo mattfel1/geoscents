@@ -627,7 +627,7 @@ const loadHallOfFame = () => {
             famers = JSON.parse(fs.readFileSync('/scratch/hall_of_fame.json', 'utf8'));
         } catch (err) {
             console.log('Hall of fame json corrupted! (1)');
-            fs.writeFile('/scratch/hall_of_fame.json', "{}", {
+            fs.writeFileSync('/scratch/hall_of_fame.json', "{}", {
                 flag: 'w'
             }, function(err) {
                 if (err) throw err;
@@ -635,7 +635,7 @@ const loadHallOfFame = () => {
         }
     } else {
         console.log('Hall of fame json corrupted! (2)');
-        fs.writeFile('/scratch/hall_of_fame.json', "{}", {
+        fs.writeFileSync('/scratch/hall_of_fame.json', "{}", {
             flag: 'w'
         }, function(err) {
             if (err) throw err;
@@ -661,7 +661,7 @@ const loadHallOfFame = () => {
         });
 
         // Set js
-        fs.writeFile(filebase + ".js", js, {
+        fs.writeFileSync(filebase + ".js", js, {
             flag: 'w'
         }, function(err) {
             if (err) throw err;
@@ -777,8 +777,15 @@ const formatPath = (hist, histcount, color, socketid, room, score) => {
     return history;
 }
 
-const insertHallOfFame = (hash, public_hash, player_name, map, path, score, color) => {
-    let famers = loadHallOfFame()
+// Javascript sucks
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function insertHallOfFame(hash, public_hash, player_name, map, path, score, color, delay) {
+    // hack....
+    await sleep(delay);
+    let famers = await loadHallOfFame()
     const currentdate = new Date();
     const timestamp = currentdate.getFullYear() + "/" +
         (currentdate.getMonth() + 1).toString().padStart(2, "0") + "/" +
@@ -786,7 +793,12 @@ const insertHallOfFame = (hash, public_hash, player_name, map, path, score, colo
         currentdate.getHours() + ":" +
         currentdate.getMinutes() + " GMT";
     var unixtime = Math.round(currentdate.getTime() / 1000);
-    var perfect = score == 6600
+    let perfect_limit = CONSTANTS.PERFECT_SCORE;
+    console.log("LIM " + perfect_limit + " con " + CONSTANTS.PERFECT_SCORE)
+    if (CONSTANTS.DEBUG_MODE)
+        perfect_limit = CONSTANTS.DEBUG_PERFECT_SCORE;
+    var perfect = score >= perfect_limit
+    console.log(score + " >=? " + perfect_limit + " = " + perfect)
 
     // Update hall of fame summary
     if (famers.has(hash)) {
@@ -815,7 +827,7 @@ const insertHallOfFame = (hash, public_hash, player_name, map, path, score, colo
         return JSON.parse(JSON.stringify(x, null, 2));
     }
 
-    fs.writeFile('/scratch/hall_of_fame.json', JSON.stringify(copy(Object.fromEntries(famers)), null, 2), function(err) {
+    fs.writeFileSync('/scratch/hall_of_fame.json', JSON.stringify(copy(Object.fromEntries(famers)), null, 2), function(err) {
         if (err) {
             logFeedback("Error commiting new hall of fame to file!")
             return console.log(err);
@@ -828,7 +840,7 @@ const insertHallOfFame = (hash, public_hash, player_name, map, path, score, colo
         const filebase = '/scratch/famers/' + spaceless_name;
 
         // Set html
-        fs.writeFile(filebase + ".html", famerHistHtml(spaceless_name, public_hash), {
+        fs.writeFileSync(filebase + ".html", famerHistHtml(spaceless_name, public_hash), {
             flag: 'w'
         }, function(err) {
             if (err) throw err;
@@ -843,7 +855,7 @@ const insertHallOfFame = (hash, public_hash, player_name, map, path, score, colo
 
         if (!fs.existsSync(filebase + ".csv")) {
             // logFeedback('Creating history for ' + player_name)
-            fs.writeFile(filebase + ".csv", "", {
+            fs.writeFileSync(filebase + ".csv", "", {
                 flag: 'wx'
             }, function(err) {
                 if (err) throw err;

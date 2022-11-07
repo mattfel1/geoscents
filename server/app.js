@@ -309,6 +309,8 @@ const announce = (text) => {
 
 io.on('connection', (socket) => {
     console.log('a user connected:', socket.id);
+    famers = helpers.loadHallOfFame();
+    rooms[CONSTANTS.LOBBY].hall_of_fame = famers;
     socket.on('newPlayer', () => {
         rooms[CONSTANTS.LOBBY].addPlayer(socket, {
             'moved': false
@@ -500,8 +502,6 @@ io.on('connection', (socket) => {
     });
     socket.on('announcement', (text) => {
         announce(text);
-        famers = helpers.loadHallOfFame();
-        rooms[CONSTANTS.LOBBY].hall_of_fame = famers;
     });
     socket.on('drawCommand', (text) => {
         if (playerRooms.has(socket.id)) {
@@ -614,6 +614,11 @@ io.on('connection', (socket) => {
             if (map.includes('World'))
                 map = CONSTANTS.WORLD
             let roomName = citysrc
+            // Update hall of fame
+            if (roomName === CONSTANTS.LOBBY) {
+                famers = helpers.loadHallOfFame();
+                rooms[CONSTANTS.LOBBY].hall_of_fame = famers;
+            }
             socket.emit('moved to', map, roomName, citysrc, rooms[citysrc].state);
             rooms[roomName].addPlayer(socket, info);
             playerRooms.set(socket.id, rooms[roomName]);
