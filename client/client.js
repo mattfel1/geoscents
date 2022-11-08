@@ -160,11 +160,12 @@ $(document).ready(function() {
         betweenGames = true;
         commands.drawCommand(" seconds until new " + map + " game auto-starts...", "", "", "", round, true, false, false)
     });
-    socket.on('draw begin', (map, time, round) => {
+    socket.on('draw begin', (map, time, round, allgrind) => {
         betweenGames = false;
         clickedReady = false;
         commands.drawCommand(" seconds until first round of " + map + "..  GET READY!", "", "", "", round, false, false, false);
-        if (time === CONSTANTS.BEGIN_GAME_DURATION) sounds.playGameBeginSound();
+        if (time === CONSTANTS.BEGIN_GAME_DURATION && !allgrind) sounds.playGameBeginSound();
+        else if (time === CONSTANTS.BEGIN_GAME_DURATION_GRIND && allgrind) sounds.playGrindGameBeginSound();
     });
     socket.on('draw guess city', (city, capital, iso2, round) => {
         commands.drawCommand("Find!       ", city, capital, iso2, round, false, false, true);

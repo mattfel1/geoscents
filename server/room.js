@@ -1013,7 +1013,8 @@ class Room {
             socket.emit('draw prepare', citysrc.toUpperCase(), round);
         } else if (this.state === CONSTANTS.BEGIN_GAME_STATE) {
             socket.emit('fresh map', map);
-            socket.emit('draw begin', citysrc.toUpperCase(), this.timer, round);
+            let allgrind = this.allGrind();
+            socket.emit('draw begin', citysrc.toUpperCase(), this.timer, round, allgrind);
         } else if (this.state === CONSTANTS.GUESS_STATE) {
             const thisTarget = Geography.stringifyTarget(this.target, this.citysrc);
             const citystring = thisTarget['string'];

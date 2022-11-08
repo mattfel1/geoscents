@@ -10,7 +10,9 @@ class Sounds {
         this.messagePop.volume = 0.5;
         // this.gameBeginSound = new Audio('/resources/audio/gamestart.mp3');
         this.gameBeginSound = new Audio('/resources/audio/jingle.mp3');
-        this.gameBeginSound.volume = 0.25;
+        this.gameBeginSound.volume = 0.22;
+        this.grindGameBeginSound = new Audio('/resources/audio/grindgamestart.mp3');
+        this.grindGameBeginSound.volume = 0.22;
         this.roundBeginSound = new Audio('/resources/audio/roundstart.mp3');
         this.roundBeginSound.volume = 0.5;
         this.roundEndSound = new Audio('/resources/audio/roundstop.mp3');
@@ -64,6 +66,9 @@ class Sounds {
 
     playGameBeginSound() {
         this.gameBeginSound.play()
+    }
+    playGrindGameBeginSound() {
+        this.grindGameBeginSound.play()
     }
     playRoundBeginSound() {
         this.roundBeginSound.play()
