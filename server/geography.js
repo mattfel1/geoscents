@@ -27,9 +27,11 @@ const randomCity = (citysrc, blacklist) => {
     console.assert(ALLCITIES.has(citysrc), "No city src database for " + citysrc);
     let CITIES = ALLCITIES.get(citysrc);
     while (!acceptable) {
-        proposal = CITIES[Math.floor(Math.random() * CITIES.length)];
+        const rng = Math.random();
+        proposal = CITIES[Math.floor(rng * CITIES.length)];
         if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
         else i = i + 1;
+        console.log("citysrc " + citysrc + " attempt " + i + " = rng " + rng + " " + stringifyTarget(proposal, citysrc)['string'] + " accepted " + acceptable)
     }
     if (requireUniqueAdmin(citysrc, proposal)) {
         blacklist.push(proposal['admin_name'])
