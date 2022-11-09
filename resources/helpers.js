@@ -761,7 +761,8 @@ const formatPath = (hist, histcount, color, socketid, room, score) => {
                 let dist = datapoint['dist'];
                 dist = dist.toString().padEnd(5).replace(/\s/g, "&nbsp;")
                 // TODO: Why pad target at all if it is the last thing in the string?
-                let target = Geography.stringifyTarget(datapoint['target'], room).string.padEnd(6050).substring(0, 100).replace(/\s/g, "&nbsp");
+                // let target = Geography.stringifyTarget(datapoint['target'], room).string.padEnd(6050).substring(0, 100).replace(/\s/g, "&nbsp");
+                let target = Geography.stringifyTarget(datapoint['target'], room).string.replace(/\s/g, "&nbsp");
                 let iso2 = datapoint['target']['iso2'];
                 if (iso2 == "" || iso2 == null)
                     iso2 = "earth";
@@ -794,11 +795,9 @@ async function insertHallOfFame(hash, public_hash, player_name, map, path, score
         currentdate.getMinutes() + " GMT";
     var unixtime = Math.round(currentdate.getTime() / 1000);
     let perfect_limit = CONSTANTS.PERFECT_SCORE;
-    console.log("LIM " + perfect_limit + " con " + CONSTANTS.PERFECT_SCORE)
     if (CONSTANTS.DEBUG_MODE)
         perfect_limit = CONSTANTS.DEBUG_PERFECT_SCORE;
     var perfect = score >= perfect_limit
-    console.log(score + " >=? " + perfect_limit + " = " + perfect)
 
     // Update hall of fame summary
     if (famers.has(hash)) {

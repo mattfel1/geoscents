@@ -81,7 +81,7 @@ scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, errors)
 outfile = geoscents_home + 'resources/databases/oceaniacities.js'
 rng = [92,252, -51,28]
 pop = 10000
-blacklist =  ['Macau', 'Thailand', 'Mexico', 'United States', 'Sri Lanka', 'India', 'China', 'Philippines', 'Vietnam', 'Cambodia', 'Laos', 'Hong Kong', 'Taiwan', 'Bangladesh', 'Burma', 'Nepal', 'Bhutan', 'Japan']
+blacklist =  ['Macau', 'Thailand', 'Mexico', 'United States', 'Sri Lanka', 'India', 'China', 'Philippines', 'Vietnam', 'Cambodia', 'Laos', 'Hong Kong', 'Taiwan', 'Bangladesh', 'Burma', 'Nepal', 'Bhutan', 'Japan', 'Myanmar']
 whitelist = ['Cook Islands', 'Wallis And Futuna', 'Honolulu', 'Hilo', 'Wailuku', 'Lihue', 'Easter Island', 'Tokelau']
 scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, errors)
 
