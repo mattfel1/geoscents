@@ -48,12 +48,14 @@ class Sounds {
     muteOn() {
         this.messagePop.muted = true;
         this.gameBeginSound.muted = true;
+        this.grindGameBeginSound.muted = true;
         this.roundBeginSound.muted = true;
         this.roundEndSound.muted = true;
     }
     muteOff() {
         this.messagePop.muted = false;
         this.gameBeginSound.muted = false;
+        this.grindGameBeginSound.muted = false;
         this.roundBeginSound.muted = false;
         this.roundEndSound.muted = false;
     }
