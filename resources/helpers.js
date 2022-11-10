@@ -279,8 +279,8 @@ const log = (payload) => {
     const timestamp = currentdate.getDate().toString().padStart(2, "0") + "/" +
         (currentdate.getMonth() + 1).toString().padStart(2, "0") + "/" +
         currentdate.getFullYear() + " @ " +
-        currentdate.getHours() + ":" +
-        currentdate.getMinutes() + ":";
+        currentdate.getHours().toString().padStart(2, "0") + ":" +
+        currentdate.getMinutes().toString().padStart(2, "0") + ":";
     if (fs.existsSync(logfile)) {
         fs.appendFile(logfile, "[" + timestamp + "] " + payload + "\n", function(err) {
             if (err) throw err;
@@ -294,8 +294,8 @@ const logMessage = (payload) => {
     const timestamp = currentdate.getDate().toString().padStart(2, "0") + "/" +
         (currentdate.getMonth() + 1).toString().padStart(2, "0") + "/" +
         currentdate.getFullYear() + " @ " +
-        currentdate.getHours() + ":" +
-        currentdate.getMinutes() + ":";
+        currentdate.getHours().toString().padStart(2, "0") + ":" +
+        currentdate.getMinutes().toString().padStart(2, "0") + ":";
     if (fs.existsSync(messagefile)) {
         fs.appendFile(messagefile, "[" + timestamp + "] " + payload + "\n", function(err) {
             if (err) throw err;
@@ -314,8 +314,8 @@ const logFeedback = (payload) => {
     const timestamp = currentdate.getDate().toString().padStart(2, "0") + "/" +
         (currentdate.getMonth() + 1).toString().padStart(2, "0") + "/" +
         currentdate.getFullYear() + " @ " +
-        currentdate.getHours() + ":" +
-        currentdate.getMinutes() + ":";
+        currentdate.getHours().toString().padStart(2, "0") + ":" +
+        currentdate.getMinutes().toString().padStart(2, "0") + ":";
     if (fs.existsSync(feedbackfile)) {
         fs.appendFile(feedbackfile, "[" + timestamp + "] " + payload + "\n", function(err) {
             if (err) throw err;
@@ -629,8 +629,8 @@ const logPlayerHistory = (name, color, score, room) => {
         const timestamp = currentdate.getFullYear() + "/" +
             (currentdate.getMonth() + 1).toString().padStart(2, "0") + "/" +
             currentdate.getDate().toString().padStart(2, "0") + " @ " +
-            currentdate.getHours() + ":" +
-            currentdate.getMinutes() + " GMT";
+            currentdate.getHours().toString().padStart(2, "0") + ":" +
+            currentdate.getMinutes().toString().padStart(2, "0") + " GMT";
         fs.appendFile(filebase + ".csv", "\"" + timestamp + "\",\"" + room + "\",\"" + score + "\",\"<font color=" + color + ">" + name + "</font>\",,,,,,,,,,,,,,,,,,,,,,,,,,,,\n", function(err) {
             if (err) throw err;
         });
@@ -835,8 +835,8 @@ async function insertHallOfFame(hash, public_hash, player_name, map, path, score
     const timestamp = currentdate.getFullYear() + "/" +
         (currentdate.getMonth() + 1).toString().padStart(2, "0") + "/" +
         currentdate.getDate().toString().padStart(2, "0") + " @ " +
-        currentdate.getHours() + ":" +
-        currentdate.getMinutes() + " GMT";
+        currentdate.getHours().toString().padStart(2, "0") + ":" +
+        currentdate.getMinutes().toString().padStart(2, "0") + " GMT";
     var unixtime = Math.round(currentdate.getTime() / 1000);
     let perfect_limit = CONSTANTS.PERFECT_SCORE;
     if (CONSTANTS.DEBUG_MODE)
