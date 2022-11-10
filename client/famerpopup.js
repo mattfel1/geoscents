@@ -46,8 +46,6 @@ class FamerPopup {
 
         // hide popup when user clicks on close button or if user clicks anywhere outside the container
         $('.close-btn, .overlay-bg').unbind().click(function() {
-            var flair = $(this).find("#requestedFlair").val()
-            var flair_country = $(this).find("#requestedFlair :selected").text();
             const perfect = flair_country.includes('👑');
             join({
                 'name': name,
@@ -56,7 +54,7 @@ class FamerPopup {
                 'logger': logger,
                 'hash': hash,
                 'public_hash': public_hash,
-                'perfect': perfect,
+                'perfect': false,
                 'grind': grind
             }, () => {
                 closePopup()
@@ -65,9 +63,6 @@ class FamerPopup {
         // hide the this.when user presses the esc key
         $(document).keyup(function(e) {
             if (e.keyCode == 27 && !choseFlair()) { // if user presses esc key
-                var flair = $(this).find("#requestedFlair").val()
-                var flair_country = $(this).find("#requestedFlair :selected").text();
-                const perfect = flair_country.includes('👑');
                 join({
                     'name': name,
                     'color': color,
@@ -75,7 +70,7 @@ class FamerPopup {
                     'logger': logger,
                     'hash': hash,
                     'public_hash': public_hash,
-                    'perfect': perfect,
+                    'perfect': false,
                     'grind': grind
                 }, () => {
                     closePopup()
