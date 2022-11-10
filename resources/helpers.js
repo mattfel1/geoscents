@@ -748,6 +748,7 @@ const formatPath = (hist, histcount, color, socketid, room, score) => {
     };
     // var history = "<br><button id=\"sharepath" + histcount + "\">copy</button><br>" + "<div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points";
     var history = "<br><div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points on " + room + ":";
+    let notified = false;
     playersHistory.forEach((hist, player) => {
         // For debugging, track all targets
         let targets = [];
@@ -765,9 +766,10 @@ const formatPath = (hist, histcount, color, socketid, room, score) => {
                 let target = Geography.stringifyTarget(datapoint['target'], room).string.replace(/\s/g, "&nbsp");
 
                 // For debugging, check if this is a collision and send me a push
-                if (targets.includes(target)) {
-                    console.log("FOUND COLLISION IN THIS GAME!");
-                    logFeedback("FOUND COLLISION IN THIS GAME!");
+                if (targets.includes(target) && !notified) {
+                    console.log("FOUND COLLISION IN THIS GAME! " + room);
+                    logFeedback("FOUND COLLISION IN THIS GAME! " + room);
+                    notified = true;
                 }
                 targets.push(target)
 

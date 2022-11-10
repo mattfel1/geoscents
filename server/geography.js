@@ -28,15 +28,26 @@ const randomCity = (citysrc, blacklist) => {
     let CITIES = ALLCITIES.get(citysrc);
     while (!acceptable) {
         const rng = Math.random();
-        proposal = CITIES[Math.floor(rng * CITIES.length)];
-        if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout) acceptable = true;
-        else i = i + 1;
-        console.log("citysrc " + citysrc + " attempt " + i + " = rng " + rng + " " + stringifyTarget(proposal, citysrc)['string'] + " accepted " + acceptable)
+        // Scan the next 11 targets to find a suitable one
+        let ofs = 0;
+        for (let ofs = 0; ofs < CONSTANTS.GAME_ROUNDS; ofs++) {
+            const id = (Math.floor(rng * CITIES.length) + ofs) % CITIES.length;
+            proposal = CITIES[id];
+            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout)
+                acceptable = true;
+            console.log("citysrc " + citysrc + " attempt " + i + " = rng " + rng + " ofs " + ofs + " " + stringifyTarget(proposal, citysrc)['string'] + " accepted " + acceptable)
+            if (acceptable)
+                break;
+        }
+        i = i + 1;
     }
     if (requireUniqueAdmin(citysrc, proposal)) {
         blacklist.push(proposal['admin_name'])
-    } else if (blacklistEntireString(citysrc)) blacklist.push(stringifyTarget(proposal, citysrc)['string'])
-    else blacklist.push(proposal['country']);
+    } else if (blacklistEntireString(citysrc)) {
+        blacklist.push(stringifyTarget(proposal, citysrc)['string'])
+    } else {
+        blacklist.push(proposal['country']);
+    }
     return [proposal, blacklist];
 };
 
