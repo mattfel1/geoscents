@@ -41,7 +41,7 @@ const randomCity = (citysrc, blacklist, played_targets) => {
             else if (desperate && !played_targets.includes(stringifyTarget(proposal, citysrc)['string']))
                 acceptable = true;
 
-            console.log("citysrc " + citysrc + "desperate " + desperate + " attempt " + i + " = rng " + rng + " ofs " + ofs + " " + stringifyTarget(proposal, citysrc)['string'] + " accepted " + acceptable)
+            // console.log("citysrc " + citysrc + "desperate " + desperate + " attempt " + i + " = rng " + rng + " ofs " + ofs + " " + stringifyTarget(proposal, citysrc)['string'] + " accepted " + acceptable)
             if (acceptable)
                 break;
         }
