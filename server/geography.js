@@ -19,7 +19,7 @@ Object.keys(MAPS).forEach(function(value) {
     ALLCITIES.set(value, list);
 })
 
-const randomCity = (citysrc, blacklist) => {
+const randomCity = (citysrc, blacklist, played_targets) => {
     let acceptable = false;
     let i = 0;
     let proposal = null;
@@ -30,12 +30,18 @@ const randomCity = (citysrc, blacklist) => {
         const rng = Math.random();
         // Scan the next 11 targets to find a suitable one
         let ofs = 0;
+        let desperate = i >= timeout - 2;
         for (let ofs = 0; ofs < CONSTANTS.GAME_ROUNDS; ofs++) {
             const id = (Math.floor(rng * CITIES.length) + ofs) % CITIES.length;
             proposal = CITIES[id];
-            if (uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout)
+
+            // If we are about to timeout, forget about the citysrc rules and just get first unique target
+            if (!desperate && uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout)
                 acceptable = true;
-            console.log("citysrc " + citysrc + " attempt " + i + " = rng " + rng + " ofs " + ofs + " " + stringifyTarget(proposal, citysrc)['string'] + " accepted " + acceptable)
+            else if (desperate && !played_targets.includes(stringifyTarget(proposal, citysrc)['string']))
+                acceptable = true;
+
+            console.log("citysrc " + citysrc + "desperate " + desperate + " attempt " + i + " = rng " + rng + " ofs " + ofs + " " + stringifyTarget(proposal, citysrc)['string'] + " accepted " + acceptable)
             if (acceptable)
                 break;
         }

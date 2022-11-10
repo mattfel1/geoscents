@@ -39,6 +39,7 @@ class Room {
         this.round = 0;
         this.winner = null;
         this.blacklist = []; // List of countries or states to avoid drawing for this round
+        this.played_targets = []; // List of actual targets this game
         this.timerColor = CONSTANTS.LOBBY_COLOR;
         this.lastRecordUpdate = new Date().getTime();
         this.serviceRecord = false;
@@ -1150,6 +1151,7 @@ class Room {
                 if (this.allReady() || this.timer <= 0) {
                     this.timerColor = CONSTANTS.BEGIN_COLOR;
                     this.blacklist = [];
+                    this.played_targets = [];
                     this.removePoppers();
                     this.playersHistory = new Map();
                     this.stateTransition(CONSTANTS.BEGIN_GAME_STATE, begin_game_duration);
@@ -1158,7 +1160,7 @@ class Room {
                 }
             } else if (this.state === CONSTANTS.SETUP_STATE) {
                 let mapname;
-                [this.target, this.blacklist] = Geography.randomCity(this.citysrc, this.blacklist);
+                [this.target, this.blacklist] = Geography.randomCity(this.citysrc, this.blacklist, this.played_targets);
                 [this.joeTime, this.joeLat, this.joeLon] = helpers.joeData(this.map, Geography.stringifyTarget(this.target, this.citysrc).string);
                 this.timerColor = CONSTANTS.GUESS_COLOR;
                 Array.from(this.players.values()).forEach((p, id) => {
@@ -1166,6 +1168,7 @@ class Room {
                 });
                 if (this.hasJoe) this.joe.reset();
                 this.playedCities[this.round] = this.target;
+                this.played_targets.push(Geography.stringifyTarget(this.target, this.citysrc)['string'])
                 this.stateTransition(CONSTANTS.GUESS_STATE, CONSTANTS.GUESS_DURATION);
             } else if (this.state === CONSTANTS.GUESS_STATE) {
                 if (this.allReboot()) {
