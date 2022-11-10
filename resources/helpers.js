@@ -749,6 +749,8 @@ const formatPath = (hist, histcount, color, socketid, room, score) => {
     // var history = "<br><button id=\"sharepath" + histcount + "\">copy</button><br>" + "<div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points";
     var history = "<br><div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points on " + room + ":";
     playersHistory.forEach((hist, player) => {
+        // For debugging, track all targets
+        let targets = [];
         if (socketid == player.id) {
             var i = CONSTANTS.GAME_ROUNDS - Object.keys(hist).length + 1;
             Object.keys(hist).forEach((round) => {
@@ -760,9 +762,15 @@ const formatPath = (hist, histcount, color, socketid, room, score) => {
                 let error_unit = datapoint['error_unit']
                 let dist = datapoint['dist'];
                 dist = dist.toString().padEnd(5).replace(/\s/g, "&nbsp;")
-                // TODO: Why pad target at all if it is the last thing in the string?
-                // let target = Geography.stringifyTarget(datapoint['target'], room).string.padEnd(6050).substring(0, 100).replace(/\s/g, "&nbsp");
                 let target = Geography.stringifyTarget(datapoint['target'], room).string.replace(/\s/g, "&nbsp");
+
+                // For debugging, check if this is a collision and send me a push
+                if (targets.includes(target)) {
+                    console.log("FOUND COLLISION IN THIS GAME!");
+                    logFeedback("FOUND COLLISION IN THIS GAME!");
+                }
+                targets.push(target)
+
                 let iso2 = datapoint['target']['iso2'];
                 if (iso2 == "" || iso2 == null)
                     iso2 = "earth";
@@ -773,6 +781,7 @@ const formatPath = (hist, histcount, color, socketid, room, score) => {
             });
         }
     });
+
 
     history = history + "</tt><br></div>"
     return history;
