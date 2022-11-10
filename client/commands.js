@@ -245,7 +245,7 @@ class Commands {
 
         $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>Lobby</b> <font size=2><br>" + lobby_string + "</font></button>"))
         if (this.isPrivate) $('#commands').append($("<button class='private-room-btn' id='private_button'><b>" + this.privateCitysrc + "</b><br>code: " + this.privateCode + "</button>"));
-        else $('#commands').append($("<button class='private-room-btn' id='private_button'><b>Private</b><font size=2><br>" + private_string + "</font></button>"));
+        else $('#commands').append($("<button class='private-room-btn' id='private_button'><b>Private/Custom</b><font size=2><br>" + private_string + "</font></button>"));
         this.roomButton(CONSTANTS.SPECIAL, "special", true);
         this.roomButton(CONSTANTS.WORLD, "world");
         this.roomButton(CONSTANTS.WORLD_CAPITALS, "world_capitals");
