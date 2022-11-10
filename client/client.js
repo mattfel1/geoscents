@@ -269,15 +269,19 @@ $(document).ready(function() {
     /**** FAMER POPUP *****/
     const famerpopup = new FamerPopup(socket);
     famerpopup.hide();
-    socket.on('request famer popup', (name, color, logger, hash, public_hash, famer_emojis, grind, perfect, clown, cb) => {
+    socket.on('request famer popup', (name, color, logger, hash, public_hash, famer_emojis, grind, perfects, clown, cb) => {
         // Update index with all flairs
         // TODO: This should probably be handled on the server side so it can't be edited by user
         let dropdown = window.document.getElementById('requestedFlair')
         let options = [];
         for (const [key, value] of Object.entries(famer_emojis)) {
             var entry = document.createElement("option");
+            const perfect = perfects.includes(key);
+            var crown = '';
+            if (perfect)
+                crown = '👑';
             entry.value = value;
-            entry.text = value + key;
+            entry.text = value + crown + key;
             options.push(entry)
         }
         options.forEach((x, i) => {
@@ -287,7 +291,7 @@ $(document).ready(function() {
         window.document.getElementById('selected_famer_name').append(name)
         window.document.getElementById('selected_famer_name').style.color = color
 
-        famerpopup.showPopup(name, color, logger, hash, public_hash, grind, perfect, clown)
+        famerpopup.showPopup(name, color, logger, hash, public_hash, grind, perfects, clown)
     });
 
     /**** Map *****/

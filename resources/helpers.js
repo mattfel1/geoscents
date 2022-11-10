@@ -191,12 +191,16 @@ $(document).ready(function() {
                 document.getElementById("buttons").append(all_btn)
 
                 let maps = []
+                let perfect = false
 
                 for (const x in results.data) {
                     let map = results.data[x][1];
                     if (!maps.includes(map)) {
                         maps.push(map)
                     }
+                    let score = results.data[x][2]
+                    if (score == 6600)
+                        perfect = true
                 }
 
                 $(document).on('click', '#all', function() {
@@ -205,7 +209,10 @@ $(document).ready(function() {
                         let map2 = maps[y].replace(' ', '');
                         document.getElementById(map2).style.background = "#a9e7f9"
                     }
+                    if (perfect)
+                        document.getElementById("Perfect").style.background = "#a9e7f9"
                     table.columns(1).search("").draw();
+                    table.columns(2).search("").draw();
                 });
 
                 for (const x in maps) {
@@ -232,9 +239,30 @@ $(document).ready(function() {
                                         document.getElementById(spaceless_map2).style.background = "#a9e7f9"
                                     }
                                 }
+                                if (perfect)
+                                    document.getElementById("Perfect").style.background = "#a9e7f9"
+
                                 table.columns(1).search('^' + map + '$', true, false).draw();
+                                table.columns(2).search("").draw();
                             });
                         }
+                    });
+                }
+                if (perfect) {
+                    let map_btn = document.createElement("button");
+                    map_btn.id = "Perfect";
+                    map_btn.className = "filter-btn"
+                    map_btn.innerHTML = "Perfect 👑"
+                    document.getElementById("buttons").append(map_btn);
+                    $(document).on('click', '#' + "Perfect", function() {
+                        document.getElementById("Perfect").style.background = "yellow"
+                        document.getElementById("all").style.background = "#a9e7f9"
+                        for (const y in maps) {
+                            let map2 = maps[y]
+                            let spaceless_map2 = map2.replace(' ', '');
+                            document.getElementById(spaceless_map2).style.background = "#a9e7f9"
+                        }
+                        table.columns(2).search('^6600$', true, false).draw();
                     });
                 }
 
@@ -619,6 +647,10 @@ const flairToEmoji = (flair) => {
         return "?";
 }
 
+const perfectEmoji = () => {
+    return '👑';
+}
+
 // Load hall of fame from json
 const loadHallOfFame = () => {
     var famers = new Map();
@@ -690,9 +722,10 @@ const hallJsonToBoard = (famers) => {
                         if (parseInt(value2['last_record']) > last_record)
                             last_record = parseInt(value2['last_record'])
                     }
-
                 }
             }
+            if (value['perfect'] !== undefined && Object.entries(value['perfect']).length > 0 && !link_name.includes(perfectEmoji()))
+                link_name = link_name + perfectEmoji();
 
 
             let link = "<a target=\"_blank\" href='resources/famers/" + value['name'].replace(/ /g, '_') + ".html'>" + link_name + "</a>"
@@ -818,8 +851,12 @@ async function insertHallOfFame(hash, public_hash, player_name, map, path, score
             old['maps'].push(map)
         }
         old['last_record'] = unixtime
-        if (perfect)
-            old['perfect'] = true
+        if (perfect) {
+            let prev_perfect = Array.from(old['perfect'].values());
+            if (!prev_perfect.includes(map)) {
+                old['perfect'].push(map)
+            }
+        }
         famers.set(hash, old)
     } else {
         let dict = {
@@ -829,7 +866,7 @@ async function insertHallOfFame(hash, public_hash, player_name, map, path, score
             'public_hash': public_hash
         }
         if (perfect)
-            dict['perfect'] = true
+            dict['perfect'] = [map];
         famers.set(hash, dict)
     }
 
@@ -908,6 +945,7 @@ module.exports = {
     makeLink,
     joeData,
     flairToEmoji,
+    perfectEmoji,
     formatPath,
     filterName,
     randstring

@@ -14,7 +14,7 @@ class FamerPopup {
     }
 
     // function to show our popups
-    showPopup(name, color, logger, hash, public_hash, grind, perfect, clown) {
+    showPopup(name, color, logger, hash, public_hash, grind, perfects, clown) {
         this.isShowing = true;
         var docHeight = $(document).height(); //grab the height of the page
         var scrollTop = $(window).scrollTop(); //grab the px value from the top of the page to where you're scrolling
@@ -47,6 +47,8 @@ class FamerPopup {
         // hide popup when user clicks on close button or if user clicks anywhere outside the container
         $('.close-btn, .overlay-bg').unbind().click(function() {
             var flair = $(this).find("#requestedFlair").val()
+            var flair_country = $(this).find("#requestedFlair :selected").text();
+            const perfect = flair_country.includes('👑');
             join({
                 'name': name,
                 'color': color,
@@ -64,6 +66,8 @@ class FamerPopup {
         $(document).keyup(function(e) {
             if (e.keyCode == 27 && !choseFlair()) { // if user presses esc key
                 var flair = $(this).find("#requestedFlair").val()
+                var flair_country = $(this).find("#requestedFlair :selected").text();
+                const perfect = flair_country.includes('👑');
                 join({
                     'name': name,
                     'color': color,
@@ -85,6 +89,8 @@ class FamerPopup {
 
             if (!choseFlair()) {
                 var flair = $(this).find("#requestedFlair").val()
+                var flair_country = $(this).find("#requestedFlair :selected").text();
+                const perfect = flair_country.includes('👑');
                 localStorage.setItem("selected_famer_flair", $('#requestedFlair').val());
                 join({
                     'name': name,

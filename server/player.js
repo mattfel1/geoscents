@@ -2,6 +2,7 @@
  * Class for storing all of a player's properties and defining methods on them
  */
 const CONSTANTS = require('../resources/constants.js');
+const helpers = require('../resources/helpers.js');
 
 class Player {
     constructor(socketid, rank, roomName, ip, ordinalid, name, info) {
@@ -96,6 +97,9 @@ class Player {
     }
     getFlairedName() {
         var fullname = this.ready + this.reboot + this.clown + this.name + this.clown + ' ' + this.flair;
+        if (this.perfect) {
+            fullname = fullname + helpers.perfectEmoji();
+        }
         return fullname;
     }
     getName() {
@@ -104,7 +108,7 @@ class Player {
             axe = '🪓'
         var fullname = this.ready + this.reboot + axe + this.clown + this.name + this.clown + ' ' + this.flair;
         if (this.perfect) {
-            fullname = "<u>" + fullname + "</u>"
+            fullname = fullname + helpers.perfectEmoji();
         }
         return fullname;
     }

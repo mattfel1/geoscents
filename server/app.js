@@ -378,11 +378,12 @@ io.on('connection', (socket) => {
         let famer_emojis = new Map();
         let public_hash = "";
         let famer_name = "";
-        var perfect = perfect
+        let perfects = [];
         for (const [key, value] of famers.entries()) {
             if (key === name) {
                 console.log("Login from hall of famer hash " + name)
                 famer_countries = value['maps']
+                perfect_countries = value['perfect']
                 is_famer = true;
                 if (value['perfect'] !== undefined)
                     perfect = value['perfect']
@@ -390,13 +391,16 @@ io.on('connection', (socket) => {
                 famer_name = value['name']
                 Object.values(famer_countries).forEach(function(value) {
                     famer_emojis.set(value, helpers.flairToEmoji(value));
-                })
+                });
+                Object.values(perfect_countries).forEach(function(value) {
+                    perfects.push(value);
+                });
             }
         }
         if (is_famer) {
             // famer popup will call playerJoin again with a flaired name
             callback()
-            socket.emit('request famer popup', famer_name, newcolor, newlogger, name, public_hash, Object.fromEntries(famer_emojis), grind, perfect, "", callback);
+            socket.emit('request famer popup', famer_name, newcolor, newlogger, name, public_hash, Object.fromEntries(famer_emojis), grind, perfects, "", callback);
             return
         }
 
@@ -458,7 +462,7 @@ io.on('connection', (socket) => {
             if (famerpublichash != "") {
                 var perfect_msg = ''
                 if (perfect)
-                    perfect_msg = ' WHO ACHIEVED A PERFECT SCORE ';
+                    perfect_msg = ' WHO ACHIEVED A PERFECT SCORE ON ' + flair;
                 var join_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b></font> is a hall of famer " + perfect_msg + " (with public hash " + famerpublichash + ")! ] " + bad_msg + "<br>";
                 io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
             }
