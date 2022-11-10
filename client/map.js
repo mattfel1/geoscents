@@ -200,8 +200,8 @@ class MapPanel {
         if (map == CONSTANTS.LOBBY) {
             // this.ctx.fillText('Welcome to GeoScents!', 400, 590);
             // this.ctx.fillText('Locate cities as quickly and accurately as possible!',20,650);
-            this.ctx.font = "120px Arial bold";
-            this.ctx.fillText('Welcome to GeoScents!', 210, 150);
+            this.ctx.font = "bold 120px serif";
+            this.ctx.fillText('GeoScents', 480, 150);
 
             this.ctx.font = "20px Arial";
             this.ctx.fillText('[ Spinning globe is loading... ]', 500, 500);
