@@ -26,14 +26,15 @@ const randomCity = (citysrc, blacklist, played_targets) => {
     let timeout = 20;
     console.assert(ALLCITIES.has(citysrc), "No city src database for " + citysrc);
     let CITIES = ALLCITIES.get(citysrc);
-    console.log("blacklist " + blacklist)
-    console.log("played " + played_targets)
     while (!acceptable) {
         const rng = Math.random();
         // Scan the next 11 targets to find a suitable one
         let ofs = 0;
-        let desperate = i >= timeout - 2;
-        for (let ofs = 0; ofs < CONSTANTS.GAME_ROUNDS; ofs++) {
+        let desperate = i >= timeout - 3;
+        let linear_scan_count = 1;
+        if (desperate)
+            linear_scan_count = CONSTANTS.GAME_ROUNDS + 1;
+        for (let ofs = 0; ofs < linear_scan_count; ofs++) {
             const id = (Math.floor(rng * CITIES.length) + ofs) % CITIES.length;
             proposal = CITIES[id];
 
@@ -43,7 +44,6 @@ const randomCity = (citysrc, blacklist, played_targets) => {
             else if (desperate && !played_targets.includes(stringifyTarget(proposal, citysrc)['string']))
                 acceptable = true;
 
-            console.log("citysrc " + citysrc + "desperate " + desperate + " attempt " + i + " = rng " + rng + " ofs " + ofs + " " + stringifyTarget(proposal, citysrc)['string'] + " accepted " + acceptable)
             if (acceptable)
                 break;
         }

@@ -1136,6 +1136,9 @@ class Room {
                 this.round = 0;
             } else if (this.state === CONSTANTS.BEGIN_GAME_STATE) {
                 if (this.timer <= 0) {
+                    // Reset lists
+                    this.blacklist = [];
+                    this.played_targets = [];
                     // Make sure this is a real map
                     let real_map = Object.keys(MAPS).indexOf(this.citysrc) !== -1
                     if (!real_map) {
