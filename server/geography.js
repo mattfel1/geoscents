@@ -26,6 +26,8 @@ const randomCity = (citysrc, blacklist, played_targets) => {
     let timeout = 20;
     console.assert(ALLCITIES.has(citysrc), "No city src database for " + citysrc);
     let CITIES = ALLCITIES.get(citysrc);
+    console.log("blacklist " + blacklist)
+    console.log("played " + played_targets)
     while (!acceptable) {
         const rng = Math.random();
         // Scan the next 11 targets to find a suitable one
@@ -41,7 +43,7 @@ const randomCity = (citysrc, blacklist, played_targets) => {
             else if (desperate && !played_targets.includes(stringifyTarget(proposal, citysrc)['string']))
                 acceptable = true;
 
-            // console.log("citysrc " + citysrc + "desperate " + desperate + " attempt " + i + " = rng " + rng + " ofs " + ofs + " " + stringifyTarget(proposal, citysrc)['string'] + " accepted " + acceptable)
+            console.log("citysrc " + citysrc + "desperate " + desperate + " attempt " + i + " = rng " + rng + " ofs " + ofs + " " + stringifyTarget(proposal, citysrc)['string'] + " accepted " + acceptable)
             if (acceptable)
                 break;
         }
