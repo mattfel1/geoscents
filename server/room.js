@@ -335,9 +335,11 @@ class Room {
     }
 
     gameActive() {
-        return this.state == CONSTANTS.BEGIN_GAME_STATE ||
-            this.state == CONSTANTS.GUESS_STATE ||
+        return this.state == CONSTANTS.GUESS_STATE ||
             this.state == CONSTANTS.REVEAL_STATE;
+    }
+    gameBeginning() {
+        return this.state == CONSTANTS.BEGIN_GAME_STATE;
     }
     killPlayer(socket) {
         // console.log('user disconnected ' + socket.id);
@@ -375,7 +377,7 @@ class Room {
     }
 
     playerReady(socket) {
-        if (this.players.has(socket.id) && !this.gameActive()) {
+        if (this.players.has(socket.id) && !this.gameBeginning()) {
             const player = this.players.get(socket.id);
             player.ready = '✔';
         }
