@@ -580,7 +580,11 @@ io.on('connection', (socket) => {
                 room.killJoe()
             } else {
                 helpers.log("Player " + socket.handshake.address + " " + info['name'] + " has birthed joe in " + room.roomName);
-                room.createJoe();
+                let botname = ''
+                if (info['perfect'] && info['flair'] == helpers.flairToEmoji(room.citysrc)) {
+                    botname = info['raw_name'];
+                }
+                room.createJoe(botname);
                 const bot_msg = "[ " + CONSTANTS.BIRTH_MSGS[Math.floor(Math.random() * CONSTANTS.BIRTH_MSGS.length)]
                     .replace('PLAYER', "<font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b></font>")
                     .replace('BOT', "<b>" + room.joe.name + "</b>") + "]<br>";
@@ -950,7 +954,7 @@ setInterval(() => {
                 room.map = special;
                 room.citysrc = special;
                 room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
-                room.createJoe();
+                room.createJoe('');
             }
         });
         announce("<font size=10 color=\"red\"><b>Daily" + s + " records have been reset!</b></font><br>")

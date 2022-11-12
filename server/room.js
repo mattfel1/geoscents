@@ -48,7 +48,7 @@ class Room {
         this.monthRecord;
         this.allRecord;
         this.loadRecords();
-        this.createJoe();
+        this.createJoe('');
         this.hasJoe = roomName != CONSTANTS.LOBBY && !CONSTANTS.DEBUG_MODE;
         this.recorded = false; // Toggle for making sure we only record once per reveal_state
         this.game_special_idx;
@@ -63,11 +63,13 @@ class Room {
         this.allRecord = all;
         this.lastRecordUpdate = timestamp;
     }
-    createJoe() {
+    createJoe(botname) {
         let name = CONSTANTS.AVERAGE_NAMES[Math.floor(Math.random() * CONSTANTS.AVERAGE_NAMES.length)]
         // console.log("create joe in " + this.map + " idx " + CONSTANTS.SPECIALS.has(this.map))
         if (this.citysrc != CONSTANTS.LOBBY && Geography.isSpecial(this.citysrc))
             name = MAPS[this.citysrc]["leader"]
+        if (botname !== '')
+            name = botname;
         const avg_name = "Average " + name;
         this.joe = new Player(this.roomName + "_joe", 0, this.map, this.ordinalCounter, this.ordinalCounter, avg_name, {
             'moved': true,
@@ -145,7 +147,7 @@ class Room {
         function copy(x) {
             return JSON.parse(JSON.stringify(x, null, 2));
         }
-        if (!this.hasJoe && this.map !== CONSTANTS.LOBBY) this.createJoe()
+        if (!this.hasJoe && this.map !== CONSTANTS.LOBBY) this.createJoe('')
         this.dayRecord = CONSTANTS.INIT_RECORD;
         if (week) this.weekRecord = CONSTANTS.INIT_RECORD;
         if (month) this.monthRecord = CONSTANTS.INIT_RECORD;
@@ -215,7 +217,8 @@ class Room {
         this.killJoe();
         this.loadRecords();
         this.drawScorePanel();
-        this.createJoe();
+        if (!this.hasJoe)
+            this.createJoe('');
     }
     // Player count
     playerCount() {
