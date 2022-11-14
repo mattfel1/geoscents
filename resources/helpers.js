@@ -862,6 +862,7 @@ async function insertHallOfFame(hash, public_hash, player_name, map, path, score
         let dict = {
             'name': player_name,
             'maps': [map],
+            'perfect': [],
             'last_record': unixtime,
             'public_hash': public_hash
         }
