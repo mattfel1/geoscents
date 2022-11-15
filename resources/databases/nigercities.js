@@ -27,6 +27,19 @@ module.exports = {
             "id": 1562200314
         },
         {
+            "city": "Tessaoua",
+            "city_ascii": "Tessaoua",
+            "lat": 13.753333,
+            "lng": 7.986389,
+            "country": "Niger",
+            "iso2": "NE",
+            "iso3": "NER",
+            "admin_name": "Maradi",
+            "capital": "",
+            "population": 43409,
+            "id": 1562200314
+        },
+        {
             "city": "Zinder",
             "city_ascii": "Zinder",
             "lat": 13.8,
@@ -89,6 +102,19 @@ module.exports = {
             "admin_name": "Diffa",
             "capital": "admin",
             "population": 30988,
+            "id": 1562050464
+        },
+        {
+            "city": "Dogondoutchi",
+            "city_ascii": "Dogondoutchi",
+            "lat": 13.3171,
+            "lng": 12.6089,
+            "country": "Niger",
+            "iso2": "NE",
+            "iso3": "NER",
+            "admin_name": "Dossa",
+            "capital": "",
+            "population": 36971,
             "id": 1562050464
         },
         {
@@ -157,6 +183,19 @@ module.exports = {
             "id": 1562787330
         },
         {
+            "city": "Abala",
+            "city_ascii": "Abala",
+            "lat": 14.936944,
+            "lng": 3.433611,
+            "country": "Niger",
+            "iso2": "NE",
+            "iso3": "NER",
+            "admin_name": "Tillab\u00e9ri",
+            "capital": "",
+            "population": 75117,
+            "id": 1562787331
+        },
+        {
             "city": "Madaoua",
             "city_ascii": "Madaoua",
             "lat": 14.0762,
@@ -193,6 +232,19 @@ module.exports = {
             "admin_name": "Zinder",
             "capital": "minor",
             "population": 14639,
+            "id": 1562482102
+        },
+        {
+            "city": "Tanout",
+            "city_ascii": "Tanout",
+            "lat": 14.972222,
+            "lng": 8.880556,
+            "country": "Niger",
+            "iso2": "NE",
+            "iso3": "NER",
+            "admin_name": "Zinder",
+            "capital": "",
+            "population": 134074,
             "id": 1562482102
         },
         {

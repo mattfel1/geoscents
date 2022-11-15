@@ -5804,6 +5804,19 @@ module.exports = {
             "id": 1562695011
         },
         {
+            "city": "Tanout",
+            "city_ascii": "Tanout",
+            "lat": 14.972222,
+            "lng": 8.880556,
+            "country": "Niger",
+            "iso2": "NE",
+            "iso3": "NER",
+            "admin_name": "Zinder",
+            "capital": "",
+            "population": 134074,
+            "id": 1562482102
+        },
+        {
             "city": "Laayoune",
             "city_ascii": "Laayoune",
             "lat": 27.153611,
