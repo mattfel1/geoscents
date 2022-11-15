@@ -4999,7 +4999,7 @@ module.exports = {
             "capital": "",
             "wiki": "https://en.wikipedia.org/wiki/Wanggongchang_Explosion"
         },
-        eoau {
+        {
             "city": "Discovery Site of Hadean Zircon (Oldest Material of Terrestrial Origin, 4.1 Billion Years Old)",
             "city_ascii": "",
             "lat": -26.116667,
