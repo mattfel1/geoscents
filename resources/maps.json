@@ -14,9 +14,19 @@
         "flair": "🌏",
         "tier": "continent"
     },
+    "Asia Capitals": {
+        "coords": [25, 158, -1, 61.05],
+        "flair": "🍚",
+        "tier": "continent"
+    },
     "Europe": {
         "coords": [-36.3, 52, 35.0, 66.3],
         "flair": "🇪🇺",
+        "tier": "continent"
+    },
+    "Europe Capitals": {
+        "coords": [-36.3, 52, 35.0, 66.3],
+        "flair": "🏰",
         "tier": "continent"
     },
     "N. America": {
@@ -34,9 +44,19 @@
         "flair": "🌊",
         "tier": "continent"
     },
+    "Oceania Capitals": {
+        "coords": [92, 252, -54.55, 28],
+        "flair": "🛶",
+        "tier": "continent"
+    },
     "S. America": {
         "coords": [-140, 17, -56.0, 24.1],
         "flair": "🌎",
+        "tier": "continent"
+    },
+    "S. America Capitals": {
+        "coords": [-140, 17, -56.0, 24.1],
+        "flair": "🦙",
         "tier": "continent"
     },
     "Trivia": {
@@ -75,6 +95,13 @@
         "flair": "🐧",
         "tier": "region"
     },
+    "Arabia": {
+        "leader": "Djinn",
+        "greeting": "أهلا بك (Ahlan bik)",
+        "coords": [23.1, 68, 12, 36],
+        "flair": "👳",
+        "tier": "region"
+    },
     "Argentina": {
         "leader": "Fernandez",
         "greeting": "Bienvenido",
@@ -88,6 +115,13 @@
         "coords": [97, 170, -45.5, -8],
         "flair": "🦘",
         "tier": "country"
+    },
+    "Balkans": {
+        "leader": "Baba Yaga",
+        "greeting": "Здраво (Zdravo)",
+        "coords": [5, 39, 34.15, 49.05],
+        "flair": "☦️",
+        "tier": "region"
     },
     "Bangladesh": {
         "leader": "Hamid",
@@ -240,14 +274,14 @@
         "leader": "Mattarella",
         "greeting": "Benvenuto",
         "coords": [-2.1, 25.4, 36, 48],
-        "flair": "🤌",
+        "flair": "🇮🇹",
         "tier": "country"
     },
     "Japan": {
         "leader": "Kishida",
         "greeting": "いらっしゃいませ (irasshaimase)",
         "coords": [110, 164.5, 23.5, 49],
-        "flair": "🗻",
+        "flair": "🇯🇵",
         "tier": "country"
     },
     "Kazakhstan": {
@@ -324,7 +358,7 @@
         "leader": "Ardern",
         "greeting": "Kia ora/Welcome",
         "coords": [151, 190.4, -49, -31.4],
-        "flair": "🥝",
+        "flair": "🇳🇿",
         "tier": "country"
     },
     "Niger": {
@@ -376,6 +410,13 @@
         "flair": "🇵🇱",
         "tier": "country"
     },
+    "Polynesia": {
+        "leader": "",
+        "greeting": "",
+        "coords": [],
+        "flair": "🏄",
+        "tier": "region"
+    },
     "Portugal": {
         "leader": "de Sousa",
         "greeting": "Receber",
@@ -394,7 +435,7 @@
         "leader": "Putin",
         "greeting": "добро пожаловать (dobro pozhalovat')",
         "coords": [19, 190, 31.5, 79],
-        "flair": "🪆",
+        "flair": "🇷🇺",
         "tier": "country"
     },
     "Saudi Arabia": {
@@ -478,7 +519,7 @@
         "leader": "Erdoğan",
         "greeting": "مرحبا‎ (Merhaba)",
         "coords": [22, 48, 33.14, 45],
-        "flair": "🦃",
+        "flair": "🇹🇷",
         "tier": "country"
     },
     "Turkmenistan": {
@@ -513,7 +554,7 @@
         "leader": "Biden",
         "greeting": "Welcome",
         "coords": [-130, -60, 22, 53.7],
-        "flair": "🦅",
+        "flair": "🇺🇸",
         "tier": "country"
     },
     "Uruguay": {
