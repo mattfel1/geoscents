@@ -592,9 +592,7 @@ io.on('connection', (socket) => {
             var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has left " + originRoomName + " and joined " + citysrc + "!</font> ]<br>";
             io.sockets.emit("update messages", originRoomName, leave_msg)
             rooms[originRoomName].killPlayer(socket);
-            let map = citysrc
-            if (map.includes('World'))
-                map = CONSTANTS.WORLD
+            let map = citysrc.replace(" Capitals", "");
             let roomName = citysrc
             // Update hall of fame
             if (roomName === CONSTANTS.LOBBY) {
@@ -646,9 +644,7 @@ io.on('connection', (socket) => {
 
 
         // Convert citysrc to the map that it is played on
-        let map = askcitysrc;
-        if (map.includes('World'))
-            map = CONSTANTS.WORLD
+        let map = askcitysrc.replace(" Capitals", "");
 
         if (playerRooms.has(socket.id)) {
             let dest = "private_" + code;

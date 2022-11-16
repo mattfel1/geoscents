@@ -113,7 +113,7 @@
         "leader": "Albanese",
         "greeting": "Welcome",
         "coords": [97, 170, -45.5, -8],
-        "flair": "🦘",
+        "flair": "🇦🇺",
         "tier": "country"
     },
     "Balkans": {
@@ -162,7 +162,7 @@
         "leader": "Trudeau",
         "greeting": "Welcome/Bienvenue",
         "coords": [-152.1, -40, 38, 72.5],
-        "flair": "🍁",
+        "flair": "🇨🇦",
         "tier": "country"
     },
     "Central African Republic": {
@@ -183,7 +183,7 @@
         "leader": "Xi",
         "greeting": "欢迎光临 (Huānyíng guānglín)",
         "coords": [62, 148, 16.85, 56],
-        "flair": "🐼",
+        "flair": "🇨🇳",
         "tier": "country"
     },
     "Colombia": {
@@ -225,7 +225,7 @@
         "leader": "Macron",
         "greeting": "Bienvenue",
         "coords": [-10.2, 17, 41, 52],
-        "flair": "🥐",
+        "flair": "🇫🇷",
         "tier": "country"
     },
     "Germany": {
@@ -375,6 +375,13 @@
         "flair": "🇳🇬",
         "tier": "country"
     },
+    "Nordic": {
+        "leader": "Thor",
+        "greeting": "Welcome",
+        "coords": [-25, 50, 52.2, 72],
+        "flair": "🎣",
+        "tier": "region"
+    },
     "Pakistan": {
         "leader": "Alvi",
         "greeting": "خوش آمدید (Khush Amdeed)/Welcome",
@@ -411,9 +418,9 @@
         "tier": "country"
     },
     "Polynesia": {
-        "leader": "",
-        "greeting": "",
-        "coords": [],
+        "leader": "Kane",
+        "greeting": "Aloha",
+        "coords": [129, 270, -49, 26],
         "flair": "🏄",
         "tier": "region"
     },

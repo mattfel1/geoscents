@@ -37,38 +37,74 @@ document.documentElement.style.zoom = 1;
 
 // Update index with all countries in special list
 let dropdown = window.document.getElementById('requestedCitysrc')
-let options = [];
-let special_options = [];
+let continent_options = [];
+let region_options = [];
+let country_options = [];
 // Add main maps first, then specific maps
 Object.keys(MAPS).forEach(function(value) {
     var entry = document.createElement("option");
     entry.value = value;
-    if (MAPS[value]['leader'] === undefined) {
+    if (MAPS[value]['tier'] === 'continent') {
         entry.text = value
-        options.push(entry)
+        continent_options.push(entry)
     }
 })
 Object.keys(MAPS).forEach(function(value) {
     var entry = document.createElement("option");
     entry.value = value;
-    if (MAPS[value]['leader'] !== undefined) {
+    if (MAPS[value]['tier'] === 'region') {
         entry.text = value
-        special_options.push(entry)
+        region_options.push(entry)
+    }
+})
+Object.keys(MAPS).forEach(function(value) {
+    var entry = document.createElement("option");
+    entry.value = value;
+    if (MAPS[value]['tier'] === 'country') {
+        entry.text = value
+        country_options.push(entry)
     }
 })
 
-options.sort((a, b) => {
+continent_options.sort((a, b) => {
     return a.text.localeCompare(b.text)
 });
-special_options.sort((a, b) => {
+region_options.sort((a, b) => {
+    return a.text.localeCompare(b.text)
+});
+country_options.sort((a, b) => {
     return a.text.localeCompare(b.text)
 });
 
-options.forEach((x, i) => {
+
+var continent_sep = document.createElement("option");
+continent_sep.text = "--- Continents ---"
+continent_sep.setAttribute('readonly', true);
+continent_sep.value = " "
+dropdown.appendChild(continent_sep);
+
+continent_options.forEach((x, i) => {
     dropdown.appendChild(x);
 })
-special_options.forEach((x, i) => {
-    dropdown.append(x);
+
+var region_sep = document.createElement("option");
+region_sep.text = "--- Regions ---"
+region_sep.setAttribute('readonly', true);
+region_sep.value = " "
+dropdown.appendChild(region_sep);
+
+region_options.forEach((x, i) => {
+    dropdown.appendChild(x);
+})
+
+var country_sep = document.createElement("option");
+country_sep.text = "--- Countries ---"
+country_sep.setAttribute('readonly', true);
+country_sep.value = " "
+dropdown.appendChild(country_sep);
+
+country_options.forEach((x, i) => {
+    dropdown.appendChild(x);
 })
 
 // Update color choices

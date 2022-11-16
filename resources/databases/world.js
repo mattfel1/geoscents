@@ -11829,6 +11829,19 @@ module.exports = {
             "id": 1840014730
         },
         {
+            "city": "Macap\u00e1",
+            "city_ascii": "Macapa",
+            "lat": 0.033,
+            "lng": -51.05,
+            "country": "Brazil",
+            "iso2": "BR",
+            "iso3": "BRA",
+            "admin_name": "Amap\u00e1",
+            "capital": "admin",
+            "population": 499166,
+            "id": 1076189884
+        },
+        {
             "city": "Des Moines",
             "city_ascii": "Des Moines",
             "lat": 41.5725,
@@ -11972,6 +11985,19 @@ module.exports = {
             "id": 1840008940
         },
         {
+            "city": "Porto Velho",
+            "city_ascii": "Porto Velho",
+            "lat": -8.75,
+            "lng": -63.9,
+            "country": "Brazil",
+            "iso2": "BR",
+            "iso3": "BRA",
+            "admin_name": "Rond\u00f4nia",
+            "capital": "admin",
+            "population": 306180,
+            "id": 1076045591
+        },
+        {
             "city": "Trenton",
             "city_ascii": "Trenton",
             "lat": 40.2236,
@@ -12050,6 +12076,19 @@ module.exports = {
             "id": 1840021224
         },
         {
+            "city": "Rio Branco",
+            "city_ascii": "Rio Branco",
+            "lat": -9.9666,
+            "lng": -67.8,
+            "country": "Brazil",
+            "iso2": "BR",
+            "iso3": "BRA",
+            "admin_name": "Acre",
+            "capital": "admin",
+            "population": 257642,
+            "id": 1076391263
+        },
+        {
             "city": "Montgomery",
             "city_ascii": "Montgomery",
             "lat": 32.3473,
@@ -12074,6 +12113,32 @@ module.exports = {
             "capital": "admin",
             "population": 253030,
             "id": 1840015913
+        },
+        {
+            "city": "Palmas",
+            "city_ascii": "Palmas",
+            "lat": -10.2377,
+            "lng": -48.2878,
+            "country": "Brazil",
+            "iso2": "BR",
+            "iso3": "BRA",
+            "admin_name": "Tocantins",
+            "capital": "admin",
+            "population": 235315,
+            "id": 1076052802
+        },
+        {
+            "city": "Boa Vista",
+            "city_ascii": "Boa Vista",
+            "lat": 2.8161,
+            "lng": -60.666,
+            "country": "Brazil",
+            "iso2": "BR",
+            "iso3": "BRA",
+            "admin_name": "Roraima",
+            "capital": "admin",
+            "population": 235150,
+            "id": 1076621300
         },
         {
             "city": "Puducherry",
