@@ -2236,6 +2236,58 @@ module.exports = {
             "id": 1643608746
         },
         {
+            "city": "Nar\u2019yan-Mar",
+            "city_ascii": "Nar'yan-Mar",
+            "lat": 67.6474,
+            "lng": 53.0574,
+            "country": "Russia",
+            "iso2": "RU",
+            "iso3": "RUS",
+            "admin_name": "Nenetskiy Avtonomnyy Okrug",
+            "capital": "admin",
+            "population": 21658,
+            "id": 1643685127
+        },
+        {
+            "city": "Anadyr\u2019",
+            "city_ascii": "Anadyr'",
+            "lat": 64.737,
+            "lng": 177.475,
+            "country": "Russia",
+            "iso2": "RU",
+            "iso3": "RUS",
+            "admin_name": "Chukotskiy Avtonomnyy Okrug",
+            "capital": "admin",
+            "population": 10332,
+            "id": 1643453469
+        },
+        {
+            "city": "Magas",
+            "city_ascii": "Magas",
+            "lat": 43.1667,
+            "lng": 44.8,
+            "country": "Russia",
+            "iso2": "RU",
+            "iso3": "RUS",
+            "admin_name": "Ingushetiya",
+            "capital": "admin",
+            "population": "",
+            "id": 1643520048
+        },
+        {
+            "city": "Perm\u2019",
+            "city_ascii": "Perm'",
+            "lat": 58.0174,
+            "lng": 56.2855,
+            "country": "Russia",
+            "iso2": "RU",
+            "iso3": "RUS",
+            "admin_name": "Permskiy Kray",
+            "capital": "admin",
+            "population": "",
+            "id": 1643294442
+        },
+        {
             "city": "Zel\u00ebnodol\u2019sk",
             "city_ascii": "Zelenodol'sk",
             "lat": 55.8406,

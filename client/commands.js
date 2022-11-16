@@ -14,7 +14,7 @@ class Commands {
         this.counts = {
             [CONSTANTS.LOBBY]: 0,
             [CONSTANTS.WORLD]: 0,
-            [CONSTANTS.WORLD_CAPITALS]: 0,
+            [CONSTANTS.SPECIAL_CAPITAL]: 0,
             [CONSTANTS.EUROPE]: 0,
             [CONSTANTS.NAMERICA]: 0,
             [CONSTANTS.AFRICA]: 0,
@@ -22,7 +22,7 @@ class Commands {
             [CONSTANTS.OCEANIA]: 0,
             [CONSTANTS.SAMERICA]: 0,
             [CONSTANTS.TRIVIA]: 0,
-            [CONSTANTS.SPECIAL]: 0
+            [CONSTANTS.SPECIAL_REGION]: 0
         }
         this.mapStyle = 'terrain';
         this.lastCommand = {
@@ -246,10 +246,10 @@ class Commands {
         $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>Lobby</b> <font size=2><br>" + lobby_string + "</font></button>"))
         if (this.isPrivate) $('#commands').append($("<button class='private-room-btn' id='private_button'><b>" + this.privateCitysrc + "</b><br>code: " + this.privateCode + "</button>"));
         else $('#commands').append($("<button class='private-room-btn' id='private_button'><b>Private/Custom</b><font size=2><br>" + private_string + "</font></button>"));
-        this.roomButton(CONSTANTS.SPECIAL, "special", true);
-        this.roomButton(CONSTANTS.WORLD, "world");
-        this.roomButton(CONSTANTS.WORLD_CAPITALS, "world_capitals");
         this.roomButton(CONSTANTS.TRIVIA, "trivia", true);
+        this.roomButton(CONSTANTS.WORLD, "world");
+        this.roomButton(CONSTANTS.SPECIAL_CAPITAL, "special_capital", true);
+        this.roomButton(CONSTANTS.SPECIAL_REGION, "special_region", true);
         this.roomButton(CONSTANTS.EUROPE, "europe");
         this.roomButton(CONSTANTS.AFRICA, "africa");
         this.roomButton(CONSTANTS.ASIA, "asia");
@@ -310,7 +310,7 @@ class Commands {
         });
         this.bindClick(room, CONSTANTS.LOBBY, "lobby", socket)
         this.bindClick(room, CONSTANTS.WORLD, "world", socket)
-        this.bindClick(room, CONSTANTS.WORLD_CAPITALS, "world_capitals", socket)
+        this.bindClick(room, CONSTANTS.SPECIAL_CAPITAL, "special_capital", socket)
         this.bindClick(room, CONSTANTS.TRIVIA, "trivia", socket)
         this.bindClick(room, CONSTANTS.NAMERICA, "namerica", socket)
         this.bindClick(room, CONSTANTS.EUROPE, "europe", socket)
@@ -318,7 +318,7 @@ class Commands {
         this.bindClick(room, CONSTANTS.ASIA, "asia", socket)
         this.bindClick(room, CONSTANTS.OCEANIA, "oceania", socket)
         this.bindClick(room, CONSTANTS.SAMERICA, "samerica", socket)
-        this.bindClick(room, CONSTANTS.SPECIAL, "special", socket)
+        this.bindClick(room, CONSTANTS.SPECIAL_REGION, "special_region", socket)
         $('#private_button').bind("click", () => {
             if (room !== CONSTANTS.PRIVATE) {
                 // Popup to ask for room name, map, bot

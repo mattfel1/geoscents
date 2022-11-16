@@ -965,6 +965,58 @@ module.exports = {
             "id": 1360692406
         },
         {
+            "city": "Manokwari",
+            "city_ascii": "Manokwari",
+            "lat": -0.8711,
+            "lng": 134.0693,
+            "country": "Indonesia",
+            "iso2": "ID",
+            "iso3": "IDN",
+            "admin_name": "Papua Barat",
+            "capital": "admin",
+            "population": 74504,
+            "id": 1360451991
+        },
+        {
+            "city": "Sofifi",
+            "city_ascii": "Sofifi",
+            "lat": 0.7373,
+            "lng": 127.5588,
+            "country": "Indonesia",
+            "iso2": "ID",
+            "iso3": "IDN",
+            "admin_name": "Maluku Utara",
+            "capital": "admin",
+            "population": "",
+            "id": 1360431437
+        },
+        {
+            "city": "Mamuju",
+            "city_ascii": "Mamuju",
+            "lat": -2.6806,
+            "lng": 118.8861,
+            "country": "Indonesia",
+            "iso2": "ID",
+            "iso3": "IDN",
+            "admin_name": "Sulawesi Barat",
+            "capital": "admin",
+            "population": "",
+            "id": 1360687242
+        },
+        {
+            "city": "Tanjung Selor",
+            "city_ascii": "Tanjung Selor",
+            "lat": 2.8375,
+            "lng": 117.3653,
+            "country": "Indonesia",
+            "iso2": "ID",
+            "iso3": "IDN",
+            "admin_name": "Kalimantan Utara",
+            "capital": "admin",
+            "population": "",
+            "id": 1360029270
+        },
+        {
             "city": "Sungai Penuh",
             "city_ascii": "Sungai Penuh",
             "lat": -2.0631,

@@ -15,7 +15,7 @@ let ALLCITIES = new Map()
 
 requireFunc = typeof __webpack_require__ === "function" ? __non_webpack_require__ : require;
 Object.keys(MAPS).forEach(function(value) {
-    let list = requireFunc('../public/' + value.toLowerCase().replace(/ /g, "").replace(".", "") + 'cities.js').CITIES;
+    let list = requireFunc('../public/' + value.toLowerCase().replace(/ /g, "").replace(".", "") + '.js').CITIES;
     ALLCITIES.set(value, list);
 })
 
@@ -63,7 +63,19 @@ const blacklistEntireString = (citysrc) => {
     return citysrc == CONSTANTS.TRIVIA || citysrc == "Vatican City" || citysrc == "Antarctica";
 }
 
-const isSpecial = (citysrc) => {
+const isCountry = (citysrc) => {
+    return MAPS[citysrc]['tier'] === "country"
+}
+const isRegion = (citysrc) => {
+    return MAPS[citysrc]['tier'] === "region"
+}
+const isContinent = (citysrc) => {
+    return MAPS[citysrc]['tier'] === "continent"
+}
+const isCapital = (citysrc) => {
+    return citysrc.endsWith("Capitals")
+}
+const hasLeader = (citysrc) => {
     return MAPS[citysrc]['leader'] !== undefined
 }
 
@@ -80,7 +92,7 @@ const includeAdmin = (target, citysrc) => {
             target['country'] === 'Russia' ||
             target['country'] === 'Indonesia' ||
             target['country'] === 'Brazil' ||
-            isSpecial(citysrc)) &&
+            isCountry(citysrc)) &&
         !blacklistEntireString(citysrc)
 
 };
@@ -136,7 +148,7 @@ const requireUniqueAdmin = (citysrc, target) => {
         return true
     } else if (blacklistEntireString(citysrc)) {
         return false
-    } else if (isSpecial(citysrc)) {
+    } else if (isCountry(citysrc)) {
         return true
     }
     // else if (citysrc === CONSTANTS.OCEANIA && target['country'] === 'Australia') {return true}
@@ -152,7 +164,7 @@ const uniqueInBlacklist = (citysrc, target, blacklist) => {
 const mercDist = (map, row1, col1, row2, col2) => {
     const row_err = Math.pow(row1 - row2, 2);
     let col_err = Math.min(Math.pow(col1 - col2, 2), Math.pow(col1 - col2 + CONSTANTS.MAP_WIDTH, 2), Math.pow(col1 - col2 - CONSTANTS.MAP_WIDTH, 2));
-    if (map === CONSTANTS.NAMERICA || map === CONSTANTS.EUROPE || map === CONSTANTS.AFRICA || map === CONSTANTS.SAMERICA || map === CONSTANTS.ASIA || map === CONSTANTS.OCEANIA || isSpecial(map)) { // No wrap
+    if (map === CONSTANTS.NAMERICA || map === CONSTANTS.EUROPE || map === CONSTANTS.AFRICA || map === CONSTANTS.SAMERICA || map === CONSTANTS.ASIA || map === CONSTANTS.OCEANIA || isCountry(map)) { // No wrap
         col_err = Math.pow(col1 - col2, 2);
     }
     return Math.sqrt(row_err + col_err);
@@ -189,7 +201,7 @@ const score = (map, geoDist, mercDist, timeBonus) => {
     } else {
         let fudge_factor = 1
         // Tiny maps need slightly different math
-        if (isSpecial(map))
+        if (!isContinent(map))
             fudge_factor = 2.5;
         if (map == "Vatican City")
             fudge_factor = 30;
@@ -324,5 +336,9 @@ module.exports = {
     stringifyTarget,
     blacklistEntireString,
     stringifyTargetAscii,
-    isSpecial
+    isCountry,
+    isRegion,
+    isContinent,
+    isCapital,
+    hasLeader
 }

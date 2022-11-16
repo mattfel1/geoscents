@@ -6,8 +6,9 @@ import re
 import warnings
 
 geoscents_home='/home/mattfel/geoscents/'
+big_countries = ['US', 'CN', 'CA', 'AU', 'IN']
 
-def scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, include_admin, errors):
+def scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, include_big_admin, include_any_admin, errors):
     countries = []
     file = geoscents_home + 'resources/databases/cities.js'
     error_msg = ""
@@ -16,8 +17,9 @@ def scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, include_admi
         filtered = []
         for entry in data:
             thisPop = 0 if (entry['population'] == '') else int(entry['population'])
-            thisMinorCap = (entry['iso2'] == 'US' or entry['iso2'] == 'CN' or entry['iso2'] == 'CA' or entry['iso2'] == 'AU' or entry['iso2'] == 'IN') and  entry['capital'] == 'admin'
-            thisCap = (include_admin and thisMinorCap) or entry['capital'] == 'primary'
+            isBigCountry = entry['iso2'] in big_countries
+            thisMinorCap = entry['capital'] == 'admin'
+            thisCap = (((include_big_admin and isBigCountry) or include_any_admin) and thisMinorCap) or entry['capital'] == 'primary'
             mustRemove = entry['country'] in blacklist or (blacklist == ['*'] and entry['country'] not in whitelist)
             mustKeep = entry['country'] in whitelist or entry['admin_name'] in whitelist or entry['city_ascii'] in whitelist
             # Still respect population if this is a single-country scrape
@@ -49,104 +51,132 @@ def scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, include_admi
 
 def make_country_list(country, rng, pop, errors):
     lower_country = country.replace(" ", "").replace(".", "").lower()
-    outfile = geoscents_home + 'resources/databases/' + lower_country + 'cities.js'
+    outfile = geoscents_home + 'resources/databases/' + lower_country + '.js'
     blacklist = ['*']
     whitelist = [country]
-    scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, errors)
+    scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, True, errors)
 
 
 errors = []
 
-outfile = geoscents_home + 'resources/databases/worldcities.js'
+outfile = geoscents_home + 'resources/databases/world.js'
 rng = [-180, 180, -65, 77]
 pop = 610000
 blacklist = []
 whitelist = ['Jersey', 'Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar', 'New Caledonia', 'Azores']
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
-outfile = geoscents_home + 'resources/databases/worldcapitalscities.js'
+outfile = geoscents_home + 'resources/databases/worldcapitals.js'
 rng = [-180, 180, -65, 77]
 pop = 9999999999999 # capital cities only
 blacklist = []
 whitelist = ['Jersey', 'Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar']
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, False, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, False, False, errors)
 
-outfile = geoscents_home + 'resources/databases/namericacities.js'
+outfile = geoscents_home + 'resources/databases/namerica.js'
 rng = [-141, -43, 12,54]
 pop = 100000
 blacklist = ['Barbados', 'Curaçao', 'Aruba', 'Saint Vincent And The Grenadines', 'Saint Lucia', 'Antigua And Barbuda', 'Grenada', 'Dominica', 'Saint Kitts And Nevis', 'Sint Maarten', 'Martinique', 'Guadeloupe']
 whitelist = []
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
-outfile = geoscents_home + 'resources/databases/oceaniacities.js'
+outfile = geoscents_home + 'resources/databases/namericacapitals.js'
+rng = [-141, -43, 12,54]
+pop = 999999999
+blacklist = ['Barbados', 'Curaçao', 'Aruba', 'Saint Vincent And The Grenadines', 'Saint Lucia', 'Antigua And Barbuda', 'Grenada', 'Dominica', 'Saint Kitts And Nevis', 'Sint Maarten', 'Martinique', 'Guadeloupe']
+whitelist = []
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
+
+outfile = geoscents_home + 'resources/databases/oceania.js'
 rng = [92,252, -51,28]
 pop = 10000
 blacklist =  ['Macau', 'Thailand', 'Mexico', 'United States', 'Sri Lanka', 'India', 'China', 'Philippines', 'Vietnam', 'Cambodia', 'Laos', 'Hong Kong', 'Taiwan', 'Bangladesh', 'Burma', 'Nepal', 'Bhutan', 'Japan', 'Myanmar']
 whitelist = ['Cook Islands', 'Wallis And Futuna', 'Honolulu', 'Hilo', 'Wailuku', 'Lihue', 'Easter Island', 'Tokelau']
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
-outfile = geoscents_home + 'resources/databases/asiacities.js'
+outfile = geoscents_home + 'resources/databases/asia.js'
 rng = [27,156, 2,59]
 pop = 400000
 blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', 'Cyprus', 'South Sudan', 'Northern Mariana Islands', 'Guam', 'Macau', 'Sudan', 'Belarus', 'Somalia']
 whitelist = []
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
-outfile = geoscents_home + 'resources/databases/samericacities.js'
+outfile = geoscents_home + 'resources/databases/samerica.js'
 rng = [-138, -30, -54,20]
 pop = 61000
 blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe', 'Pitcairn Islands']
 whitelist = ['Falkland Islands (Islas Malvinas)', 'Galápagos', 'South Georgia And South Sandwich Islands', 'Easter Island']
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
-outfile = geoscents_home + 'resources/databases/europecities.js'
+outfile = geoscents_home + 'resources/databases/europe.js'
 rng = [-36, 52, 37,66]
 pop = 100000
 blacklist = ['Azerbaijan', 'Iran', 'Armenia', 'Georgia', 'Kazakhstan', 'Iraq', 'Syria', 'Tunisia']
 whitelist = ['Isle Of Man', 'Gibraltar', 'Shetland Islands', 'Torshavn', 'Azores', 'Jersey']
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
-outfile = geoscents_home + 'resources/databases/africacities.js'
+outfile = geoscents_home + 'resources/databases/africa.js'
 rng = [-58, 80, -34,39]
 pop = 100000
 blacklist = ['India', 'Brazil', 'Pakistan', 'Iran', 'Iraq', 'Saudi Arabia', 'Afghanistan', 'Greece', 'Israel', 'Portugal', 'Syria', 'Turkey', 'Kuwait', 'Yemen', 'Paraguay', 'Lebanon', 'Qatar', 'United Arab Emirates', 'Spain', 'Tajikistan', 'Jordan', 'Oman', 'Turkmenistan', 'Bahrain', 'Malta', 'Suriname', 'Cyprus', 'Sri Lanka', 'Maldives', 'West Bank', 'Italy', 'Uzbekistan', 'China', 'Argentina', 'Uruguay']
 whitelist = ['Gibraltar']
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
-outfile = geoscents_home + 'resources/databases/ukrainecities.js'
+outfile = geoscents_home + 'resources/databases/africacapitals.js'
+rng = [-58, 80, -34,39]
+pop = 999999999 # caps only
+blacklist = ['India', 'Brazil', 'Pakistan', 'Iran', 'Iraq', 'Saudi Arabia', 'Afghanistan', 'Greece', 'Israel', 'Portugal', 'Syria', 'Turkey', 'Kuwait', 'Yemen', 'Paraguay', 'Lebanon', 'Qatar', 'United Arab Emirates', 'Spain', 'Tajikistan', 'Jordan', 'Oman', 'Turkmenistan', 'Bahrain', 'Malta', 'Suriname', 'Cyprus', 'Sri Lanka', 'Maldives', 'West Bank', 'Italy', 'Uzbekistan', 'China', 'Argentina', 'Uruguay']
+whitelist = ['Gibraltar']
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
+
+outfile = geoscents_home + 'resources/databases/ukraine.js'
 rng = [17.7, 45, 43.2, 54]
 pop = 0
 blacklist = ['Moldova', 'Belarus', 'Russia', 'Poland', 'Romania', 'Hungary', 'Serbia', 'Bosnia And Herzegovina', 'Czechia', 'Bulgaria', 'Slovakia', 'Gibraltar', 'Croatia', 'Montenegro']
 whitelist = []
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
-outfile = geoscents_home + 'resources/databases/southkoreacities.js'
+outfile = geoscents_home + 'resources/databases/southkorea.js'
 rng = [121, 135.75, 33, 40]
 pop = 0
 blacklist = ['*']
 whitelist = ['Korea, South']
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
-outfile = geoscents_home + 'resources/databases/greaterantillescities.js'
+outfile = geoscents_home + 'resources/databases/greaterantilles.js'
 rng = [-85.4, -64.5, 14.43, 26]
 pop = 30000
 blacklist = ['*']
 whitelist = ['Cuba', 'Dominican Republic', 'Haiti', 'Puerto Rico', 'Jamaica', 'Cayman Islands']
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
-outfile = geoscents_home + 'resources/databases/lesserantillescities.js'
+outfile = geoscents_home + 'resources/databases/lesserantilles.js'
 rng = [-74, -56.47, 10, 20]
 pop = 0
 blacklist = ['*']
 whitelist = ["Antigua And Barbuda", "Barbados", "Dominica", "Grenada", "Saint Kitts And Nevis", "Saint Lucia", "Saint Vincent And the Grenadines", "Trinidad And Tobago"]
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
-outfile = geoscents_home + 'resources/databases/democraticrepublicofthecongocities.js'
+outfile = geoscents_home + 'resources/databases/sahara.js'
+rng = [-19, 49.2, 6, 42]
+pop = 200000
+blacklist = ['*']
+whitelist = ["Morocco", "Algeria", "Tunisia", "Libya", "Egypt", "Mauritania", "Mali", "Niger", "Chad", "Sudan", "Eritrea", "Senegal", "Gambia, The", "Burkina Faso"]
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
+
+outfile = geoscents_home + 'resources/databases/thestans.js'
+rng = [28, 106, 23, 57]
+pop = 200000
+blacklist = ['*']
+whitelist = ["Kazakhstan", "Turkmenistan", "Uzbekistan", "Pakistan", "Afghanistan", "Tajikistan", "Kyrgyzstan"]
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
+
+outfile = geoscents_home + 'resources/databases/democraticrepublicofthecongo.js'
 rng = [3.53, 41, -14, 8]
 pop = 0
 blacklist = ['*']
 whitelist = ['Congo (Kinshasa)']
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
 make_country_list('Argentina', [-102, -20, -56.5, -20], 30000, errors)
 make_country_list('Australia', [97, 170, -45.5, -8], 15000, errors)

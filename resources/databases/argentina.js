@@ -429,6 +429,19 @@ module.exports = {
             "id": 1032847885
         },
         {
+            "city": "Rawson",
+            "city_ascii": "Rawson",
+            "lat": -43.3,
+            "lng": -65.1,
+            "country": "Argentina",
+            "iso2": "AR",
+            "iso3": "ARG",
+            "admin_name": "Chubut",
+            "capital": "admin",
+            "population": 26335,
+            "id": 1032302344
+        },
+        {
             "city": "San Carlos de Bariloche",
             "city_ascii": "San Carlos de Bariloche",
             "lat": -41.15,

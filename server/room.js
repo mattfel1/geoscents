@@ -51,7 +51,6 @@ class Room {
         this.createJoe('');
         this.hasJoe = roomName != CONSTANTS.LOBBY && !CONSTANTS.DEBUG_MODE;
         this.recorded = false; // Toggle for making sure we only record once per reveal_state
-        this.game_special_idx;
         this.hall_of_fame; // Keep hall of fame in-memory if this is the lobby
     }
 
@@ -66,7 +65,7 @@ class Room {
     createJoe(botname) {
         let name = CONSTANTS.AVERAGE_NAMES[Math.floor(Math.random() * CONSTANTS.AVERAGE_NAMES.length)]
         // console.log("create joe in " + this.map + " idx " + CONSTANTS.SPECIALS.has(this.map))
-        if (this.citysrc != CONSTANTS.LOBBY && Geography.isSpecial(this.citysrc))
+        if (this.citysrc != CONSTANTS.LOBBY && Geography.hasLeader(this.citysrc))
             name = MAPS[this.citysrc]["leader"]
         if (botname !== '')
             name = botname;

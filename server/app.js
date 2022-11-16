@@ -220,56 +220,63 @@ const coprime = (num1, num2) => {
     return true;
 };
 
-const calculate_special = () => {
+const calculate_specials = () => {
     // Get days since jan 1
     var now = new Date();
     var start = new Date(now.getFullYear(), 0, 0);
     var diff = now - start;
     var oneDay = 1000 * 60 * 60 * 24;
     var day = Math.floor(diff / oneDay) + 2;
-    let num_specials = 0
-    let num_classics = 0
+    let region_maps = []
+    let capital_maps = []
     for (const x in MAPS) {
-        if (Geography.isSpecial(x))
-            num_specials = num_specials + 1
-        else
-            num_classics = num_classics + 1
+        if (Geography.isRegion(x))
+            region_maps.push(x);
+        else if (Geography.isCapital(x))
+            capital_maps.push(x);
     }
 
-    // We want day % num_specials to be our new special_idx, but this is not stable when num_specials grows.
-    // To be more stable, we upcast num_specials to the nearest multiple of 20 and mod by that.  Then mod by num_specials.
-    let upcast_num_specials = (Math.round(num_specials / 20) + 1) * 20
-    let raw_idx = (day % upcast_num_specials) % num_specials;
+    const num_regions = region_maps.length;
+    const num_capitals = capital_maps.length;
+    // We want day % num_regions to be our new special_region_idx, but this is not stable when num_regions grows.
+    // To be more stable, we upcast num_regions to the nearest multiple of 20 and mod by that.  Then mod by num_regions.
+    let upcast_num_regions = (Math.round(num_regions / 20) + 1) * 20
+    let upcast_num_capitals = (Math.round(num_capitals / 20) + 1) * 20
+    let raw_regions_idx = (day % upcast_num_regions) % num_regions;
+    let raw_capitals_idx = (day % upcast_num_capitals) % num_capitals;
 
     // "Randomize" the special country so you can't easily tell the order by looking at constants.js.
-    // Find a multiplier, mult, that is coprime with num_specials, and recalculate special idx by multiplying
-    // with this value and re-modding with num_specials.
+    // Find a multiplier, mult, that is coprime with num_regions, and recalculate special idx by multiplying
+    // with this value and re-modding with num_regions.
     // Basically, since the lcm of two coprime numbers, A and B, is A*B, that means you can use A to re-index
     // values from 0 to B. For example, B = 10, A = 3, integers 0, 1, 2, ..., 9 would become 0, 3, 6, ..., 7.
     // Choose mult as the first coprime number above currenty "epoch."  Epoch = raw_idx / upcast_num_specials.
-    let epoch = Math.floor(day / upcast_num_specials) % num_specials;
+    let regions_epoch = Math.floor(day / upcast_num_regions) % num_regions;
     let mult = 1;
-    for (let i = epoch; i < num_specials; i++) {
-        if (i != 0 && coprime(i, num_specials)) {
+    for (let i = regions_epoch; i < num_regions; i++) {
+        if (i != 0 && coprime(i, num_regions)) {
             mult = i;
             break;
         }
     }
     // Plus 6 to match country the day this was implemented
-    let idx = (6 + mult * raw_idx) % num_specials;
+    let regions_idx = (6 + mult * raw_regions_idx) % num_regions;
+    let capitals_idx = (6 + mult * raw_capitals_idx) % num_capitals;
+
+    let special_region = region_maps[regions_idx];
+    let special_capital = capital_maps[capitals_idx];
 
     // Assume classics always come first
-    return idx + num_classics;
+    return [special_region, special_capital];
 }
 
-let special_idx = calculate_special();
-let special = Object.keys(MAPS)[special_idx];
+let [special_region, special_capital] = calculate_specials();
+let special_capital_map = special_capital.replace(" Capitals", "");
 
 // Game state info
 // map, roomName, citysrc
 var rooms = {
     'World': new Room(CONSTANTS.WORLD, CONSTANTS.WORLD, CONSTANTS.WORLD),
-    'World Capitals': new Room(CONSTANTS.WORLD, CONSTANTS.WORLD_CAPITALS, CONSTANTS.WORLD_CAPITALS),
     'N. America': new Room(CONSTANTS.NAMERICA, CONSTANTS.NAMERICA, CONSTANTS.NAMERICA),
     'S. America': new Room(CONSTANTS.SAMERICA, CONSTANTS.SAMERICA, CONSTANTS.SAMERICA),
     'Europe': new Room(CONSTANTS.EUROPE, CONSTANTS.EUROPE, CONSTANTS.EUROPE),
@@ -277,15 +284,30 @@ var rooms = {
     'Asia': new Room(CONSTANTS.ASIA, CONSTANTS.ASIA, CONSTANTS.ASIA),
     'Oceania': new Room(CONSTANTS.OCEANIA, CONSTANTS.OCEANIA, CONSTANTS.OCEANIA),
     'Trivia': new Room(CONSTANTS.TRIVIA, CONSTANTS.TRIVIA, CONSTANTS.TRIVIA),
-    'Daily Country': new Room(special, CONSTANTS.SPECIAL, special),
+    'Daily Region': new Room(special_region, CONSTANTS.SPECIAL_REGION, special_region),
+    'Daily Capitals': new Room(special_capital_map, CONSTANTS.SPECIAL_CAPITAL, special_capital),
     'Lobby': new Room(CONSTANTS.LOBBY, CONSTANTS.LOBBY, CONSTANTS.LOBBY),
 };
 
 // Populate hall of fame into lobby room
 rooms[CONSTANTS.LOBBY].hall_of_fame = famers;
-Object.values(rooms).forEach(function(room) {
-    room.game_special_idx = special_idx;
-});
+
+const getHist = () => {
+    return {
+        [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
+        [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
+        [CONSTANTS.SPECIAL_CAPITAL]: rooms[CONSTANTS.SPECIAL_CAPITAL].playerCount(),
+        [CONSTANTS.NAMERICA]: rooms[CONSTANTS.NAMERICA].playerCount(),
+        [CONSTANTS.EUROPE]: rooms[CONSTANTS.EUROPE].playerCount(),
+        [CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),
+        [CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),
+        [CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),
+        [CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),
+        [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
+        [CONSTANTS.SPECIAL_REGION]: rooms[CONSTANTS.SPECIAL_REGION].playerCount()
+    };
+}
+
 var playerRooms = new Map();
 
 const WELCOME_MESSAGE1 = 'Try out some other geography games, <a href=https://statdle.github.io/ target=\"_blank\">statdle</a>, <a href=https://worldle.teuteuf.fr/ target=\"_blank\">worldle</a>, and <a href=https://geoquest.wout.space/ target=\"_blank\">geoquest</a>!<br><br> ' +
@@ -316,19 +338,7 @@ io.on('connection', (socket) => {
             'moved': false
         });
         playerRooms.set(socket.id, rooms[CONSTANTS.LOBBY]);
-        io.sockets.emit('update counts', {
-            [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
-            [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
-            [CONSTANTS.WORLD_CAPITALS]: rooms[CONSTANTS.WORLD_CAPITALS].playerCount(),
-            [CONSTANTS.NAMERICA]: rooms[CONSTANTS.NAMERICA].playerCount(),
-            [CONSTANTS.EUROPE]: rooms[CONSTANTS.EUROPE].playerCount(),
-            [CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),
-            [CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),
-            [CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),
-            [CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),
-            [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
-            [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()
-        });
+        io.sockets.emit('update counts', getHist());
         helpers.log("User connected    " + socket.handshake.address);
         socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
     });
@@ -343,19 +353,7 @@ io.on('connection', (socket) => {
                 io.sockets.emit("update messages", room.roomName, leave_msg);
             }
             room.killPlayer(socket);
-            io.sockets.emit('update counts', {
-                [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
-                [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
-                [CONSTANTS.WORLD_CAPITALS]: rooms[CONSTANTS.WORLD_CAPITALS].playerCount(),
-                [CONSTANTS.NAMERICA]: rooms[CONSTANTS.NAMERICA].playerCount(),
-                [CONSTANTS.EUROPE]: rooms[CONSTANTS.EUROPE].playerCount(),
-                [CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),
-                [CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),
-                [CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),
-                [CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),
-                [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
-                [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()
-            });
+            io.sockets.emit('update counts', getHist());
         }
         Object.values(rooms).forEach(function(room) {
             if (room.isPrivate && room.playerCount() == 0) {
@@ -487,19 +485,7 @@ io.on('connection', (socket) => {
             // specificGreeting(socket, name, "adam", "<i>I was very concerned when you said the Male, Maldives image was \"crazy\".  I thought it was grabbing a random image from the wikipedia page for \"male\".  Did you just mean <a href=https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Male-total.jpg/600px-Male-total.jpg>this image</a> looks crazy?</i><br>");
             // specificGreeting(socket, name, "ecanpecan", "<i>Thanks for pointing that out...</i><br>");
             specificGreeting(socket, name, "Chrisi", "<i>Hi Chrisi, try using \"n7zc3wsn36\" instead of \"Chrisi\" next time you log in!</i><br>");
-            io.sockets.emit('update counts', {
-                [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
-                [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
-                [CONSTANTS.WORLD_CAPITALS]: rooms[CONSTANTS.WORLD_CAPITALS].playerCount(),
-                [CONSTANTS.NAMERICA]: rooms[CONSTANTS.NAMERICA].playerCount(),
-                [CONSTANTS.EUROPE]: rooms[CONSTANTS.EUROPE].playerCount(),
-                [CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),
-                [CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),
-                [CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),
-                [CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),
-                [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
-                [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()
-            });
+            io.sockets.emit('update counts', getHist());
 
         }
         callback()
@@ -543,19 +529,7 @@ io.on('connection', (socket) => {
             }
         });
 
-        io.sockets.emit('update counts', {
-            [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
-            [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
-            [CONSTANTS.WORLD_CAPITALS]: rooms[CONSTANTS.WORLD_CAPITALS].playerCount(),
-            [CONSTANTS.NAMERICA]: rooms[CONSTANTS.NAMERICA].playerCount(),
-            [CONSTANTS.EUROPE]: rooms[CONSTANTS.EUROPE].playerCount(),
-            [CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),
-            [CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),
-            [CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),
-            [CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),
-            [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
-            [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()
-        });
+        io.sockets.emit('update counts', getHist());
     });
     socket.on('mute', () => {
         io.sockets.emit('mute player', socket.id)
@@ -632,22 +606,7 @@ io.on('connection', (socket) => {
             playerRooms.set(socket.id, rooms[roomName]);
             var join_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has joined " + roomName + "!</font> ]<br>";
             io.sockets.emit("update messages", roomName, join_msg);
-            if (roomName == CONSTANTS.TRIVIA) rooms[roomName].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items or complain about current items by typing a message starting with /feedback!</i><br>", function() {});
-            if (roomName == CONSTANTS.SPECIAL) rooms[CONSTANTS.SPECIAL].whisperMessage(socket, "<i><b>" + MAPS[special]["greeting"] + "</b>! Today's special country is <b>" + special + "</b>!</i><br>", function() {});
-            if (roomName == CONSTANTS.WORLD_CAPITALS) rooms[roomName].whisperMessage(socket, "<i>Welcome to the World Capitals map!</i><br>", function() {});
-            io.sockets.emit('update counts', {
-                [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
-                [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
-                [CONSTANTS.WORLD_CAPITALS]: rooms[CONSTANTS.WORLD_CAPITALS].playerCount(),
-                [CONSTANTS.NAMERICA]: rooms[CONSTANTS.NAMERICA].playerCount(),
-                [CONSTANTS.EUROPE]: rooms[CONSTANTS.EUROPE].playerCount(),
-                [CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),
-                [CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),
-                [CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),
-                [CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),
-                [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
-                [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()
-            });
+            io.sockets.emit('update counts', getHist());
             rooms[roomName].joeMessage();
         }
         Object.values(rooms).forEach(function(room) {
@@ -701,7 +660,7 @@ io.on('connection', (socket) => {
                 var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b> has changed the map to " + askcitysrc + "!</font> ]<br>";
                 io.sockets.emit("update messages", originRoomName, leave_msg);
                 let citysrc = askcitysrc;
-                if (Geography.isSpecial(citysrc)) rooms[dest].whisperMessage(socket, "<i><b>" + MAPS[citysrc]["greeting"] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
+                if (Geography.hasLeader(citysrc)) rooms[dest].whisperMessage(socket, "<i><b>" + MAPS[citysrc]["greeting"] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
                 rooms[dest].map = map;
                 rooms[dest].citysrc = citysrc;
                 rooms[dest].reset();
@@ -728,23 +687,11 @@ io.on('connection', (socket) => {
                 socket.emit('update messages', dest, PRIVATE_MESSAGE);
                 rooms[dest].addPlayer(socket, info);
                 playerRooms.set(socket.id, rooms[dest]);
-                if (Geography.isSpecial(citysrc)) rooms[dest].whisperMessage(socket, "<i><b>" + MAPS[citysrc]["greeting"] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
+                if (Geography.hasLeader(citysrc)) rooms[dest].whisperMessage(socket, "<i><b>" + MAPS[citysrc]["greeting"] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
                 var join_msg = "[ <font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b> has joined " + dest + "!</font> ]<br>";
                 io.sockets.emit("update messages", dest, join_msg);
                 // if (dest == CONSTANTS.TRIVIA) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
-                io.sockets.emit('update counts', {
-                    [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
-                    [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
-                    [CONSTANTS.WORLD_CAPITALS]: rooms[CONSTANTS.WORLD_CAPITALS].playerCount(),
-                    [CONSTANTS.NAMERICA]: rooms[CONSTANTS.NAMERICA].playerCount(),
-                    [CONSTANTS.EUROPE]: rooms[CONSTANTS.EUROPE].playerCount(),
-                    [CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),
-                    [CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),
-                    [CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),
-                    [CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),
-                    [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
-                    [CONSTANTS.SPECIAL]: rooms[CONSTANTS.SPECIAL].playerCount()
-                });
+                io.sockets.emit('update counts', getHist());
                 helpers.log("Player " + socket.handshake.address + " " + info['raw_name'] + " moved to room " + dest);
                 rooms[dest].joeMessage();
             }
@@ -940,19 +887,24 @@ setInterval(() => {
     let reset_imminent = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() <= 29;
     let reset_now = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() > 29;
     if (reset_imminent) {
-        announce("<font size=9 color=\"red\"><b>WARNING: Daily" + s + " records will reset in 30 seconds! Daily country will also be changed!</b></font><br>")
+        announce("<font size=9 color=\"red\"><b>WARNING: Daily" + s + " records will reset in 30 seconds! Daily maps will also be changed!</b></font><br>")
     }
 
     // Get new special
     if (reset_now) {
-        special_idx = calculate_special();
-        special = Object.keys(MAPS)[special_idx];
+        [special_region, special_capital] = calculate_specials();
         Object.values(rooms).forEach(function(room) {
             room.flushRecords(week, month, year);
-            if (room.roomName == CONSTANTS.SPECIAL) {
+            if (room.roomName == CONSTANTS.SPECIAL_REGION) {
                 room.killJoe();
-                room.map = special;
-                room.citysrc = special;
+                room.map = special_region;
+                room.citysrc = special_region;
+                room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
+                room.createJoe('');
+            } else if (room.roomName == CONSTANTS.SPECIAL_CAPITAL) {
+                room.killJoe();
+                room.map = special_capital;
+                room.citysrc = special_capital;
                 room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
                 room.createJoe('');
             }
