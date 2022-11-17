@@ -900,7 +900,7 @@ setInterval(() => {
                 room.createJoe('');
             } else if (room.roomName == CONSTANTS.SPECIAL_CAPITAL) {
                 room.killJoe();
-                room.map = special_capital;
+                room.map = special_capital.replace(" Capitals", "");
                 room.citysrc = special_capital;
                 room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
                 room.createJoe('');
