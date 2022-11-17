@@ -889,6 +889,7 @@ setInterval(() => {
     // Get new special
     if (reset_now) {
         [special_region, special_capital] = calculate_specials();
+        // Flush all current rooms and select new specials
         Object.values(rooms).forEach(function(room) {
             room.flushRecords(week, month, year);
             if (room.roomName == CONSTANTS.SPECIAL_REGION) {
@@ -905,6 +906,14 @@ setInterval(() => {
                 room.createJoe('');
             }
         });
+        // Make a room for each map temporarily, to reset those records in case no one is in them right now
+        Object.keys(MAPS).forEach(function(value) {
+            let map = value.replace(" Capitals", "");
+            let tmp_room = new Room(value, "tmp", value)
+            tmp_room.flushRecords(week, month, year);
+            delete tmp_room;
+        });
+
         announce("<font size=10 color=\"red\"><b>Daily" + s + " records have been reset!</b></font><br>")
     }
 }, 30000);
