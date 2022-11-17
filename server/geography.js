@@ -81,6 +81,7 @@ const hasLeader = (citysrc) => {
 
 // Include the admin field when displaying city/country string to player
 const includeAdmin = (target, citysrc) => {
+    // Always display for "big" countris, or when playing region or country
     return (target['country'] === 'United States' ||
             target['country'] === 'USA' ||
             target['country'] === 'Canada' ||
@@ -92,7 +93,7 @@ const includeAdmin = (target, citysrc) => {
             target['country'] === 'Russia' ||
             target['country'] === 'Indonesia' ||
             target['country'] === 'Brazil' ||
-            isCountry(citysrc)) &&
+            isCountry(citysrc) || isRegion(citysrc)) &&
         !blacklistEntireString(citysrc)
 
 };
@@ -260,13 +261,13 @@ const pixelToGeo = (map, row, col) => {
             lon = (Math.atan(Math.abs(x) / Math.abs(y)) * 180) / Math.PI
         if (x < 0 && y < 0) {
             // Top left
-            if (map == "Antarctica")     
+            if (map == "Antarctica")
                 lon = -lon
             if (map == "Arctic")
                 lon = -180 + lon
         } else if (x < 0 && y > 0) {
             // Bottom left
-            if (map == "Antarctica")     
+            if (map == "Antarctica")
                 lon = -(180 - lon)
             if (map == "Arctic") {
                 lon = -lon
