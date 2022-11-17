@@ -262,6 +262,7 @@ $(document).ready(function() {
                             let spaceless_map2 = map2.replace(' ', '');
                             document.getElementById(spaceless_map2).style.background = "#a9e7f9"
                         }
+                        table.columns(1).search("").draw();
                         table.columns(2).search('^6600$', true, false).draw();
                     });
                 }
