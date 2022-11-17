@@ -61,7 +61,6 @@ def make_region_list(filename, rng, pop, whitelist, errors):
     blacklist = ['*']
     scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors, 50, 300)
 
-
 errors = []
 
 outfile = geoscents_home + 'resources/databases/world.js'
@@ -162,6 +161,12 @@ blacklist = ['India', 'Brazil', 'Pakistan', 'Iran', 'Iraq', 'Saudi Arabia', 'Afg
 whitelist = ['Gibraltar']
 scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
+make_region_list("arctic", [-180, 180, 62, 90], 5000, ["Russia", "Canada", "United States", "Iceland", "Faroe Islands", "Finland", "Sweden", "Norway"], errors)
+make_region_list("alps", [3.33, 18, 43, 49], 80000, ["Austria", "Switzerland", "France", "Germany", "Italy", "Liechtenstein", "Monaco", "Slovenia"], errors)
+make_region_list("amazon", [-84, -34.3, -19, 10], 300000, ["Brazil", "Ecuador", "Peru", "Bolivia", "Colombia", "Venezuela", "Suriname", "Guyana", "French Guiana"], errors)
+make_region_list("eastasia", [94.5, 157, 20, 49.65], 1500000, ["Japan", "China", "Korea, South", "Korea, North", "Taiwan", "Mongolia", "Hong Kong", "Macau", "Russia"], errors)
+make_region_list("himalayas", [69, 98.62, 23, 38], 300000, ["India", "China", "Pakistan", "Afghanistan", "Nepal", "Bhutan"], errors)
+make_region_list("indochina", [77, 152, -10.5, 32], 300000, ["Brunei", "Cambodia", "Timor-Leste", "Indonesia", "Laos", "Malaysia", "Myanmar", "Philippines", "Singapore", "Thailand", "Vietnam"], errors)
 make_region_list("nordic", [-25, 50, 52.2, 72], 20000, ["Sweden", "Finland", "Norway", "Iceland", "Denmark", "Faroe Islands"], errors)
 make_region_list("polynesia", [129, 270, -49, 26], 0, ["French Polynesia", "New Zealand", "Tuvalu", "Tonga", "Cook Islands", "American Samoa", "Samoa", "Pitcairn Islands", "Niue", "Tokelau", "Wallis And Futuna", "Easter Island", "United States", "Chile"], errors)
 make_region_list("balkans", [5, 39, 34.15, 49.05], 50000, ["Slovenia", "Croatia", "Bosnia and Herzegovina", "Serbia", "Montenegro", "Albania", "Macedonia", "Greece", "Bulgaria", "Romania"], errors)

@@ -238,29 +238,51 @@ const pixelToGeo = (map, row, col) => {
 
     let lat = 0;
     let lon = 0;
-    if (map == "Antarctica") {
+    if (map == "Antarctica" || map == "Arctic") {
         // Azimuthal Equidistant projection
         // Lon = angle from midpoint
         // Lat = distance from midpoint
+
+        // Square map (0 lon is straight up for antarctica, down for arctic)
+        let sgn = 1;
+        if (map == "Arctic") {
+            sgn = -1;
+        }
 
         let x = col - (CONSTANTS.MAP_WIDTH / 2)
         let y = row - (CONSTANTS.MAP_HEIGHT / 2)
         // Scaling factor is number of degrees per pixel
         let lat_sf = (zero_lat - max_lat) / (CONSTANTS.MAP_WIDTH / 2)
-        lat = -90 + Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) * lat_sf
+        lat = sgn * (-90 + Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) * lat_sf)
         if (x == 0)
             lon = 180
         else
             lon = (Math.atan(Math.abs(x) / Math.abs(y)) * 180) / Math.PI
-        if (x < 0 && y < 0)
+        if (x < 0 && y < 0) {
             // Top left
-            lon = -lon
-        else if (x < 0 && y > 0)
+            if (map == "Antarctica")     
+                lon = -lon
+            if (map == "Arctic")
+                lon = -180 + lon
+        } else if (x < 0 && y > 0) {
             // Bottom left
-            lon = -(180 - lon)
-        else if (x > 0 && y > 0)
+            if (map == "Antarctica")     
+                lon = -(180 - lon)
+            if (map == "Arctic") {
+                lon = -lon
+            }
+        } else if (x > 0 && y > 0) {
             // Bottom right
-            lon = 180 - lon
+            if (map == "Antarctica")
+                lon = 180 - lon
+            if (map == "Arctic")
+                lon = lon
+        } else if (x > 0 && y < 0) {
+            // Top right
+            if (map == "Arctic")
+                lon = 180 - lon
+        }
+
     } else {
         // Mercator projection
         const eqMin = Math.atanh(Math.sin(zero_lat * Math.PI / 180));
@@ -286,7 +308,7 @@ const geoToPixel = (map, lat, lon) => {
 
     let col = 0;
     let row = 0;
-    if (map == "Antarctica") {
+    if (map == "Antarctica" || map == "Arctic") {
         // Azimuthal Equidistant projection
         // Lat = radius from origin
         // Lon = angle from origin
@@ -294,12 +316,19 @@ const geoToPixel = (map, lat, lon) => {
         // y = sin(lon) * lat + midpoint
         // Longitude scaling factor
 
+        // Square map (0 lon is straight up for antarctica, down for arctic)
+        let sgn = 1;
+        let outer_lat = max_lat;
+        if (map == "Arctic") {
+            sgn = -1;
+            outer_lat = zero_lat;
+        }
+
         // Scaling factor is number of degrees per pixel
         let lat_sf = (zero_lat - max_lat) / (CONSTANTS.MAP_WIDTH / 2)
-        let hypot = (lat - max_lat) / lat_sf
+        let hypot = (lat - outer_lat) / lat_sf
 
-        // Square map
-        col = Math.sin(lon * Math.PI / 180) * hypot + (CONSTANTS.MAP_WIDTH / 2)
+        col = sgn * Math.sin(lon * Math.PI / 180) * hypot + (CONSTANTS.MAP_WIDTH / 2)
         row = -Math.cos(lon * Math.PI / 180) * hypot + (CONSTANTS.MAP_HEIGHT / 2)
     } else {
         // Mercator projection

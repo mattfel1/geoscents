@@ -88,6 +88,20 @@
         "flair": "🇩🇿",
         "tier": "country"
     },
+    "Alps": {
+        "leader": "Barbegazi",
+        "greeting": "Willkommen",
+        "coords": [3.33, 18, 43, 49],
+        "flair": "🫕",
+        "tier": "region"
+    },
+    "Amazon": {
+        "leader": "Raoni",
+        "greeting": "Receber",
+        "coords": [-84, -34.3, -19, 10],
+        "flair": "🦜",
+        "tier": "region"
+    },
     "Antarctica": {
         "leader": "Penguin",
         "greeting": "Bonvenon",
@@ -100,6 +114,13 @@
         "greeting": "أهلا بك (Ahlan bik)",
         "coords": [23.1, 68, 12, 36],
         "flair": "👳",
+        "tier": "region"
+    },
+    "Arctic": {
+        "leader": "Santa",
+        "greeting": "Welcome",
+        "coords": [-180, 180, 45, 90],
+        "flair": "❄️",
         "tier": "region"
     },
     "Argentina": {
@@ -200,6 +221,13 @@
         "flair": "🇨🇩",
         "tier": "country"
     },
+    "East Asia": {
+        "leader": "Khan",
+        "greeting": "欢迎光临 (Huānyíng guānglín)",
+        "coords": [94.5, 157, 20, 49.65],
+        "flair": "🪷",
+        "tier": "region"
+    },
     "Egypt": {
         "leader": "el-Sisi",
         "greeting": "أهلا بك (Ahlan bik)",
@@ -242,6 +270,13 @@
         "flair": "🐠",
         "tier": "region"
     },
+    "Himalayas": {
+        "leader": "Yeti",
+        "greeting": "欢迎光临 (Huānyíng guānglín)",
+        "coords": [69, 98.62, 23, 38],
+        "flair": "🏔️",
+        "tier": "region"
+    },
     "India": {
         "leader": "Modi",
         "greeting": "Welcome/स्वागत हे(svaagat he)",
@@ -255,6 +290,13 @@
         "coords": [84.5, 151, -23.5, 15],
         "flair": "🇮🇩",
         "tier": "country"
+    },
+    "Indochina": {
+        "leader": "Tiger",
+        "greeting": "Selamat datang",
+        "coords": [77, 152, -10.5, 32],
+        "flair": "🐅",
+        "tier": "region"
     },
     "Iran": {
         "leader": "Raisi",
