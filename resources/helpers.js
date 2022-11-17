@@ -715,6 +715,7 @@ const hallJsonToBoard = (famers) => {
             let last_record = parseInt(value['last_record'])
 
             // Find any other private hashes with this name and get largest record_time and superset of maps
+            let has_crown = value['perfect'] !== undefined && Object.entries(value['perfect']).length > 0;
             for (const [key2, value2] of famers.entries()) {
                 if (value2['name'] == value['name']) {
                     for (const [x, map] of Object.entries(value2['maps'])) {
@@ -723,9 +724,11 @@ const hallJsonToBoard = (famers) => {
                         if (parseInt(value2['last_record']) > last_record)
                             last_record = parseInt(value2['last_record'])
                     }
+                    has_crown = has_crow || value2['perfect'] !== undefined && Object.entries(value2['perfect']).length > 0;
+
                 }
             }
-            if (value['perfect'] !== undefined && Object.entries(value['perfect']).length > 0 && !link_name.includes(perfectEmoji()))
+            if (has_crown && !link_name.includes(perfectEmoji()))
                 link_name = link_name + perfectEmoji();
 
 
