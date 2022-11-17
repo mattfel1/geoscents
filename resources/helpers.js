@@ -724,7 +724,7 @@ const hallJsonToBoard = (famers) => {
                         if (parseInt(value2['last_record']) > last_record)
                             last_record = parseInt(value2['last_record'])
                     }
-                    has_crown = has_crow || value2['perfect'] !== undefined && Object.entries(value2['perfect']).length > 0;
+                    has_crown = has_crown || value2['perfect'] !== undefined && Object.entries(value2['perfect']).length > 0;
 
                 }
             }
