@@ -117,7 +117,7 @@ module.exports = {
     RECORD_INIT_BASE: 480,
     RECORD_DELTA_RANGE: 200,
     MAX_INACTIVE: 10, // Rounds of no click before you get booted
-    MAX_S_INACTIVE: 7, // seconds * fps spent in lobby before you get booted
+    MAX_S_INACTIVE: 2400, // seconds * fps spent in lobby before you get booted
     INIT_RECORD: {
         'record1': 0,
         'recordName1': '-',
