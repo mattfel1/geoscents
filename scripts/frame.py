@@ -161,6 +161,7 @@ blacklist = ['India', 'Brazil', 'Pakistan', 'Iran', 'Iraq', 'Saudi Arabia', 'Afg
 whitelist = ['Gibraltar']
 scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
+make_region_list("caucuses", [35, 51, 38, 45.06], 5000, ["Russia", "Azerbaijan", "Armenia", "Georgia", "Turkey", "Iran"], errors)
 make_region_list("arctic", [-180, 180, 62.6, 90], 5000, ["Russia", "Canada", "United States", "Iceland", "Faroe Islands", "Finland", "Sweden", "Norway"], errors)
 make_region_list("alps", [3.33, 18, 43, 49], 80000, ["Austria", "Switzerland", "France", "Germany", "Italy", "Liechtenstein", "Monaco", "Slovenia"], errors)
 make_region_list("amazon", [-84, -34.3, -19, 10], 300000, ["Brazil", "Ecuador", "Peru", "Bolivia", "Colombia", "Venezuela", "Suriname", "Guyana", "French Guiana"], errors)
@@ -194,6 +195,7 @@ make_country_list('Ukraine', [17.7, 45, 43.2, 54], 0, errors)
 make_country_list('Argentina', [-102, -20, -56.5, -20], 30000, errors)
 make_country_list('Australia', [97, 170, -45.5, -8], 15000, errors)
 make_country_list('Canada', [-160, -15, 38, 77.5], 15000, errors)
+make_country_list('Liechtenstein', [9.189, 9.887, 47.02, 47.3], 0, errors)
 make_country_list('Japan', [110, 164.5, 23.5, 49], 0, errors)
 make_country_list('Kenya', [30, 49, -5.3, 5.9], 0, errors)
 make_country_list('Romania', [19, 33.7, 43, 49], 0, errors)

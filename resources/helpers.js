@@ -711,16 +711,16 @@ const hallJsonToBoard = (famers) => {
     var record_time = new Array()
     for (const [key, value] of famers.entries()) {
         if (!posted_names.includes(value['name'])) {
-            let link_name = value['name'] + " ";
             let last_record = parseInt(value['last_record'])
 
             // Find any other private hashes with this name and get largest record_time and superset of maps
             let has_crown = value['perfect'] !== undefined && Object.entries(value['perfect']).length > 0;
+            let flairs = []
             for (const [key2, value2] of famers.entries()) {
                 if (value2['name'] == value['name']) {
                     for (const [x, map] of Object.entries(value2['maps'])) {
-                        if (!link_name.includes(flairToEmoji(map)))
-                            link_name = link_name + flairToEmoji(map)
+                        if (!flairs.includes(flairToEmoji(map)))
+                            flairs.push(flairToEmoji(map))
                         if (parseInt(value2['last_record']) > last_record)
                             last_record = parseInt(value2['last_record'])
                     }
@@ -728,7 +728,11 @@ const hallJsonToBoard = (famers) => {
 
                 }
             }
-            if (has_crown && !link_name.includes(perfectEmoji()))
+
+            flairs.sort();
+            let link_name = value['name'] + " " + flairs.join('');
+
+            if (has_crown)
                 link_name = link_name + perfectEmoji();
 
 

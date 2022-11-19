@@ -186,6 +186,13 @@
         "flair": "🇨🇦",
         "tier": "country"
     },
+    "Caucuses": {
+        "leader": "Elbrus",
+        "greeting": "добро пожаловать (dobro pozhalovat')",
+        "coords": [35, 51, 38, 45.06],
+        "flair": "⛰️",
+        "tier": "region"
+    },
     "Central African Republic": {
         "leader": "Touadéra",
         "greeting": "Nzoni gango/Bienvenue",
@@ -360,6 +367,13 @@
         "coords": [-74, -56.47, 10, 20],
         "flair": "🏝️",
         "tier": "region"
+    },
+    "Liechtenstein": {
+        "leader": "Risch",
+        "greeting": "Willkommen",
+        "coords": [9.189, 9.887, 47.02, 47.3],
+        "flair": "🇱🇮",
+        "tier": "country"
     },
     "Lithuania": {
         "leader": "Nauseda",

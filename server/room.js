@@ -1246,9 +1246,9 @@ class Room {
 
     distributeMessage(senderSocket, new_sent_msg, cb) {
         const getname = (s) => this.exportPlayer(s)['name'];
-        if (this.players.has(senderSocket)) {
-            this.players.get(senderSocket).consecutiveSecondsInactive = 0;
-            this.players.get(senderSocket).consecutiveRoundsInactive = 0;
+        if (this.players.has(senderSocket.id)) {
+            this.players.get(senderSocket.id).consecutiveSecondsInactive = 0;
+            this.players.get(senderSocket.id).consecutiveRoundsInactive = 0;
         }
         const senderColor = this.exportPlayer(senderSocket)['color'];
         const room = this.roomName;

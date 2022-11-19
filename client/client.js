@@ -179,8 +179,10 @@ $(document).ready(function() {
 
     const commands = new Commands(socket);
     socket.on('update counts', (newdict) => {
-        commands.updateCounts(newdict);
-        commands.postButtons();
+        if (!booted) {
+            commands.updateCounts(newdict);
+            commands.postButtons();
+        }
     })
     socket.on('draw buttons', () => {
         commands.postButtons()
@@ -245,8 +247,10 @@ $(document).ready(function() {
         sounds.newMessage(room)
     });
     socket.on("update messages", function(room, msg) {
-        chat.addMessage(room, msg);
-        sounds.newMessage(room)
+        if (!booted) {
+            chat.addMessage(room, msg);
+            sounds.newMessage(room)
+        }
     });
     socket.on("mute player", function(id) {
         sounds.muteMe(id);

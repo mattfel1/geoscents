@@ -5066,17 +5066,17 @@ module.exports = {
             "wiki": "https://en.wikipedia.org/wiki/Independence_Memorial_Museum_(Namibia)",
             "img_link": "https://momaa.org/wp-content/uploads/2019/10/Independence-Memorial-Museum-Namibia-1024x568.png"
         },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
+        {
+            "city": "Yanar Dag ('Burning Mountain', Continuously Burning Natural Gas Fire)",
+            "city_ascii": "",
+            "lat": 40.501861,
+            "lng": 49.89125,
+            "iso2": "AZ",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Yanar_Dag"
+        },
         // {
         //   "city": "",
         //   "city_ascii": "",

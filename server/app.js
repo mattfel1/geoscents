@@ -528,7 +528,6 @@ io.on('connection', (socket) => {
                 delete rooms[room.roomName];
             }
         });
-
         io.sockets.emit('update counts', getHist());
     });
     socket.on('mute', () => {

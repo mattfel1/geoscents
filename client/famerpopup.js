@@ -34,15 +34,12 @@ class FamerPopup {
         }
 
         var flair = localStorage.getItem("selected_famer_flair");
-        // Cache select TBD
-        // if (flair !== null) {
-        //     var radios = document.getElementsByName("selected_famer_flair");
-        //     for (var i = 0; i < radios.length; i++) {
-        //         // console.log("radio button " + radios[i].value)
-        //         if (radios[i].value == flair) radios[i].checked = true
-        //         else radios[i].checked = false
-        //     }
-        // }
+        if (flair !== null) {
+            var radios = document.getElementById("requestedFlair");
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].value == flair) radios.selectedIndex = i
+            }
+        }
 
         // hide popup when user clicks on close button or if user clicks anywhere outside the container
         $('.close-btn, .overlay-bg').unbind().click(function() {
