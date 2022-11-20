@@ -205,11 +205,9 @@ class Room {
             try {
                 this.allRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.citysrc + '_year_record', 'utf8'));
             } catch (err) {
-                console.log("ERROR LOADING YEAR RECORD FOR " + this.citysrc + " v1")
                 this.allRecord = CONSTANTS.INIT_RECORD;
             }
         } else {
-            console.log("ERROR LOADING YEAR RECORD FOR " + this.citysrc + " v2")
             this.allRecord = CONSTANTS.INIT_RECORD;
         }
     }

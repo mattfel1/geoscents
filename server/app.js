@@ -890,12 +890,12 @@ setInterval(() => {
     if (!week && month && year) s = ", monthly, and yearly"
     if (week && month && year) s = ", weekly, monthly, and yearly"
 
-    // Debug rapid reset
-    let reset_imminent = d.getMinutes() % 1 === 0 && d.getSeconds() <= 29;
-    let reset_now = d.getMinutes() % 1 === 0 && d.getSeconds() > 29;
+    // // Debug rapid reset
+    // let reset_imminent = d.getMinutes() % 1 === 0 && d.getSeconds() <= 29;
+    // let reset_now = d.getMinutes() % 1 === 0 && d.getSeconds() > 29;
 
-    // let reset_imminent = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() <= 29;
-    // let reset_now = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() > 29;
+    let reset_imminent = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() <= 29;
+    let reset_now = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() > 29;
     if (reset_imminent) {
         announce("<font size=9 color=\"red\"><b>WARNING: Daily" + s + " records will reset in 30 seconds! Daily maps will also be changed!</b></font><br>")
     }
@@ -907,12 +907,14 @@ setInterval(() => {
         // Flush all current rooms and select new specials
         Object.values(rooms).forEach(function(room) {
             if (room.roomName == CONSTANTS.SPECIAL_REGION) {
+                room.flushRecords(week, month, year);
                 room.killJoe();
                 room.map = special_region;
                 room.citysrc = special_region;
                 room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
                 room.createJoe('');
             } else if (room.roomName == CONSTANTS.SPECIAL_CAPITAL) {
+                room.flushRecords(week, month, year);
                 room.killJoe();
                 room.map = special_capital.replace(" Capitals", "");
                 room.citysrc = special_capital;
@@ -926,9 +928,9 @@ setInterval(() => {
             }
         });
         // Make a room for each map temporarily, to reset those records in case no one is in them right now
+        // Delaying in case there is an io issue
         helpers.sleep(1000)
         Object.keys(MAPS).forEach(function(value) {
-            console.log("try reset " + value + " with specials " + special_region + " " + special_capital)
             if (value != special_region && value != special_capital && MAPS[value]['tier'] != "continent" && value != CONSTANTS.TRIVIA && no_reset.includes(value)) {
                 let map = value.replace(" Capitals", "");
                 let tmp_room = new Room(map, "tmp", value)
