@@ -162,7 +162,8 @@ whitelist = ['Gibraltar']
 scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
 make_region_list("caucuses", [35, 51, 38, 45.06], 5000, ["Russia", "Azerbaijan", "Armenia", "Georgia", "Turkey", "Iran"], errors)
-make_region_list("arctic", [-180, 180, 62.6, 90], 5000, ["Russia", "Canada", "United States", "Iceland", "Faroe Islands", "Finland", "Sweden", "Norway"], errors)
+make_region_list("africangreatlakes", [18, 52.1, -15, 5], 70000, ["Rwanda", "Burundi", "Kenya", "Uganda", "Tanzania", "Malawi", "Congo (Kinshasa)"], errors)
+make_region_list("arctic", [-180, 180, 62.7, 90], 50, ["Russia", "Canada", "United States", "Iceland", "Faroe Islands", "Finland", "Sweden", "Norway", "Greenland"], errors)
 make_region_list("alps", [3.33, 18, 43, 49], 80000, ["Austria", "Switzerland", "France", "Germany", "Italy", "Liechtenstein", "Monaco", "Slovenia"], errors)
 make_region_list("amazon", [-84, -34.3, -19, 10], 300000, ["Brazil", "Ecuador", "Peru", "Bolivia", "Colombia", "Venezuela", "Suriname", "Guyana", "French Guiana"], errors)
 make_region_list("eastasia", [94.5, 157, 20, 49.65], 1500000, ["Japan", "China", "Korea, South", "Korea, North", "Taiwan", "Mongolia", "Hong Kong", "Macau", "Russia"], errors)

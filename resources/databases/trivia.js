@@ -5077,17 +5077,18 @@ module.exports = {
             "capital": "",
             "wiki": "https://en.wikipedia.org/wiki/Yanar_Dag"
         },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
+        {
+            "city": "Sakya Monastery (ས་སྐྱ་དགོན་པ།)",
+            "city_ascii": "",
+            "lat": 28.905,
+            ,
+            "lng": 88.018,
+            "iso2": "TB",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Sakya_Monastery"
+        },
         // {
         //   "city": "",
         //   "city_ascii": "",

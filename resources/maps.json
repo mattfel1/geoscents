@@ -81,6 +81,13 @@
         "flair": "🇦🇫",
         "tier": "country"
     },
+    "African Great Lakes": {
+        "leader": "Gihanga",
+        "greeting": "Karibu",
+        "coords": [18, 52.1, -15, 5],
+        "flair": "🦩",
+        "tier": "region"
+    },
     "Algeria": {
         "leader": "Tebboune",
         "greeting": "أهلا بك (Ahlan bik)/Azul",
