@@ -129,17 +129,17 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Handle post request to report growth error, from geoscents_stats on my local machine
 app.post('/', (req, res) => {
-  console.log("Handling post...")
+    console.log("Handling post...")
 
-  let recognized_post = Object.keys(req.body).indexOf('msg') !== -1
-  if (recognized_post) {
-    let msg = req.body['msg']
-    console.log("post msg: " + msg)
-      helpers.logFeedback(msg);
-      res.send("Handled post request with msg: " + msg);
-  } else {
-    console.log("unrecognized post!")
-  }
+    let recognized_post = Object.keys(req.body).indexOf('msg') !== -1
+    if (recognized_post) {
+        let msg = req.body['msg']
+        console.log("post msg: " + msg)
+        helpers.logFeedback(msg);
+        res.send("Handled post request with msg: " + msg);
+    } else {
+        console.log("unrecognized post!")
+    }
 });
 
 app.get('/', (req, res, next) => {
@@ -923,7 +923,7 @@ setInterval(() => {
         // Make a room for each map temporarily, to reset those records in case no one is in them right now
         Object.keys(MAPS).forEach(function(value) {
             let map = value.replace(" Capitals", "");
-            let tmp_room = new Room(value, "tmp", value)
+            let tmp_room = new Room(map, "tmp", value)
             tmp_room.flushRecords(week, month, year);
             delete tmp_room;
         });
