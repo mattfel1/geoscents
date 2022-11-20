@@ -5081,7 +5081,6 @@ module.exports = {
             "city": "Sakya Monastery (ས་སྐྱ་དགོན་པ།)",
             "city_ascii": "",
             "lat": 28.905,
-            ,
             "lng": 88.018,
             "iso2": "TB",
             "country": "",
