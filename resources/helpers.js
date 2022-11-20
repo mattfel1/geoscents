@@ -957,5 +957,6 @@ module.exports = {
     perfectEmoji,
     formatPath,
     filterName,
-    randstring
+    randstring,
+    sleep
 };

@@ -532,9 +532,6 @@ class Room {
         let weekRecord = copy(this.weekRecord);
         let monthRecord = copy(this.monthRecord);
         let allRecord = copy(this.allRecord);
-        const sleep = (ms) => {
-            this.sleep(ms);
-        }
         const lastRecordUpdate = (t) => {
             this.lastRecordUpdate = t;
             this.serviceRecord = true

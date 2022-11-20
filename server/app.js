@@ -926,6 +926,7 @@ setInterval(() => {
             }
         });
         // Make a room for each map temporarily, to reset those records in case no one is in them right now
+        helpers.sleep(1000)
         Object.keys(MAPS).forEach(function(value) {
             console.log("try reset " + value + " with specials " + special_region + " " + special_capital)
             if (value != special_region && value != special_capital && MAPS[value]['tier'] != "continent" && value != CONSTANTS.TRIVIA && no_reset.includes(value)) {
