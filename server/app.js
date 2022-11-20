@@ -924,10 +924,12 @@ setInterval(() => {
         });
         // Make a room for each map temporarily, to reset those records in case no one is in them right now
         Object.keys(MAPS).forEach(function(value) {
-            let map = value.replace(" Capitals", "");
-            let tmp_room = new Room(map, "tmp", value)
-            tmp_room.flushRecords(week, month, year);
-            delete tmp_room;
+            if (value != special_region && value != special_capital && MAPS[value][tier] != "continent" && value != CONSTANTS.TRIVIA) {
+                let map = value.replace(" Capitals", "");
+                let tmp_room = new Room(map, "tmp", value)
+                tmp_room.flushRecords(week, month, year);
+                delete tmp_room;
+            }
         });
 
         announce("<font size=10 color=\"red\"><b>Daily" + s + " records have been reset!</b></font><br>")
