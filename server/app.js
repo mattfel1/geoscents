@@ -903,9 +903,9 @@ setInterval(() => {
     // Get new special
     if (reset_now) {
         [special_region, special_capital] = calculate_specials();
+        let no_reset = []
         // Flush all current rooms and select new specials
         Object.values(rooms).forEach(function(room) {
-            room.flushRecords(week, month, year);
             if (room.roomName == CONSTANTS.SPECIAL_REGION) {
                 room.killJoe();
                 room.map = special_region;
@@ -918,11 +918,17 @@ setInterval(() => {
                 room.citysrc = special_capital;
                 room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
                 room.createJoe('');
+            } else {
+                room.flushRecords(week, month, year);
+            }
+            if (room.isPrivate) {
+                no_reset.push(room.citysrc)
             }
         });
         // Make a room for each map temporarily, to reset those records in case no one is in them right now
         Object.keys(MAPS).forEach(function(value) {
-            if (value != special_region && value != special_capital && MAPS[value]['tier'] != "continent" && value != CONSTANTS.TRIVIA) {
+            console.log("try reset " + value + " with specials " + special_region + " " + special_capitals)
+            if (value != special_region && value != special_capital && MAPS[value]['tier'] != "continent" && value != CONSTANTS.TRIVIA && no_reset.includes(value)) {
                 let map = value.replace(" Capitals", "");
                 let tmp_room = new Room(map, "tmp", value)
                 tmp_room.flushRecords(week, month, year);
