@@ -902,6 +902,8 @@ setInterval(() => {
 
     // Get new special
     if (reset_now) {
+        let old_special_region = special_region;
+        let old_special_capital = special_capital;
         [special_region, special_capital] = calculate_specials();
         let no_reset = []
         // Flush all current rooms and select new specials
@@ -931,7 +933,7 @@ setInterval(() => {
         // Delaying in case there is an io issue
         helpers.sleep(1000)
         Object.keys(MAPS).forEach(function(value) {
-            if (value != special_region && value != special_capital && MAPS[value]['tier'] != "continent" && value != CONSTANTS.TRIVIA && no_reset.includes(value)) {
+            if (value != old_special_region && value != old_special_capital && MAPS[value]['tier'] != "continent" && value != CONSTANTS.TRIVIA && no_reset.includes(value)) {
                 let map = value.replace(" Capitals", "");
                 let tmp_room = new Room(map, "tmp", value)
                 tmp_room.flushRecords(week, month, year);
