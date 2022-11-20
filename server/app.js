@@ -910,11 +910,13 @@ setInterval(() => {
                 room.killJoe();
                 room.map = special_region;
                 room.citysrc = special_region;
+                room.reset();
                 room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
                 room.createJoe('');
             } else if (room.roomName == CONSTANTS.SPECIAL_CAPITAL) {
                 room.killJoe();
                 room.map = special_capital.replace(" Capitals", "");
+                room.reset();
                 room.citysrc = special_capital;
                 room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
                 room.createJoe('');
