@@ -127,6 +127,21 @@ app.use(bodyParser.urlencoded({
 // Static middleware
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+// Handle post request to report growth error, from geoscents_stats on my local machine
+app.post('/', (req, res) => {
+  console.log("Handling post...")
+
+  let recognized_post = Object.keys(req.body).indexOf('msg') !== -1
+  if (recognized_post) {
+    let msg = req.body['msg']
+    console.log("post msg: " + msg)
+      helpers.logFeedback(msg);
+      res.send("Handled post request with msg: " + msg);
+  } else {
+    console.log("unrecognized post!")
+  }
+});
+
 app.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
