@@ -204,7 +204,7 @@ const score = (map, geoDist, mercDist, timeBonus) => {
         // Tiny maps need slightly different math
         if (!isContinent(map))
             fudge_factor = 2.5;
-        if (map == "Vatican City")
+        if (map == "Vatican City" || map == "Liechtenstein")
             fudge_factor = 30;
         scalingFactor = fullDiag / (fudge_factor * diag);
     }
