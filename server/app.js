@@ -915,6 +915,7 @@ setInterval(() => {
                 room.citysrc = special_region;
                 room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
                 room.createJoe('');
+                room.loadRecords();
             } else if (room.roomName == CONSTANTS.SPECIAL_CAPITAL) {
                 room.flushRecords(week, month, year);
                 room.killJoe();
@@ -922,6 +923,7 @@ setInterval(() => {
                 room.citysrc = special_capital;
                 room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
                 room.createJoe('');
+                room.loadRecords();
             } else {
                 room.flushRecords(week, month, year);
             }
