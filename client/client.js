@@ -540,13 +540,16 @@ $(document).ready(function() {
                 let inPoint = false;
                 studyPoints.forEach(function(point) {
                     if (isInside(mousePos, point["box"])) {
-                        commands.drawStudy("            ", point["city"], point["capital"], point["iso2"]);
                         inPoint = true;
-                        if (!wasInPoint)
+                        if (!wasInPoint) {
+                            commands.drawStudy("            ", point["city"], point["capital"], point["iso2"]);
                             socket.emit('requestTargetPhoto', point["target"]);
+                            $('#map').css('cursor','pointer')
+                        }
                     }
                 })
                 if (!inPoint && wasInPoint) {
+                    $('#map').css('cursor','auto')
                     socket.emit('redrawStudy')
                 }
                 wasInPoint = inPoint;
