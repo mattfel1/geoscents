@@ -3,8 +3,10 @@
  * // TODO: Currently entire game has one room, but the plan is to have multiple rooms to choose from with player caps
  */
 
+const isChrono = true;
+
 const CONSTANTS = require('../resources/constants.js');
-const Geography = require('./geography.js');
+const Chronology = require('./chronology.js');
 const Player = require('./player.js');
 const helpers = require('../resources/helpers.js');
 const fs = require('fs')
@@ -15,13 +17,14 @@ const MAPS = require('../resources/maps.json')
 
 class Room {
     constructor(map, roomName, citysrc) {
-        this.map = map; // Underlying map ("Ukraine" or "World")
+        this.map = map; // Underlying map (geoscents: "Ukraine" or "World", chronoscents: "1900s" or "Current Events")
         this.roomName = roomName; // User-friendly room name ("Weekly Country" or "Trivia")
-        this.citysrc = citysrc; // source for random city selection ("Ukraine" or "Trivia")
+        this.citysrc = citysrc; // source for random city selection (geoscents: "Ukraine" or "Trivia", chronscents: equivalent to map)
         this.isPrivate = roomName.startsWith('private');
         this.joeTime = 10;
         this.joeLat = 0;
         this.joeLon = 0;
+        this.joeTemporalChoice = 0;
         // Map from socketID -> socket object
         this.clients = new Map();
         // Map from socketID -> player
@@ -31,6 +34,7 @@ class Room {
         this.timer = CONSTANTS.GUESS_DURATION;
         this.target = {
             'city': '',
+            'event': '',
             'country': '',
             'capital': ''
         };
@@ -66,7 +70,7 @@ class Room {
     createJoe(botname) {
         let name = CONSTANTS.AVERAGE_NAMES[Math.floor(Math.random() * CONSTANTS.AVERAGE_NAMES.length)]
         // console.log("create joe in " + this.map + " idx " + CONSTANTS.SPECIALS.has(this.map))
-        if (this.citysrc != CONSTANTS.LOBBY && Geography.hasLeader(this.citysrc))
+        if (this.citysrc != CONSTANTS.LOBBY && Chronology.hasLeader(this.citysrc))
             name = MAPS[this.citysrc]["leader"]
         if (botname !== '')
             name = botname;
@@ -416,10 +420,15 @@ class Room {
                     player.col = playerClick.cursorX;
                     // console.log("player clicked at time " + this.timer)
                     player.clickedAt = this.timer;
-                    const geo = Geography.pixelToGeo(this.map, player.row, player.col);
-                    player.lat = geo['lat'];
-                    player.lon = geo['lng'];
-                    // console.log('click at ' + player.row + ',' + player.col + ' (' + player.lat + ',' + player.lon + ')')
+                    if (isChrono) {
+                        player.temporalChoice = Chronology.pixelToChrono(this.map, player.row, player.col);
+                    } else {
+                        // const geo = Geography.pixelToGeo(this.map, player.row, player.col);
+                        // player.lat = geo['lat'];
+                        // player.lon = geo['lng'];
+                    }
+
+                    // console.log('click at ' + player.row + ',' + player.col + ' (' + player.temporalChoice + ')')
                     if (socket != this.joe.id) socket.emit('draw point', {
                         'row': player.row,
                         'col': player.col
@@ -497,7 +506,7 @@ class Room {
 
     getActiveEntry() {
         try {
-            return Geography.stringifyTarget(this.target, this.citysrc).string;
+            return Chronology.stringifyTarget(this.target, this.citysrc).string;
         } catch (err) {
             return "Unknown"
         }
@@ -714,39 +723,62 @@ class Room {
         if (this.hasJoe)
             playersToScore.push(this.joe);
         Array.from(playersToScore).forEach(function(player) {
-            const merc = Geography.geoToPixel(map, parseFloat(target['lat']), parseFloat(target['lng']));
-            player.geoError = Geography.calcGeoDist(player.lat, player.lon, parseFloat(target['lat']), parseFloat(target['lng']));
-            player.mercError = Geography.mercDist(map, player.row, player.col, merc['row'], merc['col']);
-            if (!player.clicked || isNaN(player.mercError)) {
-                player.mercError = 9999;
-                player.geoError = 999999;
-            }
-            const update = Geography.score(map, player.geoError, player.mercError, player.clickedAt);
-            const newScore = Math.floor(player.score + update);
-            let points = Math.floor(update);
             var dist;
             var error_unit;
-            if (player.geoError > 10) {
-                dist = Math.floor(player.geoError)
-                error_unit = "km"
+            if (isChrono) {
+                player.temporalError = Chronology.calcDayDist(map);
+                if (!player.clicked || isNaN(player.temporalError)) {
+                    player.temporalError = 999999;
+                }
+                const update = Chronology.score(map, player.temporalError, player.clickedAt);
+                const newScore = Math.floor(player.score + update);
+                let points = Math.floor(update);
+                dist = Math.floor(player.temporalError)
+                error_unit = "days"
+                let clicktime = Math.floor(player.clickedAt * 10) / 10;
+                let points_str = ("Points: <b>" + points.toString() + "</b>").padEnd(19).replace(/\s/g, "&nbsp;");
+                let dist_str = ("Error (" + error_unit + "): <b>" + dist.toString() + "</b>").padEnd(26).replace(/\s/g, "&nbsp;");
+                let time_str = ("Seconds Remaining: <b>" + clicktime.toString() + "</b>").padEnd(34).replace(/\s/g, "&nbsp;");
+                let playerScoreLine = points_str + dist_str + time_str
+                if (player.temporalError === 999999) {
+                    playerScoreLine = " (Did not guess)";
+                }
+                playerScoreLine = playerScoreLine
+                historyScore(player, playerScoreLine);
+                player.score = newScore;
             } else {
-                dist = Math.floor(player.geoError * 1000)
-                error_unit = "m";
+                const merc = Chronology.geoToPixel(map, parseFloat(target['lat']), parseFloat(target['lng']));
+                player.geoError = Chronology.calcGeoDist(player.lat, player.lon, parseFloat(target['lat']), parseFloat(target['lng']));
+                player.mercError = Chronology.mercDist(map, player.row, player.col, merc['row'], merc['col']);
+                if (!player.clicked || isNaN(player.mercError)) {
+                    player.mercError = 9999;
+                    player.geoError = 999999;
+                }
+                // const update = Chronology.score(map, player.geoError, player.mercError, player.clickedAt);
+                // const newScore = Math.floor(player.score + update);
+                // let points = Math.floor(update);
+                // if (player.geoError > 10) {
+                //     dist = Math.floor(player.geoError)
+                //     error_unit = "km"
+                // } else {
+                //     dist = Math.floor(player.geoError * 1000)
+                //     error_unit = "m";
+                // }
+                // let clicktime = Math.floor(player.clickedAt * 10) / 10;
+                // let points_str = ("Points: <b>" + points.toString() + "</b>").padEnd(19).replace(/\s/g, "&nbsp;");
+                // let dist_str = ("Error (" + error_unit + "): <b>" + dist.toString() + "</b>").padEnd(26).replace(/\s/g, "&nbsp;");
+                // let time_str = ("Seconds Remaining: <b>" + clicktime.toString() + "</b>").padEnd(34).replace(/\s/g, "&nbsp;");
+                // let playerScoreLine = points_str + dist_str + time_str
+                // if (player.geoError === 999999) {
+                //     playerScoreLine = " (Did not guess)";
+                // }
+                // playerScoreLine = playerScoreLine
+                // historyScore(player, playerScoreLine);
+                // player.score = newScore;
             }
-            let clicktime = Math.floor(player.clickedAt * 10) / 10;
-            let points_str = ("Points: <b>" + points.toString() + "</b>").padEnd(19).replace(/\s/g, "&nbsp;");
-            let dist_str = ("Error (" + error_unit + "): <b>" + dist.toString() + "</b>").padEnd(26).replace(/\s/g, "&nbsp;");
-            let time_str = ("Seconds Remaining: <b>" + clicktime.toString() + "</b>").padEnd(34).replace(/\s/g, "&nbsp;");
-            let playerScoreLine = points_str + dist_str + time_str
-            if (player.geoError === 999999) {
-                playerScoreLine = " (Did not guess)";
-            }
-            playerScoreLine = playerScoreLine
-            historyScore(player, playerScoreLine);
-            player.score = newScore;
             updateHistory(player, round, newScore, points, clicktime, dist, target, error_unit);
         });
-        this.historyRound(this.round + 1, Geography.stringifyTarget(this.target, this.citysrc));
+        this.historyRound(this.round + 1, Chronology.stringifyTarget(this.target, this.citysrc));
         this.gameHistory.push(this.target)
     }
 
@@ -764,8 +796,8 @@ class Room {
         const lons = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.lon);
         const times = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.clickedAt);
         const ips = Array.from(this.players.values()).filter(player => player.clicked).map(x => respectOptOut(x))
-        // helpers.recordGuesses(this.map, Geography.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], this.target['iso2'], ips, dists, times, lats, lons, this.target['lat'], this.target['lng'], helpers.makeLink(map, this.target), true);
-        helpers.recordGuesses(this.map, Geography.stringifyTarget(this.target, this.citysrc).string, this.target['city'], this.target['admin_name'], this.target['country'], this.target['iso2'], ips, dists, times, lats, lons, this.target['lat'], this.target['lng'], helpers.makeLink(map, this.target), false);
+        // helpers.recordGuesses(this.map, Chronology.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], this.target['iso2'], ips, dists, times, lats, lons, this.target['lat'], this.target['lng'], helpers.makeLink(map, this.target), true);
+        helpers.recordGuesses(this.map, Chronology.stringifyTarget(this.target, this.citysrc).string, this.target['city'], this.target['admin_name'], this.target['country'], this.target['iso2'], ips, dists, times, lats, lons, this.target['lat'], this.target['lng'], helpers.makeLink(map, this.target), false);
     }
 
     flushGuesses() {
@@ -792,29 +824,27 @@ class Room {
         socket.emit('draw dist', {
             'row': joe.row,
             'col': joe.col
-        }, joe.color, joe.geoError);
+        }, joe.color, joe.temporalError);
     }
 
-    static broadcastAnswer(socket, row, col) {
-        // this.clients.forEach(function(s,id) {
+    static broadcastAnswer(socket, start, end) {
         socket.emit('draw answer', {
-            'row': row,
-            'col': col
+            'start': start,
+            'end': end
         })
-        // });
     }
 
     revealAll(socket) {
-        const answer = Geography.geoToPixel(this.map, this.target['lat'], this.target['lng']);
+        const answer = Chronology.chronoToPixel(this.map, this.target['start_date'], this.target['end_date']);
         this.players.forEach((player, id) => {
-            Room.broadcastPoint(socket, player.row, player.col, player.color, player.radius(), player.geoError);
+            Room.broadcastPoint(socket, player.row, player.col, player.color, player.radius(), player.temporalError);
         });
         if (this.hasJoe) Room.broadcastJoe(socket, this.joe)
         Room.broadcastAnswer(socket, answer['row'], answer['col']);
     }
 
     drawPhoto(socket, curtarget) {
-        const answer = Geography.geoToPixel(this.map, curtarget['lat'], curtarget['lng']);
+        const answer = Chronology.chronoToPixel(this.map, curtarget['start_date'], curtarget['end_date']);
         if ('img_link' in curtarget) {
             socket.emit('draw photo', {
                 'row': answer['row'],
@@ -1025,21 +1055,25 @@ class Room {
             let allgrind = this.allGrind();
             socket.emit('draw begin', citysrc.toUpperCase(), this.timer, round, allgrind);
         } else if (this.state === CONSTANTS.GUESS_STATE) {
-            const thisTarget = Geography.stringifyTarget(this.target, this.citysrc);
-            const citystring = thisTarget['string'];
+            const thisTarget = this.target["event"];
+            const citystring = thisTarget;
             const iso2 = this.target['iso2']
             capital = "";
-            if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
-            if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
+            if (!isChrono) {
+                if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
+                if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
+            }
             socket.emit('fresh map', map);
             socket.emit('draw guess city', citystring, capital, iso2, round);
         } else if (this.state === CONSTANTS.REVEAL_STATE) {
-            const thisTarget = Geography.stringifyTarget(this.target, this.citysrc);
-            const citystring = thisTarget['string'];
+            const thisTarget = this.target["event"];
+            const citystring = thisTarget;
             const iso2 = this.target['iso2']
             capital = "";
-            if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
-            if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
+            if (!isChrono) {
+                if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
+                if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
+            }
             socket.emit('fresh map', map);
             socket.emit('draw reveal city', citystring, capital, iso2, round);
             this.revealAll(socket);
@@ -1047,7 +1081,7 @@ class Room {
             try {
                 this.drawPhoto(socket, this.target);
             } catch (err) {
-                helpers.logFeedback("ERROR DRAWING " + Geography.stringifyTarget(this.target, this.citysrc)['string'])
+                helpers.logFeedback("ERROR DRAWING " + this.target["event"])
             }
         }
     }
@@ -1070,7 +1104,7 @@ class Room {
 
     processJoe() {
         if (!this.joe.clicked && this.timer <= this.joeTime) {
-            const joeGeo = Geography.geoToPixel(this.map, this.joeLat, this.joeLon);
+            const joeGeo = Chronology.geoToPixel(this.map, this.joeLat, this.joeLon);
             const playerClick = {
                 mouseDown: false,
                 touchDown: false,
@@ -1118,15 +1152,18 @@ class Room {
             socket.emit('fresh map', map);
             // Reveal points of previous game
             gameHistory.forEach(function(target) {
-                const thisTarget = Geography.stringifyTarget(target, citysrc);
-                const citystring = thisTarget['string'];
-                const iso2 = target['iso2']
-                let capital = "";
-                if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
-                if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
-                const answer = Geography.geoToPixel(map, target['lat'], target['lng']);
-                Room.broadcastAnswer(socket, answer['row'], answer['col']);
-                socket.emit('draw study city', target, citystring, capital, iso2, answer['row'], answer['col']);
+                const thisTarget = target["event"];
+                const citystring = thisTarget;
+                const iso2 = this.target['iso2']
+                capital = "";
+                if (!isChrono) {
+                    if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
+                    if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
+                }
+
+                const answer = Chronology.chronoToPixel(map, target['start_date'], target['end_date']);
+                Room.broadcastAnswer(socket, answer);
+                socket.emit('draw study city', target, citystring, capital, iso2, answer);
             })
             socket.emit('draw prepare', citysrc.toUpperCase(), 1);
         });
@@ -1195,8 +1232,8 @@ class Room {
                 }
             } else if (this.state === CONSTANTS.SETUP_STATE) {
                 let mapname;
-                [this.target, this.blacklist] = Geography.randomCity(this.citysrc, this.blacklist, this.played_targets);
-                [this.joeTime, this.joeLat, this.joeLon] = helpers.joeData(this.map, Geography.stringifyTarget(this.target, this.citysrc).string);
+                [this.target, this.blacklist] = Chronology.randomCity(this.citysrc, this.blacklist, this.played_targets);
+                [this.joeTime, this.joeLat, this.joeLon] = helpers.joeData(this.map, Chronology.stringifyTarget(this.target, this.citysrc).string);
                 this.timerColor = CONSTANTS.GUESS_COLOR;
                 Array.from(this.players.values()).forEach((p, id) => {
                     p.reset()
@@ -1204,7 +1241,7 @@ class Room {
                 if (this.hasJoe) this.joe.reset();
                 this.playedCities[this.round] = this.target;
                 this.clearStudyPoints()
-                this.played_targets.push(Geography.stringifyTarget(this.target, this.citysrc)['string'])
+                this.played_targets.push(Chronology.stringifyTarget(this.target, this.citysrc)['string'])
                 this.stateTransition(CONSTANTS.GUESS_STATE, CONSTANTS.GUESS_DURATION);
             } else if (this.state === CONSTANTS.GUESS_STATE) {
                 if (this.allReboot()) {

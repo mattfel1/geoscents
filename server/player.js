@@ -14,8 +14,10 @@ class Player {
         this.clicked = false;
         this.lat = 0;
         this.lon = 0;
+        this.dayChoice = 0;
         this.mercError = 9999;
         this.geoError = 999999;
+        this.temporalError = 99999;
         this.clickedAt = 0;
         this.id = socketid;
         this.score = 0;

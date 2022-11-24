@@ -1,7 +1,8 @@
 /** Top level file for handling connections, messages, and dispatching the game FSM */
 
-const Geography = require('./geography.js');
-const MAPS = require('../resources/maps.json')
+const isChrono = true;
+const Chronology = require('./chronology.js');
+const TIMELINES = require('../resources/timelines.json')
 const crypto = require('crypto'),
     fs = require("fs"),
     http = require("http");
@@ -145,6 +146,9 @@ app.post('/', (req, res) => {
 app.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
+app.get('/index.html', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '..', 'index.html'));
+});
 // Cities from https://simplemaps.com/data/world-cities
 //  1) Delete all "capitals" that were not primary
 //  2) Sort by capital first, population second
@@ -160,18 +164,13 @@ app.get('/resources/images/*.png', (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.sendFile(path.join(__dirname, '..', 'resources/images/' + wildcard + '.png'));
 });
-app.get('/resources/maps/*.png', (req, res, next) => {
-    const wildcard = req.params['0'];
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.sendFile(path.join(__dirname, '..', 'resources/maps/' + wildcard + '.png'));
-});
 app.get('/resources/constants.js', (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.sendFile(path.join(__dirname, '..', 'resources/constants.js'));
 });
-app.get('/resources/maps.json', (req, res, next) => {
+app.get('/resources/timelines.json', (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.sendFile(path.join(__dirname, '..', 'resources/maps.json'));
+    res.sendFile(path.join(__dirname, '..', 'resources/timelines.json'));
 });
 app.get('/resources/images/*.svg', (req, res, next) => {
     const wildcard = req.params['0'];
@@ -201,7 +200,7 @@ app.get('/resources/famers/*', (req, res, next) => {
     const wildcard = req.params['0'];
     res.sendFile(path.join(__dirname, '..', 'resources/famers/' + wildcard));
 });
-app.get('/plots/*', (req, res, next) => {
+app.get('/chrono_plots/*', (req, res, next) => {
     const wildcard = req.params['0'];
     res.sendFile(path.join(__dirname, '..', 'plots/' + wildcard));
 });
@@ -242,17 +241,17 @@ const calculate_specials = () => {
     var diff = now - start;
     var oneDay = 1000 * 60 * 60 * 24;
     var day = Math.floor(diff / oneDay) + 2;
-    let region_maps = []
-    let capital_maps = []
-    for (const x in MAPS) {
-        if (Geography.isRegion(x))
-            region_maps.push(x);
-        else if (Geography.isCapital(x))
-            capital_maps.push(x);
+    let era_maps = []
+    let century_maps = []
+    for (const x in TIMELINES) {
+        if (Chronology.isEra(x))
+            era_maps.push(x);
+        else if (Chronology.isCentury(x))
+            century_maps.push(x);
     }
 
-    const num_regions = region_maps.length;
-    const num_capitals = capital_maps.length;
+    const num_regions = era_maps.length;
+    const num_capitals = century_maps.length;
     // We want day % num_regions to be our new special_region_idx, but this is not stable when num_regions grows.
     // To be more stable, we upcast num_regions to the nearest multiple of 20 and mod by that.  Then mod by num_regions.
     let upcast_num_regions = (Math.round(num_regions / 20) + 1) * 20
@@ -278,8 +277,8 @@ const calculate_specials = () => {
     let regions_idx = (6 + mult * raw_regions_idx) % num_regions;
     let capitals_idx = (6 + mult * raw_capitals_idx) % num_capitals;
 
-    let special_region = region_maps[regions_idx];
-    let special_capital = capital_maps[capitals_idx];
+    let special_region = era_maps[regions_idx];
+    let special_capital = century_maps[capitals_idx];
 
     // Assume classics always come first
     return [special_region, special_capital];
@@ -635,7 +634,7 @@ io.on('connection', (socket) => {
     });
     socket.on('moveToPrivate', (askcitysrc, code) => {
         // Verify asked citysrc is valid
-        let unrecognized_citysrc = Object.keys(MAPS).indexOf(askcitysrc) === -1
+        let unrecognized_citysrc = Object.keys(TIMELINES).indexOf(askcitysrc) === -1
         if (unrecognized_citysrc) {
             Object.values(rooms).forEach(function(room) {
                 if (room.hasPlayer(socket)) {
@@ -670,7 +669,7 @@ io.on('connection', (socket) => {
                 var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b> has changed the map to " + askcitysrc + "!</font> ]<br>";
                 io.sockets.emit("update messages", originRoomName, leave_msg);
                 let citysrc = askcitysrc;
-                if (Geography.hasLeader(citysrc)) rooms[dest].whisperMessage(socket, "<i><b>" + MAPS[citysrc]["greeting"] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
+                if (Geography.hasLeader(citysrc)) rooms[dest].whisperMessage(socket, "<i><b>" + TIMELINES[citysrc]["greeting"] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
                 rooms[dest].map = map;
                 rooms[dest].citysrc = citysrc;
                 rooms[dest].reset();
@@ -697,7 +696,7 @@ io.on('connection', (socket) => {
                 socket.emit('update messages', dest, PRIVATE_MESSAGE);
                 rooms[dest].addPlayer(socket, info);
                 playerRooms.set(socket.id, rooms[dest]);
-                if (Geography.hasLeader(citysrc)) rooms[dest].whisperMessage(socket, "<i><b>" + MAPS[citysrc]["greeting"] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
+                if (Geography.hasLeader(citysrc)) rooms[dest].whisperMessage(socket, "<i><b>" + TIMELINES[citysrc]["greeting"] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
                 var join_msg = "[ <font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b> has joined " + dest + "!</font> ]<br>";
                 io.sockets.emit("update messages", dest, join_msg);
                 // if (dest == CONSTANTS.TRIVIA) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
@@ -947,8 +946,8 @@ setInterval(() => {
         // Make a room for each map temporarily, to reset those records in case no one is in them right now
         // Delaying in case there is an io issue
         helpers.sleep(1000)
-        Object.keys(MAPS).forEach(function(value) {
-            if (value != old_special_region && value != old_special_capital && MAPS[value]['tier'] != "continent" && value != CONSTANTS.TRIVIA && no_reset.includes(value)) {
+        Object.keys(TIMELINES).forEach(function(value) {
+            if (value != old_special_region && value != old_special_capital && TIMELINES[value]['tier'] != "continent" && value != CONSTANTS.TRIVIA && no_reset.includes(value)) {
                 let map = value.replace(" Capitals", "");
                 let tmp_room = new Room(map, "tmp", value)
                 tmp_room.flushRecords(week, month, year);

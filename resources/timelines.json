@@ -1,0 +1,17 @@
+{
+    "Prehistoric": {
+        "flair": "🦖",
+        "leader": "Ankylosaurus",
+        "tier": "era"
+    },
+    "1900s": {
+        "flair": "✈️",
+        "leader": "Elizabeth",
+        "tier": "century"
+    },
+    "Current Events": {
+        "flair": "🗞️",
+        "leader": "You",
+        "tier": "misc"
+    }
+}
