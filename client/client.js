@@ -31,6 +31,12 @@ var autoscale = was_autoscaled;
 var betweenGames = true;
 var clickedReady = false;
 var booted = false;
+var studyPoints = [];
+var wasInPoint = false;
+
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 // Init zoom
 document.documentElement.style.zoom = 1;
@@ -209,6 +215,23 @@ $(document).ready(function() {
         commands.drawCommand("Find!       ", city, capital, iso2, round, false, false, true);
         sounds.playRoundBeginSound();
     });
+    socket.on('draw study city', (target, city, capital, iso2, row, col) => {
+        let boxSize = 20;
+        let point = {
+            y: row - boxSize / 2,
+            x: col - boxSize / 2,
+            width: boxSize,
+            height: boxSize
+        };
+        let studyPoint = {
+            "target": target,
+            "city": city,
+            "capital": capital,
+            "iso2": iso2,
+            "box": point
+        }
+        studyPoints.push(studyPoint);
+    })
     socket.on('draw reveal city', (city, capital, iso2, round) => {
         commands.drawCommand("            ", city, capital, iso2, round, false, false, true);
         sounds.playRoundEndSound();
@@ -406,8 +429,12 @@ $(document).ready(function() {
         if (roomName.startsWith('private')) commands.labelPrivate(myCitysrc, privatepopup.code);
         else commands.clearPrivate()
         commands.postButtons()
+        studyPoints = []
         betweenGames = roomState === CONSTANTS.PREPARE_GAME_STATE;
     });
+    socket.on("clear study points", () => {
+        studyPoints = []
+    })
     setInterval(() => {
         if (playerClick.touchDown) playerClick.downCount = playerClick.downCount + 1;
         if (playerClick.clickEvent) {
@@ -478,7 +505,18 @@ $(document).ready(function() {
                 }
             }
         })
-
+        studyPoints.forEach(function(point) {
+            if (isInside(mousePos, point["box"])) {
+                // Copied from helpers.js makeLink, because I'm not sure I can import that file here...
+                let thisTarget = point["target"]
+                let part2 = "%2C+" + thisTarget['country'];
+                if (thisTarget['country'] === "USA") part2 = "%2C+" + thisTarget['admin_name'];
+                let wiki = "https://en.wikipedia.org/wiki/Special:Search?search=" + thisTarget['city'] + part2 + "&go=Go&ns0=1";
+                //en.wikipedia.org/w/api.php?action=query&titles=Denver%2C+Colorado&prop=pageimages&format=json&pithumbsize=100
+                if (thisTarget['wiki'] != null && thisTarget['wiki'] != "") wiki = thisTarget['wiki'];
+                window.open(wiki, '_blank');
+            }
+        })
         if (!(typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
             var x = window.scrollX,
                 y = window.scrollY;
@@ -499,6 +537,19 @@ $(document).ready(function() {
                 commands.highlightReadyButton();
             } else if (betweenGames) {
                 commands.showReadyButton(clickedReady);
+                let inPoint = false;
+                studyPoints.forEach(function(point) {
+                    if (isInside(mousePos, point["box"])) {
+                        commands.drawStudy("            ", point["city"], point["capital"], point["iso2"]);
+                        inPoint = true;
+                        if (!wasInPoint)
+                            socket.emit('requestTargetPhoto', point["target"]);
+                    }
+                })
+                if (!inPoint && wasInPoint) {
+                    socket.emit('redrawStudy')
+                }
+                wasInPoint = inPoint;
             }
         }
     }, false);

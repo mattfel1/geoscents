@@ -5088,28 +5088,28 @@ module.exports = {
             "capital": "",
             "wiki": "https://en.wikipedia.org/wiki/Sakya_Monastery"
         },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
+        {
+            "city": "Malldova Shopping Mall",
+            "city_ascii": "",
+            "lat": 47.024722,
+            "lng": 28.8325,
+            "iso2": "MD",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Malldova"
+        },
+        {
+            "city": "1960 Valdivia Earthquake and Tsunami (Most Powerful Earthquake Ever Recorded, 9.6 M)",
+            "city_ascii": "",
+            "lat": -38.24,
+            "lng": -73.05,
+            "iso2": "CL",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/1960_Valdivia_earthquake"
+        },
         // {
         //   "city": "",
         //   "city_ascii": "",

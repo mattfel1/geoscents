@@ -707,6 +707,19 @@ io.on('connection', (socket) => {
             }
         }
     });
+    socket.on('requestTargetPhoto', (target) => {
+        if (playerRooms.has(socket.id)) {
+            const room = playerRooms.get(socket.id);
+            room.drawPhoto(socket, target)
+        }
+    });
+    socket.on('redrawStudy', () => {
+        if (playerRooms.has(socket.id)) {
+            const room = playerRooms.get(socket.id);
+            room.revealStudy()
+        }
+    });
+
     socket.on('playerClick', (playerClick) => {
         if (playerClick.clickEvent && playerRooms.has(socket.id)) {
             // console.log('processing player click')      

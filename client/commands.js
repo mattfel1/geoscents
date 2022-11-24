@@ -128,6 +128,33 @@ class Commands {
         }
     }
 
+    drawStudy(timeDescrip, citystring, capital, iso2_raw) {
+        let iso2 = iso2_raw;
+        if (iso2_raw == "" || iso2_raw == null)
+            iso2 = "earth";
+
+        this.ctx.globalAlpha = 0.9;
+        this.ctx.fillStyle = CONSTANTS.BGCOLOR;
+        this.ctx.fillRect(this.command_window['x'], this.command_window['y'], this.command_window['width'], this.command_window['height']);
+        this.ctx.globalAlpha = 1.0;
+        this.ctx.font = "20px Arial";
+        this.ctx.fillStyle = "black";
+
+        this.ctx.fillText(timeDescrip, this.command_window['x'] + 5, this.command_window['y'] + 25);
+        this.ctx.fillText(citystring, this.command_window['x'] + timeDescrip.length * 10 + 30, this.command_window['y'] + 25);
+        this.ctx.fillText(capital, this.command_window['x'] + citystring.length * 10 + timeDescrip.length * 10 + 50, this.command_window['y'] + 25);
+
+        if (iso2 !== "") {
+            var flagImage = new Image();
+            flagImage.src = "/resources/flags/" + iso2.toString().toLowerCase() + ".png";
+            var ctx = this.ctx;
+            var command_window = this.command_window;
+            flagImage.onload = function() {
+                return ctx.drawImage(flagImage, command_window['x'] + 58, command_window['y'] - 2, 80, 40);
+            };
+        }
+    }
+
 
     updateCounts(newdict) {
         this.counts = newdict;

@@ -52,6 +52,7 @@ class Room {
         this.hasJoe = roomName != CONSTANTS.LOBBY && !CONSTANTS.DEBUG_MODE;
         this.recorded = false; // Toggle for making sure we only record once per reveal_state
         this.hall_of_fame; // Keep hall of fame in-memory if this is the lobby
+        this.gameHistory = [];
     }
 
 
@@ -488,6 +489,12 @@ class Room {
         this.dayRecord['recordBroken5'] = false;
     }
 
+    clearStudyPoints() {
+        this.clients.forEach((socket, id) => {
+            socket.emit("clear study points")
+        });
+    }
+
     getActiveEntry() {
         try {
             return Geography.stringifyTarget(this.target, this.citysrc).string;
@@ -740,6 +747,7 @@ class Room {
             updateHistory(player, round, newScore, points, clicktime, dist, target, error_unit);
         });
         this.historyRound(this.round + 1, Geography.stringifyTarget(this.target, this.citysrc));
+        this.gameHistory.push(this.target)
     }
 
     recordGuesses() {
@@ -805,24 +813,24 @@ class Room {
         Room.broadcastAnswer(socket, answer['row'], answer['col']);
     }
 
-    drawPhoto(socket) {
-        const answer = Geography.geoToPixel(this.map, this.target['lat'], this.target['lng']);
-        if ('img_link' in this.target) {
+    drawPhoto(socket, curtarget) {
+        const answer = Geography.geoToPixel(this.map, curtarget['lat'], curtarget['lng']);
+        if ('img_link' in curtarget) {
             socket.emit('draw photo', {
                 'row': answer['row'],
                 'col': answer['col']
-            }, this.target['img_link'])
+            }, curtarget['img_link'])
             return
         }
 
 
         // Try once with country
-        let part2 = "%2C+" + this.target['country'];
-        if (this.target['country'] === "USA" || this.target['country'] === "United States") part2 = "%2C+" + this.target['admin_name'];
+        let part2 = "%2C+" + curtarget['country'];
+        if (curtarget['country'] === "USA" || curtarget['country'] === "United States") part2 = "%2C+" + curtarget['admin_name'];
         var url = "https://en.wikipedia.org/w/api.php?";
-        var title = (this.target['city_ascii'] + part2).split(' ').join('_');
-        if ('wiki' in this.target && this.target['wiki'] != "") {
-            let link = this.target['wiki']
+        var title = (curtarget['city_ascii'] + part2).split(' ').join('_');
+        if ('wiki' in curtarget && curtarget['wiki'] != "") {
+            let link = curtarget['wiki']
             let parts = link.split('/')
             title = parts[parts.length - 1].split('#')[0]
         }
@@ -840,7 +848,7 @@ class Room {
         Object.keys(params).forEach(function(key) {
             url += "&" + key + "=" + params[key];
         });
-        let target = this.target
+        let target = curtarget
         // console.log(url)
         fetch(url)
             .then(function(response) {
@@ -1011,7 +1019,6 @@ class Room {
         const citysrc = this.citysrc;
         const round = this.round;
         if (this.state === CONSTANTS.PREPARE_GAME_STATE) {
-            socket.emit('fresh map', map);
             socket.emit('draw prepare', citysrc.toUpperCase(), round);
         } else if (this.state === CONSTANTS.BEGIN_GAME_STATE) {
             socket.emit('fresh map', map);
@@ -1036,8 +1043,9 @@ class Room {
             socket.emit('fresh map', map);
             socket.emit('draw reveal city', citystring, capital, iso2, round);
             this.revealAll(socket);
+            // Move the following to GUESS_STATE to make images pop up at the start of round
             try {
-                this.drawPhoto(socket);
+                this.drawPhoto(socket, this.target);
             } catch (err) {
                 helpers.logFeedback("ERROR DRAWING " + Geography.stringifyTarget(this.target, this.citysrc)['string'])
             }
@@ -1102,6 +1110,28 @@ class Room {
         return sortedPlayers;
     }
 
+    revealStudy() {
+        let citysrc = this.citysrc;
+        let map = this.map;
+        let gameHistory = this.gameHistory;
+        this.clients.forEach(function(socket, socketId) {
+            socket.emit('fresh map', map);
+            // Reveal points of previous game
+            gameHistory.forEach(function(target) {
+                const thisTarget = Geography.stringifyTarget(target, citysrc);
+                const citystring = thisTarget['string'];
+                const iso2 = target['iso2']
+                let capital = "";
+                if (thisTarget['majorcapital']) capital = "(* COUNTRY CAPITAL)";
+                if (thisTarget['minorcapital']) capital = "(† MINOR CAPITAL)";
+                const answer = Geography.geoToPixel(map, target['lat'], target['lng']);
+                Room.broadcastAnswer(socket, answer['row'], answer['col']);
+                socket.emit('draw study city', target, citystring, capital, iso2, answer['row'], answer['col']);
+            })
+            socket.emit('draw prepare', citysrc.toUpperCase(), 1);
+        });
+    }
+
     fsm() {
         // Game flow state machine
         this.decrementTimer();
@@ -1155,6 +1185,7 @@ class Room {
                 if (this.allReady() || this.timer <= 0) {
                     this.timerColor = CONSTANTS.BEGIN_COLOR;
                     this.blacklist = [];
+                    this.gameHistory = [];
                     this.played_targets = [];
                     this.removePoppers();
                     this.playersHistory = new Map();
@@ -1172,12 +1203,14 @@ class Room {
                 });
                 if (this.hasJoe) this.joe.reset();
                 this.playedCities[this.round] = this.target;
+                this.clearStudyPoints()
                 this.played_targets.push(Geography.stringifyTarget(this.target, this.citysrc)['string'])
                 this.stateTransition(CONSTANTS.GUESS_STATE, CONSTANTS.GUESS_DURATION);
             } else if (this.state === CONSTANTS.GUESS_STATE) {
                 if (this.allReboot()) {
                     if (this.hasJoe) this.joe.deepReset(this.players.values().size);
                     this.round = 0;
+                    this.gameHistory = []
                     this.timerColor = CONSTANTS.BEGIN_COLOR;
                     Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
                     this.playersHistory = new Map();
@@ -1205,6 +1238,7 @@ class Room {
                 if (this.allReboot()) {
                     if (this.hasJoe) this.joe.deepReset(this.players.values().size);
                     this.round = 0;
+                    this.gameHistory = []
                     this.timerColor = CONSTANTS.BEGIN_COLOR;
                     Array.from(this.players.values()).forEach((player, i) => player.deepReset(i))
                     this.playersHistory = new Map();
@@ -1221,7 +1255,8 @@ class Room {
 
                 if (this.timer <= 0 && this.round + 1 >= rounds) {
                     this.round = 0;
-                    this.stateTransition(CONSTANTS.PREPARE_GAME_DURATION, CONSTANTS.PREPARE_GAME_DURATION);
+                    this.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
+                    this.revealStudy();
                 } else if (this.timer <= 0) {
                     this.round = this.round + 1;
                     this.incrementInactive();
