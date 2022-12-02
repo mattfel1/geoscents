@@ -11894,19 +11894,6 @@ module.exports = {
             "id": 1840002915
         },
         {
-            "city": "Augusta",
-            "city_ascii": "Augusta",
-            "lat": 33.3645,
-            "lng": -82.0708,
-            "country": "United States",
-            "iso2": "US",
-            "iso3": "USA",
-            "admin_name": "Georgia",
-            "capital": "admin",
-            "population": 389383,
-            "id": 1840029462
-        },
-        {
             "city": "Boise",
             "city_ascii": "Boise",
             "lat": 43.6007,

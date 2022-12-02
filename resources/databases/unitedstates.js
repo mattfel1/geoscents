@@ -1492,7 +1492,7 @@ module.exports = {
             "iso2": "US",
             "iso3": "USA",
             "admin_name": "Georgia",
-            "capital": "admin",
+            "capital": "",
             "population": 389383,
             "id": 1840029462
         },
