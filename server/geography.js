@@ -149,11 +149,12 @@ const requireUniqueAdmin = (citysrc, target) => {
         return true
     } else if (blacklistEntireString(citysrc)) {
         return false
-    } else if (isCountry(citysrc)) {
+    } else if (isCountry(citysrc) || isRegion(citysrc) || isCapital(citysrc)) {
         return true
+    } else {
+        return false
     }
     // else if (citysrc === CONSTANTS.OCEANIA && target['country'] === 'Australia') {return true}
-    else return false
 };
 
 const uniqueInBlacklist = (citysrc, target, blacklist) => {
