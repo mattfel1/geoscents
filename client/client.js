@@ -419,7 +419,7 @@ $(document).ready(function() {
     socket.on('fresh map', (room) => map.drawMap(room));
     socket.on('blank map', (room) => map.drawBlank(room));
     socket.on('animate', () => {
-        if ((animated && !slow_roll_animation) || (animated && slow_roll_animation && (frame_id % 30 == 5)))
+        if ((animated && !slow_roll_animation) || (animated && slow_roll_animation && (frame_id % 50 == 5)))
             map.drawAnimation()
         if (frame_id < 300)
             frame_id++;
