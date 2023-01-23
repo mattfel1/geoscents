@@ -1,7 +1,7 @@
 const CONSTANTS = require('../resources/constants.js');
 
 class Commands {
-    constructor(socket) {
+    constructor(socket, animated = true) {
         this.socket = socket
         this.hasJoe = false;
         this.panel = window.document.getElementById('panel');
@@ -72,10 +72,7 @@ class Commands {
         else was_grind = false
         this.grind = was_grind;
 
-        var was_animated = localStorage.getItem("animated");
-        if (was_animated === "false") was_animated = false
-        else was_animated = true
-        this.animated = was_animated;
+        this.animated = animated;
 
         this.bottracker = [];
 
