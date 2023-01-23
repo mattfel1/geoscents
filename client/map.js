@@ -100,6 +100,8 @@ class MapPanel {
         this.clickable_buttons = [this.about_button, this.visualize_button, this.discord_button, this.help_button]
         this.map_images = new Map();
 
+        this.animated;
+
         // Initialize all maps (changed to lazy init for saving compute power)
         // Object.keys(CONSTANTS.MAP_BOUNDS).forEach(function(k) {
         //     let value;
@@ -157,16 +159,19 @@ class MapPanel {
     }
 
     drawAnimation() {
-        // const mapStyle = this.mapStyle;
-        // frame_cnt = (frame_cnt + 1) % (frames * rate);
-        // const sx = Math.floor(frame_cnt / rate) * 450;
-        // var ctx = this.ctx;
-        // let shift = this.hueShift;
-        // globeImage[mapStyle].onload = function(sx) {
-        //     document.getElementById("map").style.filter = "hue-rotate(" + shift + "deg)";
-        //     return ctx.drawImage(globeImage[mapStyle], sx, 0, 450, 450, 350, 200, 780, 780);
-        // };
-        // globeImage[mapStyle].onload(sx);
+        const mapStyle = this.mapStyle;
+        frame_cnt = (frame_cnt + 1) % (frames * rate);
+        let sx = Math.floor(frame_cnt / rate) * 450;
+        if (!this.animated)
+            sx = Math.floor(frames * rate / rate / 2) * 450;
+        var ctx = this.ctx;
+        let shift = this.hueShift;
+        let animated = this.animated;
+        globeImage[mapStyle].onload = function(sx) {
+            document.getElementById("map").style.filter = "hue-rotate(" + shift + "deg)";
+            return ctx.drawImage(globeImage[mapStyle], sx, 0, 450, 450, 350, 200, 780, 780);
+        };
+        globeImage[mapStyle].onload(sx);
     };
 
 

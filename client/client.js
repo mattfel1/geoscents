@@ -23,11 +23,18 @@ var myRoomName = CONSTANTS.LOBBY;
 const canvas = window.document.getElementById('map');
 const panel = window.document.getElementById('panel');
 const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1; // hack for scaling
+
 var lastScale = 999;
 var was_autoscaled = localStorage.getItem("autoscaled");
 if (was_autoscaled === "false") was_autoscaled = false
 else was_autoscaled = true
 var autoscale = was_autoscaled;
+
+var was_animated = localStorage.getItem("animated");
+if (was_animated === "false") was_animated = false
+else was_animated = true
+var animated = was_animated;
+
 var betweenGames = true;
 var clickedReady = false;
 var booted = false;
@@ -296,6 +303,13 @@ $(document).ready(function() {
             commands.setGrind(id);
         }
     });
+    socket.on("animated", function(id) {
+        if (socket.id == id) {
+            commands.animated = !commands.animated;
+            map.animated = commands.animated;
+            commands.setAnimated(id);
+        }
+    });
     setInterval(() => {
         // Keep track of message rate.  No more than 3000 chars or 8 messages, every 5s
         // Handle spam on the client side, even though technically someone can get around this
@@ -359,6 +373,7 @@ $(document).ready(function() {
 
     /**** Map *****/
     const map = new MapPanel(socket);
+    map.animated = animated;
     socket.on('draw point', (coords, color, radius) => {
         map.drawPoint(coords, color, radius)
     });
@@ -374,7 +389,9 @@ $(document).ready(function() {
     });
     socket.on('fresh map', (room) => map.drawMap(room));
     socket.on('blank map', (room) => map.drawBlank(room));
-    socket.on('animate', () => map.drawAnimation());
+    socket.on('animate', () => {
+        map.drawAnimation()
+    });
     socket.on("render map", function(id, style, room) {
         map.setStyle(id, style, room);
         commands.setStyle(id, style);

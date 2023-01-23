@@ -72,6 +72,11 @@ class Commands {
         else was_grind = false
         this.grind = was_grind;
 
+        var was_animated = localStorage.getItem("animated");
+        if (was_animated === "false") was_animated = false
+        else was_animated = true
+        this.animated = was_animated;
+
         this.bottracker = [];
 
         var old_hue = localStorage.getItem("hue");
@@ -256,8 +261,10 @@ class Commands {
         if (this.grind) pressedGrind = '-clicked';
         let grindButton = "<span id='grind_button' class='grind-btn-container'><button class='grind-btn" + pressedGrind + "'>🪓</button></span>";
         let hueSlider = "<div style=\"display: inline-block\" class=\"slidecontainer\"><input style=\"width: 90px\" type=\"range\" min=\"0\" max=\"360\" value=\"" + this.hueShift + "\" class=\"slider\" id=\"hue_shift\"></div>"
-        $('#settings-box').append($("<span>Display: </span><span>" + hueSlider + autoscaleButton + grindButton + "</span>"));
-
+        let pressedAnimated = '';
+        if (this.animated) pressedAnimated = '-clicked';
+        let animatedButton = "<span id='animated_button' class='grind-btn-container'><button class='grind-btn" + pressedAnimated + "'>🌍</button></span>";
+        $('#settings-box').append($("<span>Display: </span><span>" + hueSlider + autoscaleButton + grindButton + animatedButton + "</span>"));
 
         // Add map buttons
         $('#commands').append($("</div><br>"))
@@ -299,6 +306,11 @@ class Commands {
         $('#grind_button').bind("click", () => {
             localStorage.setItem("grind", !this.grind);
             socket.emit('grind', !this.grind);
+            this.refocus()
+        });
+        $('#animated_button').bind("click", () => {
+            localStorage.setItem("animated", !this.animated);
+            socket.emit('animated', !this.animated);
             this.refocus()
         });
         $('#reboot_button').bind("click", () => {
@@ -387,6 +399,15 @@ class Commands {
             if (this.autoscale) pressedAutoscale = '-clicked';
             let autoscaleButton = "<button class='settings-btn" + pressedAutoscale + "'>Autoscale</button>";
             $('#autoscale_button').append($(autoscaleButton))
+        }
+    }
+    setAnimated(id) {
+        if (this.socket.id === id) {
+            $('#animated_button').empty();
+            let pressedAnimated = '';
+            if (this.animated) pressedAnimated = '-clicked';
+            let animatedButton = "<button class='grind-btn" + pressedAnimated + "'>🌍</button>";
+            $('#animated_button').append($(animatedButton))
         }
     }
     setGrind(id) {

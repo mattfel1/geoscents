@@ -551,6 +551,9 @@ io.on('connection', (socket) => {
     socket.on('autoscale', () => {
         io.sockets.emit('autoscale', socket.id)
     });
+    socket.on('animated', () => {
+        io.sockets.emit('animated', socket.id)
+    });
     socket.on('toggle joe', () => {
         if (playerRooms.has(socket.id)) {
             const room = playerRooms.get(socket.id);
