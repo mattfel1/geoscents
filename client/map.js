@@ -157,16 +157,16 @@ class MapPanel {
     }
 
     drawAnimation() {
-        const mapStyle = this.mapStyle;
-        frame_cnt = (frame_cnt + 1) % (frames * rate);
-        const sx = Math.floor(frame_cnt / rate) * 450;
-        var ctx = this.ctx;
-        let shift = this.hueShift;
-        globeImage[mapStyle].onload = function(sx) {
-            document.getElementById("map").style.filter = "hue-rotate(" + shift + "deg)";
-            return ctx.drawImage(globeImage[mapStyle], sx, 0, 450, 450, 350, 200, 780, 780);
-        };
-        globeImage[mapStyle].onload(sx);
+        // const mapStyle = this.mapStyle;
+        // frame_cnt = (frame_cnt + 1) % (frames * rate);
+        // const sx = Math.floor(frame_cnt / rate) * 450;
+        // var ctx = this.ctx;
+        // let shift = this.hueShift;
+        // globeImage[mapStyle].onload = function(sx) {
+        //     document.getElementById("map").style.filter = "hue-rotate(" + shift + "deg)";
+        //     return ctx.drawImage(globeImage[mapStyle], sx, 0, 450, 450, 350, 200, 780, 780);
+        // };
+        // globeImage[mapStyle].onload(sx);
     };
 
 
