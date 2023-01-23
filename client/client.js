@@ -306,7 +306,7 @@ $(document).ready(function() {
     socket.on("animated", function(id) {
         if (socket.id == id) {
             commands.animated = !commands.animated;
-            map.animated = commands.animated;
+            animated = commands.animated;
             commands.setAnimated(id);
         }
     });
