@@ -390,7 +390,8 @@ $(document).ready(function() {
     socket.on('fresh map', (room) => map.drawMap(room));
     socket.on('blank map', (room) => map.drawBlank(room));
     socket.on('animate', () => {
-        map.drawAnimation()
+        if (animated)
+            map.drawAnimation()
     });
     socket.on("render map", function(id, style, room) {
         map.setStyle(id, style, room);
