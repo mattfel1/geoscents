@@ -730,11 +730,10 @@ const hallJsonToBoard = (famers) => {
             }
 
             flairs.sort();
-            let link_name = value['name'] + " " + flairs.join('');
-
+            let flairs_str = flairs.join('');
             if (has_crown)
-                link_name = link_name + perfectEmoji();
-
+                flairs_str = perfectEmoji() + flairs_str;
+            let link_name = value['name'] + " " + flairs_str;
 
             let link = "<a target=\"_blank\" href='resources/famers/" + value['name'].replace(/ /g, '_') + ".html'>" + link_name + "</a>"
             posted_names.push(value['name'])
