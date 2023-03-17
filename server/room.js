@@ -1128,7 +1128,7 @@ class Room {
                 Room.broadcastAnswer(socket, answer['row'], answer['col']);
                 socket.emit('draw study city', target, citystring, capital, iso2, answer['row'], answer['col']);
             })
-            socket.emit('draw prepare', citysrc.toUpperCase(), 1);
+            socket.emit('draw prepare', citysrc.toUpperCase(), -1);
         });
     }
 
