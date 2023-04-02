@@ -162,11 +162,13 @@ class MapPanel {
         let sx = Math.floor(frame_cnt / rate) * 450;
         var ctx = this.ctx;
         let shift = this.hueShift;
-        globeImage[mapStyle].onload = function(sx) {
-            document.getElementById("map").style.filter = "hue-rotate(" + shift + "deg)";
-            return ctx.drawImage(globeImage[mapStyle], sx, 0, 450, 450, 350, 200, 780, 780);
-        };
-        globeImage[mapStyle].onload(sx);
+        if (frame_cnt % rate == 0) {
+            globeImage[mapStyle].onload = function(sx) {
+                document.getElementById("map").style.filter = "hue-rotate(" + shift + "deg)";
+                return ctx.drawImage(globeImage[mapStyle], sx, 0, 450, 450, 350, 200, 780, 780);
+            };
+            globeImage[mapStyle].onload(sx);
+        }
     };
 
 
