@@ -20,7 +20,7 @@ let httpsServer;
 let io;
 let useHttp = false;
 
-if (hostname === "matt-machwx9") {
+if (hostname === "matt-machwx9" || hostname === "matebook") {
     PORT = 5000;
     SPORT = 5443;
     useHttp = true; // I forgot how to get https working locally after reformatting computer with local hacks... 
