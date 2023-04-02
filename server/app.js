@@ -7,10 +7,6 @@ const crypto = require('crypto'),
     http = require("http");
 const https = require('https');
 const hostname = require("os").hostname();
-let keydir = '/root/';
-if (hostname === "mattfel-pc") {
-    keydir = '/home/mattfel/geoscents/'
-}
 
 const express = require('express');
 const path = require('path');
@@ -43,8 +39,8 @@ if (hostname === "matt-machwx9") {
         })
         io = require('socket.io')(httpServer);
     } else {
-        var privateKey = fs.readFileSync('/home/mattfel/geoscents/key.pem').toString();
-        var certificate = fs.readFileSync('/home/mattfel/geoscents/cert.pem').toString();
+        var privateKey = fs.readFileSync('/home/mattf/geoscents/key.pem').toString();
+        var certificate = fs.readFileSync('/home/mattf/geoscents/cert.pem').toString();
         var credentials = {
             key: privateKey,
             cert: certificate
