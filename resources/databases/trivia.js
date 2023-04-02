@@ -5111,27 +5111,27 @@ module.exports = {
             "wiki": "https://en.wikipedia.org/wiki/1960_Valdivia_earthquake"
         },
         {
-          "city": "Kentucky Meat Shower of 1876 (Chunks of red meat fell from the sky)",
-          "city_ascii": "",
-          "lat": 38.098056,
-          "lng": -83.695833,
-          "iso2": "US",
-          "country": "",
-          "population": 0,
-          "capital": "",
-          "wiki": "https://en.wikipedia.org/wiki/Kentucky_meat_shower",
-          "img_link": "https://img.atlasobscura.com/6_bQd6yBf_caO0TCHzVs7ORIFAENGaa0KzHekz42K3U/rt:fit/w:1280/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL2Fzc2V0/cy81N2QwMTYxOC0x/MTc2LTQ3YjktYmUz/Mi0zOThkNGI1M2Q2/N2IxMDY4NDdkYWFi/NGU3MWYyYWFfX1VT/IEFic3VyZGl0eV9L/ZW50dWNreSBNZWF0/IFNob3dlcl9QYWdl/XzFfSW1hZ2VfMDAw/MV9DUk9QLmpwZw.jpg"
+            "city": "Kentucky Meat Shower of 1876 (Chunks of red meat fell from the sky)",
+            "city_ascii": "",
+            "lat": 38.098056,
+            "lng": -83.695833,
+            "iso2": "US",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Kentucky_meat_shower",
+            "img_link": "https://img.atlasobscura.com/6_bQd6yBf_caO0TCHzVs7ORIFAENGaa0KzHekz42K3U/rt:fit/w:1280/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL2Fzc2V0/cy81N2QwMTYxOC0x/MTc2LTQ3YjktYmUz/Mi0zOThkNGI1M2Q2/N2IxMDY4NDdkYWFi/NGU3MWYyYWFfX1VT/IEFic3VyZGl0eV9L/ZW50dWNreSBNZWF0/IFNob3dlcl9QYWdl/XzFfSW1hZ2VfMDAw/MV9DUk9QLmpwZw.jpg"
         },
         {
-          "city": "Statue of Unity (World's Tallest Statue)",
-          "city_ascii": "",
-          "lat": 21.838,
-          "lng": 73.7191,
-          "iso2": "IN",
-          "country": "",
-          "population": 0,
-          "capital": "",
-          "wiki": "https://en.wikipedia.org/wiki/Statue_of_Unity"
+            "city": "Statue of Unity (World's Tallest Statue)",
+            "city_ascii": "",
+            "lat": 21.838,
+            "lng": 73.7191,
+            "iso2": "IN",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Statue_of_Unity"
         },
         // {
         //   "city": "",

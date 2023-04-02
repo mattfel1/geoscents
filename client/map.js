@@ -214,6 +214,8 @@ class MapPanel {
             this.ctx.globalAlpha = 1;
             this.ctx.fillStyle = 'black';
 
+            this.drawAnimation()
+
             // // Donate
             // this.roundRect(this.ctx, 450, 120, 750, 300, 15);
             // this.ctx.font = "25px Arial";

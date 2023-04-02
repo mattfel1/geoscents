@@ -5,7 +5,8 @@ import urllib.request
 import re
 import warnings
 
-geoscents_home='/home/mattfel/geoscents/'
+home=os.environ['HOME']
+geoscents_home = home + '/geoscents/'
 big_countries = ['US', 'CN', 'CA', 'AU', 'IN', 'BR']
 
 def scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, include_big_admin, include_any_admin, errors, wanted_min = 15, wanted_max = 1000):
@@ -161,6 +162,7 @@ blacklist = ['India', 'Brazil', 'Pakistan', 'Iran', 'Iraq', 'Saudi Arabia', 'Afg
 whitelist = ['Gibraltar']
 scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
+make_region_list("mesopotamia", [33.7, 52, 29, 38], 5000, ["Iraq", "Iran", "Kuwait", "Syria", "Turkey", "Lebanon", "Israel"], errors)
 make_region_list("caucuses", [35, 51, 38, 45.06], 5000, ["Russia", "Azerbaijan", "Armenia", "Georgia", "Turkey", "Iran"], errors)
 make_region_list("africangreatlakes", [18, 52.1, -15, 5], 70000, ["Rwanda", "Burundi", "Kenya", "Uganda", "Tanzania", "Malawi", "Congo (Kinshasa)"], errors)
 make_region_list("arctic", [-180, 180, 62.7, 90], 50, ["Russia", "Canada", "United States", "Iceland", "Faroe Islands", "Finland", "Sweden", "Norway", "Greenland"], errors)
