@@ -441,11 +441,11 @@ $(document).ready(function() {
     socket.on('break history', (room, winner, score, color, record) => {
         history.breakHistory(room, winner, score, color, record)
     });
-    socket.on('draw chart', (hist, winner, color, room, max) => {
-        history.drawChart(hist, winner, color, room, max)
+    socket.on('draw chart', (hist, gameId, winner, color, room, max) => {
+        history.drawChart(hist, gameId, winner, color, room, max)
     });
-    socket.on('draw path', (h) => {
-        history.drawPath(h)
+    socket.on('draw path', (h, gameId) => {
+        history.drawPath(h, gameId)
     });
     socket.on('add history', (room, payload) => {
         history.addHistory(room, payload)

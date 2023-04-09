@@ -633,9 +633,13 @@ io.on('connection', (socket) => {
         socket.emit('request help popup');
     });
     socket.on('moveToPrivate', (askcitysrc, code) => {
+        // Check if room exists
+        let dest = "private_" + code;
+        let exists = (dest in rooms)
+
         // Verify asked citysrc is valid
         let unrecognized_citysrc = Object.keys(MAPS).indexOf(askcitysrc) === -1
-        if (unrecognized_citysrc) {
+        if (unrecognized_citysrc && !exists) {
             Object.values(rooms).forEach(function(room) {
                 if (room.hasPlayer(socket)) {
                     room.whisperMessage(socket, "<b>Not going to private room because your map was invalid: " + askcitysrc + "</b><br>", () => {});
@@ -660,12 +664,12 @@ io.on('connection', (socket) => {
         let map = askcitysrc.replace(" Capitals", "");
 
         if (playerRooms.has(socket.id)) {
-            let dest = "private_" + code;
             const room = playerRooms.get(socket.id);
             const originRoomName = room.roomName;
             var info = rooms[originRoomName].exportPlayer(socket);
             info['moved'] = true;
             if (originRoomName == dest) {
+                // Handle change map
                 var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b> has changed the map to " + askcitysrc + "!</font> ]<br>";
                 io.sockets.emit("update messages", originRoomName, leave_msg);
                 let citysrc = askcitysrc;
@@ -676,6 +680,7 @@ io.on('connection', (socket) => {
                 socket.emit('moved to', map, dest, citysrc, rooms[dest].state);
                 helpers.log("Player " + socket.handshake.address + " " + info['raw_name'] + " changed map in " + dest);
             } else {
+                // Handle join room
                 console.log('making private room ' + dest)
                 var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has left " + originRoomName + " and joined a private room!</font> ]<br>";
                 io.sockets.emit("update messages", originRoomName, leave_msg)
@@ -686,7 +691,7 @@ io.on('connection', (socket) => {
                     }
                 });
                 let citysrc = askcitysrc;
-                if (!(dest in rooms)) {
+                if (!exists) {
                     rooms[dest] = new Room(map, dest, citysrc);
                 } else {
                     map = rooms[dest].map

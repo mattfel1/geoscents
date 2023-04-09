@@ -219,6 +219,7 @@ class Room {
         this.drawScorePanel();
         if (!this.hasJoe)
             this.createJoe('');
+        this.redrawMap();
     }
     // Player count
     playerCount() {
@@ -1019,6 +1020,7 @@ class Room {
         const citysrc = this.citysrc;
         const round = this.round;
         if (this.state === CONSTANTS.PREPARE_GAME_STATE) {
+            socket.emit('fresh map', map);
             socket.emit('draw prepare', citysrc.toUpperCase(), round);
         } else if (this.state === CONSTANTS.BEGIN_GAME_STATE) {
             socket.emit('fresh map', map);
@@ -1226,8 +1228,7 @@ class Room {
                     if (this.round + 1 >= rounds) {
                         this.winner.won();
                         this.recordPersonalHistory();
-                        this.printPath(this.winner.getName(), this.winner.score, this.winner.color);
-                        this.printWinner(this.winner.getName(), this.winner.score, this.winner.color);
+                        this.printSummary(this.winner.getName(), this.winner.score, this.winner.color);
                     }
                     this.stateTransition(CONSTANTS.REVEAL_STATE, reveal_duration);
                     this.recorded = false
@@ -1316,24 +1317,22 @@ class Room {
         })
     }
 
-    printWinner(winner, score, color) {
-        this.recordsBroken();
-        const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
-        const room = this.citysrc;
-        this.clients.forEach((socket, id) => {
-            socket.emit('draw chart', playersHistory, winner, color, room, score);
-            // socket.emit('break history',  room, winner, score, color);
-        });
-    }
-
-    printPath(you, score, color) {
+    printSummary(winner, score, color) {
         const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
         const room = this.citysrc;
         const players = this.players
+        this.recordsBroken();
         this.clients.forEach((socket, id) => {
-            let history = helpers.formatPath(playersHistory, players.get(socket.id).histCount, players.get(socket.id).color, id, room, score)
-            socket.emit('draw path', history);
+            let gameId = players.get(socket.id).histCount;
+            let history = helpers.formatPath(playersHistory, gameId, players.get(socket.id).color, id, room, score)
+            socket.emit('draw path', history, gameId);
+            socket.emit('draw chart', playersHistory, gameId, winner, color, room, score);
         });
+
+        this.clients.forEach((socket, id) => {
+            // socket.emit('break history',  room, winner, score, color);
+        });
+
     }
 
     historyRound(round, thisTarget) {

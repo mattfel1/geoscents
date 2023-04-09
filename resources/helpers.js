@@ -750,7 +750,7 @@ const hallJsonToBoard = (famers) => {
     return entries;
 };
 
-const formatPath = (hist, histcount, color, socketid, room, score) => {
+const formatPath = (hist, gameId, color, socketid, room, score) => {
     const width = 560;
     const height = 210;
     const playersHistory = new Map(JSON.parse(hist));
@@ -786,8 +786,9 @@ const formatPath = (hist, histcount, color, socketid, room, score) => {
             return "✅";
         return "?";
     };
-    // var history = "<br><button id=\"sharepath" + histcount + "\">copy</button><br>" + "<div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points";
-    var history = "<br><div id=\"mypath" + histcount + "\"><br><tt>" + name + " path to " + score + " points on " + room + ":";
+
+    // var history = "<br><button id=\"sharepath" + gameId + "\">copy</button><br>" + "<div id=\"mypath" + gameId + "\"><br><tt>" + name + " path to " + score + " points";
+    var history = "<br><div id=\"mypath" + gameId + "\"><br><tt>" + name + " path to " + score + " points on " + room + ": <button id='share" + gameId + "' class='room-btn'>" + CONSTANTS.COPY_BUTTON + "</button>";
     let notified = false;
     playersHistory.forEach((hist, player) => {
         // For debugging, track all targets

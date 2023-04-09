@@ -39,9 +39,9 @@ class Commands {
             'color': 'white'
         };
         this.ready_button = {
-            x: this.canvas.width * 7 / 12,
-            y: 5,
-            width: 260,
+            x: this.canvas.width * 55 / 96,
+            y: 3,
+            width: 380,
             height: 30
         };
         this.timer_window = {
@@ -167,13 +167,13 @@ class Commands {
         this.ctx.fillRect(this.ready_button['x'] - 4, this.ready_button['y'] - 4, this.ready_button['width'] + 8, this.ready_button['height'] + 8);
         this.ctx.fillStyle = "#808080";
         this.ctx.fillRect(this.ready_button['x'] - 2, this.ready_button['y'] - 2, this.ready_button['width'] + 4, this.ready_button['height'] + 4);
-        if (clicked) this.ctx.fillStyle = "lightgrey";
-        else this.ctx.fillStyle = "orange";
+        if (clicked) this.ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
+        else this.ctx.fillStyle = CONSTANTS.LOBBY_COLOR;
         this.ctx.fillRect(this.ready_button['x'], this.ready_button['y'], this.ready_button['width'], this.ready_button['height']);
         this.ctx.font = CONSTANTS.BUTTONS_FONT + "px Arial";
         this.ctx.fillStyle = 'black';
-        if (clicked) this.ctx.fillText('YOU ARE READY!', this.ready_button['x'] + 5, this.ready_button['y'] + 22)
-        else this.ctx.fillText('CLICK HERE IF READY!', this.ready_button['x'] + 5, this.ready_button['y'] + 22)
+        if (clicked) this.ctx.fillText('YOU ARE READY!', this.ready_button['x'] + 30, this.ready_button['y'] + 22)
+        else this.ctx.fillText('CLICK HERE WHEN READY!', this.ready_button['x'] + 30, this.ready_button['y'] + 22)
     }
 
     highlightReadyButton() {
@@ -181,11 +181,11 @@ class Commands {
         this.ctx.fillRect(this.ready_button['x'] - 4, this.ready_button['y'] - 4, this.ready_button['width'] + 8, this.ready_button['height'] + 8);
         this.ctx.fillStyle = "#808080";
         this.ctx.fillRect(this.ready_button['x'] - 2, this.ready_button['y'] - 2, this.ready_button['width'] + 4, this.ready_button['height'] + 4);
-        this.ctx.fillStyle = "green";
+        this.ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
         this.ctx.fillRect(this.ready_button['x'], this.ready_button['y'], this.ready_button['width'], this.ready_button['height']);
         this.ctx.font = CONSTANTS.BUTTONS_FONT + "px Arial";
         this.ctx.fillStyle = 'black';
-        this.ctx.fillText('CLICK HERE IF READY!', this.ready_button['x'] + 5, this.ready_button['y'] + 22)
+        this.ctx.fillText('CLICK HERE WHEN READY!', this.ready_button['x'] + 30, this.ready_button['y'] + 22)
     }
 
     refocus() {

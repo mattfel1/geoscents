@@ -109,6 +109,9 @@ module.exports = {
     DEBUG_PERFECT_SCORE: 900,
     CLOWNSCORE: 5,
 
+    // Misc
+    COPY_BUTTON: "Share Path",
+
 
     // Rooms
     GAME_ROUNDS: 11,

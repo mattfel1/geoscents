@@ -24,31 +24,51 @@ class History {
         }
     }
 
-
-    drawPath(history) {
-        // TODO: Copy to clipboard button
-        //         let js = `<script>
-        // var node = document.getElementById('mypath` + histcount + `');
-        // var btn = document.getElementById('sharepath` + histcount + `');
-        // btn.onclick = function() {
-        // node.innerHTML = "I'm an image now."
-        //   domtoimage.toBlob(document.getElementById('mypath` + histcount + `'))
-        //     .then(function(blob) {
-        //       window.saveAs(blob, 'my-node.png');
-        //     });
-        // }
-        // </script>`
-        //         history = history + js;
-
-        $('#gamehist').prepend(history);
+    copyPath(gameId) {
+        let r = document.createRange();
+        r.selectNode(document.getElementById("mypath" + gameId));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(r);
+        try {
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+        } catch (err) {
+            console.log('Unable to copy!');
+        }
     }
 
-    drawChart(hist, winner, color, room, max) {
+    drawPath(history, gameId) {
+        $('#gamehist').prepend(history);
+        var share = document.getElementById("share" + gameId);
+        const copyPath = (id) => {
+            return this.copyPath(id)
+        }
+        share.className = "room-btn"
+        share.addEventListener('click', function(clicked) {
+            return function() {
+                // Briefly unset share button str so it isn't copied
+                share.innerHTML = " ";
+                copyPath(gameId)
+                this.innerHTML = "Copied!";
+                if (!clicked) {
+                    this.innerHTML = 'Copied!';
+                    clicked = true;
+                    setTimeout(function() {
+                        this.innerHTML = CONSTANTS.COPY_BUTTON;
+                        clicked = false;
+                    }.bind(this), 1500);
+                }
+            };
+        }(false), this);
+        // $('#gamehist').prepend(share)
+    }
+
+    drawChart(hist, gameId, winner, color, room, max) {
         const width = 540;
         const height = 115;
         const playersHistory = new Map(JSON.parse(hist));
         // based on https://codepen.io/dmmfll/pen/vGbZrK
-        var graph = `<br><div class="graph-container">
+        var graph = `<br><div class="graph-container${gameId}">
 <font color="${color}">${winner}</font> wins ${room} with ${max} points!
   <div class="chart-box">
     <svg height="${height}" width="${width}">`
