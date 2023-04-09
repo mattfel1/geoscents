@@ -353,7 +353,7 @@ const flushGuesses = (map) => {
         const tmpfile = '/scratch/guesses/' + map + '_guesses_staging';
         const file = '/scratch/guesses/' + map + '_guesses';
         if (!fs.existsSync(tmpfile)) {
-            logFeedback('Staging file ' + tmpfile + ' doesnt exist!!')
+            // logFeedback('Staging file ' + tmpfile + ' doesnt exist!!')
             fs.writeFile(tmpfile, "", {
                 flag: 'wx'
             }, function(err) {
@@ -422,7 +422,7 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
         if ((map in lastUpdates) && (currentdate.getTime() - lastUpdates[map] < 2000)) {
             // logFeedback("Skipping update to " + map + " because we updated less than 1s ago!")
         } else if (!fs.existsSync(file)) {
-            logFeedback('File ' + file + ' doesnt exist!!')
+            // logFeedback('File ' + file + ' doesnt exist!!')
             fs.writeFile(file, "", {
                 flag: 'w'
             }, function(err) {
