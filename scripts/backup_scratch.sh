@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Register this with crontab 0 1 * * * bash ~/geoscents/resources/backup_scratch.sh
+# Register this with crontab 0 1 * * * bash ~/geoscents/scripts/backup_scratch.sh
 backup_dir='/home/mattf/geoscents_backups/'
 max_backup=20
 rm -rf ${backup_dir}/scratch${max_backup}
