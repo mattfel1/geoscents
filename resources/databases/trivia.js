@@ -1251,7 +1251,7 @@ module.exports = {
             "wiki": "https://en.wikipedia.org/wiki/Magura_Cave"
         },
         {
-            "city": "Mount Rushmore",
+            "city": "Mount Rushmore (Tȟuŋkášila Šákpe)",
             "city_ascii": "",
             "lat": 43.878889,
             "lng": -103.459722,
