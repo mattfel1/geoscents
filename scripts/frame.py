@@ -109,14 +109,14 @@ scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, e
 outfile = geoscents_home + 'resources/databases/asia.js'
 rng = [27,156, 2,59]
 pop = 400000
-blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', 'Cyprus', 'South Sudan', 'Northern Mariana Islands', 'Guam', 'Macau', 'Sudan', 'Belarus', 'Somalia']
+blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', 'Cyprus', 'South Sudan', 'Northern Mariana Islands', 'Guam', 'Macau', 'Sudan', 'Belarus', 'Somalia', 'Somaliland']
 whitelist = []
 scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
 outfile = geoscents_home + 'resources/databases/asiacapitals.js'
 rng = [27,156, 2,59]
 pop = 999999999
-blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', 'Cyprus', 'South Sudan', 'Northern Mariana Islands', 'Guam', 'Macau', 'Sudan', 'Belarus', 'Somalia']
+blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', 'Cyprus', 'South Sudan', 'Northern Mariana Islands', 'Guam', 'Macau', 'Sudan', 'Belarus', 'Somalia', 'Somaliland']
 whitelist = []
 scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
