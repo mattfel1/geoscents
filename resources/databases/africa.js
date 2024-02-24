@@ -5777,6 +5777,19 @@ module.exports = {
             "id": 1434044820
         },
         {
+            "city": "Hargeysa",
+            "city_ascii": "Hargeysa",
+            "lat": 9.56,
+            "lng": 44.065,
+            "country": "Somaliland",
+            "iso2": "SW",
+            "iso3": "",
+            "admin_name": "Woqooyi Galbeed",
+            "capital": "primary",
+            "population": "",
+            "id": 1706832021
+        },
+        {
             "city": "Isn\u0101",
             "city_ascii": "Isna",
             "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Images_by_the_Nile_No_329..JPG/1920px-Images_by_the_Nile_No_329..JPG",

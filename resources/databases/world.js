@@ -12702,6 +12702,19 @@ module.exports = {
             "id": 1840001442
         },
         {
+            "city": "Hargeysa",
+            "city_ascii": "Hargeysa",
+            "lat": 9.56,
+            "lng": 44.065,
+            "country": "Somaliland",
+            "iso2": "SW",
+            "iso3": "",
+            "admin_name": "Woqooyi Galbeed",
+            "capital": "primary",
+            "population": "",
+            "id": 1706832021
+        },
+        {
             "city": "Kon\u00e9",
             "city_ascii": "Kone",
             "lat": -21.0667,

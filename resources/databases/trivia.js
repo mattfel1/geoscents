@@ -5134,16 +5134,16 @@ module.exports = {
             "wiki": "https://en.wikipedia.org/wiki/Statue_of_Unity"
         },
         {
-          "city": "Vulcan Point (Island in a Lake in a Volcano in a Lake in an Island)",
-          "city_ascii": "",
-          "lat": 14.01,
-          "lng": 120.9975,
-          "iso2": "PH",
-          "country": "",
-          "population": 0,
-          "capital": "",
-          "wiki": "https://en.wikipedia.org/wiki/Taal_Volcano",
-          "img_link": "https://jsis.washington.edu/seac/wp-content/uploads/sites/7/2018/02/Vulcan-Point-Aerial1.png"
+            "city": "Vulcan Point (Island in a Lake in a Volcano in a Lake in an Island)",
+            "city_ascii": "",
+            "lat": 14.01,
+            "lng": 120.9975,
+            "iso2": "PH",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Taal_Volcano",
+            "img_link": "https://jsis.washington.edu/seac/wp-content/uploads/sites/7/2018/02/Vulcan-Point-Aerial1.png"
         },
         // {
         //   "city": "",

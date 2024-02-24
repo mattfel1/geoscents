@@ -2754,6 +2754,19 @@ module.exports = {
             "id": 1540958092
         },
         {
+            "city": "Hargeysa",
+            "city_ascii": "Hargeysa",
+            "lat": 9.56,
+            "lng": 44.065,
+            "country": "Somaliland",
+            "iso2": "SW",
+            "iso3": "",
+            "admin_name": "Woqooyi Galbeed",
+            "capital": "primary",
+            "population": "",
+            "id": 1706832021
+        },
+        {
             "city": "Hamilton",
             "city_ascii": "Hamilton",
             "lat": 32.2942,

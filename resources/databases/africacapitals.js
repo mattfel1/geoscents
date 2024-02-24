@@ -753,6 +753,19 @@ module.exports = {
             "capital": "",
             "population": 187083,
             "id": 1292385245
+        },
+        {
+            "city": "Hargeysa",
+            "city_ascii": "Hargeysa",
+            "lat": 9.56,
+            "lng": 44.065,
+            "country": "Somaliland",
+            "iso2": "SW",
+            "iso3": "",
+            "admin_name": "Woqooyi Galbeed",
+            "capital": "primary",
+            "population": "",
+            "id": 1706832021
         }
     ]
 }
