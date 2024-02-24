@@ -2754,8 +2754,8 @@ module.exports = {
             "id": 1540958092
         },
         {
-            "city": "Hargeysa",
-            "city_ascii": "Hargeysa",
+            "city": "Hargeisa",
+            "city_ascii": "Hargeisa",
             "lat": 9.56,
             "lng": 44.065,
             "country": "Somaliland",
