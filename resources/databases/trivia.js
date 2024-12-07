@@ -5145,6 +5145,127 @@ module.exports = {
             "wiki": "https://en.wikipedia.org/wiki/Taal_Volcano",
             "img_link": "https://jsis.washington.edu/seac/wp-content/uploads/sites/7/2018/02/Vulcan-Point-Aerial1.png"
         },
+        {
+            "city": "Kora Superdeep Borehole (Deepest human-made hole)",
+            "city_ascii": "",
+            "lat": 69.3965,
+            "lng": 30.61,
+            "iso2": "RU",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Kola_Superdeep_Borehole"
+        },
+        {
+            "city": "1966 Palomares incident (B-52G crashed while carrying four hydrogen bombs)",
+            "city_ascii": "",
+            "lat": 37.249167,
+            "lng": -1.796944,
+            "iso2": "ES",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/1966_Palomares_incident"
+        },
+        {
+            "city": "Tarkhan Dress Discovery Site (Oldest piece of woven clothing)",
+            "city_ascii": "",
+            "lat": 29.5,
+            "lng": 31.225,
+            "iso2": "EG",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Tarkhan_dress"
+        },
+        {
+            "city": "IDDP-2 Borehole ('World's Hottest Hole, 800°F / 427°C')",
+            "city_ascii": "",
+            "lat": 63.826389,
+            "lng": -22.681944,
+            "iso2": "IS",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Iceland_Deep_Drilling_Project"
+        },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "",
+        //   "country": "",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "",
+        //   "country": "",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "",
+        //   "country": "",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "",
+        //   "country": "",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "",
+        //   "country": "",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "",
+        //   "country": "",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
+        // {
+        //   "city": "",
+        //   "city_ascii": "",
+        //   "lat": ,
+        //   "lng": ,
+        //   "iso2": "",
+        //   "country": "",
+        //   "population": 0,
+        //   "capital": "",
+        //   "wiki": ""
+        // },
         // {
         //   "city": "",
         //   "city_ascii": "",
