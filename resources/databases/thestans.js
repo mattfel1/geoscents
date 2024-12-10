@@ -287,8 +287,8 @@ module.exports = {
             "id": 1795049992
         },
         {
-            "city": "Nur-Sultan",
-            "city_ascii": "Nur-Sultan",
+            "city": "Astana",
+            "city_ascii": "Astana",
             "lat": 51.1811,
             "lng": 71.4278,
             "country": "Kazakhstan",
