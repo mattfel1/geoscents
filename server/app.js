@@ -639,7 +639,7 @@ io.on('connection', (socket) => {
 
         // Verify asked citysrc is valid
         let unrecognized_citysrc = Object.keys(MAPS).indexOf(askcitysrc) === -1
-        if (unrecognized_citysrc && !exists) {
+        if (unrecognized_citysrc) {
             Object.values(rooms).forEach(function(room) {
                 if (room.hasPlayer(socket)) {
                     room.whisperMessage(socket, "<b>Not going to private room because your map was invalid: " + askcitysrc + "</b><br>", () => {});
