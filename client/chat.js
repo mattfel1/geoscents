@@ -12,13 +12,25 @@ class Chat {
         this.muted = false;
         this.spamtracker = new Map();
         this.isSpamming();
+
+        // Add event listeners
+        window.onfocus = this.isActive.bind(this);
+        window.onblur = this.isBlur.bind(this);
+
+        // Set up socket event listeners
+        this.socket.on("update custom messages", this.addCustomMessage.bind(this));
+        this.socket.on("update messages", this.addMessage.bind(this));
+
+        // Set up interval to prune spamtracker
+        setInterval(this.pruneSpamtracker.bind(this), 1000 / 5);
     }
 
-    isActive(document) {
+    isActive() {
         this.windowActive = true;
         this.hasNewMessage = false;
         document.title = "GeoScents";
     }
+
     isBlur() {
         this.windowActive = false;
     }
@@ -38,6 +50,7 @@ class Chat {
             }
         }
     }
+
     addCustomMessage(room, msg, fontsize) {
         if (room == this.myRoomName) {
             var final_message = $("<font style=\"font-size:" + fontsize + "px;\" />").html(msg);
@@ -53,6 +66,7 @@ class Chat {
             }
         }
     }
+
     isSpamming() {
         if (this.spamtracker.size > CONSTANTS.MAX_MSG_PER_SPAMPERIOD) {
             return true
@@ -65,6 +79,7 @@ class Chat {
             return true
         return false
     }
+
     listen() {
         const socket = this.socket;
         const self = this;
@@ -88,6 +103,17 @@ class Chat {
             }
         });
         this.spamtracker = spamtracker
+    }
+
+    pruneSpamtracker() {
+        const currentdate = new Date();
+        const unix = currentdate.getTime();
+        const droptime = unix - 1000 * CONSTANTS.SPAMPERIOD;
+        // prune
+        for (let [time, chars] of this.spamtracker) {
+            if (time < droptime)
+                this.spamtracker.delete(time);
+        }
     }
 }
 

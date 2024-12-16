@@ -20,9 +20,37 @@ const MAPS = require('../resources/maps.json')
 var myMap = CONSTANTS.LOBBY;
 var myCitysrc = CONSTANTS.LOBBY;
 var myRoomName = CONSTANTS.LOBBY;
-const canvas = window.document.getElementById('map');
-const panel = window.document.getElementById('panel');
-const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1; // hack for scaling
+let canvas;
+let panel;
+let isFirefox;
+
+// Build login popup
+document.addEventListener('DOMContentLoaded', function() {
+    canvas = document.getElementById('map');
+    panel = document.getElementById('panel');
+    isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1; // hack for scaling
+
+    const selectStatus = document.getElementById("selected_color");
+
+    CONSTANTS.COLORS.forEach(function(value) {
+        const entry = document.createElement("option");
+        entry.value = value;
+        entry.style = "color:" + value
+        entry.text = '█ '
+        selectStatus.appendChild(entry);
+    })
+
+    selectStatus.addEventListener('change', changeColor);
+
+    function changeColor() {
+        const optionSelected = selectStatus.selectedIndex;
+        let color = selectStatus.options[optionSelected].value;
+        if (color == "random")
+            color = "black"
+        selectStatus.style.color = color;
+    }
+});
+
 
 var lastScale = 999;
 var was_autoscaled = localStorage.getItem("autoscaled");
@@ -148,15 +176,6 @@ country_options.forEach((x, i) => {
     dropdown.appendChild(x);
 })
 
-// Update color choices
-let name_dropdown = window.document.getElementById('selected_color')
-CONSTANTS.COLORS.forEach(function(value) {
-    var entry = document.createElement("option");
-    entry.value = value;
-    entry.style = "color:" + value
-    entry.text = '█ '
-    name_dropdown.appendChild(entry);
-})
 
 const playerClick = {
     clickEvent: false,
@@ -292,24 +311,8 @@ $(document).ready(function() {
 
     /**** Chat *****/
     const chat = new Chat(socket);
-
-    window.onfocus = function() {
-        chat.isActive(document);
-    };
-    window.onblur = function() {
-        chat.isBlur();
-    };
     chat.listen();
-    socket.on("update custom messages", function(room, msg, font) {
-        chat.addCustomMessage(room, msg, font);
-        sounds.newMessage(room)
-    });
-    socket.on("update messages", function(room, msg) {
-        if (!booted) {
-            chat.addMessage(room, msg);
-            sounds.newMessage(room)
-        }
-    });
+
     socket.on("mute player", function(id) {
         sounds.muteMe(id);
         commands.muted = sounds.muted;
@@ -339,19 +342,6 @@ $(document).ready(function() {
             slow_roll_animation = false;
         }
     });
-    setInterval(() => {
-        // Keep track of message rate.  No more than 3000 chars or 8 messages, every 5s
-        // Handle spam on the client side, even though technically someone can get around this
-        const currentdate = new Date();
-        const unix = currentdate.getTime();
-        const droptime = unix - 1000 * CONSTANTS.SPAMPERIOD;
-        // prune
-        for (let [time, chars] of chat.spamtracker) {
-            if (time < droptime)
-                chat.spamtracker.delete(time);
-        }
-    }, 1000 / 5);
-
 
     /**** HELP POPUP *****/
     // Make player choose options
