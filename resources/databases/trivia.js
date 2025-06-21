@@ -5192,13 +5192,13 @@ module.exports = {
         {
           "city": "Discovery Site of Tollund Man (Well-preserved Iron Age Mummy Mistaken for Recent Murder)",
           "city_ascii": "",
-          "lat": ,
-          "lng": ,
-          "iso2": "",
+          "lat": 56.164444,
+          "lng": 9.392778,
+          "iso2": "DK",
           "country": "",
           "population": 0,
           "capital": "",
-          "wiki": ""
+          "wiki": "https://en.wikipedia.org/wiki/Tollund_Man"
         },
         // {
         //   "city": "",
