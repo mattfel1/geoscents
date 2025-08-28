@@ -5200,17 +5200,17 @@ module.exports = {
           "capital": "",
           "wiki": "https://en.wikipedia.org/wiki/Tollund_Man"
         },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
+        {
+          "city": "Yathkyed Lake (Island in a Lake in an Island in a Lake in an Island in a Lake, a.k.a World's Most Recursive Island)",
+          "city_ascii": "",
+          "lat": 62.716667,
+          "lng": -97.916667,
+          "iso2": "CA",
+          "country": "",
+          "population": 0,
+          "capital": "",
+          "wiki": "https://en.wikipedia.org/wiki/Yathkyed_Lake"
+        },
         // {
         //   "city": "",
         //   "city_ascii": "",
