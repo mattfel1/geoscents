@@ -15,7 +15,8 @@ const Chat = require('./chat.js');
 const MapPanel = require('./map.js');
 const History = require('./history.js');
 const CONSTANTS = require('../resources/constants.js');
-const MAPS = require('../resources/maps.json')
+const MAPS          = require('../resources/maps.json')
+const MAP_COUNTRIES = require('../resources/map-countries.json')
 
 var myMap = CONSTANTS.LOBBY;
 var myCitysrc = CONSTANTS.LOBBY;
@@ -144,6 +145,7 @@ country_options.forEach((x, i) => {
 })
 
 
+
 const playerClick = {
     clickEvent: false,
     mouseDown: false,
@@ -154,6 +156,101 @@ const playerClick = {
 };
 
 $(document).ready(function() {
+    // ---------------------------------------------------------------------------
+    // Custom autocomplete for the map search box
+    // Matches both map names and the country names contained in each map.
+    // ---------------------------------------------------------------------------
+    const citysrcInput       = document.getElementById('requestedCitysrc_choice');
+    const citysrcSuggestions = document.getElementById('citysrc-suggestions');
+
+    if (citysrcInput && citysrcSuggestions) {
+        const allMaps = [
+            ...continent_options,
+            ...region_options,
+            ...country_options,
+        ].map(o => o.value);
+
+        let activeIndex = -1;
+
+        function showSuggestions(query) {
+            citysrcSuggestions.innerHTML = '';
+            activeIndex = -1;
+
+            const q = query.trim().toLowerCase();
+            if (!q) { citysrcSuggestions.style.display = 'none'; return; }
+
+            const matches = allMaps.filter(mapName => {
+                if (mapName.toLowerCase().includes(q)) return true;
+                const countries = MAP_COUNTRIES[mapName];
+                return countries && countries.some(c => c.toLowerCase().includes(q));
+            });
+
+            if (!matches.length) { citysrcSuggestions.style.display = 'none'; return; }
+
+            matches.forEach(mapName => {
+                const item = document.createElement('div');
+                item.className = 'suggestion-item';
+                item.textContent = mapName;
+
+                // Show matched country as a hint when the query matched a country, not the name
+                if (!mapName.toLowerCase().includes(q)) {
+                    const countries = MAP_COUNTRIES[mapName] || [];
+                    const hit = countries.find(c => c.toLowerCase().includes(q));
+                    if (hit) {
+                        const hint = document.createElement('span');
+                        hint.className = 'suggestion-hint';
+                        hint.textContent = ' \u2014 contains ' + hit;
+                        item.appendChild(hint);
+                    }
+                }
+
+                item.addEventListener('mousedown', function(e) {
+                    // mousedown fires before blur; use preventDefault to keep focus on input
+                    e.preventDefault();
+                    citysrcInput.value = mapName;
+                    citysrcSuggestions.style.display = 'none';
+                });
+                citysrcSuggestions.appendChild(item);
+            });
+
+            citysrcSuggestions.style.display = 'block';
+        }
+
+        citysrcInput.addEventListener('input', function() {
+            showSuggestions(this.value);
+        });
+
+        citysrcInput.addEventListener('focus', function() {
+            if (this.value.trim()) showSuggestions(this.value);
+        });
+
+        citysrcInput.addEventListener('blur', function() {
+            citysrcSuggestions.style.display = 'none';
+        });
+
+        citysrcInput.addEventListener('keydown', function(e) {
+            const items = citysrcSuggestions.querySelectorAll('.suggestion-item');
+            if (!items.length) return;
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                activeIndex = Math.min(activeIndex + 1, items.length - 1);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                activeIndex = Math.max(activeIndex - 1, 0);
+            } else if (e.key === 'Enter' && activeIndex >= 0) {
+                e.preventDefault();
+                citysrcInput.value = items[activeIndex].textContent.split(' \u2014 ')[0].trim();
+                citysrcSuggestions.style.display = 'none';
+                return;
+            } else if (e.key === 'Escape') {
+                citysrcSuggestions.style.display = 'none';
+                return;
+            }
+            items.forEach((el, i) => el.classList.toggle('active', i === activeIndex));
+            if (activeIndex >= 0) items[activeIndex].scrollIntoView({ block: 'nearest' });
+        });
+    }
+
     // Player connects
     socket.emit('newPlayer');
 

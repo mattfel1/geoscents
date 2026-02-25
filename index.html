@@ -28,8 +28,12 @@
                 <td style="text-align:center;padding: 8px;width:auto">
                     <div id="maptitle">Choose / change map</div>
 
-                    <input type="text" list="requestedCitysrc" id="requestedCitysrc_choice" />
-                    <datalist id="requestedCitysrc" autocomplete="off">
+                    <div style="position:relative;display:inline-block;">
+                        <input type="text" id="requestedCitysrc_choice" autocomplete="off" placeholder="Search map or country…" />
+                        <div id="citysrc-suggestions" class="citysrc-suggestions"></div>
+                    </div>
+                    <!-- Hidden datalist still populated by client.js for random-map selection -->
+                    <datalist id="requestedCitysrc">
                         <option value="Random">Random</option>
                         <option value="Trivia">Trivia</option>
                         <!-- To be filled in by client.js -->

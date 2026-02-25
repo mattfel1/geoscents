@@ -27,7 +27,8 @@
   },
   "scripts": {
     "start": "bash scripts/dev.sh",
-    "test": "jest"
+    "test": "jest",
+    "build:country-index": "node scripts/build-country-index.js"
   },
   "devDependencies": {
     "css-loader": "^7.1.4",

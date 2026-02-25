@@ -58,6 +58,39 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
 }
 
+/* === Map search autocomplete === */
+.citysrc-suggestions {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    min-width: 200px;
+    max-height: 220px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid #aaa;
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    z-index: 10010;
+    font-size: 13px;
+}
+.citysrc-suggestions .suggestion-item {
+    padding: 4px 8px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.citysrc-suggestions .suggestion-item:hover,
+.citysrc-suggestions .suggestion-item.active {
+    background: #cce8ff;
+}
+.citysrc-suggestions .suggestion-hint {
+    padding: 2px 8px;
+    font-size: 11px;
+    color: #888;
+    pointer-events: none;
+}
+
 /* === Settings panel === */
 .settings-panel {
     border-style: inset;
