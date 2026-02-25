@@ -9,23 +9,26 @@ Feel free to contribute!
 
 # Getting Started
 
-This is a simple starting point for a HTML5 game using Canvas, Sockets.io and Express.
+## Local development (WSL / Linux)
 
-You can use pm2, which will restart when there is a crash.  Make sure package.json script entry says: `"start": "webpack -w & pm2 start server/app.js --ignore public"`
-
-```
-npm update
-webpack
-pm2 start # --no-daemon #(for interactive)
+```bash
+npm install
+npm start        # serves at http://localhost:5000
 ```
 
-Or you can use nodemon, which will restart when you update a js file.  Make sure package.json script entry says: `"start": "webpack -w & nodemon  server/app.js --ignore public"`
+`npm start` bundles the client with webpack (watch mode) and starts the server with nodemon.
+It sets `LOCAL_DEV=1` automatically, which switches the server to plain HTTP on port 5000 — no SSL certs needed.
+It also kills any stale webpack process from a previous run before starting a new one.
 
+## Production (Digital Ocean / PM2)
+
+On the server, deploy via the `startdaily.sh` script in tmux:
+
+```bash
+bash scripts/startdaily.sh
 ```
-npm update
-webpack
-npm start
-```
+
+This pulls latest from git, copies files to `/var/www/html`, runs webpack, and starts the app under PM2.
 
 
 # Formatting

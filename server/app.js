@@ -6,8 +6,6 @@ const crypto = require('crypto'),
     fs = require("fs"),
     http = require("http");
 const https = require('https');
-const hostname = require("os").hostname();
-
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
@@ -20,10 +18,10 @@ let httpsServer;
 let io;
 let useHttp = false;
 
-if (hostname === "Q" || hostname === "matebook") {
+if (process.env.LOCAL_DEV) {
     PORT = 5000;
     SPORT = 5443;
-    useHttp = true; // I forgot how to get https working locally after reformatting computer with local hacks... 
+    useHttp = true;
     if (useHttp) {
         httpsServer = https.createServer(function(req, res) {
             res.writeHead(301, {

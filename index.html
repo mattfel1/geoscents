@@ -34,10 +34,6 @@
                         <option value="Trivia">Trivia</option>
                         <!-- To be filled in by client.js -->
                     </datalist>
-                    <script type="text/javascript">
-                        document.getElementById('requestedCitysrc').value = "<?php echo $_GET['requestedCitysrc'];?>";
-                        if (document.getElementById('requestedCitysrc').value.length == 0) document.getElementById('requestedCitysrc').value = "Random"
-                    </script>
                 </td>
             </table>
             <input type="submit" style="text-align:center" value="Go!" />
@@ -124,9 +120,6 @@
                             <input type="text" id="msg_text" name="msg_text" maxlength="1000" autocomplete="off" style="width: 800px;" />
                             <input type="submit" value="Send!" />
                         </form>
-                        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-                        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-
                         <div id="history" style="overflow:auto;width:1050px;height:275px;background:#ffffff;border:1px dotted black;text-align:left;"></div>
                         <div style="display: inline-block">
                             <a class="github-button" href="https://github.com/mattfel1/geoscents" data-size="large" aria-label="Fork mattfel1/geoscents on GitHub">View on Github</a>
@@ -154,16 +147,6 @@
 
         </div>
     </div>
-    <script type="text/javascript">
-        //<![CDATA[
-        var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.trust-provider.com/" : "http://www.trustlogo.com/");
-        document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
-        //]]>
-    </script>
-    <script language="JavaScript" type="text/javascript">
-        TrustLogo("https://www.positivessl.com/images/seals/positivessl_trust_seal_sm_124x32.png", "POSDV", "none");
-    </script>
-
     <script defer src="/bundle.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
