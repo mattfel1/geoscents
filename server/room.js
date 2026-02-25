@@ -53,6 +53,22 @@ class Room {
         this.recorded = false; // Toggle for making sure we only record once per reveal_state
         this.hall_of_fame; // Keep hall of fame in-memory if this is the lobby
         this.gameHistory = [];
+        this.hostSocketId = null; // First player to join a private room; only they can change the map
+    }
+
+    // If leavingSocketId was the host, assign the next player (by join order) as host.
+    // Must be called BEFORE killPlayer so the leaving socket is still in this.clients.
+    // Returns the new host's socketId, or null if the room will be empty.
+    transferHostIfNeeded(leavingSocketId) {
+        if (this.hostSocketId !== leavingSocketId) return null;
+        for (const [id] of this.clients) {
+            if (id !== leavingSocketId) {
+                this.hostSocketId = id;
+                return id;
+            }
+        }
+        this.hostSocketId = null;
+        return null;
     }
 
 

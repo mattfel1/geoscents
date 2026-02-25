@@ -164,64 +164,78 @@ $(document).ready(function() {
     const citysrcSuggestions = document.getElementById('citysrc-suggestions');
 
     if (citysrcInput && citysrcSuggestions) {
+        // Preserve tier info for show-all grouping
         const allMaps = [
-            ...continent_options,
-            ...region_options,
-            ...country_options,
-        ].map(o => o.value);
+            { name: 'Random', tier: 'special' },
+            ...continent_options.map(o => ({ name: o.value, tier: 'continent' })),
+            ...region_options.map(o => ({ name: o.value, tier: 'region' })),
+            ...country_options.map(o => ({ name: o.value, tier: 'country' })),
+        ];
+        const TIER_LABELS = { special: 'Special', continent: 'Continents', region: 'Regions', country: 'Countries' };
 
         let activeIndex = -1;
 
-        function showSuggestions(query) {
+        function appendSuggestionItem(m, q) {
+            const item = document.createElement('div');
+            item.className = 'suggestion-item';
+            item.textContent = m.name;
+            // Show matched country as a hint when the query matched a country, not the name
+            if (q && !m.name.toLowerCase().includes(q)) {
+                const countries = MAP_COUNTRIES[m.name] || [];
+                const hit = countries.find(c => c.toLowerCase().includes(q));
+                if (hit) {
+                    const hint = document.createElement('span');
+                    hint.className = 'suggestion-hint';
+                    hint.textContent = ' \u2014 contains ' + hit;
+                    item.appendChild(hint);
+                }
+            }
+            item.addEventListener('mousedown', function(e) {
+                e.preventDefault();
+                citysrcInput.value = m.name;
+                citysrcSuggestions.style.display = 'none';
+            });
+            citysrcSuggestions.appendChild(item);
+        }
+
+        function showSuggestions(query, forceAll) {
             citysrcSuggestions.innerHTML = '';
             activeIndex = -1;
 
             const q = query.trim().toLowerCase();
-            if (!q) { citysrcSuggestions.style.display = 'none'; return; }
+            if (!forceAll && !q) { citysrcSuggestions.style.display = 'none'; return; }
 
-            const matches = allMaps.filter(mapName => {
-                if (mapName.toLowerCase().includes(q)) return true;
-                const countries = MAP_COUNTRIES[mapName];
-                return countries && countries.some(c => c.toLowerCase().includes(q));
-            });
+            const matches = forceAll
+                ? allMaps
+                : allMaps.filter(m => {
+                    if (m.name.toLowerCase().includes(q)) return true;
+                    const countries = MAP_COUNTRIES[m.name];
+                    return countries && countries.some(c => c.toLowerCase().includes(q));
+                });
 
             if (!matches.length) { citysrcSuggestions.style.display = 'none'; return; }
 
-            matches.forEach(mapName => {
-                const item = document.createElement('div');
-                item.className = 'suggestion-item';
-                item.textContent = mapName;
-
-                // Show matched country as a hint when the query matched a country, not the name
-                if (!mapName.toLowerCase().includes(q)) {
-                    const countries = MAP_COUNTRIES[mapName] || [];
-                    const hit = countries.find(c => c.toLowerCase().includes(q));
-                    if (hit) {
-                        const hint = document.createElement('span');
-                        hint.className = 'suggestion-hint';
-                        hint.textContent = ' \u2014 contains ' + hit;
-                        item.appendChild(hint);
-                    }
+            let lastTier = null;
+            matches.forEach(m => {
+                if (forceAll && m.tier !== lastTier) {
+                    const sep = document.createElement('div');
+                    sep.className = 'suggestion-sep';
+                    sep.textContent = TIER_LABELS[m.tier] || m.tier;
+                    citysrcSuggestions.appendChild(sep);
+                    lastTier = m.tier;
                 }
-
-                item.addEventListener('mousedown', function(e) {
-                    // mousedown fires before blur; use preventDefault to keep focus on input
-                    e.preventDefault();
-                    citysrcInput.value = mapName;
-                    citysrcSuggestions.style.display = 'none';
-                });
-                citysrcSuggestions.appendChild(item);
+                appendSuggestionItem(m, q);
             });
 
             citysrcSuggestions.style.display = 'block';
         }
 
         citysrcInput.addEventListener('input', function() {
-            showSuggestions(this.value);
+            showSuggestions(this.value, false);
         });
 
         citysrcInput.addEventListener('focus', function() {
-            if (this.value.trim()) showSuggestions(this.value);
+            if (this.value.trim()) showSuggestions(this.value, false);
         });
 
         citysrcInput.addEventListener('blur', function() {
@@ -249,6 +263,19 @@ $(document).ready(function() {
             items.forEach((el, i) => el.classList.toggle('active', i === activeIndex));
             if (activeIndex >= 0) items[activeIndex].scrollIntoView({ block: 'nearest' });
         });
+
+        const showAllBtn = document.getElementById('citysrc-show-all');
+        if (showAllBtn) {
+            showAllBtn.addEventListener('mousedown', function(e) {
+                e.preventDefault(); // keep focus on input
+                if (citysrcSuggestions.style.display === 'block') {
+                    citysrcSuggestions.style.display = 'none';
+                } else {
+                    showSuggestions('', true);
+                    citysrcInput.focus();
+                }
+            });
+        }
     }
 
     // Player connects

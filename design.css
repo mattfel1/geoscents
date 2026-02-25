@@ -90,6 +90,31 @@
     color: #888;
     pointer-events: none;
 }
+.citysrc-suggestions .suggestion-sep {
+    padding: 3px 8px;
+    font-size: 11px;
+    color: #555;
+    font-style: italic;
+    background: #f0f0f0;
+    pointer-events: none;
+    border-top: 1px solid #ccc;
+}
+.citysrc-suggestions .suggestion-sep:first-child {
+    border-top: none;
+}
+#citysrc-show-all {
+    border: 1px solid #aaa;
+    border-left: none;
+    background: #f0f0f0;
+    cursor: pointer;
+    padding: 1px 5px;
+    font-size: 10px;
+    vertical-align: middle;
+    line-height: normal;
+}
+#citysrc-show-all:hover {
+    background: #ddd;
+}
 
 /* === Settings panel === */
 .settings-panel {

@@ -361,6 +361,17 @@ io.on('connection', (socket) => {
                 var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b> has exited GeoScents!</font> ]<br>";
                 io.sockets.emit("update messages", room.roomName, leave_msg);
             }
+            // Transfer host before removing player so clients Map is still intact
+            if (room.isPrivate) {
+                const newHostId = room.transferHostIfNeeded(socket.id);
+                if (newHostId !== null) {
+                    const newHostPlayer = room.players.get(newHostId);
+                    const newHostName = newHostPlayer ? newHostPlayer.name : '???';
+                    const newHostColor = newHostPlayer ? newHostPlayer.color : '#000';
+                    const hostMsg = "[ <i>Room host left. <font color='" + newHostColor + "'><b>" + newHostName + "</b></font> is now the host!</i> ]<br>";
+                    room.clients.forEach((s) => s.emit('update messages', room.roomName, hostMsg));
+                }
+            }
             room.killPlayer(socket);
             io.sockets.emit('update counts', getHist());
         }
@@ -599,6 +610,16 @@ io.on('connection', (socket) => {
             info['moved'] = true;
             var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has left " + originRoomName + " and joined " + citysrc + "!</font> ]<br>";
             io.sockets.emit("update messages", originRoomName, leave_msg)
+            if (rooms[originRoomName].isPrivate) {
+                const newHostId = rooms[originRoomName].transferHostIfNeeded(socket.id);
+                if (newHostId !== null) {
+                    const newHostPlayer = rooms[originRoomName].players.get(newHostId);
+                    const newHostName = newHostPlayer ? newHostPlayer.name : '???';
+                    const newHostColor = newHostPlayer ? newHostPlayer.color : '#000';
+                    const hostMsg = "[ <i>Room host left. <font color='" + newHostColor + "'><b>" + newHostName + "</b></font> is now the host!</i> ]<br>";
+                    rooms[originRoomName].clients.forEach((s) => s.emit('update messages', originRoomName, hostMsg));
+                }
+            }
             rooms[originRoomName].killPlayer(socket);
             let map = citysrc.replace(" Capitals", "");
             let roomName = citysrc
@@ -632,9 +653,11 @@ io.on('connection', (socket) => {
         let dest = "private_" + code;
         let exists = (dest in rooms)
 
-        // Verify asked citysrc is valid
+        // Verify asked citysrc is valid.
+        // When joining an existing room the map comes from the room itself, so we only
+        // reject an unrecognized citysrc when creating a new room or changing the map.
         let unrecognized_citysrc = Object.keys(MAPS).indexOf(askcitysrc) === -1
-        if (unrecognized_citysrc) {
+        if (!exists && unrecognized_citysrc) {
             Object.values(rooms).forEach(function(room) {
                 if (room.hasPlayer(socket)) {
                     room.whisperMessage(socket, "<b>Not going to private room because your map was invalid: " + askcitysrc + "</b><br>", () => {});
@@ -664,7 +687,18 @@ io.on('connection', (socket) => {
             var info = rooms[originRoomName].exportPlayer(socket);
             info['moved'] = true;
             if (originRoomName == dest) {
-                // Handle change map
+                // Handle change map — only the room host may do this
+                if (unrecognized_citysrc) {
+                    room.whisperMessage(socket, "<b>Map change failed: unrecognized map \"" + askcitysrc + "\"</b><br>", () => {});
+                    return;
+                }
+                if (rooms[dest].hostSocketId !== null && rooms[dest].hostSocketId !== socket.id) {
+                    const hostPlayer = rooms[dest].players.get(rooms[dest].hostSocketId);
+                    const hostName = hostPlayer ? hostPlayer.name : 'the room host';
+                    const hostColor = hostPlayer ? hostPlayer.color : '#000';
+                    room.whisperMessage(socket, "<b>Only the room host (<font color='" + hostColor + "'>" + hostName + "</font>) can change the map.</b><br>", () => {});
+                    return;
+                }
                 var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b> has changed the map to " + askcitysrc + "!</font> ]<br>";
                 io.sockets.emit("update messages", originRoomName, leave_msg);
                 let citysrc = askcitysrc;
@@ -679,6 +713,17 @@ io.on('connection', (socket) => {
                 console.log('making private room ' + dest)
                 var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has left " + originRoomName + " and joined a private room!</font> ]<br>";
                 io.sockets.emit("update messages", originRoomName, leave_msg)
+                // Transfer host before removing player from origin room
+                if (rooms[originRoomName].isPrivate) {
+                    const newHostId = rooms[originRoomName].transferHostIfNeeded(socket.id);
+                    if (newHostId !== null) {
+                        const newHostPlayer = rooms[originRoomName].players.get(newHostId);
+                        const newHostName = newHostPlayer ? newHostPlayer.name : '???';
+                        const newHostColor = newHostPlayer ? newHostPlayer.color : '#000';
+                        const hostMsg = "[ <i>Room host left. <font color='" + newHostColor + "'><b>" + newHostName + "</b></font> is now the host!</i> ]<br>";
+                        rooms[originRoomName].clients.forEach((s) => s.emit('update messages', originRoomName, hostMsg));
+                    }
+                }
                 rooms[originRoomName].killPlayer(socket);
                 Object.values(rooms).forEach(function(room) {
                     if (room.isPrivate && room.playerCount() == 0 && rooms.hasOwnProperty(room.roomName)) {
@@ -688,6 +733,7 @@ io.on('connection', (socket) => {
                 let citysrc = askcitysrc;
                 if (!exists) {
                     rooms[dest] = new Room(map, dest, citysrc);
+                    rooms[dest].hostSocketId = socket.id;
                 } else {
                     map = rooms[dest].map
                     citysrc = rooms[dest].citysrc
@@ -697,9 +743,16 @@ io.on('connection', (socket) => {
                 rooms[dest].addPlayer(socket, info);
                 playerRooms.set(socket.id, rooms[dest]);
                 if (Geography.hasLeader(citysrc)) rooms[dest].whisperMessage(socket, "<i><b>" + MAPS[citysrc]["greeting"] + "</b> to the <b>" + citysrc + "</b> map!</i><br>", function() {});
+                // Announce host status
+                if (!exists) {
+                    rooms[dest].whisperMessage(socket, "<i>You created this room and are the host. Only you can change the map.</i><br>", () => {});
+                } else {
+                    const hostPlayer = rooms[dest].players.get(rooms[dest].hostSocketId);
+                    const hostName = hostPlayer ? hostPlayer.name : '???';
+                    rooms[dest].whisperMessage(socket, "<i><b>" + hostName + "</b> is the room host and controls the map.</i><br>", () => {});
+                }
                 var join_msg = "[ <font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b> has joined " + dest + "!</font> ]<br>";
                 io.sockets.emit("update messages", dest, join_msg);
-                // if (dest == CONSTANTS.TRIVIA) rooms[dest].whisperMessage(socket, "<i>Welcome to the Trivia map!  This one quizzes you on the locations of miscellaneous cultural and historical events and places.  Please suggest more items by typing a message into the chat box that starts with \"feedback\" and I may add them!  You may also complain about any of the existing items.</i><br>", function() {});
                 io.sockets.emit('update counts', getHist());
                 helpers.log("Player " + socket.handshake.address + " " + info['raw_name'] + " moved to room " + dest);
                 rooms[dest].joeMessage();
