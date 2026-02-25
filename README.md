@@ -22,13 +22,16 @@ It also kills any stale webpack process from a previous run before starting a ne
 
 ## Production (Digital Ocean / PM2)
 
-On the server, deploy via the `startdaily.sh` script in tmux:
+SSH into the server and run in tmux:
 
 ```bash
-bash scripts/startdaily.sh
+cd /root/geoscents
+git pull
+bash scripts/deploy.sh
 ```
 
-This pulls latest from git, copies files to `/var/www/html`, runs webpack, and starts the app under PM2.
+`deploy.sh` kills existing processes, copies files to `/var/www/html`, runs `npm install`,
+builds the bundle in production mode, and starts the app under PM2.
 
 
 # Formatting
