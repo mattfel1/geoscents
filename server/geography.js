@@ -20,39 +20,26 @@ Object.keys(MAPS).forEach(function(value) {
 })
 
 const randomCity = (citysrc, blacklist, played_targets) => {
-    let acceptable = false;
-    let i = 0;
-    let proposal = null;
-    let timeout = 20;
     console.assert(ALLCITIES.has(citysrc), "No city src database for " + citysrc);
-    let CITIES = ALLCITIES.get(citysrc);
-    while (!acceptable) {
-        const rng = Math.random();
-        // Scan the next 11 targets to find a suitable one
-        let ofs = 0;
-        let desperate = i >= timeout - 3;
-        let linear_scan_count = 1;
-        if (desperate)
-            linear_scan_count = CONSTANTS.GAME_ROUNDS + 1;
-        for (let ofs = 0; ofs < linear_scan_count; ofs++) {
-            const id = (Math.floor(rng * CITIES.length) + ofs) % CITIES.length;
-            proposal = CITIES[id];
+    const CITIES = ALLCITIES.get(citysrc);
 
-            // If we are about to timeout, forget about the citysrc rules and just get first unique target
-            if (!desperate && uniqueInBlacklist(citysrc, proposal, blacklist) || i >= timeout)
-                acceptable = true;
-            else if (desperate && !played_targets.includes(stringifyTarget(proposal, citysrc)['string']))
-                acceptable = true;
+    // Primary pool: cities that pass the blacklist heuristic (unique country/admin/string)
+    let pool = CITIES.filter(c => uniqueInBlacklist(citysrc, c, blacklist));
 
-            if (acceptable)
-                break;
-        }
-        i = i + 1;
-    }
+    // Fallback: heuristic exhausted (e.g. tiny map), any city not yet played this game
+    if (pool.length === 0)
+        pool = CITIES.filter(c => !played_targets.includes(stringifyTarget(c, citysrc)['string']));
+
+    // Last resort: anything at all (should never happen in a normal game)
+    if (pool.length === 0)
+        pool = CITIES;
+
+    const proposal = pool[Math.floor(Math.random() * pool.length)];
+
     if (requireUniqueAdmin(citysrc, proposal)) {
-        blacklist.push(proposal['admin_name'])
+        blacklist.push(proposal['admin_name']);
     } else if (blacklistEntireString(citysrc)) {
-        blacklist.push(stringifyTarget(proposal, citysrc)['string'])
+        blacklist.push(stringifyTarget(proposal, citysrc)['string']);
     } else {
         blacklist.push(proposal['country']);
     }
