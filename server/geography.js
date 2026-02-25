@@ -15,7 +15,7 @@ let ALLCITIES = new Map()
 
 requireFunc = typeof __webpack_require__ === "function" ? __non_webpack_require__ : require;
 Object.keys(MAPS).forEach(function(value) {
-    let list = requireFunc('../public/' + value.toLowerCase().replace(/ /g, "").replace(".", "") + '.js').CITIES;
+    let list = requireFunc('../resources/databases/' + value.toLowerCase().replace(/ /g, "").replace(".", "") + '.js').CITIES;
     ALLCITIES.set(value, list);
 })
 

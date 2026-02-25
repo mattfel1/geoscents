@@ -1,5 +1,3 @@
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-
 module.exports = {
   entry: ['babel-polyfill', './client/client.js'],
   mode: 'development',
@@ -23,19 +21,5 @@ module.exports = {
         ]
       }
     ]
-  },
-  plugins: [
-    // Apparently this broke after copy-webpack-plugin v9...
-    new CopyWebpackPlugin({
-        patterns: [
-{
-        context: './resources/databases/',
-        from: '*.js',
-        to: './public',
-        force: true
-    }
-            ]
-    })
-
-  ]
+  }
 }
