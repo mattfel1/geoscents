@@ -9,3 +9,6 @@ certs/
 *.pem
 scripts/*.ipynb_checkpoints
 yarn.lock
+venv/
+miniconda3.sh
+C:\
