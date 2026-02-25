@@ -170,6 +170,13 @@ $(document).ready(function() {
     const popup = new Popup(socket);
     popup.showPopup();
 
+    document.getElementById('ready-btn').addEventListener('click', () => {
+        if (myMap !== CONSTANTS.LOBBY && betweenGames && !clickedReady) {
+            socket.emit('playerReady');
+            commands.drawCommand(" seconds until new game auto-starts...", "", "", "", 0, true, true, false);
+            clickedReady = true;
+        }
+    });
 
     /**** Scoreboard *****/
     const scoreboard = new Scoreboard(socket);
@@ -442,6 +449,14 @@ $(document).ready(function() {
         commands.postButtons()
         studyPoints = []
         betweenGames = roomState === CONSTANTS.PREPARE_GAME_STATE;
+        if (mapName === CONSTANTS.LOBBY) {
+            document.getElementById('timer').style.display = 'none';
+            document.getElementById('ready-btn').style.display = 'none';
+            ['cmd-time', 'cmd-city', 'cmd-capital', 'cmd-round'].forEach(id => {
+                document.getElementById(id).textContent = '';
+            });
+            document.getElementById('cmd-flag').style.visibility = 'hidden';
+        }
     });
     socket.on("clear study points", () => {
         studyPoints = []
@@ -502,11 +517,6 @@ $(document).ready(function() {
     document.addEventListener("touchend", touchUpHandler, false);
     canvas.addEventListener('click', function(evt) {
         var mousePos = getMousePosInPanel(canvas, evt);
-        if (isInside(mousePos, commands.ready_button) && myMap !== CONSTANTS.LOBBY && betweenGames) {
-            socket.emit('playerReady');
-            commands.drawCommand(" seconds until new game auto-starts...", "", "", "", 0, true, true, false);
-            clickedReady = true;
-        }
         Object.values(map.clickable_buttons).forEach(function(btn) {
             if (isInside(mousePos, btn) && myMap === CONSTANTS.LOBBY && !popup.isShowing && !booted) {
                 if (btn.label.trim() != "?") {
@@ -544,10 +554,7 @@ $(document).ready(function() {
                 } else if (!booted) map.showButton(btn);
             })
         } else {
-            if (betweenGames && !clickedReady && isInside(mousePos, commands.ready_button)) {
-                commands.highlightReadyButton();
-            } else if (betweenGames) {
-                commands.showReadyButton(clickedReady);
+            if (betweenGames) {
                 let inPoint = false;
                 studyPoints.forEach(function(point) {
                     if (isInside(mousePos, point["box"])) {

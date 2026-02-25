@@ -22,14 +22,8 @@ class Popup {
     // function to show our popups
     showPopup() {
         if (this.choseName == false) {
-            var docHeight = $(document).height(); //grab the height of the page
-            var scrollTop = $(window).scrollTop(); //grab the px value from the top of the page to where you're scrolling
-            $('.overlay-bg').show().css({
-                'height': docHeight
-            }); //display your popup background and set height to the page height
-            $('.popup').show().css({
-                'top': scrollTop + 20 + 'px'
-            }); //show the appropriate popup and set the content 20px from the window top
+            $('.overlay-bg').show();
+            $('.popup').show();
             $('#selected_name').focus();
         }
         const join = (name, cb) => this.join(name, cb);

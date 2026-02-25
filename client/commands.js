@@ -38,25 +38,6 @@ class Commands {
             'time': 10,
             'color': 'white'
         };
-        this.ready_button = {
-            x: this.canvas.width * 55 / 96,
-            y: 3,
-            width: 380,
-            height: 30
-        };
-        this.timer_window = {
-            x: this.canvas.width * 1 / 12 - 40,
-            y: 0,
-            width: 40,
-            height: 40
-        };
-        this.command_window = {
-            x: this.canvas.width * 1 / 12,
-            y: 0,
-            width: this.canvas.width * 10 / 12,
-            height: 40
-        };
-
         var was_muted = localStorage.getItem("muted");
         if (was_muted === null || was_muted === "false") was_muted = false
         else was_muted = true
@@ -82,16 +63,14 @@ class Commands {
         this.isBotSpamming();
     }
 
-    drawLastCommand(id) {
+    drawLastCommand() {
         if (this.myRoomName !== CONSTANTS.LOBBY) {
             this.drawCommand(this.lastCommand['timeDescrip'], this.lastCommand['citystring'], this.lastCommand['capital'], this.lastCommand['iso2'], this.lastCommand['round'], this.lastCommand['button'], this.lastCommand['clicked'], this.lastCommand['is_target']);
             this.postTime(this.lastTime['time'], this.lastTime['color']);
         }
     }
     drawCommand(timeDescrip, citystring, capital, iso2_raw, round, button, clicked, is_target) {
-        let iso2 = iso2_raw;
-        if (iso2_raw == "" || iso2_raw == null)
-            iso2 = "earth";
+        let iso2 = (iso2_raw === "" || iso2_raw == null) ? "earth" : iso2_raw;
 
         this.lastCommand = {
             'timeDescrip': timeDescrip,
@@ -103,57 +82,37 @@ class Commands {
             'clicked': clicked,
             'is_target': is_target
         };
-        this.ctx.globalAlpha = 0.9;
-        this.ctx.fillStyle = CONSTANTS.BGCOLOR;
-        this.ctx.fillRect(this.command_window['x'], this.command_window['y'], this.command_window['width'], this.command_window['height']);
-        this.ctx.globalAlpha = 1.0;
-        this.ctx.font = "20px Arial";
-        this.ctx.fillStyle = "black";
 
-        this.ctx.fillText(timeDescrip, this.command_window['x'] + 5, this.command_window['y'] + 25);
-        this.ctx.fillText(citystring, this.command_window['x'] + timeDescrip.length * 10 + 30, this.command_window['y'] + 25);
-        this.ctx.fillText(capital, this.command_window['x'] + citystring.length * 10 + timeDescrip.length * 10 + 50, this.command_window['y'] + 25);
-        this.ctx.fillText('Round ' + (round + 1) + '/' + (CONSTANTS.GAME_ROUNDS), this.command_window['x'] + this.command_window['width'] * 0.9, this.command_window['y'] + 25);
+        document.getElementById('cmd-time').textContent = timeDescrip;
+        document.getElementById('cmd-city').textContent = citystring;
+        document.getElementById('cmd-capital').textContent = capital || '';
+        document.getElementById('cmd-round').textContent = 'Round ' + (round + 1) + '/' + CONSTANTS.GAME_ROUNDS;
 
-        if (iso2 !== "" && is_target) {
-            var flagImage = new Image();
-            flagImage.src = "/resources/flags/" + iso2.toString().toLowerCase() + ".png";
-            var ctx = this.ctx;
-            var command_window = this.command_window;
-            flagImage.onload = function() {
-                return ctx.drawImage(flagImage, command_window['x'] + 58, command_window['y'] - 2, 80, 40);
-            };
+        const flagEl = document.getElementById('cmd-flag');
+        if (is_target && iso2 && iso2 !== 'earth') {
+            flagEl.src = '/resources/flags/' + iso2.toLowerCase() + '.png';
+            flagEl.style.visibility = '';
+        } else {
+            flagEl.style.visibility = 'hidden';
         }
 
-        if (button) {
-            this.showReadyButton(clicked);
-        }
+        if (button) this.showReadyButton(clicked);
+        else document.getElementById('ready-btn').style.display = 'none';
     }
 
     drawStudy(timeDescrip, citystring, capital, iso2_raw) {
-        let iso2 = iso2_raw;
-        if (iso2_raw == "" || iso2_raw == null)
-            iso2 = "earth";
+        let iso2 = (iso2_raw === "" || iso2_raw == null) ? "earth" : iso2_raw;
 
-        this.ctx.globalAlpha = 0.9;
-        this.ctx.fillStyle = CONSTANTS.BGCOLOR;
-        this.ctx.fillRect(this.command_window['x'], this.command_window['y'], this.command_window['width'], this.command_window['height']);
-        this.ctx.globalAlpha = 1.0;
-        this.ctx.font = "20px Arial";
-        this.ctx.fillStyle = "black";
+        document.getElementById('cmd-time').textContent = timeDescrip;
+        document.getElementById('cmd-city').textContent = citystring;
+        document.getElementById('cmd-capital').textContent = capital || '';
 
-        this.ctx.fillText(timeDescrip, this.command_window['x'] + 5, this.command_window['y'] + 25);
-        this.ctx.fillText(citystring, this.command_window['x'] + timeDescrip.length * 10 + 30, this.command_window['y'] + 25);
-        this.ctx.fillText(capital, this.command_window['x'] + citystring.length * 10 + timeDescrip.length * 10 + 50, this.command_window['y'] + 25);
-
-        if (iso2 !== "") {
-            var flagImage = new Image();
-            flagImage.src = "/resources/flags/" + iso2.toString().toLowerCase() + ".png";
-            var ctx = this.ctx;
-            var command_window = this.command_window;
-            flagImage.onload = function() {
-                return ctx.drawImage(flagImage, command_window['x'] + 58, command_window['y'] - 2, 80, 40);
-            };
+        const flagEl = document.getElementById('cmd-flag');
+        if (iso2 && iso2 !== 'earth') {
+            flagEl.src = '/resources/flags/' + iso2.toLowerCase() + '.png';
+            flagEl.style.visibility = '';
+        } else {
+            flagEl.style.visibility = 'hidden';
         }
     }
 
@@ -163,29 +122,15 @@ class Commands {
     }
 
     showReadyButton(clicked) {
-        this.ctx.fillStyle = "#000000";
-        this.ctx.fillRect(this.ready_button['x'] - 4, this.ready_button['y'] - 4, this.ready_button['width'] + 8, this.ready_button['height'] + 8);
-        this.ctx.fillStyle = "#808080";
-        this.ctx.fillRect(this.ready_button['x'] - 2, this.ready_button['y'] - 2, this.ready_button['width'] + 4, this.ready_button['height'] + 4);
-        if (clicked) this.ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
-        else this.ctx.fillStyle = CONSTANTS.LOBBY_COLOR;
-        this.ctx.fillRect(this.ready_button['x'], this.ready_button['y'], this.ready_button['width'], this.ready_button['height']);
-        this.ctx.font = CONSTANTS.BUTTONS_FONT + "px Arial";
-        this.ctx.fillStyle = 'black';
-        if (clicked) this.ctx.fillText('YOU ARE READY!', this.ready_button['x'] + 30, this.ready_button['y'] + 22)
-        else this.ctx.fillText('CLICK HERE WHEN READY!', this.ready_button['x'] + 30, this.ready_button['y'] + 22)
-    }
-
-    highlightReadyButton() {
-        this.ctx.fillStyle = "#000000";
-        this.ctx.fillRect(this.ready_button['x'] - 4, this.ready_button['y'] - 4, this.ready_button['width'] + 8, this.ready_button['height'] + 8);
-        this.ctx.fillStyle = "#808080";
-        this.ctx.fillRect(this.ready_button['x'] - 2, this.ready_button['y'] - 2, this.ready_button['width'] + 4, this.ready_button['height'] + 4);
-        this.ctx.fillStyle = CONSTANTS.MAP_BUTTON_COLOR;
-        this.ctx.fillRect(this.ready_button['x'], this.ready_button['y'], this.ready_button['width'], this.ready_button['height']);
-        this.ctx.font = CONSTANTS.BUTTONS_FONT + "px Arial";
-        this.ctx.fillStyle = 'black';
-        this.ctx.fillText('CLICK HERE WHEN READY!', this.ready_button['x'] + 30, this.ready_button['y'] + 22)
+        const btn = document.getElementById('ready-btn');
+        btn.style.display = 'block';
+        if (clicked) {
+            btn.textContent = 'YOU ARE READY!';
+            btn.classList.add('ready-clicked');
+        } else {
+            btn.textContent = 'CLICK HERE WHEN READY!';
+            btn.classList.remove('ready-clicked');
+        }
     }
 
     refocus() {
@@ -379,14 +324,12 @@ class Commands {
             let pressed3 = '';
             if (this.mapStyle === 'satellite') pressed3 = '-clicked';
             $('#satellite_button').append($("<button class='settings-btn" + pressed3 + "'>Satellite</button>"));
-            this.drawLastCommand(id);
         }
     }
 
     setHueShift(id, shift) {
         if (this.socket.id === id) {
             this.hueShift = shift;
-            this.drawLastCommand(id);
         }
     }
     setAutoscale(id) {
@@ -431,12 +374,10 @@ class Commands {
             'time': time,
             'color': color
         };
-        this.ctx.fillStyle = color;
-        this.ctx.clearRect(this.timer_window['x'], this.timer_window['y'], this.timer_window['width'], this.timer_window['height']);
-        this.ctx.fillRect(this.timer_window['x'], this.timer_window['y'], this.timer_window['width'], this.timer_window['height']);
-        this.ctx.font = CONSTANTS.INFO_BIG_FONT + "px Arial";
-        this.ctx.fillStyle = "black";
-        this.ctx.fillText(Math.max(time, 0), this.timer_window['x'] + 2, this.timer_window['y'] + 29);
+        const el = document.getElementById('timer');
+        el.style.display = 'block';
+        el.style.background = color;
+        el.textContent = Math.max(time, 0);
     }
 
 }

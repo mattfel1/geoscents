@@ -16,14 +16,8 @@ class FamerPopup {
     // function to show our popups
     showPopup(name, color, logger, hash, public_hash, grind, perfects, clown) {
         this.isShowing = true;
-        var docHeight = $(document).height(); //grab the height of the page
-        var scrollTop = $(window).scrollTop(); //grab the px value from the top of the page to where you're scrolling
-        $('.famerpopup').show().css({
-            'top': scrollTop + 20 + 'px'
-        }); //show the appropriate popup and set the content 20px from the window top
-        $('.overlay-bg').show().css({
-            'height': docHeight
-        }); //display your popup background and set height to the page height
+        $('.overlay-bg').show();
+        $('.famerpopup').show();
         $('#submit_famer').focus();
         const join = (info, cb) => this.join(info, cb);
         const closePopup = () => this.closePopup();

@@ -246,13 +246,6 @@ class MapPanel {
             image.onload = function() {
                 ctx.drawImage(image, 0, 0)
                 document.getElementById("map").style.filter = "hue-rotate(" + shift + "deg)";
-                if (first_load) {
-                    setTimeout(() => {
-                        console.log("timeout hack to redraw command after joining new map...");
-                        socket.emit("drawCommand");
-                    }, 500);
-
-                }
             };
             image.onload();
         }
