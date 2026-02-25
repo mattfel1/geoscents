@@ -59,37 +59,12 @@ else was_autoscaled = true
 var autoscale = was_autoscaled;
 
 var was_animated = localStorage.getItem("animated");
-var slow_roll_animation = false;
 if (was_animated === "false") {
     was_animated = false
-} else if (was_animated === "true") {
-    was_animated = true
 } else {
-    // If animated field wasn't set, then slow-roll the animation for chrome and edge, just in case because they seem to have issues with hardware acceleration
-    let userAgent = navigator.userAgent;
-    let browserName;
-
-    if (userAgent.match(/chrome|chromium|crios/i)) {
-        browserName = "chrome";
-    } else if (userAgent.match(/firefox|fxios/i)) {
-        browserName = "firefox";
-    } else if (userAgent.match(/safari/i)) {
-        browserName = "safari";
-    } else if (userAgent.match(/opr\//i)) {
-        browserName = "opera";
-    } else if (userAgent.match(/edg/i)) {
-        browserName = "edge";
-    } else {
-        browserName = "No browser detection";
-    }
-
-    console.log(browserName)
-    if (browserName == "edge" || browserName == "chrome")
-        slow_roll_animation = true;
-    was_animated = true;
+    was_animated = true
 }
 var animated = was_animated;
-var frame_id = 0;
 
 var betweenGames = true;
 var clickedReady = false;
@@ -409,13 +384,7 @@ $(document).ready(function() {
     socket.on('fresh map', (room) => map.drawMap(room));
     socket.on('blank map', (room) => map.drawBlank(room));
     socket.on('animate', () => {
-        if ((animated && !slow_roll_animation) || (animated && slow_roll_animation && (frame_id % 50 == 5))) {
-            map.drawAnimation()
-        }
-        if (frame_id < 300)
-            frame_id++;
-        if (frame_id === 300)
-            slow_roll_animation = false;
+        if (animated) map.drawAnimation();
     });
     socket.on("render map", function(id, style, room) {
         map.setStyle(id, style, room);

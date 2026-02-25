@@ -159,16 +159,14 @@ class MapPanel {
     drawAnimation() {
         const mapStyle = this.mapStyle;
         frame_cnt = (frame_cnt + 1) % (frames * rate);
-        let sx = Math.floor(frame_cnt / rate) * 450;
-        var ctx = this.ctx;
-        let shift = this.hueShift;
-        if (frame_cnt % rate == 0) {
-            globeImage[mapStyle].onload = function(sx) {
-                document.getElementById("map").style.filter = "hue-rotate(" + shift + "deg)";
-                return ctx.drawImage(globeImage[mapStyle], sx, 0, 450, 450, 350, 200, 780, 780);
-            };
-            globeImage[mapStyle].onload(sx);
+        if (frame_cnt % rate !== 0) return;
+        const img = globeImage[mapStyle];
+        if (!img.complete || img.naturalWidth === 0) return; // not loaded yet, skip frame
+        const sx = Math.floor(frame_cnt / rate) * 450;
+        if (this.hueShift !== 0) {
+            document.getElementById("map").style.filter = "hue-rotate(" + this.hueShift + "deg)";
         }
+        this.ctx.drawImage(img, sx, 0, 450, 450, 350, 200, 780, 780);
     };
 
 
