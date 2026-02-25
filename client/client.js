@@ -58,14 +58,6 @@ if (was_autoscaled === "false") was_autoscaled = false
 else was_autoscaled = true
 var autoscale = was_autoscaled;
 
-var was_animated = localStorage.getItem("animated");
-if (was_animated === "false") {
-    was_animated = false
-} else {
-    was_animated = true
-}
-var animated = was_animated;
-
 var betweenGames = true;
 var clickedReady = false;
 var booted = false;
@@ -219,7 +211,7 @@ $(document).ready(function() {
     /**** Commands *****/
     const sounds = new Sounds(socket);
 
-    const commands = new Commands(socket, animated);
+    const commands = new Commands(socket);
     socket.on('update counts', (newdict) => {
         if (!booted) {
             commands.updateCounts(newdict);
@@ -316,15 +308,6 @@ $(document).ready(function() {
             commands.setGrind(id);
         }
     });
-    socket.on("animated", function(id) {
-        if (socket.id == id) {
-            commands.animated = !commands.animated;
-            animated = commands.animated;
-            commands.setAnimated(id);
-            slow_roll_animation = false;
-        }
-    });
-
     /**** HELP POPUP *****/
     // Make player choose options
     const helppopup = new HelpPopup(socket);
@@ -374,7 +357,6 @@ $(document).ready(function() {
 
     /**** Map *****/
     const map = new MapPanel(socket);
-    map.animated = animated;
     socket.on('draw point', (coords, color, radius) => {
         map.drawPoint(coords, color, radius)
     });
@@ -391,7 +373,7 @@ $(document).ready(function() {
     socket.on('fresh map', (room) => map.drawMap(room));
     socket.on('blank map', (room) => map.drawBlank(room));
     socket.on('animate', () => {
-        if (animated) map.drawAnimation();
+        map.drawAnimation();
     });
     socket.on("render map", function(id, style, room) {
         map.setStyle(id, style, room);

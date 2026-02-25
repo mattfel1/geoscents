@@ -1,7 +1,7 @@
 const CONSTANTS = require('../resources/constants.js');
 
 class Commands {
-    constructor(socket, animated = true) {
+    constructor(socket) {
         this.socket = socket
         this.hasJoe = false;
         this.panel = window.document.getElementById('panel');
@@ -52,8 +52,6 @@ class Commands {
         if (was_grind === "true") was_grind = true
         else was_grind = false
         this.grind = was_grind;
-
-        this.animated = animated;
 
         this.bottracker = [];
 
@@ -175,13 +173,13 @@ class Commands {
         if (this.mapStyle === 'terrain') pressed2 = '-clicked';
         let pressed3 = '';
         if (this.mapStyle === 'satellite') pressed3 = '-clicked';
-        let button1 = "<span id='classic_button' class='settings-btn-container'><button class='settings-btn" + pressed1 + "'>Classic</button></span>";
-        let button2 = "<span id='terrain_button' class='settings-btn-container'><button class='settings-btn" + pressed2 + "'>Terrain</button></span>";
-        let button3 = "<span id='satellite_button' class='settings-btn-container'><button class='settings-btn" + pressed3 + "'>Satellite</button></span>";
+        let button1 = "<span id='classic_button' class='settings-btn-container'><button title='Classic map rendering, with orange land and blue water' class='settings-btn" + pressed1 + "'>Classic</button></span>";
+        let button2 = "<span id='terrain_button' class='settings-btn-container'><button title='Terrain map rendering, using python StadiaMapsTiles' class='settings-btn" + pressed2 + "'>Terrain</button></span>";
+        let button3 = "<span id='satellite_button' class='settings-btn-container'><button title='Satellite map rendering, using python GoogleTiles' class='settings-btn" + pressed3 + "'>Satellite</button></span>";
         $('#settings-box').append($("<span>Map Terrain:</span><span>" + button1 + button2 + button3 + "</span>"));
 
         // Add joe and reset buttons
-        let rebootButton = "<span id='reboot_button' class='settings-btn-container'><button class='settings-btn'>Restart</button></span>";
+        let rebootButton = "<span id='reboot_button' class='settings-btn-container'><button title='Vote to restart the current game. When all players vote, a new game will immediately start' class='settings-btn'>Restart</button></span>";
         let killJoe = 'Kill Bot';
         let joeSfx = '';
         if (!this.hasJoe) {
@@ -189,24 +187,20 @@ class Commands {
         } else {
             joeSfx = '-clicked';
         }
-        let joeButton = "<span id='joe_button' class='settings-btn-container'><button class='settings-btn" + joeSfx + "'>" + killJoe + "</button></span>";
-        let muteButton = "<span class='settings-btn-container'><button class='settings-btn' id='mute_button'>Mute</button></span>"
+        let joeButton = "<span id='joe_button' class='settings-btn-container'><button title='Toggle the AI bot player that clicks at the average location/time' class='settings-btn" + joeSfx + "'>" + killJoe + "</button></span>";
+        let muteButton = "<span class='settings-btn-container'><button title='Mute game sound effects' class='settings-btn' id='mute_button'>Mute</button></span>"
         if (this.muted)
-            muteButton = "<span class='settings-btn-container'><button class='settings-btn-clicked' id='mute_button'>Unmute</button></span>"
+            muteButton = "<span class='settings-btn-container'><button title='Unmute game sound effects' class='settings-btn-clicked' id='mute_button'>Unmute</button></span>"
         $('#settings-box').append($("<span>Game Controls:</span><span>" + rebootButton + joeButton + muteButton + "</span>"));
 
-        // Add jitter, hue, and grind
         let pressedAutoscale = '';
         if (this.autoscale) pressedAutoscale = '-clicked';
-        let autoscaleButton = "<span id='autoscale_button' class='settings-btn-container'><button class='settings-btn" + pressedAutoscale + "'>Autoscale</button></span>";
+        let autoscaleButton = "<span id='autoscale_button' class='settings-btn-container'><button title='Auto-scale the game to fit your screen width' class='settings-btn" + pressedAutoscale + "'>Autoscale</button></span>";
         let pressedGrind = '';
         if (this.grind) pressedGrind = '-clicked';
-        let grindButton = "<span id='grind_button' class='grind-btn-container'><button class='grind-btn" + pressedGrind + "'>🪓</button></span>";
-        let hueSlider = "<div style=\"display: inline-block\" class=\"slidecontainer\"><input style=\"width: 90px\" type=\"range\" min=\"0\" max=\"360\" value=\"" + this.hueShift + "\" class=\"slider\" id=\"hue_shift\"></div>"
-        let pressedAnimated = '';
-        if (this.animated) pressedAnimated = '-clicked';
-        let animatedButton = "<span id='animated_button' class='grind-btn-container'><button class='grind-btn" + pressedAnimated + "'>🌍</button></span>";
-        $('#settings-box').append($("<span>Display: </span><span>" + hueSlider + autoscaleButton + grindButton + animatedButton + "</span>"));
+        let grindButton = "<span id='grind_button' class='grind-btn-container'><button title='Grind mode. Shorten durations in between rounds' class='grind-btn" + pressedGrind + "'>🪓</button></span>";
+        let hueSlider = "<div title='Color blind assist. Shift the map color hue' style=\"display: inline-block\" class=\"slidecontainer\"><input style=\"width: 90px\" type=\"range\" min=\"0\" max=\"360\" value=\"" + this.hueShift + "\" class=\"slider\" id=\"hue_shift\"></div>"
+        $('#settings-box').append($("<span>Display: </span><span>" + hueSlider + autoscaleButton + grindButton + "</span>"));
 
         // Add map buttons
         $('#commands').append($("</div><br>"))
@@ -248,11 +242,6 @@ class Commands {
         $('#grind_button').bind("click", () => {
             localStorage.setItem("grind", !this.grind);
             socket.emit('grind', !this.grind);
-            this.refocus()
-        });
-        $('#animated_button').bind("click", () => {
-            localStorage.setItem("animated", !this.animated);
-            socket.emit('animated', !this.animated);
             this.refocus()
         });
         $('#reboot_button').bind("click", () => {
@@ -339,15 +328,6 @@ class Commands {
             if (this.autoscale) pressedAutoscale = '-clicked';
             let autoscaleButton = "<button class='settings-btn" + pressedAutoscale + "'>Autoscale</button>";
             $('#autoscale_button').append($(autoscaleButton))
-        }
-    }
-    setAnimated(id) {
-        if (this.socket.id === id) {
-            $('#animated_button').empty();
-            let pressedAnimated = '';
-            if (this.animated) pressedAnimated = '-clicked';
-            let animatedButton = "<button class='grind-btn" + pressedAnimated + "'>🌍</button>";
-            $('#animated_button').append($(animatedButton))
         }
     }
     setGrind(id) {

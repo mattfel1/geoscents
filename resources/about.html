@@ -149,7 +149,7 @@
 
                 <h3><a href="#11" id="11">Repeating Cities Between Games</a></h3>
                 <div>
-                    <p>Do you keep getting repeat cities between games? This is surprisingly likely because it is a case of the birthday paradox. The random number generator in the game is not broken. Depending on the map you are playing, the probability of a city being repeated between consecutive games is between 10% and 41%.</p>
+                    <p>Do you keep getting repeat cities between games? This is due to binomial sampling and similar to the birthday paradox. The random number generator in the game is not broken. Depending on the map you are playing, the probability of a city being repeated between consecutive games is between 10% and 41%.</p>
 
                     <p>There are 11 unique cities in each game. They are chosen from a uniform random distribution of possible cities for that map*. If you play two games, the probability that a city from the first game will show up in the second game is one minus the probability that ALL of the cities in the second game are unique. The equation below shows how to calculate this value as a function of the number of cities on a given map. This equation only approximates the probability because it does not take into account the heuristics*. The probability of seeing a repeat city as you play more than 2 games increases significantly.</p>
                     <br>
@@ -328,7 +328,6 @@
                     The game resets every day at midnight GMT. Sorry if you are playing a game during the reboot! You should see plenty of warnings in the minutes leading up to the game reset.<br>
                     Sometimes the Weekly records are better than the Monthly records. This is because these are the cronjobs that run the game:<br><br>
 
-                    0 0 * * * bash /root/startdaily.sh <br>
                     0 0 * * * rm /scratch/*day* <br>
                     0 0 * * 1 rm /scratch/*week* <br>
                     0 0 1 * * rm /scratch/*month* <br>
