@@ -163,6 +163,7 @@ whitelist = ['Gibraltar']
 scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
 make_region_list("mesopotamia", [33.7, 52, 29, 38], 5000, ["Iraq", "Iran", "Kuwait", "Syria", "Turkey", "Lebanon", "Israel"], errors)
+make_region_list("benelux", [-1.65, 12, 49, 54], 50, ["Belgium", "Netherlands", "Luxembourg"], errors)
 make_region_list("caucuses", [35, 51, 38, 45.06], 5000, ["Russia", "Azerbaijan", "Armenia", "Georgia", "Turkey", "Iran"], errors)
 make_region_list("africangreatlakes", [18, 52.1, -15, 5], 70000, ["Rwanda", "Burundi", "Kenya", "Uganda", "Tanzania", "Malawi", "Congo (Kinshasa)"], errors)
 make_region_list("arctic", [-180, 180, 62.7, 90], 50, ["Russia", "Canada", "United States", "Iceland", "Faroe Islands", "Finland", "Sweden", "Norway", "Greenland"], errors)
