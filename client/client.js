@@ -178,6 +178,7 @@ $(document).ready(function() {
         function appendSuggestionItem(m, q) {
             const item = document.createElement('div');
             item.className = 'suggestion-item';
+            item.dataset.name = m.name;
             item.textContent = (m.flair ? m.flair + ' ' : '') + m.name;
             // Show matched country as a hint when the query matched a country, not the name
             if (q && !m.name.toLowerCase().includes(q)) {
@@ -274,7 +275,7 @@ $(document).ready(function() {
                 activeIndex = Math.max(activeIndex - 1, 0);
             } else if (e.key === 'Enter' && activeIndex >= 0) {
                 e.preventDefault();
-                citysrcInput.value = items[activeIndex].textContent.split(' \u2014 ')[0].trim();
+                citysrcInput.value = items[activeIndex].dataset.name;
                 citysrcSuggestions.style.display = 'none';
                 return;
             } else if (e.key === 'Escape') {
