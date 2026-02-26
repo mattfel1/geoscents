@@ -695,6 +695,15 @@ io.on('connection', (socket) => {
             return;
         }
         if (!playerRooms.has(socket.id)) return;
+        const sanitizedLabel = (roomLabel || '').trim().slice(0, 16);
+        if (sanitizedLabel) {
+            const labelTaken = Object.values(rooms).some(r => r.isPublic && r.roomLabel === sanitizedLabel);
+            if (labelTaken) {
+                const originRoom = playerRooms.get(socket.id);
+                originRoom.whisperMessage(socket, "<b>A public room named \"" + sanitizedLabel + "\" already exists. Choose a different name.</b><br>", () => {});
+                return;
+            }
+        }
         const originRoomName = playerRooms.get(socket.id).roomName;
         var info = rooms[originRoomName].exportPlayer(socket);
         info['moved'] = true;
@@ -714,7 +723,7 @@ io.on('connection', (socket) => {
         }
         rooms[roomId] = new Room(map, roomId, askcitysrc);
         rooms[roomId].hostSocketId = socket.id;
-        rooms[roomId].roomLabel = (roomLabel || '').trim().slice(0, 30);
+        rooms[roomId].roomLabel = sanitizedLabel;
         var join_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has created a public room: <b>" + askcitysrc + "</b>!</font> ]<br>";
         io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
         movePlayerToRoom(info, originRoomName, rooms[roomId]);

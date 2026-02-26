@@ -205,27 +205,48 @@ $(document).ready(function() {
             const q = query.trim().toLowerCase();
             if (!forceAll && !q) { citysrcSuggestions.style.display = 'none'; return; }
 
-            const matches = forceAll
-                ? allMaps
-                : allMaps.filter(m => {
-                    if (m.name.toLowerCase().includes(q)) return true;
-                    const countries = MAP_COUNTRIES[m.name];
-                    return countries && countries.some(c => c.toLowerCase().includes(q));
+            function renderGroup(items) {
+                let lastTier = null;
+                items.forEach(m => {
+                    if (m.tier !== lastTier) {
+                        const sep = document.createElement('div');
+                        sep.className = 'suggestion-sep';
+                        sep.textContent = TIER_LABELS[m.tier] || m.tier;
+                        citysrcSuggestions.appendChild(sep);
+                        lastTier = m.tier;
+                    }
+                    appendSuggestionItem(m, q);
                 });
+            }
 
-            if (!matches.length) { citysrcSuggestions.style.display = 'none'; return; }
+            if (forceAll) {
+                renderGroup(allMaps);
+                if (citysrcSuggestions.children.length)
+                    citysrcSuggestions.style.display = 'block';
+                return;
+            }
 
-            let lastTier = null;
-            matches.forEach(m => {
-                if (forceAll && m.tier !== lastTier) {
-                    const sep = document.createElement('div');
-                    sep.className = 'suggestion-sep';
-                    sep.textContent = TIER_LABELS[m.tier] || m.tier;
-                    citysrcSuggestions.appendChild(sep);
-                    lastTier = m.tier;
-                }
-                appendSuggestionItem(m, q);
+            // Search mode: direct name matches first, then country-contains matches
+            const directMatches = allMaps.filter(m => m.name.toLowerCase().includes(q));
+            const containsMatches = allMaps.filter(m => {
+                if (m.name.toLowerCase().includes(q)) return false;
+                const countries = MAP_COUNTRIES[m.name];
+                return countries && countries.some(c => c.toLowerCase().includes(q));
             });
+
+            if (!directMatches.length && !containsMatches.length) {
+                citysrcSuggestions.style.display = 'none'; return;
+            }
+
+            renderGroup(directMatches);
+
+            if (containsMatches.length) {
+                const sep = document.createElement('div');
+                sep.className = 'suggestion-sep';
+                sep.textContent = '\u2014 contains \u201c' + query.trim() + '\u201d';
+                citysrcSuggestions.appendChild(sep);
+                renderGroup(containsMatches);
+            }
 
             citysrcSuggestions.style.display = 'block';
         }
@@ -448,6 +469,14 @@ $(document).ready(function() {
     });
     socket.on('update public rooms', (rooms) => {
         custompopup.updatePublicRooms(rooms);
+        // Keep the count in sync so postButtons() always sees the current value
+        commands.counts['_publicRooms'] = rooms.length;
+        // Refresh label if in a public room (label may have just arrived)
+        if (commands.isPublic && commands.publicRoomId) {
+            const roomInfo = rooms.find(r => r.roomId === commands.publicRoomId);
+            if (roomInfo) commands.labelPublic(commands.publicCitysrc, commands.publicRoomId, roomInfo.roomLabel);
+        }
+        commands.postButtons();
     });
     socket.on('request browse public', () => {
         custompopup.showPopup('', ''); // neutral mode — Create Public Room / browse list
@@ -544,6 +573,7 @@ $(document).ready(function() {
         commands.myRoomName = roomName;
         history.myRoomName = roomName;
         sounds.myRoomName = roomName;
+        custompopup.activeRoomName = roomName;
         myCitysrc = roomCitysrc
         map.myCitysrc = myCitysrc;
         chat.myCitysrc = myCitysrc;
@@ -553,8 +583,10 @@ $(document).ready(function() {
         sounds.myCitysrc = myCitysrc;
         clickedReady = false;
         if (roomName.startsWith('private')) commands.labelPrivate(myCitysrc, custompopup.code);
-        else if (roomName.startsWith('public')) commands.labelPublic(myCitysrc, roomName);
-        else commands.clearPrivate();
+        else if (roomName.startsWith('public')) {
+            const roomInfo = custompopup.publicRooms.find(r => r.roomId === roomName);
+            commands.labelPublic(myCitysrc, roomName, roomInfo ? roomInfo.roomLabel : '');
+        } else commands.clearPrivate();
         commands.postButtons()
         studyPoints = []
         betweenGames = roomState === CONSTANTS.PREPARE_GAME_STATE;

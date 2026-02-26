@@ -1,42 +1,5 @@
-# Introduction
-This is an unabashed attempt to recreate the game GeoSense (geosense.net), which went offline some time after ~2012.
-I have seen a few discussions on Reddit and elsewhere about people asking if it will ever go back online, but no one 
-seems to have made an effort to bring it back.
+# GeoScents
 
-I am a complete novice at Javascript and node.js but I made an attempt to throw this together anyway.
+[![Tests](https://github.com/mattfel1/geoscents/actions/workflows/test.yml/badge.svg)](https://github.com/mattfel1/geoscents/actions/workflows/test.yml)
 
-Feel free to contribute!
-
-# Getting Started
-
-## Local development (WSL / Linux)
-
-```bash
-npm install
-npm start        # serves at http://localhost:5000
-```
-
-`npm start` bundles the client with webpack (watch mode) and starts the server with nodemon.
-It sets `LOCAL_DEV=1` automatically, which switches the server to plain HTTP on port 5000 — no SSL certs needed.
-It also kills any stale webpack process from a previous run before starting a new one.
-
-## Production (Digital Ocean / PM2)
-
-SSH into the server and run in tmux:
-
-```bash
-cd /root/geoscents
-git pull
-bash scripts/deploy.sh
-```
-
-`deploy.sh` kills existing processes, copies files to `/var/www/html`, runs `npm install`,
-builds the bundle in production mode, and starts the app under PM2.
-
-
-# Formatting
-
-```
-npm -g install js-beautify
-bash scripts/format.sh # calls beautify on all files js-beautify <file> -r
-```
+Multiplayer geography guessing game. Live at [geoscents.net](https://geoscents.net).

@@ -217,18 +217,19 @@ class Commands {
         grid.append($("<button class='lobby-btn' id='lobby_button'><b>Lobby</b> <font size=2><br>" + lobby_string + "</font></button>"))
 
         const nRooms = this.counts['_publicRooms'] || 0;
-        const roomsLabel = (n) => n + ' room' + (n !== 1 ? 's' : '');
+        const roomsLabel = (n, other) => n + other + ' room' + (n !== 1 ? 's' : '');
         const customCell = $("<div class='custom-room-cell'></div>");
         grid.append(customCell);
         if (this.isPrivate) {
             customCell.append($("<button class='private-room-btn' id='private_button'>🔒 <b>" + this.privateCitysrc + "</b><br><font size=2>code: " + this.privateCode + "</font></button>"));
-            customCell.append($("<button class='other-rooms-btn' id='other_rooms_button'>Other (" + roomsLabel(nRooms) + ")</button>"));
+            customCell.append($("<button class='other-rooms-btn' id='other_rooms_button'>🚪🏃 (" + roomsLabel(nRooms, " other") + ")</button>"));
         } else if (this.isPublic) {
-            customCell.append($("<button class='private-room-btn' id='private_button'>🌐 <b>" + this.publicCitysrc + "</b></button>"));
+            const roomLabel = this.publicRoomLabel || this.publicRoomId || '';
+            customCell.append($("<button class='private-room-btn' id='private_button'>🌐 <b>" + this.publicCitysrc + "</b><br><font size=2>" + roomLabel + "</font></button>"));
             const otherRooms = Math.max(0, nRooms - 1);
-            customCell.append($("<button class='other-rooms-btn' id='other_rooms_button'>Other (" + roomsLabel(otherRooms) + ")</button>"));
+            customCell.append($("<button class='other-rooms-btn' id='other_rooms_button'>🚪🏃 (" + roomsLabel(otherRooms, " other") + ")</button>"));
         } else {
-            const roomsStr = '<font size=2>(' + roomsLabel(nRooms) + ')</font>';
+            const roomsStr = '<font size=2>(' + roomsLabel(nRooms, "") + ')</font>';
             customCell.append($("<button class='private-room-btn' id='private_button'><b>Custom Room</b><br>" + roomsStr + "</button>"));
         }
 
@@ -363,9 +364,11 @@ class Commands {
         this.isPrivate = true;
         this.isPublic = false;
     }
-    labelPublic(citysrc, roomId) {
-        this.publicCitysrc = citysrc;
-        this.isPublic = true;
+    labelPublic(citysrc, roomId, roomLabel) {
+        this.publicCitysrc  = citysrc;
+        this.publicRoomId   = roomId;
+        this.publicRoomLabel = roomLabel || '';
+        this.isPublic  = true;
         this.isPrivate = false;
     }
     clearPrivate() {

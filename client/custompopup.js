@@ -2,14 +2,15 @@ const CONSTANTS = require('../resources/constants.js');
 
 class CustomPopup {
     constructor(socket) {
-        this.socket    = socket;
-        this.isShowing = false;
-        this.mode      = 'public'; // 'public' | 'private'
-        this.code      = '';
-        this.citysrc   = '';
-        this.configured = false;
+        this.socket      = socket;
+        this.isShowing   = false;
+        this.mode        = 'public'; // 'public' | 'private'
+        this.code        = '';
+        this.citysrc     = '';
+        this.configured  = false;
         this.publicRooms = [];
-        this.currentRoomName = '';
+        this.currentRoomName = ''; // popup mode context (private_/public_ = change-map only)
+        this.activeRoomName  = ''; // always the player's actual current room
     }
 
     // Called by client.js whenever the server sends a fresh public-rooms list
@@ -65,50 +66,60 @@ class CustomPopup {
             const joinBtn = document.createElement('button');
             joinBtn.type = 'button';
             joinBtn.className = 'custompopup-join-btn';
-            joinBtn.textContent = 'Join';
-            joinBtn.addEventListener('click', () => {
-                this.socket.emit('joinPublicRoom', room.roomId);
-                this.closePopup(true);
-            });
+            const isCurrent = room.roomId === this.activeRoomName;
+            if (isCurrent) {
+                joinBtn.textContent = 'Here';
+                joinBtn.disabled = true;
+                joinBtn.style.opacity = '0.45';
+                joinBtn.style.cursor = 'default';
+            } else {
+                joinBtn.textContent = 'Join';
+                joinBtn.addEventListener('click', () => {
+                    this.socket.emit('joinPublicRoom', room.roomId);
+                    this.closePopup(true);
+                });
+            }
             btnCell.appendChild(joinBtn);
         });
         container.appendChild(table);
     }
 
+    // Sets public/private toggle state and shows/hides form rows accordingly.
+    // Only call this when the toggle is visible (not in change-map-only mode).
     _setMode(mode) {
         this.mode = mode;
-        const codeRow    = document.getElementById('custompopup-code-row');
-        const nameRow    = document.getElementById('custompopup-name-row');
-        const codeInput  = document.getElementById('selected_code');
+        const codeRow      = document.getElementById('custompopup-code-row');
+        const nameRow      = document.getElementById('custompopup-name-row');
+        const codeInput    = document.getElementById('selected_code');
         const citysrcInput = document.getElementById('requestedCitysrc_choice');
-        const publicBtn  = document.getElementById('custompopup-public-btn');
-        const privateBtn = document.getElementById('custompopup-private-btn');
-        const submitBtn  = document.getElementById('custompopup-submit');
-        const maptitle   = document.getElementById('maptitle');
+        const publicBtn    = document.getElementById('custompopup-public-btn');
+        const privateBtn   = document.getElementById('custompopup-private-btn');
+        const submitBtn    = document.getElementById('custompopup-submit');
+        const maptitle     = document.getElementById('maptitle');
         const roomsSection = document.getElementById('custompopup-rooms-section');
 
         if (mode === 'public') {
-            if (codeRow)   codeRow.style.display = 'none';
-            if (nameRow)   nameRow.style.display = '';
-            if (codeInput) codeInput.required = false;
+            if (codeRow)      codeRow.style.display = 'none';
+            if (nameRow)      nameRow.style.display = '';
+            if (codeInput)    codeInput.required = false;
             if (citysrcInput) citysrcInput.required = true;
             publicBtn.classList.add('custompopup-toggle-active');
             privateBtn.classList.remove('custompopup-toggle-active');
-            if (submitBtn) submitBtn.value = 'Create Public Room';
-            if (maptitle)  maptitle.textContent = 'Choose map';
+            if (submitBtn)    submitBtn.value = 'Create Public Room';
+            if (maptitle)     maptitle.textContent = 'Choose map';
             if (roomsSection) roomsSection.style.display = '';
             if (citysrcInput) citysrcInput.focus();
         } else {
-            if (codeRow)   codeRow.style.display = '';
-            if (nameRow)   nameRow.style.display = 'none';
-            if (codeInput) codeInput.required = true;
+            if (codeRow)      codeRow.style.display = '';
+            if (nameRow)      nameRow.style.display = 'none';
+            if (codeInput)    codeInput.required = true;
             if (citysrcInput) citysrcInput.required = false;
             publicBtn.classList.remove('custompopup-toggle-active');
             privateBtn.classList.add('custompopup-toggle-active');
-            if (submitBtn) submitBtn.value = 'Go!';
-            if (maptitle)  maptitle.textContent = 'Choose / change map';
+            if (submitBtn)    submitBtn.value = 'Create Private Room';
+            if (maptitle)     maptitle.textContent = 'Choose / change map';
             if (roomsSection) roomsSection.style.display = 'none';
-            if (codeInput) codeInput.focus();
+            if (codeInput)    codeInput.focus();
         }
     }
 
@@ -121,32 +132,38 @@ class CustomPopup {
         this.isShowing = true;
 
         const citysrcInput = document.getElementById('requestedCitysrc_choice');
-        const nameRow = document.getElementById('custompopup-name-row');
-        const submitBtn = document.getElementById('custompopup-submit');
+        const nameRow      = document.getElementById('custompopup-name-row');
+        const submitBtn    = document.getElementById('custompopup-submit');
+        const maptitle     = document.getElementById('maptitle');
+        const toggleDiv    = document.getElementById('custompopup-toggle');
+        const roomsSection = document.getElementById('custompopup-rooms-section');
 
-        if (this.currentRoomName.startsWith('private')) {
-            this._setMode('private');
-            const codeInput = document.getElementById('selected_code');
-            if (codeInput && this.code) codeInput.value = this.code;
-            if (citysrcInput) citysrcInput.value = '';
-        } else if (this.currentRoomName.startsWith('public')) {
-            this._setMode('public');
-            // In a public room — show "Change Map", hide name row, pre-fill current map
+        const inCustomRoom = this.currentRoomName.startsWith('private') ||
+                             this.currentRoomName.startsWith('public');
+
+        if (inCustomRoom) {
+            // Blue button inside a custom room: change map only, no public/private toggle
+            if (toggleDiv)    toggleDiv.style.display = 'none';
+            if (nameRow)      nameRow.style.display = 'none';
+            if (roomsSection) roomsSection.style.display = 'none';
             if (citysrcInput && currentCitysrc) citysrcInput.value = currentCitysrc;
-            if (nameRow) nameRow.style.display = 'none';
-            if (submitBtn) submitBtn.value = 'Change Map';
+            if (submitBtn)    submitBtn.value = 'Change Map';
+            if (maptitle)     maptitle.textContent = 'Choose map';
+            if (citysrcInput) citysrcInput.focus();
         } else {
-            this._setMode('public');
+            // Outside a custom room (or grey button browse): show full public/private toggle
+            if (toggleDiv) toggleDiv.style.display = '';
             if (citysrcInput) citysrcInput.value = '';
+            this._setMode('public');
+
+            document.getElementById('custompopup-public-btn').onclick  = () => this._setMode('public');
+            document.getElementById('custompopup-private-btn').onclick = () => this._setMode('private');
         }
 
         this._renderPublicRoomsList();
 
-        const closePopup = () => this.closePopup(false);
+        const closePopup    = () => this.closePopup(false);
         const configuredClose = () => this.closePopup(true);
-
-        document.getElementById('custompopup-public-btn').onclick  = () => this._setMode('public');
-        document.getElementById('custompopup-private-btn').onclick = () => this._setMode('private');
 
         $('.close-btn, .overlay-bg').unbind().click(function() { closePopup(); });
         $(document).keyup(function(e) { if (e.keyCode === 27) closePopup(); });
@@ -154,22 +171,23 @@ class CustomPopup {
         $("form#custompopup-form").off().submit((e) => {
             e.preventDefault();
             const citysrc = this._resolveRandomCitysrc();
-            if (this.mode === 'public') {
-                if (this.currentRoomName.startsWith('public')) {
-                    this.socket.emit('changePublicRoomMap', citysrc);
-                } else {
-                    const labelInput = document.getElementById('custompopup-room-label');
-                    const roomLabel = labelInput ? labelInput.value.trim() : '';
-                    this.socket.emit('createPublicRoom', citysrc, roomLabel);
-                }
-                configuredClose();
+            if (this.currentRoomName.startsWith('private')) {
+                // Change map in private room: re-enter same room with new citysrc
+                const code = this.currentRoomName.replace('private_', '');
+                this.socket.emit('moveToPrivate', citysrc, code);
+            } else if (this.currentRoomName.startsWith('public')) {
+                this.socket.emit('changePublicRoomMap', citysrc);
+            } else if (this.mode === 'public') {
+                const labelInput = document.getElementById('custompopup-room-label');
+                const roomLabel  = labelInput ? labelInput.value.trim() : '';
+                this.socket.emit('createPublicRoom', citysrc, roomLabel);
             } else {
                 const code = document.getElementById('selected_code').value;
                 this.code    = code;
                 this.citysrc = citysrc;
                 this.socket.emit('moveToPrivate', citysrc, code);
-                configuredClose();
             }
+            configuredClose();
         });
     }
 
