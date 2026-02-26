@@ -11,4 +11,4 @@ trap cleanup EXIT
 
 LOCAL_DEV=1 webpack -w &
 WEBPACK_PID=$!
-LOCAL_DEV=1 nodemon server/app.js --ignore public
+LOCAL_DEV=1 nodemon server/app.js --ignore public --ignore resources/histories --ignore resources/famers
