@@ -166,10 +166,10 @@ $(document).ready(function() {
     if (citysrcInput && citysrcSuggestions) {
         // Preserve tier info for show-all grouping
         const allMaps = [
-            { name: 'Random', tier: 'special' },
-            ...continent_options.map(o => ({ name: o.value, tier: 'continent' })),
-            ...region_options.map(o => ({ name: o.value, tier: 'region' })),
-            ...country_options.map(o => ({ name: o.value, tier: 'country' })),
+            { name: 'Random', tier: 'special', flair: '' },
+            ...continent_options.map(o => ({ name: o.value, tier: 'continent', flair: (MAPS[o.value] && MAPS[o.value].flair) || '' })),
+            ...region_options.map(o => ({ name: o.value, tier: 'region', flair: (MAPS[o.value] && MAPS[o.value].flair) || '' })),
+            ...country_options.map(o => ({ name: o.value, tier: 'country', flair: (MAPS[o.value] && MAPS[o.value].flair) || '' })),
         ];
         const TIER_LABELS = { special: 'Special', continent: 'Continents', region: 'Regions', country: 'Countries' };
 
@@ -178,7 +178,7 @@ $(document).ready(function() {
         function appendSuggestionItem(m, q) {
             const item = document.createElement('div');
             item.className = 'suggestion-item';
-            item.textContent = m.name;
+            item.textContent = (m.flair ? m.flair + ' ' : '') + m.name;
             // Show matched country as a hint when the query matched a country, not the name
             if (q && !m.name.toLowerCase().includes(q)) {
                 const countries = MAP_COUNTRIES[m.name] || [];
