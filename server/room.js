@@ -19,6 +19,8 @@ class Room {
         this.roomName = roomName; // User-friendly room name ("Weekly Country" or "Trivia")
         this.citysrc = citysrc; // source for random city selection ("Ukraine" or "Trivia")
         this.isPrivate = roomName.startsWith('private');
+        this.isPublic  = roomName.startsWith('public');
+        this.roomLabel = '';
         this.joeTime = 10;
         this.joeLat = 0;
         this.joeLon = 0;
@@ -103,12 +105,6 @@ class Room {
         this.drawScorePanel();
         this.clients.forEach(function(socket, socketId) {
             socket.emit("update joe button", true)
-        });
-        const roomName = this.roomName;
-        const joeName = this.joe.name;
-        this.clients.forEach(function(s, id) {
-            s.emit('update messages', roomName, '[ ' + roomName + ' <b>' + joeName +
-                '</b> ]: Hello!  I am just an ' + joeName + '!  I click at the average location at the average time across all players who have played this game! You can turn me off by clicking the "Kill Bot" button on the top right.<br>');
         });
     }
     joeGood(socket) {
@@ -255,14 +251,7 @@ class Room {
     }
 
     joeMessage() {
-        if (this.players.size === 1 && this.hasJoe) {
-            const roomName = this.roomName;
-            const joeName = this.joe.name;
-            this.clients.forEach(function(s, id) {
-                s.emit('update messages', roomName, '[ ' + roomName + ' <b>' + joeName +
-                    '</b> ]: Hello!  I am just an ' + joeName + '!  I click at the average location at the average time across all players who have played this game! You can turn me off by clicking the "Kill Bot" button on the top right.<br>');
-            });
-        }
+        // Intro message is now shown as a tooltip on the bot's scoreboard entry; no chat spam.
     }
 
     redrawMap(socket) {

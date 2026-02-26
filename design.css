@@ -125,6 +125,27 @@
     background: #C6C6DA;
 }
 
+/* === Room button grid === */
+.room-btn-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    padding: 3px 0;
+}
+.room-btn-grid button {
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+}
+.custom-room-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.custom-room-cell button {
+    flex: 1;
+}
+
 /* === Room buttons === */
 .room-btn,
 .private-room-btn {
@@ -137,6 +158,19 @@
     background: linear-gradient(to bottom, #a9e7f9 0%, #77d3ef 4%, #05abe0 100%);
     border-radius: 2px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.other-rooms-btn {
+    cursor: pointer;
+    border: 1px solid #555;
+    width: 110px;
+    padding: 2px;
+    margin: 3px;
+    font-size: 11px;
+    background: linear-gradient(to bottom, #c8c8c8 0%, #a8a8a8 4%, #888888 100%);
+    border-radius: 2px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+    color: white;
 }
 
 .special-room-btn {
@@ -307,4 +341,69 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+}
+
+/* === Custom room popup === */
+.custompopup-toggle {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+    justify-content: center;
+}
+.custompopup-toggle-btn {
+    cursor: pointer;
+    padding: 4px 12px;
+    border: 1px solid #888;
+    border-radius: 3px;
+    background: #e0e0e0;
+    font-size: 13px;
+}
+.custompopup-toggle-active {
+    background: #4a90d9;
+    color: white;
+    border-color: #2a6cb5;
+}
+#custompopup-rooms-section {
+    margin-top: 10px;
+    font-size: 13px;
+}
+.custompopup-room-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 0;
+    border-bottom: 1px solid #eee;
+}
+.custompopup-join-btn {
+    cursor: pointer;
+    padding: 2px 8px;
+    border: 1px solid #888;
+    border-radius: 2px;
+    background: linear-gradient(to bottom, #a9e7f9 0%, #77d3ef 4%, #05abe0 100%);
+    font-size: 12px;
+    margin-left: 8px;
+}
+.custompopup-no-rooms {
+    color: #888;
+    font-style: italic;
+    font-size: 12px;
+    padding: 4px 0;
+}
+.custompopup-rooms-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 4px;
+}
+.custompopup-rooms-table th {
+    text-align: left;
+    border-bottom: 2px solid #ccc;
+    padding: 2px 6px;
+    color: #555;
+    font-weight: bold;
+}
+.custompopup-rooms-table td {
+    padding: 3px 6px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
 }

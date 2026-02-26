@@ -9,7 +9,16 @@ class Scoreboard {
     }
 
     postScore(rank, name, color, score, wins) {
-        const string = $("<font color=" + color + " style=\"font-size:15px;font-family:monospace\" \>").html(("<b>" + name + "</b>: ").padEnd(26).replace(/\s/g, "&nbsp;") + score.toString().padEnd(4).replace(/\s/g, "&nbsp;") + '  (' + wins + ' <font size=1>🏆</font>)<br>');
+        let botBadge = '';
+        if (name.startsWith('Average ')) {
+            const msg = 'Hello! I am just an ' + name + '! I click at the average location at the average time across all players who have played this game! You can turn me off by clicking the "Kill Bot" button on the top right.';
+            botBadge = '<span title="' + msg + '" style="cursor:help">💬</span>';
+        }
+        // Pad based on visible characters only (name + badge glyph + ': ')
+        const visibleLen = name.length + (botBadge ? 2 : 0) + 2; // +2 for emoji+space, +2 for ': '
+        const padding = '&nbsp;'.repeat(Math.max(0, 26 - visibleLen));
+        const nameHtml = '<b>' + name + '</b>' + (botBadge ? ' ' + botBadge : '') + ': ' + padding;
+        const string = $("<font color=" + color + " style=\"font-size:15px;font-family:monospace\" \>").html(nameHtml + score.toString().padEnd(4).replace(/\s/g, "&nbsp;") + '  (' + wins + ' <font size=1>🏆</font>)<br>');
         $('#scoreboard').append(string)
     }
     // Message reactions

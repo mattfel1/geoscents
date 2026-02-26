@@ -302,6 +302,7 @@ var rooms = {
 rooms[CONSTANTS.LOBBY].hall_of_fame = famers;
 
 const getHist = () => {
+    const publicRoomList = Object.values(rooms).filter(r => r.isPublic);
     return {
         [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
         [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
@@ -313,9 +314,25 @@ const getHist = () => {
         [CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),
         [CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),
         [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
-        [CONSTANTS.SPECIAL_REGION]: rooms[CONSTANTS.SPECIAL_REGION].playerCount()
+        [CONSTANTS.SPECIAL_REGION]: rooms[CONSTANTS.SPECIAL_REGION].playerCount(),
+        _publicRooms: publicRoomList.length,
+        _publicPlayers: publicRoomList.reduce((sum, r) => sum + r.playerCount(), 0)
     };
 }
+
+const getPublicRoomsInfo = () => {
+    return Object.values(rooms)
+        .filter(r => r.isPublic && r.playerCount() > 0)
+        .map(r => ({
+            roomId: r.roomName,
+            citysrc: r.citysrc,
+            roomLabel: r.roomLabel,
+            playerCount: r.playerCount(),
+            flair: MAPS[r.citysrc] ? MAPS[r.citysrc].flair || '' : ''
+        }));
+};
+
+let publicRoomCounter = 0;
 
 var playerRooms = new Map();
 
@@ -348,6 +365,7 @@ io.on('connection', (socket) => {
         });
         playerRooms.set(socket.id, rooms[CONSTANTS.LOBBY]);
         io.sockets.emit('update counts', getHist());
+        socket.emit('update public rooms', getPublicRoomsInfo());
         helpers.log("User connected    " + socket.handshake.address);
         socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
     });
@@ -362,7 +380,7 @@ io.on('connection', (socket) => {
                 io.sockets.emit("update messages", room.roomName, leave_msg);
             }
             // Transfer host before removing player so clients Map is still intact
-            if (room.isPrivate) {
+            if (room.isPrivate || room.isPublic) {
                 const newHostId = room.transferHostIfNeeded(socket.id);
                 if (newHostId !== null) {
                     const newHostPlayer = room.players.get(newHostId);
@@ -374,9 +392,10 @@ io.on('connection', (socket) => {
             }
             room.killPlayer(socket);
             io.sockets.emit('update counts', getHist());
+            io.sockets.emit('update public rooms', getPublicRoomsInfo());
         }
         Object.values(rooms).forEach(function(room) {
-            if (room.isPrivate && room.playerCount() == 0) {
+            if ((room.isPrivate || room.isPublic) && room.playerCount() == 0) {
                 delete rooms[room.roomName];
             }
         });
@@ -544,11 +563,12 @@ io.on('connection', (socket) => {
             playerRooms.delete(socketid);
         }
         Object.values(rooms).forEach(function(room) {
-            if (room.isPrivate && room.playerCount() == 0) {
+            if ((room.isPrivate || room.isPublic) && room.playerCount() == 0) {
                 delete rooms[room.roomName];
             }
         });
         io.sockets.emit('update counts', getHist());
+        io.sockets.emit('update public rooms', getPublicRoomsInfo());
     });
     socket.on('mute', () => {
         io.sockets.emit('mute player', socket.id)
@@ -610,7 +630,7 @@ io.on('connection', (socket) => {
             info['moved'] = true;
             var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has left " + originRoomName + " and joined " + citysrc + "!</font> ]<br>";
             io.sockets.emit("update messages", originRoomName, leave_msg)
-            if (rooms[originRoomName].isPrivate) {
+            if (rooms[originRoomName].isPrivate || rooms[originRoomName].isPublic) {
                 const newHostId = rooms[originRoomName].transferHostIfNeeded(socket.id);
                 if (newHostId !== null) {
                     const newHostPlayer = rooms[originRoomName].players.get(newHostId);
@@ -634,16 +654,131 @@ io.on('connection', (socket) => {
             var join_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has joined " + roomName + "!</font> ]<br>";
             io.sockets.emit("update messages", roomName, join_msg);
             io.sockets.emit('update counts', getHist());
+            io.sockets.emit('update public rooms', getPublicRoomsInfo());
             rooms[roomName].joeMessage();
         }
         Object.values(rooms).forEach(function(room) {
-            if (room.isPrivate && room.playerCount() == 0 && rooms.hasOwnProperty(room.roomName)) {
+            if ((room.isPrivate || room.isPublic) && room.playerCount() == 0 && rooms.hasOwnProperty(room.roomName)) {
                 delete rooms[room.roomName];
             }
         });
     });
     socket.on('requestPrivatePopup', () => {
         socket.emit('request private popup');
+    });
+    socket.on('requestBrowsePublic', () => {
+        socket.emit('request browse public');
+    });
+
+    // Helper shared by createPublicRoom and joinPublicRoom to move a player into a room
+    function movePlayerToRoom(info, originRoomName, destRoom) {
+        rooms[originRoomName].killPlayer(socket);
+        socket.emit('moved to', destRoom.map, destRoom.roomName, destRoom.citysrc, destRoom.state);
+        destRoom.addPlayer(socket, info);
+        playerRooms.set(socket.id, destRoom);
+        // Cleanup after adding to dest so the new room is never deleted
+        Object.values(rooms).forEach(function(room) {
+            if ((room.isPrivate || room.isPublic) && room.playerCount() == 0 && rooms.hasOwnProperty(room.roomName)) {
+                delete rooms[room.roomName];
+            }
+        });
+        io.sockets.emit('update counts', getHist());
+        io.sockets.emit('update public rooms', getPublicRoomsInfo());
+        destRoom.joeMessage();
+    }
+
+    socket.on('createPublicRoom', (askcitysrc, roomLabel) => {
+        if (Object.keys(MAPS).indexOf(askcitysrc) === -1) {
+            Object.values(rooms).forEach(function(room) {
+                if (room.hasPlayer(socket)) room.whisperMessage(socket, "<b>Invalid map: " + askcitysrc + "</b><br>", () => {});
+            });
+            return;
+        }
+        if (!playerRooms.has(socket.id)) return;
+        const originRoomName = playerRooms.get(socket.id).roomName;
+        var info = rooms[originRoomName].exportPlayer(socket);
+        info['moved'] = true;
+        publicRoomCounter++;
+        const roomId = 'public_' + publicRoomCounter;
+        const map = askcitysrc.replace(" Capitals", "");
+        var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has left " + originRoomName + " and created a public room!</font> ]<br>";
+        io.sockets.emit("update messages", originRoomName, leave_msg);
+        // Host transfer from origin if needed
+        if (rooms[originRoomName].isPrivate || rooms[originRoomName].isPublic) {
+            const newHostId = rooms[originRoomName].transferHostIfNeeded(socket.id);
+            if (newHostId !== null) {
+                const nhp = rooms[originRoomName].players.get(newHostId);
+                const hostMsg = "[ <i>Room host left. <font color='" + (nhp ? nhp.color : '#000') + "'><b>" + (nhp ? nhp.name : '???') + "</b></font> is now the host!</i> ]<br>";
+                rooms[originRoomName].clients.forEach((s) => s.emit('update messages', originRoomName, hostMsg));
+            }
+        }
+        rooms[roomId] = new Room(map, roomId, askcitysrc);
+        rooms[roomId].hostSocketId = socket.id;
+        rooms[roomId].roomLabel = (roomLabel || '').trim().slice(0, 30);
+        var join_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has created a public room: <b>" + askcitysrc + "</b>!</font> ]<br>";
+        io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
+        movePlayerToRoom(info, originRoomName, rooms[roomId]);
+        rooms[roomId].whisperMessage(socket, "<i>You created this public room and are the host.</i><br>", () => {});
+        if (Geography.hasLeader(askcitysrc)) rooms[roomId].whisperMessage(socket, "<i><b>" + MAPS[askcitysrc]["greeting"] + "</b> to the <b>" + askcitysrc + "</b> map!</i><br>", () => {});
+        helpers.log("Player " + socket.handshake.address + " " + info['name'] + " created public room " + roomId);
+    });
+
+    socket.on('joinPublicRoom', (roomId) => {
+        if (!(roomId in rooms) || !rooms[roomId].isPublic) {
+            Object.values(rooms).forEach(function(room) {
+                if (room.hasPlayer(socket)) room.whisperMessage(socket, "<b>That public room no longer exists.</b><br>", () => {});
+            });
+            return;
+        }
+        if (!playerRooms.has(socket.id)) return;
+        const originRoomName = playerRooms.get(socket.id).roomName;
+        if (originRoomName === roomId) return; // already in this room
+        var info = rooms[originRoomName].exportPlayer(socket);
+        info['moved'] = true;
+        var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has left " + originRoomName + " and joined a public room!</font> ]<br>";
+        io.sockets.emit("update messages", originRoomName, leave_msg);
+        if (rooms[originRoomName].isPrivate || rooms[originRoomName].isPublic) {
+            const newHostId = rooms[originRoomName].transferHostIfNeeded(socket.id);
+            if (newHostId !== null) {
+                const nhp = rooms[originRoomName].players.get(newHostId);
+                const hostMsg = "[ <i>Room host left. <font color='" + (nhp ? nhp.color : '#000') + "'><b>" + (nhp ? nhp.name : '???') + "</b></font> is now the host!</i> ]<br>";
+                rooms[originRoomName].clients.forEach((s) => s.emit('update messages', originRoomName, hostMsg));
+            }
+        }
+        const destRoom = rooms[roomId];
+        const hostPlayer = destRoom.players.get(destRoom.hostSocketId);
+        var join_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has joined the public room: <b>" + destRoom.citysrc + "</b>!</font> ]<br>";
+        io.sockets.emit("update messages", CONSTANTS.LOBBY, join_msg);
+        movePlayerToRoom(info, originRoomName, destRoom);
+        rooms[roomId].whisperMessage(socket, "<i><b>" + (hostPlayer ? hostPlayer.name : '???') + "</b> is the room host.</i><br>", () => {});
+        if (Geography.hasLeader(destRoom.citysrc)) rooms[roomId].whisperMessage(socket, "<i><b>" + MAPS[destRoom.citysrc]["greeting"] + "</b> to the <b>" + destRoom.citysrc + "</b> map!</i><br>", () => {});
+        helpers.log("Player " + socket.handshake.address + " " + info['name'] + " joined public room " + roomId);
+    });
+    socket.on('changePublicRoomMap', (askcitysrc) => {
+        if (!playerRooms.has(socket.id)) return;
+        const room = playerRooms.get(socket.id);
+        if (!room.isPublic) return;
+        if (Object.keys(MAPS).indexOf(askcitysrc) === -1) {
+            room.whisperMessage(socket, "<b>Invalid map: " + askcitysrc + "</b><br>", () => {});
+            return;
+        }
+        if (room.hostSocketId !== socket.id) {
+            const hostPlayer = room.players.get(room.hostSocketId);
+            const hostColor = hostPlayer ? hostPlayer.color : '#000';
+            const hostName = hostPlayer ? hostPlayer.name : 'the host';
+            room.whisperMessage(socket, "<b>Only the room host (<font color='" + hostColor + "'>" + hostName + "</font>) can change the map.</b><br>", () => {});
+            return;
+        }
+        const map = askcitysrc.replace(" Capitals", "");
+        const info = room.exportPlayer(socket);
+        room.map = map;
+        room.citysrc = askcitysrc;
+        room.reset();
+        const msg = "[ <font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b> changed the map to <b>" + askcitysrc + "</b>!</font> ]<br>";
+        room.clients.forEach((s) => s.emit('update messages', room.roomName, msg));
+        room.clients.forEach((s) => s.emit('moved to', map, room.roomName, askcitysrc, room.state));
+        io.sockets.emit('update public rooms', getPublicRoomsInfo());
+        helpers.log("Player " + socket.handshake.address + " " + info['raw_name'] + " changed public room map to " + askcitysrc);
     });
     socket.on('requestHelpPopup', () => {
         socket.emit('request help popup');
@@ -714,7 +849,7 @@ io.on('connection', (socket) => {
                 var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has left " + originRoomName + " and joined a private room!</font> ]<br>";
                 io.sockets.emit("update messages", originRoomName, leave_msg)
                 // Transfer host before removing player from origin room
-                if (rooms[originRoomName].isPrivate) {
+                if (rooms[originRoomName].isPrivate || rooms[originRoomName].isPublic) {
                     const newHostId = rooms[originRoomName].transferHostIfNeeded(socket.id);
                     if (newHostId !== null) {
                         const newHostPlayer = rooms[originRoomName].players.get(newHostId);
@@ -726,7 +861,7 @@ io.on('connection', (socket) => {
                 }
                 rooms[originRoomName].killPlayer(socket);
                 Object.values(rooms).forEach(function(room) {
-                    if (room.isPrivate && room.playerCount() == 0 && rooms.hasOwnProperty(room.roomName)) {
+                    if ((room.isPrivate || room.isPublic) && room.playerCount() == 0 && rooms.hasOwnProperty(room.roomName)) {
                         delete rooms[room.roomName];
                     }
                 });
@@ -754,6 +889,7 @@ io.on('connection', (socket) => {
                 var join_msg = "[ <font color='" + info['color'] + "'><b>" + info['raw_name'] + "</b> has joined " + dest + "!</font> ]<br>";
                 io.sockets.emit("update messages", dest, join_msg);
                 io.sockets.emit('update counts', getHist());
+                io.sockets.emit('update public rooms', getPublicRoomsInfo());
                 helpers.log("Player " + socket.handshake.address + " " + info['raw_name'] + " moved to room " + dest);
                 rooms[dest].joeMessage();
             }

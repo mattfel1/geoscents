@@ -8,7 +8,7 @@ const Scoreboard = require('./scoreboard.js');
 const Commands = require('./commands.js');
 const Sounds = require('./sounds.js');
 const Popup = require('./popup.js');
-const PrivatePopup = require('./privatepopup.js');
+const CustomPopup = require('./custompopup.js');
 const FamerPopup = require('./famerpopup.js');
 const HelpPopup = require('./helppopup.js');
 const Chat = require('./chat.js');
@@ -440,15 +440,17 @@ $(document).ready(function() {
         helppopup.showPopup()
     });
 
-    /**** PRIVATE POPUP *****/
-    // Make player choose options
-    const privatepopup = new PrivatePopup(socket);
-    privatepopup.hide();
+    /**** CUSTOM POPUP *****/
+    const custompopup = new CustomPopup(socket);
+    custompopup.hide();
     socket.on('request private popup', () => {
-        if (myRoomName.startsWith("private"))
-            privatepopup.showPopup("Change map")
-        else
-            privatepopup.showPopup("Choose a map<br>(Ignored if room already exists)<br>")
+        custompopup.showPopup(myRoomName, myCitysrc);
+    });
+    socket.on('update public rooms', (rooms) => {
+        custompopup.updatePublicRooms(rooms);
+    });
+    socket.on('request browse public', () => {
+        custompopup.showPopup('', ''); // neutral mode — Create Public Room / browse list
     });
 
     /**** FAMER POPUP *****/
@@ -550,8 +552,9 @@ $(document).ready(function() {
         history.myCitysrc = myCitysrc;
         sounds.myCitysrc = myCitysrc;
         clickedReady = false;
-        if (roomName.startsWith('private')) commands.labelPrivate(myCitysrc, privatepopup.code);
-        else commands.clearPrivate()
+        if (roomName.startsWith('private')) commands.labelPrivate(myCitysrc, custompopup.code);
+        else if (roomName.startsWith('public')) commands.labelPublic(myCitysrc, roomName);
+        else commands.clearPrivate();
         commands.postButtons()
         studyPoints = []
         betweenGames = roomState === CONSTANTS.PREPARE_GAME_STATE;
@@ -690,8 +693,8 @@ $(document).ready(function() {
             xPos = 1 / document.documentElement.style.zoom * (event.clientX - rect.left);
             yPos = 1 / document.documentElement.style.zoom * (event.clientY - rect.top);
         } else {
-            xPos = (1 / document.documentElement.style.zoom * event.clientX) - rect.left;
-            yPos = (1 / document.documentElement.style.zoom * event.clientY) - rect.top;
+            xPos = (event.clientX - rect.left) / document.documentElement.style.zoom;
+            yPos = (event.clientY - rect.top) / document.documentElement.style.zoom;
         }
         return {
             x: xPos,
@@ -707,8 +710,8 @@ $(document).ready(function() {
             xPos = 1 / document.documentElement.style.zoom * (event.touches[0].clientX - rect.left);
             yPos = 1 / document.documentElement.style.zoom * (event.touches[0].clientY - rect.top);
         } else {
-            xPos = (1 / document.documentElement.style.zoom * event.touches[0].clientX) - rect.left;
-            yPos = (1 / document.documentElement.style.zoom * event.touches[0].clientY) - rect.top;
+            xPos = (event.touches[0].clientX - rect.left) / document.documentElement.style.zoom;
+            yPos = (event.touches[0].clientY - rect.top) / document.documentElement.style.zoom;
         }
         return {
             x: xPos,

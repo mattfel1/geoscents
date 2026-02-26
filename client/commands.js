@@ -11,6 +11,8 @@ class Commands {
         this.isPrivate = false;
         this.privateCitysrc;
         this.privateCode;
+        this.isPublic = false;
+        this.publicCitysrc;
         this.counts = {
             [CONSTANTS.LOBBY]: 0,
             [CONSTANTS.WORLD]: 0,
@@ -152,7 +154,7 @@ class Commands {
             str = "<font color=\"white\">(0 players)</font>"
         }
         let c = "room-btn"
-        $('#commands').append($("<button class='" + c + "' id='" + id + "_button'><b>" + room + "</b> <br><font size=2>" + str + "</font></button>"))
+        return $("<button class='" + c + "' id='" + id + "_button'><b>" + room + "</b> <br><font size=2>" + str + "</font></button>")
     }
     bindClick(myRoom, room, id, socket) {
         $('#' + id + '_button').bind("click", () => {
@@ -202,30 +204,44 @@ class Commands {
         let hueSlider = "<div title='Color blind assist. Shift the map color hue' style=\"display: inline-block\" class=\"slidecontainer\"><input style=\"width: 90px\" type=\"range\" min=\"0\" max=\"360\" value=\"" + this.hueShift + "\" class=\"slider\" id=\"hue_shift\"></div>"
         $('#settings-box').append($("<span>Display: </span><span>" + hueSlider + autoscaleButton + grindButton + "</span>"));
 
-        // Add map buttons
-        $('#commands').append($("</div><br>"))
+        // Add map buttons in a 3-column grid
+        const grid = $("<div class='room-btn-grid'></div>");
+        $('#commands').append(grid);
+
         let lobby_string;
         if (this.counts[CONSTANTS.LOBBY] > 0) {
             lobby_string = "<b>(" + this.counts[CONSTANTS.LOBBY] + " players)</b>"
         } else {
             lobby_string = "<font color=\"white\">(0 players)</font>"
         }
-        let private_string;
-        private_string = "<font color=\"white\">(? players)</font>"
+        grid.append($("<button class='lobby-btn' id='lobby_button'><b>Lobby</b> <font size=2><br>" + lobby_string + "</font></button>"))
 
-        $('#commands').append($("<button class='lobby-btn' id='lobby_button'><b>Lobby</b> <font size=2><br>" + lobby_string + "</font></button>"))
-        if (this.isPrivate) $('#commands').append($("<button class='private-room-btn' id='private_button'><b>" + this.privateCitysrc + "</b><br>code: " + this.privateCode + "</button>"));
-        else $('#commands').append($("<button class='private-room-btn' id='private_button'><b>Private/Custom</b><font size=2><br>" + private_string + "</font></button>"));
-        this.roomButton(CONSTANTS.TRIVIA, "trivia", true);
-        this.roomButton(CONSTANTS.WORLD, "world");
-        this.roomButton(CONSTANTS.SPECIAL_CAPITAL, "special_capital", true);
-        this.roomButton(CONSTANTS.SPECIAL_REGION, "special_region", true);
-        this.roomButton(CONSTANTS.EUROPE, "europe");
-        this.roomButton(CONSTANTS.AFRICA, "africa");
-        this.roomButton(CONSTANTS.ASIA, "asia");
-        this.roomButton(CONSTANTS.OCEANIA, "oceania");
-        this.roomButton(CONSTANTS.NAMERICA, "namerica");
-        this.roomButton(CONSTANTS.SAMERICA, "samerica");
+        const nRooms = this.counts['_publicRooms'] || 0;
+        const roomsLabel = (n) => n + ' room' + (n !== 1 ? 's' : '');
+        const customCell = $("<div class='custom-room-cell'></div>");
+        grid.append(customCell);
+        if (this.isPrivate) {
+            customCell.append($("<button class='private-room-btn' id='private_button'>🔒 <b>" + this.privateCitysrc + "</b><br><font size=2>code: " + this.privateCode + "</font></button>"));
+            customCell.append($("<button class='other-rooms-btn' id='other_rooms_button'>Other (" + roomsLabel(nRooms) + ")</button>"));
+        } else if (this.isPublic) {
+            customCell.append($("<button class='private-room-btn' id='private_button'>🌐 <b>" + this.publicCitysrc + "</b></button>"));
+            const otherRooms = Math.max(0, nRooms - 1);
+            customCell.append($("<button class='other-rooms-btn' id='other_rooms_button'>Other (" + roomsLabel(otherRooms) + ")</button>"));
+        } else {
+            const roomsStr = '<font size=2>(' + roomsLabel(nRooms) + ')</font>';
+            customCell.append($("<button class='private-room-btn' id='private_button'><b>Custom Room</b><br>" + roomsStr + "</button>"));
+        }
+
+        grid.append(this.roomButton(CONSTANTS.TRIVIA, "trivia", true));
+        grid.append(this.roomButton(CONSTANTS.WORLD, "world"));
+        grid.append(this.roomButton(CONSTANTS.SPECIAL_CAPITAL, "special_capital", true));
+        grid.append(this.roomButton(CONSTANTS.SPECIAL_REGION, "special_region", true));
+        grid.append(this.roomButton(CONSTANTS.EUROPE, "europe"));
+        grid.append(this.roomButton(CONSTANTS.AFRICA, "africa"));
+        grid.append(this.roomButton(CONSTANTS.ASIA, "asia"));
+        grid.append(this.roomButton(CONSTANTS.OCEANIA, "oceania"));
+        grid.append(this.roomButton(CONSTANTS.NAMERICA, "namerica"));
+        grid.append(this.roomButton(CONSTANTS.SAMERICA, "samerica"));
 
         var room = this.myRoomName;
 
@@ -290,11 +306,12 @@ class Commands {
         this.bindClick(room, CONSTANTS.SAMERICA, "samerica", socket)
         this.bindClick(room, CONSTANTS.SPECIAL_REGION, "special_region", socket)
         $('#private_button').bind("click", () => {
-            if (room !== CONSTANTS.PRIVATE) {
-                // Popup to ask for room name, map, bot
-                socket.emit('requestPrivatePopup');
-                // socket.emit('moveToPrivate', CONSTANTS.PRIVATE); this.refocus()
-            }
+            socket.emit('requestPrivatePopup');
+            this.refocus();
+        });
+        $('#other_rooms_button').bind("click", () => {
+            socket.emit('requestBrowsePublic');
+            this.refocus();
         });
     }
 
@@ -344,9 +361,16 @@ class Commands {
         this.privateCitysrc = citysrc;
         this.privateCode = code;
         this.isPrivate = true;
+        this.isPublic = false;
+    }
+    labelPublic(citysrc, roomId) {
+        this.publicCitysrc = citysrc;
+        this.isPublic = true;
+        this.isPrivate = false;
     }
     clearPrivate() {
         this.isPrivate = false;
+        this.isPublic = false;
     }
 
     postTime(time, color) {

@@ -17,32 +17,50 @@
     <div class="instruction"></div>
     <div class="screen"></div>
 
-    <div class="overlay-content-code privatepopup">
-        <p>Set up / join private room</p>
-        <form id="code">
+    <div class="overlay-content-code custompopup">
+        <p id="custompopup-title">Custom Room</p>
+        <div class="custompopup-toggle">
+            <button type="button" id="custompopup-public-btn" class="custompopup-toggle-btn custompopup-toggle-active">&#127760; Public Room</button>
+            <button type="button" id="custompopup-private-btn" class="custompopup-toggle-btn">&#128274; Private Room</button>
+        </div>
+        <form id="custompopup-form">
             <table>
-                <td style="text-align:center;padding: 8px;">
-                    <label for="Code">Room code<br></label>
-                    <input type="text" id="selected_code" autofocus name="selected_code" style="width: 120px;" required minlength="1" maxlength="5" pattern="[a-z0-9]+" title="Name should only contain lowercase letters and numbers" />
-                </td>
-                <td style="text-align:center;padding: 8px;width:auto">
-                    <div id="maptitle">Choose / change map</div>
-
-                    <div style="position:relative;display:inline-block;">
-                        <input type="text" id="requestedCitysrc_choice" autocomplete="off" placeholder="Search map or country…" /><button type="button" id="citysrc-show-all" title="Show all maps">&#9660;</button>
-                        <div id="citysrc-suggestions" class="citysrc-suggestions"></div>
-                    </div>
-                    <!-- Hidden datalist still populated by client.js for random-map selection -->
-                    <datalist id="requestedCitysrc">
-                        <option value="Random">Random</option>
-                        <option value="Trivia">Trivia</option>
-                        <!-- To be filled in by client.js -->
-                    </datalist>
-                </td>
+                <tr id="custompopup-name-row">
+                    <td style="text-align:center;padding: 4px 8px;">
+                        <label for="custompopup-room-label">Room name (optional)<br></label>
+                        <input type="text" id="custompopup-room-label" name="custompopup-room-label" style="width: 180px;" maxlength="30" placeholder="e.g. Beginners welcome!" />
+                    </td>
+                </tr>
+                <tr id="custompopup-code-row" style="display:none">
+                    <td style="text-align:center;padding: 8px;">
+                        <label for="selected_code">Room code<br></label>
+                        <input type="text" id="selected_code" name="selected_code" style="width: 120px;" minlength="1" maxlength="5" pattern="[a-z0-9]+" title="Name should only contain lowercase letters and numbers" placeholder="e.g. abcde" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;padding: 8px;width:auto">
+                        <div id="maptitle">Choose map</div>
+                        <div style="position:relative;display:inline-block;">
+                            <input type="text" id="requestedCitysrc_choice" autocomplete="off" placeholder="Search map or country…" /><button type="button" id="citysrc-show-all" title="Show all maps">&#9660;</button>
+                            <div id="citysrc-suggestions" class="citysrc-suggestions"></div>
+                        </div>
+                        <!-- Hidden datalist still populated by client.js for random-map selection -->
+                        <datalist id="requestedCitysrc">
+                            <option value="Random">Random</option>
+                            <option value="Trivia">Trivia</option>
+                            <!-- To be filled in by client.js -->
+                        </datalist>
+                    </td>
+                </tr>
             </table>
-            <input type="submit" style="text-align:center" value="Go!" />
-
+            <div style="text-align:center">
+                <input type="submit" id="custompopup-submit" value="Create Public Room" />
+            </div>
         </form>
+        <div id="custompopup-rooms-section">
+            <b>Active public rooms:</b>
+            <div id="custompopup-rooms-entries"></div>
+        </div>
     </div>
 
     <div class="overlay-content-code famerpopup">
