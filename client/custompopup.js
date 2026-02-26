@@ -135,6 +135,7 @@ class CustomPopup {
         const nameRow      = document.getElementById('custompopup-name-row');
         const submitBtn    = document.getElementById('custompopup-submit');
         const maptitle     = document.getElementById('maptitle');
+        const titleEl      = document.getElementById('custompopup-title');
         const toggleDiv    = document.getElementById('custompopup-toggle');
         const roomsSection = document.getElementById('custompopup-rooms-section');
 
@@ -143,16 +144,19 @@ class CustomPopup {
 
         if (inCustomRoom) {
             // Blue button inside a custom room: change map only, no public/private toggle
+            if (titleEl)      { titleEl.textContent = 'Change Map'; titleEl.style.display = ''; }
             if (toggleDiv)    toggleDiv.style.display = 'none';
             if (nameRow)      nameRow.style.display = 'none';
             if (roomsSection) roomsSection.style.display = 'none';
             if (citysrcInput && currentCitysrc) citysrcInput.value = currentCitysrc;
             if (submitBtn)    submitBtn.value = 'Change Map';
-            if (maptitle)     maptitle.textContent = 'Choose map';
+            if (maptitle)     maptitle.style.display = 'none';
             if (citysrcInput) citysrcInput.focus();
         } else {
             // Outside a custom room (or grey button browse): show full public/private toggle
-            if (toggleDiv) toggleDiv.style.display = '';
+            if (titleEl)      titleEl.style.display = 'none';
+            if (maptitle)     maptitle.style.display = '';
+            if (toggleDiv)    toggleDiv.style.display = '';
             if (citysrcInput) citysrcInput.value = '';
             this._setMode('public');
 
