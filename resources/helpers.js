@@ -9,7 +9,7 @@ const MAPS = require('../resources/maps.json')
 var lastUpdates = {};
 
 // Create scratch directories if they don't exist (no-op if already present)
-for (const dir of ['/scratch/guesses', '/scratch/histories', '/scratch/famers']) {
+for (const dir of ['/scratch/guesses', '/scratch/histories', '/scratch/famers', '/scratch/records']) {
     fs.mkdirSync(dir, { recursive: true });
 }
 

@@ -158,6 +158,13 @@
         "flair": "🇧🇩",
         "tier": "country"
     },
+    "Benelux": {
+        "leader": "Renee",
+        "greeting": "Welgekomen",
+        "coords": [-1.65, 12, 49, 54],
+        "flair": "🇧🇪",
+        "tier": "region"
+    },
     "Bolivia": {
         "leader": "Arce",
         "greeting": "Bienvenido/Jallallt'atapxtawa/Imaynallan",
