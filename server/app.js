@@ -516,14 +516,14 @@ io.on('connection', (socket) => {
             // Specific greetings for players
             // specificGreeting(socket, name, "Doz", "<i>Thanks so much for the donation, Doz!</i><br>");
             // specificGreeting(socket, name, "ninjer tootle", "<i>U a bitch</i><br>");
-            // specificGreeting(socket, name, "Player 69", "<i>nice</i><br>");
+            specificGreeting(socket, name, "Player 69", "<i>nice</i><br>");
             // specificGreeting(socket, name, "Snowgoat", "<i>There was a bug in World Capitals and your records disappeared from the leaderboard :( Sorry</i><br>");
             // specificGreeting(socket, name, "bumbo", "<i>There was a bug in World Capitals and your records disappeared from the leaderboard :( Sorry</i><br>");
             // specificGreeting(socket, name, "Player 42", "<i>nice</i><br>");
             // specificGreeting(socket, name, "Walter", "<i>Thanks for the feedback!  If you have any ideas for spreading the word besides a post on r/WebGames every 3 months, let me know!  <br>The twine question is surprisingly controversial, but I will add the words 'built by a single person' so that it is accurate and also matches the Weird Al song.</i><br>");
             // specificGreeting(socket, name, "adam", "<i>I was very concerned when you said the Male, Maldives image was \"crazy\".  I thought it was grabbing a random image from the wikipedia page for \"male\".  Did you just mean <a href=https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Male-total.jpg/600px-Male-total.jpg>this image</a> looks crazy?</i><br>");
             // specificGreeting(socket, name, "ecanpecan", "<i>Thanks for pointing that out...</i><br>");
-            specificGreeting(socket, name, "Chrisi", "<i>Hi Chrisi, try using \"n7zc3wsn36\" instead of \"Chrisi\" next time you log in!</i><br>");
+            // specificGreeting(socket, name, "Chrisi", "<i>Hi Chrisi, try using \"n7zc3wsn36\" instead of \"Chrisi\" next time you log in!</i><br>");
             io.sockets.emit('update counts', getHist());
 
         }

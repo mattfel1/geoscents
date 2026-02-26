@@ -241,13 +241,16 @@ class MapPanel {
             }
 
             let image = this.map_images.get(image_name);
-            let socket = this.socket;
             let shift = this.hueShift;
-            image.onload = function() {
-                ctx.drawImage(image, 0, 0)
+            const drawIt = () => {
+                ctx.drawImage(image, 0, 0);
                 document.getElementById("map").style.filter = "hue-rotate(" + shift + "deg)";
             };
-            image.onload();
+            if (image.complete && image.naturalWidth > 0) {
+                drawIt();
+            } else {
+                image.onload = drawIt;
+            }
         }
     }
 
