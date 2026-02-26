@@ -363,8 +363,15 @@
     color: white;
     border-color: #2a6cb5;
 }
+.custompopup-sep {
+    border: none;
+    border-top: 2px solid #ccc;
+    margin: 10px 0;
+}
 #custompopup-rooms-section {
-    margin-top: 10px;
+    margin-top: 0;
+    max-height: 200px;
+    overflow-y: auto;
     font-size: 13px;
 }
 .custompopup-room-row {

@@ -107,7 +107,9 @@ class CustomPopup {
             privateBtn.classList.remove('custompopup-toggle-active');
             if (submitBtn)    submitBtn.value = 'Create Public Room';
             if (maptitle)     maptitle.textContent = 'Choose map';
+            const sepEl2 = document.getElementById('custompopup-sep');
             if (roomsSection) roomsSection.style.display = '';
+            if (sepEl2)       sepEl2.style.display = '';
             if (citysrcInput) citysrcInput.focus();
         } else {
             if (codeRow)      codeRow.style.display = '';
@@ -118,7 +120,9 @@ class CustomPopup {
             privateBtn.classList.add('custompopup-toggle-active');
             if (submitBtn)    submitBtn.value = 'Create Private Room';
             if (maptitle)     maptitle.textContent = 'Choose / change map';
+            const sepEl2 = document.getElementById('custompopup-sep');
             if (roomsSection) roomsSection.style.display = 'none';
+            if (sepEl2)       sepEl2.style.display = 'none';
             if (codeInput)    codeInput.focus();
         }
     }
@@ -138,25 +142,32 @@ class CustomPopup {
         const titleEl      = document.getElementById('custompopup-title');
         const toggleDiv    = document.getElementById('custompopup-toggle');
         const roomsSection = document.getElementById('custompopup-rooms-section');
+        const sepEl        = document.getElementById('custompopup-sep');
 
         const inCustomRoom = this.currentRoomName.startsWith('private') ||
                              this.currentRoomName.startsWith('public');
+
+        const showRooms = (show) => {
+            if (roomsSection) roomsSection.style.display = show ? '' : 'none';
+            if (sepEl)        sepEl.style.display        = show ? '' : 'none';
+        };
 
         if (inCustomRoom) {
             // Blue button inside a custom room: change map only, no public/private toggle
             if (titleEl)      { titleEl.textContent = 'Change Map'; titleEl.style.display = ''; }
             if (toggleDiv)    toggleDiv.style.display = 'none';
             if (nameRow)      nameRow.style.display = 'none';
-            if (roomsSection) roomsSection.style.display = 'none';
+            if (maptitle)     maptitle.style.display = 'none';
             if (citysrcInput && currentCitysrc) citysrcInput.value = currentCitysrc;
             if (submitBtn)    submitBtn.value = 'Change Map';
-            if (maptitle)     maptitle.style.display = 'none';
+            showRooms(false);
             if (citysrcInput) citysrcInput.focus();
         } else {
-            // Outside a custom room (or grey button browse): show full public/private toggle
+            // Outside a custom room (or grey button browse): rooms on top, create form below
             if (titleEl)      titleEl.style.display = 'none';
             if (maptitle)     maptitle.style.display = '';
             if (toggleDiv)    toggleDiv.style.display = '';
+            showRooms(true);
             if (citysrcInput) citysrcInput.value = '';
             this._setMode('public');
 
