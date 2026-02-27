@@ -320,6 +320,15 @@ const getHist = () => {
     };
 }
 
+const PLAYER_COUNT_LOG = '/scratch/player_count.csv';
+if (!fs.existsSync(PLAYER_COUNT_LOG)) {
+    fs.writeFileSync(PLAYER_COUNT_LOG, 'timestamp,players\n');
+}
+const logPlayerCount = () => {
+    const total = Object.values(rooms).reduce((sum, r) => sum + r.playerCount(), 0);
+    fs.appendFile(PLAYER_COUNT_LOG, `${new Date().toISOString()},${total}\n`, () => {});
+};
+
 const getPublicRoomsInfo = () => {
     return Object.values(rooms)
         .filter(r => r.isPublic && r.playerCount() > 0)
@@ -364,7 +373,7 @@ io.on('connection', (socket) => {
             'moved': false
         });
         playerRooms.set(socket.id, rooms[CONSTANTS.LOBBY]);
-        io.sockets.emit('update counts', getHist());
+        io.sockets.emit('update counts', getHist()); 
         socket.emit('update public rooms', getPublicRoomsInfo());
         helpers.log("User connected    " + socket.handshake.address);
         socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
@@ -390,7 +399,9 @@ io.on('connection', (socket) => {
                     room.clients.forEach((s) => s.emit('update messages', room.roomName, hostMsg));
                 }
             }
+            const wasNamed = room.playerChoseName(socket);
             room.killPlayer(socket);
+            if (wasNamed) logPlayerCount();
             io.sockets.emit('update counts', getHist());
             io.sockets.emit('update public rooms', getPublicRoomsInfo());
         }
@@ -525,6 +536,7 @@ io.on('connection', (socket) => {
             // specificGreeting(socket, name, "ecanpecan", "<i>Thanks for pointing that out...</i><br>");
             // specificGreeting(socket, name, "Chrisi", "<i>Hi Chrisi, try using \"n7zc3wsn36\" instead of \"Chrisi\" next time you log in!</i><br>");
             io.sockets.emit('update counts', getHist());
+            logPlayerCount();
 
         }
         callback()
