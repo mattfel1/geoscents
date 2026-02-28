@@ -103,7 +103,7 @@ class CustomPopup {
             if (codeRow)      codeRow.style.display = 'none';
             if (nameRow)      nameRow.style.display = '';
             if (codeInput)    codeInput.required = false;
-            if (citysrcInput) citysrcInput.required = true;
+            if (citysrcInput) citysrcInput.required = false;
             publicBtn.classList.add('custompopup-toggle-active');
             privateBtn.classList.remove('custompopup-toggle-active');
             if (submitBtn)    submitBtn.value = 'Create Public Room';
