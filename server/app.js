@@ -332,8 +332,8 @@ const logPlayerCount = () => {
     const date = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
     const time = `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
     fs.appendFile(PLAYER_COUNT_LOG, `${date},${time},${d.getHours()},${total}\n`, () => {});
-
 };
+setInterval(logPlayerCount, 15 * 60 * 1000);
 
 const getPublicRoomsInfo = () => {
     return Object.values(rooms)
@@ -407,7 +407,6 @@ io.on('connection', (socket) => {
             }
             const wasNamed = room.playerChoseName(socket);
             room.killPlayer(socket);
-            if (wasNamed) logPlayerCount();
             io.sockets.emit('update counts', getHist());
             io.sockets.emit('update public rooms', getPublicRoomsInfo());
         }
@@ -542,7 +541,6 @@ io.on('connection', (socket) => {
             // specificGreeting(socket, name, "ecanpecan", "<i>Thanks for pointing that out...</i><br>");
             // specificGreeting(socket, name, "Chrisi", "<i>Hi Chrisi, try using \"n7zc3wsn36\" instead of \"Chrisi\" next time you log in!</i><br>");
             io.sockets.emit('update counts', getHist());
-            logPlayerCount();
 
         }
         callback()
