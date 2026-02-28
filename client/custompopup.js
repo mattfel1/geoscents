@@ -1,4 +1,5 @@
 const CONSTANTS = require('../resources/constants.js');
+const MAPS = require('../resources/maps.json');
 
 class CustomPopup {
     constructor(socket) {
@@ -191,6 +192,28 @@ class CustomPopup {
         $("form#custompopup-form").off().submit((e) => {
             e.preventDefault();
             const citysrc = this._resolveRandomCitysrc();
+            const citysrcInput = document.getElementById('requestedCitysrc_choice');
+            const labelInput   = document.getElementById('custompopup-room-label');
+
+            if (citysrcInput) citysrcInput.setCustomValidity('');
+            if (labelInput)   labelInput.setCustomValidity('');
+
+            if (citysrc && !MAPS[citysrc]) {
+                citysrcInput.setCustomValidity('"' + citysrc + '" is not a valid map');
+                citysrcInput.reportValidity();
+                return;
+            }
+            if (!this.currentRoomName.startsWith('private') &&
+                !this.currentRoomName.startsWith('public') &&
+                this.mode === 'public' && labelInput) {
+                const roomLabel = labelInput.value.trim();
+                if (roomLabel && this.publicRooms.some(r => r.roomLabel === roomLabel)) {
+                    labelInput.setCustomValidity('A room named "' + roomLabel + '" already exists');
+                    labelInput.reportValidity();
+                    return;
+                }
+            }
+
             if (this.currentRoomName.startsWith('private')) {
                 // Change map in private room: re-enter same room with new citysrc
                 const code = this.currentRoomName.replace('private_', '');
