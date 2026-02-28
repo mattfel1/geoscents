@@ -714,7 +714,7 @@ io.on('connection', (socket) => {
         if (!playerRooms.has(socket.id)) return;
         const sanitizedLabel = (roomLabel || '').trim().slice(0, 16);
         if (sanitizedLabel) {
-            const labelTaken = Object.values(rooms).some(r => r.isPublic && r.roomLabel === sanitizedLabel);
+            const labelTaken = Object.values(rooms).some(r => r.isPublic && (r.roomLabel === sanitizedLabel || r.roomName === sanitizedLabel));
             if (labelTaken) {
                 const originRoom = playerRooms.get(socket.id);
                 originRoom.whisperMessage(socket, "<b>A public room named \"" + sanitizedLabel + "\" already exists. Choose a different name.</b><br>", () => {});

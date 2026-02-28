@@ -207,7 +207,7 @@ class CustomPopup {
                 !this.currentRoomName.startsWith('public') &&
                 this.mode === 'public' && labelInput) {
                 const roomLabel = labelInput.value.trim();
-                if (roomLabel && this.publicRooms.some(r => r.roomLabel === roomLabel)) {
+                if (roomLabel && this.publicRooms.some(r => r.roomLabel === roomLabel || r.roomId === roomLabel)) {
                     labelInput.setCustomValidity('A room named "' + roomLabel + '" already exists');
                     labelInput.reportValidity();
                     return;
