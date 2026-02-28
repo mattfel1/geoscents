@@ -24,7 +24,7 @@ class CustomPopup {
     _resolveRandomCitysrc() {
         const input = document.getElementById('requestedCitysrc_choice');
         let citysrc = input ? input.value.trim() : '';
-        if (citysrc === 'Random') {
+        if (citysrc === '' || citysrc === 'Random') {
             const opts = Array.from(
                 document.getElementById('requestedCitysrc').children
             ).filter(o => o.value && o.value.trim() !== '' && o.value !== ' ' && o.value !== 'Random');
