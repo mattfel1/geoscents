@@ -323,7 +323,7 @@ const getHist = () => {
 const PLAYER_COUNT_LOG = '/scratch/player_count.csv';
 if (!fs.existsSync(PLAYER_COUNT_LOG)) {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    fs.writeFileSync(PLAYER_COUNT_LOG, `date,time (${tz}),players\n`);
+    fs.writeFileSync(PLAYER_COUNT_LOG, `date,time (${tz}),hour (${tz}),players\n`);
 }
 const logPlayerCount = () => {
     const total = Object.values(rooms).reduce((sum, r) => sum + r.playerCount(), 0);
@@ -331,7 +331,8 @@ const logPlayerCount = () => {
     const pad = n => String(n).padStart(2, '0');
     const date = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
     const time = `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-    fs.appendFile(PLAYER_COUNT_LOG, `${date},${time},${total}\n`, () => {});
+    fs.appendFile(PLAYER_COUNT_LOG, `${date},${time},${d.getHours()},${total}\n`, () => {});
+
 };
 
 const getPublicRoomsInfo = () => {

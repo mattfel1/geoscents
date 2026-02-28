@@ -175,6 +175,8 @@ class CustomPopup {
             showToggle(true);
             showRooms(true);
             if (citysrcInput) citysrcInput.value = '';
+            const labelInput = document.getElementById('custompopup-room-label');
+            if (labelInput) { labelInput.value = ''; labelInput.setCustomValidity(''); }
             this._setMode('public');
 
             document.getElementById('custompopup-public-btn').onclick  = () => this._setMode('public');
