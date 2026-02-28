@@ -3,7 +3,7 @@
 # Clears the sheet and re-uploads everything each run (idempotent).
 # Cron example: 0 3 * * * /home/mattfel/geoscents/scripts/upload_counts.sh
 
-APPS_SCRIPT_URL="PASTE_YOUR_DEPLOYMENT_URL_HERE"
+APPS_SCRIPT_URL="https://script.google.com/macros/s/AKfycbxWkNS4U3Efu2yk_UbVa8pHjxl4F34ZgFzXAyuyO5aBurLx0ST6HtSuHvr56Zf52g7l5A/exec"
 CSV="/scratch/player_count.csv"
 
 if [ ! -f "$CSV" ]; then
