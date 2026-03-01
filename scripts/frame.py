@@ -9,14 +9,15 @@ home=os.environ['HOME']
 geoscents_home = home + '/geoscents/'
 big_countries = ['US', 'CN', 'CA', 'AU', 'IN', 'BR']
 
-def scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, include_big_admin, include_any_admin, errors, wanted_min = 15, wanted_max = 1000):
+def scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, include_big_admin, include_any_admin, errors, wanted_min = 15, wanted_max = 1000, min_per_country = 0):
     countries = []
     file = geoscents_home + 'resources/databases/cities.js'
     error_msg = ""
     with open(file) as json_file:
         data = json.load(json_file)
         filtered = []
-        for entry in data:
+        included_indices = set()
+        for i, entry in enumerate(data):
             thisPop = 0 if (entry['population'] == '') else int(entry['population'])
             isBigCountry = entry['iso2'] in big_countries
             thisMinorCap = entry['capital'] == 'admin'
@@ -29,10 +30,47 @@ def scrape_list(outfile, latrng, lonrng, pop, blacklist, whitelist, include_big_
 
             inLat = entry['lat'] < latrng[1] and entry['lat'] > latrng[0]
             inLon = (entry['lng'] < lonrng[1] and entry['lng'] > lonrng[0]) or ((entry['lng'] + 360) < lonrng[1] and (entry['lng'] + 360) > lonrng[0])
-            if (inLat and inLon and (mustKeep or (not mustRemove and (thisPop >= pop or thisCap)))): 
+            if (inLat and inLon and (mustKeep or (not mustRemove and (thisPop >= pop or thisCap)))):
                 filtered.append(entry)
+                included_indices.add(i)
                 if (entry['country'] not in countries):
                     countries.append(entry['country'])
+
+        # Top-up: for each country already in the map with fewer than min_per_country
+        # entries, pull in more cities sorted by population descending until the floor is met.
+        if min_per_country > 0:
+            country_counts = {}
+            for entry in filtered:
+                country_counts[entry['country']] = country_counts.get(entry['country'], 0) + 1
+
+            # Gather top-up candidates per country (in-bounds, not blacklisted, not already included)
+            topup = {}  # country -> [(population, entry)]
+            for i, entry in enumerate(data):
+                if i in included_indices:
+                    continue
+                c = entry['country']
+                if c not in countries:
+                    continue  # only top up countries already represented
+                if country_counts.get(c, 0) >= min_per_country:
+                    continue  # already at floor
+                mustRemove = c in blacklist or (blacklist == ['*'] and c not in whitelist)
+                if mustRemove:
+                    continue
+                inLat = entry['lat'] < latrng[1] and entry['lat'] > latrng[0]
+                inLon = (entry['lng'] < lonrng[1] and entry['lng'] > lonrng[0]) or ((entry['lng'] + 360) < lonrng[1] and (entry['lng'] + 360) > lonrng[0])
+                if not (inLat and inLon):
+                    continue
+                p = 0 if entry['population'] == '' else int(entry['population'])
+                topup.setdefault(c, []).append((p, entry))
+
+            for c, candidates in topup.items():
+                candidates.sort(key=lambda x: -x[0])  # largest cities first
+                needed = min_per_country - country_counts.get(c, 0)
+                for _, entry in candidates[:needed]:
+                    filtered.append(entry)
+                    country_counts[c] = country_counts.get(c, 0) + 1
+            print('After min_per_country=%d top-up: %d entries' % (min_per_country, len(filtered)))
+
         print('\n%d entries' % len(filtered))
         print('%d countries' % len(countries))
         print(countries)
@@ -83,7 +121,7 @@ rng = [-141, -43, 12,54]
 pop = 100000
 blacklist = ['Barbados', 'Curaçao', 'Aruba', 'Saint Vincent And The Grenadines', 'Saint Lucia', 'Antigua And Barbuda', 'Grenada', 'Dominica', 'Saint Kitts And Nevis', 'Sint Maarten', 'Martinique', 'Guadeloupe']
 whitelist = []
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors, min_per_country=10)
 
 outfile = geoscents_home + 'resources/databases/namericacapitals.js'
 rng = [-141, -43, 12,54]
@@ -97,7 +135,7 @@ rng = [92,252, -51,28]
 pop = 10000
 blacklist =  ['Macau', 'Thailand', 'Mexico', 'United States', 'Sri Lanka', 'India', 'China', 'Philippines', 'Vietnam', 'Cambodia', 'Laos', 'Hong Kong', 'Taiwan', 'Bangladesh', 'Burma', 'Nepal', 'Bhutan', 'Japan', 'Myanmar']
 whitelist = ['Cook Islands', 'Wallis And Futuna', 'Honolulu', 'Hilo', 'Wailuku', 'Lihue', 'Easter Island', 'Tokelau']
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors, 10)
 
 outfile = geoscents_home + 'resources/databases/oceaniacapitals.js'
 rng = [92,252, -51,28]
@@ -111,7 +149,7 @@ rng = [27,156, 2,59]
 pop = 400000
 blacklist = ['Egypt', 'Ethiopia', 'Ukraine', 'Djibouti', 'Moldova', 'Eritrea', 'Cyprus', 'South Sudan', 'Northern Mariana Islands', 'Guam', 'Macau', 'Sudan', 'Belarus', 'Somalia', 'Somaliland']
 whitelist = []
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors, 10)
 
 outfile = geoscents_home + 'resources/databases/asiacapitals.js'
 rng = [27,156, 2,59]
@@ -125,7 +163,7 @@ rng = [-138, -30, -54,20]
 pop = 61000
 blacklist = ['Mexico', 'Haiti', 'El Salvador', 'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Jamaica', 'Nicaragua',  'Belize', 'Martinique', 'Guadeloupe', 'Pitcairn Islands']
 whitelist = ['Falkland Islands (Islas Malvinas)', 'Galápagos', 'South Georgia And South Sandwich Islands', 'Easter Island']
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors, 10)
 
 outfile = geoscents_home + 'resources/databases/samericacapitals.js'
 rng = [-138, -30, -54,20]
@@ -139,7 +177,7 @@ rng = [-36, 52, 37,66]
 pop = 100000
 blacklist = ['Azerbaijan', 'Iran', 'Armenia', 'Georgia', 'Kazakhstan', 'Iraq', 'Syria', 'Tunisia']
 whitelist = ['Isle Of Man', 'Gibraltar', 'Shetland Islands', 'Torshavn', 'Azores', 'Jersey']
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors, 10)
 
 outfile = geoscents_home + 'resources/databases/europecapitals.js'
 rng = [-36, 52, 37,66]
@@ -153,7 +191,7 @@ rng = [-58, 80, -34,39]
 pop = 100000
 blacklist = ['India', 'Brazil', 'Pakistan', 'Iran', 'Iraq', 'Saudi Arabia', 'Afghanistan', 'Greece', 'Israel', 'Portugal', 'Syria', 'Turkey', 'Kuwait', 'Yemen', 'Paraguay', 'Lebanon', 'Qatar', 'United Arab Emirates', 'Spain', 'Tajikistan', 'Jordan', 'Oman', 'Turkmenistan', 'Bahrain', 'Malta', 'Suriname', 'Cyprus', 'Sri Lanka', 'Maldives', 'West Bank', 'Italy', 'Uzbekistan', 'China', 'Argentina', 'Uruguay']
 whitelist = ['Gibraltar']
-scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
+scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors, 10)
 
 outfile = geoscents_home + 'resources/databases/africacapitals.js'
 rng = [-58, 80, -34,39]
