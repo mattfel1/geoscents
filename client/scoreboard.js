@@ -1,6 +1,6 @@
 const CONSTANTS = require('../resources/constants.js')
 
-const MEDALS = ['🥇', '🥈', '🥉'];
+const MEDALS = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣'];
 const PACE_MODES = ['Off', 'HoF', 'Year', 'Month', 'Week', 'Day'];
 // Indexed by pointsMode: 0=Off, 1=HoF (special), 2=Year, 3=Month, 4=Week, 5=Day
 const PACE_KEYS = [null, null, 'yearly', 'monthly', 'weekly', 'daily'];
