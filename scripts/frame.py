@@ -117,14 +117,14 @@ whitelist = ['Jersey', 'Turks And Caicos Islands', 'Isle of Man', 'Falkland Isla
 scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, False, False, errors)
 
 outfile = geoscents_home + 'resources/databases/namerica.js'
-rng = [-141, -43, 12,54]
+rng = [-161, -29.7, 10, 65.5]
 pop = 100000
 blacklist = ['Barbados', 'Curaçao', 'Aruba', 'Saint Vincent And The Grenadines', 'Saint Lucia', 'Antigua And Barbuda', 'Grenada', 'Dominica', 'Saint Kitts And Nevis', 'Sint Maarten', 'Martinique', 'Guadeloupe']
 whitelist = []
 scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors, min_per_country=10)
 
 outfile = geoscents_home + 'resources/databases/namericacapitals.js'
-rng = [-141, -43, 12,54]
+rng = [-161, -29.7, 10, 65.5]
 pop = 999999999
 blacklist = ['Barbados', 'Curaçao', 'Aruba', 'Saint Vincent And The Grenadines', 'Saint Lucia', 'Antigua And Barbuda', 'Grenada', 'Dominica', 'Saint Kitts And Nevis', 'Sint Maarten', 'Martinique', 'Guadeloupe']
 whitelist = []

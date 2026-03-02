@@ -261,6 +261,19 @@ module.exports = { CITIES: [
     "id": 1840021990
   },
   {
+    "city": "Caracas",
+    "city_ascii": "Caracas",
+    "lat": 10.501,
+    "lng": -66.917,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Distrito Capital",
+    "capital": "primary",
+    "population": 2985000,
+    "id": 1862748204
+  },
+  {
     "city": "Minneapolis",
     "city_ascii": "Minneapolis",
     "lat": 44.9635,
@@ -430,6 +443,19 @@ module.exports = { CITIES: [
     "id": 1840020364
   },
   {
+    "city": "Maracaibo",
+    "city_ascii": "Maracaibo",
+    "lat": 10.73,
+    "lng": -71.66,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Zulia",
+    "capital": "admin",
+    "population": 2072000,
+    "id": 1862072711
+  },
+  {
     "city": "Portland",
     "city_ascii": "Portland",
     "lat": 45.5371,
@@ -495,6 +521,19 @@ module.exports = { CITIES: [
     "id": 1840021570
   },
   {
+    "city": "Barranquilla",
+    "city_ascii": "Barranquilla",
+    "lat": 10.96,
+    "lng": -74.8,
+    "country": "Colombia",
+    "iso2": "CO",
+    "iso3": "COL",
+    "admin_name": "Atl\u00e1ntico",
+    "capital": "admin",
+    "population": 1798000,
+    "id": 1170179113
+  },
+  {
     "city": "Orlando",
     "city_ascii": "Orlando",
     "lat": 28.4772,
@@ -506,6 +545,19 @@ module.exports = { CITIES: [
     "capital": "",
     "population": 1776841,
     "id": 1840015099
+  },
+  {
+    "city": "Valencia",
+    "city_ascii": "Valencia",
+    "lat": 10.23,
+    "lng": -67.98,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Carabobo",
+    "capital": "admin",
+    "population": 1770000,
+    "id": 1862309871
   },
   {
     "city": "Cleveland",
@@ -794,6 +846,19 @@ module.exports = { CITIES: [
     "id": 1484215762
   },
   {
+    "city": "Barquisimeto",
+    "city_ascii": "Barquisimeto",
+    "lat": 10.05,
+    "lng": -69.3,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Lara",
+    "capital": "admin",
+    "population": 1116000,
+    "id": 1862860739
+  },
+  {
     "city": "Calgary",
     "city_ascii": "Calgary",
     "lat": 51.083,
@@ -937,6 +1002,19 @@ module.exports = { CITIES: [
     "id": 1840030815
   },
   {
+    "city": "Maracay",
+    "city_ascii": "Maracay",
+    "lat": 10.2469,
+    "lng": -67.5958,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Aragua",
+    "capital": "admin",
+    "population": 1007000,
+    "id": 1862284350
+  },
+  {
     "city": "Tegucigalpa",
     "city_ascii": "Tegucigalpa",
     "lat": 14.102,
@@ -974,6 +1052,19 @@ module.exports = { CITIES: [
     "capital": "primary",
     "population": 920000,
     "id": 1558296252
+  },
+  {
+    "city": "Port of Spain",
+    "city_ascii": "Port of Spain",
+    "lat": 10.652,
+    "lng": -61.517,
+    "country": "Trinidad And Tobago",
+    "iso2": "TT",
+    "iso3": "TTO",
+    "admin_name": "Port of Spain",
+    "capital": "primary",
+    "population": 294934,
+    "id": 1780670676
   },
   {
     "city": "Nassau",
@@ -1095,6 +1186,19 @@ module.exports = { CITIES: [
     "id": 1840004773
   },
   {
+    "city": "Cartagena",
+    "city_ascii": "Cartagena",
+    "lat": 10.3997,
+    "lng": -75.5144,
+    "country": "Colombia",
+    "iso2": "CO",
+    "iso3": "COL",
+    "admin_name": "Bol\u00edvar",
+    "capital": "admin",
+    "population": 887000,
+    "id": 1170886102
+  },
+  {
     "city": "Mexicali",
     "city_ascii": "Mexicali",
     "lat": 32.65,
@@ -1184,6 +1288,19 @@ module.exports = { CITIES: [
     "capital": "admin",
     "population": 834001,
     "id": 1484926471
+  },
+  {
+    "city": "Honolulu",
+    "city_ascii": "Honolulu",
+    "lat": 21.3294,
+    "lng": -157.846,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "admin",
+    "population": 833671,
+    "id": 1840013305
   },
   {
     "city": "Omaha",
@@ -1340,6 +1457,19 @@ module.exports = { CITIES: [
     "capital": "",
     "population": 706245,
     "id": 1840015988
+  },
+  {
+    "city": "Soledad",
+    "city_ascii": "Soledad",
+    "lat": 10.92,
+    "lng": -74.77,
+    "country": "Colombia",
+    "iso2": "CO",
+    "iso3": "COL",
+    "admin_name": "Atl\u00e1ntico",
+    "capital": "minor",
+    "population": 698852,
+    "id": 1170765625
   },
   {
     "city": "Fresno",
@@ -1512,6 +1642,19 @@ module.exports = { CITIES: [
     "id": 1840002928
   },
   {
+    "city": "Barcelona",
+    "city_ascii": "Barcelona",
+    "lat": 10.1304,
+    "lng": -64.72,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Anzo\u00e1tegui",
+    "capital": "admin",
+    "population": 600954,
+    "id": 1862418619
+  },
+  {
     "city": "Mission Viejo",
     "city_ascii": "Mission Viejo",
     "lat": 33.6095,
@@ -1679,6 +1822,19 @@ module.exports = { CITIES: [
     "capital": "admin",
     "population": 555865,
     "id": 1192766111
+  },
+  {
+    "city": "Puerto La Cruz",
+    "city_ascii": "Puerto La Cruz",
+    "lat": 10.17,
+    "lng": -64.68,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Anzo\u00e1tegui",
+    "capital": "minor",
+    "population": 546616,
+    "id": 1862856141
   },
   {
     "city": "Canc\u00fan",
@@ -1993,6 +2149,19 @@ module.exports = { CITIES: [
     "id": 1840001288
   },
   {
+    "city": "Cabimas",
+    "city_ascii": "Cabimas",
+    "lat": 10.43,
+    "lng": -71.45,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Zulia",
+    "capital": "minor",
+    "population": 441094,
+    "id": 1862398719
+  },
+  {
     "city": "Denton",
     "city_ascii": "Denton",
     "lat": 33.2176,
@@ -2056,6 +2225,19 @@ module.exports = { CITIES: [
     "capital": "",
     "population": 432589,
     "id": 1840015119
+  },
+  {
+    "city": "Santa Marta",
+    "city_ascii": "Santa Marta",
+    "lat": 11.2472,
+    "lng": -74.2017,
+    "country": "Colombia",
+    "iso2": "CO",
+    "iso3": "COL",
+    "admin_name": "Magdalena",
+    "capital": "admin",
+    "population": 431781,
+    "id": 1170715594
   },
   {
     "city": "Villahermosa",
@@ -2304,6 +2486,19 @@ module.exports = { CITIES: [
     "capital": "",
     "population": 389022,
     "id": 1840003389
+  },
+  {
+    "city": "Alajuela",
+    "city_ascii": "Alajuela",
+    "lat": 10.02,
+    "lng": -84.23,
+    "country": "Costa Rica",
+    "iso2": "CR",
+    "iso3": "CRI",
+    "admin_name": "Alajuela",
+    "capital": "admin",
+    "population": 387743,
+    "id": 1188394508
   },
   {
     "city": "Boise",
@@ -2761,6 +2956,19 @@ module.exports = { CITIES: [
     "id": 1840006009
   },
   {
+    "city": "Cuman\u00e1",
+    "city_ascii": "Cumana",
+    "lat": 10.45,
+    "lng": -64.18,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Sucre",
+    "capital": "admin",
+    "population": 317603,
+    "id": 1862583279
+  },
+  {
     "city": "Lexington",
     "city_ascii": "Lexington",
     "lat": 38.0423,
@@ -2772,6 +2980,19 @@ module.exports = { CITIES: [
     "capital": "",
     "population": 315939,
     "id": 1840015211
+  },
+  {
+    "city": "Maiquet\u00eda",
+    "city_ascii": "Maiquetia",
+    "lat": 10.6004,
+    "lng": -66.97,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Vargas",
+    "capital": "minor",
+    "population": 315442,
+    "id": 1862822831
   },
   {
     "city": "Huntsville",
@@ -2813,6 +3034,19 @@ module.exports = { CITIES: [
     "id": 1840013411
   },
   {
+    "city": "Valledupar",
+    "city_ascii": "Valledupar",
+    "lat": 10.48,
+    "lng": -73.25,
+    "country": "Colombia",
+    "iso2": "CO",
+    "iso3": "COL",
+    "admin_name": "Cesar",
+    "capital": "admin",
+    "population": 308237,
+    "id": 1170481949
+  },
+  {
     "city": "St. Paul",
     "city_ascii": "St. Paul",
     "lat": 44.9477,
@@ -2824,6 +3058,19 @@ module.exports = { CITIES: [
     "capital": "admin",
     "population": 306621,
     "id": 1840008940
+  },
+  {
+    "city": "Los Teques",
+    "city_ascii": "Los Teques",
+    "lat": 10.42,
+    "lng": -67.02,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Miranda",
+    "capital": "admin",
+    "population": 303470,
+    "id": 1862066931
   },
   {
     "city": "Fort Collins",
@@ -3359,6 +3606,19 @@ module.exports = { CITIES: [
     "id": 1840019309
   },
   {
+    "city": "Anchorage",
+    "city_ascii": "Anchorage",
+    "lat": 61.1508,
+    "lng": -149.1091,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Alaska",
+    "capital": "",
+    "population": 253421,
+    "id": 1840023385
+  },
+  {
     "city": "Tallahassee",
     "city_ascii": "Tallahassee",
     "lat": 30.4551,
@@ -3656,6 +3916,19 @@ module.exports = { CITIES: [
     "capital": "",
     "population": 234962,
     "id": 1840020292
+  },
+  {
+    "city": "Punto Fijo",
+    "city_ascii": "Punto Fijo",
+    "lat": 11.72,
+    "lng": -70.21,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Falc\u00f3n",
+    "capital": "minor",
+    "population": 234736,
+    "id": 1862535644
   },
   {
     "city": "Visalia",
@@ -4283,6 +4556,19 @@ module.exports = { CITIES: [
     "id": 1484741627
   },
   {
+    "city": "Porlamar",
+    "city_ascii": "Porlamar",
+    "lat": 10.9604,
+    "lng": -63.85,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Nueva Esparta",
+    "capital": "minor",
+    "population": 196934,
+    "id": 1862693736
+  },
+  {
     "city": "Olympia",
     "city_ascii": "Olympia",
     "lat": 47.0417,
@@ -4320,6 +4606,19 @@ module.exports = { CITIES: [
     "capital": "",
     "population": 195646,
     "id": 1840033832
+  },
+  {
+    "city": "Coro",
+    "city_ascii": "Coro",
+    "lat": 11.42,
+    "lng": -69.68,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Falc\u00f3n",
+    "capital": "admin",
+    "population": 195227,
+    "id": 1862429150
   },
   {
     "city": "Huntington",
@@ -4868,6 +5167,19 @@ module.exports = { CITIES: [
     "id": 1840020577
   },
   {
+    "city": "Puerto Cabello",
+    "city_ascii": "Puerto Cabello",
+    "lat": 10.4704,
+    "lng": -68.17,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Carabobo",
+    "capital": "minor",
+    "population": 174000,
+    "id": 1862031193
+  },
+  {
     "city": "Nampa",
     "city_ascii": "Nampa",
     "lat": 43.5843,
@@ -5022,6 +5334,33 @@ module.exports = { CITIES: [
     "capital": "",
     "population": 166541,
     "id": 1840019789
+  },
+  {
+    "city": "Ocumare del Tuy",
+    "city_ascii": "Ocumare del Tuy",
+    "lat": 10.12,
+    "lng": -66.78,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Miranda",
+    "capital": "minor",
+    "population": 166072,
+    "id": 1862015576
+  },
+  {
+    "city": "San Fernando",
+    "city_ascii": "San Fernando",
+    "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/STAPP_008_San_Fernando_Independence_Avenue_%28cropped%29.jpg/800px-STAPP_008_San_Fernando_Independence_Avenue_%28cropped%29.jpg",
+    "lat": 10.2805,
+    "lng": -61.4594,
+    "country": "Trinidad And Tobago",
+    "iso2": "TT",
+    "iso3": "TTO",
+    "admin_name": "San Fernando",
+    "capital": "admin",
+    "population": 166039,
+    "id": 1780361077
   },
   {
     "city": "Cary",
@@ -5478,6 +5817,19 @@ module.exports = { CITIES: [
     "capital": "",
     "population": 150747,
     "id": 1840000460
+  },
+  {
+    "city": "Carora",
+    "city_ascii": "Carora",
+    "lat": 10.19,
+    "lng": -70.08,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Lara",
+    "capital": "minor",
+    "population": 149711,
+    "id": 1862485109
   },
   {
     "city": "Warner Robins",
@@ -6208,6 +6560,19 @@ module.exports = { CITIES: [
     "id": 1840021154
   },
   {
+    "city": "R\u00edohacha",
+    "city_ascii": "Riohacha",
+    "lat": 11.5403,
+    "lng": -72.91,
+    "country": "Colombia",
+    "iso2": "CO",
+    "iso3": "COL",
+    "admin_name": "La Guajira",
+    "capital": "admin",
+    "population": 133186,
+    "id": 1170903069
+  },
+  {
     "city": "Coral Springs",
     "city_ascii": "Coral Springs",
     "lat": 26.2702,
@@ -6286,6 +6651,19 @@ module.exports = { CITIES: [
     "id": 1840002493
   },
   {
+    "city": "Ci\u00e9naga",
+    "city_ascii": "Cienaga",
+    "lat": 11.0104,
+    "lng": -74.25,
+    "country": "Colombia",
+    "iso2": "CO",
+    "iso3": "COL",
+    "admin_name": "Magdalena",
+    "capital": "minor",
+    "population": 131171,
+    "id": 1170825751
+  },
+  {
     "city": "Stamford",
     "city_ascii": "Stamford",
     "lat": 41.1035,
@@ -6310,6 +6688,19 @@ module.exports = { CITIES: [
     "capital": "",
     "population": 130215,
     "id": 1840003613
+  },
+  {
+    "city": "Masaya",
+    "city_ascii": "Masaya",
+    "lat": 11.969,
+    "lng": -86.095,
+    "country": "Nicaragua",
+    "iso2": "NI",
+    "iso3": "NIC",
+    "admin_name": "Masaya",
+    "capital": "admin",
+    "population": 130113,
+    "id": 1558765329
   },
   {
     "city": "Kent",
@@ -6414,6 +6805,19 @@ module.exports = { CITIES: [
     "capital": "",
     "population": 126589,
     "id": 1840014462
+  },
+  {
+    "city": "Car\u00fapano",
+    "city_ascii": "Carupano",
+    "lat": 10.67,
+    "lng": -63.23,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Sucre",
+    "capital": "minor",
+    "population": 126293,
+    "id": 1862777685
   },
   {
     "city": "Boulder",
@@ -7742,6 +8146,19 @@ module.exports = { CITIES: [
     "id": 1840028579
   },
   {
+    "city": "Granada",
+    "city_ascii": "Granada",
+    "lat": 11.9337,
+    "lng": -85.95,
+    "country": "Nicaragua",
+    "iso2": "NI",
+    "iso3": "NIC",
+    "admin_name": "Granada",
+    "capital": "admin",
+    "population": 105219,
+    "id": 1558101678
+  },
+  {
     "city": "Davie",
     "city_ascii": "Davie",
     "lat": 26.0789,
@@ -8197,6 +8614,45 @@ module.exports = { CITIES: [
     "id": 1840013210
   },
   {
+    "city": "Juneau",
+    "city_ascii": "Juneau",
+    "lat": 58.4546,
+    "lng": -134.1739,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Alaska",
+    "capital": "admin",
+    "population": 25180,
+    "id": 1840023306
+  },
+  {
+    "city": "Whitehorse",
+    "city_ascii": "Whitehorse",
+    "lat": 60.7167,
+    "lng": -135.05,
+    "country": "Canada",
+    "iso2": "CA",
+    "iso3": "CAN",
+    "admin_name": "Yukon",
+    "capital": "admin",
+    "population": 23276,
+    "id": 1124348186
+  },
+  {
+    "city": "Yellowknife",
+    "city_ascii": "Yellowknife",
+    "lat": 62.442,
+    "lng": -114.397,
+    "country": "Canada",
+    "iso2": "CA",
+    "iso3": "CAN",
+    "admin_name": "Northwest Territories",
+    "capital": "admin",
+    "population": 19234,
+    "id": 1124208917
+  },
+  {
     "city": "Pierre",
     "city_ascii": "Pierre",
     "lat": 44.3748,
@@ -8223,6 +8679,19 @@ module.exports = { CITIES: [
     "id": 1840002187
   },
   {
+    "city": "Iqaluit",
+    "city_ascii": "Iqaluit",
+    "lat": 63.7505,
+    "lng": -68.5002,
+    "country": "Canada",
+    "iso2": "CA",
+    "iso3": "CAN",
+    "admin_name": "Nunavut",
+    "capital": "admin",
+    "population": 6124,
+    "id": 1124379539
+  },
+  {
     "city": "Dover",
     "city_ascii": "Dover",
     "lat": 40.0033,
@@ -8234,6 +8703,19 @@ module.exports = { CITIES: [
     "capital": "admin",
     "population": 1991,
     "id": 1840001442
+  },
+  {
+    "city": "Nuuk",
+    "city_ascii": "Nuuk",
+    "lat": 64.1983,
+    "lng": -51.7327,
+    "country": "Greenland",
+    "iso2": "GL",
+    "iso3": "GRL",
+    "admin_name": "Sermersooq",
+    "capital": "primary",
+    "population": 14798,
+    "id": 1304028354
   },
   {
     "city": "George Town",
@@ -8652,6 +9134,45 @@ module.exports = { CITIES: [
     "id": 1084536442
   },
   {
+    "city": "Sabanalarga",
+    "city_ascii": "Sabanalarga",
+    "lat": 10.64,
+    "lng": -74.92,
+    "country": "Colombia",
+    "iso2": "CO",
+    "iso3": "COL",
+    "admin_name": "Atl\u00e1ntico",
+    "capital": "minor",
+    "population": 68535,
+    "id": 1170724527
+  },
+  {
+    "city": "San Andr\u00e9s",
+    "city_ascii": "San Andres",
+    "lat": 12.5621,
+    "lng": -81.6903,
+    "country": "Colombia",
+    "iso2": "CO",
+    "iso3": "COL",
+    "admin_name": "San Andr\u00e9s y Providencia",
+    "capital": "admin",
+    "population": 58257,
+    "id": 1170563968
+  },
+  {
+    "city": "Arjona",
+    "city_ascii": "Arjona",
+    "lat": 10.26,
+    "lng": -75.35,
+    "country": "Colombia",
+    "iso2": "CO",
+    "iso3": "COL",
+    "admin_name": "Bol\u00edvar",
+    "capital": "minor",
+    "population": 50405,
+    "id": 1170602407
+  },
+  {
     "city": "Juigalpa",
     "city_ascii": "Juigalpa",
     "lat": 12.11,
@@ -8678,43 +9199,17 @@ module.exports = { CITIES: [
     "id": 1558697688
   },
   {
-    "city": "Bilwi",
-    "city_ascii": "Bilwi",
-    "lat": 14.0333,
-    "lng": -83.3834,
+    "city": "Bluefields",
+    "city_ascii": "Bluefields",
+    "lat": 12,
+    "lng": -83.7649,
     "country": "Nicaragua",
     "iso2": "NI",
     "iso3": "NIC",
-    "admin_name": "Caribe Norte",
+    "admin_name": "Caribe Sur",
     "capital": "admin",
-    "population": 43001,
-    "id": 1558656214
-  },
-  {
-    "city": "Ocotal",
-    "city_ascii": "Ocotal",
-    "lat": 13.63,
-    "lng": -86.473,
-    "country": "Nicaragua",
-    "iso2": "NI",
-    "iso3": "NIC",
-    "admin_name": "Nueva Segovia",
-    "capital": "admin",
-    "population": 33928,
-    "id": 1558006000
-  },
-  {
-    "city": "Boaco",
-    "city_ascii": "Boaco",
-    "lat": 12.47,
-    "lng": -85.66,
-    "country": "Nicaragua",
-    "iso2": "NI",
-    "iso3": "NIC",
-    "admin_name": "Boaco",
-    "capital": "admin",
-    "population": 29046,
-    "id": 1558023610
+    "population": 44373,
+    "id": 1558301368
   },
   {
     "city": "Usulut\u00e1n",
@@ -8780,6 +9275,58 @@ module.exports = { CITIES: [
     "capital": "admin",
     "population": 34102,
     "id": 1222480039
+  },
+  {
+    "city": "Liberia",
+    "city_ascii": "Liberia",
+    "lat": 10.6338,
+    "lng": -85.4333,
+    "country": "Costa Rica",
+    "iso2": "CR",
+    "iso3": "CRI",
+    "admin_name": "Guanacaste",
+    "capital": "admin",
+    "population": 45380,
+    "id": 1188743090
+  },
+  {
+    "city": "Quesada",
+    "city_ascii": "Quesada",
+    "lat": 10.3305,
+    "lng": -84.44,
+    "country": "Costa Rica",
+    "iso2": "CR",
+    "iso3": "CRI",
+    "admin_name": "Alajuela",
+    "capital": "",
+    "population": 31106,
+    "id": 1188199888
+  },
+  {
+    "city": "Ca\u00f1as",
+    "city_ascii": "Canas",
+    "lat": 10.43,
+    "lng": -85.1,
+    "country": "Costa Rica",
+    "iso2": "CR",
+    "iso3": "CRI",
+    "admin_name": "Guanacaste",
+    "capital": "",
+    "population": 20306,
+    "id": 1188753368
+  },
+  {
+    "city": "La Cruz",
+    "city_ascii": "La Cruz",
+    "lat": 11.0704,
+    "lng": -85.63,
+    "country": "Costa Rica",
+    "iso2": "CR",
+    "iso3": "CRI",
+    "admin_name": "Guanacaste",
+    "capital": "",
+    "population": 4319,
+    "id": 1188840021
   },
   {
     "city": "Port-de-Paix",
@@ -8858,6 +9405,162 @@ module.exports = { CITIES: [
     "capital": "admin",
     "population": "",
     "id": 1332665283
+  },
+  {
+    "city": "Qaqortoq",
+    "city_ascii": "Qaqortoq",
+    "lat": 60.7289,
+    "lng": -46.0364,
+    "country": "Greenland",
+    "iso2": "GL",
+    "iso3": "GRL",
+    "admin_name": "Kujalleq",
+    "capital": "admin",
+    "population": 3224,
+    "id": 1304746917
+  },
+  {
+    "city": "Paamiut",
+    "city_ascii": "Paamiut",
+    "lat": 62.0041,
+    "lng": -49.6351,
+    "country": "Greenland",
+    "iso2": "GL",
+    "iso3": "GRL",
+    "admin_name": "Sermersooq",
+    "capital": "",
+    "population": 1862,
+    "id": 1304323922
+  },
+  {
+    "city": "Narsarsuaq",
+    "city_ascii": "Narsarsuaq",
+    "lat": 61.1666,
+    "lng": -45.4166,
+    "country": "Greenland",
+    "iso2": "GL",
+    "iso3": "GRL",
+    "admin_name": "Kujalleq",
+    "capital": "",
+    "population": 145,
+    "id": 1304138343
+  },
+  {
+    "city": "Timmiarmiut",
+    "city_ascii": "Timmiarmiut",
+    "lat": 62.5333,
+    "lng": -42.2167,
+    "country": "Greenland",
+    "iso2": "GL",
+    "iso3": "GRL",
+    "admin_name": "Kujalleq",
+    "capital": "",
+    "population": 10,
+    "id": 1304206491
+  },
+  {
+    "city": "Arima",
+    "city_ascii": "Arima",
+    "lat": 10.6374,
+    "lng": -61.2823,
+    "country": "Trinidad And Tobago",
+    "iso2": "TT",
+    "iso3": "TTO",
+    "admin_name": "Arima",
+    "capital": "admin",
+    "population": "",
+    "id": 1780753308
+  },
+  {
+    "city": "Chaguanas",
+    "city_ascii": "Chaguanas",
+    "lat": 10.5167,
+    "lng": -61.4167,
+    "country": "Trinidad And Tobago",
+    "iso2": "TT",
+    "iso3": "TTO",
+    "admin_name": "Chaguanas",
+    "capital": "admin",
+    "population": "",
+    "id": 1780795054
+  },
+  {
+    "city": "Scarborough",
+    "city_ascii": "Scarborough",
+    "lat": 11.1811,
+    "lng": -60.7333,
+    "country": "Trinidad And Tobago",
+    "iso2": "TT",
+    "iso3": "TTO",
+    "admin_name": "Tobago",
+    "capital": "admin",
+    "population": "",
+    "id": 1780875399
+  },
+  {
+    "city": "Diego Martin",
+    "city_ascii": "Diego Martin",
+    "lat": 10.7208,
+    "lng": -61.5662,
+    "country": "Trinidad And Tobago",
+    "iso2": "TT",
+    "iso3": "TTO",
+    "admin_name": "Diego Martin",
+    "capital": "admin",
+    "population": "",
+    "id": 1780534918
+  },
+  {
+    "city": "Point Fortin",
+    "city_ascii": "Point Fortin",
+    "lat": 10.1741,
+    "lng": -61.6841,
+    "country": "Trinidad And Tobago",
+    "iso2": "TT",
+    "iso3": "TTO",
+    "admin_name": "Point Fortin",
+    "capital": "admin",
+    "population": "",
+    "id": 1780702349
+  },
+  {
+    "city": "Aranguez",
+    "city_ascii": "Aranguez",
+    "lat": 10.6472,
+    "lng": -61.4461,
+    "country": "Trinidad And Tobago",
+    "iso2": "TT",
+    "iso3": "TTO",
+    "admin_name": "San Juan/Laventille",
+    "capital": "admin",
+    "population": "",
+    "id": 1780000001
+  },
+  {
+    "city": "Tunapuna",
+    "city_ascii": "Tunapuna",
+    "lat": 10.6524,
+    "lng": -61.3888,
+    "country": "Trinidad And Tobago",
+    "iso2": "TT",
+    "iso3": "TTO",
+    "admin_name": "Tunapuna/Piarco",
+    "capital": "admin",
+    "population": "",
+    "id": 1780508155
+  },
+  {
+    "city": "Debe",
+    "city_ascii": "Debe",
+    "lat": 10.2085,
+    "lng": -61.4527,
+    "country": "Trinidad And Tobago",
+    "iso2": "TT",
+    "iso3": "TTO",
+    "admin_name": "Penal/Debe",
+    "capital": "admin",
+    "population": "",
+    "id": 1780510715
   },
   {
     "city": "Freeport City",

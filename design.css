@@ -266,7 +266,7 @@
     position: absolute;
     left: 128px; top: 0;
     width: 1275px; height: 40px;
-    background: rgba(200, 200, 220, 0.75);
+    background: rgba(200, 200, 220, 0.9);
     display: flex;
     align-items: center;
     padding: 0 8px;

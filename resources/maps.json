@@ -30,12 +30,12 @@
         "tier": "continent"
     },
     "N. America": {
-        "coords": [-141, -43, 10.0, 56.0],
+        "coords": [-161, -29.7, 10, 65.5],
         "flair": "🏞️",
         "tier": "continent"
     },
     "N. America Capitals": {
-        "coords": [-141, -43, 10.0, 56.0],
+        "coords": [-161, -29.7, 10, 65.5],
         "flair": "🦬",
         "tier": "continent"
     },

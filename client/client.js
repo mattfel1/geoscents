@@ -407,6 +407,7 @@ $(document).ready(function() {
         studyPoints.push(studyPoint);
     })
     socket.on('draw reveal city', (city, capital, iso2, round) => {
+        scoreboard.setRound(round);
         commands.drawCommand("            ", city, capital, iso2, round, false, false, true);
         sounds.playRoundEndSound();
     });
@@ -560,6 +561,7 @@ $(document).ready(function() {
         socket.emit('bootPlayer', id)
     });
     socket.on('moved to', (mapName, roomName, roomCitysrc, roomState) => {
+        scoreboard.currentRound = -1;
         myMap = mapName;
         map.myMap = mapName;
         chat.myMap = mapName;
@@ -612,8 +614,7 @@ $(document).ready(function() {
         if (chat.hasNewMessage) document.title = "(*) GeoScents"
     }, 1000 / CONSTANTS.FPS);
 
-    setInterval(() => {
-        // Set zoom for resolution
+    function applyScale() {
         const scale = Math.floor(50 * Math.max(0.5, Math.min(1, window.innerWidth / 1920))) / 50;
         if (scale != lastScale && autoscale) {
             lastScale = scale;
@@ -621,7 +622,9 @@ $(document).ready(function() {
             document.documentElement.style.MozTransform = "scale(" + scale + ")";
             document.documentElement.style.MozTransformOrigin = "0 0";
         }
-    }, 1000 / 5);
+    }
+    applyScale();
+    setInterval(applyScale, 1000 / 5);
 
     const mouseUpHandler = (e) => {
         playerClick.mouseDown = false

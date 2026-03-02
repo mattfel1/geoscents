@@ -79,6 +79,19 @@ module.exports = { CITIES: [
     "id": 1840020568
   },
   {
+    "city": "Caracas",
+    "city_ascii": "Caracas",
+    "lat": 10.501,
+    "lng": -66.917,
+    "country": "Venezuela",
+    "iso2": "VE",
+    "iso3": "VEN",
+    "admin_name": "Distrito Capital",
+    "capital": "primary",
+    "population": 2985000,
+    "id": 1862748204
+  },
+  {
     "city": "Denver",
     "city_ascii": "Denver",
     "lat": 39.7621,
@@ -339,6 +352,19 @@ module.exports = { CITIES: [
     "id": 1558296252
   },
   {
+    "city": "Port of Spain",
+    "city_ascii": "Port of Spain",
+    "lat": 10.652,
+    "lng": -61.517,
+    "country": "Trinidad And Tobago",
+    "iso2": "TT",
+    "iso3": "TTO",
+    "admin_name": "Port of Spain",
+    "capital": "primary",
+    "population": 294934,
+    "id": 1780670676
+  },
+  {
     "city": "Nassau",
     "img_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Nassau%2C_Bahamas_welcome_gateway.JPG/1280px-Nassau%2C_Bahamas_welcome_gateway.JPG",
     "city_ascii": "Nassau",
@@ -391,6 +417,19 @@ module.exports = { CITIES: [
     "capital": "admin",
     "population": 914751,
     "id": 1840004773
+  },
+  {
+    "city": "Honolulu",
+    "city_ascii": "Honolulu",
+    "lat": 21.3294,
+    "lng": -157.846,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Hawaii",
+    "capital": "admin",
+    "population": 833671,
+    "id": 1840013305
   },
   {
     "city": "Winnipeg",
@@ -875,6 +914,45 @@ module.exports = { CITIES: [
     "id": 1840013210
   },
   {
+    "city": "Juneau",
+    "city_ascii": "Juneau",
+    "lat": 58.4546,
+    "lng": -134.1739,
+    "country": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "admin_name": "Alaska",
+    "capital": "admin",
+    "population": 25180,
+    "id": 1840023306
+  },
+  {
+    "city": "Whitehorse",
+    "city_ascii": "Whitehorse",
+    "lat": 60.7167,
+    "lng": -135.05,
+    "country": "Canada",
+    "iso2": "CA",
+    "iso3": "CAN",
+    "admin_name": "Yukon",
+    "capital": "admin",
+    "population": 23276,
+    "id": 1124348186
+  },
+  {
+    "city": "Yellowknife",
+    "city_ascii": "Yellowknife",
+    "lat": 62.442,
+    "lng": -114.397,
+    "country": "Canada",
+    "iso2": "CA",
+    "iso3": "CAN",
+    "admin_name": "Northwest Territories",
+    "capital": "admin",
+    "population": 19234,
+    "id": 1124208917
+  },
+  {
     "city": "Pierre",
     "city_ascii": "Pierre",
     "lat": 44.3748,
@@ -901,6 +979,19 @@ module.exports = { CITIES: [
     "id": 1840002187
   },
   {
+    "city": "Iqaluit",
+    "city_ascii": "Iqaluit",
+    "lat": 63.7505,
+    "lng": -68.5002,
+    "country": "Canada",
+    "iso2": "CA",
+    "iso3": "CAN",
+    "admin_name": "Nunavut",
+    "capital": "admin",
+    "population": 6124,
+    "id": 1124379539
+  },
+  {
     "city": "Dover",
     "city_ascii": "Dover",
     "lat": 40.0033,
@@ -912,6 +1003,19 @@ module.exports = { CITIES: [
     "capital": "admin",
     "population": 1991,
     "id": 1840001442
+  },
+  {
+    "city": "Nuuk",
+    "city_ascii": "Nuuk",
+    "lat": 64.1983,
+    "lng": -51.7327,
+    "country": "Greenland",
+    "iso2": "GL",
+    "iso3": "GRL",
+    "admin_name": "Sermersooq",
+    "capital": "primary",
+    "population": 14798,
+    "id": 1304028354
   },
   {
     "city": "George Town",
