@@ -214,6 +214,18 @@ class Scoreboard {
                 color: dict['recordColor3'],
                 broken: dict['recordBroken3']
             },
+            {
+                record: dict['record4'],
+                name: dict['recordName4'],
+                color: dict['recordColor4'],
+                broken: dict['recordBroken4']
+            },
+            {
+                record: dict['record5'],
+                name: dict['recordName5'],
+                color: dict['recordColor5'],
+                broken: dict['recordBroken5']
+            },
         ];
 
         const header = $('<div>').css({
