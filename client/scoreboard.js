@@ -62,7 +62,7 @@ class Scoreboard {
             goalName,
             achieved: true
         };
-        const remaining = Math.max(1, CONSTANTS.GAME_ROUNDS - this.currentRound - 1);
+        const remaining = CONSTANTS.GAME_ROUNDS - this.currentRound - 1;
         const maxPerRound = Math.round(CONSTANTS.PERFECT_SCORE / CONSTANTS.GAME_ROUNDS);
         const maxPossible = score + remaining * maxPerRound;
         if (maxPossible < target) return {
