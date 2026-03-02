@@ -2,8 +2,10 @@
 .overlay-bg {
     display: none;
     position: fixed;
-    top: 0; left: 0;
-    height: 100%; width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
     cursor: pointer;
     z-index: 1000;
     background: rgba(0, 0, 0, 0.75);
@@ -12,8 +14,10 @@
 .hole {
     display: none;
     position: absolute;
-    top: 20px; left: 20px;
-    width: 500px; height: 500px;
+    top: 20px;
+    left: 20px;
+    width: 500px;
+    height: 500px;
     border: 5px solid red;
     border-radius: 25px;
     z-index: 1001;
@@ -23,8 +27,10 @@
 .screen {
     display: none;
     position: absolute;
-    top: 0; left: 0;
-    height: 100%; width: 1920px;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1920px;
     cursor: pointer;
     z-index: 1002;
     background: rgba(0, 0, 0, 0);
@@ -35,7 +41,8 @@
     position: absolute;
     top: 400px;
     margin: 0 auto;
-    width: 1500px; left: 100px;
+    width: 1500px;
+    left: 100px;
     z-index: 1002;
     font-size: 80px;
     font-weight: bold;
@@ -49,7 +56,8 @@
     background: #fff;
     padding: 1%;
     position: fixed;
-    top: 50vh; left: 950px;
+    top: 50vh;
+    left: 950px;
     transform: translate(-50%, -50%);
     margin: 0;
     cursor: default;
@@ -71,25 +79,29 @@
     background: #fff;
     border: 1px solid #aaa;
     border-radius: 2px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     z-index: 10010;
     font-size: 13px;
 }
+
 .citysrc-suggestions .suggestion-item {
     padding: 4px 8px;
     cursor: pointer;
     white-space: nowrap;
 }
+
 .citysrc-suggestions .suggestion-item:hover,
 .citysrc-suggestions .suggestion-item.active {
     background: #cce8ff;
 }
+
 .citysrc-suggestions .suggestion-hint {
     padding: 2px 8px;
     font-size: 11px;
     color: #888;
     pointer-events: none;
 }
+
 .citysrc-suggestions .suggestion-sep {
     padding: 3px 8px;
     font-size: 11px;
@@ -99,9 +111,11 @@
     pointer-events: none;
     border-top: 1px solid #ccc;
 }
+
 .citysrc-suggestions .suggestion-sep:first-child {
     border-top: none;
 }
+
 #citysrc-show-all {
     border: 1px solid #aaa;
     border-left: none;
@@ -112,6 +126,7 @@
     vertical-align: middle;
     line-height: normal;
 }
+
 #citysrc-show-all:hover {
     background: #ddd;
 }
@@ -132,16 +147,19 @@
     gap: 3px;
     padding: 3px 0;
 }
+
 .room-btn-grid button {
     width: 100%;
     margin: 0;
     box-sizing: border-box;
 }
+
 .custom-room-cell {
     display: flex;
     flex-direction: column;
     gap: 3px;
 }
+
 .custom-room-cell button {
     flex: 1;
 }
@@ -246,15 +264,19 @@
 
 #game-hud {
     position: absolute;
-    top: 0; left: 0;
-    width: 1530px; height: 40px;
+    top: 0;
+    left: 0;
+    width: 1530px;
+    height: 40px;
     pointer-events: none;
 }
 
 #timer {
     position: absolute;
-    left: 88px; top: 0;
-    width: 40px; height: 40px;
+    left: 88px;
+    top: 0;
+    width: 40px;
+    height: 40px;
     background: white;
     font: bold 35px/40px Arial;
     text-align: center;
@@ -264,8 +286,10 @@
 
 #command-bar {
     position: absolute;
-    left: 128px; top: 0;
-    width: 1275px; height: 40px;
+    left: 128px;
+    top: 0;
+    width: 1275px;
+    height: 40px;
     background: rgba(200, 200, 220, 0.9);
     display: flex;
     align-items: center;
@@ -290,8 +314,10 @@
 
 #ready-btn {
     position: absolute;
-    left: 876px; top: 3px;
-    width: 380px; height: 30px;
+    left: 876px;
+    top: 3px;
+    width: 380px;
+    height: 30px;
     background: #e3e4e6;
     border: 2px solid #808080;
     outline: 2px solid black;
@@ -313,7 +339,8 @@
 
 .chart {
     background: "#3887cc";
-    width: 500px; height: 200px;
+    width: 500px;
+    height: 200px;
     border-left: 1px dotted #555;
     border-bottom: 1px dotted #555;
     padding: 20px 20px 20px 0;
@@ -337,7 +364,8 @@
 .y-labels {
     font-size: 0.9em;
     position: relative;
-    bottom: 240px; right: 70px;
+    bottom: 240px;
+    right: 70px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -350,6 +378,7 @@
     margin-bottom: 8px;
     justify-content: center;
 }
+
 .custompopup-toggle-btn {
     cursor: pointer;
     padding: 4px 12px;
@@ -358,22 +387,26 @@
     background: #e0e0e0;
     font-size: 13px;
 }
+
 .custompopup-toggle-active {
     background: #4a90d9;
     color: white;
     border-color: #2a6cb5;
 }
+
 .custompopup-sep {
     border: none;
     border-top: 2px solid #ccc;
     margin: 10px 0;
 }
+
 #custompopup-rooms-section {
     margin-top: 0;
     max-height: 200px;
     overflow-y: auto;
     font-size: 13px;
 }
+
 .custompopup-room-row {
     display: flex;
     align-items: center;
@@ -381,6 +414,7 @@
     padding: 3px 0;
     border-bottom: 1px solid #eee;
 }
+
 .custompopup-join-btn {
     cursor: pointer;
     padding: 2px 8px;
@@ -390,18 +424,21 @@
     font-size: 12px;
     margin-left: 8px;
 }
+
 .custompopup-no-rooms {
     color: #888;
     font-style: italic;
     font-size: 12px;
     padding: 4px 0;
 }
+
 .custompopup-rooms-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 13px;
     margin-top: 4px;
 }
+
 .custompopup-rooms-table th {
     text-align: left;
     border-bottom: 2px solid #ccc;
@@ -409,6 +446,7 @@
     color: #555;
     font-weight: bold;
 }
+
 .custompopup-rooms-table td {
     padding: 3px 6px;
     border-bottom: 1px solid #eee;

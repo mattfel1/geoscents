@@ -380,7 +380,7 @@ io.on('connection', (socket) => {
             'moved': false
         });
         playerRooms.set(socket.id, rooms[CONSTANTS.LOBBY]);
-        io.sockets.emit('update counts', getHist()); 
+        io.sockets.emit('update counts', getHist());
         socket.emit('update public rooms', getPublicRoomsInfo());
         helpers.log("User connected    " + socket.handshake.address);
         socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
@@ -725,7 +725,10 @@ io.on('connection', (socket) => {
         var info = rooms[originRoomName].exportPlayer(socket);
         info['moved'] = true;
         let attempts = 0;
-        do { publicRoomCounter++; attempts++; } while (rooms['public_' + (publicRoomCounter % 100)] && attempts < 100);
+        do {
+            publicRoomCounter++;
+            attempts++;
+        } while (rooms['public_' + (publicRoomCounter % 100)] && attempts < 100);
         const roomId = 'public_' + (publicRoomCounter % 100);
         const map = askcitysrc.replace(" Capitals", "");
         var leave_msg = "[ <font color='" + info['color'] + "'><b>" + info['name'] + "</b> has left " + originRoomName + " and created a public room!</font> ]<br>";

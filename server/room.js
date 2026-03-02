@@ -19,7 +19,7 @@ class Room {
         this.roomName = roomName; // User-friendly room name ("Weekly Country" or "Trivia")
         this.citysrc = citysrc; // source for random city selection ("Ukraine" or "Trivia")
         this.isPrivate = roomName.startsWith('private');
-        this.isPublic  = roomName.startsWith('public');
+        this.isPublic = roomName.startsWith('public');
         this.roomLabel = '';
         this.joeTime = 10;
         this.joeLat = 0;

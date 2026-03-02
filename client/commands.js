@@ -365,10 +365,10 @@ class Commands {
         this.isPublic = false;
     }
     labelPublic(citysrc, roomId, roomLabel) {
-        this.publicCitysrc  = citysrc;
-        this.publicRoomId   = roomId;
+        this.publicCitysrc = citysrc;
+        this.publicRoomId = roomId;
         this.publicRoomLabel = roomLabel || '';
-        this.isPublic  = true;
+        this.isPublic = true;
         this.isPrivate = false;
     }
     clearPrivate() {

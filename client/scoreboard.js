@@ -1,14 +1,15 @@
 const CONSTANTS = require('../resources/constants.js')
 
 const MEDALS = ['🥇', '🥈', '🥉'];
-const PACE_MODES = ['Off',  'HoF', 'Year', 'Month', 'Week', 'Day'];
+const PACE_MODES = ['Off', 'HoF', 'Year', 'Month', 'Week', 'Day'];
 // Indexed by pointsMode: 0=Off, 1=HoF (special), 2=Year, 3=Month, 4=Week, 5=Day
-const PACE_KEYS  = [null, null, 'yearly', 'monthly', 'weekly', 'daily'];
+const PACE_KEYS = [null, null, 'yearly', 'monthly', 'weekly', 'daily'];
 
 function getCookie(name) {
     const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
     return match ? decodeURIComponent(match[1]) : null;
 }
+
 function setCookie(name, value) {
     const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString();
     document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=/; SameSite=Lax';
@@ -21,7 +22,12 @@ class Scoreboard {
         this.myCitysrc = CONSTANTS.LOBBY;
         this.myRoomName = CONSTANTS.LOBBY;
         this.currentRound = -1;
-        this.records = { yearly: 0, monthly: 0, weekly: 0, daily: 0 };
+        this.records = {
+            yearly: 0,
+            monthly: 0,
+            weekly: 0,
+            daily: 0
+        };
         const stored = parseInt(getCookie('pointsMode'));
         this.pointsMode = isNaN(stored) ? 0 : Math.min(stored, PACE_MODES.length - 1);
     }
@@ -48,24 +54,52 @@ class Scoreboard {
             target = this.records[key];
             goalName = '\uD83E\uDD47 ' + PACE_MODES[this.pointsMode];
         }
-        if (!target || this.myMap === CONSTANTS.LOBBY) return { goalName, noData: true };
-        if (score >= target) return { goalName, achieved: true };
+        if (!target || this.myMap === CONSTANTS.LOBBY) return {
+            goalName,
+            noData: true
+        };
+        if (score >= target) return {
+            goalName,
+            achieved: true
+        };
         const remaining = Math.max(1, CONSTANTS.GAME_ROUNDS - this.currentRound - 1);
         const maxPerRound = Math.round(CONSTANTS.PERFECT_SCORE / CONSTANTS.GAME_ROUNDS);
         const maxPossible = score + remaining * maxPerRound;
-        if (maxPossible < target) return { goalName, impossible: true, maxPossible };
+        if (maxPossible < target) return {
+            goalName,
+            impossible: true,
+            maxPossible
+        };
         const needed = Math.ceil((target - score) / remaining);
-        return { goalName, needed };
+        return {
+            goalName,
+            needed
+        };
     }
 
     _paceDisplay(pace) {
         const dot = 'style="text-decoration:underline dotted;cursor:pointer"';
-        if (!pace) return { html: 'Goal: <span ' + dot + '>Off \u2014 click to set</span>', color: '#bbb' };
+        if (!pace) return {
+            html: 'Goal: <span ' + dot + '>Off \u2014 click to set</span>',
+            color: '#bbb'
+        };
         const nameSpan = '<span ' + dot + '>' + pace.goalName + '</span>';
-        if (pace.noData)     return { html: 'Goal: ' + nameSpan + '.  --- pts/rnd', color: '#bbb' };
-        if (pace.achieved)   return { html: 'Goal: ' + nameSpan + '.  \u2713 Achieved!', color: '#2a2' };
-        if (pace.impossible) return { html: 'Goal: ' + nameSpan + '.  Impossible. (<b>' + pace.maxPossible + '</b> Max)', color: '#c00' };
-        return { html: 'Goal: ' + nameSpan + '.  Required: <b>' + pace.needed + '</b> pts/rnd', color: '#555' };
+        if (pace.noData) return {
+            html: 'Goal: ' + nameSpan + '.  --- pts/rnd',
+            color: '#bbb'
+        };
+        if (pace.achieved) return {
+            html: 'Goal: ' + nameSpan + '.  \u2713 Achieved!',
+            color: '#2a2'
+        };
+        if (pace.impossible) return {
+            html: 'Goal: ' + nameSpan + '.  Impossible. (<b>' + pace.maxPossible + '</b> Max)',
+            color: '#c00'
+        };
+        return {
+            html: 'Goal: ' + nameSpan + '.  Required: <b>' + pace.needed + '</b> pts/rnd',
+            color: '#555'
+        };
     }
 
     postScore(rank, name, color, score, wins) {
@@ -97,9 +131,16 @@ class Scoreboard {
             alignItems: 'center',
         });
 
-        const left = $('<span>').css({ color: color, fontWeight: isYou ? 'bold' : 'normal' })
+        const left = $('<span>').css({
+                color: color,
+                fontWeight: isYou ? 'bold' : 'normal'
+            })
             .html(youArrow + '<b>' + displayName + '</b>' + botTooltip);
-        const right = $('<span>').css({ color: '#333', whiteSpace: 'nowrap', marginLeft: '6px' })
+        const right = $('<span>').css({
+                color: '#333',
+                whiteSpace: 'nowrap',
+                marginLeft: '6px'
+            })
             .text(score + '  (' + wins + ' \uD83C\uDFC6)');
 
         mainLine.append(left).append(right);
@@ -114,9 +155,13 @@ class Scoreboard {
             });
 
             const self = this;
+
             function renderPace() {
                 const pace = self._paceInfo(score);
-                const { html, color } = self._paceDisplay(pace);
+                const {
+                    html,
+                    color
+                } = self._paceDisplay(pace);
                 paceEl.css('color', color).html(html);
                 paceEl.find('span').on('click', function(e) {
                     e.stopPropagation();
@@ -135,21 +180,40 @@ class Scoreboard {
     clearScores() {
         $('#scoreboard').empty();
         $('#leaderboard').empty();
-        this.records = { yearly: 0, monthly: 0, weekly: 0, daily: 0 };
+        this.records = {
+            yearly: 0,
+            monthly: 0,
+            weekly: 0,
+            daily: 0
+        };
         this.myRenderPace = null;
     }
 
     postGroup(category, dict) {
         // Capture #1 record for pace tracking
-        if (category.startsWith('Yearly'))  this.records.yearly  = dict['record1'] || 0;
+        if (category.startsWith('Yearly')) this.records.yearly = dict['record1'] || 0;
         if (category.startsWith('Monthly')) this.records.monthly = dict['record1'] || 0;
-        if (category.startsWith('Weekly'))  this.records.weekly  = dict['record1'] || 0;
-        if (category.startsWith('Daily'))   this.records.daily   = dict['record1'] || 0;
+        if (category.startsWith('Weekly')) this.records.weekly = dict['record1'] || 0;
+        if (category.startsWith('Daily')) this.records.daily = dict['record1'] || 0;
 
-        const slots = [
-            { record: dict['record1'], name: dict['recordName1'], color: dict['recordColor1'], broken: dict['recordBroken1'] },
-            { record: dict['record2'], name: dict['recordName2'], color: dict['recordColor2'], broken: dict['recordBroken2'] },
-            { record: dict['record3'], name: dict['recordName3'], color: dict['recordColor3'], broken: dict['recordBroken3'] },
+        const slots = [{
+                record: dict['record1'],
+                name: dict['recordName1'],
+                color: dict['recordColor1'],
+                broken: dict['recordBroken1']
+            },
+            {
+                record: dict['record2'],
+                name: dict['recordName2'],
+                color: dict['recordColor2'],
+                broken: dict['recordBroken2']
+            },
+            {
+                record: dict['record3'],
+                name: dict['recordName3'],
+                color: dict['recordColor3'],
+                broken: dict['recordBroken3']
+            },
         ];
 
         const header = $('<div>').css({
@@ -182,7 +246,11 @@ class Scoreboard {
                 '<span style="color:' + slot.color + ';font-weight:bold">' + slot.name + '</span>' +
                 '<span style="font-size:11px">' + badge + '</span>'
             );
-            const right = $('<span>').css({ fontWeight: 'bold', color: '#222', whiteSpace: 'nowrap' })
+            const right = $('<span>').css({
+                    fontWeight: 'bold',
+                    color: '#222',
+                    whiteSpace: 'nowrap'
+                })
                 .text(slot.record);
 
             card.append(left).append(right);
@@ -216,7 +284,10 @@ class Scoreboard {
         $('#leaderboard').append(header);
 
         board.forEach(function(x) {
-            const entry = $('<div>').css({ padding: '1px 4px', fontSize: '13px' }).html(x);
+            const entry = $('<div>').css({
+                padding: '1px 4px',
+                fontSize: '13px'
+            }).html(x);
             $('#leaderboard').append(entry);
         });
 

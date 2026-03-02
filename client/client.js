@@ -15,7 +15,7 @@ const Chat = require('./chat.js');
 const MapPanel = require('./map.js');
 const History = require('./history.js');
 const CONSTANTS = require('../resources/constants.js');
-const MAPS          = require('../resources/maps.json')
+const MAPS = require('../resources/maps.json')
 const MAP_COUNTRIES = require('../resources/map-countries.json')
 
 var myMap = CONSTANTS.LOBBY;
@@ -160,18 +160,38 @@ $(document).ready(function() {
     // Custom autocomplete for the map search box
     // Matches both map names and the country names contained in each map.
     // ---------------------------------------------------------------------------
-    const citysrcInput       = document.getElementById('requestedCitysrc_choice');
+    const citysrcInput = document.getElementById('requestedCitysrc_choice');
     const citysrcSuggestions = document.getElementById('citysrc-suggestions');
 
     if (citysrcInput && citysrcSuggestions) {
         // Preserve tier info for show-all grouping
-        const allMaps = [
-            { name: 'Random', tier: 'special', flair: '' },
-            ...continent_options.map(o => ({ name: o.value, tier: 'continent', flair: (MAPS[o.value] && MAPS[o.value].flair) || '' })),
-            ...region_options.map(o => ({ name: o.value, tier: 'region', flair: (MAPS[o.value] && MAPS[o.value].flair) || '' })),
-            ...country_options.map(o => ({ name: o.value, tier: 'country', flair: (MAPS[o.value] && MAPS[o.value].flair) || '' })),
+        const allMaps = [{
+                name: 'Random',
+                tier: 'special',
+                flair: ''
+            },
+            ...continent_options.map(o => ({
+                name: o.value,
+                tier: 'continent',
+                flair: (MAPS[o.value] && MAPS[o.value].flair) || ''
+            })),
+            ...region_options.map(o => ({
+                name: o.value,
+                tier: 'region',
+                flair: (MAPS[o.value] && MAPS[o.value].flair) || ''
+            })),
+            ...country_options.map(o => ({
+                name: o.value,
+                tier: 'country',
+                flair: (MAPS[o.value] && MAPS[o.value].flair) || ''
+            })),
         ];
-        const TIER_LABELS = { special: 'Special', continent: 'Continents', region: 'Regions', country: 'Countries' };
+        const TIER_LABELS = {
+            special: 'Special',
+            continent: 'Continents',
+            region: 'Regions',
+            country: 'Countries'
+        };
 
         let activeIndex = -1;
 
@@ -204,7 +224,10 @@ $(document).ready(function() {
             activeIndex = -1;
 
             const q = query.trim().toLowerCase();
-            if (!forceAll && !q) { citysrcSuggestions.style.display = 'none'; return; }
+            if (!forceAll && !q) {
+                citysrcSuggestions.style.display = 'none';
+                return;
+            }
 
             function renderGroup(items) {
                 let lastTier = null;
@@ -236,7 +259,8 @@ $(document).ready(function() {
             });
 
             if (!directMatches.length && !containsMatches.length) {
-                citysrcSuggestions.style.display = 'none'; return;
+                citysrcSuggestions.style.display = 'none';
+                return;
             }
 
             renderGroup(directMatches);
@@ -283,7 +307,9 @@ $(document).ready(function() {
                 return;
             }
             items.forEach((el, i) => el.classList.toggle('active', i === activeIndex));
-            if (activeIndex >= 0) items[activeIndex].scrollIntoView({ block: 'nearest' });
+            if (activeIndex >= 0) items[activeIndex].scrollIntoView({
+                block: 'nearest'
+            });
         });
 
         const showAllBtn = document.getElementById('citysrc-show-all');

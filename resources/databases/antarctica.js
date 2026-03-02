@@ -412,15 +412,15 @@ module.exports = {
             "wiki": ""
         },
         {
-          "city": "Troll Research Station",
-          "city_ascii": "",
-          "lat": -72.011662,
-          "lng": 2.535138,
-          "iso2": "NO",
-          "country": "Antarctica",
-          "population": 0,
-          "capital": "",
-          "wiki": "https://en.wikipedia.org/wiki/Troll_(research_station)"
+            "city": "Troll Research Station",
+            "city_ascii": "",
+            "lat": -72.011662,
+            "lng": 2.535138,
+            "iso2": "NO",
+            "country": "Antarctica",
+            "population": 0,
+            "capital": "",
+            "wiki": "https://en.wikipedia.org/wiki/Troll_(research_station)"
         },
         // {
         //   "city": "",
