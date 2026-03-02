@@ -188,12 +188,10 @@ const score = (map, geoDist, mercDist, timeBonus) => {
     if (min_lon == -180 && max_lon == 180) {
         // No scaling for full map
     } else {
-        let fudge_factor = 1
         // Tiny maps need slightly different math
         // Originally, I had country maps at 2.5, vatican at 30, and liechtenstein at 11
         // I tried to fit this to a smooth function to hit these points instead of hardcoding the maps
-        if (!isContinent(map))
-            fudge_factor = 37.3665 * Math.pow(diag, -0.3171733);
+        let fudge_factor = 37.3665 * Math.pow(diag, -0.3171733);
         scalingFactor = fullDiag / (fudge_factor * diag);
     }
     // console.log("diag = " + diag + " sf = " + scalingFactor + " geo dist " + geoDist + " merc dist " + mercDist)

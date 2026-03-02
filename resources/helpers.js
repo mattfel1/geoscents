@@ -139,6 +139,7 @@ th {
 <div id="buttons"></div>
 <table id="table" class="display" width="75%" align="left"></table>
 <br><br>
+<p style="color:#888; font-size:12px;">* Record set before March 2026. Continent maps (Africa, Asia, Europe, N. America, Oceania, S. America) previously used a harsher scoring formula — these scores are harder to achieve than they appear.</p>
 
 <script  type="text/javascript" src="` + name + `.js"></script>
 
@@ -167,7 +168,15 @@ $(document).ready(function() {
                         },
                         {
                             title: "Map",
-                            "width": "5%"
+                            "width": "5%",
+                            render: function(data, type, row) {
+                                var LEGACY_CUTOFF = '2026/03/02';
+                                var CONTINENT_MAPS = ['Africa', 'Africa Capitals', 'Asia', 'Asia Capitals', 'Europe', 'Europe Capitals', 'N. America', 'N. America Capitals', 'Oceania', 'Oceania Capitals', 'S. America', 'S. America Capitals'];
+                                var dateStr = (row[0] || '').split(' @ ')[0];
+                                if (CONTINENT_MAPS.includes(data) && dateStr < LEGACY_CUTOFF)
+                                    return data + ' <span title="Set under pre-March 2026 scoring (continent maps were scored more harshly)">*</span>';
+                                return data;
+                            }
                         },
                         {
                             title: "Score",
