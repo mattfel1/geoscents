@@ -1,5 +1,7 @@
 const CONSTANTS = require('../resources/constants.js')
 
+const MEDALS = ['🥇', '🥈', '🥉', '🥉', '🥉'];
+
 class Scoreboard {
     constructor(socket) {
         this.socket = socket
@@ -9,61 +11,136 @@ class Scoreboard {
     }
 
     postScore(rank, name, color, score, wins) {
+        const isYou = name.startsWith('*');
+        const displayName = isYou ? name.slice(1) : name;
+
         let botBadge = '';
-        if (name.startsWith('Average ')) {
-            const msg = 'Hello! I am just an ' + name + '! I click at the average location at the average time across all players who have played this game! You can turn me off by clicking the "Kill Bot" button on the top right.';
-            botBadge = '<span title="' + msg + '" style="cursor:help">💬</span>';
+        if (displayName.startsWith('Average ')) {
+            const msg = 'Hello! I am just an ' + displayName + '! I click at the average location at the average time across all players who have played this game! You can turn me off by clicking the "Kill Bot" button on the top right.';
+            botBadge = ' <span title="' + msg + '" style="cursor:help">💬</span>';
         }
-        // Pad based on visible characters only (name + badge glyph + ': ')
-        const visibleLen = name.length + (botBadge ? 2 : 0) + 2; // +2 for emoji+space, +2 for ': '
-        const padding = '&nbsp;'.repeat(Math.max(0, 26 - visibleLen));
-        const nameHtml = '<b>' + name + '</b>' + (botBadge ? ' ' + botBadge : '') + ': ' + padding;
-        const string = $("<font color=" + color + " style=\"font-size:15px;font-family:monospace\" \>").html(nameHtml + score.toString().padEnd(4).replace(/\s/g, "&nbsp;") + '  (' + wins + ' <font size=1>🏆</font>)<br>');
-        $('#scoreboard').append(string)
+
+        const youStyle = isYou
+            ? 'background:rgba(255,255,255,0.55);border-radius:3px;padding:0 2px;'
+            : '';
+        const youArrow = isYou ? '<span style="opacity:0.6">▶ </span>' : '';
+
+        const row = $('<div>').css({
+            fontFamily: 'monospace',
+            fontSize: '14px',
+            padding: '2px 4px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            background: isYou ? 'rgba(255,255,255,0.35)' : 'transparent',
+            borderRadius: '3px',
+            margin: '1px 0',
+        });
+
+        const left = $('<span>').css({ color: color, fontWeight: isYou ? 'bold' : 'normal' })
+            .html(youArrow + '<b>' + displayName + '</b>' + botBadge);
+
+        const right = $('<span>').css({ color: '#333', whiteSpace: 'nowrap', marginLeft: '6px' })
+            .text(score + '  (' + wins + ' 🏆)');
+
+        row.append(left).append(right);
+        $('#scoreboard').append(row);
     }
-    // Message reactions
+
     clearScores() {
         $('#scoreboard').empty();
         $('#leaderboard').empty();
     }
 
     postGroup(category, dict) {
-        var pop1 = "";
-        if (dict['recordBroken1']) pop1 = '🎉';
-        var pop2 = "";
-        if (dict['recordBroken2']) pop2 = '🎉';
-        var pop3 = "";
-        if (dict['recordBroken3']) pop3 = '🎉';
-        var pop4 = "";
-        if (dict['recordBroken4']) pop4 = '🏅';
-        var pop5 = "";
-        if (dict['recordBroken5']) pop5 = '🏅';
+        const slots = [
+            { record: dict['record1'], name: dict['recordName1'], color: dict['recordColor1'], broken: dict['recordBroken1'] },
+            { record: dict['record2'], name: dict['recordName2'], color: dict['recordColor2'], broken: dict['recordBroken2'] },
+            { record: dict['record3'], name: dict['recordName3'], color: dict['recordColor3'], broken: dict['recordBroken3'] },
+            { record: dict['record4'], name: dict['recordName4'], color: dict['recordColor4'], broken: dict['recordBroken4'] },
+            { record: dict['record5'], name: dict['recordName5'], color: dict['recordColor5'], broken: dict['recordBroken5'] },
+        ];
 
-        const string1 = $("<font color=" + dict['recordColor1'] + " style=\"font-size:16px;\" \>").html(pop1 + "🥇 1st: " + dict['record1'] + " (<b>" + dict['recordName1'] + "</b>)" + pop1 + "<br>");
-        const string2 = $("<font color=" + dict['recordColor2'] + " style=\"font-size:16px;\" \>").html(pop2 + "🥈 2nd: " + dict['record2'] + " (<b>" + dict['recordName2'] + "</b>)" + pop2 + "<br>");
-        const string3 = $("<font color=" + dict['recordColor3'] + " style=\"font-size:16px;\" \>").html(pop3 + "🥉 3rd: " + dict['record3'] + " (<b>" + dict['recordName3'] + "</b>)" + pop3 + "<br>");
-        const string4 = $("<font color=" + dict['recordColor4'] + " style=\"font-size:16px;\" \>").html(pop4 + "🥉 4th: " + dict['record4'] + " (<b>" + dict['recordName4'] + "</b>)" + pop4 + "<br>");
-        const string5 = $("<font color=" + dict['recordColor5'] + " style=\"font-size:16px;\" \>").html(pop5 + "🥉 5th: " + dict['record5'] + " (<b>" + dict['recordName5'] + "</b>)" + pop5 + "<br>");
-        $('#leaderboard').append("<b>----- " + category + " -----</b><br>");
-        $('#leaderboard').append(string1);
-        $('#leaderboard').append(string2);
-        $('#leaderboard').append(string3);
-        $('#leaderboard').append(string4);
-        $('#leaderboard').append(string5);
-        // $('#leaderboard').append("<br>")
+        // Category header
+        const header = $('<div>').css({
+            fontSize: '10px',
+            fontWeight: 'bold',
+            color: '#666',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+            padding: '6px 4px 2px 4px',
+        }).text(category.replace(/:/g, ''));
+        $('#leaderboard').append(header);
+
+        slots.forEach(function(slot, i) {
+            if (!slot.name) return;
+            const badge = slot.broken ? ' 🎉' : '';
+            const card = $('<div>').css({
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                background: 'white',
+                borderLeft: '4px solid ' + slot.color,
+                borderRadius: '0 3px 3px 0',
+                padding: '3px 6px 3px 5px',
+                margin: '2px 4px',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.12)',
+                fontSize: '13px',
+            });
+
+            const left = $('<span>').html(
+                '<span style="margin-right:4px">' + MEDALS[i] + '</span>' +
+                '<span style="color:' + slot.color + ';font-weight:bold">' + slot.name + '</span>' +
+                '<span style="font-size:11px">' + badge + '</span>'
+            );
+
+            const right = $('<span>').css({ fontWeight: 'bold', color: '#222', whiteSpace: 'nowrap' })
+                .text(slot.record);
+
+            card.append(left).append(right);
+            $('#leaderboard').append(card);
+        });
     }
-    postSpace() {
-        // $('#scoreboard').append("<br>-------------------------------------------<br><b>Scoreboard:</b><br>")
-    }
+
+    postSpace() {}
+
     postScoreTitle(citysrc) {
-        $('#scoreboard').append("<b>----- Player Scores in " + citysrc + " -----</b><br>");
+        const title = $('<div>').css({
+            fontSize: '11px',
+            fontWeight: 'bold',
+            color: '#555',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+            padding: '6px 4px 2px 4px',
+        }).text('Players in ' + citysrc);
+        $('#scoreboard').append(title);
     }
+
     postLobby(board) {
-        $('#leaderboard').append("<b>" + CONSTANTS.FAMESCORE + "+ Hall of Fame</b><br>");
+        const header = $('<div>').css({
+            fontSize: '11px',
+            fontWeight: 'bold',
+            color: '#555',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+            padding: '4px 4px 2px 4px',
+        }).text(CONSTANTS.FAMESCORE + '+ Hall of Fame');
+        $('#leaderboard').append(header);
+
         board.forEach(function(x) {
-            $('#leaderboard').append(x + "<br>");
-        })
-        $('#scoreboard').append("<b>----- Players in Lobby -----</b><br>");
+            const entry = $('<div>').css({ padding: '1px 4px', fontSize: '13px' }).html(x);
+            $('#leaderboard').append(entry);
+        });
+
+        const lobbyTitle = $('<div>').css({
+            fontSize: '11px',
+            fontWeight: 'bold',
+            color: '#555',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+            padding: '6px 4px 2px 4px',
+        }).text('Players in Lobby');
+        $('#scoreboard').append(lobbyTitle);
     }
 }
 

@@ -170,6 +170,7 @@ $(document).ready(function() {
                             title: "Map",
                             "width": "5%",
                             render: function(data, type, row) {
+                                if (type !== 'display') return data;
                                 var LEGACY_CUTOFF = '2026/03/02';
                                 var CONTINENT_MAPS = ['Africa', 'Africa Capitals', 'Asia', 'Asia Capitals', 'Europe', 'Europe Capitals', 'N. America', 'N. America Capitals', 'Oceania', 'Oceania Capitals', 'S. America', 'S. America Capitals'];
                                 var dateStr = (row[0] || '').split(' @ ')[0];
