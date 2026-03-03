@@ -721,50 +721,48 @@ const loadHallOfFame = () => {
     return new Map(entries)
 }
 
-// Convert hall of fame json to board string
+// Convert hall of fame json to structured board entries for client rendering
 const hallJsonToBoard = (famers) => {
-    var entries = new Array()
-    var posted_names = new Array()
-    var record_time = new Array()
+    var entries = []
+    var posted_names = []
+
     for (const [key, value] of famers.entries()) {
         if (!posted_names.includes(value['name'])) {
             let last_record = parseInt(value['last_record'])
+            let perfectMaps = []
+            let flairMap = {}  // map -> emoji, deduplicated
 
-            // Find any other private hashes with this name and get largest record_time and superset of maps
-            let has_crown = value['perfect'] !== undefined && Object.entries(value['perfect']).length > 0;
-            let flairs = []
             for (const [key2, value2] of famers.entries()) {
                 if (value2['name'] == value['name']) {
                     for (const [x, map] of Object.entries(value2['maps'])) {
-                        if (!flairs.includes(flairToEmoji(map)))
-                            flairs.push(flairToEmoji(map))
+                        if (!flairMap[map])
+                            flairMap[map] = flairToEmoji(map)
                         if (parseInt(value2['last_record']) > last_record)
                             last_record = parseInt(value2['last_record'])
                     }
-                    has_crown = has_crown || value2['perfect'] !== undefined && Object.entries(value2['perfect']).length > 0;
-
+                    if (value2['perfect']) {
+                        for (const [x, map] of Object.entries(value2['perfect'])) {
+                            if (!perfectMaps.includes(map))
+                                perfectMaps.push(map)
+                        }
+                    }
                 }
             }
 
-            flairs.sort();
-            let flairs_str = flairs.join('');
-            if (has_crown)
-                flairs_str = perfectEmoji() + flairs_str;
-            let link_name = value['name'] + " " + flairs_str;
+            const flairs = Object.entries(flairMap)
+                .map(([map, emoji]) => ({ map, emoji }))
+                .sort((a, b) => a.emoji.localeCompare(b.emoji))
 
-            let link = "<a target=\"_blank\" href='resources/famers/" + value['name'].replace(/ /g, '_') + ".html'>" + link_name + "</a>"
+            const href = "resources/famers/" + value['name'].replace(/ /g, '_') + ".html"
+
             posted_names.push(value['name'])
-            record_time.push(last_record)
-            entries.push(link)
+            entries.push({ name: value['name'], href, perfectMaps, flairs, last_record })
         }
     }
 
-    entries = entries.sort(function(a, b) {
-        let time_delta = record_time[entries.indexOf(b)] - record_time[entries.indexOf(a)]
-        return time_delta;
-    });
+    entries.sort((a, b) => b.last_record - a.last_record)
 
-    return entries;
+    return entries
 };
 
 const formatPath = (hist, gameId, color, socketid, room, score) => {

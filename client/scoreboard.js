@@ -295,12 +295,48 @@ class Scoreboard {
         }).text(CONSTANTS.FAMESCORE + '+ Hall of Fame');
         $('#leaderboard').append(header);
 
-        board.forEach(function(x) {
-            const entry = $('<div>').css({
-                padding: '1px 4px',
-                fontSize: '13px'
-            }).html(x);
-            $('#leaderboard').append(entry);
+        board.forEach(function(entry) {
+            const hasCrown = entry.perfectMaps && entry.perfectMaps.length > 0;
+
+            const card = $('<div>').css({
+                display: 'block',
+                padding: '3px 6px',
+                margin: '2px 4px',
+                background: hasCrown ? 'linear-gradient(135deg, #fffbe6, #fff3b0)' : '#f5f5f5',
+                border: '1px solid ' + (hasCrown ? '#d4a800' : '#ccc'),
+                borderRadius: '3px',
+            });
+
+            const nameLine = $('<div>').css({
+                fontWeight: 'bold',
+                fontSize: '13px',
+            });
+            nameLine.append(
+                $('<a>').attr({ href: entry.href, target: '_blank' }).css({ color: '#222', textDecoration: 'none' }).text(entry.name)
+            );
+            if (hasCrown) {
+                const tip = 'Perfect ' + CONSTANTS.PERFECT_SCORE + '! ' + entry.perfectMaps.join(', ');
+                nameLine.append(
+                    $('<span>').attr('title', tip).css({
+                        fontSize: '15px',
+                        filter: 'drop-shadow(0 0 5px gold) drop-shadow(0 0 2px #b8860b)',
+                        cursor: 'help',
+                        marginLeft: '4px',
+                    }).text('👑')
+                );
+            }
+            card.append(nameLine);
+
+            const flairLine = $('<div>').css({ fontSize: '14px', lineHeight: '1.5', marginTop: '1px' });
+
+            entry.flairs.forEach(function(f) {
+                flairLine.append(
+                    $('<span>').attr('title', f.map).css({ cursor: 'help', marginRight: '1px' }).text(f.emoji)
+                );
+            });
+
+            card.append(flairLine);
+            $('#leaderboard').append(card);
         });
 
         const lobbyTitle = $('<div>').css({
