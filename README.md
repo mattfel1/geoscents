@@ -117,7 +117,7 @@ Add an entry in alphabetical order. The key is the display name (capitalisation 
 Fields:
 - `coords` — game viewport bounds (can differ slightly from the image/frame coords if needed)
 - `flair` — flag emoji shown next to the map name
-- `tier` — `"continent"`, `"region"`, or `"country"`
+- `tier` — `"continent"`, `"region"`, `"country"`, or `"trivia"`
 - `leader` / `greeting` — optional; display name and local-language greeting for the welcome banner
 
 Continents omit `leader` and `greeting`. Countries and regions usually include them.
@@ -141,3 +141,10 @@ The CI test (`npm test`) will fail if you skip this step after adding a map.
 npm -g install js-beautify
 bash scripts/format.sh # calls beautify on all files js-beautify <file> -r
 ```
+
+---
+
+# Credits
+
+- Flag images from [hjnilsson/country-flags](https://github.com/hjnilsson/country-flags) (`resources/flags/`)
+- City data from [SimpleMaps](https://simplemaps.com/data/world-cities)
