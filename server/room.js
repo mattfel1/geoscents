@@ -771,7 +771,7 @@ class Room {
         const times = Array.from(this.players.values()).filter(player => player.clicked).map(x => x.clickedAt);
         const ips = Array.from(this.players.values()).filter(player => player.clicked).map(x => respectOptOut(x))
         // helpers.recordGuesses(this.map, Geography.stringifyTarget(this.target).string, this.target['city'], this.target['admin_name'], this.target['country'], this.target['iso2'], ips, dists, times, lats, lons, this.target['lat'], this.target['lng'], helpers.makeLink(map, this.target), true);
-        helpers.recordGuesses(this.map, Geography.stringifyTarget(this.target, this.citysrc).string, this.target['city'], this.target['admin_name'], this.target['country'], this.target['iso2'], ips, dists, times, lats, lons, this.target['lat'], this.target['lng'], helpers.makeLink(map, this.target), false);
+        helpers.recordGuesses(this.map, Geography.stringifyTarget(this.target, this.citysrc).string, this.target['city'], this.target['admin_name'], this.target['country'], this.target['iso2'], ips, dists, times, lats, lons, this.target['lat'], this.target['lng'], CONSTANTS.makeLink(this.target), false);
     }
 
     flushGuesses() {
@@ -819,149 +819,62 @@ class Room {
         Room.broadcastAnswer(socket, answer['row'], answer['col']);
     }
 
-    drawPhoto(socket, curtarget) {
+    async drawPhoto(socket, curtarget) {
         const answer = Geography.geoToPixel(this.map, curtarget['lat'], curtarget['lng']);
+        const coords = { 'row': answer['row'], 'col': answer['col'] };
+
         if ('img_link' in curtarget) {
-            socket.emit('draw photo', {
-                'row': answer['row'],
-                'col': answer['col']
-            }, curtarget['img_link'])
-            return
+            socket.emit('draw photo', coords, curtarget['img_link']);
+            return;
         }
 
-
-        // Try once with country
-        let part2 = "%2C+" + curtarget['country'];
-        if (curtarget['country'] === "USA" || curtarget['country'] === "United States") part2 = "%2C+" + curtarget['admin_name'];
-        var url = "https://en.wikipedia.org/w/api.php?";
-        var title = (curtarget['city_ascii'] + part2).split(' ').join('_');
-        if ('wiki' in curtarget && curtarget['wiki'] != "") {
-            let link = curtarget['wiki']
-            let parts = link.split('/')
-            title = parts[parts.length - 1].split('#')[0]
+        // Build primary title (with country/state for disambiguation)
+        let part2 = '%2C+' + curtarget['country'];
+        if (curtarget['country'] === 'USA' || curtarget['country'] === 'United States')
+            part2 = '%2C+' + curtarget['admin_name'];
+        let primaryTitle = (curtarget['city_ascii'] + part2).split(' ').join('_');
+        if ('wiki' in curtarget && curtarget['wiki'] !== '') {
+            const parts = curtarget['wiki'].split('/');
+            primaryTitle = parts[parts.length - 1].split('#')[0];
         }
-        title = title.replace('’', '')
-        // TODO: THIS QUERY DOESN'T ALWAYS GET INFOBOX IMAGE.. SO ANNOYING
-        var params = {
-            action: "query",
-            prop: "pageimages",
-            // pageids: id,
-            titles: title,
-            format: "json",
-            pithumbsize: 600,
-            redirects: ""
-        };
-        Object.keys(params).forEach(function(key) {
-            url += "&" + key + "=" + params[key];
-        });
-        let target = curtarget
-        // console.log(url)
-        fetch(url)
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(response) {
-                var done = false
-                var pages = response.query.pages;
-                Object.keys(pages).forEach(function(key, _) {
-                    if (pages[key].hasOwnProperty('thumbnail')) {
-                        if (pages[key]['thumbnail'].hasOwnProperty('source')) {
-                            socket.emit('draw photo', {
-                                'row': answer['row'],
-                                'col': answer['col']
-                            }, pages[key]['thumbnail']['source'])
-                            done = true
-                        }
-                    }
-                })
+        primaryTitle = primaryTitle.replace('’', '');
 
-                if (done == true)
-                    return
+        // Fallback title: city name only (+ state for US), no country
+        const fallbackPart2 = (curtarget['country'] === 'USA' || curtarget['country'] === 'United States')
+            ? '%2C+' + curtarget['admin_name'] : '';
+        const fallbackTitle = (curtarget['city_ascii'] + fallbackPart2).split(' ').join('_');
 
-                // Try again without country
-                let part2 = "";
-                if (target['country'] === "USA" || target['country'] === "United States") part2 = "%2C+" + target['admin_name'];
-                let url = "https://en.wikipedia.org/w/api.php?";
-                let params = {
-                    action: "query",
-                    prop: "pageimages",
-                    // pageids: id,
-                    titles: (target['city_ascii'] + part2).split(' ').join('_'),
-                    format: "json",
-                    pithumbsize: 800,
-                    redirects: ""
-                };
-                Object.keys(params).forEach(function(key) {
-                    url += "&" + key + "=" + params[key];
-                });
-                // console.log(url)
-                fetch(url)
-                    .then(function(response) {
-                        return response.json();
-                    })
-                    .then(function(response) {
-                        var pages = response.query.pages;
-                        Object.keys(pages).forEach(function(key, _) {
-                            if (pages[key].hasOwnProperty('thumbnail')) {
-                                if (pages[key]['thumbnail'].hasOwnProperty('source')) {
-                                    socket.emit('draw photo', {
-                                        'row': answer['row'],
-                                        'col': answer['col']
-                                    }, pages[key]['thumbnail']['source'])
-                                }
-                            }
-                        })
-                    })
-                    .catch(function(error) {
-                        // console.log("failed to fetch 2" + url)
-                        // console.log(error);
-                    });
+        // Check cache first (null = confirmed no image, undefined = never tried)
+        if (primaryTitle in helpers.imgCache) {
+            if (helpers.imgCache[primaryTitle] !== null)
+                socket.emit('draw photo', coords, helpers.imgCache[primaryTitle]);
+            return;
+        }
 
-            })
-            .catch(function(error) {
-                console.log(error);
-
-                // Try again without country
-                let part2 = "";
-                if (target['country'] === "USA" || target['country'] === "United States") part2 = "%2C+" + target['admin_name'];
-                let url = "https://en.wikipedia.org/w/api.php?";
-                let params = {
-                    action: "query",
-                    prop: "pageimages",
-                    // pageids: id,
-                    titles: (target['city_ascii'] + part2).split(' ').join('_'),
-                    format: "json",
-                    pithumbsize: 800,
-                    redirects: ""
-                };
-                Object.keys(params).forEach(function(key) {
-                    url += "&" + key + "=" + params[key];
-                });
-                // console.log(url)
-                fetch(url)
-                    .then(function(response) {
-                        return response.json();
-                    })
-                    .then(function(response) {
-                        var pages = response.query.pages;
-                        Object.keys(pages).forEach(function(key, _) {
-                            if (pages[key].hasOwnProperty('thumbnail')) {
-                                if (pages[key]['thumbnail'].hasOwnProperty('source')) {
-                                    socket.emit('draw photo', {
-                                        'row': answer['row'],
-                                        'col': answer['col']
-                                    }, pages[key]['thumbnail']['source'])
-                                }
-                            }
-                        })
-                    })
-                    .catch(function(error) {
-                        // console.log("failed to fetch 2" + url)
-                        // console.log(error);
-                    });
+        const wikiThumb = async (title) => {
+            const url = 'https://en.wikipedia.org/w/api.php?' + new URLSearchParams({
+                action: 'query', prop: 'pageimages', titles: title,
+                format: 'json', pithumbsize: 600, redirects: ''
             });
+            const pages = (await fetch(url).then(r => r.json())).query.pages;
+            for (const page of Object.values(pages))
+                if (page.thumbnail?.source) return page.thumbnail.source;
+            return null;
+        };
 
+        let found = null;
+        try {
+            found = await wikiThumb(primaryTitle);
+            if (!found) found = await wikiThumb(fallbackTitle);
+        } catch (e) {
+            try { found = await wikiThumb(fallbackTitle); } catch (e2) {}
+        }
 
+        // Cache result (null means no image — don't retry next time)
+        helpers.imgCache[primaryTitle] = found;
+        helpers.saveImgCache();
+
+        if (found) socket.emit('draw photo', coords, found);
     }
 
     incrementInactive() {
@@ -1345,7 +1258,7 @@ class Room {
         let star = "";
         if (thisTarget['majorcapital']) star = "*";
         if (thisTarget['minorcapital']) star = "†";
-        const base = "<b>Round " + round + "</b>: <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + helpers.makeLink(room, this.target) + "\">" + star + thisTarget['string'] + "</a> (pop: " + thisTarget['pop'].toLocaleString() + ")<br>";
+        const base = "<b>Round " + round + "</b>: <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"" + CONSTANTS.makeLink(this.target) + "\">" + star + thisTarget['string'] + "</a> (pop: " + thisTarget['pop'].toLocaleString() + ")<br>";
 
         // console.log("made link " + base)
         this.clients.forEach((socket, id) => {

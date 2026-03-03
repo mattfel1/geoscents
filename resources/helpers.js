@@ -8,6 +8,20 @@ const feedbackfile = '/scratch/feedback.log';
 const MAPS = require('../resources/maps.json')
 var lastUpdates = {};
 
+// Persistent cache: Wikipedia image URL (or null = confirmed no image) keyed by article title.
+// Loaded once at startup, updated on each new lookup, survives server restarts.
+const IMG_CACHE_PATH = '/scratch/img_cache.json';
+let imgCache = {};
+try {
+    if (fs.existsSync(IMG_CACHE_PATH))
+        imgCache = JSON.parse(fs.readFileSync(IMG_CACHE_PATH, 'utf8'));
+} catch (e) {
+    imgCache = {};
+}
+const saveImgCache = () => {
+    fs.writeFileSync(IMG_CACHE_PATH, JSON.stringify(imgCache, null, 2));
+};
+
 // Create scratch directories if they don't exist (no-op if already present)
 for (const dir of ['/scratch/guesses', '/scratch/histories', '/scratch/famers', '/scratch/records']) {
     fs.mkdirSync(dir, {
@@ -342,14 +356,6 @@ const logFeedback = (payload) => {
     }
 };
 
-const makeLink = (room, thisTarget) => {
-    let part2 = "%2C+" + thisTarget['country'];
-    if (thisTarget['country'] === "USA") part2 = "%2C+" + thisTarget['admin_name'];
-    let wiki = "https://en.wikipedia.org/wiki/Special:Search?search=" + thisTarget['city'] + part2 + "&go=Go&ns0=1";
-    //en.wikipedia.org/w/api.php?action=query&titles=Denver%2C+Colorado&prop=pageimages&format=json&pithumbsize=100
-    if (thisTarget['wiki'] != null && thisTarget['wiki'] != "") wiki = thisTarget['wiki'];
-    return wiki;
-}
 
 const filterName = (name) => {
     var badname = false;
@@ -966,7 +972,10 @@ module.exports = {
     hallJsonToBoard,
     loadHallOfFame,
     insertHallOfFame,
-    makeLink,
+
+    imgCache,
+    saveImgCache,
+
     joeData,
     flairToEmoji,
     perfectEmoji,

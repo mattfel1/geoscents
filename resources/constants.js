@@ -169,5 +169,18 @@ module.exports = {
         '\\bn+[\ \_.-]*[i1y!]+[\ \_.-]*gg+[\ \_.-]*[3ei]+[\ \_.-]*r+s*\\b',
         '\\bn+[\ \_.-]*[i1y!]+[\ \_.-]*g+[\ \_.-]*[a4]+[\ \_.-]*s*\\b',
         '\\br+[\ \_.-]*a+[\ \_.-]*p+[\ \_.-]*e+r*s*\\b'
-    ]
+    ],
+
+    // Generate a Wikipedia search URL for a target city.
+    // Uses Special:Search with go=Go to auto-redirect to the best match.
+    // For US cities, appends the state (admin_name) instead of country to avoid ambiguity
+    // (e.g. "Denver, Colorado" not "Denver, USA").
+    // If the target has an explicit 'wiki' field set, that overrides the generated URL.
+    makeLink: (target) => {
+        let part2 = '%2C+' + target['country'];
+        if (target['country'] === 'USA') part2 = '%2C+' + target['admin_name'];
+        let wiki = 'https://en.wikipedia.org/wiki/Special:Search?search=' + target['city'] + part2 + '&go=Go&ns0=1';
+        if (target['wiki'] != null && target['wiki'] !== '') wiki = target['wiki'];
+        return wiki;
+    },
 }
