@@ -126,6 +126,16 @@ trivia_options.sort((a, b) => {
 });
 
 
+var trivia_sep = document.createElement("option");
+trivia_sep.text = "--- Trivia ---"
+trivia_sep.setAttribute('readonly', true);
+trivia_sep.value = " "
+dropdown.appendChild(trivia_sep);
+
+trivia_options.forEach((x, i) => {
+    dropdown.appendChild(x);
+})
+
 var continent_sep = document.createElement("option");
 continent_sep.text = "--- Continents ---"
 continent_sep.setAttribute('readonly', true);
@@ -156,16 +166,6 @@ country_options.forEach((x, i) => {
     dropdown.appendChild(x);
 })
 
-var trivia_sep = document.createElement("option");
-trivia_sep.text = "--- Trivia ---"
-trivia_sep.setAttribute('readonly', true);
-trivia_sep.value = " "
-dropdown.appendChild(trivia_sep);
-
-trivia_options.forEach((x, i) => {
-    dropdown.appendChild(x);
-})
-
 
 
 const playerClick = {
@@ -192,6 +192,12 @@ $(document).ready(function() {
                 tier: 'special',
                 flair: ''
             },
+            ...trivia_options.map(o => ({
+                name: o.value,
+                tier: 'trivia',
+                flair: (MAPS[o.value] && MAPS[o.value].flair) || '',
+                subtitle: (MAPS[o.value] && MAPS[o.value].subtitle) || ''
+            })),
             ...continent_options.map(o => ({
                 name: o.value,
                 tier: 'continent',
@@ -206,12 +212,6 @@ $(document).ready(function() {
                 name: o.value,
                 tier: 'country',
                 flair: (MAPS[o.value] && MAPS[o.value].flair) || ''
-            })),
-            ...trivia_options.map(o => ({
-                name: o.value,
-                tier: 'trivia',
-                flair: (MAPS[o.value] && MAPS[o.value].flair) || '',
-                subtitle: (MAPS[o.value] && MAPS[o.value].subtitle) || ''
             })),
         ];
         const TIER_LABELS = {

@@ -321,9 +321,12 @@
         "Belize",
         "Canada",
         "Cayman Islands",
+        "Colombia",
+        "Costa Rica",
         "Cuba",
         "Dominican Republic",
         "El Salvador",
+        "Greenland",
         "Guatemala",
         "Haiti",
         "Honduras",
@@ -331,7 +334,9 @@
         "Mexico",
         "Nicaragua",
         "Puerto Rico",
-        "United States"
+        "Trinidad And Tobago",
+        "United States",
+        "Venezuela"
     ],
     "N. America Capitals": [
         "Bahamas, The",
@@ -341,13 +346,16 @@
         "Cuba",
         "Dominican Republic",
         "El Salvador",
+        "Greenland",
         "Guatemala",
         "Haiti",
         "Honduras",
         "Jamaica",
         "Mexico",
         "Nicaragua",
-        "United States"
+        "Trinidad And Tobago",
+        "United States",
+        "Venezuela"
     ],
     "Oceania": [
         "American Samoa",
@@ -476,7 +484,7 @@
         "Uruguay",
         "Venezuela"
     ],
-    "Trivia": [
+    "Misc Trivia": [
         "Ancient Egypt",
         "Ancient Greece / Rome",
         "Assyrian Empire",
@@ -516,6 +524,28 @@
         "United Kingdom",
         "United States",
         "Xia Dynasty, China"
+    ],
+    "Classical Antiquity": [
+        "Athens / Macedonia",
+        "Athens / Persia",
+        "Carthage",
+        "Carthage / Rome",
+        "Egypt",
+        "Greece",
+        "Greece / Persia",
+        "Greece / Rome",
+        "Macedonia",
+        "Macedonia / Egypt",
+        "Macedonia / Persia",
+        "Macedonia / Rome",
+        "Persia",
+        "Persia / Macedonia",
+        "Phoenicia",
+        "Phoenicia / Carthage",
+        "Phoenicia / Rome",
+        "Rome",
+        "Rome / Egypt",
+        "Sparta / Persia"
     ],
     "World Capitals": [
         "Afghanistan",
