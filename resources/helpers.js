@@ -736,7 +736,7 @@ const hallJsonToBoard = (famers) => {
         if (!posted_names.includes(value['name'])) {
             let last_record = parseInt(value['last_record'])
             let perfectMaps = []
-            let flairMap = {}  // map -> emoji, deduplicated
+            let flairMap = {} // map -> emoji, deduplicated
 
             for (const [key2, value2] of famers.entries()) {
                 if (value2['name'] == value['name']) {
@@ -756,13 +756,22 @@ const hallJsonToBoard = (famers) => {
             }
 
             const flairs = Object.entries(flairMap)
-                .map(([map, emoji]) => ({ map, emoji }))
+                .map(([map, emoji]) => ({
+                    map,
+                    emoji
+                }))
                 .sort((a, b) => a.emoji.localeCompare(b.emoji))
 
             const href = "resources/famers/" + value['name'].replace(/ /g, '_') + ".html"
 
             posted_names.push(value['name'])
-            entries.push({ name: value['name'], href, perfectMaps, flairs, last_record })
+            entries.push({
+                name: value['name'],
+                href,
+                perfectMaps,
+                flairs,
+                last_record
+            })
         }
     }
 

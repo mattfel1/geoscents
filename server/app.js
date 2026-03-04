@@ -238,11 +238,14 @@ const calculate_specials = () => {
     var day = Math.floor(diff / oneDay) + 2;
     let region_maps = []
     let capital_maps = []
+    let trivia_maps = []
     for (const x in MAPS) {
         if (Geography.isRegion(x))
             region_maps.push(x);
         else if (Geography.isCapital(x))
             capital_maps.push(x);
+        else if (MAPS[x]['tier'] === 'trivia')
+            trivia_maps.push(x);
     }
 
     const num_regions = region_maps.length;
@@ -274,12 +277,13 @@ const calculate_specials = () => {
 
     let special_region = region_maps[regions_idx];
     let special_capital = capital_maps[capitals_idx];
+    let special_trivia = trivia_maps.length > 0 ? trivia_maps[day % trivia_maps.length] : null;
 
     // Assume classics always come first
-    return [special_region, special_capital];
+    return [special_region, special_capital, special_trivia];
 }
 
-let [special_region, special_capital] = calculate_specials();
+let [special_region, special_capital, special_trivia] = calculate_specials();
 let special_capital_map = special_capital.replace(" Capitals", "");
 
 // Game state info
@@ -292,7 +296,7 @@ var rooms = {
     'Africa': new Room(CONSTANTS.AFRICA, CONSTANTS.AFRICA, CONSTANTS.AFRICA),
     'Asia': new Room(CONSTANTS.ASIA, CONSTANTS.ASIA, CONSTANTS.ASIA),
     'Oceania': new Room(CONSTANTS.OCEANIA, CONSTANTS.OCEANIA, CONSTANTS.OCEANIA),
-    [CONSTANTS.TRIVIA]: new Room(CONSTANTS.TRIVIA, CONSTANTS.TRIVIA, CONSTANTS.TRIVIA),
+    [CONSTANTS.TRIVIA]: new Room(special_trivia || CONSTANTS.TRIVIA, CONSTANTS.TRIVIA, special_trivia || CONSTANTS.TRIVIA),
     'Daily Region': new Room(special_region, CONSTANTS.SPECIAL_REGION, special_region),
     'Daily Capitals': new Room(special_capital_map, CONSTANTS.SPECIAL_CAPITAL, special_capital),
     'Lobby': new Room(CONSTANTS.LOBBY, CONSTANTS.LOBBY, CONSTANTS.LOBBY),
@@ -1135,7 +1139,7 @@ setInterval(() => {
     if (reset_now) {
         let old_special_region = special_region;
         let old_special_capital = special_capital;
-        [special_region, special_capital] = calculate_specials();
+        [special_region, special_capital, special_trivia] = calculate_specials();
         let no_reset = []
         // Flush all current rooms and select new specials
         Object.values(rooms).forEach(function(room) {
@@ -1152,6 +1156,14 @@ setInterval(() => {
                 room.killJoe();
                 room.map = special_capital.replace(" Capitals", "");
                 room.citysrc = special_capital;
+                room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
+                room.createJoe('');
+                room.loadRecords();
+            } else if (room.roomName == CONSTANTS.TRIVIA && special_trivia) {
+                room.flushRecords(week, month, year);
+                room.killJoe();
+                room.map = special_trivia;
+                room.citysrc = special_trivia;
                 room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
                 room.createJoe('');
                 room.loadRecords();

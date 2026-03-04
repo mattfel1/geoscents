@@ -821,7 +821,10 @@ class Room {
 
     async drawPhoto(socket, curtarget) {
         const answer = Geography.geoToPixel(this.map, curtarget['lat'], curtarget['lng']);
-        const coords = { 'row': answer['row'], 'col': answer['col'] };
+        const coords = {
+            'row': answer['row'],
+            'col': answer['col']
+        };
 
         if ('img_link' in curtarget && curtarget['img_link'] !== '') {
             socket.emit('draw photo', coords, curtarget['img_link']);
@@ -841,8 +844,8 @@ class Room {
         primaryTitle = primaryTitle.replace('\u2019', '');
 
         // Fallback title: city name only (+ state for US), no country
-        const fallbackPart2 = (curtarget['country'] === 'USA' || curtarget['country'] === 'United States')
-            ? '%2C+' + curtarget['admin_name'] : '';
+        const fallbackPart2 = (curtarget['country'] === 'USA' || curtarget['country'] === 'United States') ?
+            '%2C+' + curtarget['admin_name'] : '';
         const fallbackTitle = (cityName + fallbackPart2).split(' ').join('_');
 
         // Check cache first (null = confirmed no image, undefined = never tried)
@@ -854,8 +857,12 @@ class Room {
 
         const wikiThumb = async (title) => {
             const url = 'https://en.wikipedia.org/w/api.php?' + new URLSearchParams({
-                action: 'query', prop: 'pageimages', titles: title,
-                format: 'json', pithumbsize: 600, redirects: ''
+                action: 'query',
+                prop: 'pageimages',
+                titles: title,
+                format: 'json',
+                pithumbsize: 600,
+                redirects: ''
             });
             const pages = (await fetch(url).then(r => r.json())).query.pages;
             for (const page of Object.values(pages))
@@ -868,7 +875,9 @@ class Room {
             found = await wikiThumb(primaryTitle);
             if (!found) found = await wikiThumb(fallbackTitle);
         } catch (e) {
-            try { found = await wikiThumb(fallbackTitle); } catch (e2) {}
+            try {
+                found = await wikiThumb(fallbackTitle);
+            } catch (e2) {}
         }
 
         // Cache result (null means no image — don't retry next time)

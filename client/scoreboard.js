@@ -312,7 +312,13 @@ class Scoreboard {
                 fontSize: '13px',
             });
             nameLine.append(
-                $('<a>').attr({ href: entry.href, target: '_blank' }).css({ color: '#222', textDecoration: 'none' }).text(entry.name)
+                $('<a>').attr({
+                    href: entry.href,
+                    target: '_blank'
+                }).css({
+                    color: '#222',
+                    textDecoration: 'none'
+                }).text(entry.name)
             );
             if (hasCrown) {
                 const tip = 'Perfect ' + CONSTANTS.PERFECT_SCORE + '! ' + entry.perfectMaps.join(', ');
@@ -327,11 +333,18 @@ class Scoreboard {
             }
             card.append(nameLine);
 
-            const flairLine = $('<div>').css({ fontSize: '14px', lineHeight: '1.5', marginTop: '1px' });
+            const flairLine = $('<div>').css({
+                fontSize: '14px',
+                lineHeight: '1.5',
+                marginTop: '1px'
+            });
 
             entry.flairs.forEach(function(f) {
                 flairLine.append(
-                    $('<span>').attr('title', f.map).css({ cursor: 'help', marginRight: '1px' }).text(f.emoji)
+                    $('<span>').attr('title', f.map).css({
+                        cursor: 'help',
+                        marginRight: '1px'
+                    }).text(f.emoji)
                 );
             });
 

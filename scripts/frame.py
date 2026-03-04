@@ -106,7 +106,7 @@ outfile = geoscents_home + 'resources/databases/world.js'
 rng = [-180, 180, -65, 77]
 pop = 610000
 blacklist = []
-whitelist = ['Jersey', 'Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar', 'New Caledonia', 'Azores']
+whitelist = ['Jersey', 'Turks And Caicos Islands', 'Isle of Man', 'Falkland Islands (Islas Malvinas)', 'Bermuda', 'Cook Islands', 'French Polynesia', 'Macau', 'Gibraltar', 'New Caledonia', 'Azores', 'U.S. Virgin Islands']
 scrape_list(outfile, rng[2:], rng[:2], pop, blacklist, whitelist, True, False, errors)
 
 outfile = geoscents_home + 'resources/databases/worldcapitals.js'

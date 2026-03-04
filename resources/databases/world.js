@@ -12928,6 +12928,19 @@ module.exports = {
             "capital": "primary",
             "population": 33500,
             "id": 9999999994
+        },
+        {
+            "city": "Charlotte Amalie",
+            "city_ascii": "Charlotte Amalie",
+            "lat": 18.35,
+            "lng": -64.95,
+            "country": "United States",
+            "iso2": "VI",
+            "iso3": "",
+            "admin_name": "U.S. Virgin Islands",
+            "capital": "admin",
+            "population": "8194",
+            "id": 10000000008
         }
     ]
 }
