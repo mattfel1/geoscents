@@ -68,7 +68,13 @@
         "coords": [-10, 60, 20, 52.4],
         "flair": "🏛️",
         "tier": "trivia",
-        "subtitle": "800 BC – 400 AD · Mediterranean"
+        "subtitle": "8th century BC – 5th century AD · Mediterranean"
+    },
+    "Silk Road": {
+        "coords": [8, 125, 8.6, 61.1],
+        "flair": "🐪",
+        "tier": "trivia",
+        "subtitle": "2nd century BC – 15th century AD"
     },
     "World Capitals": {
         "coords": [-180, 180, -65.5, 77.2],

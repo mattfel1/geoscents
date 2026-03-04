@@ -47,7 +47,8 @@ const randomCity = (citysrc, blacklist, played_targets) => {
 };
 
 const blacklistEntireString = (citysrc) => {
-    return citysrc == CONSTANTS.TRIVIA || citysrc == "Vatican City" || citysrc == "Antarctica";
+    if (citysrc == "Vatican City" || citysrc == "Antarctica") return true;
+    return MAPS[citysrc] && MAPS[citysrc]['tier'] === 'trivia';
 }
 
 const isCountry = (citysrc) => {
