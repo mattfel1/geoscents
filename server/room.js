@@ -823,26 +823,27 @@ class Room {
         const answer = Geography.geoToPixel(this.map, curtarget['lat'], curtarget['lng']);
         const coords = { 'row': answer['row'], 'col': answer['col'] };
 
-        if ('img_link' in curtarget) {
+        if ('img_link' in curtarget && curtarget['img_link'] !== '') {
             socket.emit('draw photo', coords, curtarget['img_link']);
             return;
         }
 
         // Build primary title (with country/state for disambiguation)
-        let part2 = '%2C+' + curtarget['country'];
+        const cityName = curtarget['city_ascii'] || curtarget['city'];
+        let part2 = curtarget['country'] ? '%2C+' + curtarget['country'] : '';
         if (curtarget['country'] === 'USA' || curtarget['country'] === 'United States')
             part2 = '%2C+' + curtarget['admin_name'];
-        let primaryTitle = (curtarget['city_ascii'] + part2).split(' ').join('_');
+        let primaryTitle = (cityName + part2).split(' ').join('_');
         if ('wiki' in curtarget && curtarget['wiki'] !== '') {
             const parts = curtarget['wiki'].split('/');
             primaryTitle = parts[parts.length - 1].split('#')[0];
         }
-        primaryTitle = primaryTitle.replace('’', '');
+        primaryTitle = primaryTitle.replace('\u2019', '');
 
         // Fallback title: city name only (+ state for US), no country
         const fallbackPart2 = (curtarget['country'] === 'USA' || curtarget['country'] === 'United States')
             ? '%2C+' + curtarget['admin_name'] : '';
-        const fallbackTitle = (curtarget['city_ascii'] + fallbackPart2).split(' ').join('_');
+        const fallbackTitle = (cityName + fallbackPart2).split(' ').join('_');
 
         // Check cache first (null = confirmed no image, undefined = never tried)
         if (primaryTitle in helpers.imgCache) {

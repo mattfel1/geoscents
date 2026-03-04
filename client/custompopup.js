@@ -93,6 +93,7 @@ class CustomPopup {
         const nameRow = document.getElementById('custompopup-name-row');
         const codeInput = document.getElementById('selected_code');
         const citysrcInput = document.getElementById('requestedCitysrc_choice');
+        if (citysrcInput) citysrcInput.addEventListener('input', () => citysrcInput.setCustomValidity(''));
         const publicBtn = document.getElementById('custompopup-public-btn');
         const privateBtn = document.getElementById('custompopup-private-btn');
         const submitBtn = document.getElementById('custompopup-submit');

@@ -41,7 +41,8 @@ module.exports = {
     EUROPE: 'Europe',
     ASIA: 'Asia',
     OCEANIA: 'Oceania',
-    TRIVIA: 'Trivia',
+    TRIVIA: 'Misc Trivia',
+    DAILY_TRIVIA: 'Daily Trivia',
     SPECIAL_REGION: 'Daily Region',
     SPECIAL_CAPITAL: 'Daily Capitals',
     AFRICA: 'Africa',
@@ -177,7 +178,7 @@ module.exports = {
     // (e.g. "Denver, Colorado" not "Denver, USA").
     // If the target has an explicit 'wiki' field set, that overrides the generated URL.
     makeLink: (target) => {
-        let part2 = '%2C+' + target['country'];
+        let part2 = target['country'] ? '%2C+' + target['country'] : '';
         if (target['country'] === 'USA') part2 = '%2C+' + target['admin_name'];
         let wiki = 'https://en.wikipedia.org/wiki/Special:Search?search=' + target['city'] + part2 + '&go=Go&ns0=1';
         if (target['wiki'] != null && target['wiki'] !== '') wiki = target['wiki'];

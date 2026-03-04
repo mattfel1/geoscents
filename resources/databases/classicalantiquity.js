@@ -1,0 +1,97 @@
+module.exports = {
+    CITIES: [
+
+        // === GREEK ===
+        { "city": "Parthenon", "city_ascii": "", "lat": 37.9715, "lng": 23.7266, "iso2": "gr", "country": "Greece", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Delphi", "city_ascii": "", "lat": 38.4824, "lng": 22.5010, "iso2": "gr", "country": "Greece", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Olympia", "city_ascii": "", "lat": 37.6413, "lng": 21.6230, "iso2": "gr", "country": "Greece", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Mycenae", "city_ascii": "", "lat": 37.7314, "lng": 22.7561, "iso2": "gr", "country": "Greece", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Knossos", "city_ascii": "", "lat": 35.2984, "lng": 25.1631, "iso2": "gr", "country": "Greece", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Sparta", "city_ascii": "", "lat": 37.0765, "lng": 22.4291, "iso2": "gr", "country": "Greece", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Corinth", "city_ascii": "", "lat": 37.9041, "lng": 22.8808, "iso2": "grspqr", "country": "Greece / Rome", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Delos", "city_ascii": "", "lat": 37.3964, "lng": 25.2700, "iso2": "gr", "country": "Greece", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Syracuse", "city_ascii": "", "lat": 37.0755, "lng": 15.2866, "iso2": "grspqr", "country": "Greece / Rome", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Syracuse,_Sicily" },
+        { "city": "Temple of Poseidon", "city_ascii": "", "lat": 37.6490, "lng": 24.0267, "iso2": "gr", "country": "Greece", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Temple_of_Poseidon,_Sounion" },
+        { "city": "Mausoleum at Halicarnassus", "city_ascii": "", "lat": 37.0376, "lng": 27.4241, "iso2": "grxpe", "country": "Greece / Persia", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Mausoleum_at_Halicarnassus" },
+        { "city": "Temple of Artemis", "city_ascii": "", "lat": 37.9499, "lng": 27.3638, "iso2": "gr", "country": "Greece", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Temple_of_Artemis" },
+        { "city": "Colossus of Rhodes", "city_ascii": "", "lat": 36.4510, "lng": 28.2275, "iso2": "gr", "country": "Greece", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Colossus_of_Rhodes" },
+        { "city": "Amphipolis", "city_ascii": "", "lat": 40.8167, "lng": 23.8500, "iso2": "grxmk", "country": "Athens / Macedonia", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Battle of Marathon (490 BC, Athens vs Persia)", "city_ascii": "", "lat": 38.1499, "lng": 23.9658, "iso2": "grxpe", "country": "Athens / Persia", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Battle_of_Marathon" },
+        { "city": "Battle of Thermopylae (480 BC, Sparta vs Persia)", "city_ascii": "", "lat": 38.7939, "lng": 22.5330, "iso2": "grxpe", "country": "Sparta / Persia", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Battle_of_Thermopylae" },
+        { "city": "Battle of Salamis (480 BC, Athens vs Persia)", "city_ascii": "", "lat": 37.9500, "lng": 23.4700, "iso2": "grxpe", "country": "Athens / Persia", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Battle_of_Salamis" },
+        { "city": "Battle of Leuctra (371 BC, Thebes vs Sparta)", "city_ascii": "", "lat": 38.2647, "lng": 23.1743, "iso2": "gr", "country": "Greece", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Battle_of_Leuctra" },
+        { "city": "Troy", "city_ascii": "", "lat": 39.9573, "lng": 26.2387, "iso2": "gr", "country": "Greece", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+
+        // === MACEDONIAN ===
+        { "city": "Pella", "city_ascii": "", "lat": 40.7608, "lng": 22.5213, "iso2": "xmk", "country": "Macedonia", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Pella" },
+        { "city": "Vergina", "city_ascii": "", "lat": 40.4758, "lng": 22.3131, "iso2": "xmk", "country": "Macedonia", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Vergina" },
+        { "city": "Alexandria", "city_ascii": "", "lat": 31.2001, "lng": 29.9187, "iso2": "xmkeg", "country": "Macedonia / Egypt", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Alexandria" },
+        { "city": "Battle of Gaugamela (331 BC, Macedonia vs Persia)", "city_ascii": "", "lat": 36.56, "lng": 43.44, "iso2": "xmkxpe", "country": "Macedonia / Persia", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Battle_of_Gaugamela" },
+        { "city": "Battle of Issus (333 BC, Macedonia vs Persia)", "city_ascii": "", "lat": 36.7525, "lng": 36.1923, "iso2": "xmkxpe", "country": "Macedonia / Persia", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Battle_of_Issus" },
+        { "city": "Battle of Granicus (334 BC, Macedonia vs Persia)", "city_ascii": "", "lat": 40.316708, "lng": 27.281113, "iso2": "xmkxpe", "country": "Macedonia / Persia", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Battle_of_the_Granicus" },
+        { "city": "Antioch", "city_ascii": "", "lat": 36.2021, "lng": 36.1603, "iso2": "xmkspqr", "country": "Macedonia / Rome", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Antioch" },
+        { "city": "Pergamon", "city_ascii": "", "lat": 39.1317, "lng": 27.1844, "iso2": "xmkspqr", "country": "Macedonia / Rome", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Seleucia", "city_ascii": "", "lat": 33.0833, "lng": 44.5333, "iso2": "xmk", "country": "Macedonia", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Seleucia" },
+
+        // === ROMAN ===
+        { "city": "Colosseum", "city_ascii": "", "lat": 41.8903, "lng": 12.4922, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Pantheon", "city_ascii": "", "lat": 41.8986, "lng": 12.4769, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Pantheon,_Rome" },
+        { "city": "Roman Forum", "city_ascii": "", "lat": 41.8925, "lng": 12.4853, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Roman_Forum" },
+        { "city": "Pompeii", "city_ascii": "", "lat": 40.7462, "lng": 14.4989, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Leptis Magna", "city_ascii": "", "lat": 32.6395, "lng": 14.2931, "iso2": "xphspqr", "country": "Phoenicia / Rome", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Timgad", "city_ascii": "", "lat": 35.4866, "lng": 6.4672, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Jerash", "city_ascii": "", "lat": 32.2742, "lng": 35.8908, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Baalbek", "city_ascii": "", "lat": 34.0039, "lng": 36.2178, "iso2": "xphspqr", "country": "Phoenicia / Rome", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Ephesus", "city_ascii": "", "lat": 37.9394, "lng": 27.3411, "iso2": "grspqr", "country": "Greece / Rome", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Diocletian's Palace", "city_ascii": "", "lat": 43.5081, "lng": 16.4402, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Diocletian%27s_Palace" },
+        { "city": "Pont du Gard", "city_ascii": "", "lat": 43.9469, "lng": 4.5353, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Segovia Aqueduct", "city_ascii": "", "lat": 40.9481, "lng": -4.1183, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Aqueduct_of_Segovia" },
+        { "city": "Hadrian's Wall", "city_ascii": "", "lat": 54.9984, "lng": -2.6130, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Palmyra", "city_ascii": "", "lat": 34.5503, "lng": 38.2686, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Arena of Nimes", "city_ascii": "", "lat": 43.8367, "lng": 4.3601, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Arenas_of_N%C3%AEmes" },
+        { "city": "Battle of Cannae (216 BC, Carthage vs Rome)", "city_ascii": "", "lat": 41.3062, "lng": 16.1302, "iso2": "xcaspqr", "country": "Carthage / Rome", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Battle_of_Cannae" },
+        { "city": "Battle of Actium (31 BC, Octavian vs Antony)", "city_ascii": "", "lat": 38.9540, "lng": 20.7450, "iso2": "spqreg", "country": "Rome / Egypt", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Battle_of_Actium" },
+        { "city": "Battle of Pharsalus (48 BC, Caesar vs Pompey)", "city_ascii": "", "lat": 39.4933, "lng": 22.2083, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Battle_of_Pharsalus" },
+        { "city": "Battle of Alesia (52 BC, Rome vs Gaul)", "city_ascii": "", "lat": 47.5370, "lng": 4.3540, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Battle_of_Alesia" },
+        { "city": "Masada", "city_ascii": "", "lat": 31.3156, "lng": 35.3533, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Petra", "city_ascii": "", "lat": 30.3285, "lng": 35.4444, "iso2": "spqr", "country": "Rome", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+
+        // === CARTHAGINIAN ===
+        { "city": "Carthage", "city_ascii": "", "lat": 36.8525, "lng": 10.3233, "iso2": "xphxca", "country": "Phoenicia / Carthage", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Utica", "city_ascii": "", "lat": 37.0580, "lng": 10.0500, "iso2": "xphxca", "country": "Phoenicia / Carthage", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Utica,_Tunisia" },
+        { "city": "Kerkouane", "city_ascii": "", "lat": 37.0480, "lng": 11.1050, "iso2": "xca", "country": "Carthage", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "New Carthage", "city_ascii": "", "lat": 37.6000, "lng": -0.9833, "iso2": "xcaspqr", "country": "Carthage / Rome", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Cartagena,_Spain" },
+        { "city": "Battle of Trebia (218 BC, Carthage vs Rome)", "city_ascii": "", "lat": 44.9833, "lng": 9.5000, "iso2": "xcaspqr", "country": "Carthage / Rome", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Battle_of_the_Trebia" },
+        { "city": "Battle of Lake Trasimene (217 BC, Carthage vs Rome)", "city_ascii": "", "lat": 43.1667, "lng": 12.1000, "iso2": "xcaspqr", "country": "Carthage / Rome", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Battle_of_Lake_Trasimene" },
+        { "city": "Battle of Zama (202 BC, Rome vs Carthage)", "city_ascii": "", "lat": 36.298889, "lng": 9.449167, "iso2": "xcaspqr", "country": "Carthage / Rome", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Battle_of_Zama" },
+
+        // === PHOENICIAN ===
+        { "city": "Tyre", "city_ascii": "", "lat": 33.2705, "lng": 35.2038, "iso2": "xph", "country": "Phoenicia", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Tyre,_Lebanon" },
+        { "city": "Sidon", "city_ascii": "", "lat": 33.5634, "lng": 35.3700, "iso2": "xph", "country": "Phoenicia", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Byblos", "city_ascii": "", "lat": 34.1234, "lng": 35.6500, "iso2": "xph", "country": "Phoenicia", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Gadir", "city_ascii": "", "lat": 36.5297, "lng": -6.2929, "iso2": "xph", "country": "Phoenicia", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/C%C3%A1diz#Antiquity" },
+        { "city": "Motya", "city_ascii": "", "lat": 37.8700, "lng": 12.4700, "iso2": "xph", "country": "Phoenicia", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Arwad", "city_ascii": "", "lat": 34.8417, "lng": 35.8583, "iso2": "xph", "country": "Phoenicia", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Akko", "city_ascii": "", "lat": 32.9236, "lng": 35.0680, "iso2": "xph", "country": "Phoenicia", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Acre,_Israel" },
+
+        // === PERSIAN ===
+        { "city": "Persepolis", "city_ascii": "", "lat": 29.9353, "lng": 52.8914, "iso2": "xpe", "country": "Persia", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Susa", "city_ascii": "", "lat": 32.1879, "lng": 48.2584, "iso2": "xpe", "country": "Persia", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Susa" },
+        { "city": "Pasargadae", "city_ascii": "", "lat": 30.1930, "lng": 53.1688, "iso2": "xpe", "country": "Persia", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Ecbatana", "city_ascii": "", "lat": 34.7987, "lng": 48.5150, "iso2": "xpe", "country": "Persia", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Ctesiphon", "city_ascii": "", "lat": 33.0944, "lng": 44.5812, "iso2": "xpe", "country": "Persia", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Naqsh-e Rostam", "city_ascii": "", "lat": 29.9947, "lng": 52.8767, "iso2": "xpe", "country": "Persia", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Behistun", "city_ascii": "", "lat": 34.3933, "lng": 47.4378, "iso2": "xpe", "country": "Persia", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Sardis", "city_ascii": "", "lat": 38.4817, "lng": 28.0439, "iso2": "xpexmk", "country": "Persia / Macedonia", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Gordium", "city_ascii": "", "lat": 39.6533, "lng": 31.9978, "iso2": "xpexmk", "country": "Persia / Macedonia", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+
+        // === EGYPTIAN ===
+        { "city": "Great Pyramid of Giza", "city_ascii": "", "lat": 29.9792, "lng": 31.1342, "iso2": "eg", "country": "Egypt", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza" },
+        { "city": "Valley of the Kings", "city_ascii": "", "lat": 25.7402, "lng": 32.6014, "iso2": "eg", "country": "Egypt", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Karnak", "city_ascii": "", "lat": 25.7188, "lng": 32.6573, "iso2": "eg", "country": "Egypt", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Karnak" },
+        { "city": "Abu Simbel", "city_ascii": "", "lat": 22.3372, "lng": 31.6258, "iso2": "eg", "country": "Egypt", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Luxor Temple", "city_ascii": "", "lat": 25.6998, "lng": 32.6392, "iso2": "eg", "country": "Egypt", "population": 0, "capital": "", "img_link": "", "wiki": "" },
+        { "city": "Philae", "city_ascii": "", "lat": 24.0244, "lng": 32.8847, "iso2": "xmkeg", "country": "Macedonia / Egypt", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Philae" },
+        { "city": "Memphis", "city_ascii": "", "lat": 29.8443, "lng": 31.2561, "iso2": "eg", "country": "Egypt", "population": 0, "capital": "", "img_link": "", "wiki": "https://en.wikipedia.org/wiki/Memphis,_Egypt" },
+    ]
+};

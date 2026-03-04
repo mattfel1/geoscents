@@ -77,6 +77,7 @@ let dropdown = window.document.getElementById('requestedCitysrc')
 let continent_options = [];
 let region_options = [];
 let country_options = [];
+let trivia_options = [];
 // Add main maps first, then specific maps
 Object.keys(MAPS).forEach(function(value) {
     var entry = document.createElement("option");
@@ -102,6 +103,14 @@ Object.keys(MAPS).forEach(function(value) {
         country_options.push(entry)
     }
 })
+Object.keys(MAPS).forEach(function(value) {
+    var entry = document.createElement("option");
+    entry.value = value;
+    if (MAPS[value]['tier'] === 'trivia') {
+        entry.text = value
+        trivia_options.push(entry)
+    }
+})
 
 continent_options.sort((a, b) => {
     return a.text.localeCompare(b.text)
@@ -110,6 +119,9 @@ region_options.sort((a, b) => {
     return a.text.localeCompare(b.text)
 });
 country_options.sort((a, b) => {
+    return a.text.localeCompare(b.text)
+});
+trivia_options.sort((a, b) => {
     return a.text.localeCompare(b.text)
 });
 
@@ -141,6 +153,16 @@ country_sep.value = " "
 dropdown.appendChild(country_sep);
 
 country_options.forEach((x, i) => {
+    dropdown.appendChild(x);
+})
+
+var trivia_sep = document.createElement("option");
+trivia_sep.text = "--- Trivia ---"
+trivia_sep.setAttribute('readonly', true);
+trivia_sep.value = " "
+dropdown.appendChild(trivia_sep);
+
+trivia_options.forEach((x, i) => {
     dropdown.appendChild(x);
 })
 
@@ -185,9 +207,16 @@ $(document).ready(function() {
                 tier: 'country',
                 flair: (MAPS[o.value] && MAPS[o.value].flair) || ''
             })),
+            ...trivia_options.map(o => ({
+                name: o.value,
+                tier: 'trivia',
+                flair: (MAPS[o.value] && MAPS[o.value].flair) || '',
+                subtitle: (MAPS[o.value] && MAPS[o.value].subtitle) || ''
+            })),
         ];
         const TIER_LABELS = {
             special: 'Special',
+            trivia: 'Trivia',
             continent: 'Continents',
             region: 'Regions',
             country: 'Countries'
@@ -200,6 +229,12 @@ $(document).ready(function() {
             item.className = 'suggestion-item';
             item.dataset.name = m.name;
             item.textContent = (m.flair ? m.flair + ' ' : '') + m.name;
+            if (m.subtitle) {
+                const sub = document.createElement('span');
+                sub.className = 'suggestion-subtitle';
+                sub.textContent = m.subtitle;
+                item.appendChild(sub);
+            }
             // Show matched country as a hint when the query matched a country, not the name
             if (q && !m.name.toLowerCase().includes(q)) {
                 const countries = MAP_COUNTRIES[m.name] || [];
@@ -214,6 +249,7 @@ $(document).ready(function() {
             item.addEventListener('mousedown', function(e) {
                 e.preventDefault();
                 citysrcInput.value = m.name;
+                citysrcInput.setCustomValidity('');
                 citysrcSuggestions.style.display = 'none';
             });
             citysrcSuggestions.appendChild(item);

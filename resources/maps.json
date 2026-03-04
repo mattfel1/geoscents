@@ -59,10 +59,16 @@
         "flair": "🦙",
         "tier": "continent"
     },
-    "Trivia": {
+    "Misc Trivia": {
         "coords": [-180, 180, -55.1, 81.05],
         "flair": "🧠",
         "tier": "trivia"
+    },
+    "Classical Antiquity": {
+        "coords": [-10, 60, 20, 52.4],
+        "flair": "🏛️",
+        "tier": "trivia",
+        "subtitle": "800 BC – 400 AD · Mediterranean"
     },
     "World Capitals": {
         "coords": [-180, 180, -65.5, 77.2],
@@ -114,7 +120,7 @@
         "greeting": "Bonvenon",
         "coords": [-180, 180, -90, -52],
         "flair": "🐧",
-        "tier": "region"
+        "tier": "trivia"
     },
     "Arabia": {
         "leader": "Djinn",

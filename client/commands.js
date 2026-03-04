@@ -146,7 +146,7 @@ class Commands {
             return true
         return false
     }
-    roomButton(room, id, special = false) {
+    roomButton(room, id, special = false, label = null) {
         let str;
         if (this.counts[room] > 0) {
             str = "<b>(" + this.counts[room] + " players)</b>"
@@ -154,7 +154,8 @@ class Commands {
             str = "<font color=\"white\">(0 players)</font>"
         }
         let c = "room-btn"
-        return $("<button class='" + c + "' id='" + id + "_button'><b>" + room + "</b> <br><font size=2>" + str + "</font></button>")
+        let displayLabel = label || room;
+        return $("<button class='" + c + "' id='" + id + "_button'><b>" + displayLabel + "</b> <br><font size=2>" + str + "</font></button>")
     }
     bindClick(myRoom, room, id, socket) {
         $('#' + id + '_button').bind("click", () => {
@@ -233,7 +234,7 @@ class Commands {
             customCell.append($("<button class='private-room-btn' id='private_button'><b>Custom Room</b><br>" + roomsStr + "</button>"));
         }
 
-        grid.append(this.roomButton(CONSTANTS.TRIVIA, "trivia", true));
+        grid.append(this.roomButton(CONSTANTS.TRIVIA, "trivia", true, CONSTANTS.DAILY_TRIVIA));
         grid.append(this.roomButton(CONSTANTS.WORLD, "world"));
         grid.append(this.roomButton(CONSTANTS.SPECIAL_CAPITAL, "special_capital", true));
         grid.append(this.roomButton(CONSTANTS.SPECIAL_REGION, "special_region", true));
