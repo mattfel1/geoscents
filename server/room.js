@@ -678,7 +678,7 @@ class Room {
             if (player.id === socketId) {
                 you = '*';
             }
-            if (player.choseName) socket.emit('post score', player.rank, you + player.getName(), player.color, player.score, player.wins);
+            if (player.choseName) socket.emit('post score', player.rank, you + player.getName(), player.color, player.score, player.wins, player.flair ? player.name : '');
         })
     }
 

@@ -16,15 +16,15 @@ class Commands {
         this.counts = {
             [CONSTANTS.LOBBY]: 0,
             [CONSTANTS.WORLD]: 0,
-            [CONSTANTS.SPECIAL_CAPITAL]: 0,
+            [CONSTANTS.DAILY_CAPITAL]: 0,
             [CONSTANTS.EUROPE]: 0,
             [CONSTANTS.NAMERICA]: 0,
             [CONSTANTS.AFRICA]: 0,
             [CONSTANTS.ASIA]: 0,
             [CONSTANTS.OCEANIA]: 0,
             [CONSTANTS.SAMERICA]: 0,
-            [CONSTANTS.TRIVIA]: 0,
-            [CONSTANTS.SPECIAL_REGION]: 0
+            [CONSTANTS.DAILY_TRIVIA]: 0,
+            [CONSTANTS.DAILY_REGION]: 0
         }
         this.mapStyle = 'terrain';
         this.lastCommand = {
@@ -234,10 +234,10 @@ class Commands {
             customCell.append($("<button class='private-room-btn' id='private_button'><b>Custom Room</b><br>" + roomsStr + "</button>"));
         }
 
-        grid.append(this.roomButton(CONSTANTS.TRIVIA, "trivia", true, CONSTANTS.DAILY_TRIVIA));
+        grid.append(this.roomButton(CONSTANTS.DAILY_TRIVIA, "daily_trivia", true));
         grid.append(this.roomButton(CONSTANTS.WORLD, "world"));
-        grid.append(this.roomButton(CONSTANTS.SPECIAL_CAPITAL, "special_capital", true));
-        grid.append(this.roomButton(CONSTANTS.SPECIAL_REGION, "special_region", true));
+        grid.append(this.roomButton(CONSTANTS.DAILY_CAPITAL, "daily_capital", true));
+        grid.append(this.roomButton(CONSTANTS.DAILY_REGION, "daily_region", true));
         grid.append(this.roomButton(CONSTANTS.EUROPE, "europe"));
         grid.append(this.roomButton(CONSTANTS.AFRICA, "africa"));
         grid.append(this.roomButton(CONSTANTS.ASIA, "asia"));
@@ -298,15 +298,15 @@ class Commands {
         });
         this.bindClick(room, CONSTANTS.LOBBY, "lobby", socket)
         this.bindClick(room, CONSTANTS.WORLD, "world", socket)
-        this.bindClick(room, CONSTANTS.SPECIAL_CAPITAL, "special_capital", socket)
-        this.bindClick(room, CONSTANTS.TRIVIA, "trivia", socket)
+        this.bindClick(room, CONSTANTS.DAILY_CAPITAL, "daily_capital", socket)
+        this.bindClick(room, CONSTANTS.DAILY_TRIVIA, "daily_trivia", socket)
         this.bindClick(room, CONSTANTS.NAMERICA, "namerica", socket)
         this.bindClick(room, CONSTANTS.EUROPE, "europe", socket)
         this.bindClick(room, CONSTANTS.AFRICA, "africa", socket)
         this.bindClick(room, CONSTANTS.ASIA, "asia", socket)
         this.bindClick(room, CONSTANTS.OCEANIA, "oceania", socket)
         this.bindClick(room, CONSTANTS.SAMERICA, "samerica", socket)
-        this.bindClick(room, CONSTANTS.SPECIAL_REGION, "special_region", socket)
+        this.bindClick(room, CONSTANTS.DAILY_REGION, "daily_region", socket)
         $('#private_button').bind("click", () => {
             socket.emit('requestPrivatePopup');
             this.refocus();

@@ -102,7 +102,7 @@ class Scoreboard {
         };
     }
 
-    postScore(rank, name, color, score, wins) {
+    postScore(rank, name, color, score, wins, famerName) {
         const isYou = name.startsWith('*');
         const displayName = isYou ? name.slice(1) : name;
         const isBot = displayName.startsWith('Average ');
@@ -172,6 +172,13 @@ class Scoreboard {
             renderPace();
             this.myRenderPace = renderPace;
             row.append(paceEl);
+        }
+
+        if (famerName) {
+            const url = '/resources/famers/' + famerName.replace(/ /g, '_') + '.html';
+            left.css('cursor', 'pointer').attr('title', 'View hall of fame page').on('click', function() {
+                window.open(url, '_blank');
+            });
         }
 
         $('#scoreboard').append(row);

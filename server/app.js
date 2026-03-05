@@ -229,7 +229,7 @@ const coprime = (num1, num2) => {
     return true;
 };
 
-const calculate_specials = () => {
+const calculate_daily = () => {
     // Get days since jan 1
     var now = new Date();
     var start = new Date(now.getFullYear(), 0, 0);
@@ -250,19 +250,19 @@ const calculate_specials = () => {
 
     const num_regions = region_maps.length;
     const num_capitals = capital_maps.length;
-    // We want day % num_regions to be our new special_region_idx, but this is not stable when num_regions grows.
+    // We want day % num_regions to be our new daily_region_idx, but this is not stable when num_regions grows.
     // To be more stable, we upcast num_regions to the nearest multiple of 20 and mod by that.  Then mod by num_regions.
     let upcast_num_regions = (Math.round(num_regions / 20) + 1) * 20
     let upcast_num_capitals = (Math.round(num_capitals / 20) + 1) * 20
     let raw_regions_idx = (day % upcast_num_regions) % num_regions;
     let raw_capitals_idx = (day % upcast_num_capitals) % num_capitals;
 
-    // "Randomize" the special country so you can't easily tell the order by looking at constants.js.
-    // Find a multiplier, mult, that is coprime with num_regions, and recalculate special idx by multiplying
+    // "Randomize" the daily country so you can't easily tell the order by looking at constants.js.
+    // Find a multiplier, mult, that is coprime with num_regions, and recalculate daily idx by multiplying
     // with this value and re-modding with num_regions.
     // Basically, since the lcm of two coprime numbers, A and B, is A*B, that means you can use A to re-index
     // values from 0 to B. For example, B = 10, A = 3, integers 0, 1, 2, ..., 9 would become 0, 3, 6, ..., 7.
-    // Choose mult as the first coprime number above currenty "epoch."  Epoch = raw_idx / upcast_num_specials.
+    // Choose mult as the first coprime number above currenty "epoch."  Epoch = raw_idx / upcast_num_dailys.
     let regions_epoch = Math.floor(day / upcast_num_regions) % num_regions;
     let mult = 1;
     for (let i = regions_epoch; i < num_regions; i++) {
@@ -275,16 +275,16 @@ const calculate_specials = () => {
     let regions_idx = (6 + mult * raw_regions_idx) % num_regions;
     let capitals_idx = (6 + mult * raw_capitals_idx) % num_capitals;
 
-    let special_region = region_maps[regions_idx];
-    let special_capital = capital_maps[capitals_idx];
-    let special_trivia = trivia_maps.length > 0 ? trivia_maps[day % trivia_maps.length] : null;
+    let daily_region = region_maps[regions_idx];
+    let daily_capital = capital_maps[capitals_idx];
+    let daily_trivia = trivia_maps.length > 0 ? trivia_maps[day % trivia_maps.length] : null;
 
     // Assume classics always come first
-    return [special_region, special_capital, special_trivia];
+    return [daily_region, daily_capital, daily_trivia];
 }
 
-let [special_region, special_capital, special_trivia] = calculate_specials();
-let special_capital_map = special_capital.replace(" Capitals", "");
+let [daily_region, daily_capital, daily_trivia] = calculate_daily();
+let daily_capital_map = daily_capital.replace(" Capitals", "");
 
 // Game state info
 // map, roomName, citysrc
@@ -296,9 +296,9 @@ var rooms = {
     'Africa': new Room(CONSTANTS.AFRICA, CONSTANTS.AFRICA, CONSTANTS.AFRICA),
     'Asia': new Room(CONSTANTS.ASIA, CONSTANTS.ASIA, CONSTANTS.ASIA),
     'Oceania': new Room(CONSTANTS.OCEANIA, CONSTANTS.OCEANIA, CONSTANTS.OCEANIA),
-    [CONSTANTS.TRIVIA]: new Room(special_trivia || CONSTANTS.TRIVIA, CONSTANTS.TRIVIA, special_trivia || CONSTANTS.TRIVIA),
-    'Daily Region': new Room(special_region, CONSTANTS.SPECIAL_REGION, special_region),
-    'Daily Capitals': new Room(special_capital_map, CONSTANTS.SPECIAL_CAPITAL, special_capital),
+    'Daily Trivia': new Room(daily_trivia, CONSTANTS.DAILY_TRIVIA, daily_trivia),
+    'Daily Region': new Room(daily_region, CONSTANTS.DAILY_REGION, daily_region),
+    'Daily Capitals': new Room(daily_capital_map, CONSTANTS.DAILY_CAPITAL, daily_capital),
     'Lobby': new Room(CONSTANTS.LOBBY, CONSTANTS.LOBBY, CONSTANTS.LOBBY),
 };
 
@@ -310,15 +310,15 @@ const getHist = () => {
     return {
         [CONSTANTS.LOBBY]: rooms[CONSTANTS.LOBBY].playerCount(),
         [CONSTANTS.WORLD]: rooms[CONSTANTS.WORLD].playerCount(),
-        [CONSTANTS.SPECIAL_CAPITAL]: rooms[CONSTANTS.SPECIAL_CAPITAL].playerCount(),
+        [CONSTANTS.DAILY_CAPITAL]: rooms[CONSTANTS.DAILY_CAPITAL].playerCount(),
         [CONSTANTS.NAMERICA]: rooms[CONSTANTS.NAMERICA].playerCount(),
         [CONSTANTS.EUROPE]: rooms[CONSTANTS.EUROPE].playerCount(),
         [CONSTANTS.AFRICA]: rooms[CONSTANTS.AFRICA].playerCount(),
         [CONSTANTS.SAMERICA]: rooms[CONSTANTS.SAMERICA].playerCount(),
         [CONSTANTS.ASIA]: rooms[CONSTANTS.ASIA].playerCount(),
         [CONSTANTS.OCEANIA]: rooms[CONSTANTS.OCEANIA].playerCount(),
-        [CONSTANTS.TRIVIA]: rooms[CONSTANTS.TRIVIA].playerCount(),
-        [CONSTANTS.SPECIAL_REGION]: rooms[CONSTANTS.SPECIAL_REGION].playerCount(),
+        [CONSTANTS.DAILY_TRIVIA]: rooms[CONSTANTS.DAILY_TRIVIA].playerCount(),
+        [CONSTANTS.DAILY_REGION]: rooms[CONSTANTS.DAILY_REGION].playerCount(),
         _publicRooms: publicRoomList.length,
         _publicPlayers: publicRoomList.reduce((sum, r) => sum + r.playerCount(), 0)
     };
@@ -1135,35 +1135,35 @@ setInterval(() => {
         announce("<font size=9 color=\"red\"><b>WARNING: Daily" + s + " records will reset in 30 seconds! Daily maps will also be changed!</b></font><br>")
     }
 
-    // Get new special
+    // Get new daily
     if (reset_now) {
-        let old_special_region = special_region;
-        let old_special_capital = special_capital;
-        [special_region, special_capital, special_trivia] = calculate_specials();
+        let old_daily_region = daily_region;
+        let old_daily_capital = daily_capital;
+        [daily_region, daily_capital, daily_trivia] = calculate_daily();
         let no_reset = []
-        // Flush all current rooms and select new specials
+        // Flush all current rooms and select new dailys
         Object.values(rooms).forEach(function(room) {
-            if (room.roomName == CONSTANTS.SPECIAL_REGION) {
+            if (room.roomName == CONSTANTS.DAILY_REGION) {
                 room.flushRecords(week, month, year);
                 room.killJoe();
-                room.map = special_region;
-                room.citysrc = special_region;
+                room.map = daily_region;
+                room.citysrc = daily_region;
                 room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
                 room.createJoe('');
                 room.loadRecords();
-            } else if (room.roomName == CONSTANTS.SPECIAL_CAPITAL) {
+            } else if (room.roomName == CONSTANTS.DAILY_CAPITAL) {
                 room.flushRecords(week, month, year);
                 room.killJoe();
-                room.map = special_capital.replace(" Capitals", "");
-                room.citysrc = special_capital;
+                room.map = daily_capital.replace(" Capitals", "");
+                room.citysrc = daily_capital;
                 room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
                 room.createJoe('');
                 room.loadRecords();
-            } else if (room.roomName == CONSTANTS.TRIVIA && special_trivia) {
+            } else if (room.roomName == CONSTANTS.TRIVIA && daily_trivia) {
                 room.flushRecords(week, month, year);
                 room.killJoe();
-                room.map = special_trivia;
-                room.citysrc = special_trivia;
+                room.map = daily_trivia;
+                room.citysrc = daily_trivia;
                 room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
                 room.createJoe('');
                 room.loadRecords();
@@ -1178,7 +1178,7 @@ setInterval(() => {
         // Delaying in case there is an io issue
         helpers.sleep(1000)
         Object.keys(MAPS).forEach(function(value) {
-            if (value != old_special_region && value != old_special_capital && MAPS[value]['tier'] != "continent" && value != CONSTANTS.TRIVIA && no_reset.includes(value)) {
+            if (value != old_daily_region && value != old_daily_capital && MAPS[value]['tier'] != "continent" && value != CONSTANTS.TRIVIA && no_reset.includes(value)) {
                 let map = value.replace(" Capitals", "");
                 let tmp_room = new Room(map, "tmp", value)
                 tmp_room.flushRecords(week, month, year);
