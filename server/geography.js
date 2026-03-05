@@ -271,6 +271,10 @@ const pixelToGeo = (map, row, col) => {
                 lon = 180 - lon
         }
 
+    } else if (MAPS[map].projection === 'equirectangular') {
+        // Equirectangular (Plate Carrée) projection
+        lon = (col / CONSTANTS.MAP_WIDTH) * (max_lon - min_lon) + min_lon;
+        lat = zero_lat - (row / CONSTANTS.MAP_HEIGHT) * (zero_lat - max_lat);
     } else {
         // Mercator projection
         const eqMin = Math.atanh(Math.sin(zero_lat * Math.PI / 180));
@@ -318,6 +322,10 @@ const geoToPixel = (map, lat, lon) => {
 
         col = sgn * Math.sin(lon * Math.PI / 180) * hypot + (CONSTANTS.MAP_WIDTH / 2)
         row = -Math.cos(lon * Math.PI / 180) * hypot + (CONSTANTS.MAP_HEIGHT / 2)
+    } else if (MAPS[map].projection === 'equirectangular') {
+        // Equirectangular (Plate Carrée) projection
+        col = (parseFloat(lon) - min_lon) / (max_lon - min_lon) * CONSTANTS.MAP_WIDTH;
+        row = (zero_lat - parseFloat(lat)) / (zero_lat - max_lat) * CONSTANTS.MAP_HEIGHT;
     } else {
         // Mercator projection
         // get col value

@@ -243,7 +243,7 @@ class MapPanel {
             let image = this.map_images.get(image_name);
             let shift = this.hueShift;
             const drawIt = () => {
-                ctx.drawImage(image, 0, 0);
+                ctx.drawImage(image, 0, 0, CONSTANTS.MAP_WIDTH, CONSTANTS.MAP_HEIGHT);
                 document.getElementById("map").style.filter = "hue-rotate(" + shift + "deg)";
             };
             if (image.complete && image.naturalWidth > 0) {
