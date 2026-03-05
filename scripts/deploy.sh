@@ -20,6 +20,9 @@ echo "==> Installing dependencies"
 export PATH=/usr/local/bin:$PATH
 npm install --omit=dev
 
+echo "==> Building country index"
+node scripts/build-country-index.js
+
 echo "==> Building bundle"
 webpack --mode production
 

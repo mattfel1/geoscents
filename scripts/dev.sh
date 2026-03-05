@@ -9,6 +9,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
+node scripts/build-country-index.js
 LOCAL_DEV=1 webpack -w &
 WEBPACK_PID=$!
 LOCAL_DEV=1 nodemon server/app.js --ignore public --ignore resources/histories --ignore resources/famers
