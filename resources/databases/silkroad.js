@@ -772,7 +772,7 @@ module.exports = {
             "population": 0,
             "capital": "",
             "img_link": "",
-            "wiki": "https://en.wikipedia.org/wiki/Bulgar_(city)"
+            "wiki": "https://en.wikipedia.org/wiki/Volga_Bulgaria"
         },
 
         // === CARAVANSERAIS & WAYPOINTS ===

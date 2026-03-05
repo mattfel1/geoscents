@@ -962,5 +962,114 @@ module.exports = {
             "img_link": "",
             "wiki": "https://en.wikipedia.org/wiki/Memphis,_Egypt"
         },
+
+        {
+            "city": "Caesar crosses the Rubicon River in 49 BC",
+            "city_ascii": "",
+            "lat": 44.1408,
+            "lng": 12.2369,
+            "iso2": "spqr",
+            "country": "Rome",
+            "population": 0,
+            "capital": "",
+            "img_link": "",
+            "wiki": "https://en.wikipedia.org/wiki/Crossing_the_Rubicon"
+        },
+        {
+            "city": "Italica (birthplace of Trajan and Hadrian)",
+            "city_ascii": "",
+            "lat": 37.4417,
+            "lng": -6.0528,
+            "iso2": "spqr",
+            "country": "Rome",
+            "population": 0,
+            "capital": "",
+            "img_link": "",
+            "wiki": "https://en.wikipedia.org/wiki/Italica"
+        },
+        {
+            "city": "Corduba (birthplace of Seneca)",
+            "city_ascii": "",
+            "lat": 37.8882,
+            "lng": -4.7794,
+            "iso2": "spqr",
+            "country": "Rome",
+            "population": 0,
+            "capital": "",
+            "img_link": "",
+            "wiki": "https://en.wikipedia.org/wiki/C%C3%B3rdoba,_Spain#Roman_era"
+        },
+        {
+            "city": "Saguntum (siege by Hannibal triggered 2nd Punic War, 219 BC)",
+            "city_ascii": "",
+            "lat": 39.6797,
+            "lng": -0.2722,
+            "iso2": "xcaspqr",
+            "country": "Carthage / Rome",
+            "population": 0,
+            "capital": "",
+            "img_link": "",
+            "wiki": "https://en.wikipedia.org/wiki/Saguntum"
+        },
+        {
+            "city": "Numantia (Celtiberian resistance against Rome)",
+            "city_ascii": "",
+            "lat": 41.8108,
+            "lng": -2.4358,
+            "iso2": "spqr",
+            "country": "Rome",
+            "population": 0,
+            "capital": "",
+            "img_link": "",
+            "wiki": "https://en.wikipedia.org/wiki/Numantia"
+        },
+        {
+            "city": "Emerita Augusta (Roman capital of Lusitania)",
+            "city_ascii": "",
+            "lat": 38.9167,
+            "lng": -6.3436,
+            "iso2": "spqr",
+            "country": "Rome",
+            "population": 0,
+            "capital": "",
+            "img_link": "",
+            "wiki": "https://en.wikipedia.org/wiki/M%C3%A9rida,_Spain"
+        },
+        {
+            "city": "Caesaraugusta",
+            "city_ascii": "",
+            "lat": 41.6488,
+            "lng": -0.8891,
+            "iso2": "spqr",
+            "country": "Rome",
+            "population": 0,
+            "capital": "",
+            "img_link": "",
+            "wiki": "https://en.wikipedia.org/wiki/Zaragoza#Roman_era"
+        },
+        {
+            "city": "Hispalis",
+            "city_ascii": "",
+            "lat": 37.3891,
+            "lng": -5.9845,
+            "iso2": "spqr",
+            "country": "Rome",
+            "population": 0,
+            "capital": "",
+            "img_link": "",
+            "wiki": "https://en.wikipedia.org/wiki/Seville#Roman_era"
+        },
+        {
+            "city": "Baelo Claudia",
+            "city_ascii": "",
+            "lat": 36.0789,
+            "lng": -5.7731,
+            "iso2": "spqr",
+            "country": "Rome",
+            "population": 0,
+            "capital": "",
+            "img_link": "",
+            "wiki": "https://en.wikipedia.org/wiki/Baelo_Claudia"
+        },
     ]
 };
