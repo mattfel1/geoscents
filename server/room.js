@@ -13,6 +13,9 @@ const fetch = require("node-fetch");
 const nameCard = (color, name) =>
     `<span style="border:2px solid ${color};border-radius:4px;padding:1px 7px;font-weight:bold;font-size:13px;color:${color};margin-right:5px;white-space:nowrap;">${name}</span>`;
 
+const botCard = (name) =>
+    `<span style="border:2px dotted #555;border-radius:4px;padding:1px 7px;font-weight:bold;font-size:13px;color:#555;margin-right:5px;white-space:nowrap;">${name}</span>`;
+
 const sysMsg = (text) => `<span style="color:#aaa;font-style:italic;">${text}</span>`;
 const MAPS = require('../resources/maps.json')
 
@@ -559,15 +562,16 @@ class Room {
                     // If they don't yet have a hash, they definitely don't have a public_hash either
                     player.public_hash = helpers.randstring(10)
                 }
-                this.clients.get(player.id).emit("announce hall", citysrc, player.name, player.score, player.color);
+                this.clients.get(player.id).emit("announce hall", citysrc, player.name, player.score, player.color, player.hash);
                 this.whisperMessage(player, "<br><i>Your PRIVATE username is <b>" + player.hash + "</b>.  Please rejoin the game any time using this name and you can select a flair for this achievement, and you can collect more!  If you forget this hash, you can leave log /feedback with your name and email, or you can ask on discord.  If multiple users are using your current display name, then your unique public identifier is <b>" + player.public_hash + "</b></i><br><br>", () => {})
             }
-            if (player.score > 0 && player.score < CONSTANTS.CLOWNSCORE) {
+            else if (player.score > 0 && player.score < CONSTANTS.CLOWNSCORE) {
                 const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
                 if (playedAllRounds(playersHistory, player.id)) {
                     player.clown = '🤡';
                     helpers.logMessage("Player " + player.name + " has been awarded the clown hat in room " + citysrc + "!");
-                    this.clients.get(player.id).emit("announce clown", citysrc, player.getName(), player.score, player.color);
+                    const clownId = player.id;
+                    this.clients.forEach((s, id) => s.emit("announce clown", citysrc, player.getName(), player.score, player.color, id === clownId));
                 }
             }
             const num_records = 5
@@ -1203,7 +1207,11 @@ class Room {
     };
 
     distributeJoeMessage(msg) {
-        this._emitChat(this.joe.name, this.joe.color, msg);
+        const room = this.roomName;
+        const badge = botCard(this.joe.name);
+        const roomBadge = `<span style="background:#f0f0f0;border-radius:3px;padding:1px 5px;font-size:11px;color:#666;margin-right:4px;">${room}</span>`;
+        const sent_msg = roomBadge + badge + msg + "<br>";
+        this.clients.forEach((socket) => socket.emit("update messages", room, sent_msg));
     };
     whisperMessage(senderSocket, msg, cb) {
         const room = this.roomName;

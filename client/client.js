@@ -12,6 +12,10 @@ const CustomPopup = require('./custompopup.js');
 const FamerPopup = require('./famerpopup.js');
 const HelpPopup = require('./helppopup.js');
 const Chat = require('./chat.js');
+const { goldConfetti, emojiRain } = require('./celebrate.js');
+const nameCard = (color, name) =>
+    `<span style="border:2px solid ${color};border-radius:4px;padding:1px 7px;font-weight:bold;font-size:13px;color:${color};margin-right:5px;white-space:nowrap;">${name}</span>`;
+const sysMsg = (text) => `<span style="color:#aaa;font-style:italic;">${text}</span>`;
 const MapPanel = require('./map.js');
 const History = require('./history.js');
 const CONSTANTS = require('../resources/constants.js');
@@ -399,21 +403,62 @@ $(document).ready(function() {
         scoreboard.postLobby(board)
     });
     socket.on('announce record', (category, room, name, score, color) => {
-        socket.emit("announcement", '[New ' + category + ' record set by <font color="' + color + '">' + name + ' (' + score + ')</font> in ' + room + ']<br>')
+        socket.emit("announcement", sysMsg('New ' + category + ' record set by ' + nameCard(color, name + ' (' + score + ')') + 'in ' + room) + '<br>');
     });
-    socket.on('announce hall', (room, name, score, color) => {
-        // TODO can this be called by client to cheat into hall of fame?
+    const overlayBg = document.querySelector('.overlay-bg');
+    const showCelebPopup = (id, onClose) => {
+        document.getElementById(id).style.display = 'block';
+        overlayBg.style.display = 'block';
+        const close = () => {
+            document.getElementById(id).style.display = 'none';
+            overlayBg.style.display = 'none';
+            overlayBg.onclick = null;
+            if (onClose) onClose();
+        };
+        document.getElementById(id.replace('-popup', '-close-btn')).onclick = close;
+        overlayBg.onclick = close;
+    };
+
+    socket.on('announce hall', (room, name, score, color, hash) => {
         let perfect_limit = CONSTANTS.PERFECT_SCORE;
-        if (CONSTANTS.DEBUG_MODE)
-            perfect_limit = CONSTANTS.DEBUG_PERFECT_SCORE;
-        var perfect_thresh = score >= perfect_limit
-        var perfect = ''
-        if (perfect_thresh)
-            perfect = 'PERFECT SCORE!!!! '
-        socket.emit("announcement", '<b>WOW!! ' + perfect + '<font color="' + color + '">' + name + '</font> made it into the hall of fame with ' + score + ' points in ' + room + '!!!</b><br>')
+        if (CONSTANTS.DEBUG_MODE) perfect_limit = CONSTANTS.DEBUG_PERFECT_SCORE;
+        const perfect = score >= perfect_limit ? 'PERFECT SCORE!!!! ' : '';
+        socket.emit("announcement", '<b>WOW!! ' + perfect + nameCard(color, name) + sysMsg('made it into the hall of fame with ' + score + ' points in ' + room + '!!!') + '</b><br>');
+        goldConfetti();
+        document.getElementById('hof-popup-msg').innerHTML = 'You scored <b style="color:' + color + '">' + score + '</b> points in <b>' + room + '</b>!';
+        document.getElementById('hof-hash-display').textContent = hash;
+        document.getElementById('hof-copy-btn').onclick = () => {
+            navigator.clipboard.writeText(hash).then(() => {
+                document.getElementById('hof-copy-btn').textContent = '✅ Copied!';
+                setTimeout(() => { document.getElementById('hof-copy-btn').textContent = '📋 Copy Code'; }, 2000);
+            });
+        };
+        showCelebPopup('hof-popup');
     });
-    socket.on('announce clown', (room, name, score, color) => {
-        socket.emit("announcement", '<font color="' + color + '">' + name + '</font> guessed every round and still scored fewer than ' + CONSTANTS.CLOWNSCORE + ' points in ' + room + '! 🤡🤡🤡</b><br>')
+    let clownBatch = [];
+    let clownBatchTimer = null;
+    socket.on('announce clown', (room, name, score, color, isMe) => {
+        clownBatch.push({ name, score, color, isMe, room });
+        clearTimeout(clownBatchTimer);
+        clownBatchTimer = setTimeout(() => {
+            emojiRain('🤡', 15);
+            emojiRain('🎪', 15);
+            emojiRain('😭', 15);
+            emojiRain('🤣', 15);
+            const lines = clownBatch.map(c => {
+                const card = nameCard(c.color, c.name);
+                const suffix = c.isMe ? ' (🫵 THAT\'S YOU! 🫵)' : '';
+                return card + sysMsg('scored ' + c.score + ' in ' + c.room + ' after guessing every round' + suffix);
+            });
+            document.getElementById('clown-popup-msg').innerHTML = lines.join('<br>');
+            clownBatch = [];
+            const timer = setTimeout(() => {
+                document.getElementById('clown-popup').style.display = 'none';
+                overlayBg.style.display = 'none';
+                overlayBg.onclick = null;
+            }, 10000);
+            showCelebPopup('clown-popup', () => clearTimeout(timer));
+        }, 300);
     });
 
     /**** Commands *****/

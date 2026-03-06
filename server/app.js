@@ -360,6 +360,9 @@ let publicRoomCounter = 0;
 const nameCard = (color, name) =>
     `<span style="border:2px solid ${color};border-radius:4px;padding:1px 7px;font-weight:bold;font-size:13px;color:${color};margin-right:5px;white-space:nowrap;">${name}</span>`;
 
+const botCard = (name) =>
+    `<span style="border:2px dotted #555;border-radius:4px;padding:1px 7px;font-weight:bold;font-size:13px;color:#555;margin-right:5px;white-space:nowrap;">${name}</span>`;
+
 // Wraps system/event message text in muted italic style
 const sysMsg = (text) => `<span style="color:#aaa;font-style:italic;">${text}</span>`;
 
@@ -632,7 +635,7 @@ io.on('connection', (socket) => {
             if (room.hasJoe) {
                 const bot_msg = sysMsg(CONSTANTS.KILL_MSGS[Math.floor(Math.random() * CONSTANTS.KILL_MSGS.length)]
                     .replace('PLAYER', nameCard(info['color'], info['name']))
-                    .replace('BOT', nameCard(room.joe.color, room.joe.name))) + "<br>";
+                    .replace('BOT', botCard(room.joe.name))) + "<br>";
                 io.sockets.emit("update messages", room.roomName, bot_msg);
                 helpers.log("Player " + socket.handshake.address + " " + info['name'] + " has killed joe in " + room.roomName);
                 room.killJoe()
@@ -645,7 +648,7 @@ io.on('connection', (socket) => {
                 room.createJoe(botname);
                 const bot_msg = sysMsg(CONSTANTS.BIRTH_MSGS[Math.floor(Math.random() * CONSTANTS.BIRTH_MSGS.length)]
                     .replace('PLAYER', nameCard(info['color'], info['name']))
-                    .replace('BOT', nameCard(room.joe.color, room.joe.name))) + "<br>";
+                    .replace('BOT', botCard(room.joe.name))) + "<br>";
                 io.sockets.emit("update messages", room.roomName, bot_msg);
             }
         }
