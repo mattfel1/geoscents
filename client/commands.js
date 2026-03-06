@@ -90,8 +90,9 @@ class Commands {
 
         const flagEl = document.getElementById('cmd-flag');
         if (is_target && iso2 && iso2 !== 'earth') {
+            flagEl.style.visibility = 'hidden';
+            flagEl.onload = () => { flagEl.style.visibility = ''; };
             flagEl.src = '/resources/flags/' + iso2.toLowerCase() + '.png';
-            flagEl.style.visibility = '';
         } else {
             flagEl.style.visibility = 'hidden';
         }
@@ -109,8 +110,9 @@ class Commands {
 
         const flagEl = document.getElementById('cmd-flag');
         if (iso2 && iso2 !== 'earth') {
+            flagEl.style.visibility = 'hidden';
+            flagEl.onload = () => { flagEl.style.visibility = ''; };
             flagEl.src = '/resources/flags/' + iso2.toLowerCase() + '.png';
-            flagEl.style.visibility = '';
         } else {
             flagEl.style.visibility = 'hidden';
         }

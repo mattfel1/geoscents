@@ -656,12 +656,13 @@ class Room {
             socket.emit('post lobby', helpers.hallJsonToBoard(this.hall_of_fame));
         }
         const sortedPlayers = this.sortPlayers();
+        const round = this.round;
         Array.from(sortedPlayers.values()).forEach(function(player, index) {
             let you = '';
             if (player.id === socketId) {
                 you = '*';
             }
-            if (player.choseName) socket.emit('post score', player.rank, you + player.getName(), player.color, player.score, player.wins, player.flair ? player.name : '');
+            if (player.choseName) socket.emit('post score', player.rank, you + player.getName(), player.color, player.score, player.wins, player.flair ? player.name : '', player.lastRoundPoints, round);
         })
     }
 
@@ -733,6 +734,7 @@ class Room {
             playerScoreLine = playerScoreLine
             historyScore(player, playerScoreLine);
             player.score = newScore;
+            player.lastRoundPoints = points;
             updateHistory(player, round, newScore, points, clicktime, dist, target, error_unit);
         });
         this.historyRound(this.round + 1, Geography.stringifyTarget(this.target, this.citysrc));

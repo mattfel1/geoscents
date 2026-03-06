@@ -19,6 +19,7 @@ class Player {
         this.clickedAt = 0;
         this.id = socketid;
         this.score = 0;
+        this.lastRoundPoints = null;
         this.rank = rank;
         this.wins = 0;
         this.ip = ip;
@@ -66,6 +67,7 @@ class Player {
         this.row = 0;
         this.col = 0;
         this.clickedAt = 0;
+        this.lastRoundPoints = null;
         this.histCount = this.histCount + 1;
     }
 

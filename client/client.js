@@ -387,8 +387,8 @@ $(document).ready(function() {
     socket.on('clear scores', () => {
         scoreboard.clearScores()
     });
-    socket.on('post score', (rank, name, color, score, wins, famerName) => {
-        scoreboard.postScore(rank, name, color, score, wins, famerName)
+    socket.on('post score', (rank, name, color, score, wins, famerName, roundPoints, round) => {
+        scoreboard.postScore(rank, name, color, score, wins, famerName, roundPoints, round)
     });
     socket.on('post group', (category, dict) => {
         scoreboard.postGroup(category, dict)

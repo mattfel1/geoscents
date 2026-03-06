@@ -43,7 +43,7 @@ class Scoreboard {
         if (this.myRenderPace) this.myRenderPace();
     }
 
-    _paceInfo(score) {
+    _paceInfo(score, round) {
         if (this.pointsMode === 0) return null;
         let target, goalName;
         if (this.pointsMode === 1) {
@@ -62,7 +62,8 @@ class Scoreboard {
             goalName,
             achieved: true
         };
-        const remaining = CONSTANTS.GAME_ROUNDS - this.currentRound - 1;
+        const currentRound = round !== undefined ? round : this.currentRound;
+        const remaining = CONSTANTS.GAME_ROUNDS - currentRound - 1;
         const maxPerRound = Math.round(CONSTANTS.PERFECT_SCORE / CONSTANTS.GAME_ROUNDS);
         const maxPossible = score + remaining * maxPerRound;
         if (maxPossible < target) return {
@@ -102,7 +103,7 @@ class Scoreboard {
         };
     }
 
-    postScore(rank, name, color, score, wins, famerName) {
+    postScore(rank, name, color, score, wins, famerName, roundPoints, round) {
         const isYou = name.startsWith('*');
         const displayName = isYou ? name.slice(1) : name;
         const isBot = displayName.startsWith('Average ');
@@ -137,12 +138,34 @@ class Scoreboard {
             })
             .html(youArrow + '<b>' + displayName + '</b>' + botTooltip);
         const right = $('<span>').css({
-                color: '#333',
-                whiteSpace: 'nowrap',
-                marginLeft: '6px'
-            })
-            .text(score + '  (' + wins + ' \uD83C\uDFC6)');
+            color: '#333',
+            whiteSpace: 'nowrap',
+            marginLeft: '6px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+        });
 
+        if (roundPoints !== null && roundPoints !== undefined) {
+            // Pace-based color only for "you" — _paceInfo is calibrated to the viewer's own score
+            let badgeColor;
+            if (isYou) {
+                const pace = this._paceInfo(score, round);
+                if (pace && pace.needed) {
+                    if (roundPoints >= pace.needed) badgeColor = '#2a8a2a';
+                    else if (roundPoints >= pace.needed * 0.7) badgeColor = '#b87000';
+                    else badgeColor = '#c00';
+                } else {
+                    badgeColor = '#666';
+                }
+            } else {
+                badgeColor = '#666';
+            }
+            right.append($('<span>').css({ fontSize: '11px', fontWeight: 'bold', color: badgeColor })
+                .text('+' + roundPoints));
+        }
+
+        right.append($('<span>').text(score + '  (' + wins + ' \uD83C\uDFC6)'));
         mainLine.append(left).append(right);
         row.append(mainLine);
 
