@@ -1219,7 +1219,9 @@ class Room {
                 const player = this.players.get(id);
                 if (player.id === senderSocket.id) senderName = "*" + senderName;
             }
-            const sent_msg = "[ " + room + " <b><font color='" + senderColor + "'>" + senderName + "</font></b> ]: " + new_sent_msg + "<br>";
+            const badge = `<span style="border:2px solid ${senderColor};border-radius:4px;padding:1px 7px;font-weight:bold;font-size:13px;color:${senderColor};margin-right:5px;white-space:nowrap;">${senderName}</span>`;
+            const roomBadge = `<span style="background:#f0f0f0;border-radius:3px;padding:1px 5px;font-size:11px;color:#666;margin-right:4px;">${this.roomName}</span>`;
+            const sent_msg = roomBadge + badge + new_sent_msg + "<br>";
             socket.emit("update messages", room, sent_msg);
             cb();
         });

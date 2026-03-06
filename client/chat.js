@@ -91,9 +91,8 @@ class Chat {
                 if (self.isSpamming()) {
                     socket.emit("block spam");
                 } else {
+                    $("form#chat #msg_text").val("");
                     socket.emit("send message", msg, function() {
-                        $("form#chat #msg_text").val("");
-
                         // Add to spamtracker map
                         const currentdate = new Date();
                         const unix = currentdate.getTime();
