@@ -327,7 +327,7 @@ const getHist = () => {
 const PLAYER_COUNT_LOG = '/scratch/player_count.csv';
 if (!fs.existsSync(PLAYER_COUNT_LOG)) {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    fs.writeFileSync(PLAYER_COUNT_LOG, `date,time (${tz}),slot (${tz}),players\n`);
+    fs.writeFileSync(PLAYER_COUNT_LOG, `date,time (${tz}),time slot (${tz}),players\n`);
 }
 const logPlayerCount = () => {
     const total = Object.values(rooms).reduce((sum, r) => sum + r.playerCount(), 0);
