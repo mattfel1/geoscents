@@ -9,7 +9,11 @@ const Player = require('./player.js');
 const helpers = require('../resources/helpers.js');
 const fs = require('fs')
 const fetch = require("node-fetch");
-const app = require('./app.js')
+
+const nameCard = (color, name) =>
+    `<span style="border:2px solid ${color};border-radius:4px;padding:1px 7px;font-weight:bold;font-size:13px;color:${color};margin-right:5px;white-space:nowrap;">${name}</span>`;
+
+const sysMsg = (text) => `<span style="color:#aaa;font-style:italic;">${text}</span>`;
 const MAPS = require('../resources/maps.json')
 
 
@@ -108,44 +112,19 @@ class Room {
         });
     }
     joeGood(socket) {
-        const name = this.exportPlayer(socket)['name'];
-        const color = this.exportPlayer(socket)['color'];
-        const roomName = this.roomName;
-        const joeName = this.joe.name;
-        this.clients.forEach(function(s, id) {
-            s.emit('update messages', roomName, '[ ' + roomName + ' <b>' + joeName +
-                '</b> ]: Aww, thanks, <b><font color="' + color + '">' + name + '</font></b>!  :D<br>');
-        });
+        const info = this.exportPlayer(socket);
+        this.distributeJoeMessage(`Aww, thanks, ${nameCard(info['color'], info['name'])}!  :D`);
     }
     joeBad(socket) {
-        const name = this.exportPlayer(socket)['name'];
-        const color = this.exportPlayer(socket)['color'];
-        const roomName = this.roomName;
-        const joeName = this.joe.name;
-        this.clients.forEach(function(s, id) {
-            s.emit('update messages', roomName, '[ ' + roomName + ' <b>' + joeName +
-                '</b> ]: Oh no, sorry for being a bad bot, <b><font color="' + color + '">' + name + '</font></b>!  D:<br>');
-        });
+        const info = this.exportPlayer(socket);
+        this.distributeJoeMessage(`Oh no, sorry for being a bad bot, ${nameCard(info['color'], info['name'])}!  D:`);
     }
     joeGG(socket) {
-        const name = this.exportPlayer(socket)['name'];
-        const color = this.exportPlayer(socket)['color'];
-        const roomName = this.roomName;
-        const joeName = this.joe.name;
-        this.clients.forEach(function(s, id) {
-            s.emit('update messages', roomName, '[ ' + roomName + ' <b>' + joeName +
-                '</b> ]: Good game, <b><font color="' + color + '">' + name + '</font></b>!  You did well!<br>');
-        });
+        const info = this.exportPlayer(socket);
+        this.distributeJoeMessage(`Good game, ${nameCard(info['color'], info['name'])}!  You did well!`);
     }
     joeYeet(socket) {
-        const name = this.exportPlayer(socket)['name'];
-        const color = this.exportPlayer(socket)['color'];
-        const roomName = this.roomName;
-        const joeName = this.joe.name;
-        this.clients.forEach(function(s, id) {
-            s.emit('update messages', roomName, '[ ' + roomName + ' <b>' + joeName +
-                '</b> ]: YEEEEEET!<br>');
-        });
+        this.distributeJoeMessage("YEEEEEET!");
     }
     killJoe() {
         this.hasJoe = false;
@@ -1205,26 +1184,26 @@ class Room {
         }
     }
 
+    _emitChat(name, color, msg) {
+        const room = this.roomName;
+        const badge = `<span style="border:2px solid ${color};border-radius:4px;padding:1px 7px;font-weight:bold;font-size:13px;color:${color};margin-right:5px;white-space:nowrap;">${name}</span>`;
+        const roomBadge = `<span style="background:#f0f0f0;border-radius:3px;padding:1px 5px;font-size:11px;color:#666;margin-right:4px;">${room}</span>`;
+        const sent_msg = roomBadge + badge + msg + "<br>";
+        this.clients.forEach((socket) => socket.emit("update messages", room, sent_msg));
+    }
+
     distributeMessage(senderSocket, new_sent_msg, cb) {
-        const getname = (s) => this.exportPlayer(s)['name'];
         if (this.players.has(senderSocket.id)) {
             this.players.get(senderSocket.id).consecutiveSecondsInactive = 0;
             this.players.get(senderSocket.id).consecutiveRoundsInactive = 0;
         }
-        const senderColor = this.exportPlayer(senderSocket)['color'];
-        const room = this.roomName;
-        this.clients.forEach((socket, id) => {
-            let senderName = getname(senderSocket);
-            if (this.players.has(id)) {
-                const player = this.players.get(id);
-                if (player.id === senderSocket.id) senderName = "*" + senderName;
-            }
-            const badge = `<span style="border:2px solid ${senderColor};border-radius:4px;padding:1px 7px;font-weight:bold;font-size:13px;color:${senderColor};margin-right:5px;white-space:nowrap;">${senderName}</span>`;
-            const roomBadge = `<span style="background:#f0f0f0;border-radius:3px;padding:1px 5px;font-size:11px;color:#666;margin-right:4px;">${this.roomName}</span>`;
-            const sent_msg = roomBadge + badge + new_sent_msg + "<br>";
-            socket.emit("update messages", room, sent_msg);
-            cb();
-        });
+        const info = this.exportPlayer(senderSocket);
+        this._emitChat(info['name'], info['color'], new_sent_msg);
+        cb();
+    };
+
+    distributeJoeMessage(msg) {
+        this._emitChat(this.joe.name, this.joe.color, msg);
     };
     whisperMessage(senderSocket, msg, cb) {
         const room = this.roomName;
