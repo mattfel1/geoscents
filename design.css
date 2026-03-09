@@ -1,5 +1,8 @@
 @keyframes emojifall {
-    to { top: 110vh; transform: rotate(360deg); }
+    to {
+        top: 110vh;
+        transform: rotate(360deg);
+    }
 }
 
 /* === Popups / overlays === */

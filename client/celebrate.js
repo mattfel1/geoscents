@@ -6,7 +6,9 @@ function goldConfetti() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const ctx = canvas.getContext('2d');
-    const particles = Array.from({length: 200}, () => ({
+    const particles = Array.from({
+        length: 200
+    }, () => ({
         x: Math.random() * canvas.width,
         y: -20 - Math.random() * canvas.height * 0.3,
         w: Math.random() * 12 + 5,
@@ -21,7 +23,9 @@ function goldConfetti() {
     const animate = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         particles.forEach(p => {
-            p.x += p.vx; p.y += p.vy; p.rot += p.vrot;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.rot += p.vrot;
             ctx.save();
             ctx.translate(p.x, p.y);
             ctx.rotate(p.rot * Math.PI / 180);
@@ -47,4 +51,7 @@ function emojiRain(emoji, count = 40) {
     }
 }
 
-module.exports = { goldConfetti, emojiRain };
+module.exports = {
+    goldConfetti,
+    emojiRain
+};

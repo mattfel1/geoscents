@@ -12,7 +12,10 @@ const CustomPopup = require('./custompopup.js');
 const FamerPopup = require('./famerpopup.js');
 const HelpPopup = require('./helppopup.js');
 const Chat = require('./chat.js');
-const { goldConfetti, emojiRain } = require('./celebrate.js');
+const {
+    goldConfetti,
+    emojiRain
+} = require('./celebrate.js');
 const nameCard = (color, name) =>
     `<span style="border:2px solid ${color};border-radius:4px;padding:1px 7px;font-weight:bold;font-size:13px;color:${color};margin-right:5px;white-space:nowrap;">${name}</span>`;
 const sysMsg = (text) => `<span style="color:#aaa;font-style:italic;">${text}</span>`;
@@ -430,7 +433,9 @@ $(document).ready(function() {
         document.getElementById('hof-copy-btn').onclick = () => {
             navigator.clipboard.writeText(hash).then(() => {
                 document.getElementById('hof-copy-btn').textContent = '✅ Copied!';
-                setTimeout(() => { document.getElementById('hof-copy-btn').textContent = '📋 Copy Code'; }, 2000);
+                setTimeout(() => {
+                    document.getElementById('hof-copy-btn').textContent = '📋 Copy Code';
+                }, 2000);
             });
         };
         showCelebPopup('hof-popup');
@@ -438,7 +443,13 @@ $(document).ready(function() {
     let clownBatch = [];
     let clownBatchTimer = null;
     socket.on('announce clown', (room, name, score, color, isMe) => {
-        clownBatch.push({ name, score, color, isMe, room });
+        clownBatch.push({
+            name,
+            score,
+            color,
+            isMe,
+            room
+        });
         clearTimeout(clownBatchTimer);
         clownBatchTimer = setTimeout(() => {
             emojiRain('🤡', 15);

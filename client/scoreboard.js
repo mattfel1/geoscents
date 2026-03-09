@@ -161,7 +161,11 @@ class Scoreboard {
             } else {
                 badgeColor = '#666';
             }
-            right.append($('<span>').css({ fontSize: '11px', fontWeight: 'bold', color: badgeColor })
+            right.append($('<span>').css({
+                    fontSize: '11px',
+                    fontWeight: 'bold',
+                    color: badgeColor
+                })
                 .text('+' + roundPoints));
         }
 

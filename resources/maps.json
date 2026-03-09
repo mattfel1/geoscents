@@ -67,12 +67,24 @@
     "Classical Antiquity": {
         "coords": [-10, 60, 20, 52.4],
         "flair": "🏛️",
+        "leader": "Caesar",
+        "greeting": "Salvē",
         "tier": "trivia",
         "subtitle": "8th century BC – 5th century AD - Mediterranean"
     },
+    "Sahel": {
+        "coords": [-18, 37.7, 0, 31.3],
+        "leader": "Musa",
+        "greeting": "Bisimila",
+        "flair": "🦒",
+        "tier": "trivia",
+        "subtitle": "4th century AD – 17th century AD"
+    },
     "Silk Road": {
         "coords": [8, 125, 8.6, 61.1],
-        "flair": "🐪",
+        "flair": "🌶️",
+        "leader": "Khan",
+        "greeting": "Тавтай морилогтун (Tavtai morilogtun)",
         "tier": "trivia",
         "subtitle": "2nd century BC – 15th century AD"
     },
@@ -85,6 +97,8 @@
     "Moon": {
         "coords": [-180, 180, -90, 90],
         "projection": "equirectangular",
+        "leader": "Armstrong",
+        "greeting": "Welcome",
         "flair": "🌕",
         "tier": "trivia",
         "subtitle": "1959 – present"

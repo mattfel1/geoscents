@@ -304,3 +304,55 @@ make_country_list('Poland', [8.15, 29, 48.5, 56], 0, errors)
 print("\n")
 for err in errors:
     print(err)
+
+# === TRIVIA MAP BOUNDS CHECK ===
+with open(geoscents_home + 'resources/maps.json') as _f:
+    _maps = json.load(_f)
+
+print("\n=== TRIVIA MAP BOUNDS CHECK ===")
+_oob_found = False
+for _map_name, _map_info in _maps.items():
+    if _map_info.get('tier') != 'trivia':
+        continue
+    _coords = _map_info.get('coords')
+    if not _coords:
+        continue
+    _lon_min, _lon_max, _lat_min, _lat_max = _coords
+
+    _slug = re.sub(r'[^a-z0-9]', '', _map_name.lower())
+    _db = geoscents_home + 'resources/databases/' + _slug + '.js'
+    if not Path(_db).exists():
+        _slug2 = _map_name.lower().replace(' ', '_').replace('.', '').replace("'", '')
+        _db = geoscents_home + 'resources/databases/' + _slug2 + '.js'
+    if not Path(_db).exists():
+        print(f"  [{_map_name}] no DB file found, skipping")
+        continue
+
+    _content = open(_db).read()
+    _oob = []
+    for _m in re.finditer(r'\{[^{}]+\}', _content, re.DOTALL):
+        _block = _m.group()
+        _city = re.search(r'"city":\s*"([^"]*)"', _block)
+        _lat  = re.search(r'"lat":\s*([-\d.]+)', _block)
+        _lng  = re.search(r'"lng":\s*([-\d.]+)', _block)
+        if not (_city and _lat and _lng):
+            continue
+        _clat, _clng = float(_lat.group(1)), float(_lng.group(1))
+        _in_lat = _lat_min <= _clat <= _lat_max
+        _in_lon = (_lon_min <= _clng <= _lon_max) or \
+                  (_lon_min <= _clng + 360 <= _lon_max) or \
+                  (_lon_min <= _clng - 360 <= _lon_max)
+        if not (_in_lat and _in_lon):
+            _oob.append((_city.group(1), _clat, _clng))
+
+    if _oob:
+        _oob_found = True
+        print(f"\n  *** OUT OF BOUNDS in [{_map_name}]"
+              f" (lon {_lon_min}–{_lon_max}, lat {_lat_min}–{_lat_max}) ***")
+        for _city, _clat, _clng in _oob:
+            print(f"      '{_city}': lat={_clat}, lng={_clng}")
+    else:
+        print(f"  [{_map_name}] OK")
+
+if not _oob_found:
+    print("  All trivia maps in bounds!")

@@ -487,18 +487,6 @@ module.exports = {
             "wiki": "https://en.wikipedia.org/wiki/Aqueduct_of_Segovia"
         },
         {
-            "city": "Hadrian's Wall",
-            "city_ascii": "",
-            "lat": 54.9984,
-            "lng": -2.6130,
-            "iso2": "spqr",
-            "country": "Rome",
-            "population": 0,
-            "capital": "",
-            "img_link": "",
-            "wiki": ""
-        },
-        {
             "city": "Palmyra",
             "city_ascii": "",
             "lat": 34.5503,

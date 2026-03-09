@@ -564,8 +564,7 @@ class Room {
                 }
                 this.clients.get(player.id).emit("announce hall", citysrc, player.name, player.score, player.color, player.hash);
                 this.whisperMessage(player, "<br><i>Your PRIVATE username is <b>" + player.hash + "</b>.  Please rejoin the game any time using this name and you can select a flair for this achievement, and you can collect more!  If you forget this hash, you can leave log /feedback with your name and email, or you can ask on discord.  If multiple users are using your current display name, then your unique public identifier is <b>" + player.public_hash + "</b></i><br><br>", () => {})
-            }
-            else if (player.score > 0 && player.score < CONSTANTS.CLOWNSCORE) {
+            } else if (player.score > 0 && player.score < CONSTANTS.CLOWNSCORE) {
                 const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
                 if (playedAllRounds(playersHistory, player.id)) {
                     player.clown = '🤡';
