@@ -97,7 +97,7 @@ Object.keys(MAPS).forEach(function(value) {
 Object.keys(MAPS).forEach(function(value) {
     var entry = document.createElement("option");
     entry.value = value;
-    if (MAPS[value]['tier'] === 'Regional Cities') {
+    if (MAPS[value]['tier'] === 'regional') {
         entry.text = value
         region_options.push(entry)
     }
@@ -212,7 +212,7 @@ $(document).ready(function() {
             })),
             ...region_options.map(o => ({
                 name: o.value,
-                tier: 'Regional Cities',
+                tier: 'regional',
                 flair: (MAPS[o.value] && MAPS[o.value].flair) || ''
             })),
             ...country_options.map(o => ({
@@ -225,7 +225,7 @@ $(document).ready(function() {
             special: 'Special',
             trivia: 'Trivia',
             continent: 'Continents',
-            region: 'Regions',
+            regional: 'Regional Cities',
             country: 'Countries'
         };
 
@@ -424,7 +424,7 @@ $(document).ready(function() {
 
     socket.on('announce hall', (room, name, score, color, hash) => {
         let perfect_limit = CONSTANTS.PERFECT_SCORE;
-        if (CONSTANTS.DEBUG_MODE) perfect_limit = CONSTANTS.DEBUG_PERFECT_SCORE;
+        if (commands.debugMode) perfect_limit = CONSTANTS.DEBUG_PERFECT_SCORE;
         const perfect = score >= perfect_limit ? 'PERFECT SCORE!!!! ' : '';
         socket.emit("announcement", '<b>WOW!! ' + perfect + nameCard(color, name) + sysMsg('made it into the hall of fame with ' + score + ' points in ' + room + '!!!') + '</b><br>');
         goldConfetti();
@@ -482,6 +482,9 @@ $(document).ready(function() {
             commands.postButtons();
         }
     })
+    socket.on('debug mode', (enabled) => {
+        commands.debugMode = enabled;
+    });
     socket.on('draw buttons', () => {
         commands.postButtons()
     });
@@ -632,6 +635,17 @@ $(document).ready(function() {
 
     /**** Map *****/
     const map = new MapPanel(socket);
+    socket.on('system toast', (type, message) => {
+        const el = document.createElement('div');
+        el.className = 'system-toast ' + type;
+        el.textContent = message;
+        document.body.appendChild(el);
+        setTimeout(() => {
+            el.classList.add('fade-out');
+            el.addEventListener('animationend', () => el.remove());
+        }, 5000);
+    });
+
     socket.on('draw point', (coords, color, radius) => {
         map.drawPoint(coords, color, radius)
     });

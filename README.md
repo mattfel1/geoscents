@@ -16,12 +16,16 @@ Feel free to contribute!
 
 ```bash
 npm install
-npm start        # serves at http://localhost:5000
+npm start              # serves at http://localhost:5000
+DEBUG_MODE=1 npm start # enable debug mode (shows Force Reset button, shorter timers, etc.)
 ```
 
 `npm start` bundles the client with webpack (watch mode) and starts the server with nodemon.
 It sets `LOCAL_DEV=1` automatically, which switches the server to plain HTTP on port 5000 — no SSL certs needed.
 It also kills any stale webpack process from a previous run before starting a new one.
+
+`DEBUG_MODE=1` is read from the environment by the server at runtime — no code changes needed.
+Do **not** edit `CONSTANTS.DEBUG_MODE` in `constants.js` directly; that field is ignored.
 
 ## Production (Digital Ocean / PM2)
 
@@ -42,7 +46,7 @@ builds the bundle in production mode, and starts the app under PM2.
 All coordinates use the format `[min_lon, max_lon, min_lat, max_lat]`.
 The display name in `maps.json` is what matters for capitalisation — all other filenames are derived from it as lowercase with spaces and dots removed (e.g. `"British Isles"` → `britishisles`).
 
-Maps come in three tiers: **continent**, **region**, and **country**.
+Maps come in three tiers: **continent**, **regional**, **country**, and **trivia**. The `regional` tier displays as "Regional Cities" in the UI.
 
 ---
 
@@ -117,7 +121,7 @@ Add an entry in alphabetical order. The key is the display name (capitalisation 
 Fields:
 - `coords` — game viewport bounds (can differ slightly from the image/frame coords if needed)
 - `flair` — flag emoji shown next to the map name
-- `tier` — `"continent"`, `"region"`, `"country"`, or `"trivia"`
+- `tier` — `"continent"`, `"regional"`, `"country"`, or `"trivia"`
 - `leader` / `greeting` — optional; display name and local-language greeting for the welcome banner
 
 Continents omit `leader` and `greeting`. Countries and regions usually include them.

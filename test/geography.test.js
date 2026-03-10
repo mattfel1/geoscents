@@ -17,7 +17,7 @@ const GAMES  = 50;
 
 // Continent + region maps get the full distribution tests.
 // Country maps (100+) only get the smoke test to keep the suite fast.
-const MAIN_MAPS    = Object.keys(MAPS).filter(m => MAPS[m].tier === 'continent' || MAPS[m].tier === 'Regional Cities');
+const MAIN_MAPS    = Object.keys(MAPS).filter(m => MAPS[m].tier === 'continent' || MAPS[m].tier === 'regional');
 const COUNTRY_MAPS = Object.keys(MAPS).filter(m => MAPS[m].tier === 'country');
 
 // ---------------------------------------------------------------------------

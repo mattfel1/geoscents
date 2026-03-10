@@ -58,7 +58,7 @@ class Room {
         this.allRecord;
         this.loadRecords();
         this.createJoe('');
-        this.hasJoe = roomName != CONSTANTS.LOBBY && !CONSTANTS.DEBUG_MODE;
+        this.hasJoe = roomName != CONSTANTS.LOBBY && !process.env.DEBUG_MODE;
         this.recorded = false; // Toggle for making sure we only record once per reveal_state
         this.hall_of_fame; // Keep hall of fame in-memory if this is the lobby
         this.gameHistory = [];
@@ -509,7 +509,7 @@ class Room {
             }
         });
         let rounds = CONSTANTS.GAME_ROUNDS;
-        if (CONSTANTS.DEBUG_MODE)
+        if (process.env.DEBUG_MODE)
             rounds = CONSTANTS.DEBUG_GAME_ROUNDS;
 
         return play_count == rounds;
@@ -553,7 +553,7 @@ class Room {
             const hour = time.getHours();
             const minute = time.getMinutes();
             let famescore = CONSTANTS.FAMESCORE;
-            if (CONSTANTS.DEBUG_MODE)
+            if (process.env.DEBUG_MODE)
                 famescore = CONSTANTS.DEBUGFAMESCORE
             if (player.score >= famescore) {
                 const payload = "- " + month + day + ": <font color=" + player.color + "><b>" + player.name + "</b></font> scored <b>" + player.score + "</b> on " + citysrc;
@@ -608,7 +608,7 @@ class Room {
             if (player.score >= famescore) {
                 const playersHistory = JSON.stringify([...this.playersHistory.entries()], null, 2);
                 let rounds = CONSTANTS.GAME_ROUNDS;
-                if (CONSTANTS.DEBUG_MODE)
+                if (process.env.DEBUG_MODE)
                     rounds = CONSTANTS.DEBUG_GAME_ROUNDS;
                 let path_str = helpers.formatPath(playersHistory, rounds, player.color, player.id, citysrc, player.score)
 
@@ -1063,7 +1063,7 @@ class Room {
         } else {
             let reveal_duration = CONSTANTS.REVEAL_DURATION;
             let begin_game_duration = CONSTANTS.BEGIN_GAME_DURATION;
-            if (CONSTANTS.DEBUG_MODE) {
+            if (process.env.DEBUG_MODE) {
                 begin_game_duration = 0;
                 reveal_duration = 0;
             } else if (this.allGrind()) {
@@ -1134,7 +1134,7 @@ class Room {
                     this.updateScores();
                     this.sortPlayers();
                     let rounds = CONSTANTS.GAME_ROUNDS;
-                    if (CONSTANTS.DEBUG_MODE)
+                    if (process.env.DEBUG_MODE)
                         rounds = CONSTANTS.DEBUG_GAME_ROUNDS;
 
                     if (this.round + 1 >= rounds) {
@@ -1163,7 +1163,7 @@ class Room {
                     this.recordGuesses()
                 }
                 let rounds = CONSTANTS.GAME_ROUNDS;
-                if (CONSTANTS.DEBUG_MODE)
+                if (process.env.DEBUG_MODE)
                     rounds = CONSTANTS.DEBUG_GAME_ROUNDS;
 
                 if (this.timer <= 0 && this.round + 1 >= rounds) {

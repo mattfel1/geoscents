@@ -877,7 +877,7 @@ async function insertHallOfFame(hash, public_hash, player_name, map, path, score
         currentdate.getMinutes().toString().padStart(2, "0") + " GMT";
     var unixtime = Math.round(currentdate.getTime() / 1000);
     let perfect_limit = CONSTANTS.PERFECT_SCORE;
-    if (CONSTANTS.DEBUG_MODE)
+    if (process.env.DEBUG_MODE)
         perfect_limit = CONSTANTS.DEBUG_PERFECT_SCORE;
     var perfect = score >= perfect_limit
 

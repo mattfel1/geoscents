@@ -415,6 +415,18 @@ io.on('connection', (socket) => {
         socket.emit('update public rooms', getPublicRoomsInfo());
         helpers.log("User connected    " + socket.handshake.address);
         socket.emit("update messages", CONSTANTS.LOBBY, WELCOME_MESSAGE1);
+        if (process.env.DEBUG_MODE) socket.emit('debug mode', true);
+    });
+
+    socket.on('debug force reset', () => {
+        if (!process.env.DEBUG_MODE) return;
+        helpers.log("DEBUG: force reset triggered");
+        io.sockets.emit('system toast', 'warning', '⚠️ DEBUG: records reset in 3 seconds...');
+        setTimeout(() => {
+            const week = true, month = true, year = true;
+            doReset(week, month, year);
+            io.sockets.emit('system toast', 'info', '✅ DEBUG: records force-reset!');
+        }, 3000);
     });
     socket.on('disconnect', function() {
         if (playerRooms.has(socket.id)) {
@@ -1137,6 +1149,45 @@ setInterval(() => {
         }
     });
 }, 1000);
+function doReset(week, month, year) {
+    [daily_region, daily_capital, daily_trivia] = calculate_daily();
+
+    // Flush inactive maps to disk via temp rooms
+    Object.keys(MAPS).forEach(function(value) {
+        if (MAPS[value]['tier'] !== 'continent') {
+            const tmp_room = new Room(value.replace(" Capitals", ""), "tmp", value);
+            tmp_room.flushRecords(week, month, year);
+            delete tmp_room;
+        }
+    });
+
+    // Sync active rooms in-memory. Use flushRecords (not loadRecords) so in-memory state
+    // is set synchronously — flushRecords' disk writes are async and would race with loadRecords.
+    Object.values(rooms).forEach(function(room) {
+        if (room.roomName == CONSTANTS.DAILY_REGION) {
+            room.killJoe();
+            room.map = daily_region; room.citysrc = daily_region;
+            room.flushRecords(week, month, year);
+            room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
+            room.createJoe('');
+        } else if (room.roomName == CONSTANTS.DAILY_CAPITAL) {
+            room.killJoe();
+            room.map = daily_capital.replace(" Capitals", ""); room.citysrc = daily_capital;
+            room.flushRecords(week, month, year);
+            room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
+            room.createJoe('');
+        } else if (room.roomName == CONSTANTS.DAILY_TRIVIA && daily_trivia) {
+            room.killJoe();
+            room.map = daily_trivia; room.citysrc = daily_trivia;
+            room.flushRecords(week, month, year);
+            room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
+            room.createJoe('');
+        } else {
+            room.flushRecords(week, month, year);
+        }
+    });
+}
+
 // Handle reboot message
 setInterval(() => {
     var d = new Date();
@@ -1159,61 +1210,13 @@ setInterval(() => {
     let reset_imminent = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() <= 29;
     let reset_now = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() > 29;
     if (reset_imminent) {
-        announce("<font size=9 color=\"red\"><b>WARNING: Daily" + s + " records will reset in 30 seconds! Daily maps will also be changed!</b></font><br>")
+        io.sockets.emit('system toast', 'warning', '⚠️ Daily' + s + ' records reset in 30 seconds — daily maps will also change!');
     }
 
     // Get new daily
     if (reset_now) {
-        let old_daily_region = daily_region;
-        let old_daily_capital = daily_capital;
-        [daily_region, daily_capital, daily_trivia] = calculate_daily();
-        let no_reset = []
-        // Flush all current rooms and select new dailys
-        Object.values(rooms).forEach(function(room) {
-            if (room.roomName == CONSTANTS.DAILY_REGION) {
-                room.flushRecords(week, month, year);
-                room.killJoe();
-                room.map = daily_region;
-                room.citysrc = daily_region;
-                room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
-                room.createJoe('');
-                room.loadRecords();
-            } else if (room.roomName == CONSTANTS.DAILY_CAPITAL) {
-                room.flushRecords(week, month, year);
-                room.killJoe();
-                room.map = daily_capital.replace(" Capitals", "");
-                room.citysrc = daily_capital;
-                room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
-                room.createJoe('');
-                room.loadRecords();
-            } else if (room.roomName == CONSTANTS.TRIVIA && daily_trivia) {
-                room.flushRecords(week, month, year);
-                room.killJoe();
-                room.map = daily_trivia;
-                room.citysrc = daily_trivia;
-                room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
-                room.createJoe('');
-                room.loadRecords();
-            } else {
-                room.flushRecords(week, month, year);
-            }
-            if (room.isPrivate) {
-                no_reset.push(room.citysrc)
-            }
-        });
-        // Make a room for each map temporarily, to reset those records in case no one is in them right now
-        // Delaying in case there is an io issue
-        helpers.sleep(1000)
-        Object.keys(MAPS).forEach(function(value) {
-            if (value != old_daily_region && value != old_daily_capital && MAPS[value]['tier'] != "continent" && value != CONSTANTS.TRIVIA && no_reset.includes(value)) {
-                let map = value.replace(" Capitals", "");
-                let tmp_room = new Room(map, "tmp", value)
-                tmp_room.flushRecords(week, month, year);
-                delete tmp_room;
-            }
-        });
-
-        announce("<font size=10 color=\"red\"><b>Daily" + s + " records have been reset!</b></font><br>")
+        doReset(week, month, year);
+        io.sockets.emit('system toast', 'info', '✅ Daily' + s + ' records have been reset!');
     }
 }, 30000);
 

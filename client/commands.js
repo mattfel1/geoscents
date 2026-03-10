@@ -27,6 +27,7 @@ class Commands {
             [CONSTANTS.DAILY_REGION]: 0
         }
         this.mapStyle = 'terrain';
+        this.debugMode = false;
         this.lastCommand = {
             'timeDescrip': '',
             'citystring': '',
@@ -211,6 +212,12 @@ class Commands {
         let hueSlider = "<div title='Color blind assist. Shift the map color hue' style=\"display: inline-block\" class=\"slidecontainer\"><input style=\"width: 90px\" type=\"range\" min=\"0\" max=\"360\" value=\"" + this.hueShift + "\" class=\"slider\" id=\"hue_shift\"></div>"
         $('#settings-box').append($("<span>Display: </span><span>" + hueSlider + autoscaleButton + grindButton + "</span>"));
 
+        // Debug-only controls (only rendered when DEBUG_MODE=1 on server)
+        if (this.debugMode) {
+            let forceResetBtn = "<span id='debug_reset_button' class='settings-btn-container'><button title='DEBUG: Force daily record reset immediately' class='settings-btn' style='background:#c0392b;color:#fff;'>⚠ Force Reset</button></span>";
+            $('#settings-box').append($("<span style='color:#c0392b;font-weight:bold;'>DEBUG:</span><span>" + forceResetBtn + "</span>"));
+        }
+
         // Add map buttons in a 3-column grid
         const grid = $("<div class='room-btn-grid'></div>");
         $('#commands').append(grid);
@@ -292,6 +299,12 @@ class Commands {
             socket.emit('renderMap', 'terrain');
             this.refocus()
         });
+        if (this.debugMode) {
+            $('#debug_reset_button').bind("click", () => {
+                socket.emit('debug force reset');
+                this.refocus()
+            });
+        }
         $('#satellite_button').bind("click", () => {
             socket.emit('renderMap', 'satellite');
             this.refocus()
