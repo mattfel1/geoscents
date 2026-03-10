@@ -62,7 +62,8 @@
     "Misc Trivia": {
         "coords": [-180, 180, -55.1, 81.05],
         "flair": "🧠",
-        "tier": "trivia"
+        "tier": "trivia",
+        "subtitle": "Random assortment of world trivia"
     },
     "Classical Antiquity": {
         "coords": [-10, 60, 20, 52.4],
@@ -125,7 +126,7 @@
         "greeting": "Karibu",
         "coords": [18, 52.1, -15, 5],
         "flair": "🦒",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Algeria": {
         "leader": "Tebboune",
@@ -139,35 +140,36 @@
         "greeting": "Willkommen",
         "coords": [3.33, 18, 43, 49],
         "flair": "🫕",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Amazon": {
         "leader": "Raoni",
         "greeting": "Receber",
         "coords": [-84, -34.3, -19, 10],
         "flair": "🦜",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Antarctica": {
         "leader": "Penguin",
         "greeting": "Bonvenon",
         "coords": [-180, 180, -90, -52],
         "flair": "🐧",
-        "tier": "trivia"
+        "tier": "trivia",
+        "subtitle": "Scientific, natural, and historical sites on Antarctica"
     },
     "Arabia": {
         "leader": "Djinn",
         "greeting": "أهلا بك (Ahlan bik)",
         "coords": [23.1, 68, 12, 36],
         "flair": "👳",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Arctic": {
         "leader": "Santa",
         "greeting": "Welcome",
         "coords": [-180, 180, 45, 90],
         "flair": "❄️",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Argentina": {
         "leader": "Fernandez",
@@ -188,7 +190,7 @@
         "greeting": "Здраво (Zdravo)",
         "coords": [5, 39, 34.15, 49.05],
         "flair": "☦️",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Bangladesh": {
         "leader": "Hamid",
@@ -202,7 +204,7 @@
         "greeting": "Welgekomen",
         "coords": [-1.65, 12, 49, 54],
         "flair": "🚲",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Bolivia": {
         "leader": "Arce",
@@ -223,7 +225,7 @@
         "greeting": "Fáilte",
         "coords": [-18.55, 10.5, 49.5, 59.4],
         "flair": "🇮🇪",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Cambodia": {
         "leader": "Sen",
@@ -251,7 +253,7 @@
         "greeting": "добро пожаловать (dobro pozhalovat')",
         "coords": [35, 51, 38, 45.06],
         "flair": "⛰️",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Central African Republic": {
         "leader": "Touadéra",
@@ -293,7 +295,7 @@
         "greeting": "欢迎光临 (Huānyíng guānglín)",
         "coords": [94.5, 157, 20, 49.65],
         "flair": "🪷",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Egypt": {
         "leader": "el-Sisi",
@@ -335,14 +337,14 @@
         "greeting": "Akeyi/Bienvenido",
         "coords": [-85.4, -64.5, 14.43, 26],
         "flair": "🐠",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Himalayas": {
         "leader": "Yeti",
         "greeting": "欢迎光临 (Huānyíng guānglín)",
         "coords": [69, 98.62, 23, 38],
         "flair": "🏔️",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "India": {
         "leader": "Modi",
@@ -363,7 +365,7 @@
         "greeting": "Selamat datang",
         "coords": [77, 152, -10.5, 32],
         "flair": "🐅",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Iran": {
         "leader": "Raisi",
@@ -426,7 +428,7 @@
         "greeting": "Welcome",
         "coords": [-74, -56.47, 10, 20],
         "flair": "🏝️",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Liechtenstein": {
         "leader": "Risch",
@@ -454,7 +456,7 @@
         "greeting": "Allû",
         "coords": [33.7, 52, 29, 38],
         "flair": "🌌",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Mexico": {
         "leader": "AMLO",
@@ -503,7 +505,7 @@
         "greeting": "Welcome",
         "coords": [-25, 50, 52.2, 72],
         "flair": "🎣",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Pakistan": {
         "leader": "Alvi",
@@ -545,7 +547,7 @@
         "greeting": "Aloha",
         "coords": [129, 270, -49, 26],
         "flair": "🏄",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Portugal": {
         "leader": "de Sousa",
@@ -580,7 +582,7 @@
         "greeting": "أهلا بك (Ahlan bik)",
         "coords": [-19, 49.2, 6, 42],
         "flair": "🐫",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "South Africa": {
         "leader": "Ramaphosa",
@@ -643,7 +645,7 @@
         "greeting": "Сәлеметсіз бе (Sälemetsiz be)",
         "coords": [28, 106, 23, 57],
         "flair": "🐎",
-        "tier": "region"
+        "tier": "Regional Cities"
     },
     "Turkey": {
         "leader": "Erdoğan",
@@ -706,10 +708,10 @@
         "greeting": "Benvenuto",
         "coords": [12.440, 12.4605, 41.899, 41.908],
         "flair": "🇻🇦",
-        "tier": "country"
+        "tier": "trivia"
     },
     "Venezuela": {
-        "leader": "Maduro",
+        "leader": "Rodriguez",
         "greeting": "Bienvenido",
         "coords": [-79.3, -52, -1, 15],
         "flair": "🇻🇪",

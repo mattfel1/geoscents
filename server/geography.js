@@ -55,7 +55,7 @@ const isCountry = (citysrc) => {
     return MAPS[citysrc]['tier'] === "country"
 }
 const isRegion = (citysrc) => {
-    return MAPS[citysrc]['tier'] === "region"
+    return MAPS[citysrc]['tier'] === "Regional Cities"
 }
 const isContinent = (citysrc) => {
     return MAPS[citysrc]['tier'] === "continent"

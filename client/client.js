@@ -97,7 +97,7 @@ Object.keys(MAPS).forEach(function(value) {
 Object.keys(MAPS).forEach(function(value) {
     var entry = document.createElement("option");
     entry.value = value;
-    if (MAPS[value]['tier'] === 'region') {
+    if (MAPS[value]['tier'] === 'Regional Cities') {
         entry.text = value
         region_options.push(entry)
     }
@@ -212,7 +212,7 @@ $(document).ready(function() {
             })),
             ...region_options.map(o => ({
                 name: o.value,
-                tier: 'region',
+                tier: 'Regional Cities',
                 flair: (MAPS[o.value] && MAPS[o.value].flair) || ''
             })),
             ...country_options.map(o => ({

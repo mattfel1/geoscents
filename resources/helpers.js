@@ -542,8 +542,8 @@ const recordGuesses = (map, citystring, city, admin, country, iso2, raw_ips, dis
                         history[citystring]["dists"] = history[citystring]["dists"].concat(dists.map(x => trunc(x, 1)));
                         history[citystring]["times"] = history[citystring]["times"].concat(times.map(x => trunc(x, 1)));
                         history[citystring]["ips"] = history[citystring]["ips"].concat(ips);
-                        history[citystring]["lats"] = history[citystring]["lats"].concat(lats.map(x => trunc(x, 3)));
-                        history[citystring]["lons"] = history[citystring]["lons"].concat(lons.map(x => trunc(x, 3)));
+                        history[citystring]["lats"] = history[citystring]["lats"].concat(lats.map(x => trunc(x, 5)));
+                        history[citystring]["lons"] = history[citystring]["lons"].concat(lons.map(x => trunc(x, 5)));
                     }
                     // Compute new averages
                     history[citystring]["true_lat"] = true_lat;
