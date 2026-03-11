@@ -1203,10 +1203,6 @@ setInterval(() => {
     if (!week && month && year) s = ", monthly, and yearly"
     if (week && month && year) s = ", weekly, monthly, and yearly"
 
-    // // Debug rapid reset
-    // let reset_imminent = d.getMinutes() % 1 === 0 && d.getSeconds() <= 29;
-    // let reset_now = d.getMinutes() % 1 === 0 && d.getSeconds() > 29;
-
     let reset_imminent = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() <= 29;
     let reset_now = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() > 29;
     if (reset_imminent) {
