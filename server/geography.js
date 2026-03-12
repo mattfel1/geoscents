@@ -210,7 +210,9 @@ const score = (map, geoDist, mercDist, timeBonus) => {
     // // Logistic distance score
     // const distPortion = 620 / (1 + Math.exp(0.003*(scaledDist - 1000)));
     // Gaussian distance score
-    const distPortion = Math.min(600, Math.exp(-scalingFactor * Math.pow(scalingFactor * geoDist, 2) / 600000) * 605);
+    // Moon coords use Earth's radius in calcGeoDist but Moon is ~3.67x smaller, so correct for it
+    const effectiveDist = (map === 'Moon') ? geoDist * (1737 / 6371) : geoDist;
+    const distPortion = Math.min(600, Math.exp(-scalingFactor * Math.pow(scalingFactor * effectiveDist, 2) / 600000) * 605);
     return distPortion * timePortion
 };
 
