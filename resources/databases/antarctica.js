@@ -229,7 +229,7 @@ module.exports = {
             "country": "Antarctica",
             "population": 0,
             "capital": "",
-            "wiki": ""
+            "wiki": "https://en.wikipedia.org/wiki/Whalers_Bay_(South_Shetland_Islands)"
         },
         {
             "city": "Hut A of Scott Base at Pram Point, Ross Island",

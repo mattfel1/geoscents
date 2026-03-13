@@ -71,7 +71,7 @@ module.exports = {
             "country": "Greece",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Nuremberg_chronicles_-_f_28v.png",
             "wiki": ""
         },
         {
@@ -167,7 +167,7 @@ module.exports = {
             "country": "Athens / Macedonia",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "https://upload.wikimedia.org/wikipedia/commons/3/31/Amphipolis_Lion.jpg",
             "wiki": ""
         },
         {
@@ -543,7 +543,7 @@ module.exports = {
             "country": "Rome",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "https://upload.wikimedia.org/wikipedia/commons/2/28/BattlePharsalus-LIX.png",
             "wiki": "https://en.wikipedia.org/wiki/Battle_of_Pharsalus"
         },
         {
@@ -813,7 +813,7 @@ module.exports = {
             "country": "Persia",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "https://upload.wikimedia.org/wikipedia/commons/6/63/Ctesiphon-ruin_1864.jpg",
             "wiki": ""
         },
         {

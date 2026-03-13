@@ -185,7 +185,7 @@ module.exports = {
             "country": "Vatican City",
             "population": 0,
             "capital": "",
-            "wiki": ""
+            "wiki": "https://en.wikipedia.org/wiki/Vatican_City_Heliport"
         },
         {
             "city": "Institute for the Works of Religion",
@@ -218,7 +218,7 @@ module.exports = {
             "country": "Vatican City",
             "population": 0,
             "capital": "",
-            "wiki": ""
+            "wiki": "https://en.wikipedia.org/wiki/Vatican_City_railway_station"
         },
         {
             "city": "Vatican Obelisk",
@@ -286,7 +286,7 @@ module.exports = {
             "country": "Vatican City",
             "population": 0,
             "capital": "",
-            "wiki": ""
+            "wiki": "https://en.wikipedia.org/wiki/Saint_Peter%27s_tomb"
         },
         // {
         //   "city": "",

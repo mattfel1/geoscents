@@ -23,7 +23,7 @@ module.exports = {
             "country": "Mauritania",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "https://telegra.ph/file/a30b701889ff1aba1dbcf.jpg",
             "wiki": "https://en.wikipedia.org/wiki/Aoudaghost"
         },
         {
@@ -184,7 +184,7 @@ module.exports = {
             "population": 0,
             "capital": "",
             "img_link": "",
-            "wiki": ""
+            "wiki": "https://en.wikipedia.org/wiki/Sidi_Yahya_Mosque"
         },
 
         // === SONGHAI EMPIRE (c. 1464–1591 AD) ===

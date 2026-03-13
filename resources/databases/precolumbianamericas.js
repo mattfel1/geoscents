@@ -35,7 +35,7 @@ module.exports = {
             "country": "Olmec",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "https://www.thoughtco.com/thmb/e2ky1XK9pGzvdBeeElhhR2QPEqo=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Tres_Zapotes_MonumentQ-58a48b473df78c47589ac640.jpg",
             "wiki": "https://en.wikipedia.org/wiki/Tres_Zapotes"
         },
 
@@ -557,7 +557,7 @@ module.exports = {
             "country": "Adena",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "d.wikimedia.org/wikipedia/commons/5/51/The_Great_Serpent_Mound.jpg",
             "wiki": "https://en.wikipedia.org/wiki/Serpent_Mound"
         },
         {
@@ -695,7 +695,7 @@ module.exports = {
             "country": "Brazil",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "https://thekidshouldseethis.com/wp-content/uploads/2023/01/roosevelt-davis-Caverna-De-Pedra-Pintada-pbs-02.png",
             "wiki": "https://en.wikipedia.org/wiki/Caverna_da_Pedra_Pintada"
         },
         {
@@ -707,7 +707,7 @@ module.exports = {
             "country": "Brazil",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "https://upload.wikimedia.org/wikipedia/commons/4/46/Brazil_16thc_map.jpg",
             "wiki": "https://en.wikipedia.org/wiki/Kuhikugu"
         },
     ]

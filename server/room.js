@@ -823,7 +823,7 @@ class Room {
         let primaryTitle = (cityName + part2).split(' ').join('_');
         if ('wiki' in curtarget && curtarget['wiki'] !== '') {
             const parts = curtarget['wiki'].split('/');
-            primaryTitle = parts[parts.length - 1].split('#')[0];
+            primaryTitle = decodeURIComponent(parts[parts.length - 1].split('#')[0]);
         }
         primaryTitle = primaryTitle.replace('\u2019', '');
 
