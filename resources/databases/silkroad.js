@@ -61,7 +61,7 @@ module.exports = {
             "country": "Rome",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Rome_skyline_panorama.jpg",
             "wiki": "https://en.wikipedia.org/wiki/Ancient_Rome"
         },
         {
@@ -73,7 +73,7 @@ module.exports = {
             "country": "Rome",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "https://upload.wikimedia.org/wikipedia/commons/2/26/Bizansist_touchup.jpg",
             "wiki": "https://en.wikipedia.org/wiki/Constantinople"
         },
         {
@@ -97,7 +97,7 @@ module.exports = {
             "country": "Rome",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Seleukos_I_Nikator_Bronze_Roman_100BCE-100CE_Museo_Archeologico_Nazionale_Naples_AN_5590_1.jpg",
             "wiki": "https://en.wikipedia.org/wiki/Antioch"
         },
         {
@@ -171,7 +171,7 @@ module.exports = {
             "country": "Persia",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "https://upload.wikimedia.org/wikipedia/commons/7/7c/001125-TaqKasra-Iraq-IMG_7945-2.jpg",
             "wiki": "https://en.wikipedia.org/wiki/Ctesiphon"
         },
         {
@@ -389,7 +389,7 @@ module.exports = {
             "country": "Central Asia",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "https://thehistoryofchina.wordpress.com/wp-content/uploads/2016/05/talas.jpg",
             "wiki": "https://en.wikipedia.org/wiki/Battle_of_Talas"
         },
 
@@ -697,7 +697,7 @@ module.exports = {
             "country": "Mongolia",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "https://miro.medium.com/v2/resize:fit:720/format:webp/0*HYxdB-LDVSoYHOfO.jpg",
             "wiki": "https://en.wikipedia.org/wiki/Battle_of_Ain_Jalut"
         },
         {
@@ -771,7 +771,7 @@ module.exports = {
             "country": "Golden Horde",
             "population": 0,
             "capital": "",
-            "img_link": "",
+            "img_link": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Snow_Leopard_seal.png",
             "wiki": "https://en.wikipedia.org/wiki/Volga_Bulgaria"
         },
 
