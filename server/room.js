@@ -25,6 +25,7 @@ class Room {
         this.map = map; // Underlying map ("Ukraine" or "World")
         this.roomName = roomName; // User-friendly room name ("Weekly Country" or "Trivia")
         this.citysrc = citysrc; // source for random city selection ("Ukraine" or "Trivia")
+        this.recordKey = citysrc; // key used for record files; overridden for daily rooms to avoid sharing with public rooms
         this.isPrivate = roomName.startsWith('private');
         this.isPublic = roomName.startsWith('public');
         this.roomLabel = '';
@@ -146,22 +147,22 @@ class Room {
         if (week) this.weekRecord = CONSTANTS.INIT_RECORD;
         if (month) this.monthRecord = CONSTANTS.INIT_RECORD;
         if (year) this.allRecord = CONSTANTS.INIT_RECORD;
-        fs.writeFile("/scratch/records/" + this.citysrc + "_day_record", JSON.stringify(copy(this.dayRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + this.recordKey + "_day_record", JSON.stringify(copy(this.dayRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
         });
-        fs.writeFile("/scratch/records/" + this.citysrc + "_week_record", JSON.stringify(copy(this.weekRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + this.recordKey + "_week_record", JSON.stringify(copy(this.weekRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
         });
-        fs.writeFile("/scratch/records/" + this.citysrc + "_month_record", JSON.stringify(copy(this.monthRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + this.recordKey + "_month_record", JSON.stringify(copy(this.monthRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
         });
-        fs.writeFile("/scratch/records/" + this.citysrc + "_year_record", JSON.stringify(copy(this.allRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + this.recordKey + "_year_record", JSON.stringify(copy(this.allRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
@@ -169,36 +170,36 @@ class Room {
         this.drawScorePanel();
     }
     loadRecords() {
-        if (fs.existsSync('/scratch/records/' + this.citysrc + '_day_record')) {
+        if (fs.existsSync('/scratch/records/' + this.recordKey + '_day_record')) {
             try {
-                this.dayRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.citysrc + '_day_record', 'utf8'));
+                this.dayRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.recordKey + '_day_record', 'utf8'));
             } catch (err) {
                 this.dayRecord = CONSTANTS.INIT_RECORD;
             }
         } else {
             this.dayRecord = CONSTANTS.INIT_RECORD;
         }
-        if (fs.existsSync('/scratch/records/' + this.citysrc + '_week_record')) {
+        if (fs.existsSync('/scratch/records/' + this.recordKey + '_week_record')) {
             try {
-                this.weekRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.citysrc + '_week_record', 'utf8'));
+                this.weekRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.recordKey + '_week_record', 'utf8'));
             } catch (err) {
                 this.weekRecord = CONSTANTS.INIT_RECORD;
             }
         } else {
             this.weekRecord = CONSTANTS.INIT_RECORD;
         }
-        if (fs.existsSync('/scratch/records/' + this.citysrc + '_month_record')) {
+        if (fs.existsSync('/scratch/records/' + this.recordKey + '_month_record')) {
             try {
-                this.monthRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.citysrc + '_month_record', 'utf8'));
+                this.monthRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.recordKey + '_month_record', 'utf8'));
             } catch (err) {
                 this.monthRecord = CONSTANTS.INIT_RECORD;
             }
         } else {
             this.monthRecord = CONSTANTS.INIT_RECORD;
         }
-        if (fs.existsSync('/scratch/records/' + this.citysrc + '_year_record')) {
+        if (fs.existsSync('/scratch/records/' + this.recordKey + '_year_record')) {
             try {
-                this.allRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.citysrc + '_year_record', 'utf8'));
+                this.allRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.recordKey + '_year_record', 'utf8'));
             } catch (err) {
                 this.allRecord = CONSTANTS.INIT_RECORD;
             }
@@ -540,6 +541,7 @@ class Room {
         }
         const sufx = ["st", "nd", "rd", "th", "th"];
         const citysrc = this.citysrc;
+        const recordKey = this.recordKey;
         Array.from(this.sortPlayersNoJoe()).forEach((player, id) => {
             // var sortedPlayers = Array.from(this.sortPlayersNoJoe());
             // for (let player of sortedPlayers) {
@@ -616,27 +618,27 @@ class Room {
                 helpers.insertHallOfFame(player.hash, player.public_hash, player.name, citysrc, path_str, player.score, player.color, delay)
             }
         })
-        fs.writeFile("/scratch/records/" + citysrc + "_day_record", JSON.stringify(copy(dayRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + recordKey + "_day_record", JSON.stringify(copy(dayRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
         });
-        fs.writeFile("/scratch/records/" + citysrc + "_week_record", JSON.stringify(copy(weekRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + recordKey + "_week_record", JSON.stringify(copy(weekRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
         });
-        fs.writeFile("/scratch/records/" + citysrc + "_month_record", JSON.stringify(copy(monthRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + recordKey + "_month_record", JSON.stringify(copy(monthRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
         });
-        fs.writeFile("/scratch/records/" + citysrc + "_year_record", JSON.stringify(copy(allRecord), null, 2), function(err) {
+        fs.writeFile("/scratch/records/" + recordKey + "_year_record", JSON.stringify(copy(allRecord), null, 2), function(err) {
             if (err) {
                 return console.log(err);
             }
         });
-        console.log("writing record to " + "/scratch/records/" + citysrc + "_day_record")
+        console.log("writing record to " + "/scratch/records/" + recordKey + "_day_record")
         this.dayRecord = copy(dayRecord);
         this.weekRecord = copy(weekRecord);
         this.monthRecord = copy(monthRecord);

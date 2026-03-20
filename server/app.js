@@ -302,6 +302,11 @@ var rooms = {
     'Lobby': new Room(CONSTANTS.LOBBY, CONSTANTS.LOBBY, CONSTANTS.LOBBY),
 };
 
+// Daily rooms share maps with public rooms but must keep separate leaderboards
+rooms[CONSTANTS.DAILY_TRIVIA].recordKey = CONSTANTS.DAILY_TRIVIA;
+rooms[CONSTANTS.DAILY_REGION].recordKey = CONSTANTS.DAILY_REGION;
+rooms[CONSTANTS.DAILY_CAPITAL].recordKey = CONSTANTS.DAILY_CAPITAL;
+
 // Populate hall of fame into lobby room
 rooms[CONSTANTS.LOBBY].hall_of_fame = famers;
 
