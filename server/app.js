@@ -851,6 +851,7 @@ io.on('connection', (socket) => {
         const info = room.exportPlayer(socket);
         room.map = map;
         room.citysrc = askcitysrc;
+        room.recordKey = askcitysrc;
         room.reset();
         const msg = nameCard(info['color'], info['raw_name']) + sysMsg("changed the map to <b>" + askcitysrc + "</b>!") + "<br>";
         room.clients.forEach((s) => s.emit('update messages', room.roomName, msg));
@@ -918,6 +919,7 @@ io.on('connection', (socket) => {
                 if (Geography.hasLeader(citysrc)) rooms[dest].whisperMessage(socket, "<i><b>" + MAPS[citysrc]["greeting"] + "</b>! This is the <b>" + citysrc + "</b> map!</i><br>", function() {});
                 rooms[dest].map = map;
                 rooms[dest].citysrc = citysrc;
+                rooms[dest].recordKey = citysrc;
                 rooms[dest].reset();
                 socket.emit('moved to', map, dest, citysrc, rooms[dest].state);
                 helpers.log("Player " + socket.handshake.address + " " + info['raw_name'] + " changed map in " + dest);
