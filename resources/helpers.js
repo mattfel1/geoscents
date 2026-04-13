@@ -201,7 +201,11 @@ $(document).ready(function() {
                         },
                         {
                             title: "Path",
-                            "width": "35%"
+                            "width": "35%",
+                            render: function(data, type, row) {
+                                if (type !== 'display') return data;
+                                return data.replace(/<button[^>]*id='share[^']*'[^>]*>[\s\S]*?<\/button>/g, '');
+                            }
                         },
                         {
                             title: "Color",
