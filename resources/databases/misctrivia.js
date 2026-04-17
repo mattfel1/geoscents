@@ -5280,17 +5280,17 @@ module.exports = {
             "capital": "",
             "wiki": "https://www.guinnessworldrecords.com/world-records/fastest-mile-joggling-with-five-objects-men"
         },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
+        {
+          "city": "Kharg Island",
+          "city_ascii": "",
+          "lat": 29.245,
+          "lng": 50.31,
+          "iso2": "IR",
+          "country": "",
+          "population": 0,
+          "capital": "",
+          "wiki": ""
+        },
         // {
         //   "city": "",
         //   "city_ascii": "",
