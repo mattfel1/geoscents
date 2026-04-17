@@ -613,6 +613,7 @@ class Room {
                 if (process.env.DEBUG_MODE)
                     rounds = CONSTANTS.DEBUG_GAME_ROUNDS;
                 let path_str = helpers.formatPath(playersHistory, rounds, player.color, player.id, citysrc, player.score)
+                path_str = path_str.replace(/<button[^>]*id='share[^']*'[^>]*>[\s\S]*?<\/button>/g, '')
 
                 const delay = id * 500
                 helpers.insertHallOfFame(player.hash, player.public_hash, player.name, citysrc, path_str, player.score, player.color, delay)

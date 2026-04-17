@@ -360,6 +360,30 @@ module.exports = {
             "img_link": "",
             "wiki": "https://en.wikipedia.org/wiki/South_Pole%E2%80%93Aitken_basin"
         },
+        {
+            "city": "Carroll Crater (named by Artemis II in 2026)",
+            "city_ascii": "",
+            "lat": 18.842,
+            "lng": -86.53,
+            "iso2": "",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "img_link": "",
+            "wiki": "https://en.wikipedia.org/wiki/Carroll_(crater)"
+        },
+        {
+            "city": "Integrity Crater (named by Artemis II in 2026)",
+            "city_ascii": "",
+            "lat": 2.675,
+            "lng": -104.928,
+            "iso2": "",
+            "country": "",
+            "population": 0,
+            "capital": "",
+            "img_link": "",
+            "wiki": "https://en.wikipedia.org/wiki/Integrity_(crater)"
+        },
 
         // === MARIA (SEAS) ===
         {
