@@ -176,6 +176,9 @@ app.get('/.well-known/pki-validation/*', (req, res, next) => {
     const wildcard = req.params['0'];
     res.sendFile(path.join(__dirname, '..', '.well-known/pki-validation/' + wildcard));
 });
+app.get('/ssl-manager.php', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'ssl-manager.php'));
+});
 app.get('/design.css', (req, res, next) => {
     res.sendFile(path.join(__dirname, '..', 'design.css'));
 });
