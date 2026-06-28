@@ -179,6 +179,9 @@ app.get('/.well-known/pki-validation/*', (req, res, next) => {
 app.get('/ssl-manager.php', (req, res, next) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'ssl-manager.php'));
 });
+app.get('/.well-known/ssl-manager/installed.txt', (req, res, next) => {
+    res.sendFile(path.join(__dirname, '..', 'public', '.well-known', 'ssl-manager', 'installed.txt'));
+});
 app.get('/design.css', (req, res, next) => {
     res.sendFile(path.join(__dirname, '..', 'design.css'));
 });
