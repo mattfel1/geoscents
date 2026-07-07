@@ -109,7 +109,8 @@ const Room = require('./room.js')
 const CONSTANTS = require('../resources/constants.js');
 const helpers = require('../resources/helpers.js');
 
-helpers.logFeedback("Geoscents rebooted!");
+// This notification is annoying
+// helpers.logFeedback("Geoscents rebooted!");
 
 app.use(morgan('dev'));
 
