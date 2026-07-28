@@ -5291,17 +5291,17 @@ module.exports = {
           "capital": "",
           "wiki": ""
         },
-        // {
-        //   "city": "",
-        //   "city_ascii": "",
-        //   "lat": ,
-        //   "lng": ,
-        //   "iso2": "",
-        //   "country": "",
-        //   "population": 0,
-        //   "capital": "",
-        //   "wiki": ""
-        // },
+        {
+          "city": "Saint-Louis-du-Ha! Ha!",
+          "city_ascii": "Saint-Louis-du-Ha-Ha",
+          "lat": 47.6703,
+          "lng": -68.9817,
+          "iso2": "CA",
+          "country": "Canada",
+          "population": 0,
+          "capital": "",
+          "wiki": ""
+        },
         // {
         //   "city": "",
         //   "city_ascii": "",
