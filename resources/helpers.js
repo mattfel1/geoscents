@@ -204,7 +204,7 @@ $(document).ready(function() {
                             "width": "35%",
                             render: function(data, type, row) {
                                 if (type !== 'display') return data;
-                                return data.replace(/<button[^>]*id='share[^']*'[^>]*>[\s\S]*?<\/button>/g, '');
+                                return data.replace(/<button[^>]*id='share[^']*'[^>]*>[\\s\\S]*?<\\/button>/g, '');
                             }
                         },
                         {
