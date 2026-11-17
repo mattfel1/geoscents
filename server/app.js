@@ -588,7 +588,7 @@ io.on('connection', (socket) => {
             // Specific greetings for players
             // specificGreeting(socket, name, "Doz", "<i>Thanks so much for the donation, Doz!</i><br>");
             // specificGreeting(socket, name, "ninjer tootle", "<i>U a bitch</i><br>");
-            specificGreeting(socket, name, "Player 69", "<i>nice</i><br>");
+            // specificGreeting(socket, name, "Player 69", "<i>nice</i><br>");
             // specificGreeting(socket, name, "Snowgoat", "<i>There was a bug in World Capitals and your records disappeared from the leaderboard :( Sorry</i><br>");
             // specificGreeting(socket, name, "bumbo", "<i>There was a bug in World Capitals and your records disappeared from the leaderboard :( Sorry</i><br>");
             // specificGreeting(socket, name, "Player 42", "<i>nice</i><br>");
