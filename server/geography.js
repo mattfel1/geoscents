@@ -351,7 +351,75 @@ const geoToPixel = (map, lat, lon) => {
     }
 };
 
+
+const coprime = (num1, num2) => {
+    const smaller = num1 > num2 ? num1 : num2;
+    for (let ind = 2; ind < smaller; ind++) {
+        const condition1 = num1 % ind === 0;
+        const condition2 = num2 % ind === 0;
+        if (condition1 && condition2) {
+            return false;
+        };
+    };
+    return true;
+};
+
+// Daily maps for the given date (defaults to now)
+const calculateDaily = (now = new Date()) => {
+    // Get days since jan 1
+    var start = new Date(now.getFullYear(), 0, 0);
+    var diff = now - start;
+    var oneDay = 1000 * 60 * 60 * 24;
+    var day = Math.floor(diff / oneDay) + 2;
+    let region_maps = []
+    let capital_maps = []
+    let trivia_maps = []
+    for (const x in MAPS) {
+        if (isRegion(x))
+            region_maps.push(x);
+        else if (isCapital(x))
+            capital_maps.push(x);
+        else if (MAPS[x]['tier'] === 'trivia')
+            trivia_maps.push(x);
+    }
+
+    const num_regions = region_maps.length;
+    const num_capitals = capital_maps.length;
+    // We want day % num_regions to be our new daily_region_idx, but this is not stable when num_regions grows.
+    // To be more stable, we upcast num_regions to the nearest multiple of 20 and mod by that.  Then mod by num_regions.
+    let upcast_num_regions = (Math.round(num_regions / 20) + 1) * 20
+    let upcast_num_capitals = (Math.round(num_capitals / 20) + 1) * 20
+    let raw_regions_idx = (day % upcast_num_regions) % num_regions;
+    let raw_capitals_idx = (day % upcast_num_capitals) % num_capitals;
+
+    // "Randomize" the daily country so you can't easily tell the order by looking at constants.js.
+    // Find a multiplier, mult, that is coprime with num_regions, and recalculate daily idx by multiplying
+    // with this value and re-modding with num_regions.
+    // Basically, since the lcm of two coprime numbers, A and B, is A*B, that means you can use A to re-index
+    // values from 0 to B. For example, B = 10, A = 3, integers 0, 1, 2, ..., 9 would become 0, 3, 6, ..., 7.
+    // Choose mult as the first coprime number above currenty "epoch."  Epoch = raw_idx / upcast_num_dailys.
+    let regions_epoch = Math.floor(day / upcast_num_regions) % num_regions;
+    let mult = 1;
+    for (let i = regions_epoch; i < num_regions; i++) {
+        if (i != 0 && coprime(i, num_regions)) {
+            mult = i;
+            break;
+        }
+    }
+    // Plus 6 to match country the day this was implemented
+    let regions_idx = (6 + mult * raw_regions_idx) % num_regions;
+    let capitals_idx = (6 + mult * raw_capitals_idx) % num_capitals;
+
+    let daily_region = region_maps[regions_idx];
+    let daily_capital = capital_maps[capitals_idx];
+    let daily_trivia = trivia_maps.length > 0 ? trivia_maps[day % trivia_maps.length] : null;
+
+    // Assume classics always come first
+    return [daily_region, daily_capital, daily_trivia];
+}
+
 module.exports = {
+    calculateDaily,
     randomCity,
     mercDist,
     calcGeoDist,

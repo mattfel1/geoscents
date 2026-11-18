@@ -224,73 +224,7 @@ app.use((err, req, res, next) => {
 // Load hall of fame stuff
 var famers = helpers.loadHallOfFame();
 
-const coprime = (num1, num2) => {
-    const smaller = num1 > num2 ? num1 : num2;
-    for (let ind = 2; ind < smaller; ind++) {
-        const condition1 = num1 % ind === 0;
-        const condition2 = num2 % ind === 0;
-        if (condition1 && condition2) {
-            return false;
-        };
-    };
-    return true;
-};
-
-const calculate_daily = () => {
-    // Get days since jan 1
-    var now = new Date();
-    var start = new Date(now.getFullYear(), 0, 0);
-    var diff = now - start;
-    var oneDay = 1000 * 60 * 60 * 24;
-    var day = Math.floor(diff / oneDay) + 2;
-    let region_maps = []
-    let capital_maps = []
-    let trivia_maps = []
-    for (const x in MAPS) {
-        if (Geography.isRegion(x))
-            region_maps.push(x);
-        else if (Geography.isCapital(x))
-            capital_maps.push(x);
-        else if (MAPS[x]['tier'] === 'trivia')
-            trivia_maps.push(x);
-    }
-
-    const num_regions = region_maps.length;
-    const num_capitals = capital_maps.length;
-    // We want day % num_regions to be our new daily_region_idx, but this is not stable when num_regions grows.
-    // To be more stable, we upcast num_regions to the nearest multiple of 20 and mod by that.  Then mod by num_regions.
-    let upcast_num_regions = (Math.round(num_regions / 20) + 1) * 20
-    let upcast_num_capitals = (Math.round(num_capitals / 20) + 1) * 20
-    let raw_regions_idx = (day % upcast_num_regions) % num_regions;
-    let raw_capitals_idx = (day % upcast_num_capitals) % num_capitals;
-
-    // "Randomize" the daily country so you can't easily tell the order by looking at constants.js.
-    // Find a multiplier, mult, that is coprime with num_regions, and recalculate daily idx by multiplying
-    // with this value and re-modding with num_regions.
-    // Basically, since the lcm of two coprime numbers, A and B, is A*B, that means you can use A to re-index
-    // values from 0 to B. For example, B = 10, A = 3, integers 0, 1, 2, ..., 9 would become 0, 3, 6, ..., 7.
-    // Choose mult as the first coprime number above currenty "epoch."  Epoch = raw_idx / upcast_num_dailys.
-    let regions_epoch = Math.floor(day / upcast_num_regions) % num_regions;
-    let mult = 1;
-    for (let i = regions_epoch; i < num_regions; i++) {
-        if (i != 0 && coprime(i, num_regions)) {
-            mult = i;
-            break;
-        }
-    }
-    // Plus 6 to match country the day this was implemented
-    let regions_idx = (6 + mult * raw_regions_idx) % num_regions;
-    let capitals_idx = (6 + mult * raw_capitals_idx) % num_capitals;
-
-    let daily_region = region_maps[regions_idx];
-    let daily_capital = capital_maps[capitals_idx];
-    let daily_trivia = trivia_maps.length > 0 ? trivia_maps[day % trivia_maps.length] : null;
-
-    // Assume classics always come first
-    return [daily_region, daily_capital, daily_trivia];
-}
-
-let [daily_region, daily_capital, daily_trivia] = calculate_daily();
+let [daily_region, daily_capital, daily_trivia] = Geography.calculateDaily();
 let daily_capital_map = daily_capital.replace(" Capitals", "");
 
 // Game state info
@@ -308,11 +242,6 @@ var rooms = {
     'Daily Capitals': new Room(daily_capital_map, CONSTANTS.DAILY_CAPITAL, daily_capital),
     'Lobby': new Room(CONSTANTS.LOBBY, CONSTANTS.LOBBY, CONSTANTS.LOBBY),
 };
-
-// Daily rooms share maps with public rooms but must keep separate leaderboards
-rooms[CONSTANTS.DAILY_TRIVIA].recordKey = CONSTANTS.DAILY_TRIVIA;
-rooms[CONSTANTS.DAILY_REGION].recordKey = CONSTANTS.DAILY_REGION;
-rooms[CONSTANTS.DAILY_CAPITAL].recordKey = CONSTANTS.DAILY_CAPITAL;
 
 // Populate hall of fame into lobby room
 rooms[CONSTANTS.LOBBY].hall_of_fame = famers;
@@ -1164,7 +1093,7 @@ setInterval(() => {
     });
 }, 1000);
 function doReset(week, month, year) {
-    [daily_region, daily_capital, daily_trivia] = calculate_daily();
+    [daily_region, daily_capital, daily_trivia] = Geography.calculateDaily();
 
     // Flush inactive maps to disk via temp rooms
     Object.keys(MAPS).forEach(function(value) {
@@ -1175,27 +1104,25 @@ function doReset(week, month, year) {
         }
     });
 
-    // Sync active rooms in-memory. Use flushRecords (not loadRecords) so in-memory state
-    // is set synchronously — flushRecords' disk writes are async and would race with loadRecords.
+    // Sync active rooms in-memory. flushRecords reloads from disk before resetting, so this is safe to run after
+    // the temp rooms above. Daily rooms switch to the new map's records and tell their clients about the new map.
+    const rotateDaily = (room, map, citysrc) => {
+        room.killJoe();
+        room.map = map;
+        room.citysrc = citysrc;
+        room.recordKey = citysrc;
+        room.flushRecords(week, month, year);
+        room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
+        room.createJoe('');
+        room.clients.forEach((s) => s.emit('moved to', room.map, room.roomName, room.citysrc, room.state));
+    };
     Object.values(rooms).forEach(function(room) {
         if (room.roomName == CONSTANTS.DAILY_REGION) {
-            room.killJoe();
-            room.map = daily_region; room.citysrc = daily_region;
-            room.flushRecords(week, month, year);
-            room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
-            room.createJoe('');
+            rotateDaily(room, daily_region, daily_region);
         } else if (room.roomName == CONSTANTS.DAILY_CAPITAL) {
-            room.killJoe();
-            room.map = daily_capital.replace(" Capitals", ""); room.citysrc = daily_capital;
-            room.flushRecords(week, month, year);
-            room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
-            room.createJoe('');
+            rotateDaily(room, daily_capital.replace(" Capitals", ""), daily_capital);
         } else if (room.roomName == CONSTANTS.DAILY_TRIVIA && daily_trivia) {
-            room.killJoe();
-            room.map = daily_trivia; room.citysrc = daily_trivia;
-            room.flushRecords(week, month, year);
-            room.stateTransition(CONSTANTS.PREPARE_GAME_STATE, CONSTANTS.PREPARE_GAME_DURATION);
-            room.createJoe('');
+            rotateDaily(room, daily_trivia, daily_trivia);
         } else {
             room.flushRecords(week, month, year);
         }

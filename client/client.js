@@ -372,6 +372,13 @@ $(document).ready(function() {
     // Player connects
     socket.emit('newPlayer');
 
+    // After a dropped connection, socket.io reconnects with a new socket id that the server has never
+    // seen (the old player was removed on disconnect), so the page silently stops working. Reload to rejoin.
+    socket.on('disconnect', () => {
+        commands.drawCommand("Connection lost, reconnecting...", "", "", "", 0, false, false, false);
+    });
+    socket.io.on('reconnect', () => location.reload());
+
     /**** POPUP *****/
     // Make player choose name
     const popup = new Popup(socket);

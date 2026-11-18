@@ -25,7 +25,7 @@ class Room {
         this.map = map; // Underlying map ("Ukraine" or "World")
         this.roomName = roomName; // User-friendly room name ("Weekly Country" or "Trivia")
         this.citysrc = citysrc; // source for random city selection ("Ukraine" or "Trivia")
-        this.recordKey = citysrc; // key used for record files; overridden for daily rooms to avoid sharing with public rooms
+        this.recordKey = citysrc; // key used for record files, shared by every room playing this citysrc (including daily rooms)
         this.isPrivate = roomName.startsWith('private');
         this.isPublic = roomName.startsWith('public');
         this.roomLabel = '';
@@ -138,74 +138,56 @@ class Room {
             socket.emit("update joe button", false)
         });
     }
+    // Record files are shared by every room with the same recordKey (e.g. several public rooms on one map),
+    // so always re-read them before modifying and write them atomically. Otherwise a room holding a stale
+    // in-memory copy clobbers records set in other rooms, and a reader can see a half-written file.
+    writeRecords() {
+        const write = (category, record) => {
+            const file = '/scratch/records/' + this.recordKey + '_' + category + '_record';
+            try {
+                fs.writeFileSync(file + '.tmp', JSON.stringify(record, null, 2));
+                fs.renameSync(file + '.tmp', file);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        write('day', this.dayRecord);
+        write('week', this.weekRecord);
+        write('month', this.monthRecord);
+        write('year', this.allRecord);
+    }
     flushRecords(week, month, year) {
         function copy(x) {
             return JSON.parse(JSON.stringify(x, null, 2));
         }
         if (!this.hasJoe && this.map !== CONSTANTS.LOBBY) this.createJoe('')
-        this.dayRecord = CONSTANTS.INIT_RECORD;
-        if (week) this.weekRecord = CONSTANTS.INIT_RECORD;
-        if (month) this.monthRecord = CONSTANTS.INIT_RECORD;
-        if (year) this.allRecord = CONSTANTS.INIT_RECORD;
-        fs.writeFile("/scratch/records/" + this.recordKey + "_day_record", JSON.stringify(copy(this.dayRecord), null, 2), function(err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
-        fs.writeFile("/scratch/records/" + this.recordKey + "_week_record", JSON.stringify(copy(this.weekRecord), null, 2), function(err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
-        fs.writeFile("/scratch/records/" + this.recordKey + "_month_record", JSON.stringify(copy(this.monthRecord), null, 2), function(err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
-        fs.writeFile("/scratch/records/" + this.recordKey + "_year_record", JSON.stringify(copy(this.allRecord), null, 2), function(err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
+        this.loadRecords();
+        this.dayRecord = copy(CONSTANTS.INIT_RECORD);
+        if (week) this.weekRecord = copy(CONSTANTS.INIT_RECORD);
+        if (month) this.monthRecord = copy(CONSTANTS.INIT_RECORD);
+        if (year) this.allRecord = copy(CONSTANTS.INIT_RECORD);
+        this.writeRecords();
         this.drawScorePanel();
     }
     loadRecords() {
-        if (fs.existsSync('/scratch/records/' + this.recordKey + '_day_record')) {
-            try {
-                this.dayRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.recordKey + '_day_record', 'utf8'));
-            } catch (err) {
-                this.dayRecord = CONSTANTS.INIT_RECORD;
-            }
-        } else {
-            this.dayRecord = CONSTANTS.INIT_RECORD;
+        function copy(x) {
+            return JSON.parse(JSON.stringify(x, null, 2));
         }
-        if (fs.existsSync('/scratch/records/' + this.recordKey + '_week_record')) {
+        const load = (category, current) => {
+            const file = '/scratch/records/' + this.recordKey + '_' + category + '_record';
+            if (!fs.existsSync(file)) return copy(CONSTANTS.INIT_RECORD);
             try {
-                this.weekRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.recordKey + '_week_record', 'utf8'));
+                return JSON.parse(fs.readFileSync(file, 'utf8'));
             } catch (err) {
-                this.weekRecord = CONSTANTS.INIT_RECORD;
+                // Don't fall back to an empty board here, the next write would make the loss permanent
+                console.log('Could not parse ' + file + ', keeping in-memory records');
+                return current || copy(CONSTANTS.INIT_RECORD);
             }
-        } else {
-            this.weekRecord = CONSTANTS.INIT_RECORD;
-        }
-        if (fs.existsSync('/scratch/records/' + this.recordKey + '_month_record')) {
-            try {
-                this.monthRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.recordKey + '_month_record', 'utf8'));
-            } catch (err) {
-                this.monthRecord = CONSTANTS.INIT_RECORD;
-            }
-        } else {
-            this.monthRecord = CONSTANTS.INIT_RECORD;
-        }
-        if (fs.existsSync('/scratch/records/' + this.recordKey + '_year_record')) {
-            try {
-                this.allRecord = JSON.parse(fs.readFileSync('/scratch/records/' + this.recordKey + '_year_record', 'utf8'));
-            } catch (err) {
-                this.allRecord = CONSTANTS.INIT_RECORD;
-            }
-        } else {
-            this.allRecord = CONSTANTS.INIT_RECORD;
-        }
+        };
+        this.dayRecord = load('day', this.dayRecord);
+        this.weekRecord = load('week', this.weekRecord);
+        this.monthRecord = load('month', this.monthRecord);
+        this.allRecord = load('year', this.allRecord);
     }
     reset() {
         this.state = CONSTANTS.IDLE_STATE;
@@ -522,6 +504,9 @@ class Room {
         }
 
 
+        // Pick up records set by other rooms sharing this recordKey since we last loaded
+        this.loadRecords();
+        this.removePoppers();
         let dayRecord = copy(this.dayRecord);
         let weekRecord = copy(this.weekRecord);
         let monthRecord = copy(this.monthRecord);
@@ -541,7 +526,6 @@ class Room {
         }
         const sufx = ["st", "nd", "rd", "th", "th"];
         const citysrc = this.citysrc;
-        const recordKey = this.recordKey;
         Array.from(this.sortPlayersNoJoe()).forEach((player, id) => {
             // var sortedPlayers = Array.from(this.sortPlayersNoJoe());
             // for (let player of sortedPlayers) {
@@ -619,31 +603,11 @@ class Room {
                 helpers.insertHallOfFame(player.hash, player.public_hash, player.name, citysrc, path_str, player.score, player.color, delay)
             }
         })
-        fs.writeFile("/scratch/records/" + recordKey + "_day_record", JSON.stringify(copy(dayRecord), null, 2), function(err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
-        fs.writeFile("/scratch/records/" + recordKey + "_week_record", JSON.stringify(copy(weekRecord), null, 2), function(err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
-        fs.writeFile("/scratch/records/" + recordKey + "_month_record", JSON.stringify(copy(monthRecord), null, 2), function(err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
-        fs.writeFile("/scratch/records/" + recordKey + "_year_record", JSON.stringify(copy(allRecord), null, 2), function(err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
-        console.log("writing record to " + "/scratch/records/" + recordKey + "_day_record")
         this.dayRecord = copy(dayRecord);
         this.weekRecord = copy(weekRecord);
         this.monthRecord = copy(monthRecord);
         this.allRecord = copy(allRecord);
+        this.writeRecords();
 
     }
 
