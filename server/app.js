@@ -17,6 +17,12 @@ let httpServer;
 let httpsServer;
 let io;
 let useHttp = false;
+// Let clients that drop briefly resume with the same socket id (and get missed broadcasts replayed)
+const IO_OPTIONS = {
+    connectionStateRecovery: {
+        maxDisconnectionDuration: require('../resources/constants.js').DISCONNECT_GRACE_MS,
+    },
+};
 
 if (process.env.LOCAL_DEV) {
     PORT = 5000;
@@ -35,7 +41,7 @@ if (process.env.LOCAL_DEV) {
         httpServer.listen(PORT, () => {
             console.log('Magic is happening on port ' + PORT);
         })
-        io = require('socket.io')(httpServer);
+        io = require('socket.io')(httpServer, IO_OPTIONS);
     } else {
         var privateKey = fs.readFileSync('/home/mattf/geoscents/key.pem').toString();
         var certificate = fs.readFileSync('/home/mattf/geoscents/cert.pem').toString();
@@ -55,7 +61,7 @@ if (process.env.LOCAL_DEV) {
         httpsServer.listen(SPORT, () => {
             console.log('Magic is happening on port ' + SPORT);
         });
-        io = require('socket.io')(httpsServer);
+        io = require('socket.io')(httpsServer, IO_OPTIONS);
     }
 } else {
     if (useHttp) {
@@ -71,7 +77,7 @@ if (process.env.LOCAL_DEV) {
         httpServer.listen(PORT, () => {
             console.log('Magic is happening on port ' + PORT);
         })
-        io = require('socket.io')(httpServer);
+        io = require('socket.io')(httpServer, IO_OPTIONS);
     } else {
         // var privateKey = fs.readFileSync('/root/privatekey.pem').toString();
         // var certificate = fs.readFileSync('/root/geoscents_net.crt').toString();
@@ -97,7 +103,7 @@ if (process.env.LOCAL_DEV) {
         httpsServer.listen(SPORT, () => {
             console.log('Magic is happening on port ' + SPORT);
         });
-        io = require('socket.io')(httpsServer);
+        io = require('socket.io')(httpsServer, IO_OPTIONS);
     }
 }
 
@@ -323,6 +329,7 @@ const roomCard = (map) => {
 };
 
 var playerRooms = new Map();
+var pendingRemovals = new Map(); // socket id -> timer that removes a disconnected player after the grace period
 
 const WELCOME_MESSAGE1 = 'Try out some other geography games, <a href=https://statdle.com/ target=\"_blank\">statdle</a>, <a href=https://worldle.teuteuf.fr/ target=\"_blank\">worldle</a>, and <a href=https://geoquest.wout.space/ target=\"_blank\">geoquest</a>!<br><br> ' +
     '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
@@ -345,6 +352,20 @@ const announce = (text) => {
 
 io.on('connection', (socket) => {
     console.log('a user connected:', socket.id);
+    if (socket.recovered) {
+        if (pendingRemovals.has(socket.id) && playerRooms.has(socket.id)) {
+            // Same player resuming within the grace period: swap in the new socket object and resync the scoreboard
+            clearTimeout(pendingRemovals.get(socket.id));
+            pendingRemovals.delete(socket.id);
+            const room = playerRooms.get(socket.id);
+            if (room.clients.has(socket.id)) room.clients.set(socket.id, socket);
+            helpers.log("User reconnected  " + socket.handshake.address + ": " + room.exportPlayer(socket)['raw_name']);
+            room.drawScorePanel();
+        } else {
+            // The player was already removed, so the client has to start over
+            socket.emit('rejoin required');
+        }
+    }
     let clientErrorCount = 0;
     socket.on('client error', (report, cb) => {
         if (typeof report === 'string' && clientErrorCount++ < 20)
@@ -375,12 +396,23 @@ io.on('connection', (socket) => {
             io.sockets.emit('system toast', 'info', '✅ DEBUG: records force-reset!');
         }, 3000);
     });
-    socket.on('disconnect', function() {
+    socket.on('disconnect', function(reason) {
+        if (playerRooms.has(socket.id)) {
+            const info = playerRooms.get(socket.id).exportPlayer(socket);
+            helpers.log("User disconnected " + socket.handshake.address + ": " + info['raw_name'] + " (" + reason + ")");
+        }
+        // Keep the player around briefly so a client that drops for a few seconds (flaky wifi etc) can resume
+        // via socket.io connection state recovery with the same socket id. See the recovery check above.
+        pendingRemovals.set(socket.id, setTimeout(() => {
+            pendingRemovals.delete(socket.id);
+            removePlayer();
+        }, CONSTANTS.DISCONNECT_GRACE_MS));
+    });
+    const removePlayer = () => {
         if (playerRooms.has(socket.id)) {
             const room = playerRooms.get(socket.id);
             const info = room.exportPlayer(socket);
             const name = info['raw_name'];
-            helpers.log("User disconnected " + socket.handshake.address + ": " + name);
             if (room.playerChoseName(socket)) {
                 var leave_msg = nameCard(info['color'], info['raw_name']) + sysMsg("has exited GeoScents!") + "<br>";
                 io.sockets.emit("update messages", room.roomName, leave_msg);
@@ -406,7 +438,7 @@ io.on('connection', (socket) => {
                 delete rooms[room.roomName];
             }
         });
-    });
+    };
 
     socket.on('playerJoin', (newname, newcolor, newlogger, famerhash, famerpublichash, flair, grind, perfect, clown, callback) => {
         var name = '';

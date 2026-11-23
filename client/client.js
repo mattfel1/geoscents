@@ -372,8 +372,10 @@ $(document).ready(function() {
     // Player connects
     socket.emit('newPlayer');
 
-    // After a dropped connection, socket.io reconnects with a new socket id that the server has never
-    // seen (the old player was removed on disconnect), so the page silently stops working. Reload to rejoin.
+    // After a short drop, socket.io connection state recovery resumes the same session (the server keeps the
+    // player for CONSTANTS.DISCONNECT_GRACE_MS). If the drop was longer, the server has removed the player and
+    // the new socket id is unknown to it, so reload and rejoin with the same name and room automatically
+    // (see the rejoin check after the name popup).
     // Problems are reported to the server (logged to /scratch/client_errors.log) so freezes can be diagnosed.
     // Reports sent while disconnected are buffered by socket.io and delivered after reconnecting.
     const pageLoadTime = Date.now();
@@ -391,23 +393,60 @@ $(document).ready(function() {
     socket.on('disconnect', (reason) => {
         lastDisconnect = {
             reason: reason,
+            transport: socket.io.engine ? socket.io.engine.transport.name : "?",
             time: Date.now(),
             hidden: document.hidden
         };
         commands.drawCommand("Connection lost, reconnecting...", "", "", "", 0, false, false, false);
     });
-    socket.io.on('reconnect', () => {
-        let msg = "reconnected";
-        if (lastDisconnect) msg += " after " + Math.round((Date.now() - lastDisconnect.time) / 1000) + "s, reason: " + lastDisconnect.reason + ", tab hidden: " + lastDisconnect.hidden;
+    const describeDisconnect = () => " after " + Math.round((Date.now() - lastDisconnect.time) / 1000) + "s, reason: " + lastDisconnect.reason + ", transport: " + lastDisconnect.transport + ", tab hidden: " + lastDisconnect.hidden;
+    const reloadAndRejoin = (msg) => {
+        try {
+            sessionStorage.setItem("rejoin", JSON.stringify({
+                room: myRoomName,
+                time: Date.now()
+            }));
+        } catch (e) {}
         // Reload once the report is delivered, or after 2s regardless
         reportError(msg, () => location.reload());
         setTimeout(() => location.reload(), 2000);
+    };
+    socket.on('connect', () => {
+        if (!lastDisconnect) return; // first connection
+        if (socket.recovered) {
+            reportError("resumed" + describeDisconnect());
+            commands.drawCommand("Reconnected!", "", "", "", 0, false, false, false);
+        } else {
+            reloadAndRejoin("reconnected (could not resume)" + describeDisconnect());
+        }
+        lastDisconnect = null;
     });
+    // Server resumed our socket id but had already removed the player
+    socket.on('rejoin required', () => reloadAndRejoin("server required rejoin"));
 
     /**** POPUP *****/
     // Make player choose name
     const popup = new Popup(socket);
     popup.showPopup();
+
+    // If this page load came from the reconnect reload above, skip the name popup and rejoin as before.
+    // Private/public rooms need a code or may be gone, so those players land in the lobby instead.
+    let rejoin = null,
+        lastJoin = null;
+    try {
+        rejoin = JSON.parse(sessionStorage.getItem("rejoin"));
+        lastJoin = JSON.parse(sessionStorage.getItem("last_join"));
+        sessionStorage.removeItem("rejoin");
+    } catch (e) {}
+    if (rejoin && lastJoin && Date.now() - rejoin.time < 60 * 1000) {
+        popup.choseName = true;
+        popup.closePopup();
+        socket.emit('playerJoin', ...lastJoin, () => {
+            const room = rejoin.room;
+            if (room && room !== CONSTANTS.LOBBY && !room.startsWith('private') && !room.startsWith('public'))
+                socket.emit('moveTo', room);
+        });
+    }
 
     document.getElementById('ready-btn').addEventListener('click', () => {
         if (myMap !== CONSTANTS.LOBBY && betweenGames && !clickedReady) {

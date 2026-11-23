@@ -7,7 +7,12 @@ class FamerPopup {
 
     join(info, cb) {
         this.choseFlair = true;
-        this.socket.emit('playerJoin', info['name'], info['color'], info['logger'], info['hash'], info['public_hash'], info['flair'], info['grind'], info['perfect'], '', cb);
+        const args = [info['name'], info['color'], info['logger'], info['hash'], info['public_hash'], info['flair'], info['grind'], info['perfect'], ''];
+        // Remembered for this tab so client.js can rejoin automatically after a dropped connection
+        try {
+            sessionStorage.setItem("last_join", JSON.stringify(args));
+        } catch (e) {}
+        this.socket.emit('playerJoin', ...args, cb);
     }
     getChoseFlair() {
         return this.choseFlair;

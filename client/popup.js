@@ -13,7 +13,12 @@ class Popup {
         if (was_grind === "true") was_grind = true
         else was_grind = false
 
-        this.socket.emit('playerJoin', info['name'], info['color'], info['logger'], "", "", "", was_grind, false, "", cb);
+        const args = [info['name'], info['color'], info['logger'], "", "", "", was_grind, false, ""];
+        // Remembered for this tab so client.js can rejoin automatically after a dropped connection
+        try {
+            sessionStorage.setItem("last_join", JSON.stringify(args));
+        } catch (e) {}
+        this.socket.emit('playerJoin', ...args, cb);
     }
     getChoseName() {
         return this.choseName;

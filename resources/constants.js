@@ -118,6 +118,7 @@ module.exports = {
     RECORD_INIT_BASE: 480,
     RECORD_DELTA_RANGE: 200,
     MAX_INACTIVE: 10, // Rounds of no click before you get booted
+    DISCONNECT_GRACE_MS: 10 * 1000, // How long a dropped player is kept around so they can resume without rejoining
     MAX_S_INACTIVE: 2400, // seconds * fps spent in lobby before you get booted
     INIT_RECORD: {
         'record1': 0,
