@@ -315,6 +315,19 @@ class Room {
     gameBeginning() {
         return this.state == CONSTANTS.BEGIN_GAME_STATE;
     }
+    // Move a player onto a new socket after they reconnect (see 'resume' in app.js), keeping their place in the game
+    transferPlayer(oldId, socket) {
+        const player = this.players.get(oldId);
+        player.id = socket.id;
+        this.players = new Map([...this.players].map(([id, p]) => [id === oldId ? socket.id : id, p]));
+        this.clients.delete(oldId);
+        this.clients.set(socket.id, socket);
+        if (this.hostSocketId === oldId) this.hostSocketId = socket.id;
+        this.drawScorePanel();
+        socket.emit('fresh map', this.map);
+        socket.emit('update joe button', this.hasJoe);
+        this.drawCommand(socket);
+    }
     killPlayer(socket) {
         // console.log('user disconnected ' + socket.id);
         if (this.clients.has(socket.id)) {

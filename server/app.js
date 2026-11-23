@@ -330,6 +330,7 @@ const roomCard = (map) => {
 
 var playerRooms = new Map();
 var pendingRemovals = new Map(); // socket id -> timer that removes a disconnected player after the grace period
+var resumeTokens = new Map(); // secret token given to each player -> their current socket id, see 'resume'
 
 const WELCOME_MESSAGE1 = 'Try out some other geography games, <a href=https://statdle.com/ target=\"_blank\">statdle</a>, <a href=https://worldle.teuteuf.fr/ target=\"_blank\">worldle</a>, and <a href=https://geoquest.wout.space/ target=\"_blank\">geoquest</a>!<br><br> ' +
     '[ <b>GREETING</b> ] Welcome to Geoscents, an online multiplayer world geography game! ' +
@@ -379,6 +380,9 @@ io.on('connection', (socket) => {
             'moved': false
         });
         playerRooms.set(socket.id, rooms[CONSTANTS.LOBBY]);
+        socket.data.resumeToken = crypto.randomBytes(16).toString('hex');
+        resumeTokens.set(socket.data.resumeToken, socket.id);
+        socket.emit('resume token', socket.data.resumeToken);
         io.sockets.emit('update counts', getHist());
         socket.emit('update public rooms', getPublicRoomsInfo());
         helpers.log("User connected    " + socket.handshake.address);
@@ -396,6 +400,30 @@ io.on('connection', (socket) => {
             io.sockets.emit('system toast', 'info', '✅ DEBUG: records force-reset!');
         }, 3000);
     });
+    // A client that lost its connection and came back with a new socket id. The server often hasn't noticed the old
+    // connection is dead yet (e.g. wifi switched off: no close, just a ping timeout later), so take the player over
+    // from the old socket whether or not it is still considered connected.
+    socket.on('resume', (token, cb) => {
+        const oldId = resumeTokens.get(token);
+        if (typeof cb !== 'function') return;
+        if (!oldId || oldId === socket.id || !playerRooms.has(oldId) || playerRooms.has(socket.id)) return cb(false);
+        const room = playerRooms.get(oldId);
+        if (!room.clients.has(oldId)) return cb(false);
+        if (pendingRemovals.has(oldId)) {
+            clearTimeout(pendingRemovals.get(oldId));
+            pendingRemovals.delete(oldId);
+        }
+        room.transferPlayer(oldId, socket);
+        playerRooms.delete(oldId);
+        playerRooms.set(socket.id, room);
+        resumeTokens.set(token, socket.id);
+        socket.data.resumeToken = token;
+        helpers.log("User resumed      " + socket.handshake.address + ": " + room.exportPlayer(socket)['raw_name']);
+        // The old socket no longer owns a player, so its disconnect handler has nothing to remove
+        const oldSocket = io.sockets.sockets.get(oldId);
+        if (oldSocket) oldSocket.disconnect(true);
+        cb(true);
+    });
     socket.on('disconnect', function(reason) {
         if (playerRooms.has(socket.id)) {
             const info = playerRooms.get(socket.id).exportPlayer(socket);
@@ -409,6 +437,7 @@ io.on('connection', (socket) => {
         }, CONSTANTS.DISCONNECT_GRACE_MS));
     });
     const removePlayer = () => {
+        if (resumeTokens.get(socket.data.resumeToken) === socket.id) resumeTokens.delete(socket.data.resumeToken);
         if (playerRooms.has(socket.id)) {
             const room = playerRooms.get(socket.id);
             const info = room.exportPlayer(socket);

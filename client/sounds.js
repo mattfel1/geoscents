@@ -1,5 +1,12 @@
 const CONSTANTS = require('../resources/constants.js')
 
+// Browsers refuse to play audio until the player has interacted with the page (see the unlock in the constructor),
+// and play() then rejects. That's expected, so swallow it rather than reporting it as an error.
+const play = (audio) => {
+    const p = audio.play();
+    if (p) p.catch(() => {});
+};
+
 class Sounds {
     constructor(socket) {
         this.socket = socket;
@@ -26,6 +33,31 @@ class Sounds {
         if (this.muted) {
             this.muteOn();
         }
+
+        // Safari only lets an audio element play on its own (e.g. from a socket event) after it has been played once
+        // during a user gesture, so play each sound silently on the first click/keypress to unlock them.
+        const unlock = () => {
+            document.removeEventListener('pointerdown', unlock, true);
+            document.removeEventListener('keydown', unlock, true);
+            this.allSounds().forEach((audio) => {
+                const wasMuted = audio.muted;
+                audio.muted = true;
+                const p = audio.play();
+                const restore = () => {
+                    audio.pause();
+                    audio.currentTime = 0;
+                    audio.muted = wasMuted;
+                };
+                if (p) p.then(restore, restore);
+                else restore();
+            });
+        };
+        document.addEventListener('pointerdown', unlock, true);
+        document.addEventListener('keydown', unlock, true);
+    }
+
+    allSounds() {
+        return [this.messagePop, this.gameBeginSound, this.grindGameBeginSound, this.roundBeginSound, this.roundEndSound];
     }
 
     muteMe(id) {
@@ -62,21 +94,21 @@ class Sounds {
 
     newMessage(room) {
         if (room == this.myRoomName) {
-            this.messagePop.play();
+            play(this.messagePop);
         }
     }
 
     playGameBeginSound() {
-        this.gameBeginSound.play()
+        play(this.gameBeginSound);
     }
     playGrindGameBeginSound() {
-        this.grindGameBeginSound.play()
+        play(this.grindGameBeginSound);
     }
     playRoundBeginSound() {
-        this.roundBeginSound.play()
+        play(this.roundBeginSound);
     }
     playRoundEndSound() {
-        this.roundEndSound.play()
+        play(this.roundEndSound);
     }
 }
 

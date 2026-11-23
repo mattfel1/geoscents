@@ -33,6 +33,17 @@ let panel;
 let isFirefox;
 
 // Build login popup
+function showToast(type, message) {
+    const el = document.createElement('div');
+    el.className = 'system-toast ' + type;
+    el.textContent = message;
+    document.body.appendChild(el);
+    setTimeout(() => {
+        el.classList.add('fade-out');
+        el.addEventListener('animationend', () => el.remove());
+    }, 5000);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     canvas = document.getElementById('map');
     panel = document.getElementById('panel');
@@ -390,6 +401,11 @@ $(document).ready(function() {
     window.addEventListener('unhandledrejection', (e) => {
         reportError("unhandled rejection: " + (e.reason && e.reason.stack ? e.reason.stack : e.reason));
     });
+    let resumeToken = null;
+    socket.on('resume token', (token) => {
+        resumeToken = token;
+    });
+    let reconnectCountdown = null;
     socket.on('disconnect', (reason) => {
         lastDisconnect = {
             reason: reason,
@@ -397,7 +413,14 @@ $(document).ready(function() {
             time: Date.now(),
             hidden: document.hidden
         };
-        commands.drawCommand("Connection lost, reconnecting...", "", "", "", 0, false, false, false);
+        const graceSecs = CONSTANTS.DISCONNECT_GRACE_MS / 1000;
+        const showCountdown = () => {
+            const secs = Math.round((Date.now() - lastDisconnect.time) / 1000);
+            commands.drawCommand("Connection lost, reconnecting... " + secs + "s / " + graceSecs + "s before you lose your spot", "", "", "", 0, false, false, false);
+        };
+        showCountdown();
+        clearInterval(reconnectCountdown);
+        reconnectCountdown = setInterval(showCountdown, 1000);
     });
     const describeDisconnect = () => " after " + Math.round((Date.now() - lastDisconnect.time) / 1000) + "s, reason: " + lastDisconnect.reason + ", transport: " + lastDisconnect.transport + ", tab hidden: " + lastDisconnect.hidden;
     const reloadAndRejoin = (msg) => {
@@ -411,15 +434,26 @@ $(document).ready(function() {
         reportError(msg, () => location.reload());
         setTimeout(() => location.reload(), 2000);
     };
+    const resumed = (how) => {
+        reportError("resumed (" + how + ")" + describeDisconnect());
+        commands.drawCommand("Reconnected!", "", "", "", 0, false, false, false);
+        showToast('info', '✅ Reconnected after ' + Math.round((Date.now() - lastDisconnect.time) / 1000) + 's');
+        lastDisconnect = null;
+    };
     socket.on('connect', () => {
         if (!lastDisconnect) return; // first connection
+        clearInterval(reconnectCountdown);
         if (socket.recovered) {
-            reportError("resumed" + describeDisconnect());
-            commands.drawCommand("Reconnected!", "", "", "", 0, false, false, false);
+            resumed("recovered");
+        } else if (resumeToken) {
+            // New socket id: ask the server to hand our player over from the old connection
+            socket.emit('resume', resumeToken, (ok) => {
+                if (ok) resumed("token");
+                else reloadAndRejoin("reconnected (could not resume)" + describeDisconnect());
+            });
         } else {
             reloadAndRejoin("reconnected (could not resume)" + describeDisconnect());
         }
-        lastDisconnect = null;
     });
     // Server resumed our socket id but had already removed the player
     socket.on('rejoin required', () => reloadAndRejoin("server required rejoin"));
@@ -706,16 +740,7 @@ $(document).ready(function() {
 
     /**** Map *****/
     const map = new MapPanel(socket);
-    socket.on('system toast', (type, message) => {
-        const el = document.createElement('div');
-        el.className = 'system-toast ' + type;
-        el.textContent = message;
-        document.body.appendChild(el);
-        setTimeout(() => {
-            el.classList.add('fade-out');
-            el.addEventListener('animationend', () => el.remove());
-        }, 5000);
-    });
+    socket.on('system toast', (type, message) => showToast(type, message));
 
     socket.on('draw point', (coords, color, radius) => {
         map.drawPoint(coords, color, radius)
