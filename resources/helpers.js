@@ -371,8 +371,8 @@ const push = (msg) => {
     });
 };
 
-// Disconnects and JS errors reported by players' browsers, see client.js.
-// Pushes at most once per CLIENT_ERROR_PUSH_PERIOD so a burst of reports can't flood the phone.
+// Disconnects and JS errors reported by players' browsers, see client.js. Only JS errors are pushed, at most once
+// per CLIENT_ERROR_PUSH_PERIOD so a burst of reports can't flood the phone.
 const CLIENT_ERROR_PUSH_PERIOD = 10 * 60 * 1000;
 let lastClientErrorPush = 0;
 let unpushedClientErrors = 0;
@@ -380,15 +380,16 @@ let latestClientError = "";
 let clientErrorPushTimer = null;
 const pushClientErrors = () => {
     clientErrorPushTimer = null;
-    push(unpushedClientErrors + " new client report(s) in " + clienterrorfile + ", latest: " + latestClientError.slice(0, 500));
+    push(unpushedClientErrors + " new client error(s) in " + clienterrorfile + ", latest: " + latestClientError.slice(0, 500));
     lastClientErrorPush = Date.now();
     unpushedClientErrors = 0;
 };
-const logClientError = (payload) => {
+const logClientError = (payload, isError) => {
     const timestamp = new Date().toISOString();
     fs.appendFile(clienterrorfile, "[" + timestamp + "] " + payload + "\n", function(err) {
         if (err) console.log(err);
     });
+    if (!isError) return;
     unpushedClientErrors++;
     latestClientError = payload;
     const wait = lastClientErrorPush + CLIENT_ERROR_PUSH_PERIOD - Date.now();

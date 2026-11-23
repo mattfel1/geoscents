@@ -391,15 +391,24 @@ $(document).ready(function() {
     // Reports sent while disconnected are buffered by socket.io and delivered after reconnecting.
     const pageLoadTime = Date.now();
     let lastDisconnect = null;
-    const reportError = (msg, cb) => {
+    // isError: a real JS error, which the server pushes to the phone (reconnect reports are only logged)
+    const reportError = (msg, isError, cb) => {
         const minsOpen = Math.round((Date.now() - pageLoadTime) / 60000);
-        socket.emit('client error', myRoomName + " | open " + minsOpen + "min | " + navigator.userAgent + " | " + msg, cb);
+        socket.emit('client error', myRoomName + " | open " + minsOpen + "min | " + navigator.userAgent + " | " + msg, isError, cb);
     };
     window.addEventListener('error', (e) => {
-        reportError("error: " + e.message + " @ " + e.filename + ":" + e.lineno + ":" + e.colno + (e.error && e.error.stack ? " " + e.error.stack : ""));
+        reportError("error: " + e.message + " @ " + e.filename + ":" + e.lineno + ":" + e.colno + (e.error && e.error.stack ? " " + e.error.stack : ""), true);
     });
     window.addEventListener('unhandledrejection', (e) => {
-        reportError("unhandled rejection: " + (e.reason && e.reason.stack ? e.reason.stack : e.reason));
+        reportError("unhandled rejection: " + (e.reason && e.reason.stack ? e.reason.stack : e.reason), true);
+    });
+    // Leaving on purpose (tab closed or reloaded): disconnect explicitly so the server removes us right away instead
+    // of announcing a lost connection and holding our spot. If the page comes back from the back/forward cache,
+    // that socket is gone, so start fresh.
+    window.addEventListener('beforeunload', () => socket.disconnect());
+    window.addEventListener('pagehide', () => socket.disconnect());
+    window.addEventListener('pageshow', (e) => {
+        if (e.persisted) location.reload();
     });
     let resumeToken = null;
     socket.on('resume token', (token) => {
@@ -407,6 +416,7 @@ $(document).ready(function() {
     });
     let reconnectCountdown = null;
     socket.on('disconnect', (reason) => {
+        if (reason === 'io client disconnect') return; // our own pagehide disconnect
         lastDisconnect = {
             reason: reason,
             transport: socket.io.engine ? socket.io.engine.transport.name : "?",
@@ -431,11 +441,11 @@ $(document).ready(function() {
             }));
         } catch (e) {}
         // Reload once the report is delivered, or after 2s regardless
-        reportError(msg, () => location.reload());
+        reportError(msg, false, () => location.reload());
         setTimeout(() => location.reload(), 2000);
     };
     const resumed = (how) => {
-        reportError("resumed (" + how + ")" + describeDisconnect());
+        reportError("resumed (" + how + ")" + describeDisconnect(), false);
         commands.drawCommand("Reconnected!", "", "", "", 0, false, false, false);
         showToast('info', '✅ Reconnected after ' + Math.round((Date.now() - lastDisconnect.time) / 1000) + 's');
         lastDisconnect = null;

@@ -17,8 +17,11 @@ let httpServer;
 let httpsServer;
 let io;
 let useHttp = false;
-// Let clients that drop briefly resume with the same socket id (and get missed broadcasts replayed)
+// Let clients that drop briefly resume with the same socket id (and get missed broadcasts replayed). Heartbeat
+// faster than the default (25s + 20s) so connections that die silently (wifi off) are noticed within 20s.
 const IO_OPTIONS = {
+    pingInterval: 10 * 1000,
+    pingTimeout: 10 * 1000,
     connectionStateRecovery: {
         maxDisconnectionDuration: require('../resources/constants.js').DISCONNECT_GRACE_MS,
     },
@@ -345,6 +348,24 @@ const PRIVATE_MESSAGE = '<i>Welcome to a private room!  You can whisper your sec
 
 let random_player_id = 0;
 
+// Chat notes about a named player's connection dropping and coming back. "reconnected" is only posted if the drop
+// was announced: when wifi dies silently the server may not notice before the player is already back.
+const announcedLost = new Set(); // socket ids
+const announceConnection = (socket, text) => {
+    if (!playerRooms.has(socket.id)) return;
+    const room = playerRooms.get(socket.id);
+    if (!room.playerChoseName(socket)) return;
+    const info = room.exportPlayer(socket);
+    io.sockets.emit("update messages", room.roomName, nameCard(info['color'], info['raw_name']) + sysMsg(text) + "<br>");
+};
+const announceLost = (socket) => {
+    announcedLost.add(socket.id);
+    announceConnection(socket, "lost connection, trying to reconnect...");
+};
+const announceBack = (socket, oldId) => {
+    if (announcedLost.delete(oldId)) announceConnection(socket, "reconnected!");
+};
+
 const announce = (text) => {
     Object.values(rooms).forEach(function(room) {
         io.sockets.emit("update messages", room.roomName, text);
@@ -354,23 +375,29 @@ const announce = (text) => {
 io.on('connection', (socket) => {
     console.log('a user connected:', socket.id);
     if (socket.recovered) {
-        if (pendingRemovals.has(socket.id) && playerRooms.has(socket.id)) {
-            // Same player resuming within the grace period: swap in the new socket object and resync the scoreboard
-            clearTimeout(pendingRemovals.get(socket.id));
-            pendingRemovals.delete(socket.id);
+        if (playerRooms.has(socket.id) && playerRooms.get(socket.id).clients.has(socket.id)) {
+            // Same player resuming: swap in the new socket object and resync the scoreboard. The server may not have
+            // noticed the drop yet (wifi off), in which case the stale socket object with this same id is still
+            // around; the disconnect handler ignores it when it eventually times out.
+            if (pendingRemovals.has(socket.id)) {
+                clearTimeout(pendingRemovals.get(socket.id));
+                pendingRemovals.delete(socket.id);
+            }
             const room = playerRooms.get(socket.id);
-            if (room.clients.has(socket.id)) room.clients.set(socket.id, socket);
+            room.clients.set(socket.id, socket);
             helpers.log("User reconnected  " + socket.handshake.address + ": " + room.exportPlayer(socket)['raw_name']);
             room.drawScorePanel();
+            announceBack(socket, socket.id);
         } else {
             // The player was already removed, so the client has to start over
             socket.emit('rejoin required');
         }
     }
     let clientErrorCount = 0;
-    socket.on('client error', (report, cb) => {
+    // isError: a real JS error (pushed to the phone) rather than a reconnect report (only logged)
+    socket.on('client error', (report, isError, cb) => {
         if (typeof report === 'string' && clientErrorCount++ < 20)
-            helpers.logClientError(socket.handshake.address + " " + report.slice(0, 2000));
+            helpers.logClientError(socket.handshake.address + " " + report.slice(0, 2000), isError === true);
         if (typeof cb === 'function') cb();
     });
     famers = helpers.loadHallOfFame();
@@ -422,21 +449,29 @@ io.on('connection', (socket) => {
         // The old socket no longer owns a player, so its disconnect handler has nothing to remove
         const oldSocket = io.sockets.sockets.get(oldId);
         if (oldSocket) oldSocket.disconnect(true);
+        announceBack(socket, oldId);
         cb(true);
     });
     socket.on('disconnect', function(reason) {
+        // A stale socket whose id was taken over by a recovered connection (see above): nothing to clean up
+        if (playerRooms.has(socket.id) && playerRooms.get(socket.id).clients.has(socket.id) &&
+            playerRooms.get(socket.id).clients.get(socket.id) !== socket) return;
         if (playerRooms.has(socket.id)) {
             const info = playerRooms.get(socket.id).exportPlayer(socket);
             helpers.log("User disconnected " + socket.handshake.address + ": " + info['raw_name'] + " (" + reason + ")");
         }
-        // Keep the player around briefly so a client that drops for a few seconds (flaky wifi etc) can resume
-        // via socket.io connection state recovery with the same socket id. See the recovery check above.
+        // The client disconnects deliberately when its tab is closed or reloaded (pagehide in client.js), so remove
+        // it right away. Anything else is a connection problem: tell the room, and keep the player around briefly
+        // so they can resume (via connection state recovery above, or the 'resume' token).
+        if (reason === 'client namespace disconnect') return removePlayer();
+        announceLost(socket);
         pendingRemovals.set(socket.id, setTimeout(() => {
             pendingRemovals.delete(socket.id);
             removePlayer();
         }, CONSTANTS.DISCONNECT_GRACE_MS));
     });
     const removePlayer = () => {
+        announcedLost.delete(socket.id);
         if (resumeTokens.get(socket.data.resumeToken) === socket.id) resumeTokens.delete(socket.data.resumeToken);
         if (playerRooms.has(socket.id)) {
             const room = playerRooms.get(socket.id);
