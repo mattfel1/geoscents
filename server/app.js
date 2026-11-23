@@ -345,6 +345,12 @@ const announce = (text) => {
 
 io.on('connection', (socket) => {
     console.log('a user connected:', socket.id);
+    let clientErrorCount = 0;
+    socket.on('client error', (report, cb) => {
+        if (typeof report === 'string' && clientErrorCount++ < 20)
+            helpers.logClientError(socket.handshake.address + " " + report.slice(0, 2000));
+        if (typeof cb === 'function') cb();
+    });
     famers = helpers.loadHallOfFame();
     rooms[CONSTANTS.LOBBY].hall_of_fame = famers;
     socket.on('newPlayer', () => {

@@ -374,10 +374,35 @@ $(document).ready(function() {
 
     // After a dropped connection, socket.io reconnects with a new socket id that the server has never
     // seen (the old player was removed on disconnect), so the page silently stops working. Reload to rejoin.
-    socket.on('disconnect', () => {
+    // Problems are reported to the server (logged to /scratch/client_errors.log) so freezes can be diagnosed.
+    // Reports sent while disconnected are buffered by socket.io and delivered after reconnecting.
+    const pageLoadTime = Date.now();
+    let lastDisconnect = null;
+    const reportError = (msg, cb) => {
+        const minsOpen = Math.round((Date.now() - pageLoadTime) / 60000);
+        socket.emit('client error', myRoomName + " | open " + minsOpen + "min | " + navigator.userAgent + " | " + msg, cb);
+    };
+    window.addEventListener('error', (e) => {
+        reportError("error: " + e.message + " @ " + e.filename + ":" + e.lineno + ":" + e.colno + (e.error && e.error.stack ? " " + e.error.stack : ""));
+    });
+    window.addEventListener('unhandledrejection', (e) => {
+        reportError("unhandled rejection: " + (e.reason && e.reason.stack ? e.reason.stack : e.reason));
+    });
+    socket.on('disconnect', (reason) => {
+        lastDisconnect = {
+            reason: reason,
+            time: Date.now(),
+            hidden: document.hidden
+        };
         commands.drawCommand("Connection lost, reconnecting...", "", "", "", 0, false, false, false);
     });
-    socket.io.on('reconnect', () => location.reload());
+    socket.io.on('reconnect', () => {
+        let msg = "reconnected";
+        if (lastDisconnect) msg += " after " + Math.round((Date.now() - lastDisconnect.time) / 1000) + "s, reason: " + lastDisconnect.reason + ", tab hidden: " + lastDisconnect.hidden;
+        // Reload once the report is delivered, or after 2s regardless
+        reportError(msg, () => location.reload());
+        setTimeout(() => location.reload(), 2000);
+    });
 
     /**** POPUP *****/
     // Make player choose name

@@ -1,10 +1,13 @@
 #!/bin/bash
-# Full deploy: copy repo to web dir, install, build, start.
-# Run this on the server after `git pull`.
+# Full deploy: pull, copy repo to web dir, install, build, start.
 set -e
 
 REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 DEPLOY_DIR="/var/www/html"
+
+echo "==> Pulling latest code"
+git -C "$REPO_DIR" pull --ff-only
+git -C "$REPO_DIR" log -1 --format="    deploying %h %s"
 
 echo "==> Stopping existing processes"
 pkill -f node || true

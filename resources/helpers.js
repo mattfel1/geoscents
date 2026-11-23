@@ -1,10 +1,12 @@
 const fs = require('fs');
+const { execFile } = require('child_process');
 const CONSTANTS = require('../resources/constants.js');
 const Geography = require('../server/geography.js');
 const logfile = '/scratch/connections.log';
 const messagefile = '/scratch/messages.log';
 const histfile = '/scratch/histograms.log';
 const feedbackfile = '/scratch/feedback.log';
+const clienterrorfile = '/scratch/client_errors.log';
 const MAPS = require('../resources/maps.json')
 var lastUpdates = {};
 
@@ -360,6 +362,39 @@ const logFeedback = (payload) => {
     }
 };
 
+// Pushover notification via the push function in /root/.bashrc (needs -i, .bashrc returns early otherwise).
+// The message is passed as an argument, never interpolated into the command.
+const push = (msg) => {
+    if (process.env.LOCAL_DEV) return;
+    execFile('bash', ['-i', '-c', 'push "$1"', 'push', msg], (err) => {
+        if (err) console.log("pushover failed: " + err.message);
+    });
+};
+
+// Disconnects and JS errors reported by players' browsers, see client.js.
+// Pushes at most once per CLIENT_ERROR_PUSH_PERIOD so a burst of reports can't flood the phone.
+const CLIENT_ERROR_PUSH_PERIOD = 10 * 60 * 1000;
+let lastClientErrorPush = 0;
+let unpushedClientErrors = 0;
+let latestClientError = "";
+let clientErrorPushTimer = null;
+const pushClientErrors = () => {
+    clientErrorPushTimer = null;
+    push(unpushedClientErrors + " new client report(s) in " + clienterrorfile + ", latest: " + latestClientError.slice(0, 500));
+    lastClientErrorPush = Date.now();
+    unpushedClientErrors = 0;
+};
+const logClientError = (payload) => {
+    const timestamp = new Date().toISOString();
+    fs.appendFile(clienterrorfile, "[" + timestamp + "] " + payload + "\n", function(err) {
+        if (err) console.log(err);
+    });
+    unpushedClientErrors++;
+    latestClientError = payload;
+    const wait = lastClientErrorPush + CLIENT_ERROR_PUSH_PERIOD - Date.now();
+    if (wait <= 0) pushClientErrors();
+    else if (!clientErrorPushTimer) clientErrorPushTimer = setTimeout(pushClientErrors, wait);
+};
 
 const filterName = (name) => {
     var badname = false;
@@ -978,6 +1013,7 @@ const randstring = (length) => {
 module.exports = {
     log,
     logFeedback,
+    logClientError,
     logMessage,
     logPlayerHistory,
     recordGuesses,
