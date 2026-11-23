@@ -1095,13 +1095,12 @@ setInterval(() => {
 function doReset(week, month, year) {
     [daily_region, daily_capital, daily_trivia] = Geography.calculateDaily();
 
-    // Flush inactive maps to disk via temp rooms
+    // Flush every map to disk via temp rooms. Maps with an active room get flushed again below, which is harmless
+    // since flushRecords reloads from disk first. (Don't skip continent tier: the Capitals maps are continent tier
+    // but have no standing room, so they were never being reset.)
     Object.keys(MAPS).forEach(function(value) {
-        if (MAPS[value]['tier'] !== 'continent') {
-            const tmp_room = new Room(value.replace(" Capitals", ""), "tmp", value);
-            tmp_room.flushRecords(week, month, year);
-            delete tmp_room;
-        }
+        const tmp_room = new Room(value.replace(" Capitals", ""), "tmp", value);
+        tmp_room.flushRecords(week, month, year);
     });
 
     // Sync active rooms in-memory. flushRecords reloads from disk before resetting, so this is safe to run after
@@ -1130,6 +1129,8 @@ function doReset(week, month, year) {
 }
 
 // Handle reboot message
+// Reset once per date rather than only inside the 00:00:30-00:00:59 window, which a drifting 30s timer can skip
+let lastResetDate = new Date().toDateString();
 setInterval(() => {
     var d = new Date();
     const week = d.getDay() === 0;
@@ -1145,13 +1146,14 @@ setInterval(() => {
     if (week && month && year) s = ", weekly, monthly, and yearly"
 
     let reset_imminent = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() <= 29;
-    let reset_now = d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() > 29;
+    let reset_now = d.toDateString() !== lastResetDate && !reset_imminent;
     if (reset_imminent) {
         io.sockets.emit('system toast', 'warning', '⚠️ Daily' + s + ' records reset in 30 seconds — daily maps will also change!');
     }
 
     // Get new daily
     if (reset_now) {
+        lastResetDate = d.toDateString();
         doReset(week, month, year);
         io.sockets.emit('system toast', 'info', '✅ Daily' + s + ' records have been reset!');
     }

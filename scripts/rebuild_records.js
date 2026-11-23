@@ -3,7 +3,12 @@
 // From 2026-03-19 until daily rooms were switched to the map's own record files, daily room games were saved to
 // separate "Daily ..." boards, so the map boards are missing them (rooms writing back stale in-memory copies could
 // also drop records, see Room.writeRecords). Player histories are append-only, but only exist for players with
-// logging enabled, so this only ever ADDS missing scores to the existing boards and never removes anything.
+// logging enabled, so missing scores are only ever ADDED to the existing boards.
+//
+// Before 2026-03-19 the midnight daily rotation also saved the previous daily map's in-memory boards over the new
+// daily map's files, copying one board across every map in the rotation, and the nightly reset skipped the Capitals
+// maps entirely, so those boards were never cleared. So an existing entry is REMOVED when the history has that exact
+// player+score, but never on this map within the board's window (entries with no history at all are kept).
 //
 // Usage: node scripts/rebuild_records.js <scratch dir> <out dir> [--since 2026-03-13] [--now 2026-11-18T00:00Z]
 //   --since ignores history before that date (e.g. testing games before launch)
@@ -43,7 +48,8 @@ const windows = {
 
 // "2026/09/23 @ 21:44 GMT","Precolumbian Americas","5399","<font color=#6BAB6B>pepino4379592</font>",,,...
 const LINE_RE = /^"(\d+)\/(\d+)\/(\d+) @ (\d+):(\d+) GMT","([^"]*)","(-?\d+)","<font color=([^>]*)>(.*)<\/font>"/;
-const plays = new Map(); // recordKey -> [{time, score, color, name}]
+const plays = new Map(); // recordKey -> [{time, score, color, name}], candidates to add
+const allPlays = []; // every play ever, used to spot entries copied from other maps or left over from old windows
 const histDir = path.join(scratchDir, 'histories');
 for (const file of fs.readdirSync(histDir).filter(f => f.endsWith('_history.csv'))) {
     for (const line of fs.readFileSync(path.join(histDir, file), 'utf8').split('\n')) {
@@ -51,7 +57,9 @@ for (const file of fs.readdirSync(histDir).filter(f => f.endsWith('_history.csv'
         if (!m) continue;
         const time = Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]);
         const score = parseInt(m[7]);
-        if (time < windows.year || time > now.getTime() || score <= 0) continue;
+        if (time > now.getTime() || score <= 0) continue;
+        allPlays.push({ key: m[6], time, score, name: m[9] });
+        if (time < windows.year) continue;
         if (since && time < since.getTime()) continue;
         if (!plays.has(m[6])) plays.set(m[6], []);
         plays.get(m[6]).push({ time, score, color: m[8], name: m[9] });
@@ -83,6 +91,16 @@ const toBoard = (list) => {
 };
 // Board names carry flair/clown/ready decorations around the raw name, so match on substring
 const alreadyListed = (list, play) => list.some(e => e.existing && e.score === play.score && e.name.includes(play.name));
+// Keep only the longest matching raw names, so "Trump Sucks 2 🇨🇦" isn't matched to plays by "Trump Sucks"
+const historyFor = (entry) => {
+    const matches = allPlays.filter(p => p.score === entry.score && entry.name.includes(p.name));
+    const longest = Math.max(0, ...matches.map(p => p.name.length));
+    return matches.filter(p => p.name.length === longest);
+};
+const doesNotBelong = (key, windowStart, entry) => {
+    const matches = historyFor(entry);
+    return matches.length > 0 && !matches.some(p => p.key === key && p.time >= windowStart);
+};
 
 const recordsDir = path.join(scratchDir, 'records');
 const keys = new Set(fs.readdirSync(recordsDir)
@@ -100,7 +118,8 @@ for (const key of [...keys].sort()) {
         let board = JSON.parse(JSON.stringify(CONSTANTS.INIT_RECORD));
         if (fs.existsSync(file)) board = JSON.parse(fs.readFileSync(file, 'utf8'));
 
-        const list = toList(board);
+        const removed = toList(board).filter(e => doesNotBelong(key, windows[category], e));
+        const list = toList(board).filter(e => !doesNotBelong(key, windows[category], e));
         const added = [];
         // Chronological, so ties keep the earlier score ahead (getPosition uses strict >)
         const candidates = (plays.get(key) || []).filter(p => p.time >= windows[category]).sort((a, b) => a.time - b.time);
@@ -113,12 +132,13 @@ for (const key of [...keys].sort()) {
         list.sort((a, b) => b.score - a.score);
         const top = list.slice(0, NUM_RECORDS);
         const kept = added.filter(p => top.includes(p));
-        if (kept.length === 0) continue;
+        if (kept.length === 0 && removed.length === 0) continue;
 
         changedFiles++;
         fs.writeFileSync(path.join(outDir, 'records', key + '_' + category + '_record'), JSON.stringify(toBoard(top), null, 2));
         console.log(key + ' [' + category + ']');
         console.log('  before: ' + toList(board).map(e => e.score + ' ' + e.name).join(', '));
+        if (removed.length) console.log('  removed (not played on this map in this window): ' + removed.map(e => e.score + ' ' + e.name + ' <- ' + [...new Set(historyFor(e).map(p => p.key + ' ' + new Date(p.time).toISOString().slice(0, 10)))].join('/')).join(', '));
         console.log('  after:  ' + top.map(e => e.score + ' ' + e.name + (e.existing ? '' : ' (+' + new Date(e.time).toISOString().slice(0, 10) + ')')).join(', '));
     }
 }
