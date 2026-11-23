@@ -405,7 +405,6 @@ $(document).ready(function() {
     // Leaving on purpose (tab closed or reloaded): disconnect explicitly so the server removes us right away instead
     // of announcing a lost connection and holding our spot. If the page comes back from the back/forward cache,
     // that socket is gone, so start fresh.
-    window.addEventListener('beforeunload', () => socket.disconnect());
     window.addEventListener('pagehide', () => socket.disconnect());
     window.addEventListener('pageshow', (e) => {
         if (e.persisted) location.reload();
@@ -426,7 +425,8 @@ $(document).ready(function() {
         const graceSecs = CONSTANTS.DISCONNECT_GRACE_MS / 1000;
         const showCountdown = () => {
             const secs = Math.round((Date.now() - lastDisconnect.time) / 1000);
-            commands.drawCommand("Connection lost, reconnecting... " + secs + "s / " + graceSecs + "s before you lose your spot", "", "", "", 0, false, false, false);
+            if (secs <= graceSecs) commands.drawCommand("Connection lost, reconnecting... " + secs + "s / " + graceSecs + "s before you lose your spot", "", "", "", 0, false, false, false);
+            else commands.drawCommand("Connection lost, still trying to reconnect... " + secs + "s", "", "", "", 0, false, false, false);
         };
         showCountdown();
         clearInterval(reconnectCountdown);
@@ -453,9 +453,7 @@ $(document).ready(function() {
     socket.on('connect', () => {
         if (!lastDisconnect) return; // first connection
         clearInterval(reconnectCountdown);
-        if (socket.recovered) {
-            resumed("recovered");
-        } else if (resumeToken) {
+        if (resumeToken) {
             // New socket id: ask the server to hand our player over from the old connection
             socket.emit('resume', resumeToken, (ok) => {
                 if (ok) resumed("token");
@@ -465,8 +463,6 @@ $(document).ready(function() {
             reloadAndRejoin("reconnected (could not resume)" + describeDisconnect());
         }
     });
-    // Server resumed our socket id but had already removed the player
-    socket.on('rejoin required', () => reloadAndRejoin("server required rejoin"));
 
     /**** POPUP *****/
     // Make player choose name

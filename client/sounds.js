@@ -40,13 +40,12 @@ class Sounds {
             document.removeEventListener('pointerdown', unlock, true);
             document.removeEventListener('keydown', unlock, true);
             this.allSounds().forEach((audio) => {
-                const wasMuted = audio.muted;
                 audio.muted = true;
                 const p = audio.play();
                 const restore = () => {
                     audio.pause();
                     audio.currentTime = 0;
-                    audio.muted = wasMuted;
+                    audio.muted = this.muted; // current setting, in case Mute was toggled meanwhile
                 };
                 if (p) p.then(restore, restore);
                 else restore();
