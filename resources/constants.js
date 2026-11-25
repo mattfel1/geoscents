@@ -104,6 +104,7 @@ module.exports = {
     FAMESCORE: 6500,
     DEBUGFAMESCORE: 600,
     PERFECT_SCORE: 6600,
+    RECORD_BUCKET_WIDTH: 50, // A player's scores within this of their best share one leaderboard slot (see server/records.js)
     DEBUG_PERFECT_SCORE: 900,
     CLOWNSCORE: 100,
 

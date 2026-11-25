@@ -6,6 +6,7 @@
 const CONSTANTS = require('../resources/constants.js');
 const Geography = require('./geography.js');
 const Player = require('./player.js');
+const records = require('./records.js');
 const helpers = require('../resources/helpers.js');
 const fs = require('fs')
 const fetch = require("node-fetch");
@@ -413,64 +414,11 @@ class Room {
         }
     }
 
-    insertRecord(position, category, olddict, room, player) {
-        function copy(x) {
-            return JSON.parse(JSON.stringify(x, null, 2));
-        }
-        const num_records = 5
-        const dict = copy(olddict);
-        let i;
-        for (i = num_records; i > position; i--) {
-            if (('record' + (i - 1)) in dict) {
-                dict['record' + i] = copy(dict['record' + (i - 1)]);
-                dict['recordColor' + i] = copy(dict['recordColor' + (i - 1)]);
-                dict['recordName' + i] = copy(dict['recordName' + (i - 1)]);
-                dict['recordBroken' + i] = false;
-            }
-        }
-        dict['record' + position] = copy(player.score);
-        dict['recordColor' + position] = copy(player.color);
-        let display_name = player.getFlairedName();
-        dict['recordName' + position] = copy(display_name);
-        dict['recordBroken' + position] = true;
-        // fs.writeFile("/scratch/" + room + "_" + category + "_record", JSON.stringify(dict), function(err) {
-        //     if(err) {
-        //         return console.log(err);
-        //     }
-        // });
-        return copy(dict);
-    }
-
-    getPosition(score, category) {
-        if (score > category['record1']) return 1;
-        else if (score > category['record2']) return 2;
-        else if (score > category['record3']) return 3;
-        else if (score > category['record4'] || !('record4' in category)) return 4;
-        else if (score > category['record5'] || !('record5' in category)) return 5;
-        else return 6;
-    }
-
     removePoppers() {
-        this.allRecord['recordBroken1'] = false;
-        this.allRecord['recordBroken2'] = false;
-        this.allRecord['recordBroken3'] = false;
-        this.allRecord['recordBroken4'] = false;
-        this.allRecord['recordBroken5'] = false;
-        this.monthRecord['recordBroken1'] = false;
-        this.monthRecord['recordBroken2'] = false;
-        this.monthRecord['recordBroken3'] = false;
-        this.monthRecord['recordBroken4'] = false;
-        this.monthRecord['recordBroken5'] = false;
-        this.weekRecord['recordBroken1'] = false;
-        this.weekRecord['recordBroken2'] = false;
-        this.weekRecord['recordBroken3'] = false;
-        this.weekRecord['recordBroken4'] = false;
-        this.weekRecord['recordBroken5'] = false;
-        this.dayRecord['recordBroken1'] = false;
-        this.dayRecord['recordBroken2'] = false;
-        this.dayRecord['recordBroken3'] = false;
-        this.dayRecord['recordBroken4'] = false;
-        this.dayRecord['recordBroken5'] = false;
+        this.allRecord = records.clearBroken(this.allRecord);
+        this.monthRecord = records.clearBroken(this.monthRecord);
+        this.weekRecord = records.clearBroken(this.weekRecord);
+        this.dayRecord = records.clearBroken(this.dayRecord);
     }
 
     clearStudyPoints() {
@@ -528,16 +476,9 @@ class Room {
             this.lastRecordUpdate = t;
             this.serviceRecord = true
         };
-        const getPosition = (score, category) => {
-            return this.getPosition(score, category)
-        };
-        const insertRecord = (p, c, d, r, pl) => {
-            return this.insertRecord(p, c, d, r, pl)
-        };
         const playedAllRounds = (data, socketid) => {
             return this.playedAllRounds(data, socketid)
         }
-        const sufx = ["st", "nd", "rd", "th", "th"];
         const citysrc = this.citysrc;
         Array.from(this.sortPlayersNoJoe()).forEach((player, id) => {
             // var sortedPlayers = Array.from(this.sortPlayersNoJoe());
@@ -572,32 +513,17 @@ class Room {
                     this.clients.forEach((s, id) => s.emit("announce clown", citysrc, player.getName(), player.score, player.color, id === clownId));
                 }
             }
-            const num_records = 5
-            let allStr = "";
-            let monStr = "";
-            let wkStr = "";
-            let dayStr = "";
             let categories = [];
-            if (getPosition(player.score, dayRecord) <= num_records) {
-                dayStr = "<b>" + (getPosition(player.score, dayRecord)) + sufx[(getPosition(player.score, dayRecord) - 1)] + "</b>" + " daily"
-                dayRecord = copy(insertRecord(getPosition(player.score, dayRecord), "day", copy(dayRecord), citysrc, player));
-                categories.push("<b>daily</b>");
-            }
-            if (getPosition(player.score, weekRecord) <= num_records) {
-                wkStr = "<b>" + (getPosition(player.score, weekRecord)) + sufx[(getPosition(player.score, weekRecord) - 1)] + "</b>" + " weekly"
-                weekRecord = copy(insertRecord(getPosition(player.score, weekRecord), "week", copy(weekRecord), citysrc, player));
-                categories.push("<b>weekly</b>");
-            }
-            if (getPosition(player.score, monthRecord) <= num_records) {
-                monStr = "<b>" + (getPosition(player.score, monthRecord)) + sufx[(getPosition(player.score, monthRecord) - 1)] + "</b>" + " monthly"
-                monthRecord = copy(insertRecord(getPosition(player.score, monthRecord), "month", copy(monthRecord), citysrc, player));
-                categories.push("<b>monthly</b>");
-            }
-            if (getPosition(player.score, allRecord) <= num_records) {
-                allStr = "<b>" + (getPosition(player.score, allRecord)) + sufx[(getPosition(player.score, allRecord) - 1)] + "</b>" + " yearly"
-                allRecord = copy(insertRecord(getPosition(player.score, allRecord), "yearly", copy(allRecord), citysrc, player));
-                categories.push("<b>yearly</b>");
-            }
+            const place = (dict, label) => {
+                if (!(player.score > 0)) return dict;
+                const result = records.addScore(dict, player.score, player.getFlairedName(), player.name, player.color);
+                if (result.placed) categories.push("<b>" + label + "</b>");
+                return result.board;
+            };
+            dayRecord = place(dayRecord, "daily");
+            weekRecord = place(weekRecord, "weekly");
+            monthRecord = place(monthRecord, "monthly");
+            allRecord = place(allRecord, "yearly");
             if (categories.length > 0 && this.clients.has(player.id)) {
                 this.clients.get(player.id).emit("announce record", categories.join(", "), citysrc, player.getFlairedName(), player.score, player.color);
             }
@@ -626,10 +552,10 @@ class Room {
 
     printScoresWithSelf(socket, socketId) {
         if (this.map !== CONSTANTS.LOBBY) {
-            socket.emit('post group', 'Yearly Records:', this.allRecord);
-            socket.emit('post group', 'Monthly Records:', this.monthRecord);
-            socket.emit('post group', 'Weekly Records:', this.weekRecord);
-            socket.emit('post group', 'Daily Records:', this.dayRecord);
+            socket.emit('post group', 'Yearly Records:', records.forClient(this.allRecord));
+            socket.emit('post group', 'Monthly Records:', records.forClient(this.monthRecord));
+            socket.emit('post group', 'Weekly Records:', records.forClient(this.weekRecord));
+            socket.emit('post group', 'Daily Records:', records.forClient(this.dayRecord));
             socket.emit('post score title', this.citysrc);
         } else {
             socket.emit('post lobby', helpers.hallJsonToBoard(this.hall_of_fame));

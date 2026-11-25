@@ -22,6 +22,7 @@ class Scoreboard {
         this.myCitysrc = CONSTANTS.LOBBY;
         this.myRoomName = CONSTANTS.LOBBY;
         this.currentRound = -1;
+        this.expandedRecords = new Set(); // leaderboard slots opened to show every score, kept across redraws
         this.records = {
             yearly: 0,
             monthly: 0,
@@ -230,37 +231,15 @@ class Scoreboard {
         if (category.startsWith('Weekly')) this.records.weekly = dict['record1'] || 0;
         if (category.startsWith('Daily')) this.records.daily = dict['record1'] || 0;
 
-        const slots = [{
-                record: dict['record1'],
-                name: dict['recordName1'],
-                color: dict['recordColor1'],
-                broken: dict['recordBroken1']
-            },
-            {
-                record: dict['record2'],
-                name: dict['recordName2'],
-                color: dict['recordColor2'],
-                broken: dict['recordBroken2']
-            },
-            {
-                record: dict['record3'],
-                name: dict['recordName3'],
-                color: dict['recordColor3'],
-                broken: dict['recordBroken3']
-            },
-            {
-                record: dict['record4'],
-                name: dict['recordName4'],
-                color: dict['recordColor4'],
-                broken: dict['recordBroken4']
-            },
-            {
-                record: dict['record5'],
-                name: dict['recordName5'],
-                color: dict['recordColor5'],
-                broken: dict['recordBroken5']
-            },
-        ];
+        const slots = [1, 2, 3, 4, 5].map((i) => ({
+            record: dict['record' + i],
+            name: dict['recordName' + i],
+            color: dict['recordColor' + i],
+            broken: dict['recordBroken' + i],
+            low: dict['recordLow' + i],
+            count: dict['recordCount' + i] || 1,
+            scores: dict['recordScores' + i] || []
+        }));
 
         const header = $('<div>').css({
             fontSize: '10px',
@@ -272,6 +251,7 @@ class Scoreboard {
         }).text(category.replace(/:/g, ''));
         $('#leaderboard').append(header);
 
+        const expanded = this.expandedRecords;
         slots.forEach(function(slot, i) {
             if (!slot.name) return;
             const badge = slot.broken ? ' 🎉' : '';
@@ -298,9 +278,41 @@ class Scoreboard {
                     whiteSpace: 'nowrap'
                 })
                 .text(slot.record);
+            // A slot can hold several of one player's scores (see server/records.js): "6600 - 6571 (5x)"
+            if (slot.count > 1) {
+                const range = slot.low !== undefined && slot.low !== slot.record ? ' - ' + slot.low : '';
+                right.text(slot.record + range).append($('<span>').css({
+                    fontWeight: 'normal',
+                    color: '#666',
+                    fontSize: '11px'
+                }).text(' (' + slot.count + 'x)'));
+            }
 
             card.append(left).append(right);
             $('#leaderboard').append(card);
+
+            // Click a slot holding several scores to list them all
+            if (slot.count > 1 && slot.scores.length) {
+                const key = category + '|' + slot.name + '|' + slot.record;
+                const details = $('<div>').css({
+                    margin: '0 4px 2px 4px',
+                    padding: '2px 8px',
+                    fontSize: '11px',
+                    color: '#444',
+                    background: slot.color + '0c',
+                    border: '1px dashed ' + slot.color,
+                    borderTop: 'none',
+                    borderRadius: '0 0 3px 3px',
+                    display: expanded.has(key) ? 'block' : 'none',
+                }).text(slot.scores.map(([score, count]) => score + (count > 1 ? ' ×' + count : '')).join(', '));
+                card.css('cursor', 'pointer').attr('title', 'Click to see every score');
+                card.on('click', () => {
+                    if (expanded.has(key)) expanded.delete(key);
+                    else expanded.add(key);
+                    details.toggle();
+                });
+                $('#leaderboard').append(details);
+            }
         });
     }
 

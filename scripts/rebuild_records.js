@@ -10,6 +10,8 @@
 // maps entirely, so those boards were never cleared. So an existing entry is REMOVED when the history has that exact
 // player+score, but never on this map within the board's window (entries with no history at all are kept).
 //
+// Boards are rebuilt with server/records.js, so a player's nearby scores share one slot exactly as in the game.
+//
 // Usage: node scripts/rebuild_records.js <scratch dir> <out dir> [--since 2026-03-13] [--now 2026-11-18T00:00Z]
 //   --since ignores history before that date (e.g. testing games before launch)
 //   <scratch dir> must contain records/ and histories/ (e.g. a copy of the server's /scratch)
@@ -18,6 +20,7 @@
 const fs = require('fs');
 const path = require('path');
 const CONSTANTS = require('../resources/constants.js');
+const records = require('../server/records.js');
 
 const args = process.argv.slice(2);
 const option = (flag) => {
@@ -32,7 +35,6 @@ if (!scratchDir || !outDir) {
     process.exit(1);
 }
 
-const NUM_RECORDS = 5;
 // The old "Daily ..." boards are no longer used
 const SKIP_KEYS = [CONSTANTS.LOBBY, CONSTANTS.DAILY_TRIVIA, CONSTANTS.DAILY_REGION, CONSTANTS.DAILY_CAPITAL];
 
@@ -66,29 +68,11 @@ for (const file of fs.readdirSync(histDir).filter(f => f.endsWith('_history.csv'
     }
 }
 
-const toList = (board) => {
-    const list = [];
-    for (let i = 1; i <= NUM_RECORDS; i++) {
-        if (board['record' + i] > 0) list.push({
-            score: board['record' + i],
-            name: board['recordName' + i],
-            color: board['recordColor' + i],
-            broken: board['recordBroken' + i],
-            existing: true,
-        });
-    }
-    return list;
-};
-const toBoard = (list) => {
-    const board = JSON.parse(JSON.stringify(CONSTANTS.INIT_RECORD));
-    list.forEach((e, i) => {
-        board['record' + (i + 1)] = e.score;
-        board['recordName' + (i + 1)] = e.name;
-        board['recordColor' + (i + 1)] = e.color;
-        board['recordBroken' + (i + 1)] = !!e.broken;
-    });
-    return board;
-};
+const slotsText = (board) => [1, 2, 3, 4, 5].filter(i => board['record' + i] > 0).map(i => {
+    const count = board['recordCount' + i] || 1;
+    const range = count > 1 && board['recordLow' + i] !== board['record' + i] ? ' - ' + board['recordLow' + i] : '';
+    return board['record' + i] + range + ' ' + board['recordName' + i] + (count > 1 ? ' (' + count + 'x)' : '');
+}).join(', ');
 // Board names carry flair/clown/ready decorations around the raw name, so match on substring
 const alreadyListed = (list, play) => list.some(e => e.existing && e.score === play.score && e.name.includes(play.name));
 // Keep only the longest matching raw names, so "Trump Sucks 2 🇨🇦" isn't matched to plays by "Trump Sucks"
@@ -118,28 +102,24 @@ for (const key of [...keys].sort()) {
         let board = JSON.parse(JSON.stringify(CONSTANTS.INIT_RECORD));
         if (fs.existsSync(file)) board = JSON.parse(fs.readFileSync(file, 'utf8'));
 
-        const removed = toList(board).filter(e => doesNotBelong(key, windows[category], e));
-        const list = toList(board).filter(e => !doesNotBelong(key, windows[category], e));
-        const added = [];
-        // Chronological, so ties keep the earlier score ahead (getPosition uses strict >)
+        const entries = records.entriesOf(board).map(e => Object.assign(e, { existing: true }));
+        const removed = entries.filter(e => doesNotBelong(key, windows[category], e));
+        const list = entries.filter(e => !doesNotBelong(key, windows[category], e));
+        // Chronological, so ties keep the earlier score ahead
         const candidates = (plays.get(key) || []).filter(p => p.time >= windows[category]).sort((a, b) => a.time - b.time);
         for (const play of candidates) {
             if (alreadyListed(list, play)) continue;
-            list.push(play);
-            added.push(play);
+            list.push({ score: play.score, name: play.name, rawName: play.name, color: play.color, count: 1, broken: false });
         }
-        // Stable sort: existing entries stay ahead of history entries with the same score
-        list.sort((a, b) => b.score - a.score);
-        const top = list.slice(0, NUM_RECORDS);
-        const kept = added.filter(p => top.includes(p));
-        if (kept.length === 0 && removed.length === 0) continue;
+        const rebuilt = records.boardOf(list.map(({ score, name, rawName, color, count, broken }) => ({ score, name, rawName, color, count, broken })));
+        if (slotsText(rebuilt) === slotsText(board)) continue;
 
         changedFiles++;
-        fs.writeFileSync(path.join(outDir, 'records', key + '_' + category + '_record'), JSON.stringify(toBoard(top), null, 2));
+        fs.writeFileSync(path.join(outDir, 'records', key + '_' + category + '_record'), JSON.stringify(rebuilt, null, 2));
         console.log(key + ' [' + category + ']');
-        console.log('  before: ' + toList(board).map(e => e.score + ' ' + e.name).join(', '));
+        console.log('  before: ' + slotsText(board));
         if (removed.length) console.log('  removed (not played on this map in this window): ' + removed.map(e => e.score + ' ' + e.name + ' <- ' + [...new Set(historyFor(e).map(p => p.key + ' ' + new Date(p.time).toISOString().slice(0, 10)))].join('/')).join(', '));
-        console.log('  after:  ' + top.map(e => e.score + ' ' + e.name + (e.existing ? '' : ' (+' + new Date(e.time).toISOString().slice(0, 10) + ')')).join(', '));
+        console.log('  after:  ' + slotsText(rebuilt));
     }
 }
 console.log('\n' + changedFiles + ' record files rebuilt into ' + path.join(outDir, 'records'));

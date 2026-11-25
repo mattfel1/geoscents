@@ -393,6 +393,11 @@ $(document).ready(function() {
     let lastDisconnect = null;
     // isError: a real JS error, which the server pushes to the phone (reconnect reports are only logged)
     const reportError = (msg, isError, cb) => {
+        // Search engine crawlers run the page too; their errors aren't worth a report
+        if (/bot|crawl|spider/i.test(navigator.userAgent)) {
+            if (cb) cb();
+            return;
+        }
         const minsOpen = Math.round((Date.now() - pageLoadTime) / 60000);
         socket.emit('client error', myRoomName + " | open " + minsOpen + "min | " + navigator.userAgent + " | " + msg, isError, cb);
     };

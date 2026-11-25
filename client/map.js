@@ -267,6 +267,13 @@ class MapPanel {
         }
     }
 
+    // Draw now if the logo has loaded, otherwise once it does. drawImage throws on an image that failed to load.
+    drawDiscordLogo(properties) {
+        const draw = () => this.ctx.drawImage(discordImg, properties['x'] + 5, properties['y'] + 1, properties['height'], properties['height']);
+        if (discordImg.complete && discordImg.naturalWidth > 0) draw();
+        else discordImg.onload = draw;
+    }
+
     highlightButton(properties) {
         this.ctx.fillStyle = properties['border_color1'];
         this.ctx.fillRect(properties['x'] - 4, properties['y'] - 4, properties['width'] + 8, properties['height'] + 8);
@@ -280,11 +287,7 @@ class MapPanel {
         if (properties['label'] != "DISCORD") {
             this.ctx.fillText(properties['label'], properties['x'] + properties['x_font_ofs'], properties['y'] + properties['y_font_ofs'])
         } else {
-            let ctx = this.ctx;
-            discordImg.onload = function() {
-                ctx.drawImage(discordImg, properties['x'] + 5, properties['y'] + 1, properties['height'], properties['height'])
-            };
-            discordImg.onload();
+            this.drawDiscordLogo(properties);
         }
     }
     showButton(properties) {
@@ -300,11 +303,7 @@ class MapPanel {
         if (properties['label'] != "DISCORD") {
             this.ctx.fillText(properties['label'], properties['x'] + properties['x_font_ofs'], properties['y'] + properties['y_font_ofs'])
         } else {
-            let ctx = this.ctx;
-            discordImg.onload = function() {
-                ctx.drawImage(discordImg, properties['x'] + 5, properties['y'] + 1, properties['height'], properties['height'])
-            };
-            discordImg.onload();
+            this.drawDiscordLogo(properties);
         }
     }
 
