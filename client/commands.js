@@ -189,7 +189,9 @@ class Commands {
         $('#settings-box').append($("<span>Map Terrain:</span><span>" + button1 + button2 + button3 + "</span>"));
 
         // Add joe and reset buttons
-        let rebootButton = "<span id='reboot_button' class='settings-btn-container'><button title='Vote to restart the current game. When all players vote, a new game will immediately start' class='settings-btn'>Restart</button></span>";
+        // Shortcut is Alt+R (Option+R on Mac), see client.js
+        const restartKey = navigator.platform.indexOf('Mac') !== -1 ? '⌥R' : 'Alt+R';
+        let rebootButton = "<span id='reboot_button' class='settings-btn-container'><button title='Vote to restart the current game (shortcut: " + restartKey + "). When all players vote, a new game will immediately start' class='settings-btn'>Restart (" + restartKey + ")</button></span>";
         let killJoe = 'Kill Bot';
         let joeSfx = '';
         if (!this.hasJoe) {

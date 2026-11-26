@@ -431,7 +431,9 @@ $(document).ready(function() {
         const showCountdown = () => {
             const secs = Math.round((Date.now() - lastDisconnect.time) / 1000);
             if (secs <= graceSecs) commands.drawCommand("Connection lost, reconnecting... " + secs + "s / " + graceSecs + "s before you lose your spot", "", "", "", 0, false, false, false);
-            else commands.drawCommand("Connection lost, still trying to reconnect... " + secs + "s", "", "", "", 0, false, false, false);
+            // The server's grace period starts when it notices the drop, so the spot may or may not be gone yet.
+            // Either way, reconnecting brings them back: resumed if it is still held, otherwise reloaded and rejoined.
+            else commands.drawCommand("Still reconnecting... " + secs + "s. You may have lost your spot, but you'll rejoin automatically", "", "", "", 0, false, false, false);
         };
         showCountdown();
         clearInterval(reconnectCountdown);
@@ -922,6 +924,13 @@ $(document).ready(function() {
             window.scrollTo(x, y);
         }
     }, false);
+    // Alt+R (Option+R on Mac) votes to restart, even while the chat box has focus. Use e.code, since Option+R
+    // produces '®' as e.key on Mac, and preventDefault so that doesn't get typed into chat.
+    document.addEventListener('keydown', (e) => {
+        if (!e.altKey || e.ctrlKey || e.metaKey || e.code !== 'KeyR' || $('.overlay-bg').is(':visible')) return;
+        e.preventDefault();
+        socket.emit('playerReboot');
+    });
     canvas.addEventListener('mousemove', function(evt) {
         var mousePos = getMousePosInPanel(canvas, evt);
         if (myMap === CONSTANTS.LOBBY) {
